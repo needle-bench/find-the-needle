@@ -1,0 +1,103 @@
+name: Score Benchmarks
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and score each benchmark
+        run: |
+          RESULTS="[]"
+          for dir in benchmarks/*/; do
+            name=$(basename "$dir")
+            [ "$name" = "_template" ] && continue
+
+            echo "=== Scoring $name ==="
+
+            # Build
+            BUILD_START=$(date +%s%N)
+            if ! docker build -q -t "needle-bench-$name" "$dir" > /dev/null 2>&1; then
+              echo "  BUILD FAILED"
+              RESULTS=$(echo "$RESULTS" | python3 -c "
+          import sys, json
+          r = json.load(sys.stdin)
+          r.append({'name': '$name', 'status': 'build_failed', 'time_ms': 0})
+          json.dump(r, sys.stdout)")
+              continue
+            fi
+            BUILD_END=$(date +%s%N)
+            BUILD_MS=$(( (BUILD_END - BUILD_START) / 1000000 ))
+
+            # Run with solution applied
+            RUN_START=$(date +%s%N)
+            SOLUTION_OUTPUT=$(docker run --rm "needle-bench-$name" bash -c \
+              "cd /app && git init -q && git add -A && git commit -q -m init && git apply .bench/solution.patch && bash test.sh" 2>&1)
+            SOLUTION_RC=$?
+            RUN_END=$(date +%s%N)
+            RUN_MS=$(( (RUN_END - RUN_START) / 1000000 ))
+
+            if [ $SOLUTION_RC -eq 0 ]; then
+              STATUS="pass"
+              echo "  PASS (${RUN_MS}ms)"
+            else
+              STATUS="solution_failed"
+              echo "  SOLUTION FAILED"
+              echo "  $SOLUTION_OUTPUT"
+            fi
+
+            # Run without solution (verify bug exists)
+            BUG_OUTPUT=$(docker run --rm "needle-bench-$name" bash -c \
+              "cd /app && bash test.sh" 2>&1)
+            BUG_RC=$?
+
+            if [ $BUG_RC -eq 0 ]; then
+              BUG_STATUS="bug_missing"
+              echo "  WARNING: bug not present"
+            else
+              BUG_STATUS="bug_confirmed"
+            fi
+
+            RESULTS=$(echo "$RESULTS" | python3 -c "
+          import sys, json
+          r = json.load(sys.stdin)
+          r.append({
+            'name': '$name',
+            'status': '$STATUS',
+            'bug_status': '$BUG_STATUS',
+            'build_ms': $BUILD_MS,
+            'solve_ms': $RUN_MS
+          })
+          json.dump(r, sys.stdout)")
+          done
+
+          # Write scores
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          python3 -c "
+          import json, sys
+          results = json.loads('''$RESULTS''')
+          scores = {
+            'timestamp': '$TIMESTAMP',
+            'commit': '$(git rev-parse --short HEAD)',
+            'benchmarks': results
+          }
+          with open('leaderboard/scores.json', 'w') as f:
+            json.dump(scores, f, indent=2)
+          print(json.dumps(scores, indent=2))
+          "
+
+      - name: Commit scores
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add leaderboard/scores.json
+          git diff --cached --quiet && echo "No changes to commit" || \
+            git commit -m "chore: update benchmark scores [skip ci]" && \
+            git push
