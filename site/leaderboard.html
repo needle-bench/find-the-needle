@@ -37,13 +37,14 @@
             <th data-key="resolved">Resolved</th>
             <th data-key="turns_to_discovery">Discovery</th>
             <th data-key="turns_to_fix">Fix turns</th>
+            <th data-key="tokens">Tokens</th>
             <th data-key="files_touched">Files</th>
             <th data-key="lines_changed">Lines</th>
             <th data-key="blind_discovery">Blind</th>
           </tr>
         </thead>
         <tbody id="scores-body">
-          <tr><td colspan="9" class="empty">Loading scores...</td></tr>
+          <tr><td colspan="10" class="empty">Loading scores...</td></tr>
         </tbody>
       </table>
     </div>
@@ -74,7 +75,7 @@
         }
         if (!data.length) {
           document.getElementById('scores-body').innerHTML =
-            '<tr><td colspan="9" class="empty">No scores yet. Run some benchmarks!</td></tr>';
+            '<tr><td colspan="10" class="empty">No scores yet. Run some benchmarks!</td></tr>';
           return;
         }
 
@@ -90,19 +91,25 @@
             if (typeof av === 'string') return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
             return sortAsc ? av - bv : bv - av;
           });
-          document.getElementById('scores-body').innerHTML = sorted.map((e, i) =>
-            '<tr>' +
+          document.getElementById('scores-body').innerHTML = sorted.map((e, i) => {
+            const icon = e.agent.startsWith('claude') ? '\u2B21' :
+                         e.agent.startsWith('gemini') ? '\u25C6' : '\u25CF';
+            const color = e.agent.startsWith('claude') ? '#E87040' :
+                          e.agent.startsWith('gemini') ? '#4285F4' : '#10A37F';
+            const tokStr = e.tokens ? e.tokens.toLocaleString() : '\u2014';
+            return '<tr>' +
             '<td>' + (i + 1) + '</td>' +
-            '<td><code>' + e.agent + '</code></td>' +
+            '<td><span style="color:' + color + ';margin-right:0.4em">' + icon + '</span><code>' + e.agent + '</code></td>' +
             '<td><code>' + e.benchmark + '</code></td>' +
             '<td>' + (e.resolved ? 'yes' : 'no') + '</td>' +
             '<td>' + e.turns_to_discovery + '</td>' +
             '<td>' + e.turns_to_fix + '</td>' +
+            '<td>' + tokStr + '</td>' +
             '<td>' + e.files_touched + '</td>' +
             '<td>' + e.lines_changed + '</td>' +
             '<td>' + (e.blind_discovery ? 'yes' : '-') + '</td>' +
-            '</tr>'
-          ).join('');
+            '</tr>';
+          }).join('');
         }
 
         render(data);
@@ -119,7 +126,7 @@
         });
       } catch (e) {
         document.getElementById('scores-body').innerHTML =
-          '<tr><td colspan="9" class="empty">No scores available yet.</td></tr>';
+          '<tr><td colspan="10" class="empty">No scores available yet.</td></tr>';
       }
     })();
   </script>
