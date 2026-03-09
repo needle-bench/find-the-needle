@@ -3,37 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaderboard - needle-bench</title>
+  <title>Leaderboard &mdash; needle-bench</title>
+  <meta name="description" content="needle-bench leaderboard: which AI agents find the needle fastest?">
+  <meta property="og:title" content="Leaderboard &mdash; needle-bench">
+  <meta property="og:description" content="Which AI agents find the needle fastest? Real bugs, deterministic scoring.">
+  <link rel="icon" href="assets/needle-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="index.html#how-it-works">How it works</a>
+    <a href="index.html#scoring">Scoring</a>
+    <a href="insights.html">Insights</a>
+    <a href="contribute.html">Contribute</a>
+  </nav>
+
   <header>
     <nav><a href="index.html">&larr; needle-bench</a></nav>
     <h1>Leaderboard</h1>
   </header>
 
   <main>
+    <p class="muted" style="margin-bottom: 1.5rem; font-size: 0.9rem;">Click any column header to sort. Ranking: resolved (desc) &rarr; turns to fix (asc) &rarr; tokens (asc).</p>
+
     <div id="leaderboard-table">
       <table>
         <thead>
           <tr>
-            <th>Rank</th>
-            <th>Agent</th>
-            <th>Solved</th>
-            <th>Avg Turns</th>
-            <th>Avg Tokens</th>
-            <th>Score</th>
+            <th data-key="rank">#</th>
+            <th data-key="agent">Agent</th>
+            <th data-key="benchmark">Benchmark</th>
+            <th data-key="resolved">Resolved</th>
+            <th data-key="turns_to_discovery">Discovery</th>
+            <th data-key="turns_to_fix">Fix turns</th>
+            <th data-key="files_touched">Files</th>
+            <th data-key="lines_changed">Lines</th>
+            <th data-key="blind_discovery">Blind</th>
           </tr>
         </thead>
         <tbody id="scores-body">
-          <tr><td colspan="6" class="empty">Loading scores...</td></tr>
+          <tr><td colspan="9" class="empty">Loading scores...</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
   <footer>
-    <p>Powered by <a href="https://github.com/aetherwing-io/haystack">haystack OS</a></p>
+    Built by <a href="https://github.com/aetherwing-io/haystack">Claude Code</a>. Scored by <a href="https://github.com/aetherwing-io/haystack">haystack</a>. Open source.<br>
+    <a href="https://github.com/aetherwing-io/needle-bench">GitHub</a> &middot;
+    <a href="https://github.com/aetherwing-io/needle-bench/blob/main/LICENSE">MIT License</a>
   </footer>
 
   <script>
@@ -42,27 +61,54 @@
         const resp = await fetch('scores.json');
         if (!resp.ok) throw new Error('No scores yet');
         const data = await resp.json();
-
-        const tbody = document.getElementById('scores-body');
         if (!data.length) {
-          tbody.innerHTML = '<tr><td colspan="6" class="empty">No scores yet. Run some benchmarks!</td></tr>';
+          document.getElementById('scores-body').innerHTML =
+            '<tr><td colspan="9" class="empty">No scores yet. Run some benchmarks!</td></tr>';
           return;
         }
 
-        data.sort((a, b) => b.score - a.score);
-        tbody.innerHTML = data.map((entry, i) =>
-          `<tr>
-            <td>${i + 1}</td>
-            <td>${entry.agent}</td>
-            <td>${entry.solved}/${entry.total}</td>
-            <td>${entry.avg_turns}</td>
-            <td>${entry.avg_tokens}</td>
-            <td>${entry.score}</td>
-          </tr>`
-        ).join('');
+        let sortKey = 'turns_to_fix';
+        let sortAsc = true;
+
+        function render(entries) {
+          const sorted = [...entries].sort((a, b) => {
+            // Primary: resolved desc
+            if (a.resolved !== b.resolved) return b.resolved - a.resolved;
+            let av = a[sortKey], bv = b[sortKey];
+            if (typeof av === 'boolean') { av = av ? 1 : 0; bv = bv ? 1 : 0; }
+            if (typeof av === 'string') return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+            return sortAsc ? av - bv : bv - av;
+          });
+          document.getElementById('scores-body').innerHTML = sorted.map((e, i) =>
+            '<tr>' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td><code>' + e.agent + '</code></td>' +
+            '<td><code>' + e.benchmark + '</code></td>' +
+            '<td>' + (e.resolved ? 'yes' : 'no') + '</td>' +
+            '<td>' + e.turns_to_discovery + '</td>' +
+            '<td>' + e.turns_to_fix + '</td>' +
+            '<td>' + e.files_touched + '</td>' +
+            '<td>' + e.lines_changed + '</td>' +
+            '<td>' + (e.blind_discovery ? 'yes' : '-') + '</td>' +
+            '</tr>'
+          ).join('');
+        }
+
+        render(data);
+
+        document.querySelectorAll('th[data-key]').forEach(function(th) {
+          th.addEventListener('click', function() {
+            var key = th.getAttribute('data-key');
+            if (key === 'rank') return;
+            if (sortKey === key) { sortAsc = !sortAsc; } else { sortKey = key; sortAsc = true; }
+            document.querySelectorAll('th').forEach(function(t) { t.classList.remove('sorted'); });
+            th.classList.add('sorted');
+            render(data);
+          });
+        });
       } catch (e) {
         document.getElementById('scores-body').innerHTML =
-          '<tr><td colspan="6" class="empty">No scores available yet.</td></tr>';
+          '<tr><td colspan="9" class="empty">No scores available yet.</td></tr>';
       }
     })();
   </script>
