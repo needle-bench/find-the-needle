@@ -10,7 +10,7 @@
 BENCHMARKS_DIR := benchmarks
 BENCH ?=
 
-.PHONY: validate run list clean help bench verify
+.PHONY: validate run list clean help bench verify score score-all score-status
 
 help: ## Show this help
 	@echo "needle-bench — your worst debugging day, everyone's benchmark."
@@ -22,6 +22,9 @@ help: ## Show this help
 	@echo "  make bench                 Run all benchmarks (expect failures)"
 	@echo "  make verify                Verify all solutions work"
 	@echo "  make list                  List all benchmarks"
+	@echo "  make score MODEL=name      Run one model against all benchmarks"
+	@echo "  make score-all             Run all models against all benchmarks"
+	@echo "  make score-status          Show completed/pending runs"
 	@echo "  make clean                 Remove build artifacts"
 	@echo ""
 
@@ -112,6 +115,38 @@ verify: ## Verify all solutions fix their benchmarks
 		echo "PASS (solution works)" || echo "FAIL (solution broken)"; \
 		echo ""; \
 	done
+
+score: ## Run one model against all benchmarks
+ifndef MODEL
+	$(error MODEL is required. Usage: make score MODEL=claude-haiku-3-5-20241022)
+endif
+	@bash dispatch.sh $(MODEL)
+
+score-all: ## Run all models against all benchmarks
+	@bash dispatch.sh --all
+
+score-status: ## Show completed/pending runs
+	@echo "needle-bench score status:"
+	@echo ""
+	@while read -r model provider rest; do \
+		[ -z "$$model" ] && continue; \
+		case "$$model" in \#*) continue;; esac; \
+		for dir in $(BENCHMARKS_DIR)/*/; do \
+			name=$$(basename "$$dir"); \
+			[ "$$name" = "_template" ] && continue; \
+			if [ -f "runs/$$model/$$name.jsonl" ]; then \
+				score=""; \
+				if [ -f "runs/$$model/$$name.score.json" ]; then \
+					resolved=$$(python3 -c "import json; print(json.load(open('runs/$$model/$$name.score.json'))['resolved'])" 2>/dev/null || echo "?"); \
+					score=" resolved=$$resolved"; \
+				fi; \
+				echo "  DONE  $$model/$$name$$score"; \
+			else \
+				echo "  PEND  $$model/$$name"; \
+			fi; \
+		done; \
+	done < models.conf
+	@echo ""
 
 clean: ## Remove build artifacts
 	@echo "Cleaning up..."

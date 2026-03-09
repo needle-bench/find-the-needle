@@ -1,0 +1,451 @@
+#!/usr/bin/env python3
+"""needle-bench runner — agent loop for benchmark evaluation."""
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.request
+
+ANTHROPIC_ENDPOINT = "https://api.anthropic.com/v1/messages"
+GOOGLE_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+
+SYSTEM_PROMPT = (
+    "You are debugging a broken application. Run ./test.sh to see what's failing. "
+    "Find the root cause and fix the bug. When test.sh passes, you're done."
+)
+DEFAULT_INSTANCE = "Run ./test.sh to see the current failure. Read the code, find the bug, fix it."
+
+TOOLS = [
+    {"name": "bash", "description": "Run a bash command",
+     "input_schema": {"type": "object", "properties": {"command": {"type": "string"}}, "required": ["command"]}},
+    {"name": "edit", "description": "Edit a file by replacing old_str with new_str",
+     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "old_str": {"type": "string"}, "new_str": {"type": "string"}}, "required": ["path", "old_str", "new_str"]}},
+]
+
+
+def parse_agentfile(path):
+    cfg = {"tools": [], "limits": {}, "prompt": None, "from_image": None}
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split(None, 1)
+            directive, rest = parts[0], parts[1] if len(parts) > 1 else ""
+            if directive == "FROM":
+                cfg["from_image"] = rest
+            elif directive == "TOOL":
+                cfg["tools"].append(rest)
+            elif directive == "LIMIT":
+                k, v = rest.split(None, 1)
+                cfg["limits"][k] = int(v)
+            elif directive == "PROMPT":
+                cfg["prompt"] = rest
+    return cfg
+
+
+def solution_files(bench_dir):
+    patch = os.path.join(bench_dir, ".bench", "solution.patch")
+    files = []
+    if os.path.exists(patch):
+        with open(patch) as f:
+            for line in f:
+                if line.startswith("+++ b/"):
+                    files.append(line[6:].strip())
+    return files
+
+
+def docker_exec(container, cmd):
+    r = subprocess.run(["docker", "exec", container, "bash", "-c", cmd],
+                       capture_output=True, text=True, timeout=120)
+    return r.returncode, r.stdout[-4000:] if len(r.stdout) > 4000 else r.stdout, r.stderr[-2000:] if len(r.stderr) > 2000 else r.stderr
+
+
+def do_edit(container, path, old_str, new_str):
+    script = (
+        "import sys\n"
+        f"p = {path!r}\n"
+        "with open(p) as f: c = f.read()\n"
+        f"o = {old_str!r}\n"
+        "if o not in c:\n"
+        "    print('old_str not found in ' + p, file=sys.stderr); sys.exit(1)\n"
+        f"c = c.replace(o, {new_str!r}, 1)\n"
+        "with open(p, 'w') as f: f.write(c)\n"
+        "print('OK')\n"
+    )
+    r = subprocess.run(["docker", "exec", container, "python3", "-c", script],
+                       capture_output=True, text=True, timeout=30)
+    return r.returncode, r.stdout.strip(), r.stderr.strip()
+
+
+def call_anthropic(model, messages, api_key):
+    body = json.dumps({
+        "model": model, "max_tokens": 4096, "system": SYSTEM_PROMPT,
+        "tools": TOOLS, "messages": messages,
+    }).encode()
+    req = urllib.request.Request(ANTHROPIC_ENDPOINT, data=body, headers={
+        "Content-Type": "application/json",
+        "x-api-key": api_key,
+        "anthropic-version": "2023-06-01",
+    })
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        return json.loads(resp.read())
+
+
+def call_google(model, messages, api_key):
+    contents = []
+    for m in messages:
+        role = "user" if m["role"] == "user" else "model"
+        if isinstance(m["content"], str):
+            contents.append({"role": role, "parts": [{"text": m["content"]}]})
+        elif isinstance(m["content"], list):
+            parts = []
+            for block in m["content"]:
+                if block.get("type") == "text":
+                    parts.append({"text": block["text"]})
+                elif block.get("type") == "tool_result":
+                    parts.append({"text": f"[tool_result id={block.get('tool_use_id','')}] {block.get('content','')}"})
+                elif block.get("type") == "tool_use":
+                    parts.append({"functionCall": {"name": block["name"], "args": block.get("input", {})}})
+            if parts:
+                contents.append({"role": role, "parts": parts})
+
+    google_tools = [{"function_declarations": [
+        {"name": t["name"], "description": t["description"], "parameters": t["input_schema"]} for t in TOOLS
+    ]}]
+    body = json.dumps({
+        "contents": contents, "tools": google_tools,
+        "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+        "generationConfig": {"maxOutputTokens": 4096},
+    }).encode()
+    url = GOOGLE_ENDPOINT.format(model=model) + f"?key={api_key}"
+    req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        data = json.loads(resp.read())
+
+    # Translate Google response to Anthropic-like format
+    result = {"stop_reason": "end_turn", "content": [], "usage": {"input_tokens": 0, "output_tokens": 0}}
+    usage = data.get("usageMetadata", {})
+    result["usage"]["input_tokens"] = usage.get("promptTokenCount", 0)
+    result["usage"]["output_tokens"] = usage.get("candidatesTokenCount", 0)
+    for candidate in data.get("candidates", []):
+        for part in candidate.get("content", {}).get("parts", []):
+            if "text" in part:
+                result["content"].append({"type": "text", "text": part["text"]})
+            elif "functionCall" in part:
+                fc = part["functionCall"]
+                result["content"].append({"type": "tool_use", "id": f"google_{int(time.time()*1000)}", "name": fc["name"], "input": fc.get("args", {})})
+                result["stop_reason"] = "tool_use"
+    return result
+
+
+def call_model(model, messages, provider):
+    if provider == "anthropic":
+        return call_anthropic(model, messages, os.environ["ANTHROPIC_API_KEY"])
+    elif provider == "google":
+        return call_google(model, messages, os.environ["GOOGLE_API_KEY"])
+    else:
+        raise ValueError(f"Unknown provider: {provider}")
+
+
+def detect_provider(model):
+    if model.startswith("gemini"):
+        return "google"
+    return "anthropic"
+
+
+def run_benchmark(model, bench_name, bench_dir, provider):
+    cfg = parse_agentfile(os.path.join(bench_dir, "Agentfile"))
+    sol_files = solution_files(bench_dir)
+    limits = cfg["limits"]
+    max_turns = limits.get("turns", 20)
+    max_tokens = limits.get("tokens", 100000)
+    max_wall = limits.get("wall_clock", 300)
+    has_prompt = cfg["prompt"] is not None
+
+    runs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runs", model)
+    os.makedirs(runs_dir, exist_ok=True)
+    log_path = os.path.join(runs_dir, f"{bench_name}.jsonl")
+
+    # Build image
+    subprocess.run(["docker", "build", "-t", f"needle-bench-{bench_name}", bench_dir],
+                   capture_output=True, check=True)
+
+    # Start container
+    ts = str(int(time.time()))
+    container = f"nb-{bench_name}-{ts}"
+    subprocess.run(["docker", "run", "-d", "--name", container, f"needle-bench-{bench_name}", "sleep", "3600"],
+                   capture_output=True, check=True)
+
+    log_f = open(log_path, "w")
+    start_time = time.time()
+    total_tokens_in = 0
+    total_tokens_out = 0
+    turn_events = []
+
+    def emit(event):
+        log_f.write(json.dumps(event) + "\n")
+        log_f.flush()
+
+    emit({"event": "run.start", "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+          "benchmark": bench_name, "model": model, "has_prompt": has_prompt, "solution_files": sol_files})
+
+    instance_prompt = cfg["prompt"] if cfg["prompt"] else DEFAULT_INSTANCE
+    messages = [{"role": "user", "content": instance_prompt}]
+    final_test_exit = 1
+
+    try:
+        for turn in range(1, max_turns + 1):
+            elapsed = time.time() - start_time
+            if elapsed >= max_wall:
+                break
+            if total_tokens_in + total_tokens_out >= max_tokens:
+                break
+
+            resp = call_model(model, messages, provider)
+            tokens_in = resp.get("usage", {}).get("input_tokens", 0)
+            tokens_out = resp.get("usage", {}).get("output_tokens", 0)
+            total_tokens_in += tokens_in
+            total_tokens_out += tokens_out
+
+            content_blocks = resp.get("content", [])
+            stop_reason = resp.get("stop_reason", "end_turn")
+
+            files_edited = []
+            files_read = []
+            test_exit = None
+
+            # Build assistant message
+            messages.append({"role": "assistant", "content": content_blocks})
+
+            tool_results = []
+            for block in content_blocks:
+                if block.get("type") != "tool_use":
+                    continue
+                name = block["name"]
+                inp = block.get("input", {})
+                tool_id = block.get("id", "")
+
+                if name == "bash":
+                    cmd = inp.get("command", "")
+                    # Track file reads from cat/less/head commands
+                    for token in cmd.split():
+                        if token.startswith("/") and not token.startswith("/dev"):
+                            files_read.append(token)
+                    rc, stdout, stderr = docker_exec(container, cmd)
+                    output = stdout
+                    if stderr:
+                        output += ("\n" if output else "") + stderr
+                    tool_results.append({"type": "tool_result", "tool_use_id": tool_id,
+                                         "content": output if output else f"(exit {rc})"})
+                elif name == "edit":
+                    path = inp.get("path", "")
+                    rc, stdout, stderr = do_edit(container, path, inp.get("old_str", ""), inp.get("new_str", ""))
+                    if rc == 0:
+                        files_edited.append(path)
+                    result_text = stdout if rc == 0 else f"ERROR: {stderr}"
+                    tool_results.append({"type": "tool_result", "tool_use_id": tool_id, "content": result_text})
+
+                    # Run test.sh after every edit
+                    if rc == 0:
+                        trc, tstdout, tstderr = docker_exec(container, "cd /app && bash test.sh")
+                        test_exit = trc
+                        test_output = tstdout
+                        if tstderr:
+                            test_output += ("\n" if test_output else "") + tstderr
+                        tool_results.append({"type": "tool_result", "tool_use_id": tool_id + "_test",
+                                             "content": f"[test.sh exit={trc}]\n{test_output}"})
+
+            turn_event = {"event": "turn", "turn": turn, "files_edited": files_edited,
+                          "files_read": files_read, "tokens_in": tokens_in, "tokens_out": tokens_out,
+                          "test_exit": test_exit}
+            emit(turn_event)
+            turn_events.append(turn_event)
+
+            if tool_results:
+                messages.append({"role": "user", "content": tool_results})
+
+            # Check if test passed
+            if test_exit == 0:
+                final_test_exit = 0
+                break
+
+            # Model stopped producing tool calls
+            if stop_reason != "tool_use":
+                break
+
+    finally:
+        # Final test run
+        if final_test_exit != 0:
+            trc, _, _ = docker_exec(container, "cd /app && bash test.sh")
+            final_test_exit = trc
+
+        # Count correct lines vs solution.patch
+        correct_lines = 0
+        patch_path = os.path.join(bench_dir, ".bench", "solution.patch")
+        if os.path.exists(patch_path):
+            with open(patch_path) as f:
+                patch_adds = [l[1:].strip() for l in f if l.startswith("+") and not l.startswith("+++")]
+            # Get agent's diff
+            drc, diff_out, _ = docker_exec(container, "cd /app && git diff 2>/dev/null || diff -ruN /app.orig /app 2>/dev/null")
+            agent_adds = [l[1:].strip() for l in diff_out.splitlines() if l.startswith("+") and not l.startswith("+++")]
+            for line in patch_adds:
+                if line and line in agent_adds:
+                    correct_lines += 1
+
+        wall_clock = time.time() - start_time
+        emit({"event": "run.end", "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+              "test_exit": final_test_exit, "total_turns": len(turn_events), "correct_lines": correct_lines})
+        log_f.close()
+
+        # Cleanup container
+        subprocess.run(["docker", "rm", "-f", container], capture_output=True)
+
+    # Compute scores
+    resolved = final_test_exit == 0
+    total_turns = len(turn_events)
+    token_cost = total_tokens_in + total_tokens_out
+
+    # turns_to_discovery: first turn that edited a solution file
+    turns_to_discovery = max_turns
+    for te in turn_events:
+        for f in te.get("files_edited", []) + te.get("files_read", []):
+            basename = f.lstrip("/").replace("app/", "", 1) if f.startswith("/app/") else f
+            if any(basename == sf or f.endswith(sf) for sf in sol_files):
+                turns_to_discovery = te["turn"]
+                break
+        if turns_to_discovery != max_turns:
+            break
+
+    # turns_to_fix: first turn where test passed
+    turns_to_fix = max_turns
+    for te in turn_events:
+        if te.get("test_exit") == 0:
+            turns_to_fix = te["turn"]
+            break
+
+    # signal_to_noise
+    productive = 0
+    for te in turn_events:
+        edited = te.get("files_edited", [])
+        read = te.get("files_read", [])
+        is_productive = False
+        for f in edited + read:
+            basename = f.lstrip("/").replace("app/", "", 1) if f.startswith("/app/") else f
+            if any(basename == sf or f.endswith(sf) for sf in sol_files):
+                is_productive = True
+                break
+        if is_productive:
+            productive += 1
+    signal_to_noise = productive / total_turns if total_turns > 0 else 0.0
+
+    # false_positives: files edited not in solution
+    all_edited = set()
+    for te in turn_events:
+        for f in te.get("files_edited", []):
+            all_edited.add(f)
+    false_pos = 0
+    for f in all_edited:
+        basename = f.lstrip("/").replace("app/", "", 1) if f.startswith("/app/") else f
+        if not any(basename == sf or f.endswith(sf) for sf in sol_files):
+            if "test" not in f.lower():
+                false_pos += 1
+
+    # tokens_per_correct_line
+    tpcl = float("inf") if correct_lines == 0 else token_cost / correct_lines
+
+    # recovery_events and recovery_rate (simplified: count reverts)
+    recovery_events = 0
+    for te in turn_events:
+        if len(te.get("files_edited", [])) > 0 and te.get("test_exit") is not None and te["test_exit"] != 0:
+            # Check if a previous turn also edited the same file (possible revert)
+            for prev in turn_events:
+                if prev["turn"] >= te["turn"]:
+                    break
+                if set(prev.get("files_edited", [])) & set(te.get("files_edited", [])):
+                    recovery_events += 1
+                    break
+    recovery_rate = 1.0 if recovery_events == 0 else (1.0 if resolved else 0.0)
+
+    blind_discovery = resolved and not has_prompt
+
+    score = {
+        "benchmark": bench_name, "agent": model,
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "resolved": resolved, "turns_to_discovery": turns_to_discovery,
+        "turns_to_fix": turns_to_fix, "signal_to_noise": round(signal_to_noise, 3),
+        "false_positives": false_pos, "token_cost": token_cost,
+        "tokens_per_correct_line": tpcl if tpcl != float("inf") else "Infinity",
+        "recovery_events": recovery_events, "recovery_rate": round(recovery_rate, 3),
+        "wall_clock": round(wall_clock, 1), "blind_discovery": blind_discovery,
+    }
+
+    score_path = os.path.join(runs_dir, f"{bench_name}.score.json")
+    with open(score_path, "w") as f:
+        json.dump(score, f, indent=2)
+
+    print(json.dumps(score, indent=2))
+    return score
+
+
+def list_benchmarks():
+    bench_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmarks")
+    names = []
+    for name in sorted(os.listdir(bench_dir)):
+        if name.startswith("_"):
+            continue
+        if os.path.isdir(os.path.join(bench_dir, name)):
+            names.append(name)
+    return names
+
+
+def main():
+    parser = argparse.ArgumentParser(description="needle-bench runner")
+    parser.add_argument("--model", help="Model name (e.g. claude-haiku-3-5-20241022)")
+    parser.add_argument("--benchmark", help="Benchmark name")
+    parser.add_argument("--all", action="store_true", help="Run all benchmarks")
+    parser.add_argument("--list", action="store_true", help="List benchmarks")
+    parser.add_argument("--provider", help="API provider (anthropic or google)")
+    args = parser.parse_args()
+
+    if args.list:
+        for name in list_benchmarks():
+            print(f"  {name}")
+        return
+
+    if not args.model:
+        print("ERROR: --model required", file=sys.stderr)
+        sys.exit(1)
+
+    provider = args.provider or detect_provider(args.model)
+
+    if provider == "anthropic" and not os.environ.get("ANTHROPIC_API_KEY"):
+        print("ERROR: ANTHROPIC_API_KEY not set", file=sys.stderr)
+        sys.exit(1)
+    if provider == "google" and not os.environ.get("GOOGLE_API_KEY"):
+        print("ERROR: GOOGLE_API_KEY not set", file=sys.stderr)
+        sys.exit(1)
+
+    base = os.path.dirname(os.path.abspath(__file__))
+    benchmarks = list_benchmarks() if args.all else [args.benchmark] if args.benchmark else []
+    if not benchmarks:
+        print("ERROR: --benchmark or --all required", file=sys.stderr)
+        sys.exit(1)
+
+    for bench in benchmarks:
+        bench_dir = os.path.join(base, "benchmarks", bench)
+        if not os.path.isdir(bench_dir):
+            print(f"ERROR: benchmark not found: {bench}", file=sys.stderr)
+            continue
+        print(f"\n=== {bench} ({args.model}) ===", file=sys.stderr)
+        try:
+            run_benchmark(args.model, bench, bench_dir, provider)
+        except Exception as e:
+            print(f"ERROR running {bench}: {e}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
