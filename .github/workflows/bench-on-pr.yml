@@ -1,0 +1,195 @@
+name: Bench on PR
+
+on:
+  pull_request:
+    paths:
+      - "benchmarks/**"
+
+# Cancel previous runs for the same PR
+concurrency:
+  group: bench-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build matrix from changed benchmarks and model labels
+        id: matrix
+        run: |
+          # 1. Detect which benchmarks changed
+          BASE=${{ github.event.pull_request.base.sha }}
+          HEAD=${{ github.event.pull_request.head.sha }}
+          BENCHMARKS=$(git diff --name-only "$BASE" "$HEAD" -- benchmarks/ \
+            | sed 's|benchmarks/\([^/]*\)/.*|\1|' \
+            | grep -v '^_template$' \
+            | sort -u)
+
+          if [ -z "$BENCHMARKS" ]; then
+            echo "matrix=[]" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # 2. Select models from PR labels (model:sonnet, model:haiku, etc.)
+          LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+          MODEL_LABELS=$(echo "$LABELS" | jq -r '.[] | select(startswith("model:")) | sub("^model:"; "")')
+
+          MODELS="[]"
+          if [ -n "$MODEL_LABELS" ]; then
+            while IFS= read -r label; do
+              case "$label" in
+                sonnet)  MODELS=$(echo "$MODELS" | jq -c '. + [{"model":"claude-sonnet-4-6","provider":"anthropic"}]') ;;
+                haiku)   MODELS=$(echo "$MODELS" | jq -c '. + [{"model":"claude-haiku-3-5-20241022","provider":"anthropic"}]') ;;
+                opus)    MODELS=$(echo "$MODELS" | jq -c '. + [{"model":"claude-opus-4-6","provider":"anthropic"}]') ;;
+                gemini)  MODELS=$(echo "$MODELS" | jq -c '. + [{"model":"gemini-2.5-pro","provider":"google"}]') ;;
+                *)       echo "::warning::Unknown model label: $label" ;;
+              esac
+            done <<< "$MODEL_LABELS"
+          else
+            # Default: sonnet + gemini
+            MODELS='[{"model":"claude-sonnet-4-6","provider":"anthropic"},{"model":"gemini-2.5-pro","provider":"google"}]'
+          fi
+
+          # 3. Build cross-product: every benchmark x every model
+          MATRIX="[]"
+          while IFS= read -r bench; do
+            [ -z "$bench" ] && continue
+            for i in $(seq 0 $(($(echo "$MODELS" | jq length) - 1))); do
+              MODEL=$(echo "$MODELS" | jq -r ".[$i].model")
+              PROVIDER=$(echo "$MODELS" | jq -r ".[$i].provider")
+              MATRIX=$(echo "$MATRIX" | jq -c \
+                --arg b "$bench" --arg m "$MODEL" --arg p "$PROVIDER" \
+                '. + [{"benchmark": $b, "model": $m, "provider": $p}]')
+            done
+          done <<< "$BENCHMARKS"
+
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+          echo "Matrix: $MATRIX"
+
+  bench:
+    needs: detect
+    if: needs.detect.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        combo: ${{ fromJSON(needs.detect.outputs.matrix) }}
+
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run benchmark
+        run: |
+          MODEL="${{ matrix.combo.model }}"
+          PROVIDER="${{ matrix.combo.provider }}"
+          BENCH="${{ matrix.combo.benchmark }}"
+
+          echo "::group::Running $BENCH with $MODEL ($PROVIDER)"
+
+          python3 runner.py \
+            --model "$MODEL" \
+            --provider "$PROVIDER" \
+            --benchmark "$BENCH" \
+            2>&1 | tee bench-output.log
+
+          echo "::endgroup::"
+
+          # Copy score file to a stable location for upload
+          SCORE_FILE="runs/${MODEL}/${BENCH}.score.json"
+          if [ -f "$SCORE_FILE" ]; then
+            cp "$SCORE_FILE" result.json
+          else
+            echo '{"benchmark":"'"$BENCH"'","agent":"'"$MODEL"'","resolved":false,"error":"runner produced no score file"}' > result.json
+          fi
+
+          echo "Result:"
+          cat result.json
+
+      - name: Upload result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: result-${{ matrix.combo.benchmark }}--${{ matrix.combo.model }}
+          path: result.json
+          retention-days: 30
+
+  comment:
+    needs: [detect, bench]
+    if: always() && needs.detect.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: results
+          pattern: result-*
+
+      - name: Build and post PR comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Build markdown table from all result artifacts
+          TABLE="## needle-bench results
+
+          | Benchmark | Model | Resolved | Turns | Tokens | Time |
+          |-----------|-------|----------|-------|--------|------|"
+
+          for f in results/result-*/result.json; do
+            [ -f "$f" ] || continue
+
+            BENCH=$(jq -r '.benchmark // "?"' "$f")
+            MODEL=$(jq -r '.agent // "?"' "$f")
+            RESOLVED=$(jq -r '.resolved' "$f")
+            TOKENS=$(jq -r '.token_cost // "—"' "$f")
+            WALL=$(jq -r '.wall_clock // "—"' "$f")
+
+            if [ "$RESOLVED" = "true" ]; then
+              ICON="✅"
+              TURNS=$(jq -r '.turns_to_fix' "$f")
+            else
+              ICON="❌"
+              TURNS=$(jq -r '.total_turns // "—"' "$f")
+            fi
+
+            if [ "$WALL" != "—" ] && [ "$WALL" != "null" ]; then
+              WALL="${WALL}s"
+            else
+              WALL="—"
+            fi
+
+            TABLE="${TABLE}
+          | ${BENCH} | ${MODEL} | ${ICON} | ${TURNS} | ${TOKENS} | ${WALL} |"
+          done
+
+          BODY="${TABLE}
+
+          <sub>Run by [bench-on-pr](${GITHUB_SERVER_URL}/${REPO}/actions/runs/${GITHUB_RUN_ID})</sub>"
+
+          # Replace previous bench comment if one exists
+          EXISTING=$(gh api "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+            --jq '.[] | select(.body | startswith("## needle-bench results")) | .id' 2>/dev/null || true)
+          for cid in $EXISTING; do
+            gh api -X DELETE "repos/${REPO}/issues/${PR_NUMBER}/comments/${cid}" 2>/dev/null || true
+          done
+
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$BODY"
