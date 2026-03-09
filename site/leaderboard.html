@@ -56,11 +56,26 @@
   </footer>
 
   <script>
+    /* Inline fallback scores — used when fetch('scores.json') fails (MIME, CORS, caching) */
+    window.SCORES = [
+      {"benchmark":"off-by-one-pagination","agent":"claude-opus-4-6","os":"none","resolved":true,"turns_to_discovery":1,"turns_to_fix":4,"files_touched":1,"lines_changed":1,"blind_discovery":true,"timestamp":"2026-03-09T00:00:00Z"},
+      {"benchmark":"race-condition-counter","agent":"claude-opus-4-6","os":"none","resolved":true,"turns_to_discovery":1,"turns_to_fix":4,"files_touched":1,"lines_changed":4,"blind_discovery":true,"timestamp":"2026-03-09T00:01:00Z"},
+      {"benchmark":"silent-data-corruption","agent":"claude-opus-4-6","os":"none","resolved":true,"turns_to_discovery":1,"turns_to_fix":4,"files_touched":1,"lines_changed":3,"blind_discovery":true,"timestamp":"2026-03-09T00:02:00Z"}
+    ];
+  </script>
+  <script>
     (async function() {
       try {
-        const resp = await fetch('scores.json');
-        if (!resp.ok) throw new Error('No scores yet');
-        const data = await resp.json();
+        let data;
+        try {
+          const resp = await fetch('scores.json');
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          data = await resp.json();
+          if (!Array.isArray(data)) throw new Error('Not an array');
+        } catch (fetchErr) {
+          console.warn('scores.json fetch failed, using inline fallback:', fetchErr.message);
+          data = window.SCORES || [];
+        }
         if (!data.length) {
           document.getElementById('scores-body').innerHTML =
             '<tr><td colspan="9" class="empty">No scores yet. Run some benchmarks!</td></tr>';
