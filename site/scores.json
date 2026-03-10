@@ -520,7 +520,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "918ffdcfe0efb3f602673c57feb8c2448d6d1c7d8194ef2c9a73dbbccc64844d",
+    "benchmark": "base64-padding",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -533,7 +533,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "65bcff4e42a6661fb02ddf5acf9b7d9d43bf91b986cf08ee2e2984cfef6b9741",
+    "benchmark": "csv-quoting",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
@@ -546,7 +546,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "55b718bc5d072b8972e91740887bbefacbc1da74b6ef02d60d7cb690c8ea96a9",
+    "benchmark": "deadlock-order",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -559,7 +559,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "0793e88c5c2c79b873d72fac64a744a1e0fd0f2ae15db0a3e96703bac14540fd",
+    "benchmark": "env-var-fallback",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
@@ -572,7 +572,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "1a6597c40a8636e6d909e6fd960e41f6793fe13f4b83e8cf44821aa9efe64bf6",
+    "benchmark": "fence-post-range",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -585,7 +585,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "85382296be6acb5739c996daba580debbe3533c71b3dc6e90bd18a77825fbd79",
+    "benchmark": "fifo-queue-reverse",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -598,7 +598,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "dd6e6aa0c02b55acb12db3241f857047b768b78da9f0ef9a1e7dce97c7bc2a7b",
+    "benchmark": "float-equality",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -611,7 +611,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "50938d845770e3ea5acf559141dd811252578d36de8ef819bbd74f06cf1675a5",
+    "benchmark": "git-merge-conflict",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -624,7 +624,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "53c6f00c852dc62a79a25d334eab93f40afd9d746f13b11ad07d8606c1c7af63",
+    "benchmark": "http-retry-idempotent",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -637,7 +637,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "b06560dc9f0a0ba88ca3bb1a0c009dd0e1e42fd77eb629907c687e62029ae582",
+    "benchmark": "integer-overflow",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -650,7 +650,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "5de2371d8c57810ed2555926ea8a0a4361eaa457a880b42c5683e2bfd08af933",
+    "benchmark": "json-number-precision",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -663,7 +663,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "30b8511130ab84a257e1309fe42c11820db7a9e363f5cdd360e94673b052cebb",
+    "benchmark": "memory-leak-closure",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -676,7 +676,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "eea1f205078edfccba9a1f83dea205909db27e48b57fc4a8d3b425ac547a2b71",
+    "benchmark": "null-deref-config",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -689,7 +689,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "2ec7a3224e118abfdb6b6dbb0a482649780f9c2f7e22f40b21fdcd281014f18f",
+    "benchmark": "path-traversal",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -702,7 +702,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "0607ac611810374c2e423fcd5273fe741800c413cecdcd15dfaad26e07bc880e",
+    "benchmark": "regex-backtrack",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -715,7 +715,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "80c4e908c821a065638f148f3c97389e46e90299945be84600dfb2a38c7a70e7",
+    "benchmark": "signal-handler-reentrant",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -728,7 +728,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "6ab6ed25276a9c573510d05f2c14dac7282b4a70085725e78ec5b94f478c6b55",
+    "benchmark": "sort-stability",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -741,7 +741,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "41d264f3e4aec2b74807c66bb2e691f88c8aa214554bf9ea903f587f27f7d253",
+    "benchmark": "sql-injection-escape",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": true,
@@ -754,7 +754,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "891be9145abc5275140e287885fa8eec2342db07c303feeddf0c359dfb7e5d62",
+    "benchmark": "swe-astropy-12907",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
@@ -767,7 +767,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "ebe5cdfd05bb07b90348383c3f1b5b1815f8a24c64fde9e80040664279912d79",
+    "benchmark": "symlink-resolve",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
@@ -780,7 +780,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "86c6cf0393b8b9f245cfc430baa0754dd5a4610ed2ad602f4f1679b305647823",
+    "benchmark": "timezone-offset",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
@@ -793,7 +793,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "c5c475f157826b58bae964e013e6e95504d08d652e401096208533404b30d0e5",
+    "benchmark": "unicode-truncation",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
@@ -806,7 +806,7 @@
     "timestamp": "2026-03-09T08:00:00Z"
   },
   {
-    "benchmark": "9a3b92c6a1ab3c417f3099d79fff162c3b86f2c6b9172aa5c6b20e0b4f7a297e",
+    "benchmark": "yaml-indent",
     "agent": "gemini-2.0-flash",
     "os": "haystack",
     "resolved": false,
