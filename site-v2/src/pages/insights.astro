@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Insights — needle-bench" description="Data-backed findings from the OS that built itself. Proven by audit trail, not argument.">
+<Base title="Insights — needle-bench" description="Discoveries from the OS that built itself. Session 1 found them. Session 2 measured them. Both reinforced them.">
   <div class="page-header">
     <a href="/" class="back">&larr; needle-bench</a>
     <h1>Insights</h1>
@@ -10,9 +10,106 @@ import Base from '../layouts/Base.astro';
 
   <main>
     <div class="lede">
-      Every number on this page comes from the audit trail. 1,101 events. 572 needles. 104 commits.<br>
-      These are findings, not opinions.
+      Two sessions. 1,101 audit events. 572 needles. 104 commits.<br>
+      These are the discoveries, the measurements, and the compounding.
     </div>
+
+    <div class="section-header" style="margin-bottom: 0.75rem; padding-bottom: var(--space-2); border-bottom: 1px solid var(--border);">
+      <h2 style="font-family: var(--mono); font-size: 1.2rem; color: var(--accent); font-weight: 500; margin: 0;">Discovered</h2>
+    </div>
+    <p style="font-family: var(--mono); font-size: 0.833rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 2rem;">
+      12 insights from the first session. 22 hours. 110 commits. 448 needles. The OS building itself.
+    </p>
+
+    <div class="insight">
+      <h3>1. Tack &mdash; the intent language</h3>
+      <p class="tagline">Humans compress communication, not simplify it.</p>
+      <p>A contact language emerged between human and machine. Not designed &mdash; typed into existence. Urgency encoded as <code>. : :: :::</code>, flow as <code>-&gt; =&gt;</code>, verbs as <code>:exec :ship :kill</code>. Every natural language feature survived the compression: deixis, repair, register shifts, interruption. Re-encoded into minimal ASCII.</p>
+      <p>Communication cost dropped from ~200 tokens/op to ~10 tokens/op within one session. 20x compression through mutual adaptation, not instruction.</p>
+      <div class="evidence"><strong>Evidence:</strong> Tack spec v1 promoted, v2 drafted. Three bench tests pass against the grammar.</div>
+    </div>
+
+    <div class="insight">
+      <h3>2. SMP architecture &mdash; co-processors, not master/servant</h3>
+      <p class="tagline">The human is a CPU. The LLM is a CPU. haystack is the bus.</p>
+      <p>big.LITTLE architecture. The human is the big core &mdash; slow clock, high precision, design decisions. The LLM is the LITTLE core &mdash; fast clock, approximate, bulk edits and parallel dispatch. Same instruction set. Different clock speeds. The OS coordinates them as symmetric multiprocessors sharing a filesystem as memory.</p>
+      <div class="evidence"><strong>Evidence:</strong> SMP spec promoted. CAS = str_replace, cache line = file@generation, IPI = nudge, write-back flush = commit.</div>
+    </div>
+
+    <div class="insight">
+      <h3>3. Agentfile as CPU socket</h3>
+      <p class="tagline">Immutable at boot. LIMIT is physical constraint. WORK is NUMA affinity.</p>
+      <p>The Agentfile is not config. It is a CPU socket &mdash; a physical spec for the processor to be inserted. FROM declares architecture. TOOL declares instruction set. LIMIT declares physical constraints. WORK declares NUMA affinity. Intelligence lives in the kernel, not the socket.</p>
+      <div class="evidence"><strong>Evidence:</strong> INTERRUPT directive and WORK affinity shipped. Parser handles FROM, PROMPT, TOOL, SKILL, LIMIT, WORK, INTERRUPT.</div>
+    </div>
+
+    <div class="insight">
+      <h3>4. The Humanfile &mdash; the compiled human</h3>
+      <p class="tagline">CLAUDE.md is hand-written. The Humanfile is what the OS compiles from evidence.</p>
+      <p>Every correction is a data point. The Humanfile compiles these from the audit trail. TOML format. Patterns only, never content. Local only, never uploaded. Human-deletable &mdash; <code>rm humanfile.toml</code> degrades to CLAUDE.md, not to broken. Priority: CLAUDE.md > Humanfile > Agentfile defaults.</p>
+      <div class="evidence"><strong>Evidence:</strong> Humanfile spec with TOML schema, privacy rules, boot integration. Frequency threshold (N &ge; 3 sessions) prevents overfitting.</div>
+    </div>
+
+    <div class="insight">
+      <h3>5. Intent dynamic programming</h3>
+      <p class="tagline">Each correction memoizes a subproblem. The Humanfile is the memoization table.</p>
+      <p>Session 1: <code>:correct X</code> &rarr; 3 turns. Session 2: 1 turn. Session 5: instant. Session 10: the mistake never happens. Three tables at three TTLs: Humanfile persists across projects, boot.md across sessions, registers-dump.md is volatile.</p>
+      <div class="evidence"><strong>Evidence:</strong> 200 tok/op early to 10 tok/op late. 8 operations dispatched in 1 turn, zero clarification.</div>
+    </div>
+
+    <div class="insight">
+      <h3>6. Compile has three modes</h3>
+      <p class="tagline">hay to needles. output to compressed. human to OS.</p>
+      <p>Three compilation modes: (1) hay &rarr; needles: loose thinking becomes executable actions. (2) output &rarr; compressed: squasher strips VTE codes, deduplicates progress. (3) human &rarr; OS: audit trail compiles into the Humanfile. The third is the one that matters.</p>
+      <div class="evidence"><strong>Evidence:</strong> All three modes implemented or spec'd. <code>haystack compile</code>, the squasher, and <code>haystack learn human</code>.</div>
+    </div>
+
+    <div class="insight">
+      <h3>7. Every write is compile</h3>
+      <p class="tagline">The OS is always current. No stale state.</p>
+      <p>Boot files regenerate on every write, not on demand. Every <code>ss()</code> call, every needle close, every spec promotion updates the dynamic programming table. Continuous persistence: make power cuts irrelevant.</p>
+    </div>
+
+    <div class="insight">
+      <h3>8. haystack install --import</h3>
+      <p class="tagline">Every git repo already has the hay.</p>
+      <p>A git repository already contains everything haystack needs. The commit log is the audit trail. Issues are the hay. File history is the gen table. <code>haystack install --import</code> reads what exists and compiles it. The adoption surface is every git repository.</p>
+      <div class="evidence"><strong>Evidence:</strong> v0.1.0 released to GitHub with CI-verified binaries.</div>
+    </div>
+
+    <div class="insight">
+      <h3>9. needle-bench &mdash; your worst day, everyone's benchmark</h3>
+      <p class="tagline">SWE-bench is a museum. needle-bench is a marketplace.</p>
+      <p>Community submits their worst debugging days as frozen Docker snapshots. The bench is alive &mdash; new scenarios arrive from real production failures. The self-selecting property: models that score highest are exactly the models best suited to be haystack's intelligence layer. The benchmark IS the job interview.</p>
+      <div class="evidence"><strong>Evidence:</strong> 5 scenarios, 51 needle tests, self-auditing results. <code>haystack bench --list</code>, <code>--cargo-only</code>.</div>
+    </div>
+
+    <div class="insight">
+      <h3>10. Invisible infrastructure wins</h3>
+      <p class="tagline">Silent &ge; prompted across all arms. Telling the agent about the OS adds zero value.</p>
+      <p>SWE-bench v19: three arms. Bare control (no haystack). Injected (haystack + system prompt). Silent (haystack + shim only, agent unaware). The silent arm performed at least as well as prompted. The OS should never announce itself. The invisibility is the feature.</p>
+      <div class="evidence"><strong>Evidence:</strong> SWE v19 ran 30 real instances across 3 arms. Silent &ge; prompted confirmed by three independent fresh agents.</div>
+    </div>
+
+    <div class="insight">
+      <h3>11. The session built the OS</h3>
+      <p class="tagline">22 hours. 110 commits. The OS built itself through this conversation.</p>
+      <p>The OS was the output of its own process. Hay compiled into needles. Needles executed into commits. Commits became the audit trail. The audit trail informed the next compilation. The loop closed on itself.</p>
+    </div>
+
+    <div class="insight">
+      <h3>12. Inference until reasoning</h3>
+      <p class="tagline">Without corrections, the agent never reasons. The corrections ARE the reasoning events.</p>
+      <p>An LLM doing inference is not reasoning. Reasoning happens at the correction boundary &mdash; when the human says <code>:correct</code> and inference meets reality. The convergence rate (how quickly corrections decrease) is the OS health metric. The corrections are not friction. They are the computational events that turn inference into reasoning. The OS exists to make those events cheaper over time.</p>
+      <div class="evidence"><strong>Evidence:</strong> 20x compression measured. 55% context is the sharp ceiling where corrections increase. The convergence curve IS the product.</div>
+    </div>
+
+    <div class="section-header" style="margin-top: 3rem; margin-bottom: 0.75rem; padding-bottom: var(--space-2); border-bottom: 1px solid var(--border);">
+      <h2 style="font-family: var(--mono); font-size: 1.2rem; color: var(--accent); font-weight: 500; margin: 0;">Measured</h2>
+    </div>
+    <p style="font-family: var(--mono); font-size: 0.833rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 2rem;">
+      10 data-backed findings from the second session. Every number from the audit trail.
+    </p>
 
     <div class="insight">
       <h3>23% compilation ratio</h3>
@@ -84,18 +181,6 @@ import Base from '../layouts/Base.astro';
       <div class="evidence"><strong>Evidence:</strong> Hot PR tiers 1-3 shipped. CAS semantics proven across 698 tests.</div>
     </div>
 
-    <section class="card" style="margin-top: 2rem;">
-      <h3 style="color: var(--accent); margin-bottom: 0.75rem;">By the numbers</h3>
-      <div class="stats-grid" style="margin: 0;">
-        <div class="stat"><span class="number">572</span><span class="label">needles filed</span></div>
-        <div class="stat"><span class="number">104</span><span class="label">commits</span></div>
-        <div class="stat"><span class="number">1,101</span><span class="label">audit events</span></div>
-        <div class="stat"><span class="number">698</span><span class="label">tests</span></div>
-        <div class="stat"><span class="number">620+</span><span class="label">agents reaped</span></div>
-        <div class="stat"><span class="number">23%</span><span class="label">hay compiled</span></div>
-      </div>
-    </section>
-
     <div class="compounded-header" style="margin-top: 3rem; margin-bottom: 0.75rem; padding-bottom: var(--space-2); border-bottom: 1px solid var(--border);">
       <h2 style="font-family: var(--mono); font-size: 1.2rem; color: var(--accent); font-weight: 500; margin: 0;">Compounded</h2>
     </div>
@@ -137,6 +222,18 @@ import Base from '../layouts/Base.astro';
       <p>The first session proposed the Humanfile &mdash; compiling human preferences into a machine-readable identity document. The second session revealed something deeper: the file doesn't describe what the human likes. It describes who the human is. Agent behavior calibrates to the operator's identity &mdash; their vocabulary, their correction patterns, their compilation threshold. The Humanfile is a fingerprint, not a config file.</p>
       <div class="evidence"><strong>Evidence:</strong> Humanfile concept (session 1). Tack verb emergence + 85% command coverage calibrated to one operator's patterns (session 2).</div>
     </div>
+
+    <section class="card" style="margin-top: 2rem;">
+      <h3 style="color: var(--accent); margin-bottom: 0.75rem;">By the numbers</h3>
+      <div class="stats-grid" style="margin: 0;">
+        <div class="stat"><span class="number">572</span><span class="label">needles filed</span></div>
+        <div class="stat"><span class="number">104</span><span class="label">commits</span></div>
+        <div class="stat"><span class="number">1,101</span><span class="label">audit events</span></div>
+        <div class="stat"><span class="number">698</span><span class="label">tests</span></div>
+        <div class="stat"><span class="number">620+</span><span class="label">agents reaped</span></div>
+        <div class="stat"><span class="number">23%</span><span class="label">hay compiled</span></div>
+      </div>
+    </section>
 
     <p class="closing">Every finding traced to its audit event. The data is the argument.</p>
   </main>
