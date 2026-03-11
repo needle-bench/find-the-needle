@@ -51,10 +51,11 @@
             <th data-key="files_touched">Files</th>
             <th data-key="lines_changed">Lines</th>
             <th data-key="blind_discovery">Blind</th>
+            <th data-key="commit">Commit</th>
           </tr>
         </thead>
         <tbody id="scores-body">
-          <tr><td colspan="11" class="empty">Loading scores...</td></tr>
+          <tr><td colspan="12" class="empty">Loading scores...</td></tr>
         </tbody>
       </table>
     </div>
@@ -85,7 +86,7 @@
         }
         if (!data.length) {
           document.getElementById('scores-body').innerHTML =
-            '<tr><td colspan="11" class="empty">No scores yet. Run some benchmarks!</td></tr>';
+            '<tr><td colspan="12" class="empty">No scores yet. Run some benchmarks!</td></tr>';
           return;
         }
 
@@ -153,6 +154,9 @@
             '<td>' + e.files_touched + '</td>' +
             '<td>' + e.lines_changed + '</td>' +
             '<td>' + (e.blind_discovery ? 'yes' : '-') + '</td>' +
+            '<td style="font-family:var(--mono);font-size:0.75rem;color:var(--text-muted)">' +
+              (e.commit ? '<a href="https://github.com/aetherwing-io/needle-bench/commit/' + e.commit + '" style="color:var(--text-muted);text-decoration:none" title="' + e.commit + '">' + e.commit.slice(0,7) + '</a>' : '—') +
+            '</td>' +
             '</tr>';
           }).join('');
         }
@@ -171,7 +175,7 @@
         });
       } catch (e) {
         document.getElementById('scores-body').innerHTML =
-          '<tr><td colspan="11" class="empty">No scores available yet.</td></tr>';
+          '<tr><td colspan="12" class="empty">No scores available yet.</td></tr>';
       }
     })();
   </script>

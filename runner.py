@@ -709,8 +709,19 @@ def run_benchmark(model, bench_name, bench_dir, provider):
 
     blind_discovery = resolved and not has_prompt
 
+    # Capture commit hash of the benchmark repo for audit trail
+    try:
+        import subprocess as _sp
+        _bench_sha = _sp.check_output(
+            ["git", "-C", bench_dir, "rev-parse", "--short", "HEAD"],
+            stderr=_sp.DEVNULL, text=True
+        ).strip()
+    except Exception:
+        _bench_sha = "unknown"
+
     score = {
         "benchmark": bench_name, "agent": model,
+        "commit": _bench_sha,
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "resolved": resolved, "turns_to_discovery": turns_to_discovery,
         "turns_to_fix": turns_to_fix, "signal_to_noise": round(signal_to_noise, 3),
