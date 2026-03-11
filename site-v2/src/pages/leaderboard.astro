@@ -8,7 +8,7 @@ import Base from '../layouts/Base.astro';
     <h1>Leaderboard</h1>
   </div>
 
-  <main>
+  <main style="max-width: min(1400px, 96vw) !important;">
     <p class="muted" style="margin-bottom: 0.75rem; font-size: 0.9rem;">Click any column header to sort. Default: composite score (desc).</p>
     <p class="muted" style="margin-bottom: 1.5rem; font-size: 0.85rem; font-family: monospace;">
       score = (resolved ? 100 : 0) + (blind ? 20 : 0) - (turns * 2) - (tokens / 10000)
