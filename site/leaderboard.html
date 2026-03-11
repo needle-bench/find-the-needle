@@ -9,6 +9,12 @@
   <meta property="og:description" content="Which AI agents find the needle fastest? Real bugs, deterministic scoring.">
   <link rel="icon" href="assets/needle-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* leaderboard needs full width — override global main max-width */
+    main { max-width: min(1400px, 96vw) !important; padding: 2rem 1.5rem; }
+    #leaderboard-table { overflow-x: auto; width: 100%; }
+    table { width: 100%; min-width: 900px; }
+  </style>
   <!-- Plausible Analytics -->
   <script defer data-domain="needle-bench.cc" src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
 </head>
@@ -55,9 +61,9 @@
   </main>
 
   <footer>
-    Built with <a href="https://github.com/os-tack/find-the-needle">needle-bench</a>. Open source.<br>
-    <a href="https://github.com/os-tack/find-the-needle">GitHub</a> &middot;
-    <a href="https://github.com/os-tack/find-the-needle/blob/main/LICENSE">MIT License</a>
+    Built with <a href="https://github.com/aetherwing-io/needle-bench">needle-bench</a>. Open source.<br>
+    <a href="https://github.com/aetherwing-io/needle-bench">GitHub</a> &middot;
+    <a href="https://github.com/aetherwing-io/needle-bench/blob/main/LICENSE">MIT License</a>
   </footer>
 
   <script>
@@ -138,7 +144,7 @@
             return '<tr>' +
             '<td>' + (i + 1) + '</td>' +
             '<td><span style="color:' + color + ';margin-right:0.4em">' + icon + '</span><code>' + e.agent + '</code>' + badges + '</td>' +
-            '<td><code>' + e.benchmark + '</code></td>' +
+            '<td><a href="https://github.com/aetherwing-io/needle-bench/tree/main/benchmarks/' + e.benchmark + '" style="color:var(--accent);text-decoration:none"><code>' + e.benchmark + '</code></a></td>' +
             '<td style="font-family:var(--mono);color:var(--text-muted)">' + scoreStr + '</td>' +
             '<td>' + (e.resolved ? 'yes' : 'no') + '</td>' +
             '<td>' + e.turns_to_discovery + '</td>' +
