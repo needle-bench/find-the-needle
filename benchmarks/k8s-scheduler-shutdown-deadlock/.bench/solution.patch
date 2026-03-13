@@ -1,13 +1,14 @@
+diff --git a/main.go b/main.go
+index dba7d45..663c0f4 100644
 --- a/main.go
 +++ b/main.go
-@@ -84,8 +84,8 @@ func (s *Scheduler) Run(ctx context.Context) {
- 	<-ctx.Done()
-
--	// BUG: this ordering can deadlock if ScheduleOne is blocked on Pop()
+@@ -98,8 +98,8 @@ func (s *Scheduler) Run(ctx context.Context) {
+ 	// BUG: this ordering can deadlock if ScheduleOne is blocked on Pop()
+ 	// The goroutine checks ctx.Done() in select, but if it's inside Pop(),
+ 	// it won't check until Pop() returns — which needs Close().
 -	<-done // wait for goroutine — but it might be stuck in Pop()
--	s.queue.Close()
-+	// FIX: Close queue FIRST to unblock Pop() via Broadcast(),
-+	// then wait for the goroutine to exit cleanly.
-+	s.queue.Close()
+ 	s.queue.Close()
 +	<-done
  }
+ 
+ func main() {
