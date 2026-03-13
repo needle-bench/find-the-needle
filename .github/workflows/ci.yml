@@ -11,7 +11,7 @@ jobs:
         id: changed
         run: |
           CHANGED=$(git diff --name-only origin/main...HEAD -- benchmarks/ \
-            | grep -oP 'benchmarks/[^/]+' | sort -u | sed 's|benchmarks/||')
+            | grep -oP 'benchmarks/[^/]+' | sort -u | sed 's|benchmarks/||' | tr '\n' ' ' | xargs)
           if [ -z "$CHANGED" ]; then
             echo "dirs=" >> $GITHUB_OUTPUT
             echo "No benchmark changes detected"
