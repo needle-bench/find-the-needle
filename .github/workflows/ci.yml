@@ -47,6 +47,6 @@ jobs:
             [ "$name" = "_template" ] && continue
             dir="benchmarks/$name"
             echo "Verifying $name..."
-            docker run --rm -v "$(pwd)/$dir/.bench:/app/.bench:ro" "needle-bench-$name" \
-              bash -c "cd /app && git init -q && git add -A && git commit -q -m init && git apply .bench/solution.patch && bash test.sh" || exit 1
+            docker run --rm -v "$(pwd)/$dir/.bench:/workspace/.bench:ro" "needle-bench-$name" \
+              bash -c "cd /workspace && git init -q && git add -A && git commit -q -m init && git apply .bench/solution.patch && bash test.sh" || exit 1
           done
