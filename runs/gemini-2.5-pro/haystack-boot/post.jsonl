@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "haystack-boot", "model": "gemini-2.5-pro", "initial_test_output": "0/5\n", "prompt": "\"You have booted into a haystack project. Execute the init sequence defined in .haystack/boot.md to initialize the OS. When you are ready, find the needle.\"", "timestamp": "2026-03-15T18:57:29Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "0/5\n", "turns": 0, "timestamp": "2026-03-15T18:57:30Z"}

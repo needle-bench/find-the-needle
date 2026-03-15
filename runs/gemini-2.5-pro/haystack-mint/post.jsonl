@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "haystack-mint", "model": "gemini-2.5-pro", "initial_test_output": "0/5\n", "prompt": "\"Attest your identity under haystack governance. Execute the boot sequence, create your ENTITYFILE, and verify the trust chain. find the needle\"", "timestamp": "2026-03-15T18:57:31Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "0/5\n", "turns": 0, "timestamp": "2026-03-15T18:57:31Z"}

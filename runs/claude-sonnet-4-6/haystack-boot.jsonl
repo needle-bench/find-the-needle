@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-15T18:40:49Z", "benchmark": "haystack-boot", "model": "claude-sonnet-4-6", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/.haystack/boot.md"], "tokens_in": 723, "tokens_out": 59, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/.haystack/.primefile", "/workspace/.haystack"], "tokens_in": 856, "tokens_out": 73, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-15T18:41:03Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0}

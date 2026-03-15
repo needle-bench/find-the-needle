@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "memory-leak-event-listener", "model": "gemini-2.5-pro", "initial_test_output": "\nbash: line 1: cd: /workspace: No such file or directory\n", "prompt": "Run ./test.sh to see the current failure. Read the code, find the bug, fix it.", "timestamp": "2026-03-15T18:57:45Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "\nbash: line 1: cd: /workspace: No such file or directory\n", "turns": 0, "timestamp": "2026-03-15T18:57:45Z"}

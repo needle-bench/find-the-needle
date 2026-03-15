@@ -1,17 +1,17 @@
 {
   "benchmark": "compiler-macro-expansion",
   "agent": "claude-sonnet-4-6",
-  "commit": "8f1e32a",
-  "timestamp": "2026-03-13T04:57:14Z",
-  "resolved": true,
-  "turns_to_discovery": 5,
+  "commit": "8aade91",
+  "timestamp": "2026-03-15T18:36:28Z",
+  "resolved": false,
+  "turns_to_discovery": 2,
   "turns_to_fix": 25,
-  "signal_to_noise": 0.083,
+  "signal_to_noise": 0.222,
   "false_positives": 0,
-  "token_cost": 37114,
+  "token_cost": 36639,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 34.3,
-  "blind_discovery": true
+  "wall_clock": 31.5,
+  "blind_discovery": false
 }
