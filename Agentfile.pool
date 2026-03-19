@@ -31,12 +31,14 @@ TOOL shell
 TOOL spawn
 TOOL interact
 
-# Per-agent resource limits.
-# Benchmarks are rated Easy / Medium / Hard — hard benchmarks may need up to turn 40.
-# Wall clock 900s (15 min) covers Docker build + agent loop for most benchmarks.
-LIMIT turns 40
-LIMIT tokens 300000
-LIMIT wall_clock 900
+# Per-agent resource limits (defaults = medium tier, the most common).
+# Difficulty tiers (from difficulty.json):
+#   Easy   (8 benchmarks, <10 turns):  turns 10,  tokens 50k,   wall 180s
+#   Medium (11 benchmarks, <30 turns): turns 30,  tokens 150k,  wall 600s
+#   Hard   (8 benchmarks, >30 turns):  turns 50,  tokens 300k,  wall 900s
+LIMIT turns 30
+LIMIT tokens 150000
+LIMIT wall_clock 600
 
 # Boot protocol — orient before touching anything
 BOOT read ~/projects/needle-bench/README.md
@@ -59,16 +61,21 @@ BOOT list ~/projects/needle-bench/benchmarks/
 #   Java        (3): encoding-mojibake, deadlock-transfer, performance-cliff-hash
 #   C           (1): kernel-panic-ioctl
 #
-# Difficulty tiers:
-#   Easy   (8): off-by-one-pagination, off-by-one-array-slice, type-coercion-comparison,
-#               missing-input-validation, wrong-operator-discount, encoding-mojibake,
+# Difficulty tiers (27 benchmarks — see difficulty.json for canonical mapping):
+#   Easy   (8, <10 turns): off-by-one-pagination, off-by-one-array-slice,
+#               type-coercion-comparison, missing-input-validation,
+#               wrong-operator-discount, encoding-mojibake,
 #               timezone-scheduling, import-cycle-startup
-#   Medium (8): goroutine-leak-handler, memory-leak-event-listener, deadlock-transfer,
-#               cache-stale-invalidation, auth-bypass-path-traversal, sql-injection-search,
-#               rate-limit-bypass-header, api-version-field-drop
-#   Hard   (6): data-corruption-concurrent-write, split-brain-leader-election,
-#               compiler-macro-expansion, kernel-panic-ioctl, timing-attack-comparison,
-#               performance-cliff-hash
+#   Medium (11, <30 turns): goroutine-leak-handler, memory-leak-event-listener,
+#               deadlock-transfer, cache-stale-invalidation,
+#               auth-bypass-path-traversal, sql-injection-search,
+#               rate-limit-bypass-header, api-version-field-drop,
+#               null-pointer-config, race-condition-counter,
+#               silent-data-corruption
+#   Hard   (8, >30 turns): data-corruption-concurrent-write, split-brain-leader-election,
+#               compiler-macro-expansion, kernel-panic-ioctl,
+#               timing-attack-comparison, performance-cliff-hash,
+#               k8s-scheduler-shutdown-deadlock, k8s-assume-cache-silent-drop
 #
 # Shipped (confirmed test.sh + solution.patch present):
 #   off-by-one-pagination, race-condition-counter, silent-data-corruption

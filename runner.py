@@ -260,6 +260,23 @@ def resolve_tools(agentfile_tools):
     return [ALL_TOOLS[name] for name in ALL_TOOLS if name in api_names]
 
 
+def _resolve_var(value):
+    """Resolve ${VAR:-default} syntax, returning the raw string.
+
+    If value matches ${VAR:-default}, check os.environ for VAR and fall back
+    to the default.  Otherwise return the value unchanged.
+    """
+    import re
+    m = re.match(r'^\$\{(\w+):-([^}]*)\}$', value)
+    if m:
+        env_name, default = m.group(1), m.group(2)
+        return os.environ.get(env_name, default)
+    m = re.match(r'^\$\{(\w+)\}$', value)
+    if m:
+        return os.environ.get(m.group(1), value)
+    return value
+
+
 def parse_agentfile(path):
     cfg = {"tools": [], "limits": {}, "prompt": None, "from_image": None, "boot": None}
     with open(path) as f:
@@ -270,12 +287,12 @@ def parse_agentfile(path):
             parts = line.split(None, 1)
             directive, rest = parts[0], parts[1] if len(parts) > 1 else ""
             if directive == "FROM":
-                cfg["from_image"] = rest
+                cfg["from_image"] = _resolve_var(rest)
             elif directive == "TOOL":
                 cfg["tools"].append(rest)
             elif directive == "LIMIT":
                 k, v = rest.split(None, 1)
-                cfg["limits"][k] = int(v)
+                cfg["limits"][k] = int(_resolve_var(v))
             elif directive == "PROMPT":
                 cfg["prompt"] = rest
             elif directive == "BOOT":
@@ -542,16 +559,59 @@ def detect_provider(model):
     return "anthropic"
 
 
+def _load_difficulty_json():
+    """Load difficulty.json from the project root, returning (tiers, benchmarks) or (None, None)."""
+    proj_root = os.path.dirname(os.path.abspath(__file__))
+    diff_path = os.path.join(proj_root, "difficulty.json")
+    if not os.path.exists(diff_path):
+        return None, None
+    with open(diff_path) as f:
+        data = json.load(f)
+    return data.get("tiers", {}), data.get("benchmarks", {})
+
+
+def _resolve_difficulty_limits(bench_name):
+    """Look up difficulty-tier limits for a benchmark.
+
+    Returns a dict with turns/tokens/wall_clock if the benchmark is in
+    difficulty.json, or None to signal the caller should fall back to
+    per-Agentfile limits.
+    """
+    tiers, benchmarks = _load_difficulty_json()
+    if tiers is None or benchmarks is None:
+        return None
+    tier_name = benchmarks.get(bench_name)
+    if tier_name is None:
+        return None
+    return tiers.get(tier_name)
+
+
 def run_benchmark(model, bench_name, bench_dir, provider):
     # Bug 1 fix: always use canonical short name so scores don't fragment
     model = _canonical_agent_name(model)
-    cfg = parse_agentfile(os.path.join(bench_dir, "Agentfile"))
+
+    # Try the unified Agentfile.bench first, fall back to per-benchmark Agentfile
+    proj_root = os.path.dirname(os.path.abspath(__file__))
+    bench_agentfile = os.path.join(proj_root, "Agentfile.bench")
+    per_bench_agentfile = os.path.join(bench_dir, "Agentfile")
+    if os.path.exists(bench_agentfile):
+        cfg = parse_agentfile(bench_agentfile)
+    else:
+        cfg = parse_agentfile(per_bench_agentfile)
     tools = resolve_tools(cfg["tools"])
     sol_files = solution_files(bench_dir)
-    limits = cfg["limits"]
-    max_turns = limits.get("turns", 20)
-    max_tokens = limits.get("tokens", 100000)
-    max_wall = limits.get("wall_clock", 300)
+
+    # Resolve limits: difficulty.json tier > Agentfile LIMIT > defaults
+    diff_limits = _resolve_difficulty_limits(bench_name)
+    if diff_limits is not None:
+        max_turns = diff_limits.get("turns", 30)
+        max_tokens = diff_limits.get("tokens", 150000)
+        max_wall = diff_limits.get("wall_clock", 600)
+    else:
+        limits = cfg["limits"]
+        max_turns = limits.get("turns", 20)
+        max_tokens = limits.get("tokens", 100000)
+        max_wall = limits.get("wall_clock", 300)
     has_prompt = cfg["prompt"] is not None
 
     runs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runs", model)

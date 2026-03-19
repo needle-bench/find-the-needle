@@ -2,6 +2,6 @@ FROM null-pointer-config
 TOOL shell
 TOOL file:read
 TOOL file:edit
-LIMIT turns 20
-LIMIT tokens 100000
-LIMIT wall_clock 300
+LIMIT turns 30
+LIMIT tokens 150000
+LIMIT wall_clock 600

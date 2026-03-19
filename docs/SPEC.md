@@ -44,6 +44,10 @@ The Dockerfile MUST NOT:
 
 The Agentfile configures the agent's environment and constraints.
 
+### Per-benchmark Agentfile
+
+Each benchmark directory may contain an `Agentfile` with static directives:
+
 ```
 FROM <image>           # Docker image (built from Dockerfile)
 PROMPT <text>          # Optional — additional context for the agent
@@ -53,19 +57,64 @@ LIMIT tokens <N>       # Maximum token budget
 LIMIT wall_clock <Ns>  # Maximum wall-clock seconds
 ```
 
+### Unified Agentfile.bench
+
+For `haystack bench` runs, a single `Agentfile.bench` at the project root replaces per-benchmark Agentfiles. It defines tools and default limits; the actual limits are resolved from `difficulty.json` (see below).
+
+```
+FROM ${MODEL:-claude-sonnet-4-6}
+
+TOOL shell
+TOOL file:read
+TOOL file:edit
+
+LIMIT turns ${TURNS:-30}
+LIMIT tokens ${TOKENS:-150000}
+LIMIT wall_clock ${WALL:-600}
+```
+
+### Variable Substitution
+
+Agentfile.bench supports `${VAR:-default}` syntax:
+
+| Variable | Source | Default |
+|----------|--------|---------|
+| `${MODEL}` | `--model` flag | `claude-sonnet-4-6` |
+| `${TURNS}` | difficulty.json tier | `30` |
+| `${TOKENS}` | difficulty.json tier | `150000` |
+| `${WALL}` | difficulty.json tier | `600` |
+
+The runner resolves limits in this priority order:
+1. **difficulty.json tier** — if the benchmark is listed, its tier limits win
+2. **Agentfile LIMIT directives** — fallback for unlisted benchmarks
+3. **Built-in defaults** — turns=20, tokens=100k, wall=300s
+
+### Difficulty Tiers (difficulty.json)
+
+`difficulty.json` at the project root maps each benchmark to a difficulty tier with resource limits:
+
+| Tier | Benchmarks | Turns | Tokens | Wall Clock |
+|------|-----------|-------|--------|------------|
+| **Easy** | 8 | 10 | 50,000 | 180s |
+| **Medium** | 11 | 30 | 150,000 | 600s |
+| **Hard** | 8 | 50 | 300,000 | 900s |
+
+Easy benchmarks are single-cause bugs solvable in under 10 turns. Medium benchmarks involve concurrency, security, or caching bugs. Hard benchmarks require deep domain knowledge (distributed systems, compilers, kernels).
+
 ### Directives
 
 | Directive | Required | Description |
 |-----------|----------|-------------|
-| `FROM` | Yes | Base image reference |
+| `FROM` | Yes | Base image reference (supports `${MODEL}` substitution) |
 | `PROMPT` | No | Additional context beyond "find the needle" |
 | `TOOL` | Yes (1+) | Tools the agent may use (shell, file:read, file:edit) |
-| `LIMIT` | Yes (1+) | Resource constraints |
+| `LIMIT` | Yes (1+) | Resource constraints (supports `${VAR:-default}` substitution) |
+| `BOOT` | No | Command to run in container before agent starts |
 
 ### Default limits (if not specified)
 
 - `turns`: 30
-- `tokens`: 200,000
+- `tokens`: 150,000
 - `wall_clock`: 600s
 
 ## .bench/solution.patch

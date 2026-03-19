@@ -4,5 +4,6 @@ PROMPT "Find and fix the shutdown deadlock in this Go scheduler. The program sho
 TOOL shell
 TOOL file:read
 TOOL file:edit
-LIMIT budget_usd 3
-LIMIT max_turns 25
+LIMIT max_turns 50
+LIMIT tokens 300000
+LIMIT wall_clock 900

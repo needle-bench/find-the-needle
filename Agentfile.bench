@@ -1,0 +1,22 @@
+# needle-bench — unified benchmark Agentfile
+# Used by: haystack bench <scenario> --model <model>
+#
+# The scenario determines the Dockerfile and test.sh.
+# The model is passed via --model flag.
+# Difficulty tier sets resource limits.
+#
+# Difficulty tiers:
+#   Easy   (<10 turns):  LIMIT turns 10,  tokens 50k,   wall 180s
+#   Medium (<30 turns):  LIMIT turns 30,  tokens 150k,  wall 600s
+#   Hard   (>30 turns):  LIMIT turns 50,  tokens 300k,  wall 900s
+
+FROM ${MODEL:-claude-sonnet-4-6}
+
+TOOL shell
+TOOL file:read
+TOOL file:edit
+
+# Default limits (overridden by difficulty tier)
+LIMIT turns ${TURNS:-30}
+LIMIT tokens ${TOKENS:-150000}
+LIMIT wall_clock ${WALL:-600}

@@ -2,6 +2,6 @@ FROM goroutine-leak-handler:latest
 TOOL shell
 TOOL file:read
 TOOL file:edit
-LIMIT turns 25
+LIMIT turns 30
 LIMIT tokens 150000
-LIMIT wall_clock 450
+LIMIT wall_clock 600
