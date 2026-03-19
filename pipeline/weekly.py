@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Weekly kernel-curated benchmark pipeline.
 
-Pipeline 2: haystack imports a repo, diagnoses the most compounding issue,
+Pipeline 2: ostk imports a repo, diagnoses the most compounding issue,
 creates a frozen Docker benchmark, models solve it, fix offered upstream.
 
 Usage:
@@ -85,7 +85,7 @@ def _resolve_fork(repo_entry):
 
 
 def import_repo(org, repo, branch="main", *, upstream=None, dry_run=False):
-    """Clone the repo (or fork) and run haystack diagnosis on it.
+    """Clone the repo (or fork) and run ostk diagnosis on it.
 
     Returns (repo_path, needles) where needles is a list of diagnosed issues
     ranked by compounding impact.
@@ -114,16 +114,16 @@ def import_repo(org, repo, branch="main", *, upstream=None, dry_run=False):
         os.makedirs(repo_path, exist_ok=True)
         commit = "dry-run-0000000000"
 
-    # --- haystack integration point ---
-    # TODO: Run `haystack install --import` on the cloned repo to produce
+    # --- ostk integration point ---
+    # TODO: Run `ostk install --import` on the cloned repo to produce
     #       a compiled needle graph.  For now we stub the output.
     #
     # Expected flow:
     #   result = subprocess.run(
-    #       ["haystack", "install", "--import", repo_path],
+    #       ["ostk", "install", "--import", repo_path],
     #       capture_output=True, text=True, check=True,
     #   )
-    #   needles = parse_haystack_output(result.stdout)
+    #   needles = parse_ostk_output(result.stdout)
     #
     # Stub: return an empty list; the pipeline will exit gracefully.
     needles = _stub_needles(org, repo, commit)
@@ -132,12 +132,12 @@ def import_repo(org, repo, branch="main", *, upstream=None, dry_run=False):
 
 
 def _stub_needles(org, repo, commit):
-    """Placeholder until haystack --import produces real needles.
+    """Placeholder until ostk --import produces real needles.
 
-    Returns a list of dicts shaped like haystack needle output so the
+    Returns a list of dicts shaped like ostk needle output so the
     downstream steps have something to work with during development.
     """
-    # TODO: Replace with real haystack output parsing
+    # TODO: Replace with real ostk output parsing
     return [
         {
             "id": f"{org}/{repo}#stub-001",
@@ -149,7 +149,7 @@ def _stub_needles(org, repo, commit):
             "test_hint": "tests/test_core.py",
             "commit": commit,
             "description": (
-                "This is a stub needle. Once haystack --import is wired up, "
+                "This is a stub needle. Once ostk --import is wired up, "
                 "this will contain the real diagnosis of the most compounding "
                 "issue in the repository."
             ),
@@ -253,7 +253,7 @@ def create_benchmark(needle, repo_path, output_dir=None, *, dry_run=False):
     _write_bench_readme(bench_dir, needle, org_repo, commit)
 
     # --- .bench/solution.patch ---
-    # TODO: Generate from the actual fix once haystack provides it.
+    # TODO: Generate from the actual fix once ostk provides it.
     _write_solution_stub(bench_dir)
 
     # --- Copy relevant source files ---
@@ -343,7 +343,7 @@ LIMIT wall_clock 600
 def _write_test_sh(bench_dir, needle):
     """Generate test.sh from needle metadata."""
     test_hint = needle.get("test_hint", "")
-    # TODO: Extract the actual failing test command from haystack output.
+    # TODO: Extract the actual failing test command from ostk output.
     #       For now, write a stub that always fails (benchmark is unsolved).
     test_sh = f"""\
 #!/bin/sh
@@ -393,7 +393,7 @@ docker run --rm needle-bench-test bash -c "cd /workspace && bash test.sh"
 
 ## Attribution
 
-Discovered by the needle-bench weekly pipeline via haystack kernel diagnosis.
+Discovered by the needle-bench weekly pipeline via ostk kernel diagnosis.
 """
     with open(os.path.join(bench_dir, ".bench", "README.md"), "w") as f:
         f.write(readme)
@@ -402,7 +402,7 @@ Discovered by the needle-bench weekly pipeline via haystack kernel diagnosis.
 def _write_solution_stub(bench_dir):
     """Write a placeholder solution.patch."""
     patch = """\
-# TODO: Generate from the actual fix once haystack provides it.
+# TODO: Generate from the actual fix once ostk provides it.
 # This file should be a git-format patch that, when applied, makes test.sh pass.
 """
     with open(os.path.join(bench_dir, ".bench", "solution.patch"), "w") as f:

@@ -17,14 +17,14 @@ Manually curated benchmarks contributed by the community.
 ## Pipeline 2: Kernel-Curated (Weekly)
 
 Automated weekly pipeline (`weekly.py`) that imports a well-known open-source
-repo, uses haystack to diagnose the most compounding issue, and creates a
+repo, uses ostk to diagnose the most compounding issue, and creates a
 frozen benchmark from it.
 
 ### How it works
 
 1. **Import** — Shallow-clone a repo from the curated list (`repos.json`).
    Rotation is deterministic: `week_number % len(repos)`.
-2. **Diagnose** — Run haystack on the repo to produce a ranked list of
+2. **Diagnose** — Run ostk on the repo to produce a ranked list of
    "needles" (compounding issues).
 3. **Select** — Pick the highest-leverage needle (P0, most dependencies).
 4. **Freeze** — Create a benchmark directory with Dockerfile, test.sh,
@@ -79,5 +79,5 @@ subsequently solves it, the fix can be offered back to the original project:
 3. PR includes attribution: model name, benchmark ID, and link to needle-bench.
 4. Upstream maintainers review and merge (or not) on their own terms.
 
-This closes the loop: haystack finds the bug, needle-bench benchmarks it,
+This closes the loop: ostk finds the bug, needle-bench benchmarks it,
 models compete to fix it, and the best fix goes back to the project.

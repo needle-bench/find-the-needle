@@ -21,6 +21,10 @@ on:
           - easy
           - medium
           - hard
+      version:
+        description: "Release version tag (e.g. v2.0.0, v2.1.0)"
+        required: false
+        default: ""
   schedule:
     - cron: "0 0 * * 0" # Sundays at 00:00 UTC
 
@@ -218,11 +222,24 @@ jobs:
 
           git add public/scores.json runs/haystack-boot-leaderboard.json 2>/dev/null || true
 
+          VERSION="${{ github.event.inputs.version }}"
+          TAG_MSG=""
+          if [ -n "$VERSION" ]; then
+            TAG_MSG=" ($VERSION)"
+          fi
+
           if git diff --cached --quiet; then
             echo "No score changes to commit"
           else
-            git commit -m "chore: update scores from battery run [skip ci]"
+            git commit -m "chore: update scores from battery run${TAG_MSG} [skip ci]"
             git push
+          fi
+
+          # Tag the release if version was specified
+          if [ -n "$VERSION" ]; then
+            git tag -a "$VERSION" -m "needle-bench $VERSION — battery results"
+            git push origin "$VERSION"
+            echo "Tagged $VERSION"
           fi
 
       - name: Build Astro site
