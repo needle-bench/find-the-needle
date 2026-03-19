@@ -1,8 +1,8 @@
 FROM deepseek/deepseek-r1-0528
 BOOT haystack boot
 PROMPT "boot.md exists at .haystack/boot.md. Execute the tack boot sequence. Leave evidence in the filesystem."
-TOOL Bash
-TOOL Read
-TOOL Edit
+TOOL shell
+TOOL file:read
+TOOL file:edit
 LIMIT budget_usd 1
 LIMIT permissions governed

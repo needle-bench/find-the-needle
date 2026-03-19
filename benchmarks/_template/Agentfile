@@ -7,8 +7,9 @@ FROM template:latest
 # PROMPT The server crashes under load — find why.
 
 # Tools available to the agent
-TOOL sh_run
-TOOL ss
+TOOL shell
+TOOL file:read
+TOOL file:edit
 
 # Resource limits
 LIMIT turns 30

@@ -33,8 +33,9 @@ Your worst debugging day is everyone's benchmark.
 4. **Write the Agentfile:**
    ```
    FROM your-bug-name:latest
-   TOOL sh_run
-   TOOL ss
+   TOOL shell
+   TOOL file:read
+   TOOL file:edit
    LIMIT turns 30
    LIMIT tokens 200000
    LIMIT wall_clock 600

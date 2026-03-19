@@ -59,7 +59,7 @@ LIMIT wall_clock <Ns>  # Maximum wall-clock seconds
 |-----------|----------|-------------|
 | `FROM` | Yes | Base image reference |
 | `PROMPT` | No | Additional context beyond "find the needle" |
-| `TOOL` | Yes (1+) | Tools the agent may use (sh_run, ss, etc.) |
+| `TOOL` | Yes (1+) | Tools the agent may use (shell, file:read, file:edit) |
 | `LIMIT` | Yes (1+) | Resource constraints |
 
 ### Default limits (if not specified)

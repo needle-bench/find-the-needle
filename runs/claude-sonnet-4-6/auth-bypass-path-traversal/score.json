@@ -1,17 +1,17 @@
 {
   "benchmark": "auth-bypass-path-traversal",
   "agent": "claude-sonnet-4-6",
-  "commit": "8aade91",
-  "timestamp": "2026-03-15T18:35:28Z",
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T20:47:08Z",
   "resolved": false,
-  "turns_to_discovery": 4,
+  "turns_to_discovery": 2,
   "turns_to_fix": 25,
-  "signal_to_noise": 0.455,
+  "signal_to_noise": 0.375,
   "false_positives": 0,
-  "token_cost": 39761,
+  "token_cost": 28012,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 45.1,
+  "wall_clock": 34.8,
   "blind_discovery": false
 }

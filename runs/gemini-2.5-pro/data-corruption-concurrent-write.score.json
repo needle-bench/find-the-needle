@@ -1,0 +1,17 @@
+{
+  "benchmark": "data-corruption-concurrent-write",
+  "agent": "gemini-2.5-pro",
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T20:50:52Z",
+  "resolved": false,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 25,
+  "signal_to_noise": 0.222,
+  "false_positives": 0,
+  "token_cost": 20838,
+  "tokens_per_correct_line": "Infinity",
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 43.8,
+  "blind_discovery": false
+}

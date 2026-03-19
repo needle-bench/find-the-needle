@@ -1,6 +1,7 @@
 FROM cache-stale-invalidation:latest
-TOOL sh_run
-TOOL ss
+TOOL shell
+TOOL file:read
+TOOL file:edit
 LIMIT turns 25
 LIMIT tokens 150000
 LIMIT wall_clock 450

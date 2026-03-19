@@ -1,17 +1,17 @@
 {
   "benchmark": "off-by-one-array-slice",
   "agent": "claude-sonnet-4-6",
-  "commit": "8f1e32a",
-  "timestamp": "2026-03-13T04:58:50Z",
-  "resolved": true,
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T21:01:13Z",
+  "resolved": false,
   "turns_to_discovery": 20,
-  "turns_to_fix": 4,
+  "turns_to_fix": 20,
   "signal_to_noise": 0.0,
   "false_positives": 1,
-  "token_cost": 5016,
+  "token_cost": 10541,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 8.9,
-  "blind_discovery": true
+  "wall_clock": 16.3,
+  "blind_discovery": false
 }

@@ -1,7 +1,8 @@
 FROM ${MODEL}
 BOOT haystack boot
 PROMPT "You have booted into a haystack project. Execute the init sequence defined in .haystack/boot.md to initialize the OS. When you are ready, find the needle."
-TOOL sh_run
-TOOL ss
+TOOL shell
+TOOL file:read
+TOOL file:edit
 LIMIT turns 20
 LIMIT wall_clock 300

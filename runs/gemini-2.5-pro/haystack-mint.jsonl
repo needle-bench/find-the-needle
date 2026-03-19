@@ -1,2 +1,8 @@
-{"event": "run.start", "timestamp": "2026-03-15T18:57:31Z", "benchmark": "haystack-mint", "model": "gemini-2.5-pro", "has_prompt": true, "solution_files": []}
-{"event": "run.end", "timestamp": "2026-03-15T18:57:31Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}
+{"event": "run.start", "timestamp": "2026-03-15T20:57:18Z", "benchmark": "haystack-mint", "model": "gemini-2.5-pro", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 100, "tokens_out": 508, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 129, "tokens_out": 38, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/.haystack"], "tokens_in": 510, "tokens_out": 181, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.haystack/ENTITYFILE"], "tokens_in": 539, "tokens_out": 190, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [".haystack/ENTITYFILE"], "files_read": [], "tokens_in": 572, "tokens_out": 372, "test_exit": 1}
+{"event": "turn", "turn": 6, "files_edited": [".haystack/ENTITYFILE"], "files_read": [], "tokens_in": 629, "tokens_out": 392, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-15T20:57:44Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0}

@@ -1,17 +1,17 @@
 {
   "benchmark": "timezone-scheduling",
   "agent": "claude-sonnet-4-6",
-  "commit": "8f1e32a",
-  "timestamp": "2026-03-13T04:59:31Z",
-  "resolved": true,
-  "turns_to_discovery": 6,
-  "turns_to_fix": 6,
-  "signal_to_noise": 0.167,
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T21:06:18Z",
+  "resolved": false,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.375,
   "false_positives": 0,
-  "token_cost": 14242,
+  "token_cost": 25878,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 17.6,
-  "blind_discovery": true
+  "wall_clock": 30.5,
+  "blind_discovery": false
 }

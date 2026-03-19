@@ -1,0 +1,17 @@
+{
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "agent": "claude-opus-4-6",
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T20:55:46Z",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 9,
+  "signal_to_noise": 0.556,
+  "false_positives": 0,
+  "token_cost": 29287,
+  "tokens_per_correct_line": 9762.333333333334,
+  "recovery_events": 1,
+  "recovery_rate": 1.0,
+  "wall_clock": 39.0,
+  "blind_discovery": false
+}

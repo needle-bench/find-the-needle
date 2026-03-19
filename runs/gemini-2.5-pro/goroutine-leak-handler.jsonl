@@ -1,2 +1,6 @@
-{"event": "run.start", "timestamp": "2026-03-15T18:57:28Z", "benchmark": "goroutine-leak-handler", "model": "gemini-2.5-pro", "has_prompt": false, "solution_files": ["app/main.go"]}
-{"event": "run.end", "timestamp": "2026-03-15T18:57:29Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}
+{"event": "run.start", "timestamp": "2026-03-15T20:56:05Z", "benchmark": "goroutine-leak-handler", "model": "gemini-2.5-pro", "has_prompt": false, "solution_files": ["app/main.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 101, "tokens_out": 61, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 242, "tokens_out": 175, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 364, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 446, "tokens_out": 39, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-15T20:56:28Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0}

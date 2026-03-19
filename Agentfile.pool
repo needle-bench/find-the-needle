@@ -27,9 +27,9 @@ GOAL find the needle, make test.sh pass, minimize turns and tokens
 
 # Tools — the runner exposes bash + edit inside the Docker container.
 # Outside the container (orientation, scoring, filing needles) uses shell + files.
-TOOL sh_run
-TOOL sh_spawn
-TOOL sh_interact
+TOOL shell
+TOOL spawn
+TOOL interact
 
 # Per-agent resource limits.
 # Benchmarks are rated Easy / Medium / Hard — hard benchmarks may need up to turn 40.
@@ -104,7 +104,6 @@ BOOT list ~/projects/needle-bench/benchmarks/
 
 # Coordination — agents share state through the filesystem
 COORDINATE filesystem
-STATE ~/projects/needle-bench/.haystack/
 
 # Score output — each run writes to runs/<model>/<benchmark>.jsonl
 # The agent pool should check runs/ before starting a benchmark to avoid

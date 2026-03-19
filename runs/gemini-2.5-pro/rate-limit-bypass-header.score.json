@@ -1,0 +1,17 @@
+{
+  "benchmark": "rate-limit-bypass-header",
+  "agent": "gemini-2.5-pro",
+  "commit": "418d4eb",
+  "timestamp": "2026-03-15T21:11:53Z",
+  "resolved": false,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 25,
+  "signal_to_noise": 0.2,
+  "false_positives": 0,
+  "token_cost": 102098,
+  "tokens_per_correct_line": "Infinity",
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 112.0,
+  "blind_discovery": false
+}

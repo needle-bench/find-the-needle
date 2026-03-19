@@ -1,2 +1,5 @@
-{"event": "run.start", "timestamp": "2026-03-15T18:57:35Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "gemini-2.5-pro", "has_prompt": true, "solution_files": ["main.go"]}
-{"event": "run.end", "timestamp": "2026-03-15T18:57:43Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}
+{"event": "run.start", "timestamp": "2026-03-15T20:59:32Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "gemini-2.5-pro", "has_prompt": true, "solution_files": ["main.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 98, "tokens_out": 98, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 137, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": ["main.go"], "files_read": [], "tokens_in": 1106, "tokens_out": 551, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-15T20:59:49Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0}

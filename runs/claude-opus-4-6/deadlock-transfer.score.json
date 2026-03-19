@@ -1,17 +1,17 @@
 {
   "benchmark": "deadlock-transfer",
   "agent": "claude-opus-4-6",
-  "commit": "8aade91",
-  "timestamp": "2026-03-15T18:47:23Z",
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T20:49:56Z",
   "resolved": false,
-  "turns_to_discovery": 4,
+  "turns_to_discovery": 10,
   "turns_to_fix": 25,
-  "signal_to_noise": 0.364,
+  "signal_to_noise": 0.214,
   "false_positives": 0,
-  "token_cost": 34023,
+  "token_cost": 62414,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 53.1,
+  "wall_clock": 61.2,
   "blind_discovery": false
 }

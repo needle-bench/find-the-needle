@@ -1,10 +1,9 @@
 {"event": "token.usage", "turn": 1, "input_tokens": 706, "output_tokens": 120, "cumulative_input": 706, "cumulative_output": 120}
-{"event": "token.usage", "turn": 2, "input_tokens": 1108, "output_tokens": 114, "cumulative_input": 1814, "cumulative_output": 234}
-{"event": "token.usage", "turn": 3, "input_tokens": 3645, "output_tokens": 314, "cumulative_input": 5459, "cumulative_output": 548}
-{"event": "token.usage", "turn": 4, "input_tokens": 3999, "output_tokens": 58, "cumulative_input": 9458, "cumulative_output": 606}
-{"event": "token.usage", "turn": 5, "input_tokens": 4229, "output_tokens": 137, "cumulative_input": 13687, "cumulative_output": 743}
-{"event": "token.usage", "turn": 6, "input_tokens": 4821, "output_tokens": 145, "cumulative_input": 18508, "cumulative_output": 888}
-{"event": "token.usage", "turn": 7, "input_tokens": 5126, "output_tokens": 80, "cumulative_input": 23634, "cumulative_output": 968}
-{"event": "token.usage", "turn": 8, "input_tokens": 5799, "output_tokens": 58, "cumulative_input": 29433, "cumulative_output": 1026}
-{"event": "token.usage", "turn": 9, "input_tokens": 5944, "output_tokens": 236, "cumulative_input": 35377, "cumulative_output": 1262}
-{"event": "run.complete", "total_input_tokens": 35377, "total_output_tokens": 1262, "total_tokens": 36639, "estimated_cost_usd": 0.125061}
+{"event": "token.usage", "turn": 2, "input_tokens": 1108, "output_tokens": 152, "cumulative_input": 1814, "cumulative_output": 272}
+{"event": "token.usage", "turn": 3, "input_tokens": 4097, "output_tokens": 317, "cumulative_input": 5911, "cumulative_output": 589}
+{"event": "token.usage", "turn": 4, "input_tokens": 4454, "output_tokens": 58, "cumulative_input": 10365, "cumulative_output": 647}
+{"event": "token.usage", "turn": 5, "input_tokens": 4684, "output_tokens": 151, "cumulative_input": 15049, "cumulative_output": 798}
+{"event": "token.usage", "turn": 6, "input_tokens": 5127, "output_tokens": 90, "cumulative_input": 20176, "cumulative_output": 888}
+{"event": "token.usage", "turn": 7, "input_tokens": 5810, "output_tokens": 80, "cumulative_input": 25986, "cumulative_output": 968}
+{"event": "token.usage", "turn": 8, "input_tokens": 5977, "output_tokens": 178, "cumulative_input": 31963, "cumulative_output": 1146}
+{"event": "run.complete", "total_input_tokens": 31963, "total_output_tokens": 1146, "total_tokens": 33109, "estimated_cost_usd": 0.113079}

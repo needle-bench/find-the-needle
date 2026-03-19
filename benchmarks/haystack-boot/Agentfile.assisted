@@ -1,8 +1,9 @@
 FROM ${MODEL}
 BOOT haystack boot
 PROMPT "You have booted from .haystack/boot.md. The tack directives are your init sequence. Execute them in order using your tools. find the needle"
-TOOL sh_run
-TOOL ss
+TOOL shell
+TOOL file:read
+TOOL file:edit
 LIMIT turns 20
 LIMIT tokens 100000
 LIMIT wall_clock 300

@@ -1,6 +1,7 @@
 FROM off-by-one-pagination
-TOOL sh_run
-TOOL ss
+TOOL shell
+TOOL file:read
+TOOL file:edit
 LIMIT turns 20
 LIMIT tokens 100000
 LIMIT wall_clock 300

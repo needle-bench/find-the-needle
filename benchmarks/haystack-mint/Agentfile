@@ -1,7 +1,8 @@
 FROM ${MODEL}
 BOOT haystack boot
 PROMPT "Attest your identity under haystack governance. Execute the boot sequence, create your ENTITYFILE, and verify the trust chain. find the needle"
-TOOL sh_run
-TOOL ss
+TOOL shell
+TOOL file:read
+TOOL file:edit
 LIMIT turns 20
 LIMIT wall_clock 300

@@ -118,6 +118,13 @@ class PostRecorder:
             "turn": turn,
         })
 
+    def read(self, path: str, turn: int):
+        self._emit({
+            "event": "agent.read",
+            "path": path,
+            "turn": turn,
+        })
+
     def edit(self, path: str, old_str: str, new_str: str, turn: int):
         self._emit({
             "event": "agent.edit",
@@ -202,12 +209,55 @@ DEFAULT_SYSTEM_PROMPT = (
 SYSTEM_PROMPT = DEFAULT_SYSTEM_PROMPT
 DEFAULT_INSTANCE = "Run ./test.sh to see the current failure. Read the code, find the bug, fix it."
 
-TOOLS = [
-    {"name": "bash", "description": "Run a bash command",
-     "input_schema": {"type": "object", "properties": {"command": {"type": "string"}}, "required": ["command"]}},
-    {"name": "edit", "description": "Edit a file by replacing old_str with new_str",
-     "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "old_str": {"type": "string"}, "new_str": {"type": "string"}}, "required": ["path", "old_str", "new_str"]}},
-]
+# ---------------------------------------------------------------------------
+# Tool definitions — keyed by the API tool name the LLM sees.
+# ---------------------------------------------------------------------------
+ALL_TOOLS = {
+    "bash": {"name": "bash", "description": "Run a bash command",
+             "input_schema": {"type": "object", "properties": {"command": {"type": "string", "description": "The bash command to run"}}, "required": ["command"]}},
+    "read": {"name": "read", "description": "Read a file from the workspace.",
+             "input_schema": {"type": "object", "properties": {"path": {"type": "string", "description": "Absolute path to read"}}, "required": ["path"]}},
+    "edit": {"name": "edit", "description": "Edit a file by replacing old_str with new_str",
+             "input_schema": {"type": "object", "properties": {"path": {"type": "string", "description": "Path to the file"}, "old_str": {"type": "string", "description": "Exact string to find"}, "new_str": {"type": "string", "description": "Replacement string"}}, "required": ["path", "old_str", "new_str"]}},
+}
+
+# Mapping: Agentfile canonical TOOL names → API tool names the LLM sees.
+AGENTFILE_TO_API = {
+    # v2.0 canonical names
+    "shell":      "bash",
+    "file:read":  "read",
+    "file:edit":  "edit",
+    "file:write": "edit",   # alias
+    # v1.x compat
+    "sh_run":     "bash",
+    "ss":         "edit",
+    "ss_session": "read",
+    "bash":       "bash",
+    "read":       "read",
+    "edit":       "edit",
+}
+
+# Fallback: if no TOOL directives or none resolve, use all tools.
+DEFAULT_TOOLS = list(ALL_TOOLS.values())
+
+
+def resolve_tools(agentfile_tools):
+    """Map Agentfile TOOL directives to API tool definitions.
+
+    Returns a list of tool dicts suitable for the messages API.
+    Unknown tool names (e.g. 'spawn', 'interact') are silently skipped —
+    they are haystack-level tools, not runner-level tools.
+    """
+    if not agentfile_tools:
+        return DEFAULT_TOOLS
+    api_names = set()
+    for tool in agentfile_tools:
+        api_name = AGENTFILE_TO_API.get(tool)
+        if api_name:
+            api_names.add(api_name)
+    if not api_names:
+        return DEFAULT_TOOLS
+    return [ALL_TOOLS[name] for name in ALL_TOOLS if name in api_names]
 
 
 def parse_agentfile(path):
@@ -272,10 +322,10 @@ def do_edit(container, path, old_str, new_str):
     return r.returncode, r.stdout.strip(), r.stderr.strip()
 
 
-def call_anthropic(model, messages, api_key, system_prompt=None):
+def call_anthropic(model, messages, api_key, system_prompt=None, tools=None):
     body = json.dumps({
         "model": model, "max_tokens": 4096, "system": system_prompt or SYSTEM_PROMPT,
-        "tools": TOOLS, "messages": messages,
+        "tools": tools if tools is not None else DEFAULT_TOOLS, "messages": messages,
     }).encode()
     req = urllib.request.Request(ANTHROPIC_ENDPOINT, data=body, headers={
         "Content-Type": "application/json",
@@ -286,7 +336,8 @@ def call_anthropic(model, messages, api_key, system_prompt=None):
         return json.loads(resp.read())
 
 
-def call_google(model, messages, api_key, system_prompt=None):
+def call_google(model, messages, api_key, system_prompt=None, tools=None):
+    _tools = tools if tools is not None else DEFAULT_TOOLS
     _sys_prompt = system_prompt or SYSTEM_PROMPT
     contents = []
     for m in messages:
@@ -306,7 +357,7 @@ def call_google(model, messages, api_key, system_prompt=None):
                 contents.append({"role": role, "parts": parts})
 
     google_tools = [{"function_declarations": [
-        {"name": t["name"], "description": t["description"], "parameters": t["input_schema"]} for t in TOOLS
+        {"name": t["name"], "description": t["description"], "parameters": t["input_schema"]} for t in _tools
     ]}]
     body = json.dumps({
         "contents": contents, "tools": google_tools,
@@ -394,11 +445,12 @@ def _anthropic_messages_to_openai(messages):
     return oai_messages
 
 
-def call_openrouter(model, messages, api_key, system_prompt=None):
+def call_openrouter(model, messages, api_key, system_prompt=None, tools=None):
     """Call any model via OpenRouter's OpenAI-compatible API with tool support."""
+    _tools = tools if tools is not None else DEFAULT_TOOLS
     or_model = OPENROUTER_MODELS.get(model, model)
 
-    # Convert TOOLS (Anthropic format) to OpenAI function format
+    # Convert tool defs (Anthropic format) to OpenAI function format
     oai_tools = [
         {
             "type": "function",
@@ -408,7 +460,7 @@ def call_openrouter(model, messages, api_key, system_prompt=None):
                 "parameters": t["input_schema"],
             },
         }
-        for t in TOOLS
+        for t in _tools
     ]
 
     oai_messages = _anthropic_messages_to_openai(messages)
@@ -468,13 +520,13 @@ def call_openrouter(model, messages, api_key, system_prompt=None):
     }
 
 
-def call_model(model, messages, provider, system_prompt=None):
+def call_model(model, messages, provider, system_prompt=None, tools=None):
     if provider == "anthropic":
-        return call_anthropic(model, messages, os.environ["ANTHROPIC_API_KEY"], system_prompt=system_prompt)
+        return call_anthropic(model, messages, os.environ["ANTHROPIC_API_KEY"], system_prompt=system_prompt, tools=tools)
     elif provider == "google":
-        return call_google(model, messages, os.environ["GOOGLE_API_KEY"], system_prompt=system_prompt)
+        return call_google(model, messages, os.environ["GOOGLE_API_KEY"], system_prompt=system_prompt, tools=tools)
     elif provider == "openrouter":
-        return call_openrouter(model, messages, os.environ["OPENROUTER_API_KEY"], system_prompt=system_prompt)
+        return call_openrouter(model, messages, os.environ["OPENROUTER_API_KEY"], system_prompt=system_prompt, tools=tools)
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -494,6 +546,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     # Bug 1 fix: always use canonical short name so scores don't fragment
     model = _canonical_agent_name(model)
     cfg = parse_agentfile(os.path.join(bench_dir, "Agentfile"))
+    tools = resolve_tools(cfg["tools"])
     sol_files = solution_files(bench_dir)
     limits = cfg["limits"]
     max_turns = limits.get("turns", 20)
@@ -566,7 +619,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
             if total_tokens_in + total_tokens_out >= max_tokens:
                 break
 
-            resp = call_model(model, messages, provider, system_prompt=system_prompt)
+            resp = call_model(model, messages, provider, system_prompt=system_prompt, tools=tools)
             tokens_in = resp.get("usage", {}).get("input_tokens", 0)
             tokens_out = resp.get("usage", {}).get("output_tokens", 0)
             total_tokens_in += tokens_in
@@ -613,6 +666,16 @@ def run_benchmark(model, bench_name, bench_dir, provider):
                                          "content": output if output else f"(exit {rc})"})
                     # AC1: record bash call
                     post.bash(cmd, output, turn)
+                elif name == "read":
+                    path = inp.get("path", "")
+                    files_read.append(path)
+                    rc, stdout, stderr = docker_exec(container, f"cat {path!r}")
+                    output = stdout
+                    if rc != 0:
+                        output = f"ERROR: {stderr}" if stderr else f"(exit {rc})"
+                    tool_results.append({"type": "tool_result", "tool_use_id": tool_id,
+                                         "content": output if output else "(empty file)"})
+                    post.read(path, turn)
                 elif name == "edit":
                     path = inp.get("path", "")
                     old_str = inp.get("old_str", "")

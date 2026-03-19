@@ -1,17 +1,17 @@
 {
   "benchmark": "api-version-field-drop",
   "agent": "claude-sonnet-4-6",
-  "commit": "8aade91",
-  "timestamp": "2026-03-15T18:34:42Z",
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T20:46:32Z",
   "resolved": false,
   "turns_to_discovery": 2,
   "turns_to_fix": 25,
-  "signal_to_noise": 0.529,
+  "signal_to_noise": 0.571,
   "false_positives": 0,
-  "token_cost": 85397,
+  "token_cost": 61515,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 63.7,
+  "wall_clock": 53.2,
   "blind_discovery": false
 }

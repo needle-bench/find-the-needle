@@ -1,16 +1,17 @@
 {
   "benchmark": "wrong-operator-discount",
   "agent": "claude-sonnet-4-6",
-  "timestamp": "2026-03-11T16:05:21Z",
-  "resolved": true,
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T21:07:05Z",
+  "resolved": false,
   "turns_to_discovery": 20,
-  "turns_to_fix": 4,
+  "turns_to_fix": 20,
   "signal_to_noise": 0.0,
   "false_positives": 1,
-  "token_cost": 5655,
+  "token_cost": 12200,
   "tokens_per_correct_line": "Infinity",
   "recovery_events": 0,
   "recovery_rate": 1.0,
-  "wall_clock": 10.6,
-  "blind_discovery": true
+  "wall_clock": 16.6,
+  "blind_discovery": false
 }

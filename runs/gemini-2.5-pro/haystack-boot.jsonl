@@ -1,2 +1,22 @@
-{"event": "run.start", "timestamp": "2026-03-15T18:57:29Z", "benchmark": "haystack-boot", "model": "gemini-2.5-pro", "has_prompt": true, "solution_files": []}
-{"event": "run.end", "timestamp": "2026-03-15T18:57:30Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}
+{"event": "run.start", "timestamp": "2026-03-15T20:56:29Z", "benchmark": "haystack-boot", "model": "gemini-2.5-pro", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/.haystack/boot.md"], "tokens_in": 112, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/.primefile"], "tokens_in": 202, "tokens_out": 88, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 239, "tokens_out": 342, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 321, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 758, "tokens_out": 73, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/.haystack"], "tokens_in": 864, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/.haystack/HUMANFILE"], "tokens_in": 952, "tokens_out": 145, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/.primefile"], "tokens_in": 1134, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 1222, "tokens_out": 116, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 1360, "tokens_out": 87, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 1552, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [".primefile"], "files_read": [], "tokens_in": 3223, "tokens_out": 629, "test_exit": 1}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/workspace/.haystack/.language"], "tokens_in": 3381, "tokens_out": 154, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 3766, "tokens_out": 86, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/"], "tokens_in": 3879, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/"], "tokens_in": 3966, "tokens_out": 48, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/workspace/.haystack/audit.jsonl"], "tokens_in": 4266, "tokens_out": 162, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/"], "tokens_in": 4447, "tokens_out": 77, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/"], "tokens_in": 4547, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 4628, "tokens_out": 21, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-15T20:57:17Z", "test_exit": 1, "total_turns": 20, "correct_lines": 0}

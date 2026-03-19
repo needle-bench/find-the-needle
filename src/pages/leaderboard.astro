@@ -1,0 +1,676 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Leaderboard — needle-bench" description="Unified test matrix: boot battery + code-solve benchmarks across all models.">
+  <div class="page-header">
+    <a href="/" class="back">&larr; needle-bench</a>
+    <h1>Leaderboard</h1>
+  </div>
+
+  <main>
+    <p class="muted" style="margin-bottom: 1.5rem;">Unified test matrix. Left columns are sticky. Scroll right for per-benchmark results. Click any header to sort.</p>
+
+    <div class="leaderboard-container">
+      <table id="leaderboard">
+        <thead id="lb-head">
+          <tr>
+            <th class="sticky-col col-model" data-key="model" data-type="string">Model <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-boot" data-key="boot" data-type="tier">Boot <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-post" data-key="post" data-type="boolean">POST <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean">Entity <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-resolved" data-key="resolvedCount" data-type="number">Solved <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number">Tokens <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-turns" data-key="totalTurns" data-type="number">Turns <span class="sort-arrow"></span></th>
+            <th class="sticky-col col-time" data-key="totalTime" data-type="number">Time <span class="sort-arrow"></span></th>
+          </tr>
+        </thead>
+        <tbody id="lb-body">
+          <tr><td colspan="8" class="empty">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <h3>Legend</h3>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="verdict-badge verdict-boots">BOOTS</span> Full boot sequence completed</div>
+        <div class="legend-item"><span class="verdict-badge verdict-partial">PARTIAL</span> Partial boot &mdash; reads + some writes</div>
+        <div class="legend-item"><span class="verdict-badge verdict-reads">READS</span> Read directives only, no writes</div>
+        <div class="legend-item"><span class="verdict-badge verdict-explores">EXPLORES</span> Minimal exploration, few directives</div>
+        <div class="legend-item"><span class="verdict-badge verdict-noboot">NO_BOOT</span> Failed to start boot sequence</div>
+        <div class="legend-item"><span class="cell-sample cell-pass">&nbsp;</span> Benchmark resolved (test.sh passed)</div>
+        <div class="legend-item"><span class="cell-sample cell-fail">&nbsp;</span> Benchmark attempted but not resolved</div>
+        <div class="legend-item"><span class="cell-sample cell-empty">&nbsp;</span> No data for this model+benchmark</div>
+      </div>
+      <p class="muted" style="margin-top: 0.75rem;">
+        Cell format: <code>{tok}k {turns}t {time}s</code> &mdash; token cost (thousands), turns to fix, wall-clock seconds.<br>
+        POST = all 9 boot directives passed. Entity = wrote entityfile directive.
+      </p>
+      <p class="muted" id="last-updated"></p>
+    </div>
+  </main>
+</Base>
+
+<style>
+  main {
+    max-width: none;
+    padding: 1rem 2rem 2rem;
+  }
+
+  .leaderboard-container {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    margin-bottom: 2rem;
+  }
+
+  #leaderboard {
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 100%;
+    font-size: 0.75rem;
+  }
+
+  #leaderboard thead {
+    border-bottom: none;
+  }
+
+  #leaderboard th {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    position: relative;
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+
+  #leaderboard th.sorted {
+    color: var(--accent);
+  }
+
+  #leaderboard th .sort-arrow {
+    font-size: 0.6rem;
+    opacity: 0.4;
+  }
+
+  #leaderboard th.sorted .sort-arrow {
+    opacity: 1;
+  }
+
+  /* Sticky left columns */
+  .sticky-col {
+    position: sticky;
+    z-index: 2;
+    background: var(--surface);
+  }
+
+  .col-model    { left: 0;     min-width: 140px; max-width: 180px; }
+  .col-boot     { left: 140px; min-width: 72px; }
+  .col-post     { left: 212px; min-width: 40px; text-align: center; }
+  .col-entity   { left: 252px; min-width: 46px; text-align: center; }
+  .col-resolved { left: 298px; min-width: 48px; text-align: center; }
+  .col-tokens   { left: 346px; min-width: 62px; text-align: right; }
+  .col-turns    { left: 408px; min-width: 48px; text-align: right; }
+  .col-time     { left: 456px; min-width: 52px; text-align: right; border-right: 2px solid var(--border); }
+
+  .bench-col {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+    font-size: 0.65rem;
+  }
+
+  th.bench-col {
+    height: 100px;
+    vertical-align: bottom;
+    padding-bottom: 0.4rem;
+  }
+
+  th.bench-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  th.bench-col a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  th.bench-col .rotated {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    display: inline-block;
+    font-size: 0.65rem;
+    max-height: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #leaderboard td {
+    padding: 0.35rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  #leaderboard td.sticky-col {
+    background: var(--bg);
+  }
+
+  #leaderboard tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  #leaderboard tr:nth-child(even) td.sticky-col {
+    background-color: color-mix(in srgb, var(--bg) 97%, white);
+  }
+
+  #leaderboard tr:hover td {
+    background: var(--surface);
+  }
+
+  #leaderboard tr:hover td.sticky-col {
+    background: var(--surface);
+  }
+
+  .verdict-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.15em 0.45em;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  .verdict-boots     { background: rgba(63, 185, 80, 0.2); color: #3fb950; border: 1px solid rgba(63, 185, 80, 0.3); }
+  .verdict-partial   { background: rgba(210, 153, 34, 0.2); color: #d29922; border: 1px solid rgba(210, 153, 34, 0.3); }
+  .verdict-reads     { background: rgba(219, 109, 40, 0.2); color: #db6d28; border: 1px solid rgba(219, 109, 40, 0.3); }
+  .verdict-explores  { background: rgba(139, 148, 158, 0.2); color: #8b949e; border: 1px solid rgba(139, 148, 158, 0.3); }
+  .verdict-noboot    { background: rgba(248, 81, 73, 0.2); color: #f85149; border: 1px solid rgba(248, 81, 73, 0.3); }
+
+  .cell-pass {
+    background: rgba(63, 185, 80, 0.12);
+    color: var(--text);
+  }
+
+  .cell-fail {
+    background: rgba(248, 81, 73, 0.12);
+    color: var(--text-muted);
+  }
+
+  .cell-empty {
+    background: rgba(139, 148, 158, 0.05);
+    color: var(--text-muted);
+  }
+
+  td.col-post, td.col-entity, td.col-resolved {
+    text-align: center;
+  }
+
+  td.col-tokens, td.col-turns, td.col-time {
+    text-align: right;
+  }
+
+  td.col-time {
+    border-right: 2px solid var(--border);
+  }
+
+  .check-pass { color: var(--green); }
+  .check-fail { color: var(--red); }
+
+  .model-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .model-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .model-name {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .legend {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .legend h3 {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cell-sample {
+    display: inline-block;
+    width: 20px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .cell-sample.cell-pass  { background: rgba(63, 185, 80, 0.12); border: 1px solid rgba(63, 185, 80, 0.25); }
+  .cell-sample.cell-fail  { background: rgba(248, 81, 73, 0.12); border: 1px solid rgba(248, 81, 73, 0.25); }
+  .cell-sample.cell-empty { background: rgba(139, 148, 158, 0.05); border: 1px solid var(--border); }
+
+  @media (max-width: 600px) {
+    main { padding: 0.5rem; }
+    .col-model { min-width: 100px; max-width: 120px; }
+    .col-boot  { left: 100px; }
+    .col-post  { left: 172px; }
+    .col-entity { left: 212px; }
+    .col-resolved { left: 258px; }
+    .col-tokens { left: 306px; }
+    .col-turns  { left: 368px; }
+    .col-time   { left: 416px; }
+  }
+</style>
+
+<script>
+  const REPO_BASE = 'https://github.com/os-tack/find-the-needle';
+
+  const VERDICT_TIER: Record<string, number> = {
+    'BOOTS': 0,
+    'PARTIAL_BOOT': 1,
+    'READS_TACK': 2,
+    'EXPLORES': 3,
+    'NO_BOOT': 4,
+  };
+
+  const VERDICT_DISPLAY: Record<string, string> = {
+    'BOOTS': 'BOOTS',
+    'PARTIAL_BOOT': 'PARTIAL',
+    'READS_TACK': 'READS',
+    'EXPLORES': 'EXPLORES',
+    'NO_BOOT': 'NO_BOOT',
+  };
+
+  const VERDICT_CLASS: Record<string, string> = {
+    'BOOTS': 'verdict-boots',
+    'PARTIAL_BOOT': 'verdict-partial',
+    'READS_TACK': 'verdict-reads',
+    'EXPLORES': 'verdict-explores',
+    'NO_BOOT': 'verdict-noboot',
+  };
+
+  function normalizeForMatch(raw: string): string {
+    let name = raw.includes('/') ? raw.split('/').slice(1).join('/') : raw;
+    return name.toLowerCase().replace(/_/g, '-').replace(/\./g, '-');
+  }
+
+  function shortModel(raw: string): string {
+    return raw.includes('/') ? raw.split('/').slice(1).join('/') : raw;
+  }
+
+  interface BootEntry {
+    model: string;
+    verdict: string;
+    total_score: number;
+    total_possible: number;
+    read_score: number;
+    write_score: number;
+    tokens: number;
+    wall_clock: number;
+    turns: number;
+    directives: Record<string, boolean>;
+  }
+
+  interface ScoreEntry {
+    benchmark: string;
+    agent: string;
+    resolved: boolean;
+    turns_to_fix: number;
+    token_cost: number;
+    wall_clock: number;
+    turns_to_discovery: number;
+    blind_discovery: boolean;
+    timestamp?: string;
+    commit?: string;
+  }
+
+  interface ModelData {
+    displayName: string;
+    normalizedKey: string;
+    boot: BootEntry | null;
+    benchmarks: Record<string, ScoreEntry>;
+    resolvedCount: number;
+    totalTokens: number;
+    totalTurns: number;
+    totalTime: number;
+    verdictTier: number;
+    post: boolean;
+    entityfile: boolean;
+    commitHash: string;
+  }
+
+  (async function() {
+    let scores: ScoreEntry[] = [];
+    let bootData: BootEntry[] = [];
+
+    try {
+      const [scoresResp, bootResp] = await Promise.all([
+        fetch('/scores.json'),
+        fetch('/haystack-boot-leaderboard.json')
+      ]);
+      if (scoresResp.ok) {
+        const d = await scoresResp.json();
+        if (Array.isArray(d)) scores = d;
+      }
+      if (bootResp.ok) {
+        const d = await bootResp.json();
+        if (Array.isArray(d)) bootData = d;
+      }
+    } catch {}
+
+    const bootMap = new Map<string, BootEntry>();
+    for (const b of bootData) {
+      bootMap.set(normalizeForMatch(b.model), b);
+    }
+
+    const benchmarkSet = new Set<string>();
+    for (const s of scores) benchmarkSet.add(s.benchmark);
+    const benchmarks = Array.from(benchmarkSet).sort();
+
+    const modelMap = new Map<string, ModelData>();
+
+    function getOrCreate(rawName: string): ModelData {
+      const key = normalizeForMatch(rawName);
+      if (!modelMap.has(key)) {
+        modelMap.set(key, {
+          displayName: shortModel(rawName),
+          normalizedKey: key,
+          boot: null,
+          benchmarks: {},
+          resolvedCount: 0,
+          totalTokens: 0,
+          totalTurns: 0,
+          totalTime: 0,
+          verdictTier: 4,
+          post: false,
+          entityfile: false,
+          commitHash: '',
+        });
+      }
+      return modelMap.get(key)!;
+    }
+
+    for (const b of bootData) {
+      const m = getOrCreate(b.model);
+      m.boot = b;
+      m.displayName = shortModel(b.model);
+      m.verdictTier = VERDICT_TIER[b.verdict] ?? 4;
+      m.post = b.total_score === b.total_possible;
+      m.entityfile = b.directives?.wrote_entityfile === true;
+    }
+
+    for (const s of scores) {
+      const m = getOrCreate(s.agent);
+      const existing = m.benchmarks[s.benchmark];
+      if (!existing ||
+          (!existing.resolved && s.resolved) ||
+          (existing.resolved === s.resolved && (s.token_cost || 0) < (existing.token_cost || 0))) {
+        m.benchmarks[s.benchmark] = s;
+      }
+      if (s.commit && !m.commitHash) {
+        m.commitHash = s.commit;
+      }
+    }
+
+    for (const m of modelMap.values()) {
+      let resolvedCount = 0;
+      let benchTokens = 0;
+      let benchTurns = 0;
+      let benchTime = 0;
+      for (const b of Object.values(m.benchmarks)) {
+        if (b.resolved) resolvedCount++;
+        benchTokens += (b.token_cost || 0);
+        benchTurns += (b.turns_to_fix || 0);
+        benchTime += (b.wall_clock || 0);
+      }
+      m.resolvedCount = resolvedCount;
+      m.totalTokens = (m.boot?.tokens || 0) + benchTokens;
+      m.totalTurns = (m.boot?.turns || 0) + benchTurns;
+      m.totalTime = (m.boot?.wall_clock || 0) + benchTime;
+    }
+
+    let models = Array.from(modelMap.values());
+    let currentSortKey = '__default__';
+    let currentSortAsc = true;
+
+    function defaultSort(a: ModelData, b: ModelData): number {
+      if (a.verdictTier !== b.verdictTier) return a.verdictTier - b.verdictTier;
+      if (a.resolvedCount !== b.resolvedCount) return b.resolvedCount - a.resolvedCount;
+      return a.totalTokens - b.totalTokens;
+    }
+
+    function sortModels() {
+      if (currentSortKey === '__default__') {
+        models.sort(defaultSort);
+        return;
+      }
+      models.sort((a, b) => {
+        let av: any, bv: any;
+        switch (currentSortKey) {
+          case 'model':
+            av = a.displayName.toLowerCase();
+            bv = b.displayName.toLowerCase();
+            return currentSortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+          case 'boot':
+            av = a.verdictTier; bv = b.verdictTier;
+            break;
+          case 'post':
+            av = a.post ? 0 : 1; bv = b.post ? 0 : 1;
+            break;
+          case 'entityfile':
+            av = a.entityfile ? 0 : 1; bv = b.entityfile ? 0 : 1;
+            break;
+          case 'resolvedCount':
+            av = a.resolvedCount; bv = b.resolvedCount;
+            return currentSortAsc ? av - bv : bv - av;
+          case 'totalTokens':
+            av = a.totalTokens; bv = b.totalTokens;
+            break;
+          case 'totalTurns':
+            av = a.totalTurns; bv = b.totalTurns;
+            break;
+          case 'totalTime':
+            av = a.totalTime; bv = b.totalTime;
+            break;
+          default: {
+            const benchKey = currentSortKey;
+            const aEntry = a.benchmarks[benchKey];
+            const bEntry = b.benchmarks[benchKey];
+            const aRes = aEntry?.resolved ? 1 : 0;
+            const bRes = bEntry?.resolved ? 1 : 0;
+            if (aRes !== bRes) return currentSortAsc ? bRes - aRes : aRes - bRes;
+            av = aEntry?.token_cost ?? Infinity;
+            bv = bEntry?.token_cost ?? Infinity;
+            break;
+          }
+        }
+        if (av === undefined) av = Infinity;
+        if (bv === undefined) bv = Infinity;
+        return currentSortAsc ? av - bv : bv - av;
+      });
+    }
+
+    // Add benchmark column headers with links to repo
+    const headRow = document.querySelector('#lb-head tr')!;
+    for (const bench of benchmarks) {
+      const th = document.createElement('th');
+      th.className = 'bench-col';
+      th.dataset.key = bench;
+      th.dataset.type = 'benchmark';
+      th.title = bench;
+      const link = document.createElement('a');
+      link.href = REPO_BASE + '/tree/main/benchmarks/' + encodeURIComponent(bench);
+      link.target = '_blank';
+      link.rel = 'noopener';
+      const span = document.createElement('span');
+      span.className = 'rotated';
+      span.textContent = bench;
+      link.appendChild(span);
+      th.appendChild(link);
+      headRow.appendChild(th);
+    }
+
+    function render() {
+      sortModels();
+      const tbody = document.getElementById('lb-body')!;
+      if (!models.length) {
+        tbody.innerHTML = '<tr><td colspan="' + (8 + benchmarks.length) + '" class="empty">No data available.</td></tr>';
+        return;
+      }
+
+      const rows: string[] = [];
+      for (const m of models) {
+        let row = '<tr>';
+
+        // Model name — link to commit if available
+        if (m.commitHash) {
+          row += '<td class="sticky-col col-model"><a class="model-link" href="' + REPO_BASE + '/commit/' + escHtml(m.commitHash) + '" target="_blank" rel="noopener">' + escHtml(m.displayName) + '</a></td>';
+        } else {
+          row += '<td class="sticky-col col-model"><span class="model-name">' + escHtml(m.displayName) + '</span></td>';
+        }
+
+        // Boot verdict
+        if (m.boot) {
+          const vc = VERDICT_CLASS[m.boot.verdict] || 'verdict-noboot';
+          const vd = VERDICT_DISPLAY[m.boot.verdict] || m.boot.verdict;
+          row += '<td class="sticky-col col-boot"><span class="verdict-badge ' + vc + '">' + vd + '</span></td>';
+        } else {
+          row += '<td class="sticky-col col-boot"><span class="verdict-badge verdict-noboot">N/A</span></td>';
+        }
+
+        // POST
+        row += '<td class="sticky-col col-post">' + (m.post ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
+
+        // Entityfile
+        row += '<td class="sticky-col col-entity">' + (m.entityfile ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
+
+        // Solved count
+        row += '<td class="sticky-col col-resolved">' + m.resolvedCount + '/' + benchmarks.length + '</td>';
+
+        // Tokens
+        row += '<td class="sticky-col col-tokens">' + fmtNum(m.totalTokens) + '</td>';
+
+        // Turns
+        row += '<td class="sticky-col col-turns">' + m.totalTurns + '</td>';
+
+        // Time
+        row += '<td class="sticky-col col-time">' + fmtTime(m.totalTime) + '</td>';
+
+        // Benchmark columns
+        for (const bench of benchmarks) {
+          const entry = m.benchmarks[bench];
+          if (!entry) {
+            row += '<td class="bench-col cell-empty">&mdash;</td>';
+          } else if (entry.resolved) {
+            row += '<td class="bench-col cell-pass">'
+              + fmtK(entry.token_cost) + 'k '
+              + entry.turns_to_fix + 't '
+              + Math.round(entry.wall_clock) + 's'
+              + '</td>';
+          } else {
+            row += '<td class="bench-col cell-fail">'
+              + fmtK(entry.token_cost) + 'k '
+              + entry.turns_to_fix + 't '
+              + Math.round(entry.wall_clock) + 's'
+              + '</td>';
+          }
+        }
+
+        row += '</tr>';
+        rows.push(row);
+      }
+
+      tbody.innerHTML = rows.join('');
+    }
+
+    function escHtml(s: string): string {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function fmtNum(n: number): string {
+      if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(0) + 'k';
+      return String(n);
+    }
+
+    function fmtK(n: number): string {
+      if (!n) return '0';
+      return (n / 1000).toFixed(0);
+    }
+
+    function fmtTime(s: number): string {
+      if (s >= 3600) return (s / 3600).toFixed(1) + 'h';
+      if (s >= 60) return (s / 60).toFixed(1) + 'm';
+      return Math.round(s) + 's';
+    }
+
+    // Sort handlers
+    document.querySelectorAll('#leaderboard th').forEach(th => {
+      th.addEventListener('click', () => {
+        const key = (th as HTMLElement).dataset.key;
+        if (!key) return;
+        if (currentSortKey === key) {
+          currentSortAsc = !currentSortAsc;
+        } else {
+          currentSortKey = key;
+          currentSortAsc = true;
+        }
+        document.querySelectorAll('#leaderboard th').forEach(t => t.classList.remove('sorted'));
+        th.classList.add('sorted');
+        render();
+      });
+    });
+
+    // Last updated timestamp
+    let latestTs = '';
+    for (const s of scores) {
+      if (s.timestamp && s.timestamp > latestTs) latestTs = s.timestamp;
+    }
+    if (latestTs) {
+      const el = document.getElementById('last-updated');
+      if (el) {
+        const d = new Date(latestTs);
+        el.textContent = 'Last updated: ' + d.toISOString().slice(0, 10);
+      }
+    }
+
+    render();
+  })();
+</script>

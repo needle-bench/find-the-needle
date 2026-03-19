@@ -1,0 +1,17 @@
+{
+  "benchmark": "null-pointer-config",
+  "agent": "gemini-2.5-pro",
+  "commit": "9ee56f2",
+  "timestamp": "2026-03-15T21:05:55Z",
+  "resolved": false,
+  "turns_to_discovery": 20,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 39855,
+  "tokens_per_correct_line": "Infinity",
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 77.9,
+  "blind_discovery": false
+}
