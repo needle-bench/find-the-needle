@@ -1,0 +1,16 @@
+{
+  "repos": [
+    {"org": "django", "repo": "django", "lang": "python", "branch": "main"},
+    {"org": "golang", "repo": "go", "lang": "go", "branch": "master"},
+    {"org": "rust-lang", "repo": "rust", "lang": "rust", "branch": "master"},
+    {"org": "facebook", "repo": "react", "lang": "javascript", "branch": "main"},
+    {"org": "nodejs", "repo": "node", "lang": "javascript", "branch": "main"},
+    {"org": "kubernetes", "repo": "kubernetes", "lang": "go", "branch": "master"},
+    {"org": "tokio-rs", "repo": "tokio", "lang": "rust", "branch": "master"},
+    {"org": "pallets", "repo": "flask", "lang": "python", "branch": "main"},
+    {"org": "expressjs", "repo": "express", "lang": "javascript", "branch": "master"},
+    {"org": "gin-gonic", "repo": "gin", "lang": "go", "branch": "master"}
+  ],
+  "rotation": "weekly",
+  "note": "One repo per week, cycling through the list. Selection is deterministic: week_number % len(repos)."
+}

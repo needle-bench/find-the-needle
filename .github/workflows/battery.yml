@@ -1,0 +1,240 @@
+name: Battery — Full Benchmark Suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "Comma-separated model list"
+        required: false
+        default: "claude-sonnet-4-6,claude-opus-4-6,claude-haiku-4-5"
+      benchmarks:
+        description: "Comma-separated benchmark list or 'all'"
+        required: false
+        default: "all"
+      tier:
+        description: "Difficulty tier filter"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - easy
+          - medium
+          - hard
+  schedule:
+    - cron: "0 0 * * 0" # Sundays at 00:00 UTC
+
+concurrency:
+  group: battery
+  cancel-in-progress: false
+
+jobs:
+  # ---------- Phase 1: Build the dynamic matrix from difficulty.json ----------
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build matrix JSON
+        id: matrix
+        env:
+          MODELS_INPUT: ${{ github.event.inputs.models || 'claude-sonnet-4-6,claude-opus-4-6,claude-haiku-4-5' }}
+          BENCHMARKS_INPUT: ${{ github.event.inputs.benchmarks || 'all' }}
+          TIER_INPUT: ${{ github.event.inputs.tier || 'all' }}
+        run: |
+          python3 << 'PYEOF' > matrix.json
+          import json, os, sys
+
+          with open("difficulty.json") as f:
+              diff = json.load(f)
+
+          tiers = diff["tiers"]
+          benchmarks_map = diff["benchmarks"]
+
+          models = [m.strip() for m in os.environ["MODELS_INPUT"].split(",") if m.strip()]
+          bench_input = os.environ["BENCHMARKS_INPUT"].strip()
+          tier_input = os.environ["TIER_INPUT"].strip()
+
+          if bench_input == "all":
+              bench_list = list(benchmarks_map.keys())
+          else:
+              bench_list = [b.strip() for b in bench_input.split(",") if b.strip()]
+
+          # Filter by tier
+          if tier_input != "all":
+              bench_list = [b for b in bench_list if benchmarks_map.get(b) == tier_input]
+
+          # Build matrix: one entry per (model, benchmark)
+          matrix = []
+          for model in models:
+              for bench in bench_list:
+                  tier = benchmarks_map.get(bench, "medium")
+                  tier_limits = tiers.get(tier, tiers.get("medium", {}))
+                  wall_clock = tier_limits.get("wall_clock", 600)
+                  # Timeout in minutes: wall_clock + 5 min buffer, minimum 10
+                  timeout = max(10, (wall_clock // 60) + 6)
+                  matrix.append({
+                      "model": model,
+                      "benchmark": bench,
+                      "tier": tier,
+                      "timeout": timeout,
+                      "wall_clock": wall_clock,
+                  })
+
+          print(f"Generated {len(matrix)} matrix entries ({len(models)} models x {len(bench_list)} benchmarks)", file=sys.stderr)
+          if not matrix:
+              print("WARNING: empty matrix -- no matching benchmarks", file=sys.stderr)
+
+          print(json.dumps(matrix))
+          PYEOF
+
+          echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
+          echo "Matrix size: $(python3 -c "import json; print(len(json.load(open('matrix.json'))))")"
+
+  # ---------- Phase 2: Run each (model x benchmark) in parallel ----------
+  bench:
+    needs: setup
+    if: needs.setup.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ matrix.combo.timeout }}
+
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        combo: ${{ fromJSON(needs.setup.outputs.matrix) }}
+
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run ${{ matrix.combo.benchmark }} with ${{ matrix.combo.model }}
+        run: |
+          MODEL="${{ matrix.combo.model }}"
+          BENCH="${{ matrix.combo.benchmark }}"
+          TIER="${{ matrix.combo.tier }}"
+
+          echo "::group::$BENCH ($MODEL) — tier=$TIER"
+
+          python3 runner.py \
+            --model "$MODEL" \
+            --provider openrouter \
+            --benchmark "$BENCH" \
+            2>&1 | tee bench-output.log
+
+          echo "::endgroup::"
+
+          # Verify score file was produced
+          SCORE_FILE="runs/${MODEL}/${BENCH}.score.json"
+          if [ -f "$SCORE_FILE" ]; then
+            echo "Score:"
+            cat "$SCORE_FILE"
+          else
+            echo "::warning::No score file produced for $BENCH ($MODEL)"
+            mkdir -p "runs/${MODEL}"
+            echo '{"benchmark":"'"$BENCH"'","agent":"'"$MODEL"'","resolved":false,"error":"runner produced no score file","timestamp":"'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'"}' > "$SCORE_FILE"
+          fi
+
+      - name: Upload score artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: score--${{ matrix.combo.model }}--${{ matrix.combo.benchmark }}
+          path: |
+            runs/${{ matrix.combo.model }}/${{ matrix.combo.benchmark }}.score.json
+            runs/${{ matrix.combo.model }}/${{ matrix.combo.benchmark }}/
+          retention-days: 90
+
+  # ---------- Phase 3: Consolidate scores, build site, deploy ----------
+  consolidate:
+    needs: [setup, bench]
+    if: always() && needs.setup.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download all score artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifact-scores
+          pattern: score--*
+
+      - name: Merge artifacts into runs/
+        run: |
+          # Each artifact is in artifact-scores/score--<model>--<benchmark>/runs/<model>/...
+          # Copy them into the repo's runs/ directory
+          find artifact-scores -name '*.score.json' -o -name 'score.json' -o -name 'post.jsonl' -o -name 'metrics.jsonl' | while read f; do
+            # Extract the path relative to runs/
+            REL=$(echo "$f" | sed 's|.*runs/||')
+            DIR=$(dirname "runs/$REL")
+            mkdir -p "$DIR"
+            cp "$f" "runs/$REL"
+          done
+
+          echo "Merged score files:"
+          find runs -name '*.score.json' | wc -l
+
+      - name: Consolidate scores
+        run: |
+          python3 consolidate_scores.py
+          echo "---"
+          cat public/scores.json | python3 -m json.tool | head -50
+
+      - name: Score haystack-boot (if present)
+        run: |
+          if find runs -path '*/haystack-boot/post.jsonl' | grep -q .; then
+            python3 score_boot.py
+          else
+            echo "No haystack-boot runs found — skipping"
+          fi
+
+      - name: Commit updated scores
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add public/scores.json runs/haystack-boot-leaderboard.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No score changes to commit"
+          else
+            git commit -m "chore: update scores from battery run [skip ci]"
+            git push
+          fi
+
+      - name: Build Astro site
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

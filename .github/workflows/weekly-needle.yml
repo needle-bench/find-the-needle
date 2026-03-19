@@ -1,0 +1,136 @@
+name: Weekly Needle Pipeline
+
+on:
+  schedule:
+    # Monday 6am UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: 'GitHub repo (org/name) — leave blank for auto-rotation'
+        required: false
+        type: string
+      branch:
+        description: 'Branch to clone (leave blank for default)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run (no cloning, no file creation)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  find-needle:
+    runs-on: ubuntu-latest
+    outputs:
+      benchmark_slug: ${{ steps.pipeline.outputs.slug }}
+      benchmark_created: ${{ steps.pipeline.outputs.created }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Determine repo
+        id: target
+        run: |
+          if [ -n "${{ inputs.repo }}" ]; then
+            echo "repo=${{ inputs.repo }}" >> $GITHUB_OUTPUT
+            BRANCH="${{ inputs.branch }}"
+            if [ -z "$BRANCH" ]; then
+              BRANCH=$(python3 -c "
+          import json
+          org, name = '${{ inputs.repo }}'.split('/')
+          repos = json.load(open('pipeline/repos.json'))['repos']
+          match = [r for r in repos if r['org'] == org and r['repo'] == name]
+          print(match[0]['branch'] if match else 'main')
+              ")
+            fi
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          else
+            # Auto-rotation: week_number % len(repos)
+            ENTRY=$(python3 -c "
+          import json, datetime
+          repos = json.load(open('pipeline/repos.json'))['repos']
+          week = datetime.date.today().isocalendar()[1]
+          r = repos[week % len(repos)]
+          print(f\"{r['org']}/{r['repo']}\")
+            ")
+            BRANCH=$(python3 -c "
+          import json, datetime
+          repos = json.load(open('pipeline/repos.json'))['repos']
+          week = datetime.date.today().isocalendar()[1]
+          r = repos[week % len(repos)]
+          print(r['branch'])
+            ")
+            echo "repo=$ENTRY" >> $GITHUB_OUTPUT
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          fi
+          echo "Target: $(cat $GITHUB_OUTPUT)"
+
+      - name: Run weekly pipeline
+        id: pipeline
+        run: |
+          FLAGS="--repo ${{ steps.target.outputs.repo }} --branch ${{ steps.target.outputs.branch }}"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            FLAGS="$FLAGS --dry-run"
+          fi
+
+          echo "Running: python3 pipeline/weekly.py $FLAGS"
+          OUTPUT=$(python3 pipeline/weekly.py $FLAGS 2>&1) || true
+          echo "$OUTPUT"
+
+          # Extract benchmark slug from output
+          SLUG=$(echo "$OUTPUT" | grep -oP '(?<=benchmarks/)[a-z0-9-]+' | tail -1 || echo "")
+          if [ -n "$SLUG" ] && [ -d "benchmarks/$SLUG" ]; then
+            echo "slug=$SLUG" >> $GITHUB_OUTPUT
+            echo "created=true" >> $GITHUB_OUTPUT
+          else
+            echo "slug=" >> $GITHUB_OUTPUT
+            echo "created=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Open PR for review
+        if: steps.pipeline.outputs.created == 'true' && inputs.dry_run != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SLUG="${{ steps.pipeline.outputs.slug }}"
+          REPO="${{ steps.target.outputs.repo }}"
+          BRANCH_NAME="weekly/needle-${SLUG}"
+
+          git checkout -b "$BRANCH_NAME"
+          git add "benchmarks/$SLUG/" difficulty.json
+          git commit -m "feat(weekly): new benchmark $SLUG from $REPO"
+          git push origin "$BRANCH_NAME"
+
+          # Build PR body from .bench/README.md
+          BODY="## Weekly Pipeline: New Benchmark\n\n"
+          BODY+="**Source:** $REPO\n"
+          BODY+="**Benchmark:** \`$SLUG\`\n"
+          BODY+="**Pipeline:** kernel-curated (automated weekly)\n\n"
+          BODY+="---\n\n"
+          if [ -f "benchmarks/$SLUG/.bench/README.md" ]; then
+            BODY+=$(cat "benchmarks/$SLUG/.bench/README.md")
+          fi
+          BODY+="\n\n---\n\n"
+          BODY+="**Action required:** Review the benchmark, adjust difficulty in \`difficulty.json\`, "
+          BODY+="and verify the test fails on the buggy code / passes on the fix.\n"
+
+          gh pr create \
+            --title "Weekly needle: $SLUG" \
+            --body "$BODY" \
+            --label "weekly-pipeline" \
+            --reviewer "" || echo "PR creation failed (label may not exist yet)"
+
+          echo "PR created for $SLUG"
