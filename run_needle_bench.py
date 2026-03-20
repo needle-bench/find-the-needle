@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# DEPRECATED: This file is being replaced by `ostk bench` (the kernel-native runner).
+# See docs/OSTK_BENCH_SPEC.md for the migration plan.
+# run_needle_bench.py will be removed once ostk bench supports Docker execution natively.
 """needle-bench agent runner.
 
 Parses an Agentfile, builds the Docker image, runs a mini-swe-agent DefaultAgent

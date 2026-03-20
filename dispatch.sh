@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# DEPRECATED: This file is being replaced by `ostk bench` (the kernel-native runner).
+# See docs/OSTK_BENCH_SPEC.md for the migration plan.
+# dispatch.sh will be removed once ostk bench supports Docker execution natively.
+#
 # dispatch.sh — run needle-bench across models and benchmarks
 set -euo pipefail
 
@@ -68,7 +72,11 @@ for mp in "${MODELS[@]}"; do
             continue
         fi
         echo "RUN  $model/$bench"
-        python3 "$SCRIPT_DIR/runner.py" --model "$model" --benchmark "$bench" --provider "$provider" &
+        if command -v ostk &>/dev/null; then
+            ostk bench "$bench" --model "$model" --docker &
+        else
+            python3 "$SCRIPT_DIR/runner.py" --model "$model" --benchmark "$bench" --provider "$provider" &
+        fi
         running=$((running + 1))
         if [[ $running -ge $MAX_PARALLEL ]]; then
             wait -n 2>/dev/null || true

@@ -122,6 +122,19 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Migration: ostk bench will replace runner.py once the kernel supports
+      # Docker execution natively. See docs/OSTK_BENCH_SPEC.md for the plan.
+      # When ostk is available as a pre-built binary, uncomment the install step
+      # and the bench job will automatically prefer it over runner.py.
+      - name: Install ostk
+        id: install-ostk
+        run: |
+          # TODO: Replace with actual release URL when ostk is published
+          # curl -sSL https://ostk.ai/install | bash
+          # For now, fall back to runner.py
+          echo "ostk not yet available as pre-built binary — using runner.py fallback"
+        continue-on-error: true
+
       - name: Run ${{ matrix.combo.benchmark }} with ${{ matrix.combo.model }}
         run: |
           MODEL="${{ matrix.combo.model }}"
@@ -130,11 +143,16 @@ jobs:
 
           echo "::group::$BENCH ($MODEL) — tier=$TIER"
 
-          python3 runner.py \
-            --model "$MODEL" \
-            --provider openrouter \
-            --benchmark "$BENCH" \
-            2>&1 | tee bench-output.log
+          if command -v ostk &>/dev/null; then
+            ostk bench "$BENCH" --model "$MODEL" --docker \
+              2>&1 | tee bench-output.log
+          else
+            python3 runner.py \
+              --model "$MODEL" \
+              --provider openrouter \
+              --benchmark "$BENCH" \
+              2>&1 | tee bench-output.log
+          fi
 
           echo "::endgroup::"
 
