@@ -281,8 +281,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git pull --rebase origin main || true
+          # Stage everything first, then pull --rebase (avoids unstaged changes error)
           git add public/scores.json runs/haystack-boot-leaderboard.json 2>/dev/null || true
+          git add runs/ 2>/dev/null || true
 
           VERSION="${{ github.event.inputs.version }}"
           TAG_MSG=""
@@ -294,7 +295,12 @@ jobs:
             echo "No score changes to commit"
           else
             git commit -m "chore: update scores from battery run${TAG_MSG} [skip ci]"
-            git push
+            # Pull remote changes, rebase our commit on top, then push
+            git pull --rebase origin main || true
+            git push || {
+              echo "Push failed — force pushing score update"
+              git push --force-with-lease
+            }
           fi
 
           # Tag the release if version was specified
