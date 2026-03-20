@@ -1,6 +1,6 @@
 --- a/app/main.go
 +++ b/app/main.go
-@@ -107,9 +107,9 @@ func createOrder(w http.ResponseWriter, r *http.Request) {
+@@ -106,9 +106,9 @@
  	var order Order
  	// BUG: Uses old column name "status" — migration 002 renamed it to "order_status".
  	// This INSERT will fail with: column "status" does not exist
@@ -13,8 +13,7 @@
 +		 RETURNING id, user_id, total, order_status, shipping_address, created_at`,
  		req.UserID, req.Total, req.ShippingAddress,
  	).Scan(&order.ID, &order.UserID, &order.Total, &order.Status, &order.ShippingAddress, &order.CreatedAt)
-
-@@ -128,8 +128,8 @@ func createOrder(w http.ResponseWriter, r *http.Request) {
+@@ -127,8 +127,8 @@
  func getOrder(w http.ResponseWriter, orderID string) {
  	var order Order
  	// BUG: Also uses old column name "status" in SELECT

@@ -1,6 +1,6 @@
---- a/app/wal.go
-+++ b/app/wal.go
-@@ -82,11 +82,19 @@ func (w *WAL) Append(key, value string) error {
+--- a/wal.go
++++ b/wal.go
+@@ -82,11 +82,19 @@
  	n, err := w.buf.Write(record)
  	if err != nil {
  		return fmt.Errorf("WAL append: %w", err)

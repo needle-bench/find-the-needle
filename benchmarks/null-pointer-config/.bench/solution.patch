@@ -1,6 +1,6 @@
---- a/app/config.go
-+++ b/app/config.go
-@@ -42,6 +42,13 @@
+--- a/config.go
++++ b/config.go
+@@ -45,6 +45,13 @@
  	if cfg.Version == "" {
  		cfg.Version = "0.0.1"
  	}

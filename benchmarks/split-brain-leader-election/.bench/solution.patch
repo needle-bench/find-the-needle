@@ -1,6 +1,6 @@
 --- a/app/cluster/node.go
 +++ b/app/cluster/node.go
-@@ -121,8 +121,10 @@
+@@ -121,7 +121,9 @@
  	fmt.Printf("Node %d: received %d/%d votes for term %d\n", n.ID, finalVotes, totalNodes, currentTerm)
  
 -	// Check if we have enough votes for a quorum

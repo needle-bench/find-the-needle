@@ -1,10 +1,10 @@
 {
   "benchmark": "rate-limit-bypass-header",
   "agent": "control-baseline",
-  "timestamp": "2026-03-20T15:22:53Z",
+  "timestamp": "2026-03-20T15:49:38Z",
   "resolved": false,
   "turns_to_fix": 0,
   "token_cost": 0,
-  "wall_clock": 7.8,
+  "wall_clock": 7.7,
   "control_type": "no-agent"
 }

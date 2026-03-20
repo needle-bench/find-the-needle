@@ -1,7 +1,7 @@
---- a/nginx/app.conf
-+++ b/nginx/app.conf
+--- a//etc/nginx/sites-available/default
++++ b//etc/nginx/sites-available/default
 @@ -13,7 +13,7 @@
-
+ 
      # Reverse-proxy everything under /api/ to the Flask backend.
      location /api/ {
 -        proxy_pass http://127.0.0.1:5001;

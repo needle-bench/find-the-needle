@@ -8,8 +8,7 @@
  	"encoding/json"
  	"fmt"
  	"log"
-@@ -58,12 +59,14 @@
- 
+@@ -58,23 +59,23 @@
  	resultCh := make(chan ComputeResult, 1)
  
 -	// BUG: goroutine spawned without context cancellation awareness.
@@ -42,7 +41,7 @@
 +		http.Error(w, "client disconnected", 499)
  	}
  }
- 
+@@ -82,15 +83,21 @@
 -func performComputation(req ComputeRequest) ComputeResult {
 +func performComputation(ctx context.Context, req ComputeRequest) ComputeResult {
  	start := time.Now()
@@ -69,3 +68,4 @@
  		time.Sleep(time.Duration(req.DelayMs) * time.Millisecond)
  	}
  
+ 	return ComputeResult{

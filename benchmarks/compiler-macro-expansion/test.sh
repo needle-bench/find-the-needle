@@ -28,12 +28,13 @@ echo "--- Generated code inspection ---"
 codegen-engine generate complex > /tmp/generated.rs
 echo "Generated code written to /tmp/generated.rs"
 
-# Check that Ref-typed fields have reference return types
-if grep -q "fn company(&self) -> Company" /tmp/generated.rs; then
+# Check that Ref-typed fields have reference return types.
+# Match "-> Company {" (owned) but not "-> &Company {" (reference).
+if grep -q "\-> Company {" /tmp/generated.rs && ! grep -q "\-> &Company {" /tmp/generated.rs; then
     echo "FAIL: company getter returns owned type instead of reference"
     FAIL=1
 fi
-if grep -q "fn address(&self) -> Address" /tmp/generated.rs; then
+if grep -q "\-> Address {" /tmp/generated.rs && ! grep -q "\-> &Address {" /tmp/generated.rs; then
     echo "FAIL: address getter returns owned type instead of reference"
     FAIL=1
 fi

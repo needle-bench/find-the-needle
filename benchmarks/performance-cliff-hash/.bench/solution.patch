@@ -1,6 +1,6 @@
 --- a/src/Product.java
 +++ b/src/Product.java
-@@ -27,9 +27,8 @@
+@@ -26,9 +26,8 @@
  
      /**
 -     * Custom hashCode for use in our ProductCache.
@@ -14,7 +14,7 @@
      }
 --- a/src/ProductCache.java
 +++ b/src/ProductCache.java
-@@ -92,18 +92,9 @@
+@@ -90,19 +90,5 @@
  
 -    /**
 -     * Get the bucket index for a SKU lookup.

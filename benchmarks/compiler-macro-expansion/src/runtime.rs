@@ -192,11 +192,11 @@ pub fn test_complex() -> bool {
 
     // The Employee struct's `company` getter should return `&Company`, not `Company`
     // The Address struct's reference from Company should be `&Address`, not `Address`
-    if code.contains("fn company(&self) -> Company") {
+    if code.contains("-> Company {") && !code.contains("-> &Company {") {
         println!("  FAIL: company getter returns owned Company instead of &Company");
         pass = false;
     }
-    if code.contains("fn address(&self) -> Address") {
+    if code.contains("-> Address {") && !code.contains("-> &Address {") {
         println!("  FAIL: address getter returns owned Address instead of &Address");
         pass = false;
     }

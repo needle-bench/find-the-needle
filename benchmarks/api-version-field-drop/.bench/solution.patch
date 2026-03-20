@@ -1,6 +1,6 @@
 --- a/app/models.go
 +++ b/app/models.go
-@@ -19,14 +19,16 @@
+@@ -18,15 +18,13 @@
  
 -// UserV2 represents the v2 API user response.
 -// BUG: Several fields from v1 are missing (avatar_url, bio, location).
@@ -20,7 +20,7 @@
  	Department  string    `json:"department"`
  	PhoneNumber string    `json:"phone_number"`
  	IsActive    bool      `json:"is_active"`
-@@ -68,14 +70,14 @@
+@@ -67,13 +65,14 @@
  
 -// ToV2 converts internal user to v2 API response.
 -// BUG: Does not include avatar_url, bio, or location because

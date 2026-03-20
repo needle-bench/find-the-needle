@@ -1,6 +1,6 @@
---- a/app/pricing.py
-+++ b/app/pricing.py
-@@ -8,5 +8,5 @@ def calculate_discount_amount(subtotal: float, discount_percent: float) -> float
+--- a/pricing.py
++++ b/pricing.py
+@@ -8,5 +8,5 @@
  
      For a 20% discount on $100, the discount amount should be $20.
      """

@@ -29,23 +29,20 @@ curl -s -X POST http://localhost:8082/config \
     -H "Content-Type: application/json" \
     -d '{"drop_response_ms": 3000}'
 
-# Send the transfer request in background — it will retry 3 times on timeout
-curl -s http://localhost:8080/transfer \
-    -H "Content-Type: application/json" \
-    -d '{"from":"A","to":"B","amount":500,"idempotency_key":"txn-001"}' &
+# Fire several concurrent requests directly at the processor with the same
+# idempotency key.  The 50ms sleep between debit-commit and idempotency-check
+# creates a race window.  Sending 5 simultaneous requests makes it virtually
+# certain that at least two will enter the window before the first records
+# the idempotency key.
+for i in 1 2 3 4 5; do
+    curl -s -X POST http://localhost:8081/execute \
+        -H "Content-Type: application/json" \
+        -d '{"from":"A","to":"B","amount":500,"idempotency_key":"txn-001"}' > /dev/null &
+done
 
-# Also send a duplicate directly to the processor (via chaos proxy) to
-# guarantee concurrent execution during the debit-to-idempotency window.
-# The 50ms sleep in the processor between debit and idempotency check
-# creates a race window we exploit by sending requests in rapid succession.
-sleep 0.3
-curl -s -X POST http://localhost:8081/execute \
-    -H "Content-Type: application/json" \
-    -d '{"from":"A","to":"B","amount":500,"idempotency_key":"txn-001"}' &
-
-# Wait for all curl processes and proxy delays to complete
+# Wait for all curl processes to finish
 wait
-sleep 5
+sleep 2
 
 # Check balances
 BALANCE_A=$(curl -s http://localhost:8080/balance/A | python3 -c "import sys,json; print(json.load(sys.stdin)['balance'])")

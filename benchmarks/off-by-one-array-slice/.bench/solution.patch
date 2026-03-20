@@ -1,10 +1,11 @@
---- a/app/processor.py
-+++ b/app/processor.py
+--- a/processor.py
++++ b/processor.py
 @@ -14,7 +14,7 @@
+ 
      for batch_num in range(num_batches):
          start = batch_num * batch_size
 -        end = start + batch_size - 1  # grab exactly batch_size items
 +        end = start + batch_size
          batch = records[start:end]
-
+ 
          transformed = transform_batch(batch, batch_num + 1)

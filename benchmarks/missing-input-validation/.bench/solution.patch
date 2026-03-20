@@ -1,6 +1,6 @@
---- a/app/inventory.ts
-+++ b/app/inventory.ts
-@@ -35,6 +35,10 @@ export class Inventory {
+--- a/inventory.ts
++++ b/inventory.ts
+@@ -35,6 +35,10 @@
      }
  
      const previousQuantity = product.quantity;
@@ -11,9 +11,9 @@
      product.quantity += adjustment;
  
      return {
---- a/app/routes.ts
-+++ b/app/routes.ts
-@@ -54,7 +54,12 @@ export async function handleInventory(
+--- a/routes.ts
++++ b/routes.ts
+@@ -54,7 +54,12 @@
        return;
      }
  
