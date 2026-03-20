@@ -73,7 +73,7 @@ import Base from '../layouts/Base.astro';
   .col-boot   { min-width: 72px; width: 72px; }
   .col-post   { min-width: 36px; width: 36px; text-align: center; }
   .col-entity { min-width: 36px; width: 36px; text-align: center; }
-  .col-resolved { min-width: 50px; width: 50px; text-align: center; }
+  .col-resolved { min-width: 80px; width: 80px; text-align: center; }
   .col-tokens { min-width: 55px; width: 55px; text-align: right; }
   .col-turns  { min-width: 55px; width: 55px; text-align: right; }
   .col-time   { min-width: 55px; width: 55px; text-align: right; border-right: 2px solid rgba(212,160,84,0.4); }
@@ -107,12 +107,24 @@ import Base from '../layouts/Base.astro';
   }
   .hm-pass  { background: rgba(63,185,80,0.5);  border: 1px solid rgba(63,185,80,0.35); }
   .hm-fail  { background: rgba(248,81,73,0.4);  border: 1px solid rgba(248,81,73,0.3); }
-  .hm-empty { background: rgba(139,148,158,0.08); border: 1px solid rgba(139,148,158,0.1); }
+  .hm-empty { background: transparent; border: 1px solid transparent; }
+  .hm-untested { background: transparent; border: none; }
 
   /* Colorblind mode */
   .hm-pass::after  { content: '\2713'; color: #fff; font-size: 0.7rem; font-weight: 700; }
   .hm-fail::after  { content: '\2717'; color: #fff; font-size: 0.7rem; font-weight: 700; }
-  .hm-empty::after { content: '\2014'; color: #555; font-size: 0.6rem; }
+  .hm-empty::after { content: ''; }
+  .hm-untested::after { content: ''; }
+
+  /* Control rows */
+  tr.control-row td { opacity: 0.6; }
+  tr.control-row:hover td { opacity: 0.85; }
+  tr.control-row .model-name { font-style: italic; color: var(--text-muted); font-weight: 400; }
+  tr.control-separator td { border-top: 2px solid rgba(212,160,84,0.3); }
+
+  /* Coverage indicator */
+  .coverage-partial { color: #d29922; font-size: 0.6rem; font-weight: 400; }
+  .coverage-full { color: #3fb950; }
 
   #leaderboard td {
     padding: 0.35rem 0.4rem; border-bottom: 1px solid var(--border);
@@ -199,6 +211,7 @@ import Base from '../layouts/Base.astro';
     benches: Record<string, ScoreEntry>; resolved: number;
     tokens: number; turns: number; time: number;
     tier: number; post: boolean; entity: boolean; commit: string;
+    isControl: boolean; controlType: string;
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────
@@ -245,6 +258,7 @@ import Base from '../layouts/Base.astro';
           display: displayName(raw), key, boot: null, benches: {},
           resolved: 0, tokens: 0, turns: 0, time: 0,
           tier: 4, post: false, entity: false, commit: '',
+          isControl: raw.startsWith('control-'), controlType: '',
         });
       }
       const m = modelMap.get(key)!;
@@ -266,6 +280,11 @@ import Base from '../layouts/Base.astro';
     for (const s of scores) {
       if (!benchSet.has(s.benchmark)) continue;
       const m = getModel(s.agent);
+      // Tag control rows
+      if (s.agent.startsWith('control-')) {
+        m.isControl = true;
+        m.controlType = (s as any).control_type || s.agent.replace('control-', '');
+      }
       const prev = m.benches[s.benchmark];
       // Keep best run: resolved > not-resolved, then lower token cost
       if (!prev || (!prev.resolved && s.resolved) ||
@@ -290,7 +309,25 @@ import Base from '../layouts/Base.astro';
       m.time = (m.boot?.wall_clock || 0) + tm;
     }
 
-    let models = Array.from(modelMap.values());
+    // Separate control rows from real models
+    const controlModels: ModelRow[] = [];
+    let models: ModelRow[] = [];
+    for (const m of modelMap.values()) {
+      if (m.isControl) {
+        // Set friendly display names for control rows
+        if (m.key.includes('solution')) m.display = 'Control (solution)';
+        else if (m.key.includes('baseline')) m.display = 'Control (baseline)';
+        controlModels.push(m);
+      } else {
+        models.push(m);
+      }
+    }
+    // Sort controls: solution first, then baseline
+    controlModels.sort((a, b) => {
+      if (a.key.includes('solution')) return -1;
+      if (b.key.includes('solution')) return 1;
+      return 0;
+    });
 
     // ── Sort ─────────────────────────────────────────────────────────
     let sortKey = '__default__';
@@ -364,67 +401,110 @@ import Base from '../layouts/Base.astro';
     }
 
     // ── Render ───────────────────────────────────────────────────────
+    function renderRow(m: ModelRow, index: number, isControl: boolean, isFirstReal: boolean): string {
+      const rc = (!isControl && index < 3) ? ' rank-' + (index + 1) : '';
+      const ctrlCls = isControl ? ' control-row' : '';
+      const sepCls = isFirstReal ? ' control-separator' : '';
+      let r = '<tr class="' + (rc + ctrlCls + sepCls).trim() + '">';
+
+      // Model
+      if (isControl) {
+        r += '<td class="sticky-col col-model"><span class="model-name">' + esc(m.display) + '</span></td>';
+      } else if (m.commit) {
+        r += '<td class="sticky-col col-model"><a class="model-link" href="' + REPO + '/commit/' + esc(m.commit) + '" target="_blank" rel="noopener">' + esc(m.display) + '</a></td>';
+      } else {
+        r += '<td class="sticky-col col-model"><span class="model-name">' + esc(m.display) + '</span></td>';
+      }
+
+      // Boot verdict
+      if (isControl) {
+        r += '<td class="sticky-col col-boot">\u2014</td>';
+      } else if (m.boot) {
+        const vc = VERDICT_CLASS[m.boot.verdict] || 'verdict-noboot';
+        const vd = VERDICT_DISPLAY[m.boot.verdict] || m.boot.verdict;
+        r += '<td class="sticky-col col-boot"><span class="verdict-badge ' + vc + '">' + vd + '</span></td>';
+      } else {
+        r += '<td class="sticky-col col-boot"><span class="verdict-badge verdict-noboot">N/A</span></td>';
+      }
+
+      // POST + Entity
+      if (isControl) {
+        r += '<td class="sticky-col col-post">\u2014</td>';
+        r += '<td class="sticky-col col-entity">\u2014</td>';
+      } else {
+        r += '<td class="sticky-col col-post">' + (m.post ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
+        r += '<td class="sticky-col col-entity">' + (m.entity ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
+      }
+
+      // Solved — with coverage indicator
+      const coverage = Object.keys(m.benches).length;
+      const isFull = coverage === totalBenches;
+
+      if (isControl) {
+        r += '<td class="sticky-col col-resolved solved-zero">\u2014</td>';
+      } else if (coverage === 0) {
+        r += '<td class="sticky-col col-resolved solved-zero">\u2014</td>';
+      } else {
+        const ratio = totalBenches > 0 ? m.resolved / totalBenches : 0;
+        const sc = ratio >= 0.8 ? 'solved-high' : ratio >= 0.4 ? 'solved-mid' : ratio > 0 ? 'solved-low' : 'solved-zero';
+        const solvedText = m.resolved + '/' + totalBenches;
+        const coverageNote = isFull ? '' : ' <span class="coverage-partial">(' + coverage + ' tested)</span>';
+        const coverageCls = isFull ? ' coverage-full' : '';
+        r += '<td class="sticky-col col-resolved ' + sc + coverageCls + '">' + solvedText + coverageNote + '</td>';
+      }
+
+      // Tok / Trn / Time
+      if (isControl) {
+        r += '<td class="sticky-col col-tokens">\u2014</td>';
+        r += '<td class="sticky-col col-turns">\u2014</td>';
+        r += '<td class="sticky-col col-time">\u2014</td>';
+      } else {
+        r += '<td class="sticky-col col-tokens">' + fmtN(m.tokens) + '</td>';
+        r += '<td class="sticky-col col-turns">' + m.turns + 't</td>';
+        r += '<td class="sticky-col col-time">' + fmtT(m.time) + '</td>';
+      }
+
+      // Heatmap cells
+      for (const bench of allBenches) {
+        const e = m.benches[bench];
+        const desc = benchDescs[bench] || '';
+        const descLine = desc ? '\n' + desc : '';
+        if (!e) {
+          // Untested: model has no score entry at all for this benchmark
+          const tip = esc(bench) + ': untested' + descLine;
+          r += '<td class="bench-col"><span class="hm hm-untested" title="' + tip + '"></span></td>';
+        } else {
+          const ok = e.resolved;
+          const cls = ok ? 'hm-pass' : 'hm-fail';
+          const sym = ok ? '\u2713 resolved' : '\u2717 not resolved';
+          const metrics = Math.round((e.token_cost||0)/1000) + 'k tok \u00B7 ' + (e.turns_to_fix||0) + 't \u00B7 ' + Math.round(e.wall_clock) + 's';
+          const tip = esc(bench) + '\n' + sym + ' \u00B7 ' + metrics + descLine;
+          r += '<td class="bench-col"><span class="hm ' + cls + '" title="' + tip + '"></span></td>';
+        }
+      }
+      r += '</tr>';
+      return r;
+    }
+
     function render() {
       doSort();
       const tbody = document.getElementById('lb-body')!;
-      if (!models.length) {
+      if (!models.length && !controlModels.length) {
         tbody.innerHTML = '<tr><td colspan="' + (8 + totalBenches) + '" class="empty">No data.</td></tr>';
         return;
       }
       const rows: string[] = [];
+
+      // Render control rows at the top (if any)
+      for (const cm of controlModels) {
+        rows.push(renderRow(cm, -1, true, false));
+      }
+
+      // Render real models
+      const hasControls = controlModels.length > 0;
       for (let i = 0; i < models.length; i++) {
-        const m = models[i];
-        const rc = i < 3 ? ' rank-' + (i + 1) : '';
-        let r = '<tr class="' + rc.trim() + '">';
-
-        // Model
-        if (m.commit) {
-          r += '<td class="sticky-col col-model"><a class="model-link" href="' + REPO + '/commit/' + esc(m.commit) + '" target="_blank" rel="noopener">' + esc(m.display) + '</a></td>';
-        } else {
-          r += '<td class="sticky-col col-model"><span class="model-name">' + esc(m.display) + '</span></td>';
-        }
-
-        // Boot verdict
-        if (m.boot) {
-          const vc = VERDICT_CLASS[m.boot.verdict] || 'verdict-noboot';
-          const vd = VERDICT_DISPLAY[m.boot.verdict] || m.boot.verdict;
-          r += '<td class="sticky-col col-boot"><span class="verdict-badge ' + vc + '">' + vd + '</span></td>';
-        } else {
-          r += '<td class="sticky-col col-boot"><span class="verdict-badge verdict-noboot">N/A</span></td>';
-        }
-
-        // POST + Entity
-        r += '<td class="sticky-col col-post">' + (m.post ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
-        r += '<td class="sticky-col col-entity">' + (m.entity ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
-
-        // Solved
-        const ratio = totalBenches > 0 ? m.resolved / totalBenches : 0;
-        const sc = ratio >= 0.8 ? 'solved-high' : ratio >= 0.4 ? 'solved-mid' : ratio > 0 ? 'solved-low' : 'solved-zero';
-        r += '<td class="sticky-col col-resolved ' + sc + '">' + m.resolved + '/' + totalBenches + '</td>';
-
-        // Tok / Trn / Time
-        r += '<td class="sticky-col col-tokens">' + fmtN(m.tokens) + '</td>';
-        r += '<td class="sticky-col col-turns">' + m.turns + 't</td>';
-        r += '<td class="sticky-col col-time">' + fmtT(m.time) + '</td>';
-
-        // Heatmap cells
-        for (const bench of allBenches) {
-          const e = m.benches[bench];
-          const desc = benchDescs[bench] || '';
-          const descLine = desc ? '\n' + desc : '';
-          if (!e) {
-            r += '<td class="bench-col"><span class="hm hm-empty" title="' + esc(bench) + descLine + '"></span></td>';
-          } else {
-            const ok = e.resolved;
-            const cls = ok ? 'hm-pass' : 'hm-fail';
-            const sym = ok ? '\u2713 resolved' : '\u2717 not resolved';
-            const metrics = Math.round((e.token_cost||0)/1000) + 'k tok \u00B7 ' + (e.turns_to_fix||0) + 't \u00B7 ' + Math.round(e.wall_clock) + 's';
-            const tip = esc(bench) + '\n' + sym + ' \u00B7 ' + metrics + descLine;
-            r += '<td class="bench-col"><span class="hm ' + cls + '" title="' + tip + '"></span></td>';
-          }
-        }
-        r += '</tr>';
-        rows.push(r);
+        const isFirstReal = hasControls && i === 0;
+        rows.push(renderRow(models[i], i, false, isFirstReal));
       }
       tbody.innerHTML = rows.join('');
     }
