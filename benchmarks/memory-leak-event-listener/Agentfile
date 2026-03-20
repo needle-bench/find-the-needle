@@ -2,6 +2,6 @@ FROM memory-leak-event-listener:latest
 TOOL shell
 TOOL file:read
 TOOL file:edit
-LIMIT turns 30
-LIMIT tokens 150000
+LIMIT turns 40
+LIMIT tokens 200000
 LIMIT wall_clock 600

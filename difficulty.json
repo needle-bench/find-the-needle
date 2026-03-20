@@ -1,8 +1,8 @@
 {
   "tiers": {
-    "easy": {"turns": 10, "tokens": 50000, "wall_clock": 180},
-    "medium": {"turns": 30, "tokens": 150000, "wall_clock": 600},
-    "hard": {"turns": 50, "tokens": 300000, "wall_clock": 900}
+    "easy": {"turns": 20, "tokens": 100000, "wall_clock": 300},
+    "medium": {"turns": 40, "tokens": 200000, "wall_clock": 600},
+    "hard": {"turns": 60, "tokens": 400000, "wall_clock": 1200}
   },
   "benchmarks": {
     "off-by-one-pagination": "easy",

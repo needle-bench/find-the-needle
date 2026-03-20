@@ -2,6 +2,6 @@ FROM type-coercion-comparison
 TOOL shell
 TOOL file:read
 TOOL file:edit
-LIMIT turns 10
-LIMIT tokens 50000
-LIMIT wall_clock 180
+LIMIT turns 20
+LIMIT tokens 100000
+LIMIT wall_clock 300
