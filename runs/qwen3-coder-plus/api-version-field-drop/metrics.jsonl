@@ -11,3 +11,5 @@
 {"event": "token.usage", "turn": 11, "input_tokens": 4323, "output_tokens": 51, "cumulative_input": 25101, "cumulative_output": 1523}
 {"event": "token.usage", "turn": 12, "input_tokens": 4392, "output_tokens": 736, "cumulative_input": 29493, "cumulative_output": 2259}
 {"event": "token.usage", "turn": 13, "input_tokens": 5146, "output_tokens": 44, "cumulative_input": 34639, "cumulative_output": 2303}
+{"event": "token.usage", "turn": 14, "input_tokens": 5208, "output_tokens": 87, "cumulative_input": 39847, "cumulative_output": 2390}
+{"event": "token.usage", "turn": 15, "input_tokens": 5313, "output_tokens": 34, "cumulative_input": 45160, "cumulative_output": 2424}
