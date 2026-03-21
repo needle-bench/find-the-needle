@@ -11,3 +11,5 @@
 {"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 4243, "tokens_out": 1061, "test_exit": null}
 {"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 5303, "tokens_out": 86, "test_exit": null}
 {"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 5377, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 5451, "tokens_out": 663, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:37:20Z", "test_exit": 1, "total_turns": 13, "correct_lines": 0}
