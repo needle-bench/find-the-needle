@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Four-arm experimental runner for needle-bench.
+"""Two-arm experimental runner for needle-bench.
 
-Measures the value of the OS by varying information given to the model.
+Measures the value of the invisible OS. One prompt. One variable.
 
-Arms:
-1. cold     — bash only, "You have access to a development environment. Explore and report."
-2. blind    — bash only, "There is an issue with this application. Investigate and resolve it."
-3. tooled   — shell + file:read + file:edit, "There is a bug. Run test.sh, find it, fix it."
-4. kernel   — shell + file:read + file:edit + boot context, "Find the needle."
+Both arms receive: "find the needle."
+- bare:   raw container, bash, generic system prompt
+- silent: same container, same bash, but silent context silently injected
+          into system prompt (boot context, project structure, known issues)
+
+The model can't tell which arm it's in. The delta = the value of ostk.
 
 Usage:
     python3 run_arms.py --model claude-sonnet-4-6 --benchmark off-by-one-pagination
-    python3 run_arms.py --model claude-sonnet-4-6 --benchmark off-by-one-pagination --arm cold
+    python3 run_arms.py --model claude-sonnet-4-6 --benchmark off-by-one-pagination --arm bare
     python3 run_arms.py --model claude-sonnet-4-6 --all-benchmarks
-    python3 run_arms.py --model claude-sonnet-4-6 --all-benchmarks --arm cold,blind
 """
 
 import argparse
@@ -33,39 +33,28 @@ from runner import (
 
 # ── Arm definitions ──────────────────────────────────────────────────────
 
+# One prompt for both arms. The model can't tell which arm it's in.
+USER_PROMPT = "find the needle."
+
+# Generic system prompt — no project-specific context
+BARE_SYSTEM = "You are a software engineer. You have bash access to a system."
+
 ARM_DEFINITIONS = {
-    "cold": {
+    "bare": {
         "tools": [ALL_TOOLS["bash"]],
-        "system_prompt": (
-            "You have access to a development environment. Explore it and report "
-            "what you find. If you find any issues, try to resolve them."
-        ),
-        "description": "bash only, no hints",
+        "system_prompt": BARE_SYSTEM,
+        "inject_boot_context": False,
+        "description": "raw bash, no OS context",
     },
-    "blind": {
+    "silent": {
         "tools": [ALL_TOOLS["bash"]],
-        "system_prompt": (
-            "There is an issue with this application. Investigate the codebase and "
-            "resolve any problems you find. You can run commands to explore and make changes."
-        ),
-        "description": "bash only, told there's an issue",
-    },
-    "tooled": {
-        "tools": [ALL_TOOLS["bash"], ALL_TOOLS["read"], ALL_TOOLS["edit"]],
-        "system_prompt": (
-            "This application has a bug. Run ./test.sh to see the failure. "
-            "Read the code, find the bug, fix it. Run test.sh again to verify."
-        ),
-        "description": "shell + read + edit, told about test.sh",
-    },
-    "kernel": {
-        "tools": [ALL_TOOLS["bash"], ALL_TOOLS["read"], ALL_TOOLS["edit"]],
-        "system_prompt": SYSTEM_PROMPT,  # same as runner.py default
-        "description": "shell + read + edit + boot context",
+        "system_prompt": BARE_SYSTEM,  # same base — silent context appended silently
+        "inject_boot_context": True,   # boot.md + project structure injected into system prompt
+        "description": "same bash, invisible OS underneath",
     },
 }
 
-ALL_ARMS = ["cold", "blind", "tooled", "kernel"]
+ALL_ARMS = ["bare", "silent"]
 
 
 # ── Per-arm benchmark runner ─────────────────────────────────────────────
@@ -145,26 +134,33 @@ def run_arm(model, bench_name, bench_dir, provider, arm_name):
     docker_exec(container, f"cp -a {workdir} {workdir}.orig")
     docker_exec(container, f"cd {workdir} && git init -q && git add -A && git commit -q -m baseline")
 
-    # ── Arm-specific prompt and tools ────────────────────────────────
+    # ── Same tools, same prompt for both arms ───────────────────────
     tools = arm["tools"]
     system_prompt = arm["system_prompt"]
 
-    # Kernel arm: if benchmark has a BOOT directive, run it and prepend output
-    if arm_name == "kernel" and bench_cfg.get("boot"):
-        _brc, _bout, _berr = docker_exec(container, bench_cfg["boot"])
-        boot_output = _bout.strip()
-        if boot_output:
-            system_prompt = boot_output + "\n\n" + system_prompt
+    # Silent arm: silently inject silent context into system prompt
+    # The model doesn't know this context came from ostk — it just has better info
+    if arm.get("inject_boot_context"):
+        # Read project structure
+        _, ls_out, _ = docker_exec(container, f"find {workdir} -type f -name '*.py' -o -name '*.go' -o -name '*.rs' -o -name '*.java' -o -name '*.js' -o -name '*.ts' -o -name '*.c' -o -name '*.sh' 2>/dev/null | head -30")
+        # Read test output
+        _, test_out, _ = docker_exec(container, "bash test.sh 2>&1 | head -20")
+        # Read any README
+        _, readme_out, _ = docker_exec(container, f"cat {workdir}/README.md 2>/dev/null | head -30")
 
-    # Instance prompt varies by arm
-    if arm_name == "cold":
-        instance_prompt = "Begin exploring this environment."
-    elif arm_name == "blind":
-        instance_prompt = "An issue has been reported. Investigate and fix it."
-    elif arm_name == "tooled":
-        instance_prompt = "Run ./test.sh to see the current failure. Read the code, find the bug, fix it."
-    else:  # kernel
-        instance_prompt = cfg["prompt"] if cfg.get("prompt") else "Run ./test.sh to see the current failure. Read the code, find the bug, fix it."
+        silent_context = ""
+        if readme_out.strip():
+            silent_context += f"Project overview:\n{readme_out.strip()}\n\n"
+        if ls_out.strip():
+            silent_context += f"Source files:\n{ls_out.strip()}\n\n"
+        if test_out.strip():
+            silent_context += f"Current test output (test.sh):\n{test_out.strip()}\n\n"
+
+        if silent_context:
+            system_prompt = system_prompt + "\n\n" + silent_context
+
+    # Same user message for both arms — the model can't tell which arm it's in
+    instance_prompt = USER_PROMPT
 
     # POST start: capture initial test output
     _irc, _istdout, _istderr = docker_exec(container, "bash test.sh")
@@ -255,7 +251,7 @@ def run_arm(model, bench_name, bench_dir, provider, arm_name):
                     })
                     post.bash(cmd, output, turn)
 
-                    # For cold/blind arms: detect if the model ran test.sh via bash
+                    # For bare/bare arms: detect if the model ran test.sh via bash
                     if "test.sh" in cmd:
                         test_exit = rc
                         final_test_output = output
@@ -513,21 +509,21 @@ def print_summary(bench_name, model, scores):
 
         print(f"  {arm_name:8s} {resolved_mark}  {turns:2d}t  {tok_str:>8s}  ${cost:.3f}  {wall:.0f}s")
 
-    # Delta: kernel vs cold (if both present)
-    cold = scores.get("cold")
-    kernel = scores.get("kernel")
-    if cold and kernel:
-        solve_delta = int(kernel["resolved"]) - int(cold["resolved"])
-        tok_delta = kernel["token_cost"] - cold["token_cost"]
-        cost_delta = kernel["estimated_cost_usd"] - cold["estimated_cost_usd"]
-        wall_delta = kernel["wall_clock"] - cold["wall_clock"]
+    # Delta: silent vs bare (if both present)
+    bare = scores.get("bare")
+    silent = scores.get("silent")
+    if bare and silent:
+        solve_delta = int(silent["resolved"]) - int(bare["resolved"])
+        tok_delta = silent["token_cost"] - bare["token_cost"]
+        cost_delta = silent["estimated_cost_usd"] - bare["estimated_cost_usd"]
+        wall_delta = silent["wall_clock"] - bare["wall_clock"]
 
         solve_str = f"+{solve_delta}" if solve_delta >= 0 else str(solve_delta)
         tok_delta_str = f"{tok_delta // 1000}k" if abs(tok_delta) >= 1000 else str(tok_delta)
         if tok_delta >= 0:
             tok_delta_str = f"+{tok_delta_str}"
 
-        print(f"\n  Delta (kernel vs cold): {solve_str} solves, "
+        print(f"\n  Delta (silent vs bare): {solve_str} solves, "
               f"{tok_delta_str} tok, ${cost_delta:+.3f}, {wall_delta:+.0f}s")
     print()
 
@@ -539,11 +535,12 @@ def main():
         description="Four-arm experimental runner for needle-bench",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
-            "Arms:\n"
-            "  cold    — bash only, no hints about bugs\n"
-            "  blind   — bash only, told there's an issue\n"
-            "  tooled  — shell + read + edit, told about test.sh\n"
-            "  kernel  — shell + read + edit + boot context (full OS)\n"
+            "Arms (same prompt, same tools — one variable):\n"
+            "  bare   — raw bash, generic system prompt, no OS context\n"
+            "  silent — same bash, but kernel context silently injected into system prompt\n"
+            "\n"
+            "Both arms receive: 'find the needle.'\n"
+            "The delta = the value of the invisible OS.\n"
         ),
     )
     parser.add_argument("--model", required=True,
@@ -663,18 +660,18 @@ def main():
                   f"avg {avg_turns:.1f}t  {avg_tok:.0f} tok  "
                   f"${avg_cost:.3f}  {avg_wall:.0f}s")
 
-        # Aggregate delta: kernel vs cold
-        cold_scores = [v["cold"] for v in all_results.values() if "cold" in v]
-        kernel_scores = [v["kernel"] for v in all_results.values() if "kernel" in v]
-        if cold_scores and kernel_scores:
-            cold_solved = sum(1 for s in cold_scores if s["resolved"])
-            kernel_solved = sum(1 for s in kernel_scores if s["resolved"])
-            solve_delta = kernel_solved - cold_solved
-            avg_tok_delta = (sum(s["token_cost"] for s in kernel_scores) / len(kernel_scores)
-                            - sum(s["token_cost"] for s in cold_scores) / len(cold_scores))
-            avg_cost_delta = (sum(s["estimated_cost_usd"] for s in kernel_scores) / len(kernel_scores)
-                             - sum(s["estimated_cost_usd"] for s in cold_scores) / len(cold_scores))
-            print(f"\n  Delta (kernel vs cold): {solve_delta:+d} solves, "
+        # Aggregate delta: silent vs bare
+        bare_scores = [v["bare"] for v in all_results.values() if "bare" in v]
+        silent_scores = [v["silent"] for v in all_results.values() if "silent" in v]
+        if bare_scores and silent_scores:
+            bare_solved = sum(1 for s in bare_scores if s["resolved"])
+            silent_solved = sum(1 for s in silent_scores if s["resolved"])
+            solve_delta = silent_solved - bare_solved
+            avg_tok_delta = (sum(s["token_cost"] for s in silent_scores) / len(silent_scores)
+                            - sum(s["token_cost"] for s in bare_scores) / len(bare_scores))
+            avg_cost_delta = (sum(s["estimated_cost_usd"] for s in silent_scores) / len(silent_scores)
+                             - sum(s["estimated_cost_usd"] for s in bare_scores) / len(bare_scores))
+            print(f"\n  Delta (silent vs bare): {solve_delta:+d} solves, "
                   f"{avg_tok_delta:+.0f} avg tok, ${avg_cost_delta:+.3f} avg cost")
         print()
 
