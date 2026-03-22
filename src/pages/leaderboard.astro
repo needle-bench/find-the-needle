@@ -32,13 +32,14 @@ import Base from '../layouts/Base.astro';
             <th class="sticky-col col-bare" data-key="bareResolved" data-type="number">Bare</th>
             <th class="sticky-col col-os" data-key="silentResolved" data-type="number">OS</th>
             <th class="sticky-col col-delta" data-key="expDelta" data-type="number">&Delta;</th>
+            <th class="sticky-col col-cost" data-key="silentCostTotal" data-type="number">$/b</th>
             <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number">Tok</th>
             <th class="sticky-col col-turns" data-key="totalTurns" data-type="number">Trn</th>
             <th class="sticky-col col-time" data-key="totalTime" data-type="number">Time</th>
           </tr>
         </thead>
         <tbody id="lb-body">
-          <tr><td colspan="11" class="empty">Loading...</td></tr>
+          <tr><td colspan="12" class="empty">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -86,6 +87,7 @@ import Base from '../layouts/Base.astro';
   .col-bare   { min-width: 50px; width: 50px; text-align: center; }
   .col-os     { min-width: 50px; width: 50px; text-align: center; }
   .col-delta  { min-width: 60px; width: 60px; text-align: center; }
+  .col-cost   { min-width: 50px; width: 50px; text-align: right; font-size: 0.75rem; }
   .col-tokens { min-width: 55px; width: 55px; text-align: right; }
   .col-turns  { min-width: 55px; width: 55px; text-align: right; }
   .col-time   { min-width: 55px; width: 55px; text-align: right; border-right: 2px solid rgba(212,160,84,0.4); }
@@ -168,6 +170,7 @@ import Base from '../layouts/Base.astro';
   #leaderboard tr:hover td { background: rgba(255,255,255,0.06); }
   #leaderboard tr:hover td.sticky-col { background: rgba(255,255,255,0.06); }
   td.col-post, td.col-entity, td.col-resolved, td.col-bare, td.col-os, td.col-delta { text-align: center; }
+  td.col-cost { text-align: right; font-size: 0.75rem; }
   td.col-tokens, td.col-turns, td.col-time { text-align: right; }
   td.col-time { border-right: 2px solid rgba(212,160,84,0.4); }
 
@@ -257,6 +260,7 @@ import Base from '../layouts/Base.astro';
     bareResolved: number; bareTested: number;
     silentResolved: number; silentTested: number;
     expDelta: number; // percentage point delta (silent - bare) over shared benchmarks
+    bareCostTotal: number; silentCostTotal: number; // total cost across all benchmarks
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────
@@ -330,6 +334,7 @@ import Base from '../layouts/Base.astro';
           isControl: raw.startsWith('control-'), controlType: '',
           experiment: {}, bareResolved: 0, bareTested: 0,
           silentResolved: 0, silentTested: 0, expDelta: 0,
+          bareCostTotal: 0, silentCostTotal: 0,
         });
       }
       const m = modelMap.get(key)!;
@@ -385,9 +390,10 @@ import Base from '../layouts/Base.astro';
         m.experiment = Object.fromEntries(expMap);
         let bareR = 0, bareT = 0, silentR = 0, silentT = 0;
         let sharedBareR = 0, sharedSilentR = 0, sharedCount = 0;
+        let bareCost = 0, silentCost = 0;
         for (const [_bench, exp] of expMap) {
-          if (exp.bare) { bareT++; if (exp.bare.resolved) bareR++; }
-          if (exp.silent) { silentT++; if (exp.silent.resolved) silentR++; }
+          if (exp.bare) { bareT++; if (exp.bare.resolved) bareR++; bareCost += exp.bare.estimated_cost_usd || 0; }
+          if (exp.silent) { silentT++; if (exp.silent.resolved) silentR++; silentCost += exp.silent.estimated_cost_usd || 0; }
           // Delta only over benchmarks where BOTH arms were tested
           if (exp.bare && exp.silent) {
             sharedCount++;
@@ -396,6 +402,8 @@ import Base from '../layouts/Base.astro';
           }
         }
         m.bareResolved = bareR;
+        m.bareCostTotal = bareCost;
+        m.silentCostTotal = silentCost;
         m.bareTested = bareT;
         m.silentResolved = silentR;
         m.silentTested = silentT;
@@ -453,6 +461,8 @@ import Base from '../layouts/Base.astro';
           case 'silentResolved': av = a.silentResolved; bv = b.silentResolved; return sortAsc ? av - bv : bv - av;
           case 'expDelta': av = a.bareTested ? a.expDelta : -Infinity; bv = b.bareTested ? b.expDelta : -Infinity;
             return sortAsc ? av - bv : bv - av;
+          case 'silentCostTotal': av = a.silentCostTotal || 0; bv = b.silentCostTotal || 0;
+            return sortAsc ? av - bv : bv - av;
           case 'totalTokens': av = a.tokens; bv = b.tokens; break;
           case 'totalTurns': av = a.turns; bv = b.turns; break;
           case 'totalTime': av = a.time; bv = b.time; break;
@@ -470,7 +480,7 @@ import Base from '../layouts/Base.astro';
 
     // ── Build tier header row ────────────────────────────────────────
     const tierRow = document.getElementById('lb-tier-row')!;
-    const stickyCls = ['col-model','col-boot','col-post','col-entity','col-resolved','col-bare','col-os','col-delta','col-tokens','col-turns','col-time'];
+    const stickyCls = ['col-model','col-boot','col-post','col-entity','col-resolved','col-bare','col-os','col-delta','col-cost','col-tokens','col-turns','col-time'];
     for (const cls of stickyCls) {
       const th = document.createElement('th');
       th.className = 'sticky-col tier-sticky-placeholder ' + cls;
@@ -558,21 +568,30 @@ import Base from '../layouts/Base.astro';
         r += '<td class="sticky-col col-resolved ' + sc + coverageCls + '">' + solvedText + coverageNote + '</td>';
       }
 
-      // BARE / OS / Delta columns
+      // BARE / OS / Delta / Cost columns
       if (isControl || !hasExp) {
         r += '<td class="sticky-col col-bare" style="color:#484f58">\u2014</td>';
         r += '<td class="sticky-col col-os" style="color:#484f58">\u2014</td>';
         r += '<td class="sticky-col col-delta" style="color:#484f58">\u2014</td>';
+        r += '<td class="sticky-col col-cost" style="color:#484f58">\u2014</td>';
       } else {
         r += '<td class="sticky-col col-bare">' + m.bareResolved + '/' + m.bareTested + '</td>';
         r += '<td class="sticky-col col-os">' + m.silentResolved + '/' + m.silentTested + '</td>';
-        // Delta — compute only if both arms have data
+        // Delta
         const hasBoth = m.bareTested > 0 && m.silentTested > 0;
         if (hasBoth) {
           const dc = deltaClass(m.expDelta);
           r += '<td class="sticky-col col-delta ' + dc + '">' + fmtDelta(m.expDelta) + '</td>';
         } else {
           r += '<td class="sticky-col col-delta" style="color:#484f58">\u2014</td>';
+        }
+        // Cost per benchmark (silent arm — the "with OS" cost)
+        const costPerBench = m.silentTested > 0 ? m.silentCostTotal / m.silentTested : 0;
+        if (costPerBench > 0) {
+          const costStr = costPerBench < 0.01 ? '$' + costPerBench.toFixed(3) : '$' + costPerBench.toFixed(2);
+          r += '<td class="sticky-col col-cost">' + costStr + '</td>';
+        } else {
+          r += '<td class="sticky-col col-cost" style="color:#484f58">\u2014</td>';
         }
       }
 
