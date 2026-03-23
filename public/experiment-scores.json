@@ -4,19 +4,19 @@
     "benchmark": "api-version-field-drop",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 25769,
-      "estimated_cost_usd": 0.032377,
-      "wall_clock": 25.8,
-      "signal_to_noise": 0.222
+      "turns_to_fix": 4,
+      "token_cost": 5413,
+      "estimated_cost_usd": 0.006669000000000001,
+      "wall_clock": 8.6,
+      "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 6670,
-      "estimated_cost_usd": 0.010054,
-      "wall_clock": 9.4,
-      "signal_to_noise": 0.333
+      "resolved": true,
+      "turns_to_fix": 2,
+      "token_cost": 2109,
+      "estimated_cost_usd": 0.0028450000000000003,
+      "wall_clock": 4.1,
+      "signal_to_noise": 0
     }
   },
   {
@@ -25,18 +25,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 1655,
-      "estimated_cost_usd": 0.002659,
-      "wall_clock": 5.5,
+      "token_cost": 8107,
+      "estimated_cost_usd": 0.010891000000000001,
+      "wall_clock": 14.3,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 7222,
-      "estimated_cost_usd": 0.008466000000000001,
-      "wall_clock": 7.7,
-      "signal_to_noise": 0.25
+      "turns_to_fix": 1,
+      "token_cost": 862,
+      "estimated_cost_usd": 0.001206,
+      "wall_clock": 4.0,
+      "signal_to_noise": 0
     }
   },
   {
@@ -45,18 +45,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 4582,
-      "estimated_cost_usd": 0.006334,
-      "wall_clock": 9.7,
+      "token_cost": 727,
+      "estimated_cost_usd": 0.001307,
+      "wall_clock": 4.5,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 1764,
-      "estimated_cost_usd": 0.00246,
-      "wall_clock": 3.5,
-      "signal_to_noise": 0
+      "turns_to_fix": 1,
+      "token_cost": 975,
+      "estimated_cost_usd": 0.001987,
+      "wall_clock": 2.6,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -64,19 +64,19 @@
     "benchmark": "compiler-macro-expansion",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 5867,
-      "estimated_cost_usd": 0.0072310000000000004,
-      "wall_clock": 8.3,
-      "signal_to_noise": 0
+      "turns_to_fix": 6,
+      "token_cost": 9622,
+      "estimated_cost_usd": 0.011658,
+      "wall_clock": 10.8,
+      "signal_to_noise": 0.167
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 2545,
-      "estimated_cost_usd": 0.0031609999999999997,
-      "wall_clock": 3.2,
-      "signal_to_noise": 0
+      "turns_to_fix": 4,
+      "token_cost": 12177,
+      "estimated_cost_usd": 0.013633000000000001,
+      "wall_clock": 8.6,
+      "signal_to_noise": 0.25
     }
   },
   {
@@ -85,31 +85,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 13546,
-      "estimated_cost_usd": 0.017386,
-      "wall_clock": 17.2,
-      "signal_to_noise": 0.143
+      "token_cost": 11849,
+      "estimated_cost_usd": 0.015333,
+      "wall_clock": 11.3,
+      "signal_to_noise": 0.25
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 6,
-      "token_cost": 14937,
-      "estimated_cost_usd": 0.016589,
-      "wall_clock": 10.6,
+      "token_cost": 15465,
+      "estimated_cost_usd": 0.017249,
+      "wall_clock": 16.7,
       "signal_to_noise": 0.167
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "deadlock-transfer",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 715,
+      "estimated_cost_usd": 0.001247,
+      "wall_clock": 22.4,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 7999,
-      "estimated_cost_usd": 0.012295,
-      "wall_clock": 12.0,
-      "signal_to_noise": 0.5
+      "turns_to_fix": 2,
+      "token_cost": 1812,
+      "estimated_cost_usd": 0.002528,
+      "wall_clock": 3.5,
+      "signal_to_noise": 0
     }
   },
   {
@@ -118,17 +125,17 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 4,
-      "token_cost": 3854,
-      "estimated_cost_usd": 0.005334,
-      "wall_clock": 6.5,
+      "token_cost": 3761,
+      "estimated_cost_usd": 0.005065,
+      "wall_clock": 10.3,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 20,
-      "token_cost": 7039,
-      "estimated_cost_usd": 0.009159,
-      "wall_clock": 10.3,
+      "resolved": true,
+      "turns_to_fix": 3,
+      "token_cost": 4793,
+      "estimated_cost_usd": 0.005721,
+      "wall_clock": 7.6,
       "signal_to_noise": 0
     }
   },
@@ -136,20 +143,20 @@
     "model": "claude-haiku-4-5",
     "benchmark": "goroutine-leak-handler",
     "bare": {
-      "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 1821,
-      "estimated_cost_usd": 0.002921,
-      "wall_clock": 4.3,
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 5151,
+      "estimated_cost_usd": 0.006971,
+      "wall_clock": 18.1,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 842,
-      "estimated_cost_usd": 0.001186,
-      "wall_clock": 1.9,
-      "signal_to_noise": 0
+      "token_cost": 1009,
+      "estimated_cost_usd": 0.002021,
+      "wall_clock": 2.9,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -158,9 +165,9 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 30,
-      "token_cost": 5247,
-      "estimated_cost_usd": 0.007299,
-      "wall_clock": 9.0,
+      "token_cost": 4714,
+      "estimated_cost_usd": 0.006513999999999999,
+      "wall_clock": 21.6,
       "signal_to_noise": 0
     },
     "silent": {
@@ -168,7 +175,7 @@
       "turns_to_fix": 1,
       "token_cost": 688,
       "estimated_cost_usd": 0.001016,
-      "wall_clock": 1.4,
+      "wall_clock": 2.6,
       "signal_to_noise": 0
     }
   },
@@ -176,33 +183,40 @@
     "model": "claude-haiku-4-5",
     "benchmark": "haystack-mint",
     "bare": {
-      "resolved": false,
-      "turns_to_fix": 30,
-      "token_cost": 8994,
-      "estimated_cost_usd": 0.011606,
-      "wall_clock": 14.3,
+      "resolved": true,
+      "turns_to_fix": 8,
+      "token_cost": 11505,
+      "estimated_cost_usd": 0.014529,
+      "wall_clock": 28.9,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 687,
-      "estimated_cost_usd": 0.001011,
-      "wall_clock": 1.3,
+      "token_cost": 690,
+      "estimated_cost_usd": 0.001026,
+      "wall_clock": 2.2,
       "signal_to_noise": 0
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "import-cycle-startup",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 3469,
+      "estimated_cost_usd": 0.004857,
+      "wall_clock": 9.5,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 10,
-      "token_cost": 32306,
-      "estimated_cost_usd": 0.042102,
-      "wall_clock": 27.2,
-      "signal_to_noise": 0.6
+      "turns_to_fix": 7,
+      "token_cost": 17666,
+      "estimated_cost_usd": 0.023057999999999995,
+      "wall_clock": 24.9,
+      "signal_to_noise": 0.571
     }
   },
   {
@@ -211,30 +225,37 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 711,
-      "estimated_cost_usd": 0.001227,
+      "token_cost": 727,
+      "estimated_cost_usd": 0.001307,
       "wall_clock": 2.4,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 787,
-      "estimated_cost_usd": 0.001271,
-      "wall_clock": 1.8,
+      "token_cost": 783,
+      "estimated_cost_usd": 0.001251,
+      "wall_clock": 2.2,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "k8s-scheduler-shutdown-deadlock",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 723,
+      "estimated_cost_usd": 0.001287,
+      "wall_clock": 8.5,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 717,
-      "estimated_cost_usd": 0.001049,
-      "wall_clock": 1.6,
+      "token_cost": 756,
+      "estimated_cost_usd": 0.001244,
+      "wall_clock": 2.1,
       "signal_to_noise": 1.0
     }
   },
@@ -244,30 +265,37 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 11087,
-      "estimated_cost_usd": 0.013939,
-      "wall_clock": 14.5,
-      "signal_to_noise": 0.143
+      "token_cost": 51633,
+      "estimated_cost_usd": 0.058996999999999994,
+      "wall_clock": 34.4,
+      "signal_to_noise": 0.083
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 17,
-      "token_cost": 122762,
-      "estimated_cost_usd": 0.14326599999999998,
-      "wall_clock": 52.0,
-      "signal_to_noise": 0.176
+      "turns_to_fix": 2,
+      "token_cost": 2805,
+      "estimated_cost_usd": 0.003509,
+      "wall_clock": 3.6,
+      "signal_to_noise": 0
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "memory-leak-event-listener",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 3,
+      "token_cost": 2403,
+      "estimated_cost_usd": 0.003283,
+      "wall_clock": 7.4,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 1823,
-      "estimated_cost_usd": 0.0024070000000000003,
-      "wall_clock": 3.4,
+      "turns_to_fix": 1,
+      "token_cost": 807,
+      "estimated_cost_usd": 0.001167,
+      "wall_clock": 3.1,
       "signal_to_noise": 0
     }
   },
@@ -275,19 +303,19 @@
     "model": "claude-haiku-4-5",
     "benchmark": "missing-input-validation",
     "bare": {
-      "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 8248,
-      "estimated_cost_usd": 0.009872,
-      "wall_clock": 9.1,
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 6208,
+      "estimated_cost_usd": 0.007992,
+      "wall_clock": 13.8,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1210,
-      "estimated_cost_usd": 0.001538,
-      "wall_clock": 1.6,
+      "token_cost": 1214,
+      "estimated_cost_usd": 0.001558,
+      "wall_clock": 2.0,
       "signal_to_noise": 0
     }
   },
@@ -296,18 +324,18 @@
     "benchmark": "nginx-upstream-port-mismatch",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 4637,
-      "estimated_cost_usd": 0.006169000000000001,
-      "wall_clock": 7.9,
+      "turns_to_fix": 3,
+      "token_cost": 2428,
+      "estimated_cost_usd": 0.0033280000000000002,
+      "wall_clock": 4.7,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 913,
-      "estimated_cost_usd": 0.001301,
-      "wall_clock": 2.4,
+      "turns_to_fix": 4,
+      "token_cost": 4890,
+      "estimated_cost_usd": 0.006066,
+      "wall_clock": 9.2,
       "signal_to_noise": 0
     }
   },
@@ -317,18 +345,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 8691,
-      "estimated_cost_usd": 0.010675,
+      "token_cost": 8516,
+      "estimated_cost_usd": 0.010436,
       "wall_clock": 14.7,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 1344,
-      "estimated_cost_usd": 0.002152,
-      "wall_clock": 2.5,
-      "signal_to_noise": 1.0
+      "turns_to_fix": 6,
+      "token_cost": 14038,
+      "estimated_cost_usd": 0.01559,
+      "wall_clock": 12.7,
+      "signal_to_noise": 0.167
     }
   },
   {
@@ -337,17 +365,17 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 4,
-      "token_cost": 3969,
-      "estimated_cost_usd": 0.0052250000000000005,
-      "wall_clock": 7.5,
+      "token_cost": 3807,
+      "estimated_cost_usd": 0.005047,
+      "wall_clock": 8.4,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 2057,
-      "estimated_cost_usd": 0.0026769999999999997,
-      "wall_clock": 3.0,
+      "token_cost": 2058,
+      "estimated_cost_usd": 0.002682,
+      "wall_clock": 3.7,
       "signal_to_noise": 0
     }
   },
@@ -355,19 +383,19 @@
     "model": "claude-haiku-4-5",
     "benchmark": "off-by-one-pagination",
     "bare": {
-      "resolved": false,
-      "turns_to_fix": 20,
-      "token_cost": 9940,
-      "estimated_cost_usd": 0.013128,
-      "wall_clock": 15.4,
-      "signal_to_noise": 0.143
-    },
-    "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 4324,
-      "estimated_cost_usd": 0.005556,
-      "wall_clock": 5.4,
+      "token_cost": 2576,
+      "estimated_cost_usd": 0.00362,
+      "wall_clock": 6.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 4544,
+      "estimated_cost_usd": 0.006712,
+      "wall_clock": 10.4,
       "signal_to_noise": 0.333
     }
   },
@@ -377,18 +405,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 698,
-      "estimated_cost_usd": 0.001162,
-      "wall_clock": 2.2,
+      "token_cost": 7381,
+      "estimated_cost_usd": 0.009477,
+      "wall_clock": 15.2,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 4610,
-      "estimated_cost_usd": 0.006346,
-      "wall_clock": 7.0,
-      "signal_to_noise": 0.333
+      "resolved": true,
+      "turns_to_fix": 11,
+      "token_cost": 71915,
+      "estimated_cost_usd": 0.08405499999999999,
+      "wall_clock": 40.7,
+      "signal_to_noise": 0.455
     }
   },
   {
@@ -396,44 +424,58 @@
     "benchmark": "postgres-migration-schema-drift",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 6121,
-      "estimated_cost_usd": 0.007989,
-      "wall_clock": 11.9,
+      "turns_to_fix": 4,
+      "token_cost": 3522,
+      "estimated_cost_usd": 0.004814,
+      "wall_clock": 9.5,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 4841,
-      "estimated_cost_usd": 0.005825,
-      "wall_clock": 5.3,
+      "turns_to_fix": 2,
+      "token_cost": 3006,
+      "estimated_cost_usd": 0.0036899999999999997,
+      "wall_clock": 4.7,
       "signal_to_noise": 0
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "race-condition-counter",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 4328,
+      "estimated_cost_usd": 0.006136,
+      "wall_clock": 15.0,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 1641,
-      "estimated_cost_usd": 0.002469,
-      "wall_clock": 2.4,
-      "signal_to_noise": 1.0
+      "turns_to_fix": 3,
+      "token_cost": 5553,
+      "estimated_cost_usd": 0.007580999999999999,
+      "wall_clock": 13.2,
+      "signal_to_noise": 0.333
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "rate-limit-bypass-header",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 701,
+      "estimated_cost_usd": 0.001177,
+      "wall_clock": 9.9,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 3318,
-      "estimated_cost_usd": 0.00405,
-      "wall_clock": 3.6,
+      "turns_to_fix": 1,
+      "token_cost": 1421,
+      "estimated_cost_usd": 0.001737,
+      "wall_clock": 1.6,
       "signal_to_noise": 0
     }
   },
@@ -441,20 +483,20 @@
     "model": "claude-haiku-4-5",
     "benchmark": "retry-storm-duplicate-transfer",
     "bare": {
-      "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 2861,
-      "estimated_cost_usd": 0.004425,
-      "wall_clock": 6.3,
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 728,
+      "estimated_cost_usd": 0.001312,
+      "wall_clock": 6.5,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 1693,
-      "estimated_cost_usd": 0.002333,
-      "wall_clock": 3.5,
-      "signal_to_noise": 0
+      "token_cost": 1888,
+      "estimated_cost_usd": 0.0032519999999999997,
+      "wall_clock": 5.7,
+      "signal_to_noise": 0.5
     }
   },
   {
@@ -463,31 +505,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 3785,
-      "estimated_cost_usd": 0.0048649999999999995,
-      "wall_clock": 7.7,
+      "token_cost": 1781,
+      "estimated_cost_usd": 0.0031209999999999996,
+      "wall_clock": 5.4,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 1988,
-      "estimated_cost_usd": 0.002648,
-      "wall_clock": 3.1,
+      "turns_to_fix": 1,
+      "token_cost": 928,
+      "estimated_cost_usd": 0.001252,
+      "wall_clock": 1.9,
       "signal_to_noise": 0
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "split-brain-leader-election",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 9928,
+      "estimated_cost_usd": 0.013108000000000002,
+      "wall_clock": 33.5,
+      "signal_to_noise": 0.143
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 12397,
-      "estimated_cost_usd": 0.013977,
-      "wall_clock": 10.2,
-      "signal_to_noise": 0.2
+      "turns_to_fix": 8,
+      "token_cost": 25588,
+      "estimated_cost_usd": 0.030123999999999998,
+      "wall_clock": 22.4,
+      "signal_to_noise": 0.5
     }
   },
   {
@@ -495,10 +544,10 @@
     "benchmark": "sql-injection-search",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 2475,
-      "estimated_cost_usd": 0.0034509999999999996,
-      "wall_clock": 6.3,
+      "turns_to_fix": 6,
+      "token_cost": 8777,
+      "estimated_cost_usd": 0.010929,
+      "wall_clock": 12.9,
       "signal_to_noise": 0
     },
     "silent": null
@@ -508,31 +557,38 @@
     "benchmark": "ssrf-allowlist-port-confusion",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 2417,
-      "estimated_cost_usd": 0.003321,
-      "wall_clock": 5.8,
+      "turns_to_fix": 6,
+      "token_cost": 6581,
+      "estimated_cost_usd": 0.008325,
+      "wall_clock": 16.4,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 4647,
-      "estimated_cost_usd": 0.0068709999999999995,
-      "wall_clock": 9.8,
-      "signal_to_noise": 0.333
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 7116,
+      "estimated_cost_usd": 0.008484,
+      "wall_clock": 9.7,
+      "signal_to_noise": 0.25
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "timezone-scheduling",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 1736,
+      "estimated_cost_usd": 0.0026,
+      "wall_clock": 3.8,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 2269,
-      "estimated_cost_usd": 0.0029649999999999998,
-      "wall_clock": 4.7,
+      "token_cost": 2243,
+      "estimated_cost_usd": 0.002903,
+      "wall_clock": 5.1,
       "signal_to_noise": 0
     }
   },
@@ -542,17 +598,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 1824,
-      "estimated_cost_usd": 0.002636,
-      "wall_clock": 4.5,
+      "token_cost": 2771,
+      "estimated_cost_usd": 0.0038510000000000003,
+      "wall_clock": 13.8,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 4062,
-      "estimated_cost_usd": 0.00549,
-      "wall_clock": 6.8,
+      "token_cost": 4068,
+      "estimated_cost_usd": 0.005492,
+      "wall_clock": 8.3,
       "signal_to_noise": 0.333
     }
   },
@@ -560,19 +616,19 @@
     "model": "claude-haiku-4-5",
     "benchmark": "type-coercion-comparison",
     "bare": {
-      "resolved": false,
-      "turns_to_fix": 20,
-      "token_cost": 726,
-      "estimated_cost_usd": 0.001302,
-      "wall_clock": 4.4,
-      "signal_to_noise": 0
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 6015,
+      "estimated_cost_usd": 0.007851,
+      "wall_clock": 9.7,
+      "signal_to_noise": 0.25
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 794,
-      "estimated_cost_usd": 0.001178,
-      "wall_clock": 1.5,
+      "token_cost": 803,
+      "estimated_cost_usd": 0.001223,
+      "wall_clock": 2.1,
       "signal_to_noise": 1.0
     }
   },
@@ -583,22 +639,29 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 2152,
-      "estimated_cost_usd": 0.00278,
-      "wall_clock": 3.9,
+      "token_cost": 2163,
+      "estimated_cost_usd": 0.0028510000000000002,
+      "wall_clock": 3.7,
       "signal_to_noise": 0
     }
   },
   {
     "model": "claude-haiku-4-5",
     "benchmark": "wrong-operator-discount",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 5930,
+      "estimated_cost_usd": 0.007926,
+      "wall_clock": 11.6,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 808,
-      "estimated_cost_usd": 0.001188,
-      "wall_clock": 1.7,
+      "turns_to_fix": 2,
+      "token_cost": 1970,
+      "estimated_cost_usd": 0.002582,
+      "wall_clock": 4.3,
       "signal_to_noise": 0
     }
   },
@@ -607,18 +670,18 @@
     "benchmark": "api-version-field-drop",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 12778,
-      "estimated_cost_usd": 0.08776999999999999,
-      "wall_clock": 32.1,
-      "signal_to_noise": 0.167
+      "turns_to_fix": 4,
+      "token_cost": 8302,
+      "estimated_cost_usd": 0.05369,
+      "wall_clock": 15.5,
+      "signal_to_noise": 0.25
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1171,
-      "estimated_cost_usd": 0.011615,
-      "wall_clock": 4.5,
+      "token_cost": 1169,
+      "estimated_cost_usd": 0.011565,
+      "wall_clock": 5.6,
       "signal_to_noise": 1.0
     }
   },
@@ -627,18 +690,18 @@
     "benchmark": "auth-bypass-path-traversal",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 11372,
-      "estimated_cost_usd": 0.07636,
-      "wall_clock": 26.2,
-      "signal_to_noise": 0.2
+      "turns_to_fix": 6,
+      "token_cost": 13268,
+      "estimated_cost_usd": 0.08932000000000001,
+      "wall_clock": 36.0,
+      "signal_to_noise": 0.167
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1025,
-      "estimated_cost_usd": 0.010085,
-      "wall_clock": 4.2,
+      "token_cost": 1023,
+      "estimated_cost_usd": 0.010035,
+      "wall_clock": 5.0,
       "signal_to_noise": 1.0
     }
   },
@@ -648,17 +711,17 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 5,
-      "token_cost": 10502,
-      "estimated_cost_usd": 0.07249,
-      "wall_clock": 17.9,
+      "token_cost": 10513,
+      "estimated_cost_usd": 0.071705,
+      "wall_clock": 20.0,
       "signal_to_noise": 0.2
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 969,
-      "estimated_cost_usd": 0.009765,
-      "wall_clock": 4.0,
+      "token_cost": 976,
+      "estimated_cost_usd": 0.00994,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
@@ -671,7 +734,7 @@
       "turns_to_fix": 1,
       "token_cost": 1376,
       "estimated_cost_usd": 0.01184,
-      "wall_clock": 3.9,
+      "wall_clock": 4.7,
       "signal_to_noise": 1.0
     }
   },
@@ -684,7 +747,7 @@
       "turns_to_fix": 1,
       "token_cost": 1457,
       "estimated_cost_usd": 0.012325,
-      "wall_clock": 4.3,
+      "wall_clock": 4.8,
       "signal_to_noise": 1.0
     }
   },
@@ -693,18 +756,18 @@
     "benchmark": "deadlock-transfer",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 7,
-      "token_cost": 18833,
-      "estimated_cost_usd": 0.118585,
-      "wall_clock": 27.0,
-      "signal_to_noise": 0.143
+      "turns_to_fix": 6,
+      "token_cost": 11232,
+      "estimated_cost_usd": 0.07666,
+      "wall_clock": 21.3,
+      "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1035,
       "estimated_cost_usd": 0.011095,
-      "wall_clock": 5.4,
+      "wall_clock": 4.8,
       "signal_to_noise": 1.0
     }
   },
@@ -713,18 +776,18 @@
     "benchmark": "encoding-mojibake",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 4251,
-      "estimated_cost_usd": 0.032115,
-      "wall_clock": 11.6,
-      "signal_to_noise": 0.333
+      "turns_to_fix": 8,
+      "token_cost": 29198,
+      "estimated_cost_usd": 0.17367000000000002,
+      "wall_clock": 30.7,
+      "signal_to_noise": 0.125
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1206,
       "estimated_cost_usd": 0.01089,
-      "wall_clock": 3.9,
+      "wall_clock": 4.2,
       "signal_to_noise": 1.0
     }
   },
@@ -733,18 +796,18 @@
     "benchmark": "goroutine-leak-handler",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 7686,
-      "estimated_cost_usd": 0.05327,
-      "wall_clock": 21.3,
-      "signal_to_noise": 0
+      "turns_to_fix": 3,
+      "token_cost": 4045,
+      "estimated_cost_usd": 0.030185,
+      "wall_clock": 10.4,
+      "signal_to_noise": 0.333
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1010,
       "estimated_cost_usd": 0.01011,
-      "wall_clock": 4.2,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
@@ -754,9 +817,9 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 6,
-      "token_cost": 11002,
-      "estimated_cost_usd": 0.07243,
-      "wall_clock": 20.4,
+      "token_cost": 11004,
+      "estimated_cost_usd": 0.07246,
+      "wall_clock": 22.0,
       "signal_to_noise": 0
     },
     "silent": {
@@ -764,7 +827,7 @@
       "turns_to_fix": 1,
       "token_cost": 682,
       "estimated_cost_usd": 0.00491,
-      "wall_clock": 2.2,
+      "wall_clock": 2.8,
       "signal_to_noise": 0
     }
   },
@@ -774,9 +837,9 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 6,
-      "token_cost": 11283,
-      "estimated_cost_usd": 0.075755,
-      "wall_clock": 21.8,
+      "token_cost": 11095,
+      "estimated_cost_usd": 0.07381499999999999,
+      "wall_clock": 20.3,
       "signal_to_noise": 0
     },
     "silent": {
@@ -784,7 +847,7 @@
       "turns_to_fix": 1,
       "token_cost": 682,
       "estimated_cost_usd": 0.00491,
-      "wall_clock": 3.1,
+      "wall_clock": 2.7,
       "signal_to_noise": 0
     }
   },
@@ -797,14 +860,21 @@
       "turns_to_fix": 1,
       "token_cost": 1100,
       "estimated_cost_usd": 0.0112,
-      "wall_clock": 4.6,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-opus-4-6",
     "benchmark": "k8s-assume-cache-silent-drop",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 8,
+      "token_cost": 34692,
+      "estimated_cost_usd": 0.20358,
+      "wall_clock": 33.6,
+      "signal_to_noise": 0.125
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
@@ -823,7 +893,7 @@
       "turns_to_fix": 1,
       "token_cost": 747,
       "estimated_cost_usd": 0.005975,
-      "wall_clock": 2.9,
+      "wall_clock": 2.8,
       "signal_to_noise": 1.0
     }
   },
@@ -832,18 +902,18 @@
     "benchmark": "kernel-panic-ioctl",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 15974,
-      "estimated_cost_usd": 0.10472999999999999,
-      "wall_clock": 23.6,
-      "signal_to_noise": 0.167
+      "turns_to_fix": 7,
+      "token_cost": 15349,
+      "estimated_cost_usd": 0.101325,
+      "wall_clock": 27.8,
+      "signal_to_noise": 0.143
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1436,
-      "estimated_cost_usd": 0.01134,
-      "wall_clock": 4.5,
+      "token_cost": 1437,
+      "estimated_cost_usd": 0.011365,
+      "wall_clock": 3.9,
       "signal_to_noise": 1.0
     }
   },
@@ -852,18 +922,18 @@
     "benchmark": "memory-leak-event-listener",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 13,
-      "token_cost": 51222,
-      "estimated_cost_usd": 0.29355000000000003,
-      "wall_clock": 59.5,
-      "signal_to_noise": 0
+      "turns_to_fix": 5,
+      "token_cost": 11626,
+      "estimated_cost_usd": 0.07245,
+      "wall_clock": 18.4,
+      "signal_to_noise": 0.4
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1014,
-      "estimated_cost_usd": 0.01099,
-      "wall_clock": 4.6,
+      "token_cost": 1013,
+      "estimated_cost_usd": 0.010965,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
@@ -873,9 +943,9 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 7,
-      "token_cost": 15667,
-      "estimated_cost_usd": 0.104035,
-      "wall_clock": 27.7,
+      "token_cost": 35090,
+      "estimated_cost_usd": 0.20254999999999998,
+      "wall_clock": 27.1,
       "signal_to_noise": 0.143
     },
     "silent": {
@@ -883,20 +953,27 @@
       "turns_to_fix": 1,
       "token_cost": 1411,
       "estimated_cost_usd": 0.012695,
-      "wall_clock": 4.6,
+      "wall_clock": 3.9,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-opus-4-6",
     "benchmark": "nginx-upstream-port-mismatch",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 2,
+      "token_cost": 1928,
+      "estimated_cost_usd": 0.0161,
+      "wall_clock": 8.0,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 973,
       "estimated_cost_usd": 0.007985,
-      "wall_clock": 3.3,
+      "wall_clock": 3.2,
       "signal_to_noise": 0
     }
   },
@@ -905,18 +982,18 @@
     "benchmark": "null-pointer-config",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 7,
-      "token_cost": 29263,
-      "estimated_cost_usd": 0.172215,
-      "wall_clock": 39.2,
-      "signal_to_noise": 0.286
+      "turns_to_fix": 6,
+      "token_cost": 12141,
+      "estimated_cost_usd": 0.081405,
+      "wall_clock": 26.7,
+      "signal_to_noise": 0.167
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1346,
-      "estimated_cost_usd": 0.01079,
-      "wall_clock": 3.9,
+      "token_cost": 1359,
+      "estimated_cost_usd": 0.010855,
+      "wall_clock": 4.0,
       "signal_to_noise": 1.0
     }
   },
@@ -925,18 +1002,18 @@
     "benchmark": "off-by-one-array-slice",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 10913,
-      "estimated_cost_usd": 0.078865,
-      "wall_clock": 22.3,
-      "signal_to_noise": 0.2
+      "turns_to_fix": 2,
+      "token_cost": 1983,
+      "estimated_cost_usd": 0.016875,
+      "wall_clock": 6.7,
+      "signal_to_noise": 0.5
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1034,
       "estimated_cost_usd": 0.01075,
-      "wall_clock": 4.6,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
@@ -947,9 +1024,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 6699,
-      "estimated_cost_usd": 0.04413500000000001,
-      "wall_clock": 13.8,
+      "token_cost": 6779,
+      "estimated_cost_usd": 0.045375,
+      "wall_clock": 14.5,
       "signal_to_noise": 0.667
     }
   },
@@ -967,22 +1044,29 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 7,
-      "token_cost": 36422,
-      "estimated_cost_usd": 0.20203000000000002,
-      "wall_clock": 31.0,
+      "token_cost": 36032,
+      "estimated_cost_usd": 0.20010000000000003,
+      "wall_clock": 29.8,
       "signal_to_noise": 0.714
     }
   },
   {
     "model": "claude-opus-4-6",
     "benchmark": "postgres-migration-schema-drift",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 5,
+      "token_cost": 8768,
+      "estimated_cost_usd": 0.06348,
+      "wall_clock": 20.2,
+      "signal_to_noise": 0.2
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1334,
       "estimated_cost_usd": 0.00989,
-      "wall_clock": 3.1,
+      "wall_clock": 4.0,
       "signal_to_noise": 1.0
     }
   },
@@ -991,10 +1075,10 @@
     "benchmark": "race-condition-counter",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 17076,
-      "estimated_cost_usd": 0.10600000000000001,
-      "wall_clock": 20.8,
+      "turns_to_fix": 5,
+      "token_cost": 12517,
+      "estimated_cost_usd": 0.07900499999999999,
+      "wall_clock": 18.3,
       "signal_to_noise": 0
     },
     "silent": {
@@ -1002,7 +1086,7 @@
       "turns_to_fix": 1,
       "token_cost": 1636,
       "estimated_cost_usd": 0.0122,
-      "wall_clock": 3.9,
+      "wall_clock": 3.8,
       "signal_to_noise": 1.0
     }
   },
@@ -1012,17 +1096,17 @@
     "bare": {
       "resolved": true,
       "turns_to_fix": 8,
-      "token_cost": 24971,
-      "estimated_cost_usd": 0.149515,
+      "token_cost": 34675,
+      "estimated_cost_usd": 0.201175,
       "wall_clock": 29.7,
       "signal_to_noise": 0.125
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1590,
-      "estimated_cost_usd": 0.01289,
-      "wall_clock": 3.9,
+      "token_cost": 1591,
+      "estimated_cost_usd": 0.012915,
+      "wall_clock": 3.7,
       "signal_to_noise": 1.0
     }
   },
@@ -1031,18 +1115,18 @@
     "benchmark": "retry-storm-duplicate-transfer",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 3953,
-      "estimated_cost_usd": 0.027985,
-      "wall_clock": 9.7,
-      "signal_to_noise": 0.333
+      "turns_to_fix": 7,
+      "token_cost": 15834,
+      "estimated_cost_usd": 0.09861,
+      "wall_clock": 25.2,
+      "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 945,
-      "estimated_cost_usd": 0.009705,
-      "wall_clock": 3.9,
+      "token_cost": 948,
+      "estimated_cost_usd": 0.00978,
+      "wall_clock": 4.2,
       "signal_to_noise": 1.0
     }
   },
@@ -1051,31 +1135,38 @@
     "benchmark": "silent-data-corruption",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 4455,
-      "estimated_cost_usd": 0.031955000000000004,
-      "wall_clock": 11.2,
-      "signal_to_noise": 0.333
+      "turns_to_fix": 4,
+      "token_cost": 9959,
+      "estimated_cost_usd": 0.066135,
+      "wall_clock": 16.5,
+      "signal_to_noise": 0.25
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1008,
-      "estimated_cost_usd": 0.00824,
-      "wall_clock": 3.6,
+      "token_cost": 1010,
+      "estimated_cost_usd": 0.00829,
+      "wall_clock": 3.2,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-opus-4-6",
     "benchmark": "split-brain-leader-election",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 8,
+      "token_cost": 19303,
+      "estimated_cost_usd": 0.120755,
+      "wall_clock": 28.2,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1404,
       "estimated_cost_usd": 0.013,
-      "wall_clock": 4.3,
+      "wall_clock": 4.9,
       "signal_to_noise": 1.0
     }
   },
@@ -1084,11 +1175,11 @@
     "benchmark": "sql-injection-search",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 7,
-      "token_cost": 16384,
-      "estimated_cost_usd": 0.10782,
-      "wall_clock": 26.0,
-      "signal_to_noise": 0.143
+      "turns_to_fix": 6,
+      "token_cost": 13750,
+      "estimated_cost_usd": 0.08945,
+      "wall_clock": 24.0,
+      "signal_to_noise": 0
     },
     "silent": null
   },
@@ -1097,31 +1188,38 @@
     "benchmark": "ssrf-allowlist-port-confusion",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 13729,
-      "estimated_cost_usd": 0.089285,
-      "wall_clock": 22.0,
-      "signal_to_noise": 0.167
+      "turns_to_fix": 7,
+      "token_cost": 14039,
+      "estimated_cost_usd": 0.088835,
+      "wall_clock": 23.4,
+      "signal_to_noise": 0.143
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1314,
-      "estimated_cost_usd": 0.01069,
-      "wall_clock": 3.7,
+      "token_cost": 1312,
+      "estimated_cost_usd": 0.01064,
+      "wall_clock": 3.8,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-opus-4-6",
     "benchmark": "timezone-scheduling",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 8,
+      "token_cost": 32884,
+      "estimated_cost_usd": 0.18534,
+      "wall_clock": 24.9,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1221,
       "estimated_cost_usd": 0.011065,
-      "wall_clock": 3.6,
+      "wall_clock": 4.1,
       "signal_to_noise": 1.0
     }
   },
@@ -1141,7 +1239,7 @@
       "turns_to_fix": 1,
       "token_cost": 1419,
       "estimated_cost_usd": 0.013935,
-      "wall_clock": 4.9,
+      "wall_clock": 4.4,
       "signal_to_noise": 1.0
     }
   },
@@ -1150,18 +1248,18 @@
     "benchmark": "type-coercion-comparison",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 11973,
-      "estimated_cost_usd": 0.07894499999999999,
-      "wall_clock": 22.1,
-      "signal_to_noise": 0.167
+      "turns_to_fix": 2,
+      "token_cost": 2131,
+      "estimated_cost_usd": 0.019255,
+      "wall_clock": 8.2,
+      "signal_to_noise": 0.5
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 929,
       "estimated_cost_usd": 0.009245,
-      "wall_clock": 3.8,
+      "wall_clock": 5.4,
       "signal_to_noise": 1.0
     }
   },
@@ -1170,18 +1268,18 @@
     "benchmark": "wal-fsync-ghost-ack",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 2134,
-      "estimated_cost_usd": 0.01831,
-      "wall_clock": 9.1,
-      "signal_to_noise": 0.5
+      "turns_to_fix": 12,
+      "token_cost": 60459,
+      "estimated_cost_usd": 0.33467500000000006,
+      "wall_clock": 43.2,
+      "signal_to_noise": 0.25
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 1072,
       "estimated_cost_usd": 0.01098,
-      "wall_clock": 4.4,
+      "wall_clock": 5.3,
       "signal_to_noise": 1.0
     }
   },
@@ -1190,18 +1288,18 @@
     "benchmark": "wrong-operator-discount",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 18215,
-      "estimated_cost_usd": 0.116135,
-      "wall_clock": 36.0,
-      "signal_to_noise": 0
+      "turns_to_fix": 4,
+      "token_cost": 7327,
+      "estimated_cost_usd": 0.053955,
+      "wall_clock": 19.4,
+      "signal_to_noise": 0.25
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 993,
       "estimated_cost_usd": 0.010545,
-      "wall_clock": 3.7,
+      "wall_clock": 4.5,
       "signal_to_noise": 1.0
     }
   },
@@ -1867,14 +1965,21 @@
   {
     "model": "claude-sonnet-4-6",
     "benchmark": "api-version-field-drop",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 10,
+      "token_cost": 22737,
+      "estimated_cost_usd": 0.080343,
+      "wall_clock": 29.0,
+      "signal_to_noise": 0.1
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 12776,
-      "estimated_cost_usd": 0.0546,
-      "wall_clock": 18.2,
-      "signal_to_noise": 0.75
+      "turns_to_fix": 5,
+      "token_cost": 21676,
+      "estimated_cost_usd": 0.092868,
+      "wall_clock": 33.3,
+      "signal_to_noise": 0.6
     }
   },
   {
@@ -1882,12 +1987,12 @@
     "benchmark": "auth-bypass-path-traversal",
     "bare": null,
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 5276,
-      "estimated_cost_usd": 0.027120000000000002,
-      "wall_clock": 18.5,
-      "signal_to_noise": 0.5
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 976,
+      "estimated_cost_usd": 0.005316,
+      "wall_clock": 2.6,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -1899,7 +2004,7 @@
       "turns_to_fix": 1,
       "token_cost": 968,
       "estimated_cost_usd": 0.005844,
-      "wall_clock": 3.5,
+      "wall_clock": 4.2,
       "signal_to_noise": 1.0
     }
   },
@@ -1910,9 +2015,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1375,
-      "estimated_cost_usd": 0.007089,
-      "wall_clock": 3.1,
+      "token_cost": 1311,
+      "estimated_cost_usd": 0.006129,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
@@ -1925,7 +2030,7 @@
       "turns_to_fix": 1,
       "token_cost": 1447,
       "estimated_cost_usd": 0.007245,
-      "wall_clock": 3.4,
+      "wall_clock": 3.8,
       "signal_to_noise": 1.0
     }
   },
@@ -1936,9 +2041,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 8620,
-      "estimated_cost_usd": 0.0363,
-      "wall_clock": 13.6,
+      "token_cost": 8664,
+      "estimated_cost_usd": 0.036671999999999996,
+      "wall_clock": 14.3,
       "signal_to_noise": 0.667
     }
   },
@@ -1951,7 +2056,7 @@
       "turns_to_fix": 1,
       "token_cost": 1206,
       "estimated_cost_usd": 0.006534,
-      "wall_clock": 3.3,
+      "wall_clock": 3.0,
       "signal_to_noise": 1.0
     }
   },
@@ -1962,9 +2067,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 999,
-      "estimated_cost_usd": 0.005901,
-      "wall_clock": 3.2,
+      "token_cost": 998,
+      "estimated_cost_usd": 0.005886,
+      "wall_clock": 2.8,
       "signal_to_noise": 1.0
     }
   },
@@ -1973,10 +2078,10 @@
     "benchmark": "haystack-boot",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 12619,
-      "estimated_cost_usd": 0.047120999999999996,
-      "wall_clock": 19.9,
+      "turns_to_fix": 5,
+      "token_cost": 7045,
+      "estimated_cost_usd": 0.029211,
+      "wall_clock": 11.5,
       "signal_to_noise": 0
     },
     "silent": {
@@ -1984,20 +2089,27 @@
       "turns_to_fix": 1,
       "token_cost": 723,
       "estimated_cost_usd": 0.003561,
-      "wall_clock": 2.0,
+      "wall_clock": 1.9,
       "signal_to_noise": 0
     }
   },
   {
     "model": "claude-sonnet-4-6",
     "benchmark": "haystack-mint",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 8,
+      "token_cost": 12833,
+      "estimated_cost_usd": 0.047619,
+      "wall_clock": 20.5,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 726,
-      "estimated_cost_usd": 0.003606,
-      "wall_clock": 2.1,
+      "token_cost": 723,
+      "estimated_cost_usd": 0.003561,
+      "wall_clock": 2.4,
       "signal_to_noise": 0
     }
   },
@@ -2007,18 +2119,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 4046,
-      "estimated_cost_usd": 0.017994,
-      "wall_clock": 11.3,
+      "token_cost": 4019,
+      "estimated_cost_usd": 0.017901,
+      "wall_clock": 11.4,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 14800,
-      "estimated_cost_usd": 0.059544,
+      "turns_to_fix": 5,
+      "token_cost": 18957,
+      "estimated_cost_usd": 0.071103,
       "wall_clock": 23.4,
-      "signal_to_noise": 0.75
+      "signal_to_noise": 0.6
     }
   },
   {
@@ -2035,22 +2147,29 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 781,
-      "estimated_cost_usd": 0.003711,
-      "wall_clock": 2.0,
+      "token_cost": 780,
+      "estimated_cost_usd": 0.003696,
+      "wall_clock": 1.9,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-sonnet-4-6",
     "benchmark": "k8s-scheduler-shutdown-deadlock",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 9180,
+      "estimated_cost_usd": 0.033492,
+      "wall_clock": 19.1,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 748,
       "estimated_cost_usd": 0.0036,
-      "wall_clock": 2.3,
+      "wall_clock": 1.9,
       "signal_to_noise": 1.0
     }
   },
@@ -2061,9 +2180,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1385,
-      "estimated_cost_usd": 0.006039,
-      "wall_clock": 2.8,
+      "token_cost": 1389,
+      "estimated_cost_usd": 0.006099,
+      "wall_clock": 2.7,
       "signal_to_noise": 1.0
     }
   },
@@ -2073,11 +2192,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 1006,
-      "estimated_cost_usd": 0.006474,
-      "wall_clock": 5.8,
-      "signal_to_noise": 1.0
+      "turns_to_fix": 3,
+      "token_cost": 9081,
+      "estimated_cost_usd": 0.037599,
+      "wall_clock": 17.4,
+      "signal_to_noise": 0.667
     }
   },
   {
@@ -2100,9 +2219,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 969,
-      "estimated_cost_usd": 0.004731,
-      "wall_clock": 3.4,
+      "token_cost": 968,
+      "estimated_cost_usd": 0.004716,
+      "wall_clock": 2.7,
       "signal_to_noise": 0
     }
   },
@@ -2113,10 +2232,10 @@
     "silent": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 4384,
-      "estimated_cost_usd": 0.02064,
-      "wall_clock": 15.8,
-      "signal_to_noise": 0.5
+      "token_cost": 7371,
+      "estimated_cost_usd": 0.032205,
+      "wall_clock": 19.4,
+      "signal_to_noise": 0.333
     }
   },
   {
@@ -2126,9 +2245,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1035,
-      "estimated_cost_usd": 0.006465,
-      "wall_clock": 3.2,
+      "token_cost": 1033,
+      "estimated_cost_usd": 0.006435,
+      "wall_clock": 4.0,
       "signal_to_noise": 1.0
     }
   },
@@ -2139,9 +2258,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 5557,
-      "estimated_cost_usd": 0.022011,
-      "wall_clock": 12.6,
+      "token_cost": 5515,
+      "estimated_cost_usd": 0.021633,
+      "wall_clock": 11.1,
       "signal_to_noise": 0.667
     }
   },
@@ -2151,30 +2270,30 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 8,
-      "token_cost": 49422,
-      "estimated_cost_usd": 0.177366,
-      "wall_clock": 52.6,
-      "signal_to_noise": 0.625
+      "turns_to_fix": 6,
+      "token_cost": 27876,
+      "estimated_cost_usd": 0.098556,
+      "wall_clock": 29.4,
+      "signal_to_noise": 0.667
     }
   },
   {
     "model": "claude-sonnet-4-6",
     "benchmark": "postgres-migration-schema-drift",
     "bare": {
-      "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 5857,
-      "estimated_cost_usd": 0.023067000000000004,
-      "wall_clock": 11.3,
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 4354,
+      "estimated_cost_usd": 0.021966,
+      "wall_clock": 12.8,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1346,
-      "estimated_cost_usd": 0.006114,
-      "wall_clock": 3.6,
+      "token_cost": 1324,
+      "estimated_cost_usd": 0.005784,
+      "wall_clock": 2.0,
       "signal_to_noise": 1.0
     }
   },
@@ -2184,11 +2303,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 8394,
-      "estimated_cost_usd": 0.036210000000000006,
-      "wall_clock": 21.7,
-      "signal_to_noise": 0.667
+      "turns_to_fix": 1,
+      "token_cost": 1592,
+      "estimated_cost_usd": 0.00666,
+      "wall_clock": 3.0,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -2200,7 +2319,7 @@
       "turns_to_fix": 1,
       "token_cost": 1591,
       "estimated_cost_usd": 0.007749,
-      "wall_clock": 4.4,
+      "wall_clock": 4.3,
       "signal_to_noise": 1.0
     }
   },
@@ -2211,22 +2330,29 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 964,
-      "estimated_cost_usd": 0.005868,
-      "wall_clock": 3.2,
+      "token_cost": 936,
+      "estimated_cost_usd": 0.005688,
+      "wall_clock": 2.7,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "claude-sonnet-4-6",
     "benchmark": "silent-data-corruption",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 4024,
+      "estimated_cost_usd": 0.01908,
+      "wall_clock": 12.9,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 1006,
-      "estimated_cost_usd": 0.004914,
-      "wall_clock": 2.6,
+      "token_cost": 1005,
+      "estimated_cost_usd": 0.004899,
+      "wall_clock": 2.8,
       "signal_to_noise": 1.0
     }
   },
@@ -2236,11 +2362,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 30795,
-      "estimated_cost_usd": 0.107925,
-      "wall_clock": 28.2,
-      "signal_to_noise": 0.5
+      "turns_to_fix": 9,
+      "token_cost": 56173,
+      "estimated_cost_usd": 0.19128300000000004,
+      "wall_clock": 44.3,
+      "signal_to_noise": 0.556
     }
   },
   {
@@ -2249,11 +2375,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 9210,
-      "estimated_cost_usd": 0.042929999999999996,
-      "wall_clock": 25.6,
-      "signal_to_noise": 0.667
+      "turns_to_fix": 1,
+      "token_cost": 1312,
+      "estimated_cost_usd": 0.006384,
+      "wall_clock": 4.1,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -2263,8 +2389,8 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 4232,
-      "estimated_cost_usd": 0.01608,
+      "token_cost": 4230,
+      "estimated_cost_usd": 0.016050000000000002,
       "wall_clock": 5.0,
       "signal_to_noise": 0.5
     }
@@ -2276,9 +2402,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 8807,
-      "estimated_cost_usd": 0.032553,
-      "wall_clock": 9.3,
+      "token_cost": 7336,
+      "estimated_cost_usd": 0.028596000000000003,
+      "wall_clock": 14.4,
       "signal_to_noise": 0.667
     }
   },
@@ -2289,9 +2415,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 6603,
-      "estimated_cost_usd": 0.026073,
-      "wall_clock": 12.3,
+      "token_cost": 6711,
+      "estimated_cost_usd": 0.027033,
+      "wall_clock": 12.6,
       "signal_to_noise": 0.667
     }
   },
@@ -2304,7 +2430,7 @@
       "turns_to_fix": 1,
       "token_cost": 1068,
       "estimated_cost_usd": 0.006528,
-      "wall_clock": 3.6,
+      "wall_clock": 3.4,
       "signal_to_noise": 1.0
     }
   },
@@ -2315,9 +2441,9 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 992,
-      "estimated_cost_usd": 0.006312,
-      "wall_clock": 4.3,
+      "token_cost": 986,
+      "estimated_cost_usd": 0.006222,
+      "wall_clock": 3.3,
       "signal_to_noise": 1.0
     }
   },
@@ -3663,14 +3789,21 @@
   {
     "model": "deepseek-r1",
     "benchmark": "api-version-field-drop",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 2255,
-      "estimated_cost_usd": 0.0032309,
-      "wall_clock": 24.0,
-      "signal_to_noise": 0.5
+      "token_cost": 3215,
+      "estimated_cost_usd": 0.0037301,
+      "wall_clock": 33.8,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 651,
+      "estimated_cost_usd": 0.0006105,
+      "wall_clock": 5.2,
+      "signal_to_noise": 0
     }
   },
   {
@@ -3679,17 +3812,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 8294,
-      "estimated_cost_usd": 0.0096416,
-      "wall_clock": 63.9,
+      "token_cost": 3189,
+      "estimated_cost_usd": 0.0038397,
+      "wall_clock": 37.7,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 2465,
-      "estimated_cost_usd": 0.0035399000000000003,
-      "wall_clock": 26.3,
+      "token_cost": 2369,
+      "estimated_cost_usd": 0.0032998999999999997,
+      "wall_clock": 35.0,
       "signal_to_noise": 0.5
     }
   },
@@ -3699,31 +3832,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 4415,
-      "estimated_cost_usd": 0.0047051,
-      "wall_clock": 32.1,
+      "token_cost": 2053,
+      "estimated_cost_usd": 0.0023497,
+      "wall_clock": 22.5,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 2663,
-      "estimated_cost_usd": 0.0038963,
-      "wall_clock": 27.1,
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 577,
+      "estimated_cost_usd": 0.0006613,
+      "wall_clock": 6.5,
       "signal_to_noise": 0
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "compiler-macro-expansion",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 6526,
+      "estimated_cost_usd": 0.0079342,
+      "wall_clock": 65.4,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 5215,
-      "estimated_cost_usd": 0.0059617,
-      "wall_clock": 28.3,
-      "signal_to_noise": 0
+      "token_cost": 29296,
+      "estimated_cost_usd": 0.038698,
+      "wall_clock": 295.5,
+      "signal_to_noise": 0.889
     }
   },
   {
@@ -3738,12 +3878,12 @@
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 5,
-      "token_cost": 19481,
-      "estimated_cost_usd": 0.0330767,
-      "wall_clock": 246.5,
-      "signal_to_noise": 0.4
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 10820,
+      "estimated_cost_usd": 0.011174,
+      "wall_clock": 78.7,
+      "signal_to_noise": 0.25
     }
   },
   {
@@ -3752,18 +3892,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 9305,
-      "estimated_cost_usd": 0.0113735,
-      "wall_clock": 84.4,
+      "token_cost": 6893,
+      "estimated_cost_usd": 0.0084575,
+      "wall_clock": 73.0,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 7121,
-      "estimated_cost_usd": 0.0084155,
-      "wall_clock": 60.8,
-      "signal_to_noise": 0.2
+      "resolved": true,
+      "turns_to_fix": 6,
+      "token_cost": 10211,
+      "estimated_cost_usd": 0.0114083,
+      "wall_clock": 81.7,
+      "signal_to_noise": 0.667
     }
   },
   {
@@ -3772,18 +3912,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 1740,
-      "estimated_cost_usd": 0.0028686,
-      "wall_clock": 23.7,
+      "token_cost": 11571,
+      "estimated_cost_usd": 0.0134925,
+      "wall_clock": 105.7,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 2582,
-      "estimated_cost_usd": 0.0037730000000000003,
-      "wall_clock": 26.5,
-      "signal_to_noise": 0.5
+      "token_cost": 3871,
+      "estimated_cost_usd": 0.0045781,
+      "wall_clock": 33.9,
+      "signal_to_noise": 0.667
     }
   },
   {
@@ -3792,17 +3932,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 2218,
-      "estimated_cost_usd": 0.0028558000000000004,
-      "wall_clock": 29.8,
+      "token_cost": 2064,
+      "estimated_cost_usd": 0.0022512,
+      "wall_clock": 29.6,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 3559,
-      "estimated_cost_usd": 0.0040033,
-      "wall_clock": 25.5,
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 4746,
+      "estimated_cost_usd": 0.008468400000000001,
+      "wall_clock": 91.7,
       "signal_to_noise": 0.667
     }
   },
@@ -3812,17 +3952,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 30,
-      "token_cost": 3829,
-      "estimated_cost_usd": 0.0050725,
-      "wall_clock": 38.1,
+      "token_cost": 22621,
+      "estimated_cost_usd": 0.0244009,
+      "wall_clock": 181.0,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 690,
-      "estimated_cost_usd": 0.0010194,
-      "wall_clock": 8.2,
+      "token_cost": 835,
+      "estimated_cost_usd": 0.0013819,
+      "wall_clock": 13.2,
       "signal_to_noise": 0
     }
   },
@@ -3832,17 +3972,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 30,
-      "token_cost": 3442,
-      "estimated_cost_usd": 0.0040942,
-      "wall_clock": 28.0,
+      "token_cost": 15911,
+      "estimated_cost_usd": 0.017527699999999997,
+      "wall_clock": 119.4,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 726,
-      "estimated_cost_usd": 0.0011094,
-      "wall_clock": 9.5,
+      "token_cost": 811,
+      "estimated_cost_usd": 0.0013219,
+      "wall_clock": 13.1,
       "signal_to_noise": 0
     }
   },
@@ -3852,18 +3992,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 6617,
-      "estimated_cost_usd": 0.0072455,
-      "wall_clock": 48.0,
+      "token_cost": 2428,
+      "estimated_cost_usd": 0.0042772,
+      "wall_clock": 46.7,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 21786,
-      "estimated_cost_usd": 0.0210264,
-      "wall_clock": 86.7,
-      "signal_to_noise": 0.556
+      "token_cost": 1103,
+      "estimated_cost_usd": 0.0017567,
+      "wall_clock": 16.0,
+      "signal_to_noise": 0
     }
   },
   {
@@ -3872,18 +4012,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 4874,
-      "estimated_cost_usd": 0.006496999999999999,
-      "wall_clock": 43.9,
+      "token_cost": 16389,
+      "estimated_cost_usd": 0.0146169,
+      "wall_clock": 65.9,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 11242,
-      "estimated_cost_usd": 0.0150442,
-      "wall_clock": 92.3,
-      "signal_to_noise": 0.8
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 1140,
+      "estimated_cost_usd": 0.0020544,
+      "wall_clock": 20.3,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -3892,31 +4032,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 6916,
-      "estimated_cost_usd": 0.008182,
-      "wall_clock": 58.7,
+      "token_cost": 1957,
+      "estimated_cost_usd": 0.0021583,
+      "wall_clock": 23.3,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 723,
-      "estimated_cost_usd": 0.0010605,
-      "wall_clock": 8.2,
-      "signal_to_noise": 1.0
+      "turns_to_fix": 3,
+      "token_cost": 2935,
+      "estimated_cost_usd": 0.0028969,
+      "wall_clock": 19.9,
+      "signal_to_noise": 0.333
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "kernel-panic-ioctl",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 11232,
-      "estimated_cost_usd": 0.0105624,
-      "wall_clock": 41.9,
-      "signal_to_noise": 0.5
+      "token_cost": 1948,
+      "estimated_cost_usd": 0.002008,
+      "wall_clock": 16.4,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 5,
+      "token_cost": 15678,
+      "estimated_cost_usd": 0.0134226,
+      "wall_clock": 52.9,
+      "signal_to_noise": 0.4
     }
   },
   {
@@ -3925,18 +4072,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 7010,
-      "estimated_cost_usd": 0.008859800000000001,
-      "wall_clock": 64.6,
+      "token_cost": 7222,
+      "estimated_cost_usd": 0.0097264,
+      "wall_clock": 100.4,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 5948,
-      "estimated_cost_usd": 0.0070454,
-      "wall_clock": 43.5,
-      "signal_to_noise": 0.5
+      "resolved": true,
+      "turns_to_fix": 9,
+      "token_cost": 24694,
+      "estimated_cost_usd": 0.025087,
+      "wall_clock": 142.9,
+      "signal_to_noise": 0.444
     }
   },
   {
@@ -3945,38 +4092,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 1546,
-      "estimated_cost_usd": 0.0024105999999999997,
-      "wall_clock": 22.6,
+      "token_cost": 4646,
+      "estimated_cost_usd": 0.0056624,
+      "wall_clock": 52.4,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 845,
-      "estimated_cost_usd": 0.0008363,
-      "wall_clock": 5.6,
-      "signal_to_noise": 0
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 2666,
+      "estimated_cost_usd": 0.003506,
+      "wall_clock": 32.1,
+      "signal_to_noise": 0.5
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "nginx-upstream-port-mismatch",
     "bare": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 930,
-      "estimated_cost_usd": 0.0016554,
-      "wall_clock": 15.8,
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 2453,
+      "estimated_cost_usd": 0.0022715,
+      "wall_clock": 19.3,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 40,
-      "token_cost": 9501,
-      "estimated_cost_usd": 0.009921300000000001,
-      "wall_clock": 52.8,
-      "signal_to_noise": 0.286
+      "turns_to_fix": 8,
+      "token_cost": 10252,
+      "estimated_cost_usd": 0.0113236,
+      "wall_clock": 82.5,
+      "signal_to_noise": 0.25
     }
   },
   {
@@ -3985,18 +4132,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 4029,
-      "estimated_cost_usd": 0.0050720999999999995,
-      "wall_clock": 38.5,
+      "token_cost": 13937,
+      "estimated_cost_usd": 0.0133955,
+      "wall_clock": 76.5,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 9891,
-      "estimated_cost_usd": 0.0120159,
-      "wall_clock": 69.3,
-      "signal_to_noise": 0.4
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 6262,
+      "estimated_cost_usd": 0.0055677999999999995,
+      "wall_clock": 30.8,
+      "signal_to_noise": 0.25
     }
   },
   {
@@ -4005,17 +4152,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 1495,
-      "estimated_cost_usd": 0.0022938999999999998,
-      "wall_clock": 18.8,
+      "token_cost": 4396,
+      "estimated_cost_usd": 0.004537,
+      "wall_clock": 35.0,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 558,
-      "estimated_cost_usd": 0.0005616,
-      "wall_clock": 4.3,
+      "turns_to_fix": 2,
+      "token_cost": 1357,
+      "estimated_cost_usd": 0.0012163,
+      "wall_clock": 9.4,
       "signal_to_noise": 0
     }
   },
@@ -4025,18 +4172,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 4887,
-      "estimated_cost_usd": 0.0060867000000000004,
-      "wall_clock": 45.5,
+      "token_cost": 3502,
+      "estimated_cost_usd": 0.0037798,
+      "wall_clock": 39.6,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 5659,
-      "estimated_cost_usd": 0.0084973,
-      "wall_clock": 64.0,
-      "signal_to_noise": 0.333
+      "turns_to_fix": 4,
+      "token_cost": 5197,
+      "estimated_cost_usd": 0.0058213,
+      "wall_clock": 51.6,
+      "signal_to_noise": 0.25
     }
   },
   {
@@ -4045,30 +4192,37 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 5860,
-      "estimated_cost_usd": 0.0056572,
-      "wall_clock": 32.9,
+      "token_cost": 1460,
+      "estimated_cost_usd": 0.0021956,
+      "wall_clock": 23.6,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 5592,
-      "estimated_cost_usd": 0.0053796,
-      "wall_clock": 24.7,
-      "signal_to_noise": 0.333
+      "token_cost": 16504,
+      "estimated_cost_usd": 0.0143014,
+      "wall_clock": 63.0,
+      "signal_to_noise": 0.667
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "postgres-migration-schema-drift",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 4605,
+      "estimated_cost_usd": 0.0059001,
+      "wall_clock": 56.0,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 2485,
-      "estimated_cost_usd": 0.0020437,
-      "wall_clock": 8.5,
+      "token_cost": 3057,
+      "estimated_cost_usd": 0.0034107,
+      "wall_clock": 25.7,
       "signal_to_noise": 0
     }
   },
@@ -4078,31 +4232,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 5636,
-      "estimated_cost_usd": 0.0061376,
-      "wall_clock": 43.2,
+      "token_cost": 4747,
+      "estimated_cost_usd": 0.0048853,
+      "wall_clock": 47.0,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 5545,
-      "estimated_cost_usd": 0.0045871,
-      "wall_clock": 19.0,
-      "signal_to_noise": 0.25
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 3245,
+      "estimated_cost_usd": 0.0039851,
+      "wall_clock": 41.1,
+      "signal_to_noise": 0.5
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "rate-limit-bypass-header",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 28601,
-      "estimated_cost_usd": 0.030586699999999998,
-      "wall_clock": 151.3,
-      "signal_to_noise": 0.727
+      "token_cost": 1235,
+      "estimated_cost_usd": 0.0017123,
+      "wall_clock": 28.4,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 2,
+      "token_cost": 3205,
+      "estimated_cost_usd": 0.0035557,
+      "wall_clock": 28.2,
+      "signal_to_noise": 0.5
     }
   },
   {
@@ -4110,25 +4271,52 @@
     "benchmark": "retry-storm-duplicate-transfer",
     "bare": null,
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 6658,
-      "estimated_cost_usd": 0.0094018,
-      "wall_clock": 68.8,
-      "signal_to_noise": 0.8
+      "resolved": true,
+      "turns_to_fix": 2,
+      "token_cost": 1284,
+      "estimated_cost_usd": 0.0014136,
+      "wall_clock": 13.9,
+      "signal_to_noise": 0
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "silent-data-corruption",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 4489,
+      "estimated_cost_usd": 0.0047191,
+      "wall_clock": 42.5,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 3847,
-      "estimated_cost_usd": 0.0036847,
-      "wall_clock": 22.8,
+      "token_cost": 3682,
+      "estimated_cost_usd": 0.0032830000000000003,
+      "wall_clock": 19.4,
       "signal_to_noise": 0.333
+    }
+  },
+  {
+    "model": "deepseek-r1",
+    "benchmark": "split-brain-leader-election",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 10321,
+      "estimated_cost_usd": 0.011110900000000002,
+      "wall_clock": 83.9,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 12794,
+      "estimated_cost_usd": 0.019215799999999998,
+      "wall_clock": 195.2,
+      "signal_to_noise": 0.4
     }
   },
   {
@@ -4137,9 +4325,9 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 9161,
-      "estimated_cost_usd": 0.0108785,
-      "wall_clock": 73.1,
+      "token_cost": 13332,
+      "estimated_cost_usd": 0.0133536,
+      "wall_clock": 87.5,
       "signal_to_noise": 0
     },
     "silent": null
@@ -4150,18 +4338,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 3338,
-      "estimated_cost_usd": 0.0042878,
-      "wall_clock": 35.9,
+      "token_cost": 7110,
+      "estimated_cost_usd": 0.0082746,
+      "wall_clock": 74.7,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 6477,
-      "estimated_cost_usd": 0.0051693,
-      "wall_clock": 18.7,
-      "signal_to_noise": 0.25
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 3765,
+      "estimated_cost_usd": 0.0056631,
+      "wall_clock": 44.6,
+      "signal_to_noise": 0.5
     }
   },
   {
@@ -4170,24 +4358,31 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 20,
-      "token_cost": 17325,
-      "estimated_cost_usd": 0.0211041,
-      "wall_clock": 125.8,
-      "signal_to_noise": 0.714
+      "turns_to_fix": 1,
+      "token_cost": 762,
+      "estimated_cost_usd": 0.0007026,
+      "wall_clock": 5.0,
+      "signal_to_noise": 0
     }
   },
   {
     "model": "deepseek-r1",
     "benchmark": "timing-attack-comparison",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 6919,
-      "estimated_cost_usd": 0.0066433,
-      "wall_clock": 31.7,
-      "signal_to_noise": 0.25
+      "token_cost": 8493,
+      "estimated_cost_usd": 0.0084417,
+      "wall_clock": 49.0,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 26,
+      "token_cost": 94927,
+      "estimated_cost_usd": 0.10088650000000002,
+      "wall_clock": 503.9,
+      "signal_to_noise": 0.423
     }
   },
   {
@@ -4196,17 +4391,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 1468,
-      "estimated_cost_usd": 0.0022282,
-      "wall_clock": 21.3,
+      "token_cost": 2421,
+      "estimated_cost_usd": 0.0028809,
+      "wall_clock": 25.7,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 484,
-      "estimated_cost_usd": 0.0004684,
-      "wall_clock": 4.0,
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 2058,
+      "estimated_cost_usd": 0.0031038,
+      "wall_clock": 27.7,
       "signal_to_noise": 0
     }
   },
@@ -4216,18 +4411,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 2508,
-      "estimated_cost_usd": 0.0029364,
-      "wall_clock": 24.6,
+      "token_cost": 5038,
+      "estimated_cost_usd": 0.0088834,
+      "wall_clock": 78.6,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 9098,
-      "estimated_cost_usd": 0.0144902,
-      "wall_clock": 115.2,
-      "signal_to_noise": 0.5
+      "token_cost": 7069,
+      "estimated_cost_usd": 0.008710299999999999,
+      "wall_clock": 58.1,
+      "signal_to_noise": 0.2
     }
   },
   {
@@ -4236,118 +4431,18 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 14960,
-      "estimated_cost_usd": 0.0133844,
-      "wall_clock": 67.2,
-      "signal_to_noise": 0
-    },
-    "silent": {
-      "resolved": true,
-      "turns_to_fix": 20,
-      "token_cost": 4242,
-      "estimated_cost_usd": 0.0066882,
-      "wall_clock": 56.1,
-      "signal_to_noise": 0.667
-    }
-  },
-  {
-    "model": "deepseek-r1-0528",
-    "benchmark": "api-version-field-drop",
-    "bare": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 795,
-      "estimated_cost_usd": 0.001018775,
-      "wall_clock": 18.4,
-      "signal_to_noise": 0
-    },
-    "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 4508,
-      "estimated_cost_usd": 0.008987975,
-      "wall_clock": 145.4,
-      "signal_to_noise": 0
-    }
-  },
-  {
-    "model": "deepseek-r1-0528",
-    "benchmark": "auth-bypass-path-traversal",
-    "bare": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 5688,
-      "estimated_cost_usd": 0.011287125,
-      "wall_clock": 155.3,
-      "signal_to_noise": 0
-    },
-    "silent": {
-      "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 5365,
-      "estimated_cost_usd": 0.00977255,
-      "wall_clock": 155.3,
-      "signal_to_noise": 0.5
-    }
-  },
-  {
-    "model": "deepseek-r1-0528",
-    "benchmark": "cache-stale-invalidation",
-    "bare": {
-      "resolved": false,
-      "turns_to_fix": 40,
       "token_cost": 1692,
-      "estimated_cost_usd": 0.002983225,
-      "wall_clock": 59.4,
+      "estimated_cost_usd": 0.0024678,
+      "wall_clock": 23.2,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": false,
-      "turns_to_fix": 40,
-      "token_cost": 1970,
-      "estimated_cost_usd": 0.002345725,
-      "wall_clock": 27.4,
-      "signal_to_noise": 0
-    }
-  },
-  {
-    "model": "deepseek-r1-0528",
-    "benchmark": "compiler-macro-expansion",
-    "bare": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 23318,
-      "estimated_cost_usd": 0.0291309,
-      "wall_clock": 501.6,
-      "signal_to_noise": 0
-    },
-    "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 10342,
-      "estimated_cost_usd": 0.0139988,
-      "wall_clock": 192.3,
+      "turns_to_fix": 20,
+      "token_cost": 3339,
+      "estimated_cost_usd": 0.0042939,
+      "wall_clock": 31.6,
       "signal_to_noise": 0.333
-    }
-  },
-  {
-    "model": "deepseek-r1-0528",
-    "benchmark": "data-corruption-concurrent-write",
-    "bare": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 720,
-      "estimated_cost_usd": 0.000908025,
-      "wall_clock": 17.6,
-      "signal_to_noise": 0
-    },
-    "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 3395,
-      "estimated_cost_usd": 0.0035507,
-      "wall_clock": 60.4,
-      "signal_to_noise": 0
     }
   },
   {
@@ -9542,27 +9637,41 @@
   {
     "model": "gpt-4o",
     "benchmark": "api-version-field-drop",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 102131,
-      "estimated_cost_usd": 0.1576975,
-      "wall_clock": 39.0,
-      "signal_to_noise": 0.075
+      "token_cost": 36515,
+      "estimated_cost_usd": 0.07547250000000003,
+      "wall_clock": 40.5,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 9,
+      "token_cost": 4587,
+      "estimated_cost_usd": 0.013094999999999999,
+      "wall_clock": 8.3,
+      "signal_to_noise": 0.333
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "auth-bypass-path-traversal",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 117789,
-      "estimated_cost_usd": 0.18160750000000003,
-      "wall_clock": 42.4,
-      "signal_to_noise": 0.85
+      "token_cost": 174089,
+      "estimated_cost_usd": 0.26042,
+      "wall_clock": 40.2,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 342,
+      "estimated_cost_usd": 0.00171,
+      "wall_clock": 2.2,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -9572,10 +9681,10 @@
     "silent": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 132560,
-      "estimated_cost_usd": 0.19724000000000003,
-      "wall_clock": 45.5,
-      "signal_to_noise": 0.05
+      "token_cost": 117104,
+      "estimated_cost_usd": 0.174465,
+      "wall_clock": 41.4,
+      "signal_to_noise": 0
     }
   },
   {
@@ -9584,11 +9693,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 16,
-      "token_cost": 28463,
-      "estimated_cost_usd": 0.058917500000000005,
-      "wall_clock": 14.5,
-      "signal_to_noise": 0
+      "turns_to_fix": 5,
+      "token_cost": 10320,
+      "estimated_cost_usd": 0.0215525,
+      "wall_clock": 4.4,
+      "signal_to_noise": 0.2
     }
   },
   {
@@ -9607,7 +9716,7 @@
       "turns_to_fix": 5,
       "token_cost": 8729,
       "estimated_cost_usd": 0.0159825,
-      "wall_clock": 3.8,
+      "wall_clock": 4.2,
       "signal_to_noise": 0.2
     }
   },
@@ -9617,11 +9726,24 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 346,
-      "estimated_cost_usd": 0.0020575,
-      "wall_clock": 2.0,
-      "signal_to_noise": 1.0
+      "turns_to_fix": 25,
+      "token_cost": 29185,
+      "estimated_cost_usd": 0.059222500000000004,
+      "wall_clock": 23.0,
+      "signal_to_noise": 0.2
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "encoding-mojibake",
+    "bare": null,
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 29332,
+      "estimated_cost_usd": 0.05616500000000001,
+      "wall_clock": 18.7,
+      "signal_to_noise": 0.05
     }
   },
   {
@@ -9630,23 +9752,30 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 7,
-      "token_cost": 8331,
-      "estimated_cost_usd": 0.018520000000000002,
-      "wall_clock": 6.1,
-      "signal_to_noise": 0.143
+      "turns_to_fix": 38,
+      "token_cost": 98119,
+      "estimated_cost_usd": 0.14595499999999997,
+      "wall_clock": 42.2,
+      "signal_to_noise": 0.632
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "haystack-boot",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 30,
+      "token_cost": 33602,
+      "estimated_cost_usd": 0.0696425,
+      "wall_clock": 31.0,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 102,
       "estimated_cost_usd": 0.00039,
-      "wall_clock": 0.7,
+      "wall_clock": 0.8,
       "signal_to_noise": 0
     }
   },
@@ -9666,14 +9795,21 @@
   {
     "model": "gpt-4o",
     "benchmark": "import-cycle-startup",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 43702,
+      "estimated_cost_usd": 0.07454,
+      "wall_clock": 18.0,
+      "signal_to_noise": 0.1
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 15962,
-      "estimated_cost_usd": 0.0271225,
-      "wall_clock": 7.4,
-      "signal_to_noise": 0.556
+      "turns_to_fix": 11,
+      "token_cost": 7019,
+      "estimated_cost_usd": 0.0184275,
+      "wall_clock": 9.2,
+      "signal_to_noise": 0.727
     }
   },
   {
@@ -9683,36 +9819,50 @@
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 183,
-      "estimated_cost_usd": 0.0008475,
-      "wall_clock": 1.1,
-      "signal_to_noise": 1.0
+      "token_cost": 149,
+      "estimated_cost_usd": 0.0005075,
+      "wall_clock": 0.6,
+      "signal_to_noise": 0
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "k8s-scheduler-shutdown-deadlock",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 13,
+      "token_cost": 7681,
+      "estimated_cost_usd": 0.021647499999999997,
+      "wall_clock": 12.2,
+      "signal_to_noise": 0.077
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
       "token_cost": 158,
       "estimated_cost_usd": 0.000785,
-      "wall_clock": 0.9,
+      "wall_clock": 1.5,
       "signal_to_noise": 1.0
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "kernel-panic-ioctl",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 266316,
+      "estimated_cost_usd": 0.39614250000000006,
+      "wall_clock": 62.2,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 409891,
-      "estimated_cost_usd": 0.5787100000000002,
-      "wall_clock": 59.7,
-      "signal_to_noise": 0.517
+      "token_cost": 409134,
+      "estimated_cost_usd": 0.574935,
+      "wall_clock": 60.0,
+      "signal_to_noise": 0.764
     }
   },
   {
@@ -9728,11 +9878,11 @@
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 16,
-      "token_cost": 29413,
-      "estimated_cost_usd": 0.0503325,
-      "wall_clock": 14.6,
-      "signal_to_noise": 0.062
+      "turns_to_fix": 1,
+      "token_cost": 303,
+      "estimated_cost_usd": 0.0017475,
+      "wall_clock": 1.8,
+      "signal_to_noise": 1.0
     }
   },
   {
@@ -9741,17 +9891,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 35938,
-      "estimated_cost_usd": 0.0667875,
-      "wall_clock": 22.8,
+      "token_cost": 25770,
+      "estimated_cost_usd": 0.0507875,
+      "wall_clock": 26.3,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 20,
-      "token_cost": 53579,
-      "estimated_cost_usd": 0.0941575,
-      "wall_clock": 22.5,
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 531,
+      "estimated_cost_usd": 0.00201,
+      "wall_clock": 1.4,
       "signal_to_noise": 0
     }
   },
@@ -9760,17 +9910,17 @@
     "benchmark": "nginx-upstream-port-mismatch",
     "bare": {
       "resolved": true,
-      "turns_to_fix": 4,
-      "token_cost": 544,
-      "estimated_cost_usd": 0.0019974999999999997,
-      "wall_clock": 3.1,
+      "turns_to_fix": 3,
+      "token_cost": 351,
+      "estimated_cost_usd": 0.0013124999999999999,
+      "wall_clock": 4.7,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 1474,
-      "estimated_cost_usd": 0.0040975000000000004,
+      "turns_to_fix": 2,
+      "token_cost": 627,
+      "estimated_cost_usd": 0.0018975,
       "wall_clock": 1.9,
       "signal_to_noise": 0
     }
@@ -9782,10 +9932,10 @@
     "silent": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 84499,
-      "estimated_cost_usd": 0.12902750000000002,
-      "wall_clock": 38.0,
-      "signal_to_noise": 0.05
+      "token_cost": 113241,
+      "estimated_cost_usd": 0.16414499999999999,
+      "wall_clock": 52.2,
+      "signal_to_noise": 0.375
     }
   },
   {
@@ -9801,24 +9951,31 @@
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 2898,
-      "estimated_cost_usd": 0.008182499999999999,
-      "wall_clock": 3.0,
-      "signal_to_noise": 0.333
+      "turns_to_fix": 1,
+      "token_cost": 338,
+      "estimated_cost_usd": 0.0018425,
+      "wall_clock": 2.0,
+      "signal_to_noise": 1.0
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "off-by-one-pagination",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 8935,
+      "estimated_cost_usd": 0.0264325,
+      "wall_clock": 20.1,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 7,
-      "token_cost": 6739,
-      "estimated_cost_usd": 0.0174125,
-      "wall_clock": 8.7,
-      "signal_to_noise": 0.571
+      "turns_to_fix": 8,
+      "token_cost": 5144,
+      "estimated_cost_usd": 0.0143825,
+      "wall_clock": 8.6,
+      "signal_to_noise": 0.375
     }
   },
   {
@@ -9834,23 +9991,30 @@
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 8,
-      "token_cost": 8081,
-      "estimated_cost_usd": 0.019242499999999996,
-      "wall_clock": 6.8,
-      "signal_to_noise": 0.625
+      "turns_to_fix": 22,
+      "token_cost": 72060,
+      "estimated_cost_usd": 0.1033875,
+      "wall_clock": 25.0,
+      "signal_to_noise": 0.182
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "postgres-migration-schema-drift",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 534,
+      "estimated_cost_usd": 0.00186,
+      "wall_clock": 3.3,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 2,
-      "token_cost": 978,
-      "estimated_cost_usd": 0.0027375000000000003,
-      "wall_clock": 1.4,
+      "token_cost": 983,
+      "estimated_cost_usd": 0.0027875,
+      "wall_clock": 1.8,
       "signal_to_noise": 0
     }
   },
@@ -9868,10 +10032,10 @@
     "silent": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 141559,
-      "estimated_cost_usd": 0.19856,
-      "wall_clock": 38.7,
-      "signal_to_noise": 0
+      "token_cost": 90492,
+      "estimated_cost_usd": 0.13349,
+      "wall_clock": 40.9,
+      "signal_to_noise": 0.025
     }
   },
   {
@@ -9880,31 +10044,38 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 169119,
-      "estimated_cost_usd": 0.2562175,
-      "wall_clock": 52.6,
+      "token_cost": 205936,
+      "estimated_cost_usd": 0.3163174999999999,
+      "wall_clock": 45.4,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 14266,
-      "estimated_cost_usd": 0.02919,
-      "wall_clock": 8.5,
-      "signal_to_noise": 0.111
+      "turns_to_fix": 16,
+      "token_cost": 31930,
+      "estimated_cost_usd": 0.054707500000000006,
+      "wall_clock": 18.9,
+      "signal_to_noise": 0.312
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "retry-storm-duplicate-transfer",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 16,
+      "token_cost": 53993,
+      "estimated_cost_usd": 0.093825,
+      "wall_clock": 22.4,
+      "signal_to_noise": 0.062
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 12,
-      "token_cost": 15379,
-      "estimated_cost_usd": 0.03353,
-      "wall_clock": 11.6,
-      "signal_to_noise": 0.25
+      "turns_to_fix": 9,
+      "token_cost": 15325,
+      "estimated_cost_usd": 0.03144,
+      "wall_clock": 8.5,
+      "signal_to_noise": 0.111
     }
   },
   {
@@ -9920,24 +10091,31 @@
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 2,
-      "token_cost": 1724,
-      "estimated_cost_usd": 0.004857500000000001,
-      "wall_clock": 1.8,
-      "signal_to_noise": 0.5
+      "turns_to_fix": 31,
+      "token_cost": 42294,
+      "estimated_cost_usd": 0.08081,
+      "wall_clock": 31.9,
+      "signal_to_noise": 0.677
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "split-brain-leader-election",
-    "bare": null,
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 11,
+      "token_cost": 8958,
+      "estimated_cost_usd": 0.0217625,
+      "wall_clock": 9.0,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 50,
-      "token_cost": 191128,
-      "estimated_cost_usd": 0.29916249999999994,
-      "wall_clock": 47.5,
-      "signal_to_noise": 0.46
+      "turns_to_fix": 28,
+      "token_cost": 65712,
+      "estimated_cost_usd": 0.11932000000000001,
+      "wall_clock": 45.5,
+      "signal_to_noise": 0.929
     }
   },
   {
@@ -9946,37 +10124,51 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 67455,
-      "estimated_cost_usd": 0.11396749999999997,
-      "wall_clock": 40.5,
-      "signal_to_noise": 0
+      "token_cost": 100031,
+      "estimated_cost_usd": 0.16753749999999998,
+      "wall_clock": 53.9,
+      "signal_to_noise": 0.025
     },
     "silent": null
   },
   {
     "model": "gpt-4o",
     "benchmark": "ssrf-allowlist-port-confusion",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 76370,
+      "estimated_cost_usd": 0.13763000000000003,
+      "wall_clock": 66.8,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 173742,
-      "estimated_cost_usd": 0.27056250000000004,
-      "wall_clock": 70.0,
-      "signal_to_noise": 0.017
+      "token_cost": 183391,
+      "estimated_cost_usd": 0.28855500000000006,
+      "wall_clock": 67.1,
+      "signal_to_noise": 0.05
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "timezone-scheduling",
-    "bare": null,
-    "silent": {
+    "bare": {
       "resolved": false,
       "turns_to_fix": 20,
-      "token_cost": 51188,
-      "estimated_cost_usd": 0.08246,
-      "wall_clock": 20.6,
-      "signal_to_noise": 0.15
+      "token_cost": 9190,
+      "estimated_cost_usd": 0.0270175,
+      "wall_clock": 20.9,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 3,
+      "token_cost": 1647,
+      "estimated_cost_usd": 0.00543,
+      "wall_clock": 4.0,
+      "signal_to_noise": 0
     }
   },
   {
@@ -9985,31 +10177,31 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 26,
-      "token_cost": 78382,
-      "estimated_cost_usd": 0.13685,
-      "wall_clock": 25.2,
-      "signal_to_noise": 0.192
+      "turns_to_fix": 16,
+      "token_cost": 25955,
+      "estimated_cost_usd": 0.04689249999999999,
+      "wall_clock": 16.4,
+      "signal_to_noise": 0.125
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "type-coercion-comparison",
     "bare": {
-      "resolved": false,
-      "turns_to_fix": 20,
-      "token_cost": 18363,
-      "estimated_cost_usd": 0.0422875,
-      "wall_clock": 19.6,
-      "signal_to_noise": 0
+      "resolved": true,
+      "turns_to_fix": 8,
+      "token_cost": 2641,
+      "estimated_cost_usd": 0.0085975,
+      "wall_clock": 10.3,
+      "signal_to_noise": 0.125
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 4474,
-      "estimated_cost_usd": 0.012024999999999997,
-      "wall_clock": 4.2,
-      "signal_to_noise": 0.167
+      "turns_to_fix": 2,
+      "token_cost": 620,
+      "estimated_cost_usd": 0.00182,
+      "wall_clock": 1.9,
+      "signal_to_noise": 0
     }
   },
   {
@@ -10025,23 +10217,30 @@
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 17,
-      "token_cost": 17103,
-      "estimated_cost_usd": 0.03852,
-      "wall_clock": 18.5,
-      "signal_to_noise": 0
+      "turns_to_fix": 1,
+      "token_cost": 382,
+      "estimated_cost_usd": 0.0018925,
+      "wall_clock": 1.7,
+      "signal_to_noise": 1.0
     }
   },
   {
     "model": "gpt-4o",
     "benchmark": "wrong-operator-discount",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 10815,
+      "estimated_cost_usd": 0.028964999999999998,
+      "wall_clock": 18.5,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 299,
-      "estimated_cost_usd": 0.0016925,
-      "wall_clock": 1.9,
+      "token_cost": 213,
+      "estimated_cost_usd": 0.0008325,
+      "wall_clock": 1.0,
       "signal_to_noise": 1.0
     }
   },
@@ -12657,27 +12856,41 @@
   {
     "model": "mistral-large",
     "benchmark": "api-version-field-drop",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 19466,
+      "estimated_cost_usd": 0.034170400000000004,
+      "wall_clock": 61.5,
+      "signal_to_noise": 0
+    },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 18882,
-      "estimated_cost_usd": 0.0404984,
-      "wall_clock": 26.3,
-      "signal_to_noise": 0.333
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 2835,
+      "estimated_cost_usd": 0.010046,
+      "wall_clock": 17.7,
+      "signal_to_noise": 0.5
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "auth-bypass-path-traversal",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 395,
+      "estimated_cost_usd": 0.0018948,
+      "wall_clock": 6.2,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 3,
-      "token_cost": 4323,
-      "estimated_cost_usd": 0.013645999999999998,
-      "wall_clock": 21.5,
-      "signal_to_noise": 0.667
+      "turns_to_fix": 5,
+      "token_cost": 10348,
+      "estimated_cost_usd": 0.0261872,
+      "wall_clock": 25.6,
+      "signal_to_noise": 0.8
     }
   },
   {
@@ -12686,17 +12899,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 2206,
-      "estimated_cost_usd": 0.0063968,
-      "wall_clock": 14.2,
+      "token_cost": 535,
+      "estimated_cost_usd": 0.0027348,
+      "wall_clock": 8.1,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 5,
-      "token_cost": 9972,
-      "estimated_cost_usd": 0.0232712,
-      "wall_clock": 21.4,
+      "token_cost": 11348,
+      "estimated_cost_usd": 0.0256872,
+      "wall_clock": 26.1,
       "signal_to_noise": 0.4
     }
   },
@@ -12706,11 +12919,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 42949,
-      "estimated_cost_usd": 0.084062,
-      "wall_clock": 35.5,
-      "signal_to_noise": 0.667
+      "turns_to_fix": 6,
+      "token_cost": 21698,
+      "estimated_cost_usd": 0.051371999999999994,
+      "wall_clock": 53.4,
+      "signal_to_noise": 0.5
     }
   },
   {
@@ -12719,17 +12932,17 @@
     "bare": {
       "resolved": false,
       "turns_to_fix": 60,
-      "token_cost": 18248,
-      "estimated_cost_usd": 0.0279464,
-      "wall_clock": 39.0,
+      "token_cost": 6418,
+      "estimated_cost_usd": 0.010709600000000001,
+      "wall_clock": 38.3,
       "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
       "turns_to_fix": 5,
-      "token_cost": 11679,
-      "estimated_cost_usd": 0.0260332,
-      "wall_clock": 21.5,
+      "token_cost": 12654,
+      "estimated_cost_usd": 0.029564,
+      "wall_clock": 29.8,
       "signal_to_noise": 0.4
     }
   },
@@ -12740,10 +12953,10 @@
     "silent": {
       "resolved": false,
       "turns_to_fix": 40,
-      "token_cost": 9039,
-      "estimated_cost_usd": 0.0233588,
-      "wall_clock": 38.7,
-      "signal_to_noise": 0.2
+      "token_cost": 3272,
+      "estimated_cost_usd": 0.0101336,
+      "wall_clock": 25.8,
+      "signal_to_noise": 0.333
     }
   },
   {
@@ -12758,32 +12971,32 @@
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 10,
-      "token_cost": 24406,
-      "estimated_cost_usd": 0.0471496,
-      "wall_clock": 33.5,
-      "signal_to_noise": 0.3
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 2915,
+      "estimated_cost_usd": 0.010022,
+      "wall_clock": 16.6,
+      "signal_to_noise": 0.5
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "goroutine-leak-handler",
     "bare": {
-      "resolved": true,
-      "turns_to_fix": 13,
-      "token_cost": 30270,
-      "estimated_cost_usd": 0.053818399999999995,
-      "wall_clock": 30.6,
-      "signal_to_noise": 0.077
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 3925,
+      "estimated_cost_usd": 0.0089476,
+      "wall_clock": 25.3,
+      "signal_to_noise": 0
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 9,
-      "token_cost": 42648,
-      "estimated_cost_usd": 0.0850408,
-      "wall_clock": 92.0,
-      "signal_to_noise": 0.444
+      "turns_to_fix": 8,
+      "token_cost": 26138,
+      "estimated_cost_usd": 0.0524568,
+      "wall_clock": 63.6,
+      "signal_to_noise": 0.375
     }
   },
   {
@@ -12795,7 +13008,7 @@
       "turns_to_fix": 1,
       "token_cost": 123,
       "estimated_cost_usd": 0.000302,
-      "wall_clock": 0.6,
+      "wall_clock": 0.7,
       "signal_to_noise": 0
     }
   },
@@ -12815,40 +13028,81 @@
   {
     "model": "mistral-large",
     "benchmark": "import-cycle-startup",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 42569,
+      "estimated_cost_usd": 0.0637404,
+      "wall_clock": 37.2,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 3,
-      "token_cost": 6161,
-      "estimated_cost_usd": 0.01609,
-      "wall_clock": 15.3,
+      "token_cost": 6248,
+      "estimated_cost_usd": 0.0167152,
+      "wall_clock": 18.8,
       "signal_to_noise": 0.667
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "k8s-assume-cache-silent-drop",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 369,
+      "estimated_cost_usd": 0.0017388,
+      "wall_clock": 4.8,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 509,
-      "estimated_cost_usd": 0.002422,
-      "wall_clock": 5.8,
+      "token_cost": 412,
+      "estimated_cost_usd": 0.00184,
+      "wall_clock": 4.9,
       "signal_to_noise": 0
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "k8s-scheduler-shutdown-deadlock",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 384,
+      "estimated_cost_usd": 0.0018288,
+      "wall_clock": 8.2,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
       "turns_to_fix": 1,
-      "token_cost": 305,
-      "estimated_cost_usd": 0.001302,
-      "wall_clock": 3.5,
-      "signal_to_noise": 1.0
+      "token_cost": 351,
+      "estimated_cost_usd": 0.001578,
+      "wall_clock": 3.8,
+      "signal_to_noise": 0
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "kernel-panic-ioctl",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 9690,
+      "estimated_cost_usd": 0.017504,
+      "wall_clock": 25.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 13,
+      "token_cost": 80327,
+      "estimated_cost_usd": 0.1588844,
+      "wall_clock": 193.4,
+      "signal_to_noise": 0.538
     }
   },
   {
@@ -12857,11 +13111,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 6,
-      "token_cost": 16853,
-      "estimated_cost_usd": 0.051212400000000005,
-      "wall_clock": 69.7,
-      "signal_to_noise": 0.333
+      "turns_to_fix": 7,
+      "token_cost": 25459,
+      "estimated_cost_usd": 0.0611012,
+      "wall_clock": 64.7,
+      "signal_to_noise": 0.286
     }
   },
   {
@@ -12877,11 +13131,11 @@
     },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 14,
-      "token_cost": 51954,
-      "estimated_cost_usd": 0.08460720000000001,
-      "wall_clock": 58.2,
-      "signal_to_noise": 0.857
+      "turns_to_fix": 12,
+      "token_cost": 43921,
+      "estimated_cost_usd": 0.0842476,
+      "wall_clock": 80.7,
+      "signal_to_noise": 0.5
     }
   },
   {
@@ -12890,11 +13144,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 12,
-      "token_cost": 20415,
-      "estimated_cost_usd": 0.0292636,
-      "wall_clock": 21.3,
-      "signal_to_noise": 0.25
+      "turns_to_fix": 1,
+      "token_cost": 590,
+      "estimated_cost_usd": 0.002248,
+      "wall_clock": 4.4,
+      "signal_to_noise": 0
     }
   },
   {
@@ -12903,24 +13157,31 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 7,
-      "token_cost": 22217,
-      "estimated_cost_usd": 0.0534668,
-      "wall_clock": 42.7,
-      "signal_to_noise": 0.143
+      "turns_to_fix": 9,
+      "token_cost": 27044,
+      "estimated_cost_usd": 0.04670399999999999,
+      "wall_clock": 44.4,
+      "signal_to_noise": 0.111
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "off-by-one-array-slice",
-    "bare": null,
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 29244,
+      "estimated_cost_usd": 0.0447272,
+      "wall_clock": 52.5,
+      "signal_to_noise": 0
+    },
     "silent": {
       "resolved": true,
-      "turns_to_fix": 1,
-      "token_cost": 321,
-      "estimated_cost_usd": 0.000942,
-      "wall_clock": 1.6,
-      "signal_to_noise": 0
+      "turns_to_fix": 4,
+      "token_cost": 3390,
+      "estimated_cost_usd": 0.006991200000000001,
+      "wall_clock": 7.8,
+      "signal_to_noise": 0.25
     }
   },
   {
@@ -12929,11 +13190,11 @@
     "bare": null,
     "silent": {
       "resolved": true,
-      "turns_to_fix": 12,
-      "token_cost": 32787,
-      "estimated_cost_usd": 0.0515156,
-      "wall_clock": 30.9,
-      "signal_to_noise": 0.5
+      "turns_to_fix": 11,
+      "token_cost": 27171,
+      "estimated_cost_usd": 0.0384796,
+      "wall_clock": 27.9,
+      "signal_to_noise": 0.545
     }
   },
   {
@@ -12941,45 +13202,231 @@
     "benchmark": "performance-cliff-hash",
     "bare": null,
     "silent": {
-      "resolved": true,
-      "turns_to_fix": 23,
-      "token_cost": 125701,
-      "estimated_cost_usd": 0.14187,
-      "wall_clock": 66.0,
-      "signal_to_noise": 0.652
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 407274,
+      "estimated_cost_usd": 0.39291679999999995,
+      "wall_clock": 154.4,
+      "signal_to_noise": 0.829
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "postgres-migration-schema-drift",
     "bare": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 570,
-      "estimated_cost_usd": 0.00306,
-      "wall_clock": 7.5,
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 2735,
+      "estimated_cost_usd": 0.0071228,
+      "wall_clock": 10.8,
       "signal_to_noise": 0
     },
     "silent": {
-      "resolved": false,
-      "turns_to_fix": 60,
-      "token_cost": 820,
-      "estimated_cost_usd": 0.002988,
-      "wall_clock": 5.5,
+      "resolved": true,
+      "turns_to_fix": 6,
+      "token_cost": 9547,
+      "estimated_cost_usd": 0.022514799999999998,
+      "wall_clock": 23.9,
       "signal_to_noise": 0
     }
   },
   {
     "model": "mistral-large",
     "benchmark": "race-condition-counter",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 4978,
+      "estimated_cost_usd": 0.011098400000000001,
+      "wall_clock": 23.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 6402,
+      "estimated_cost_usd": 0.0147888,
+      "wall_clock": 17.9,
+      "signal_to_noise": 0.5
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "rate-limit-bypass-header",
+    "bare": null,
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 5,
+      "token_cost": 14410,
+      "estimated_cost_usd": 0.032323199999999996,
+      "wall_clock": 49.7,
+      "signal_to_noise": 0.6
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 3138,
+      "estimated_cost_usd": 0.0079656,
+      "wall_clock": 15.9,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 7,
+      "token_cost": 25499,
+      "estimated_cost_usd": 0.0585132,
+      "wall_clock": 56.0,
+      "signal_to_noise": 0.571
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "silent-data-corruption",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 5738,
+      "estimated_cost_usd": 0.013572,
+      "wall_clock": 44.7,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 3000,
+      "estimated_cost_usd": 0.006816000000000001,
+      "wall_clock": 9.9,
+      "signal_to_noise": 0.333
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "split-brain-leader-election",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 537,
+      "estimated_cost_usd": 0.0027468,
+      "wall_clock": 7.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 412997,
+      "estimated_cost_usd": 0.39566599999999996,
+      "wall_clock": 161.5,
+      "signal_to_noise": 0.375
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 3521,
+      "estimated_cost_usd": 0.0075428,
+      "wall_clock": 14.9,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 7,
+      "token_cost": 17610,
+      "estimated_cost_usd": 0.0369408,
+      "wall_clock": 30.5,
+      "signal_to_noise": 0.429
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "timezone-scheduling",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 508,
+      "estimated_cost_usd": 0.0025728,
+      "wall_clock": 7.0,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 6738,
+      "estimated_cost_usd": 0.018704,
+      "wall_clock": 20.8,
+      "signal_to_noise": 0.25
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "timing-attack-comparison",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 2510,
+      "estimated_cost_usd": 0.007396,
+      "wall_clock": 20.7,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 13,
+      "token_cost": 31842,
+      "estimated_cost_usd": 0.0515544,
+      "wall_clock": 34.2,
+      "signal_to_noise": 0.538
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "type-coercion-comparison",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 20914,
+      "estimated_cost_usd": 0.029250400000000003,
+      "wall_clock": 43.2,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 17,
+      "token_cost": 52309,
+      "estimated_cost_usd": 0.07439639999999999,
+      "wall_clock": 72.2,
+      "signal_to_noise": 0.176
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "wal-fsync-ghost-ack",
+    "bare": null,
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 14,
+      "token_cost": 106320,
+      "estimated_cost_usd": 0.1954656,
+      "wall_clock": 150.1,
+      "signal_to_noise": 0.357
+    }
+  },
+  {
+    "model": "mistral-large",
+    "benchmark": "wrong-operator-discount",
     "bare": null,
     "silent": {
       "resolved": true,
       "turns_to_fix": 4,
-      "token_cost": 6511,
-      "estimated_cost_usd": 0.017074,
-      "wall_clock": 20.5,
-      "signal_to_noise": 0.75
+      "token_cost": 4445,
+      "estimated_cost_usd": 0.011566,
+      "wall_clock": 12.8,
+      "signal_to_noise": 0.5
     }
   },
   {
