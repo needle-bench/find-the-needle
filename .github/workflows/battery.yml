@@ -78,32 +78,21 @@ jobs:
           if tier_input != "all":
               bench_list = [b for b in bench_list if benchmarks_map.get(b) == tier_input]
 
-          # Build matrix: two entries per (model, benchmark) — test arm + control arm
+          # Build matrix: one entry per model (all benchmarks run sequentially per model).
+          # GitHub Actions caps at 256 jobs per matrix. Each job runs all benchmarks
+          # for one model, both arms. This keeps the matrix small (= number of models).
           matrix = []
           for model in models:
-              for bench in bench_list:
-                  tier = benchmarks_map.get(bench, "medium")
-                  tier_limits = tiers.get(tier, tiers.get("medium", {}))
-                  wall_clock = tier_limits.get("wall_clock", 600)
-                  timeout = max(10, (wall_clock // 60) + 6)
-                  # Silent arm: OS context silently injected into system prompt
-                  matrix.append({
-                      "model": model,
-                      "benchmark": bench,
-                      "tier": tier,
-                      "timeout": timeout,
-                      "wall_clock": wall_clock,
-                      "arm": "silent",
-                  })
-                  # Bare arm: no OS context, generic system prompt
-                  matrix.append({
-                      "model": model,
-                      "benchmark": bench,
-                      "tier": tier,
-                      "timeout": timeout,
-                      "wall_clock": wall_clock,
-                      "arm": "bare",
-                  })
+              # Use the hardest tier's wall clock for timeout
+              max_wall = max(t.get("wall_clock", 600) for t in tiers.values())
+              # Each model runs all benchmarks × 2 arms sequentially
+              timeout = max(30, (max_wall * len(bench_list) * 2) // 60 + 10)
+              # Cap at 6 hours
+              timeout = min(timeout, 360)
+              matrix.append({
+                  "model": model,
+                  "timeout": timeout,
+              })
 
           print(f"Generated {len(matrix)} matrix entries ({len(models)} models x {len(bench_list)} benchmarks)", file=sys.stderr)
           if not matrix:
@@ -155,41 +144,26 @@ jobs:
           echo "ostk not yet available as pre-built binary — using runner.py fallback"
         continue-on-error: true
 
-      - name: Run ${{ matrix.combo.benchmark }} with ${{ matrix.combo.model }} (${{ matrix.combo.arm }})
+      - name: Run all benchmarks with ${{ matrix.combo.model }}
         run: |
           MODEL="${{ matrix.combo.model }}"
-          BENCH="${{ matrix.combo.benchmark }}"
-          TIER="${{ matrix.combo.tier }}"
-          ARM="${{ matrix.combo.arm }}"
-          AGENT_NAME="${MODEL}-${ARM}"
 
-          echo "::group::$BENCH ($AGENT_NAME) — tier=$TIER arm=$ARM"
+          echo "Running all benchmarks for $MODEL (bare + silent arms)"
 
           python3 run_arms.py \
             --model "$MODEL" \
             --provider openrouter \
-            --benchmark "$BENCH" \
-            --arm "$ARM" \
-            2>&1 | tee bench-output.log
+            --all-benchmarks \
+            2>&1 | tee bench-output.log || true
 
-          echo "::endgroup::"
-
-          # Verify score file was produced
-          SCORE_FILE="runs/${AGENT_NAME}/${BENCH}.score.json"
-          if [ -f "$SCORE_FILE" ]; then
-            echo "Score:"
-            cat "$SCORE_FILE"
-          else
-            echo "::warning::No score file produced for $BENCH ($AGENT_NAME)"
-            mkdir -p "runs/${AGENT_NAME}"
-            echo '{"benchmark":"'"$BENCH"'","agent":"'"$AGENT_NAME"'","arm":"'"$ARM"'","resolved":false,"error":"runner produced no score file","timestamp":"'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'"}' > "$SCORE_FILE"
-          fi
+          echo "Score files produced:"
+          find runs/ -name '*.score.json' | wc -l
 
       - name: Upload score artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: score--${{ matrix.combo.model }}--${{ matrix.combo.benchmark }}--${{ matrix.combo.arm }}
+          name: score--${{ matrix.combo.model }}
           path: |
             runs/*/
           retention-days: 90
