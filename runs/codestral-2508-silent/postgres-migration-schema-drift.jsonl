@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-24T11:02:00Z", "benchmark": "postgres-migration-schema-drift", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/start.sh\n/workspace/test.sh\n/workspace/app/main.go\n/workspace/app/vendor/github.com/lib/pq/krb.go\n/workspace/ap"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 483, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/usr/lib/postgresql/15/bin/initdb", "/tmp/postgres"], "tokens_in": 516, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/tmp/postgres\""], "tokens_in": 589, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/tmp/postgres"], "tokens_in": 875, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/tmp/postgres", "/tmp/logfile"], "tokens_in": 956, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 1012, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 1110, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 1208, "tokens_out": 48, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-24T11:02:06Z", "test_exit": 127, "total_turns": 8, "correct_lines": 0, "arm": "silent"}

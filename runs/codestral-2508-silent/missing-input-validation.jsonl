@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-24T11:01:20Z", "benchmark": "missing-input-validation", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/dist/utils.js\n/app/dist/types.d.ts\n/app/dist/types.js\n/app/dist/routes.js\n/app/dist/server.js\n/app/dist/"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/"], "tokens_in": 433, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/"], "tokens_in": 495, "tokens_out": 162, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 664, "tokens_out": 39, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-24T11:01:28Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

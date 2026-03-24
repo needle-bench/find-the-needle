@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-24T11:04:20Z", "benchmark": "retry-storm-duplicate-transfer", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/chaos_proxy.py\n/workspace/app/models.py\n/workspace/app/processor.py\n/workspace/app/gatew"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/app/"], "tokens_in": 220, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 272, "tokens_out": 156, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-24T11:04:26Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}
