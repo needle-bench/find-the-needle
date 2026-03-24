@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T17:15:24Z", "benchmark": "cache-stale-invalidation", "model": "claude-sonnet-4-6", "has_prompt": false, "solution_files": ["app/server.py"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/workspace/./test.sh", "/", "/workspace/\"*.py\"", "/workspace/\"*.js\"", "/workspace/\"*.ts\"", "/workspace/\"*.go\"", "/workspace/\"*.rb\"", "/workspace/\"*.java\""], "tokens_in": 805, "tokens_out": 180, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/workspace/\"test.sh\""], "tokens_in": 1140, "tokens_out": 73, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/workspace/./test.sh", "/app", "/app/test.sh"], "tokens_in": 1240, "tokens_out": 106, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/cache.py", "/app/app/server.py", "/app/app/store.py"], "tokens_in": 2294, "tokens_out": 140, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": ["/app/app/server.py"], "files_read": [], "tokens_in": 4826, "tokens_out": 633, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T17:15:44Z", "test_exit": 0, "total_turns": 5, "correct_lines": 3}

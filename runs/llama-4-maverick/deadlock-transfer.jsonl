@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T17:16:35Z", "benchmark": "deadlock-transfer", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["app/TransferService.java"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 449, "tokens_out": 9, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T17:16:56Z", "test_exit": 1, "total_turns": 1, "correct_lines": 0}

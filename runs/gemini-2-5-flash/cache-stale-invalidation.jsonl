@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T17:15:25Z", "benchmark": "cache-stale-invalidation", "model": "gemini-2-5-flash", "has_prompt": false, "solution_files": ["app/server.py"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 132, "tokens_out": 6, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 230, "tokens_out": 77, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 334, "tokens_out": 48, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["app/store.py"], "tokens_in": 420, "tokens_out": 73, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/cache.py"], "tokens_in": 1121, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["app/server.py"], "tokens_in": 1772, "tokens_out": 121, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": ["app/server.py"], "files_read": [], "tokens_in": 3034, "tokens_out": 152, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T17:15:36Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0}

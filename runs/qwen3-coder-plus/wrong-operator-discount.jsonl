@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T17:10:31Z", "benchmark": "wrong-operator-discount", "model": "qwen3-coder-plus", "has_prompt": false, "solution_files": ["pricing.py"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 532, "tokens_out": 23, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/*.py"], "tokens_in": 664, "tokens_out": 242, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["./pricing.py"], "tokens_in": 935, "tokens_out": 132, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": ["./pricing.py"], "files_read": [], "tokens_in": 1302, "tokens_out": 196, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T17:10:45Z", "test_exit": 0, "total_turns": 4, "correct_lines": 1}

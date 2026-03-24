@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T17:15:51Z", "benchmark": "timezone-scheduling", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["app/scheduler.py"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 701, "tokens_out": 42, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["./test.sh"], "tokens_in": 1063, "tokens_out": 78, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/runner.py"], "tokens_in": 1987, "tokens_out": 45, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 2515, "tokens_out": 45, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/config.json"], "tokens_in": 3177, "tokens_out": 45, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": ["/app/app/scheduler.py"], "files_read": [], "tokens_in": 3574, "tokens_out": 436, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T17:16:16Z", "test_exit": 0, "total_turns": 6, "correct_lines": 1}

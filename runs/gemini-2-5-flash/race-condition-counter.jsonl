@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T17:21:04Z", "benchmark": "race-condition-counter", "model": "gemini-2-5-flash", "has_prompt": false, "solution_files": ["app/counter.js"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 132, "tokens_out": 6, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 277, "tokens_out": 69, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 386, "tokens_out": 32, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["app/server.js"], "tokens_in": 464, "tokens_out": 79, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/counter.js"], "tokens_in": 946, "tokens_out": 48, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": ["app/counter.js"], "files_read": [], "tokens_in": 1326, "tokens_out": 285, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T17:21:23Z", "test_exit": 0, "total_turns": 6, "correct_lines": 2}
