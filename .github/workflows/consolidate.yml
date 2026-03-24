@@ -1,0 +1,113 @@
+name: Consolidate — Collect results and deploy
+
+# Downloads all bench artifacts, merges into runs/, consolidates, commits, deploys.
+# Run this AFTER all bench.yml runs complete.
+#
+# Usage: gh workflow run consolidate.yml
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download all bench artifacts
+        run: |
+          mkdir -p /tmp/artifacts
+          # Download from all successful bench runs
+          for id in $(gh run list --workflow="bench.yml" --limit 50 --json databaseId,conclusion --jq '.[] | select(.conclusion == "success") | .databaseId'); do
+            echo "Downloading $id..."
+            gh run download "$id" -D /tmp/artifacts 2>/dev/null || true
+          done
+          echo "Downloaded artifacts:"
+          find /tmp/artifacts -name "*.score.json" | wc -l
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Merge artifacts into runs/
+        run: |
+          # Each artifact is at /tmp/artifacts/bench--{model}/runs/{model}-{arm}/...
+          find /tmp/artifacts -name "*.score.json" | while read f; do
+            # Extract path after runs/
+            REL=$(echo "$f" | sed 's|.*/runs/||')
+            DIR=$(dirname "runs/$REL")
+            mkdir -p "$DIR"
+            cp "$f" "runs/$REL"
+          done
+
+          echo "Merged score files per model:"
+          for d in runs/*-bare; do
+            model=$(basename "$d" | sed 's/-bare$//')
+            bare=$(ls "$d"/*.score.json 2>/dev/null | wc -l | tr -d ' ')
+            silent=$(ls "runs/${model}-silent"/*.score.json 2>/dev/null | wc -l | tr -d ' ')
+            echo "  $model: bare=$bare silent=$silent"
+          done
+
+      - name: Generate scores from experiment data
+        run: |
+          python3 consolidate_scores.py
+
+          # Also generate scores.json from silent arm for leaderboard
+          python3 -c "
+          import json
+          exp = json.load(open('public/experiment-scores.json'))
+          scores = []
+          for e in exp:
+              s = e.get('silent')
+              if not s: continue
+              scores.append({
+                  'benchmark': e['benchmark'], 'agent': e['model'],
+                  'resolved': s.get('resolved', False),
+                  'turns_to_fix': s.get('turns_to_fix', 0),
+                  'token_cost': s.get('token_cost', 0),
+                  'estimated_cost_usd': s.get('estimated_cost_usd', 0),
+                  'wall_clock': s.get('wall_clock', 0),
+                  'signal_to_noise': s.get('signal_to_noise', 0),
+                  'timestamp': '2026-03-24T00:00:00Z',
+              })
+          scores.sort(key=lambda s: (s['agent'], s['benchmark']))
+          json.dump(scores, open('public/scores.json', 'w'), indent=2)
+          print(f'scores.json: {len(scores)} entries, {len(set(s[\"agent\"] for s in scores))} models')
+          "
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add runs/ public/scores.json public/experiment-scores.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "data: consolidated bench results from CI [skip ci]"
+          git push origin main
+
+      - name: Build and deploy site
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
+        id: deploy

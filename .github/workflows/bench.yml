@@ -115,53 +115,5 @@ jobs:
             runs/${{ steps.names.outputs.canon }}-silent/
           retention-days: 90
 
-      - name: Consolidate and commit
-        run: |
-          python3 consolidate_scores.py
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          CANON=$(python3 -c "import re; print(re.sub(r'[_.]', '-', '$MODEL'.split('/')[-1].lower()))")
-
-          # Only add THIS model's results + consolidated JSONs
-          git add "runs/${CANON}-bare/" "runs/${CANON}-silent/" 2>/dev/null || true
-          git add public/scores.json public/experiment-scores.json 2>/dev/null || true
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-
-          git commit -m "bench: $MODEL — bare + silent results [skip ci]"
-
-          # Retry push with backoff — concurrent runs will collide
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase --autostash origin main 2>&1 && git push 2>&1; then
-              echo "Push succeeded on attempt $attempt"
-              break
-            fi
-            echo "Push attempt $attempt failed, retrying in $((attempt * 5))s..."
-            sleep $((attempt * 5))
-            # Re-stage if rebase dropped changes
-            git add "runs/${CANON}-bare/" "runs/${CANON}-silent/" 2>/dev/null || true
-            git add public/scores.json public/experiment-scores.json 2>/dev/null || true
-            git diff --cached --quiet || git commit --amend --no-edit
-          done
-
-      - name: Build and deploy site
-        run: |
-          npm ci
-          npm run build
-
-      - uses: actions/configure-pages@v5
-        if: success()
-
-      - uses: actions/upload-pages-artifact@v3
-        if: success()
-        with:
-          path: dist
-
-      - uses: actions/deploy-pages@v4
-        if: success()
-        id: deploy
+      # No git push. No deploy. Artifact upload is the only output.
+      # Run `gh run download` locally or use consolidate.yml to collect results.
