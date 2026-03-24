@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:15:24Z", "benchmark": "sql-injection-search", "model": "mistral-large", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 90, "tokens_out": 145, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/tmp", "/var", "/etc", "/opt"], "tokens_in": 242, "tokens_out": 83, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 332, "tokens_out": 140, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 479, "tokens_out": 142, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/root/.gitconfig"], "tokens_in": 629, "tokens_out": 64, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 715, "tokens_out": 83, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T07:15:38Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

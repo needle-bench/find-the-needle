@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:43:31Z", "benchmark": "missing-input-validation", "model": "qwen-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/dist/inventory.js\n/app/dist/inventory.d.ts\n/app/dist/utils.js\n/app/dist/utils.d.ts\n/app/dist/routes.js\n/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/inventory.ts"], "tokens_in": 559, "tokens_out": 197, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/routes.ts"], "tokens_in": 1062, "tokens_out": 237, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1859, "tokens_out": 346, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:43:51Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

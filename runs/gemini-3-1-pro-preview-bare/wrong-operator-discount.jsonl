@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:30:12Z", "benchmark": "wrong-operator-discount", "model": "gemini-3-1-pro-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 56, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 345, "tokens_out": 34, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 604, "tokens_out": 74, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/./test.sh"], "tokens_in": 2165, "tokens_out": 201, "test_exit": 1}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/pricing.py"], "tokens_in": 2385, "tokens_out": 232, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/./test.sh"], "tokens_in": 2639, "tokens_out": 10, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:30:37Z", "test_exit": 0, "total_turns": 6, "correct_lines": 1, "arm": "bare"}

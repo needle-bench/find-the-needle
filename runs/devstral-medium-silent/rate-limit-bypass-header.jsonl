@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:25:46Z", "benchmark": "rate-limit-bypass-header", "model": "devstral-medium", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/ratelimiter.ts\n/app/app/routes.ts\n/app/app/server.ts\n/app/app/utils.ts\n/app/app/node_modules/@types/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app"], "tokens_in": 639, "tokens_out": 18, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1036, "tokens_out": 191, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T21:25:57Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

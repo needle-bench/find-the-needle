@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:22:57Z", "benchmark": "wal-fsync-ghost-ack", "model": "deepseek-r1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/client.go\n/workspace/main.go\n/workspace/server.go\n/workspace/store.go\n/workspace/wal.go\n\nCur"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 523, "tokens_out": 112, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/server.go"], "tokens_in": 1382, "tokens_out": 859, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 2289, "tokens_out": 52, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 3652, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 4479, "tokens_out": 2795, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T07:24:57Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

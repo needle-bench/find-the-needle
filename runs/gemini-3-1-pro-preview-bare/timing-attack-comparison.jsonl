@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:27:43Z", "benchmark": "timing-attack-comparison", "model": "gemini-3-1-pro-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 60, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 302, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 682, "tokens_out": 43, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 786, "tokens_out": 74, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:28:06Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

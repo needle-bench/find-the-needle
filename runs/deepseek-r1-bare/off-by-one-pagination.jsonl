@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:51:25Z", "benchmark": "off-by-one-pagination", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 98, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app"], "tokens_in": 597, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app"], "tokens_in": 868, "tokens_out": 83, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 977, "tokens_out": 485, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:52:04Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

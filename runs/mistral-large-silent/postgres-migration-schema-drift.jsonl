@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:02:49Z", "benchmark": "postgres-migration-schema-drift", "model": "mistral-large", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/start.sh\n/workspace/test.sh\n/workspace/app/main.go\n/workspace/app/vendor/github.com/lib/pq/array.go\n/workspace/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/usr/lib/postgresql/", "/usr/lib/postgresql/\""], "tokens_in": 483, "tokens_out": 386, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 891, "tokens_out": 331, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/usr"], "tokens_in": 1477, "tokens_out": 162, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1652, "tokens_out": 182, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace", "/workspace/./test.sh"], "tokens_in": 1848, "tokens_out": 43, "test_exit": 127}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1952, "tokens_out": 140, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-23T07:03:13Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

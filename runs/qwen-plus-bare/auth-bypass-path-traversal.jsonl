@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:30:47Z", "benchmark": "auth-bypass-path-traversal", "model": "qwen-plus", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 171, "tokens_out": 227, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 467, "tokens_out": 236, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/./.git/logs/HEAD", "/app/.git/logs/HEAD\""], "tokens_in": 733, "tokens_out": 195, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/./.git/logs/refs/heads/master", "/app/.git/logs/refs/heads/master\""], "tokens_in": 1052, "tokens_out": 288, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1464, "tokens_out": 209, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:31:13Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

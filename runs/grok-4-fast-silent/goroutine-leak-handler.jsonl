@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:59:37Z", "benchmark": "goroutine-leak-handler", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/config.go\n/app/app/main.go\n/app/app/middleware.go\n/app/app/worker.go\n\nCurrent test output (test.sh):"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/main.go"], "tokens_in": 504, "tokens_out": 190, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/worker.go"], "tokens_in": 1517, "tokens_out": 776, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/config.go"], "tokens_in": 1913, "tokens_out": 60, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2156, "tokens_out": 59, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T21:59:47Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:15:01Z", "benchmark": "timing-attack-comparison", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# timing-attack-comparison\n\n## Project\n\nA Go authentication server (`authserver`) that stores user credentials as SHA-"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 784, "tokens_out": 257, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/auth/compare.go", "//", "/app/equality."], "tokens_in": 871, "tokens_out": 957, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 1001, "tokens_out": 77, "test_exit": 1}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/auth/timing_test.go"], "tokens_in": 1295, "tokens_out": 348, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1917, "tokens_out": 297, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T22:15:19Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

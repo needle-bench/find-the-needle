@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:25:35Z", "benchmark": "haystack-mint", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 94, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/.haystack/"], "tokens_in": 552, "tokens_out": 89, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/.haystack/needles/"], "tokens_in": 842, "tokens_out": 67, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 1018, "tokens_out": 93, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T21:27:56Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

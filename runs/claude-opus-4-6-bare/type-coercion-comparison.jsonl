@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:33:30Z", "benchmark": "type-coercion-comparison", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 583, "tokens_out": 178, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/data.js", "/app/filter.js", "/app/server.js", "/app/utils.js", "/app/test.sh", "/app/package.json"], "tokens_in": 1118, "tokens_out": 252, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:33:38Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

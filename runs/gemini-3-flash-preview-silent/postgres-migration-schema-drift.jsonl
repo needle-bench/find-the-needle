@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:56:21Z", "benchmark": "postgres-migration-schema-drift", "model": "gemini-3-flash-preview", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/start.sh\n/workspace/test.sh\n/workspace/app/main.go\n/workspace/app/vendor/github.com/lib/pq/array.go\n/workspace/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 596, "tokens_out": 12, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/main.go"], "tokens_in": 936, "tokens_out": 16, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/app/main.go"], "tokens_in": 2287, "tokens_out": 29, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/queries.", "/workspace/app/main.go"], "tokens_in": 2337, "tokens_out": 42, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/\"order_status\".", "/workspace/consistency.", "/workspace/migrations/001_initial.sql", "/workspace/migrations/002_rename_status.sql", "/workspace/migrations/003_add_shipping.sql"], "tokens_in": 3716, "tokens_out": 92, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/\"order_status\".", "/workspace/main.go", "/workspace/\"order_status\".", "/workspace/earlier.", "/workspace/./test.sh"], "tokens_in": 3901, "tokens_out": 84, "test_exit": 127}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 4057, "tokens_out": 12, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:56:32Z", "test_exit": 0, "total_turns": 7, "correct_lines": 3, "arm": "silent"}

@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:03:59Z", "benchmark": "goroutine-leak-handler", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/needle.txt", "/app/."], "tokens_in": 165, "tokens_out": 198, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/./.git/logs/HEAD", "/app/./.git/logs/refs/heads/master"], "tokens_in": 523, "tokens_out": 121, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 786, "tokens_out": 131, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:04:19Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

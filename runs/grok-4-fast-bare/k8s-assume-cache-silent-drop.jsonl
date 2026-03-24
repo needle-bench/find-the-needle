@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:00:50Z", "benchmark": "k8s-assume-cache-silent-drop", "model": "grok-4-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 371, "tokens_out": 291, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 420, "tokens_out": 281, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 607, "tokens_out": 143, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/./assume-cache"], "tokens_in": 1668, "tokens_out": 406, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1740, "tokens_out": 284, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T22:01:03Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

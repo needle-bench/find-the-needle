@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:57:55Z", "benchmark": "wrong-operator-discount", "model": "qwen3-coder-flash", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 283, "tokens_out": 45, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 644, "tokens_out": 89, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/./.git/logs/HEAD"], "tokens_in": 764, "tokens_out": 64, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/./.git/logs/refs/heads/master"], "tokens_in": 956, "tokens_out": 145, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1229, "tokens_out": 168, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T06:58:04Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

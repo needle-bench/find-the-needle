@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:28:22Z", "benchmark": "goroutine-leak-handler", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app"], "tokens_in": 523, "tokens_out": 88, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 771, "tokens_out": 264, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:28:51Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:09:57Z", "benchmark": "postgres-migration-schema-drift", "model": "gemini-3-1-pro-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 32, "tokens_out": 104, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 74, "tokens_out": 21, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 325, "tokens_out": 65, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 367, "tokens_out": 30, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:10:25Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

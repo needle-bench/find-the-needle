@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:46:37Z", "benchmark": "type-coercion-comparison", "model": "qwen3-5-flash-02-23", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/data.js\n/app/filter.js\n/app/server.js\n/app/utils.js\n\nCurrent test output (test.sh):\nServer running on po"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app"], "tokens_in": 386, "tokens_out": 151, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/filter.js"], "tokens_in": 459, "tokens_out": 74, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/data.js"], "tokens_in": 796, "tokens_out": 159, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/server.js"], "tokens_in": 1451, "tokens_out": 35, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/utils.js"], "tokens_in": 1802, "tokens_out": 35, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2066, "tokens_out": 270, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:46:49Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

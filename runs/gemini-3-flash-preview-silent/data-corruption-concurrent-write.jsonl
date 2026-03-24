@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:42:24Z", "benchmark": "data-corruption-concurrent-write", "model": "gemini-3-flash-preview", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# data-corruption-concurrent-write\n\n## Project\n\nA Rust CLI tool (`concurrent-writer`) that writes data to a file using"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/main.rs", "/app/src/config.rs", "/app/src/writer.rs", "/app/src/verify.rs"], "tokens_in": 618, "tokens_out": 39, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 1822, "tokens_out": 15, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/writer.rs"], "tokens_in": 2343, "tokens_out": 15, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 3231, "tokens_out": 22, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3684, "tokens_out": 13, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:42:32Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

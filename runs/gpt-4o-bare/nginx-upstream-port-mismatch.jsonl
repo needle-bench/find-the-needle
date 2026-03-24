@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:44:54Z", "benchmark": "nginx-upstream-port-mismatch", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 66, "tokens_out": 21, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 98, "tokens_out": 20, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 129, "tokens_out": 17, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-23T06:44:59Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

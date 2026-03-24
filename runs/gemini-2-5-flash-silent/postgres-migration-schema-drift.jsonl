@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:04:27Z", "benchmark": "postgres-migration-schema-drift", "model": "gemini-2-5-flash", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/start.sh\n/workspace/test.sh\n/workspace/app/main.go\n/workspace/app/vendor/github.com/lib/pq/array.go\n/workspace/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 596, "tokens_out": 52, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 913, "tokens_out": 65, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 1002, "tokens_out": 38, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1075, "tokens_out": 71, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T22:04:34Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

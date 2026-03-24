@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:31:21Z", "benchmark": "data-corruption-concurrent-write", "model": "llama-3-3-70b-instruct", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# data-corruption-concurrent-write\n\n## Project\n\nA Rust CLI tool (`concurrent-writer`) that writes data to a file using"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 726, "tokens_out": 26, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 761, "tokens_out": 10, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:31:22Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

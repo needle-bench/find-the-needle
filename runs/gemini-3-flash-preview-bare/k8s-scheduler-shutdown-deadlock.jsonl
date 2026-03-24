@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:50:08Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/.", "/workspace/."], "tokens_in": 32, "tokens_out": 28, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 317, "tokens_out": 10, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 356, "tokens_out": 11, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 381, "tokens_out": 11, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 1349, "tokens_out": 12, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1386, "tokens_out": 361, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:50:24Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

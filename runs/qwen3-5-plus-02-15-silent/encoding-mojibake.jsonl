@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:36:45Z", "benchmark": "encoding-mojibake", "model": "qwen3-5-plus-02-15", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/CsvReader.java\n/app/app/CustomerRecord.java\n/app/app/Main.java\n/app/app/ReportGenerator.java\n\nCurren"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/CsvReader.java"], "tokens_in": 613, "tokens_out": 285, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/customers.csv"], "tokens_in": 1190, "tokens_out": 354, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app/\"customers.csv\"", "/app/app/customers.csv", "/app", "/app/\"*.csv\""], "tokens_in": 1250, "tokens_out": 105, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1526, "tokens_out": 176, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:37:06Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

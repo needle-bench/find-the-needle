@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:33:57Z", "benchmark": "data-corruption-concurrent-write", "model": "claude-sonnet-4-5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# data-corruption-concurrent-write\n\n## Project\n\nA Rust CLI tool (`concurrent-writer`) that writes data to a file using"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/\"*.rs\"", "/app/\"*.sh\""], "tokens_in": 1204, "tokens_out": 108, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 1366, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 1878, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/writer.rs"], "tokens_in": 2454, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/verify.rs"], "tokens_in": 3440, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 4218, "tokens_out": 72, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:34:11Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

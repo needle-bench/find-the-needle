@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:55:26Z", "benchmark": "cache-stale-invalidation", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 477, "tokens_out": 307, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/store.py"], "tokens_in": 964, "tokens_out": 179, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 1507, "tokens_out": 273, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 2416, "tokens_out": 793, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T21:55:39Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

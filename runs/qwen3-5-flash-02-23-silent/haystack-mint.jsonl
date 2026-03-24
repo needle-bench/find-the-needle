@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:32:44Z", "benchmark": "haystack-mint", "model": "qwen3-5-flash-02-23", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n\nCurrent test output (test.sh):\n0/5\n\n"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 315, "tokens_out": 116, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T07:32:46Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

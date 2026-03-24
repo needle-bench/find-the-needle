@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:37:32Z", "benchmark": "performance-cliff-hash", "model": "qwen3-5-flash-02-23", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 294, "tokens_out": 119, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 355, "tokens_out": 119, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 676, "tokens_out": 49, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 743, "tokens_out": 49, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/./Dockerfile"], "tokens_in": 825, "tokens_out": 38, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 907, "tokens_out": 115, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:37:41Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:15:32Z", "benchmark": "retry-storm-duplicate-transfer", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/chaos_proxy.py\n/workspace/app/gateway.py\n/workspace/app/models.py\n/workspace/app/process"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 156, "tokens_out": 42, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 188, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 458, "tokens_out": 310, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 574, "tokens_out": 34, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 666, "tokens_out": 49, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 816, "tokens_out": 276, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 914, "tokens_out": 539, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:16:01Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "silent"}

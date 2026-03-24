@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:32:48Z", "benchmark": "split-brain-leader-election", "model": "claude-haiku-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 582, "tokens_out": 85, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 682, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 769, "tokens_out": 68, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 1106, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/./app", "/app/\"*.go\""], "tokens_in": 1417, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/./app/cluster/node.go"], "tokens_in": 1570, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 3007, "tokens_out": 343, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:33:21Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

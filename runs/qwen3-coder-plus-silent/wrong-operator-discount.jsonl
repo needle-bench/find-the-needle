@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:30:09Z", "benchmark": "wrong-operator-discount", "model": "qwen3-coder-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/cart.py\n/app/catalog.py\n/app/formatter.py\n/app/main.py\n/app/pricing.py\n\nCurrent test output (test.sh):\nF"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/pricing.py"], "tokens_in": 414, "tokens_out": 91, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/pricing.py"], "tokens_in": 740, "tokens_out": 137, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/pricing.py"], "tokens_in": 895, "tokens_out": 39, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1169, "tokens_out": 43, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T22:30:19Z", "test_exit": 0, "total_turns": 4, "correct_lines": 1, "arm": "silent"}

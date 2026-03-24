@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:38:57Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 106, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 547, "tokens_out": 69, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 650, "tokens_out": 263, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:39:21Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

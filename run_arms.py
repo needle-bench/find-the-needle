@@ -62,6 +62,44 @@ ALL_ARMS = ["bare", "silent"]
 def run_arm(model, bench_name, bench_dir, provider, arm_name):
     """Run a single arm for a single benchmark. Returns a score dict."""
 
+    canon_model = _canonical_agent_name(model)
+    start_time = time.time()
+
+    try:
+        return _run_arm_inner(model, bench_name, bench_dir, provider, arm_name)
+    except Exception as e:
+        # Write a FAIL score so every benchmark produces a .score.json
+        error_score = {
+            "benchmark": bench_name,
+            "agent": f"{canon_model}-{arm_name}",
+            "arm": arm_name,
+            "control_type": arm_name,
+            "resolved": False,
+            "error": str(e),
+            "turns_to_fix": 0,
+            "token_cost": 0,
+            "estimated_cost_usd": 0,
+            "wall_clock": round(time.time() - start_time, 1),
+            "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
+        proj_root = os.path.dirname(os.path.abspath(__file__))
+        runs_dir = os.path.join(proj_root, "runs", f"{canon_model}-{arm_name}")
+        os.makedirs(runs_dir, exist_ok=True)
+        score_path = os.path.join(runs_dir, f"{bench_name}.score.json")
+        with open(score_path, "w") as f:
+            json.dump(error_score, f, indent=2)
+        run_score_dir = os.path.join(runs_dir, bench_name)
+        os.makedirs(run_score_dir, exist_ok=True)
+        run_score_path = os.path.join(run_score_dir, "score.json")
+        with open(run_score_path, "w") as f:
+            json.dump(error_score, f, indent=2)
+        print(f"  [{arm_name}] FAIL: {e}", file=sys.stderr)
+        return error_score
+
+
+def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
+    """Inner implementation of run_arm — may raise exceptions."""
+
     arm = ARM_DEFINITIONS[arm_name]
     api_model = model
     canon_model = _canonical_agent_name(model)

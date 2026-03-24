@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:36:32Z", "benchmark": "type-coercion-comparison", "model": "llama-4-maverick", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/data.js\n/app/filter.js\n/app/server.js\n/app/utils.js\n\nCurrent test output (test.sh):\nServer running on po"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/filter.js"], "tokens_in": 251, "tokens_out": 229, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/data.js"], "tokens_in": 800, "tokens_out": 162, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/server.js", "/app/server.js"], "tokens_in": 1568, "tokens_out": 115, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/utils.js"], "tokens_in": 2353, "tokens_out": 109, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/'s/query.minRating", "/app/searchParams.get('min_rating');/query.minRating", "/app/parseInt(searchParams.get('min_rating'));/'", "/app/utils.js"], "tokens_in": 2712, "tokens_out": 274, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2998, "tokens_out": 62, "test_exit": 1}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/server.js", "/app/server.js'", "/app/results.filter(p", "/app/acceptable.includes(p.rating));/results", "/app/results.filter(p", "/app/p.rating", "/app/query.minRating);/'", "/app/filter.js", "/app/test.sh"], "tokens_in": 3195, "tokens_out": 955, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:37:50Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "silent"}

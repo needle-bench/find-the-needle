@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:44:01Z", "benchmark": "encoding-mojibake", "model": "gemini-3-flash-preview", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/CsvReader.java\n/app/app/CustomerRecord.java\n/app/app/Main.java\n/app/app/ReportGenerator.java\n\nCurren"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app"], "tokens_in": 387, "tokens_out": 12, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/customers.csv"], "tokens_in": 480, "tokens_out": 16, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/CsvReader.java"], "tokens_in": 724, "tokens_out": 17, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/ReportGenerator.java"], "tokens_in": 1325, "tokens_out": 17, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/'s/Charset.forName(\"ISO-8859-1\")/java.nio.charset.StandardCharsets.UTF_8/'", "/app/app/CsvReader.java", "/app/test.sh"], "tokens_in": 1749, "tokens_out": 55, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:44:08Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

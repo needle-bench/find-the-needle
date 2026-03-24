@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:04:17Z", "benchmark": "wrong-operator-discount", "model": "deepseek-v3-2", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/cart.py\n/app/catalog.py\n/app/formatter.py\n/app/main.py\n/app/pricing.py\n\nCurrent test output (test.sh):\nF"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/"], "tokens_in": 431, "tokens_out": 64, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 746, "tokens_out": 47, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T22:04:23Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

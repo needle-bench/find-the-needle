@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:11:16Z", "benchmark": "haystack-boot", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/.haystack/", "/workspace/.haystack/needles"], "tokens_in": 878, "tokens_out": 112, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/.haystack/needles/"], "tokens_in": 1321, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.haystack/needles/counter", "/workspace/.haystack/needles/issues.jsonl", "/workspace/.haystack/.language", "/workspace/.haystack/.primefile", "/workspace/.haystack/HUMANFILE", "/workspace/.haystack/boot.md"], "tokens_in": 1512, "tokens_out": 277, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/", "/workspace"], "tokens_in": 2338, "tokens_out": 133, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/test.sh", "/workspace"], "tokens_in": 3500, "tokens_out": 101, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:11:38Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

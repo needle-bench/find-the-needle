@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:42:43Z", "benchmark": "deadlock-transfer", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/'*/.*'"], "tokens_in": 32, "tokens_out": 22, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 155, "tokens_out": 14, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 424, "tokens_out": 11, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/TransferService.java"], "tokens_in": 1713, "tokens_out": 14, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/Account.java"], "tokens_in": 2178, "tokens_out": 13, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/(from.getLock())", "/app/from.getId().compareTo(to.getId())", "/app/(first.getLock())", "/app/app/TransferService.java", "/app/(to.getLock())", "/app/(second.getLock())", "/app/app/TransferService.java", "/app/app/TransferService.java"], "tokens_in": 2552, "tokens_out": 118, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3156, "tokens_out": 11, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:42:54Z", "test_exit": 0, "total_turns": 7, "correct_lines": 3, "arm": "bare"}

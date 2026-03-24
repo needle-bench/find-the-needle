@@ -28,7 +28,6 @@ import Base from '../layouts/Base.astro';
             <th class="sticky-col col-boot" data-key="boot" data-type="tier">Boot</th>
             <th class="sticky-col col-post" data-key="post" data-type="boolean">POST</th>
             <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean">Entity</th>
-            <th class="sticky-col col-resolved" data-key="resolvedCount" data-type="number">Solved</th>
             <th class="sticky-col col-bare" data-key="bareResolved" data-type="number">Bare</th>
             <th class="sticky-col col-os" data-key="silentResolved" data-type="number">OS</th>
             <th class="sticky-col col-delta" data-key="expDelta" data-type="number">&Delta;</th>
@@ -39,7 +38,7 @@ import Base from '../layouts/Base.astro';
           </tr>
         </thead>
         <tbody id="lb-body">
-          <tr><td colspan="12" class="empty">Loading...</td></tr>
+          <tr><td colspan="11" class="empty">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -83,7 +82,6 @@ import Base from '../layouts/Base.astro';
   .col-boot   { min-width: 72px; width: 72px; }
   .col-post   { min-width: 36px; width: 36px; text-align: center; }
   .col-entity { min-width: 36px; width: 36px; text-align: center; }
-  .col-resolved { min-width: 80px; width: 80px; text-align: center; }
   .col-bare   { min-width: 50px; width: 50px; text-align: center; }
   .col-os     { min-width: 50px; width: 50px; text-align: center; }
   .col-delta  { min-width: 60px; width: 60px; text-align: center; }
@@ -169,7 +167,7 @@ import Base from '../layouts/Base.astro';
   #leaderboard tr:nth-child(even) td.sticky-col { background-color: color-mix(in srgb, var(--surface) 97%, white); position: sticky; z-index: 2; }
   #leaderboard tr:hover td { background: rgba(255,255,255,0.06); }
   #leaderboard tr:hover td.sticky-col { background: color-mix(in srgb, var(--surface) 94%, white); position: sticky; z-index: 2; }
-  td.col-post, td.col-entity, td.col-resolved, td.col-bare, td.col-os, td.col-delta { text-align: center; }
+  td.col-post, td.col-entity, td.col-bare, td.col-os, td.col-delta { text-align: center; }
   td.col-cost { text-align: right; font-size: 0.75rem; }
   td.col-tokens, td.col-turns, td.col-time { text-align: right; }
   td.col-time { border-right: 2px solid rgba(212,160,84,0.4); }
@@ -460,7 +458,6 @@ import Base from '../layouts/Base.astro';
           case 'boot': av = a.tier; bv = b.tier; break;
           case 'post': av = a.post ? 0 : 1; bv = b.post ? 0 : 1; break;
           case 'entityfile': av = a.entity ? 0 : 1; bv = b.entity ? 0 : 1; break;
-          case 'resolvedCount': av = a.resolved; bv = b.resolved; return sortAsc ? av - bv : bv - av;
           case 'bareResolved': av = a.bareResolved; bv = b.bareResolved; return sortAsc ? av - bv : bv - av;
           case 'silentResolved': av = a.silentResolved; bv = b.silentResolved; return sortAsc ? av - bv : bv - av;
           case 'expDelta': av = a.bareTested ? a.expDelta : -Infinity; bv = b.bareTested ? b.expDelta : -Infinity;
@@ -484,7 +481,7 @@ import Base from '../layouts/Base.astro';
 
     // ── Build tier header row ────────────────────────────────────────
     const tierRow = document.getElementById('lb-tier-row')!;
-    const stickyCls = ['col-model','col-boot','col-post','col-entity','col-resolved','col-bare','col-os','col-delta','col-cost','col-tokens','col-turns','col-time'];
+    const stickyCls = ['col-model','col-boot','col-post','col-entity','col-bare','col-os','col-delta','col-cost','col-tokens','col-turns','col-time'];
     for (const cls of stickyCls) {
       const th = document.createElement('th');
       th.className = 'sticky-col tier-sticky-placeholder ' + cls;
@@ -553,25 +550,6 @@ import Base from '../layouts/Base.astro';
       } else {
         r += '<td class="sticky-col col-post">' + (m.post ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
         r += '<td class="sticky-col col-entity">' + (m.entity ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
-      }
-
-      // Solved — with coverage indicator (merge standard + experiment benchmarks)
-      const testedBenches = new Set(Object.keys(m.benches));
-      for (const bench of Object.keys(m.experiment)) {
-        if (benchSet.has(bench)) testedBenches.add(bench);
-      }
-      const coverage = testedBenches.size;
-      const isFull = coverage === totalBenches;
-
-      if (isControl) {
-        r += '<td class="sticky-col col-resolved solved-zero">\u2014</td>';
-      } else if (coverage === 0) {
-        r += '<td class="sticky-col col-resolved solved-zero">\u2014</td>';
-      } else {
-        const ratio = totalBenches > 0 ? m.resolved / totalBenches : 0;
-        const sc = ratio >= 0.8 ? 'solved-high' : ratio >= 0.4 ? 'solved-mid' : ratio > 0 ? 'solved-low' : 'solved-zero';
-        const solvedText = m.resolved + '/' + totalBenches;
-        r += '<td class="sticky-col col-resolved ' + sc + '">' + solvedText + '</td>';
       }
 
       // BARE / OS / Delta / Cost columns
@@ -667,7 +645,7 @@ import Base from '../layouts/Base.astro';
       doSort();
       const tbody = document.getElementById('lb-body')!;
       if (!models.length && !controlModels.length) {
-        tbody.innerHTML = '<tr><td colspan="' + (11 + totalBenches) + '" class="empty">No data.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="' + (10 + totalBenches) + '" class="empty">No data.</td></tr>';
         return;
       }
       const rows: string[] = [];

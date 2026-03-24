@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:01:56Z", "benchmark": "import-cycle-startup", "model": "qwen3-coder-plus", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 283, "tokens_out": 190, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 634, "tokens_out": 129, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1012, "tokens_out": 133, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1402, "tokens_out": 146, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/."], "tokens_in": 1566, "tokens_out": 124, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1708, "tokens_out": 147, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T22:02:21Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

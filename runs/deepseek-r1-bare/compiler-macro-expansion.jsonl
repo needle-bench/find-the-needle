@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:11:34Z", "benchmark": "compiler-macro-expansion", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 102, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 693, "tokens_out": 337, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app"], "tokens_in": 756, "tokens_out": 451, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app"], "tokens_in": 815, "tokens_out": 303, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/.git/logs/HEAD", "/app/.git/logs/refs/heads/master", "/app/Dockerfile"], "tokens_in": 899, "tokens_out": 249, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1171, "tokens_out": 428, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:12:40Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

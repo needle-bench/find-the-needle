@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:54:31Z", "benchmark": "postgres-migration-schema-drift", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 93, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 603, "tokens_out": 317, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 665, "tokens_out": 403, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 728, "tokens_out": 371, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 800, "tokens_out": 303, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:55:27Z", "test_exit": 127, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

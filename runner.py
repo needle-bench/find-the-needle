@@ -320,9 +320,12 @@ def docker_exec(container, cmd):
     gh_token = os.environ.get("GH_NEEDLE_BENCH_PROOF", "")
     if gh_token:
         env_flags = ["-e", f"GH_NEEDLE_BENCH_PROOF={gh_token}"]
-    r = subprocess.run(["docker", "exec"] + env_flags + [container, "bash", "-c", cmd],
-                       capture_output=True, text=True, timeout=120)
-    return r.returncode, r.stdout[-4000:] if len(r.stdout) > 4000 else r.stdout, r.stderr[-2000:] if len(r.stderr) > 2000 else r.stderr
+    try:
+        r = subprocess.run(["docker", "exec"] + env_flags + [container, "bash", "-c", cmd],
+                           capture_output=True, text=True, timeout=120)
+        return r.returncode, r.stdout[-4000:] if len(r.stdout) > 4000 else r.stdout, r.stderr[-2000:] if len(r.stderr) > 2000 else r.stderr
+    except subprocess.TimeoutExpired:
+        return 124, "timeout: command exceeded 120s limit", ""
 
 
 def do_edit(container, path, old_str, new_str):
@@ -975,7 +978,19 @@ def run_benchmark(model, bench_name, bench_dir, provider):
 
 
 def list_benchmarks():
-    bench_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmarks")
+    """Return benchmark names from difficulty.json (canonical list).
+
+    Falls back to filesystem scan only if difficulty.json doesn't exist.
+    """
+    proj_root = os.path.dirname(os.path.abspath(__file__))
+    diff_path = os.path.join(proj_root, "difficulty.json")
+    if os.path.exists(diff_path):
+        with open(diff_path) as f:
+            data = json.load(f)
+        return sorted(data.get("benchmarks", {}).keys())
+
+    # Fallback: filesystem scan
+    bench_dir = os.path.join(proj_root, "benchmarks")
     names = []
     for name in sorted(os.listdir(bench_dir)):
         if name.startswith("_"):

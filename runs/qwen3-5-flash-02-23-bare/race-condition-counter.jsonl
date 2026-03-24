@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:40:07Z", "benchmark": "race-condition-counter", "model": "qwen3-5-flash-02-23", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 294, "tokens_out": 115, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app", "/app/\"*.py\"", "/app/\"*.js\"", "/app/\"*.md\"", "/app/\"*.txt\"", "/app/\"*.yaml\"", "/app/\"*.yml\""], "tokens_in": 642, "tokens_out": 164, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app"], "tokens_in": 1735, "tokens_out": 110, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app"], "tokens_in": 1794, "tokens_out": 122, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app"], "tokens_in": 1900, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2261, "tokens_out": 360, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:40:28Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

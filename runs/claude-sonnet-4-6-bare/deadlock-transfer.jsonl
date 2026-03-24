@@ -1,2 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T19:36:15Z", "benchmark": "deadlock-transfer", "model": "claude-sonnet-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 583, "tokens_out": 131, "test_exit": null}

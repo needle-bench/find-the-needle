@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:30:57Z", "benchmark": "api-version-field-drop", "model": "claude-sonnet-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 582, "tokens_out": 83, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 680, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 927, "tokens_out": 63, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 1157, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1260, "tokens_out": 66, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/*.go"], "tokens_in": 1567, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1641, "tokens_out": 54, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:31:15Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

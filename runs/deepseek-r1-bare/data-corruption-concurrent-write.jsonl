@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:17:38Z", "benchmark": "data-corruption-concurrent-write", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 372, "tokens_out": 466, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 394, "tokens_out": 101, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/"], "tokens_in": 477, "tokens_out": 58, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:20:04Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:12:04Z", "benchmark": "wal-fsync-ghost-ack", "model": "gemini-2-5-flash", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/client.go\n/workspace/main.go\n/workspace/server.go\n/workspace/store.go\n/workspace/wal.go\n\nCur"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 259, "tokens_out": 80, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/'WAL.sync'", "/workspace/wal.go"], "tokens_in": 1791, "tokens_out": 165, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 1978, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 2071, "tokens_out": 68, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 3589, "tokens_out": 146, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 0, "tokens_out": 0, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T22:12:16Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

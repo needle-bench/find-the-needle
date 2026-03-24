@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:33:13Z", "benchmark": "k8s-assume-cache-silent-drop", "model": "qwen3-5-flash-02-23", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 294, "tokens_out": 178, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 355, "tokens_out": 147, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 421, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 488, "tokens_out": 115, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/", "/workspace/\"*.txt\"", "/workspace/\"*.md\"", "/workspace/\"*.log\""], "tokens_in": 549, "tokens_out": 133, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 795, "tokens_out": 141, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:33:23Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:31:42Z", "benchmark": "cache-stale-invalidation", "model": "qwen3-5-plus-02-15", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 404, "tokens_out": 140, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 943, "tokens_out": 53, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1965, "tokens_out": 637, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:32:01Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

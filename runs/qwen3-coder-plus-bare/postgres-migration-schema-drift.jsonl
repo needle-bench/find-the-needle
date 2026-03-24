@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:15:33Z", "benchmark": "postgres-migration-schema-drift", "model": "qwen3-coder-plus", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 283, "tokens_out": 100, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 401, "tokens_out": 110, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T22:15:41Z", "test_exit": 127, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

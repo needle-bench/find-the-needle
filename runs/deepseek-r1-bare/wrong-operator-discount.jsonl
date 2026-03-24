@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:24:58Z", "benchmark": "wrong-operator-discount", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 372, "tokens_out": 499, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 400, "tokens_out": 95, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 504, "tokens_out": 56, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/*.py", "/app/*.sh"], "tokens_in": 806, "tokens_out": 307, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 885, "tokens_out": 377, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 961, "tokens_out": 359, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T07:26:05Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

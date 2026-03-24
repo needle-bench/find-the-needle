@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:13:54Z", "benchmark": "timezone-scheduling", "model": "gpt-4o", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/event_store.py\n/app/app/models.py\n/app/app/runner.py\n/app/app/scheduler.py\n\nCurrent test output (tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/*", "/app/app/*"], "tokens_in": 399, "tokens_out": 61, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/*", "/app/'", "/app/app/*", "/app/app/'"], "tokens_in": 482, "tokens_out": 80, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/test.sh", "/app/test.sh'"], "tokens_in": 591, "tokens_out": 34, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-23T07:13:58Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

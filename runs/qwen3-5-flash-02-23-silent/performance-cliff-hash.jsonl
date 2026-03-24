@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:37:43Z", "benchmark": "performance-cliff-hash", "model": "qwen3-5-flash-02-23", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# performance-cliff-hash\n\n## Project\n\nA Java inventory cache system (`perftest`) that stores products in a custom hash"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/Product.java"], "tokens_in": 817, "tokens_out": 255, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/category.hashCode();/return", "/app/sku.hashCode();/'", "/app/src/Product.java"], "tokens_in": 1218, "tokens_out": 106, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/Product.java"], "tokens_in": 1342, "tokens_out": 55, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1483, "tokens_out": 31, "test_exit": 1}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1959, "tokens_out": 104, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T07:37:51Z", "test_exit": 0, "total_turns": 5, "correct_lines": 1, "arm": "silent"}

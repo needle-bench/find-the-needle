@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:07:07Z", "benchmark": "off-by-one-pagination", "model": "grok-4-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 371, "tokens_out": 215, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 420, "tokens_out": 199, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T22:07:13Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

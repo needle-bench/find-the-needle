@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:07:16Z", "benchmark": "null-pointer-config", "model": "gemini-2-5-pro", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 32, "tokens_out": 389, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 66, "tokens_out": 291, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:07:28Z", "test_exit": 52, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

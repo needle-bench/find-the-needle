@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:32:54Z", "benchmark": "auth-bypass-path-traversal", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 371, "tokens_out": 315, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/", "/"], "tokens_in": 423, "tokens_out": 599, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app.orig", "/root", "/app", "/app.orig"], "tokens_in": 1015, "tokens_out": 686, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app", "/app/test.sh", "/app/.git", "/app", "/app/server"], "tokens_in": 1526, "tokens_out": 780, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:33:13Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:05:13Z", "benchmark": "haystack-boot", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 165, "tokens_out": 125, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 305, "tokens_out": 104, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/.git"], "tokens_in": 632, "tokens_out": 91, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.git/config"], "tokens_in": 971, "tokens_out": 122, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/'s/bench@needle-bench.cc/new-email@example.com/g'", "/workspace/.git/config"], "tokens_in": 1155, "tokens_out": 170, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/.git/config"], "tokens_in": 1340, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1462, "tokens_out": 91, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:05:30Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

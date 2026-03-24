@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:44:17Z", "benchmark": "memory-leak-event-listener", "model": "qwen3-5-plus-02-15", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 294, "tokens_out": 123, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 475, "tokens_out": 70, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 533, "tokens_out": 77, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 823, "tokens_out": 89, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 878, "tokens_out": 71, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T07:44:31Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

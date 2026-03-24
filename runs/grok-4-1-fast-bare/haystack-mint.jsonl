@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:42:59Z", "benchmark": "haystack-mint", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 371, "tokens_out": 442, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/.haystack", "/workspace/.haystack/needles", "/workspace/.haystack/needles"], "tokens_in": 600, "tokens_out": 339, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/.haystack/needles"], "tokens_in": 917, "tokens_out": 122, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.haystack/needles/counter", "/workspace/.haystack/needles/issues.jsonl", "/workspace/.", "/workspace/."], "tokens_in": 1052, "tokens_out": 505, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/.haystack/boot.md", "/workspace/.haystack/.language", "/workspace/.haystack/.primefile", "/workspace/.haystack/audit.jsonl", "/workspace/.haystack/identity_counter", "/workspace/test.sh", "/workspace/.git"], "tokens_in": 1412, "tokens_out": 587, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:43:16Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

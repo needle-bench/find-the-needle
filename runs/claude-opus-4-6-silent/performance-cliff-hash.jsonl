@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:23:18Z", "benchmark": "performance-cliff-hash", "model": "claude-opus-4-6", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# performance-cliff-hash\n\n## Project\n\nA Java inventory cache system (`perftest`) that stores products in a custom hash"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/Product.java", "/app/src/ProductCache.java", "/app/src/ProductGenerator.java", "/app/src/Main.java"], "tokens_in": 1140, "tokens_out": 208, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/category.hashCode();/return", "/app/sku.hashCode();/'", "/app/src/Product.java"], "tokens_in": 4365, "tokens_out": 253, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/Product.java"], "tokens_in": 4633, "tokens_out": 66, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app", "/app/test.sh"], "tokens_in": 5107, "tokens_out": 66, "test_exit": 1}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/ProductCache.java"], "tokens_in": 5635, "tokens_out": 134, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/src/ProductCache.java"], "tokens_in": 6924, "tokens_out": 84, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 7231, "tokens_out": 186, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:23:48Z", "test_exit": 0, "total_turns": 7, "correct_lines": 1, "arm": "silent"}

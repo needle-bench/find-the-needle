@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:01:52Z", "benchmark": "missing-input-validation", "model": "gemini-2-5-flash", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 27, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/inventory.ts"], "tokens_in": 123, "tokens_out": 50, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/server.ts"], "tokens_in": 552, "tokens_out": 56, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/routes.ts"], "tokens_in": 837, "tokens_out": 44, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1545, "tokens_out": 162, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T22:02:00Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

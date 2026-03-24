@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:48:27Z", "benchmark": "postgres-migration-schema-drift", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 93, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 612, "tokens_out": 85, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 716, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 799, "tokens_out": 65, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T21:48:42Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

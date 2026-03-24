@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:21:59Z", "benchmark": "wal-fsync-ghost-ack", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 91, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 667, "tokens_out": 388, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 851, "tokens_out": 106, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 954, "tokens_out": 617, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T07:22:52Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

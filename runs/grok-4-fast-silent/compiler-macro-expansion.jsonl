@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:55:46Z", "benchmark": "compiler-macro-expansion", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# compiler-macro-expansion\n\n## Project\n\nA Rust code generation engine (`codegen-engine`) that takes schema definitions"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 833, "tokens_out": 335, "test_exit": 2}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 965, "tokens_out": 251, "test_exit": 1}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/tmp/generated.rs"], "tokens_in": 3491, "tokens_out": 165, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3541, "tokens_out": 127, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T21:55:52Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:24:20Z", "benchmark": "race-condition-counter", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 188, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/", "/"], "tokens_in": 863, "tokens_out": 170, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app.orig", "/root", "/opt", "/tmp"], "tokens_in": 1742, "tokens_out": 76, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app", "/app.orig", "/root", "/opt", "/tmp", "/app.orig/", "/opt/", "/root/", "/tmp/"], "tokens_in": 3120, "tokens_out": 180, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/root/.gitconfig", "/app.orig/README.md", "/app.orig/Agentfile", "/app.orig/test.sh"], "tokens_in": 5388, "tokens_out": 207, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:24:38Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

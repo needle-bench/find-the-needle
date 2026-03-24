@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:46:19Z", "benchmark": "timing-attack-comparison", "model": "qwen3-5-flash-02-23", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# timing-attack-comparison\n\n## Project\n\nA Go authentication server (`authserver`) that stores user credentials as SHA-"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/auth/compare.go", "/app/app/auth/security.go"], "tokens_in": 730, "tokens_out": 205, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 2090, "tokens_out": 257, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:46:25Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

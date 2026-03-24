@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:43:07Z", "benchmark": "nginx-upstream-port-mismatch", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 69, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 543, "tokens_out": 61, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 686, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 921, "tokens_out": 65, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T21:43:21Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

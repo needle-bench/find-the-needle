@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:59:04Z", "benchmark": "retry-storm-duplicate-transfer", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 372, "tokens_out": 310, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 397, "tokens_out": 67, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 503, "tokens_out": 624, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 584, "tokens_out": 498, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/"], "tokens_in": 669, "tokens_out": 54, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T07:02:24Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

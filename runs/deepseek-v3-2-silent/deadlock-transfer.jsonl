@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:18:08Z", "benchmark": "deadlock-transfer", "model": "deepseek-v3-2", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/Account.java\n/app/app/Bank.java\n/app/app/Main.java\n/app/app/TransferResult.java\n/app/app/TransferSer"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 447, "tokens_out": 88, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 554, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 763, "tokens_out": 47, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 986, "tokens_out": 79, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T21:18:23Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

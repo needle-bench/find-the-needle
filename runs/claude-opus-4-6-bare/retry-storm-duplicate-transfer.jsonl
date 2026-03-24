@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:25:55Z", "benchmark": "retry-storm-duplicate-transfer", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/etc/", "/opt/", "/root/"], "tokens_in": 862, "tokens_out": 225, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/.gitconfig", "/root/"], "tokens_in": 1230, "tokens_out": 95, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/", "/", "/root/.gitconfig"], "tokens_in": 1572, "tokens_out": 128, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/"], "tokens_in": 2419, "tokens_out": 108, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace", "/workspace"], "tokens_in": 3935, "tokens_out": 116, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace", "/workspace/.", "/workspace/'./.git/*'", "/workspace", "/workspace/test.sh"], "tokens_in": 4261, "tokens_out": 113, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:26:21Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

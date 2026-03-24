@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:52:39Z", "benchmark": "haystack-boot", "model": "gpt-4-1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n\nCurrent test output (test.sh):\n0/5\n\n"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/"], "tokens_in": 91, "tokens_out": 14, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 334, "tokens_out": 17, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 370, "tokens_out": 16, "test_exit": 1}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 404, "tokens_out": 10, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:52:43Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

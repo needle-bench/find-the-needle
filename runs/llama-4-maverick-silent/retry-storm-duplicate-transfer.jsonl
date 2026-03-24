@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:23:41Z", "benchmark": "retry-storm-duplicate-transfer", "model": "llama-4-maverick", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/chaos_proxy.py\n/workspace/app/gateway.py\n/workspace/app/models.py\n/workspace/app/process"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/app/", "/workspace/app/models.py", "/workspace/app/processor.py", "/workspace/app/processor.py", "/workspace/app/chaos_proxy.py", "/workspace/app/chaos_proxy.py", "/workspace/app/"], "tokens_in": 251, "tokens_out": 650, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/gateway.py"], "tokens_in": 5013, "tokens_out": 322, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 6121, "tokens_out": 219, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:24:42Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

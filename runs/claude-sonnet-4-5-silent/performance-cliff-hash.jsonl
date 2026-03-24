@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:49:26Z", "benchmark": "performance-cliff-hash", "model": "claude-sonnet-4-5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# performance-cliff-hash\n\n## Project\n\nA Java inventory cache system (`perftest`) that stores products in a custom hash"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/\"*.java\""], "tokens_in": 1139, "tokens_out": 94, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/Product.java"], "tokens_in": 1282, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/ProductGenerator.java"], "tokens_in": 1748, "tokens_out": 205, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/Product.java", "/**", "/app/system.", "/app/Unit).", "/app/this.sku", "/app/this.name", "/app/this.category", "/app/this.price", "/app/this.quantity", "/**", "/app/ProductCache.", "/app/buckets.", "/app/sku.hashCode();", "/app/obj.getClass())", "/app/sku.equals(other.sku);", "/app/String.format(\"Product{sku='%s',", "/app/price=%.2f,"], "tokens_in": 2384, "tokens_out": 535, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app/test.sh"], "tokens_in": 2934, "tokens_out": 70, "test_exit": 1}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app", "/app/*.class", "/app/src/*.class", "/app/src/*.java"], "tokens_in": 3466, "tokens_out": 94, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3620, "tokens_out": 57, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:49:55Z", "test_exit": 0, "total_turns": 7, "correct_lines": 1, "arm": "silent"}

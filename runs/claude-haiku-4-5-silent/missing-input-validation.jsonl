@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:22:18Z", "benchmark": "missing-input-validation", "model": "claude-haiku-4-5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/dist/inventory.js\n/app/dist/inventory.d.ts\n/app/dist/utils.js\n/app/dist/utils.d.ts\n/app/dist/routes.js\n/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/test.sh"], "tokens_in": 1128, "tokens_out": 86, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-23T06:22:20Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

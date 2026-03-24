@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:09:00Z", "benchmark": "memory-leak-event-listener", "model": "qwen3-coder-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/monitor.js\n/app/app/processor.js\n/app/app/queue.js\n/app/app/server.js\n/app/app/utils.js\n\nCurrent tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/server.js"], "tokens_in": 399, "tokens_out": 71, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/processor.js"], "tokens_in": 1035, "tokens_out": 152, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/monitor.js"], "tokens_in": 1751, "tokens_out": 237, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/queue.js"], "tokens_in": 2346, "tokens_out": 27, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2612, "tokens_out": 217, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T22:09:25Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:30:53Z", "benchmark": "race-condition-counter", "model": "claude-haiku-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 582, "tokens_out": 87, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 684, "tokens_out": 156, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 1150, "tokens_out": 76, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1460, "tokens_out": 133, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:31:08Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

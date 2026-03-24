@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T04:59:04Z", "benchmark": "cache-stale-invalidation", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 164, "tokens_out": 297, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 727, "tokens_out": 125, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/cache./a", "/app/cache.delete('products:list')\"", "/app/app/server.py"], "tokens_in": 1876, "tokens_out": 461, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/cache./a", "/app/cache.delete(f'products:{product_id}')\"", "/app/app/server.py"], "tokens_in": 2080, "tokens_out": 2962, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2146, "tokens_out": 177, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T04:59:49Z", "test_exit": 0, "total_turns": 5, "correct_lines": 3, "arm": "silent"}

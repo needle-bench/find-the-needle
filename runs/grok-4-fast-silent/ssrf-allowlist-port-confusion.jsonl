@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T22:13:25Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/internal_service.py\n/workspace/app/server.py\n/workspace/app/validator.py\n\nCurrent test o"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 825, "tokens_out": 230, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 1346, "tokens_out": 182, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/urllib.parse", "/workspace/print(repr(urlparse('http://[::1]:8888/').hostname))\""], "tokens_in": 1690, "tokens_out": 843, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/urllib.parse", "/workspace/print(repr(urlparse('http://[0:0:0:0:0:0:0:1]:8888/').hostname))\""], "tokens_in": 1756, "tokens_out": 393, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/\"169.254.169.254\",/a\\", "/workspace/app/validator.py"], "tokens_in": 1848, "tokens_out": 815, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/'/\"169.254.169.254\",", "/workspace/app/validator.py"], "tokens_in": 1959, "tokens_out": 372, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 2058, "tokens_out": 58, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T22:13:49Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "silent"}

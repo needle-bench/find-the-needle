@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:47:21Z", "benchmark": "haystack-boot", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 10, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 62, "tokens_out": 11, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T05:47:23Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

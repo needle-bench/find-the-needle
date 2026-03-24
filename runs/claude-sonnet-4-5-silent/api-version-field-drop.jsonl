@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:31:21Z", "benchmark": "api-version-field-drop", "model": "claude-sonnet-4-5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/handlers.go\n/app/app/main.go\n/app/app/migration.go\n/app/app/models.go\n/app/app/store.go\n\nCurrent tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/test.sh", "/app/app/handlers.go", "/app/app/main.go", "/app/app/migration.go", "/app/app/models.go", "/app/app/store.go"], "tokens_in": 882, "tokens_out": 298, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:31:27Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

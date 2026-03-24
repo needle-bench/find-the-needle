@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:00:45Z", "benchmark": "haystack-mint", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n\nCurrent test output (test.sh):\n0/5\n\n"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 109, "tokens_out": 14, "test_exit": 1}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 142, "tokens_out": 38, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:00:46Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

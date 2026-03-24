@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:41:31Z", "benchmark": "memory-leak-event-listener", "model": "mistral-large", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 90, "tokens_out": 148, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/var", "/etc", "/opt", "/tmp"], "tokens_in": 245, "tokens_out": 90, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 342, "tokens_out": 76, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/root", "/usr/local", "/srv"], "tokens_in": 425, "tokens_out": 127, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/"], "tokens_in": 615, "tokens_out": 111, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T06:43:51Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:18:39Z", "benchmark": "off-by-one-pagination", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 186, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T09:20:49Z", "test_exit": 1, "total_turns": 1, "correct_lines": 0, "arm": "bare"}

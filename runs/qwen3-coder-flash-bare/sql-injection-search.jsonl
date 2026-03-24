@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:51:27Z", "benchmark": "sql-injection-search", "model": "qwen3-coder-flash", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 283, "tokens_out": 53, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/tmp", "/var", "/usr"], "tokens_in": 354, "tokens_out": 84, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 456, "tokens_out": 55, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/home", "/tmp", "/var"], "tokens_in": 529, "tokens_out": 63, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 614, "tokens_out": 184, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T06:51:36Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

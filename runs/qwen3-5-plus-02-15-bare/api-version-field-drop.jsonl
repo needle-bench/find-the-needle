@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:27:58Z", "benchmark": "api-version-field-drop", "model": "qwen3-5-plus-02-15", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 294, "tokens_out": 148, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/root", "/var", "/tmp", "/opt"], "tokens_in": 352, "tokens_out": 119, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/.gitconfig"], "tokens_in": 746, "tokens_out": 211, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 811, "tokens_out": 71, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T07:28:20Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

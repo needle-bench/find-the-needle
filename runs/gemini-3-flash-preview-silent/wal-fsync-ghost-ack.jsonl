@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:11:25Z", "benchmark": "wal-fsync-ghost-ack", "model": "gemini-3-flash-preview", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/client.go\n/workspace/main.go\n/workspace/server.go\n/workspace/store.go\n/workspace/wal.go\n\nCur"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/"], "tokens_in": 259, "tokens_out": 13, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 318, "tokens_out": 14, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:11:27Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

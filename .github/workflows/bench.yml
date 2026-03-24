@@ -137,7 +137,7 @@ jobs:
 
           # Retry push with backoff — concurrent runs will collide
           for attempt in 1 2 3 4 5; do
-            if git pull --rebase origin main 2>&1 && git push 2>&1; then
+            if git pull --rebase --autostash origin main 2>&1 && git push 2>&1; then
               echo "Push succeeded on attempt $attempt"
               break
             fi

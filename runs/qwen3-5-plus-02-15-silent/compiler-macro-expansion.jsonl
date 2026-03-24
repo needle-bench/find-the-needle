@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T07:34:11Z", "benchmark": "compiler-macro-expansion", "model": "qwen3-5-plus-02-15", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# compiler-macro-expansion\n\n## Project\n\nA Rust code generation engine (`codegen-engine`) that takes schema definitions"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/\"*.rs\""], "tokens_in": 780, "tokens_out": 167, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/schema.rs"], "tokens_in": 858, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 1582, "tokens_out": 35, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/runtime.rs"], "tokens_in": 2683, "tokens_out": 34, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 3750, "tokens_out": 34, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 4175, "tokens_out": 33, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T07:34:23Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

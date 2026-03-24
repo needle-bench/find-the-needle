@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:16:01Z", "benchmark": "timezone-scheduling", "model": "deepseek-r1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/event_store.py\n/app/app/models.py\n/app/app/runner.py\n/app/app/scheduler.py\n\nCurrent test output (tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/models.py"], "tokens_in": 668, "tokens_out": 139, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/event_store.py"], "tokens_in": 897, "tokens_out": 49, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 1174, "tokens_out": 47, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/window_start.date()/local_today", "/app/window_start.astimezone(tz).date()/g;", "/app/datetime(today_utc.year,", "/app/today_utc.month,", "/app/today_utc.day,/naive_scheduled", "/app/datetime(local_today.year,", "/app/local_today.month,", "/app/local_today.day,/g'", "/app/app/scheduler.py"], "tokens_in": 1856, "tokens_out": 539, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1997, "tokens_out": 516, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-23T07:16:49Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

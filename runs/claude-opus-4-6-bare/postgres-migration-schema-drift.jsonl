@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:23:49Z", "benchmark": "postgres-migration-schema-drift", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/etc/", "/opt/", "/root/"], "tokens_in": 862, "tokens_out": 237, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/", "/home/", "/tmp/", "/root/"], "tokens_in": 1216, "tokens_out": 175, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 2311, "tokens_out": 185, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/test.sh", "/workspace/app/main.go", "/workspace/start.sh", "/workspace/migrations/*.sql"], "tokens_in": 2814, "tokens_out": 198, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:24:09Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

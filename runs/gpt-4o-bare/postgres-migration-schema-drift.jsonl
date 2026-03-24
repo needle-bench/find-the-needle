@@ -1,2 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T06:53:24Z", "benchmark": "postgres-migration-schema-drift", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "run.end", "timestamp": "2026-03-23T06:55:25Z", "test_exit": 127, "total_turns": 0, "correct_lines": 0, "arm": "bare"}

@@ -1,2 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-23T07:16:14Z", "benchmark": "wal-fsync-ghost-ack", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "run.end", "timestamp": "2026-03-23T07:18:17Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0, "arm": "bare"}

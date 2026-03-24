@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T21:08:58Z", "benchmark": "api-version-field-drop", "model": "devstral-medium", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/handlers.go\n/app/app/main.go\n/app/app/migration.go\n/app/app/models.go\n/app/app/store.go\n\nCurrent tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app"], "tokens_in": 354, "tokens_out": 85, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/models.go"], "tokens_in": 527, "tokens_out": 68, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/models.go"], "tokens_in": 1256, "tokens_out": 192, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/u.PhoneNumber,/a\\\\tAvatarURL:", "/app/u.AvatarURL,\\n\\tBio:", "/app/u.Bio,\\n\\tLocation:", "/app/u.Location,'", "/app/app/models.go"], "tokens_in": 1455, "tokens_out": 61, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1523, "tokens_out": 71, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-21T21:09:06Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

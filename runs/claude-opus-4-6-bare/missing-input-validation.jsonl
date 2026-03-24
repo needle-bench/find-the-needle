@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T09:16:52Z", "benchmark": "missing-input-validation", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/opt/", "/etc/", "/root/", "/"], "tokens_in": 862, "tokens_out": 274, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 1923, "tokens_out": 132, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 5382, "tokens_out": 151, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/*.ts", "/app/dist/*", "/app/test.sh", "/app/package.json", "/app.orig", "/app", "/app"], "tokens_in": 8081, "tokens_out": 229, "test_exit": 1}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app.orig", "/app"], "tokens_in": 8406, "tokens_out": 77, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app.orig/inventory.ts", "/app/inventory.ts", "/app.orig/routes.ts", "/app/routes.ts", "/app.orig/server.ts", "/app/server.ts", "/app.orig/utils.ts", "/app/utils.ts", "/app.orig/types.ts", "/app/types.ts", "/app.orig/test.sh", "/app/test.sh"], "tokens_in": 8498, "tokens_out": 305, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T09:17:19Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

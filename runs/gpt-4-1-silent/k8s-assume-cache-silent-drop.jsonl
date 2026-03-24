@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:53:39Z", "benchmark": "k8s-assume-cache-silent-drop", "model": "gpt-4-1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/main.go\n\nCurrent test output (test.sh):\nafter assume: version=5 data=\"assumed-by-scheduler\"\n"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/"], "tokens_in": 138, "tokens_out": 28, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 1215, "tokens_out": 12, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 1519, "tokens_out": 17, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 1924, "tokens_out": 16, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/;", "/workspace/test.sh"], "tokens_in": 2395, "tokens_out": 18, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:53:44Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

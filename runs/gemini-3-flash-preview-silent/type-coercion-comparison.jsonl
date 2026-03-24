@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-22T06:11:00Z", "benchmark": "type-coercion-comparison", "model": "gemini-3-flash-preview", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/data.js\n/app/filter.js\n/app/server.js\n/app/utils.js\n\nCurrent test output (test.sh):\nServer running on po"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/server.js", "/app/filter.js", "/app/data.js", "/app/test.sh"], "tokens_in": 143, "tokens_out": 44, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-22T06:11:01Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}
