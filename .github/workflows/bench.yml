@@ -1,0 +1,154 @@
+name: Bench — Single Model
+
+# One model. All benchmarks. Both arms. Results committed.
+#
+# Usage:
+#   gh workflow run bench.yml -f model=anthropic/claude-sonnet-4-6
+#   gh workflow run bench.yml -f model=openai/gpt-4.1
+#
+# To run all models:
+#   for m in $(cat models.txt); do gh workflow run bench.yml -f model="$m"; done
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "OpenRouter model ID (e.g. anthropic/claude-sonnet-4-6)"
+        required: true
+        type: string
+
+concurrency:
+  group: bench-${{ github.event.inputs.model }}
+  cancel-in-progress: true
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      MODEL: ${{ github.event.inputs.model }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate model input
+        run: |
+          if [ -z "$MODEL" ]; then
+            echo "::error::model input is required"
+            exit 1
+          fi
+          if ! echo "$MODEL" | grep -q '/'; then
+            echo "::error::model must include vendor prefix (e.g. anthropic/claude-sonnet-4-6)"
+            exit 1
+          fi
+          echo "Model: $MODEL"
+
+      - name: Run bare arm
+        run: |
+          echo "::group::Bare arm — $MODEL"
+          python3 run_arms.py \
+            --model "$MODEL" \
+            --provider openrouter \
+            --all-benchmarks \
+            --arm bare \
+            2>&1 | tee bare.log || true
+          echo "::endgroup::"
+
+          CANON=$(python3 -c "import re; print(re.sub(r'[_.]', '-', '$MODEL'.split('/')[-1].lower()))")
+          echo "Bare score files:"
+          ls runs/${CANON}-bare/*.score.json 2>/dev/null | wc -l
+
+      - name: Run silent arm
+        run: |
+          echo "::group::Silent arm — $MODEL"
+          python3 run_arms.py \
+            --model "$MODEL" \
+            --provider openrouter \
+            --all-benchmarks \
+            --arm silent \
+            2>&1 | tee silent.log || true
+          echo "::endgroup::"
+
+          CANON=$(python3 -c "import re; print(re.sub(r'[_.]', '-', '$MODEL'.split('/')[-1].lower()))")
+          echo "Silent score files:"
+          ls runs/${CANON}-silent/*.score.json 2>/dev/null | wc -l
+
+      - name: Summary
+        run: |
+          CANON=$(python3 -c "import re; print(re.sub(r'[_.]', '-', '$MODEL'.split('/')[-1].lower()))")
+          echo "## $MODEL" >> $GITHUB_STEP_SUMMARY
+
+          BARE_TOTAL=$(ls runs/${CANON}-bare/*.score.json 2>/dev/null | wc -l)
+          BARE_PASS=$(python3 -c "import glob,json; print(sum(1 for f in glob.glob('runs/${CANON}-bare/*.score.json') if json.load(open(f)).get('resolved')))")
+          SILENT_TOTAL=$(ls runs/${CANON}-silent/*.score.json 2>/dev/null | wc -l)
+          SILENT_PASS=$(python3 -c "import glob,json; print(sum(1 for f in glob.glob('runs/${CANON}-silent/*.score.json') if json.load(open(f)).get('resolved')))")
+
+          echo "| Arm | Resolved | Total |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Bare | $BARE_PASS | $BARE_TOTAL |" >> $GITHUB_STEP_SUMMARY
+          echo "| Silent | $SILENT_PASS | $SILENT_TOTAL |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Compute artifact name
+        id: names
+        run: |
+          CANON=$(python3 -c "import re; print(re.sub(r'[_.]', '-', '$MODEL'.split('/')[-1].lower()))")
+          echo "canon=$CANON" >> "$GITHUB_OUTPUT"
+          echo "artifact=bench--${MODEL//\//-}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.names.outputs.artifact }}
+          path: |
+            runs/${{ steps.names.outputs.canon }}-bare/
+            runs/${{ steps.names.outputs.canon }}-silent/
+          retention-days: 90
+
+      - name: Consolidate and commit
+        run: |
+          python3 consolidate_scores.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          CANON=$(python3 -c "import re; print(re.sub(r'[_.]', '-', '$MODEL'.split('/')[-1].lower()))")
+
+          # Only add THIS model's results + consolidated JSONs
+          git add "runs/${CANON}-bare/" "runs/${CANON}-silent/" 2>/dev/null || true
+          git add public/scores.json public/experiment-scores.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "bench: $MODEL — bare + silent results [skip ci]"
+            git pull --rebase origin main || true
+            git push
+          fi
+
+      - name: Build and deploy site
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/configure-pages@v5
+        if: success()
+
+      - uses: actions/upload-pages-artifact@v3
+        if: success()
+        with:
+          path: dist
+
+      - uses: actions/deploy-pages@v4
+        if: success()
+        id: deploy
