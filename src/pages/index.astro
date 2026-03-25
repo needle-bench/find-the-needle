@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="needle-bench — find the needle" description="27 models. 1574 runs. One prompt: find the needle.">
+<Base title="needle-bench — find the needle" description="25 models. 1,600 runs. One prompt: find the needle.">
   <div class="page-header">
     <div class="page-header-left">
       <h1>needle-bench</h1>
@@ -16,7 +16,10 @@ import Base from '../layouts/Base.astro';
 
   <main>
     <div class="lb-toolbar">
-      <p class="muted">Unified test matrix. Left pane is sticky. Drag right to scroll the heatmap. Click any header to sort.</p>
+      <div class="experiment-info">
+        <p><strong>Two-arm experiment.</strong> 25 models &times; 32 benchmarks &times; 2 arms = 1,600 runs.</p>
+        <p class="muted">Each model receives one prompt: &ldquo;find the needle.&rdquo; <strong>Bare</strong>: generic system prompt + bash. <strong>OS</strong>: same prompt + bash, but project context (README, file listing, test output) silently injected. The model can&rsquo;t tell which arm it&rsquo;s in. <strong>&Delta;</strong>: percentage point lift from the invisible OS. Click any header to sort.</p>
+      </div>
     </div>
 
     <div class="leaderboard-container" id="lb-container">
@@ -43,6 +46,31 @@ import Base from '../layouts/Base.astro';
       </table>
     </div>
     <p class="muted" id="last-updated" style="margin-top:0.5rem;font-size:0.75rem;"></p>
+
+    <section class="results-summary">
+      <h2>Results</h2>
+      <p>Across 25 models and 32 benchmarks, silent context injection improved resolve rates by an average of <strong>+33 percentage points</strong>. The effect was consistent across all vendors (Anthropic, Google, OpenAI, xAI, DeepSeek, Mistral, Meta, Qwen).</p>
+
+      <h3>Key findings</h3>
+      <ul>
+        <li><strong>Elite tier</strong> (opus, grok-4.1-fast, deepseek-v3.2): 94&ndash;100% bare, 97&ndash;100% OS. The OS reduces turns and cost without improving accuracy.</li>
+        <li><strong>Mid tier</strong> (haiku, mistral-large, gemini-2.5-flash, devstral): 3&ndash;44% bare &rarr; 61&ndash;88% OS. The OS transforms unusable models into productive ones.</li>
+        <li><strong>Cost efficiency</strong>: haiku + OS at $0.01/bench (88% resolve) outperforms bare gpt-4.1 at $0.07/bench (77% resolve).</li>
+        <li><strong>Token economy</strong>: Silent context adds ~200 tokens to the system prompt but eliminates 5&ndash;30 turns of blind exploration, reducing total token cost for most models.</li>
+      </ul>
+
+      <h3>Methodology</h3>
+      <ul>
+        <li>All runs via <a href="https://openrouter.ai">OpenRouter</a> for fair cross-vendor comparison.</li>
+        <li>32 Docker-containerized benchmarks with real bugs across easy, medium, and hard tiers.</li>
+        <li>Each benchmark has a deterministic test: <code>test.sh</code> exits 0 = fixed, 1 = still broken.</li>
+        <li>Both arms use identical tools (bash only) and identical user prompt (&ldquo;find the needle.&rdquo;).</li>
+        <li>Silent arm injects: project README (30 lines), source file listing (30 files), current test output (20 lines).</li>
+        <li>Score files, run logs, and CI workflows are public at <a href="https://github.com/os-tack/find-the-needle">os-tack/find-the-needle</a>.</li>
+      </ul>
+
+      <p class="muted">Last updated: March 2026. Contribute a benchmark: <a href="/contribute/">guide</a>. Full methodology: <a href="/about/">about</a>.</p>
+    </section>
   </main>
 </Base>
 
@@ -197,6 +225,23 @@ import Base from '../layouts/Base.astro';
   .rank-1 .model-link, .rank-1 .model-name { color: var(--text); }
   .rank-2 .model-link, .rank-2 .model-name { color: var(--text); }
   .rank-3 .model-link, .rank-3 .model-name { color: var(--text); }
+
+  .experiment-info {
+    font-size: 0.85rem; max-width: 800px; margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .experiment-info p { margin: 0 0 0.25rem; }
+
+  .results-summary {
+    max-width: 800px; margin: 2rem auto; padding: 0 2rem; font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .results-summary h2 { margin-top: 0; }
+  .results-summary h3 { margin: 1.25rem 0 0.5rem; font-size: 1rem; }
+  .results-summary ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+  .results-summary li { margin-bottom: 0.35rem; }
+  .results-summary a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .results-summary a:hover { color: var(--accent); }
 
   @media (max-width: 600px) {
     main { padding: 0.5rem; }
