@@ -1,7 +1,7 @@
 --- a/src/Product.java
 +++ b/src/Product.java
 @@ -25,9 +25,8 @@
-
+ 
      /**
 -     * Custom hashCode for use in our ProductCache.
 -     * Groups products by their category for cache-friendly bucket placement.
@@ -15,7 +15,7 @@
 --- a/src/ProductCache.java
 +++ b/src/ProductCache.java
 @@ -90,19 +90,5 @@
-
+ 
 -    /**
 -     * Get the bucket index for a SKU lookup.
 -     * Must match the same bucket as put() for the same SKU.
@@ -40,11 +40,11 @@
 +++ b/test.sh
 @@ -7,6 +7,9 @@
  set -e
-
+ 
  FAIL=0
 +
 +# Recompile from source (needed after patching)
 +javac -d /app/classes /app/src/*.java 2>&1
-
+ 
  echo "=== Performance Cliff Hash Map Test ==="
-
+ 

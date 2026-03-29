@@ -9,7 +9,7 @@
 -    let bytes_read = file.read(&mut buffer)?;
 +    let mut buffer = Vec::new();
 +    file.read_to_end(&mut buffer)?;
-
+ 
 -    let data = &buffer[..bytes_read];
 +    let data = &buffer;
      let transformed = transform::process(data);
@@ -17,12 +17,12 @@
 +++ b/test.sh
 @@ -6,6 +6,10 @@
  set -e
-
+ 
  FAIL=0
 +
 +# Rebuild from patched source
 +cd /app && cargo build --release 2>&1
 +cp /app/target/release/fileproc /usr/local/bin/fileproc
-
+ 
  # Generate a test file larger than 64KB (the internal buffer size)
  python3 -c "

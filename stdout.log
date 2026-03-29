@@ -1,0 +1,19 @@
+Running control arms for 1 benchmarks
+Results will be written to: /Users/scottmeyer/projects/needle-bench/runs/control
+
+============================================================
+  nginx-upstream-port-mismatch
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+========================================================================
+  CONTROL SUMMARY
+========================================================================
+Benchmark                                  Baseline   Solution
+---------------------------------------- ---------- ----------
+nginx-upstream-port-mismatch                 FAIL ✓     PASS ✓
+
+  Valid: 1  Invalid: 0  Skipped: 0
+  Total: 1

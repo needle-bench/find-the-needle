@@ -29,7 +29,7 @@
 @@ -4,6 +4,12 @@
  # Exit 1 = bug still present (fail)
  set -e
-
+ 
 +# Ensure PostgreSQL tools are in PATH
 +export PATH="/usr/lib/postgresql/15/bin:$PATH"
 +
@@ -37,5 +37,5 @@
 +cd /workspace/app && go build -mod=vendor -o /workspace/orders-api . && cd /workspace
 +
  echo "=== postgres-migration-schema-drift test ==="
-
+ 
  PGDATA=/var/lib/postgresql/data

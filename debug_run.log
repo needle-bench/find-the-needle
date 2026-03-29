@@ -1,0 +1,281 @@
+Running control arms for 32 benchmarks
+Results will be written to: /Users/scottmeyer/projects/needle-bench/runs/control
+
+============================================================
+  api-version-field-drop
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  auth-bypass-path-traversal
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  cache-stale-invalidation
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  compiler-macro-expansion
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  data-corruption-concurrent-write
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  deadlock-transfer
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  encoding-mojibake
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  goroutine-leak-handler
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  import-cycle-startup
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  k8s-assume-cache-silent-drop
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  k8s-scheduler-shutdown-deadlock
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  kernel-panic-ioctl
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  memory-leak-event-listener
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  missing-input-validation
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  nginx-upstream-port-mismatch
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control...   PATCH FAILED: git apply: error: invalid path '../etc/nginx/sites-available/default'
+  PATCH FAILED: patch -p1: 
+DEBUG: git apply rc=128 stderr=error: invalid path '../etc/nginx/sites-available/default' stdout=
+DEBUG: patch rc=1 stderr= stdout=can't find file to patch at input line 3
+Perhaps you used the wrong -p or --strip option?
+The text leading up to this was:
+--------------------------
+|--- a/../etc/nginx/sites-available/default
+|+++ b/../etc/nginx/sites-available/default
+--------------------------
+File to patch: 
+Skip this patch? [y] 
+Skipping patch.
+1 out of 1 hunk ignored
+FAIL (UNEXPECTED)
+
+============================================================
+  null-pointer-config
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  off-by-one-array-slice
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  off-by-one-pagination
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  performance-cliff-hash
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  postgres-migration-schema-drift
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  race-condition-counter
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  rate-limit-bypass-header
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  retry-storm-duplicate-transfer
+============================================================
+  Building image... done
+  Running no-agent control... PASS (UNEXPECTED)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  silent-data-corruption
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  split-brain-leader-election
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  sql-injection-search
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  ssrf-allowlist-port-confusion
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  timezone-scheduling
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  timing-attack-comparison
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  type-coercion-comparison
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  wal-fsync-ghost-ack
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+============================================================
+  wrong-operator-discount
+============================================================
+  Building image... done
+  Running no-agent control... FAIL (expected)
+  Running solution-applied control... PASS (expected)
+
+========================================================================
+  CONTROL SUMMARY
+========================================================================
+Benchmark                                  Baseline   Solution
+---------------------------------------- ---------- ----------
+api-version-field-drop                       FAIL ✓     PASS ✓
+auth-bypass-path-traversal                   FAIL ✓     PASS ✓
+cache-stale-invalidation                     FAIL ✓     PASS ✓
+compiler-macro-expansion                     FAIL ✓     PASS ✓
+data-corruption-concurrent-write             FAIL ✓     PASS ✓
+deadlock-transfer                            FAIL ✓     PASS ✓
+encoding-mojibake                            FAIL ✓     PASS ✓
+goroutine-leak-handler                       FAIL ✓     PASS ✓
+import-cycle-startup                         FAIL ✓     PASS ✓
+k8s-assume-cache-silent-drop                 FAIL ✓     PASS ✓
+k8s-scheduler-shutdown-deadlock              FAIL ✓     PASS ✓
+kernel-panic-ioctl                           FAIL ✓     PASS ✓
+memory-leak-event-listener                   FAIL ✓     PASS ✓
+missing-input-validation                     FAIL ✓     PASS ✓
+nginx-upstream-port-mismatch                 FAIL ✓     FAIL ✗  <- INVALID
+null-pointer-config                          FAIL ✓     PASS ✓
+off-by-one-array-slice                       FAIL ✓     PASS ✓
+off-by-one-pagination                        FAIL ✓     PASS ✓
+performance-cliff-hash                       FAIL ✓     PASS ✓
+postgres-migration-schema-drift              FAIL ✓     PASS ✓
+race-condition-counter                       FAIL ✓     PASS ✓
+rate-limit-bypass-header                     FAIL ✓     PASS ✓
+retry-storm-duplicate-transfer               PASS ✗     PASS ✓  <- INVALID
+silent-data-corruption                       FAIL ✓     PASS ✓
+split-brain-leader-election                  FAIL ✓     PASS ✓
+sql-injection-search                         FAIL ✓     PASS ✓
+ssrf-allowlist-port-confusion                FAIL ✓     PASS ✓
+timezone-scheduling                          FAIL ✓     PASS ✓
+timing-attack-comparison                     FAIL ✓     PASS ✓
+type-coercion-comparison                     FAIL ✓     PASS ✓
+wal-fsync-ghost-ack                          FAIL ✓     PASS ✓
+wrong-operator-discount                      FAIL ✓     PASS ✓
+
+  Valid: 30  Invalid: 2  Skipped: 0
+  Total: 32

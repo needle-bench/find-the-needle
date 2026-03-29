@@ -183,6 +183,8 @@ def run_solution_applied(bench_name, bench_dir):
             rc2, stdout2, stderr2 = docker_exec(
                 container, f"cd {workdir} && patch -p1 < /tmp/solution.patch"
             )
+            print(f"DEBUG: git apply rc={rc} stderr={stderr.strip()} stdout={stdout.strip()}")
+            print(f"DEBUG: patch rc={rc2} stderr={stderr2.strip()} stdout={stdout2.strip()}")
             if rc2 != 0:
                 print(f"  PATCH FAILED: git apply: {stderr.strip()}", file=sys.stderr)
                 print(f"  PATCH FAILED: patch -p1: {stderr2.strip()}", file=sys.stderr)

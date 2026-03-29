@@ -14,7 +14,7 @@ sleep 2
 
 # Wait for all services to be healthy
 for svc_port in 8080 8081 8082; do
-    for i in 1 2 3 4 5; do
+    for i in $(seq 1 20); do
         if curl -sf http://localhost:$svc_port/health > /dev/null 2>&1; then
             break
         fi
@@ -34,7 +34,7 @@ curl -s -X POST http://localhost:8082/config \
 # creates a race window.  Sending 5 simultaneous requests makes it virtually
 # certain that at least two will enter the window before the first records
 # the idempotency key.
-for i in 1 2 3 4 5; do
+for i in $(seq 1 20); do
     curl -s -X POST http://localhost:8082/execute \
         -H "Content-Type: application/json" \
         -d '{"from":"A","to":"B","amount":500,"idempotency_key":"txn-001"}' > /dev/null &

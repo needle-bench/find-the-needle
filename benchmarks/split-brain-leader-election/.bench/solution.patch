@@ -2,7 +2,7 @@
 +++ b/app/cluster/node.go
 @@ -121,7 +121,9 @@
  	fmt.Printf("Node %d: received %d/%d votes for term %d\n", n.ID, finalVotes, totalNodes, currentTerm)
-
+ 
 -	// Check if we have enough votes for a quorum
 -	if finalVotes >= totalNodes/2 {
 +	// Majority requires strictly more than half the cluster.
@@ -16,11 +16,11 @@
 +++ b/test.sh
 @@ -5,6 +5,9 @@
  set -e
-
+ 
  FAIL=0
 +
 +# Rebuild from patched source
 +cd /app/app && go build -o /usr/local/bin/split-brain . 2>&1 && cd /app
-
+ 
  echo "=== Split-Brain Leader Election Test ==="
-
+ 

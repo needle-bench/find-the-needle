@@ -6,7 +6,7 @@
  		return fmt.Errorf("WAL append: %w", err)
  	}
  	w.currentOffset += int64(n)
-
+ 
 -	// Entry is in the buffer — it will be fsynced by the background
 -	// goroutine on the next cycle. Returning nil here means the
 -	// caller can treat this as acknowledged.
@@ -28,7 +28,7 @@
 @@ -91,5 +91,9 @@
  		}
  	}
-
+ 
 -	fmt.Printf("summary: %d OK, %d LOST out of %d acked\n", ok, lost, len(keys))
 +	if lost > 0 {
 +		fmt.Printf("summary: %d OK, %d LOST out of %d acked\n", ok, lost, len(keys))
