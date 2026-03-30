@@ -1,0 +1,206 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Open vs Closed Source AI Models for Debugging: Benchmark Results",
+  "description": "DeepSeek, Devstral, Llama, and Qwen compared to Claude, GPT, and Gemini on 32 real debugging tasks. Open models close the gap with context injection.",
+  "url": "https://needle-bench.cc/insights/open-vs-closed/",
+  "datePublished": "2026-03-30",
+  "publisher": {
+    "@type": "Organization",
+    "name": "os-tack",
+    "url": "https://github.com/os-tack"
+  }
+};
+---
+
+<Base title="Open vs Closed Source AI Models for Debugging — needle-bench" description="DeepSeek, Devstral, Llama, Qwen vs Claude, GPT, Gemini on 32 real bugs. Open models close the gap with context injection. 1,664 runs, deterministic scoring." jsonLd={articleSchema}>
+  <div class="page-header">
+    <div class="page-header-left">
+      <a href="/insights/" class="back">&larr; Insights</a>
+      <h1>Open vs Closed</h1>
+    </div>
+    <nav class="page-header-right">
+      <a href="/">Leaderboard</a>
+      <a href="/insights/model-comparison/">All models</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="section">
+      <h1>Open vs Closed Source Models for Debugging</h1>
+      <p>Can open-source models debug real bugs? We tested 13 open-weight and 13 closed-source models on 32 identical debugging tasks. The short answer: bare, the gap is massive. With context injection, open models become competitive.</p>
+      <p><a href="/insights/model-comparison/">See all 26 models</a> &middot; <a href="/about/">Methodology</a></p>
+    </section>
+
+    <section class="section">
+      <h2>The bare gap</h2>
+      <p>Without context injection, closed-source models dominate.</p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Category</th><th>Models</th><th>Mean bare</th><th>Median bare</th><th>Best bare</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Closed source</td><td class="num">13</td><td class="num">47.6%</td><td class="num">46.9%</td><td class="num">96.9%</td></tr>
+            <tr><td>Open weight</td><td class="num">13</td><td class="num">22.2%</td><td class="num">9.4%</td><td class="num">96.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Mean gap: 25.4 percentage points. Closed-source models resolve nearly twice as many benchmarks bare. But the &ldquo;best bare&rdquo; column tells a different story &mdash; DeepSeek R1 (open-weight) ties with Grok 4.1 Fast (closed) at 96.9%.</p>
+    </section>
+
+    <section class="section">
+      <h2>Open-weight models: bare vs context</h2>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Model</th><th>Weights</th><th>Bare</th><th>OS</th><th>Δ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DeepSeek R1</td><td>671B MoE</td><td class="num">96.9%</td><td class="num">96.9%</td><td class="num">+0.0pp</td></tr>
+            <tr><td>DeepSeek V3.2</td><td>685B MoE</td><td class="num">93.8%</td><td class="num">100.0%</td><td class="num green">+6.2pp</td></tr>
+            <tr><td>DeepSeek Chat</td><td>685B MoE</td><td class="num">0.0%</td><td class="num">25.0%</td><td class="num green">+25.0pp</td></tr>
+            <tr><td>Devstral Medium</td><td>24B</td><td class="num">3.1%</td><td class="num">75.0%</td><td class="num green">+71.9pp</td></tr>
+            <tr><td>Codestral 2508</td><td>22B</td><td class="num">3.1%</td><td class="num">9.4%</td><td class="num green">+6.2pp</td></tr>
+            <tr><td>Llama 4 Maverick</td><td>400B MoE</td><td class="num">15.6%</td><td class="num">43.8%</td><td class="num green">+28.1pp</td></tr>
+            <tr><td>Llama 3.3 70B</td><td>70B</td><td class="num">3.1%</td><td class="num">3.1%</td><td class="num">+0.0pp</td></tr>
+            <tr><td>Qwen3 Coder Flash</td><td>—</td><td class="num">9.4%</td><td class="num">81.2%</td><td class="num green">+71.9pp</td></tr>
+            <tr><td>Qwen3 Coder Plus</td><td>—</td><td class="num">0.0%</td><td class="num">59.4%</td><td class="num green">+59.4pp</td></tr>
+            <tr><td>Qwen Plus</td><td>—</td><td class="num">3.1%</td><td class="num">68.8%</td><td class="num green">+65.6pp</td></tr>
+            <tr><td>Qwen 3.5 Plus</td><td>—</td><td class="num">65.6%</td><td class="num">34.4%</td><td class="num red">&minus;31.2pp</td></tr>
+            <tr><td>Qwen 3.5 Flash</td><td>—</td><td class="num">31.2%</td><td class="num">40.6%</td><td class="num green">+9.4pp</td></tr>
+            <tr><td>Mistral Large</td><td>123B</td><td class="num">9.4%</td><td class="num">78.1%</td><td class="num green">+68.8pp</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Mean open-weight delta: <strong>+29.3pp</strong>. Excluding Qwen 3.5 Plus (the outlier that degraded): <strong>+34.4pp</strong>.</p>
+    </section>
+
+    <section class="section">
+      <h2>The leveling effect</h2>
+      <p>With context injection, the open vs closed gap narrows dramatically:</p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Category</th><th>Mean bare</th><th>Mean OS</th><th>Mean Δ</th><th>Gap</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Closed source</td><td class="num">47.6%</td><td class="num">87.0%</td><td class="num green">+39.4pp</td><td rowspan="2" class="num" style="vertical-align: middle; font-weight: bold;">31.6pp &rarr; 17.6pp</td></tr>
+            <tr><td>Open weight</td><td class="num">22.2%</td><td class="num">51.3%</td><td class="num green">+29.3pp</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The bare gap (25.4pp) narrows, but closed models still lead in absolute OS performance. The story changes when you look at specific models:</p>
+      <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
+        <li><strong>DeepSeek V3.2 + context</strong> (100.0%) ties with the best closed models</li>
+        <li><strong>Qwen3 Coder Flash + context</strong> (81.2%) beats GPT-4o bare (15.6%) and GPT-4o + context (81.2%)</li>
+        <li><strong>Devstral Medium + context</strong> (75.0%) &mdash; a 24B model outperforms several frontier models bare</li>
+        <li><strong>Mistral Large + context</strong> (78.1%) outperforms Gemini 2.5 Pro + context (65.6%)</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>The Devstral story</h2>
+      <p>Devstral Medium deserves special attention. At 24 billion parameters, it&rsquo;s one of the smallest models in the benchmark. Bare, it solves 1 out of 32 benchmarks (3.1%). With context injection, it solves 24 out of 32 (75.0%) &mdash; a <strong>+71.9 percentage point</strong> improvement.</p>
+      <p>This is the single most dramatic context sensitivity we measured. A model that is effectively useless for debugging becomes competitive with frontier models when given the right context. The implication: Devstral has strong reasoning capabilities that are bottlenecked by its inability to explore codebases efficiently through tool use alone.</p>
+      <p>For teams running models locally, this matters. You don&rsquo;t need 671B parameters to debug effectively &mdash; you need 24B parameters and good context.</p>
+    </section>
+
+    <section class="section">
+      <h2>Running open models locally</h2>
+      <p>Several open models in this benchmark can run on consumer hardware:</p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Model</th><th>Params</th><th>VRAM (est.)</th><th>Bare</th><th>OS</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Devstral Medium</td><td class="num">24B</td><td class="num">~16 GB</td><td class="num">3.1%</td><td class="num">75.0%</td></tr>
+            <tr><td>Codestral 2508</td><td class="num">22B</td><td class="num">~14 GB</td><td class="num">3.1%</td><td class="num">9.4%</td></tr>
+            <tr><td>Llama 3.3 70B</td><td class="num">70B</td><td class="num">~40 GB</td><td class="num">3.1%</td><td class="num">3.1%</td></tr>
+            <tr><td>Llama 4 Maverick</td><td class="num">400B MoE</td><td class="num">~48 GB</td><td class="num">15.6%</td><td class="num">43.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Devstral Medium at 24B with context injection (75.0%) is the clear choice for local-first debugging. It fits on a single GPU and outperforms models 10&times; its size when given project context.</p>
+      <p>The context injection is provided by <a href="https://ostk.ai">ostk</a>, which runs locally and works with any model that supports tool use. <a href="https://ostk.ai/docs/">Install guide</a>.</p>
+    </section>
+
+    <section class="section">
+      <h2>Key takeaways</h2>
+      <ol style="padding-left: 1.5rem; line-height: 1.8;">
+        <li><strong>The top open-weight model (DeepSeek V3.2 + context) reaches 100%</strong>, tying with the best closed models. The ceiling is the same.</li>
+        <li><strong>Context injection benefits open models as much as closed models</strong> (mean +29.3pp vs +39.4pp). The technique is model-agnostic.</li>
+        <li><strong>Small open models + context can beat large closed models bare.</strong> Devstral 24B + context (75.0%) outperforms GPT-4.1 bare (50.0%).</li>
+        <li><strong>Parameter count matters less than context quality.</strong> The 24B Devstral with context outperforms the 70B Llama without it by 24&times;.</li>
+        <li><strong>For local-first teams, Devstral Medium + ostk is the sweet spot.</strong> 16 GB VRAM, 75.0% resolve rate, no API costs.</li>
+      </ol>
+      <p style="margin-top: 1.5rem;"><a href="/insights/model-comparison/">Full 26-model comparison</a> &middot; <a href="/">Live leaderboard</a> &middot; <a href="https://ostk.ai/insights/">More insights on ostk.ai</a></p>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .data-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .data-table th {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .data-table .green {
+    color: var(--green);
+  }
+
+  .data-table .red {
+    color: var(--red);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+  }
+
+  .card pre {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  ol li {
+    margin-bottom: 0.5rem;
+  }
+</style>

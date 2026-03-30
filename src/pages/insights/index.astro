@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Insights — needle-bench" description="Data-driven analysis of AI coding agents. Model comparisons, open vs closed source benchmarks, and debugging performance across 26 models and 1,664 runs.">
+  <div class="page-header">
+    <div class="page-header-left">
+      <a href="/" class="back">&larr; Leaderboard</a>
+      <h1>Insights</h1>
+    </div>
+    <nav class="page-header-right">
+      <a href="https://github.com/os-tack/find-the-needle">GitHub</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="section">
+      <p>Analysis from 26 models &times; 32 benchmarks &times; 2 experimental arms = 1,664 runs. Every claim cites specific data. No marketing.</p>
+    </section>
+
+    <section class="section">
+      <h2>Articles</h2>
+      <div class="insight-list">
+        <a href="/insights/model-comparison/" class="insight-card">
+          <h3>AI Coding Model Comparison: 26 Models on Real Bugs</h3>
+          <p class="muted">Head-to-head benchmark results. Claude, GPT, Gemini, DeepSeek, Grok, Mistral, Llama, Qwen — tested on identical bugs with deterministic scoring.</p>
+        </a>
+        <a href="/insights/open-vs-closed/" class="insight-card">
+          <h3>Open vs Closed Source Models for Debugging</h3>
+          <p class="muted">DeepSeek, Devstral, Llama, and Qwen vs Claude, GPT, and Gemini. The gap is smaller than you think — and context injection changes the math.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .insight-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .insight-card {
+    display: block;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+
+  .insight-card:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .insight-card h3 {
+    font-family: var(--mono);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+  }
+
+  .insight-card .muted {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+</style>
