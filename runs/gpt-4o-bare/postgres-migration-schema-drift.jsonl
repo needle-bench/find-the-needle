@@ -1,0 +1,60 @@
+{"event": "run.start", "timestamp": "2026-03-30T03:01:43Z", "benchmark": "postgres-migration-schema-drift", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 66, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 101, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 144, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/var/log"], "tokens_in": 180, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/home"], "tokens_in": 213, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/etc"], "tokens_in": 245, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/usr"], "tokens_in": 277, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/usr/bin"], "tokens_in": 1207, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/usr/lib"], "tokens_in": 1242, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/usr/share/doc"], "tokens_in": 1277, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/var"], "tokens_in": 1313, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/opt"], "tokens_in": 1345, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/lib"], "tokens_in": 1377, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/srv", "/sys"], "tokens_in": 1834, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 2540, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/boot"], "tokens_in": 2572, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/mnt"], "tokens_in": 2604, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/media"], "tokens_in": 2636, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/proc"], "tokens_in": 2668, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": [], "tokens_in": 2704, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": ["/run"], "tokens_in": 2736, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/sbin"], "tokens_in": 2768, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 23, "files_edited": [], "files_read": ["/bin"], "tokens_in": 2801, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 24, "files_edited": [], "files_read": ["/bin"], "tokens_in": 2840, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 25, "files_edited": [], "files_read": ["/sbin"], "tokens_in": 2874, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 26, "files_edited": [], "files_read": ["/lib"], "tokens_in": 2909, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 27, "files_edited": [], "files_read": ["/usr/lib"], "tokens_in": 2943, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 28, "files_edited": [], "files_read": ["/"], "tokens_in": 2978, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 29, "files_edited": [], "files_read": ["/etc"], "tokens_in": 3018, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 30, "files_edited": [], "files_read": ["/srv", "/sys"], "tokens_in": 3055, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 31, "files_edited": [], "files_read": ["/tmp", "/boot"], "tokens_in": 3149, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 32, "files_edited": [], "files_read": ["/mnt", "/media"], "tokens_in": 3239, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 33, "files_edited": [], "files_read": ["/run", "/proc"], "tokens_in": 3329, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 34, "files_edited": [], "files_read": ["/proc/acpi"], "tokens_in": 3423, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 35, "files_edited": [], "files_read": ["/proc/fs"], "tokens_in": 3462, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 36, "files_edited": [], "files_read": ["/proc/irq"], "tokens_in": 3500, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 37, "files_edited": [], "files_read": ["/proc/sys"], "tokens_in": 3539, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 38, "files_edited": [], "files_read": ["/proc/sysrq-trigger"], "tokens_in": 3577, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 39, "files_edited": [], "files_read": ["/proc/acpi/event"], "tokens_in": 3617, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 40, "files_edited": [], "files_read": ["/proc/bus"], "tokens_in": 3657, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 41, "files_edited": [], "files_read": ["/proc/fs/ext4"], "tokens_in": 3696, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 42, "files_edited": [], "files_read": ["/proc/driver", "/proc/fb"], "tokens_in": 3736, "tokens_out": 72, "test_exit": null}
+{"event": "turn", "turn": 43, "files_edited": [], "files_read": ["/proc/fs/jfs", "/proc/fs/nfsd"], "tokens_in": 3830, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 44, "files_edited": [], "files_read": ["/proc/fs/xfs", "/proc/interupts"], "tokens_in": 3927, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 45, "files_edited": [], "files_read": ["/proc/kcore", "/proc/kmsg"], "tokens_in": 4023, "tokens_out": 72, "test_exit": null}
+{"event": "turn", "turn": 46, "files_edited": [], "files_read": ["/proc/loadavg", "/proc/locks"], "tokens_in": 4117, "tokens_out": 72, "test_exit": null}
+{"event": "turn", "turn": 47, "files_edited": [], "files_read": ["/proc/mounts", "/proc/sched_debug"], "tokens_in": 4211, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 48, "files_edited": [], "files_read": ["/proc/buddyinfo", "/proc/cmdline"], "tokens_in": 4307, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 49, "files_edited": [], "files_read": ["/proc/cpuinfo", "/proc/devices"], "tokens_in": 4403, "tokens_out": 73, "test_exit": null}
+{"event": "turn", "turn": 50, "files_edited": [], "files_read": ["/proc/diskstats", "/proc/kpageflags"], "tokens_in": 4498, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 51, "files_edited": [], "files_read": ["/srv", "/sys"], "tokens_in": 4594, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 52, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4688, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 53, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4749, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 54, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4790, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 55, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4834, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 56, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4882, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 57, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4926, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 58, "files_edited": [], "files_read": ["/sys/kernel/btf/vmlinux"], "tokens_in": 4978, "tokens_out": 27, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T03:10:48Z", "test_exit": 127, "total_turns": 58, "correct_lines": 0, "arm": "bare"}

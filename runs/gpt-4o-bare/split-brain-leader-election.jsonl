@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-30T03:32:23Z", "benchmark": "split-brain-leader-election", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 66, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 101, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 335, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/.", "/app/."], "tokens_in": 365, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 629, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 804, "tokens_out": 16, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T03:32:28Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

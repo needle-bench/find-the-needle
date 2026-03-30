@@ -2500,6 +2500,66 @@
     }
   },
   {
+    "model": "claude-sonnet-4-6",
+    "benchmark": "type-coercion-comparison",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 3954,
+      "estimated_cost_usd": 0.018269999999999998,
+      "wall_clock": 138.6,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 3,
+      "token_cost": 6818,
+      "estimated_cost_usd": 0.028038,
+      "wall_clock": 16.4,
+      "signal_to_noise": 0.667
+    }
+  },
+  {
+    "model": "claude-sonnet-4-6",
+    "benchmark": "wal-fsync-ghost-ack",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 0,
+      "token_cost": 0,
+      "estimated_cost_usd": 0,
+      "wall_clock": 142.9,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 1066,
+      "estimated_cost_usd": 0.006498,
+      "wall_clock": 3.4,
+      "signal_to_noise": 1.0
+    }
+  },
+  {
+    "model": "claude-sonnet-4-6",
+    "benchmark": "wrong-operator-discount",
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 6,
+      "token_cost": 7241,
+      "estimated_cost_usd": 0.028310999999999996,
+      "wall_clock": 135.5,
+      "signal_to_noise": 0.167
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 985,
+      "estimated_cost_usd": 0.006207,
+      "wall_clock": 3.4,
+      "signal_to_noise": 1.0
+    }
+  },
+  {
     "model": "codestral-2508",
     "benchmark": "api-version-field-drop",
     "bare": {
@@ -9798,6 +9858,319 @@
       "wall_clock": 21.7,
       "signal_to_noise": 0.235
     }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "missing-input-validation",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 19596,
+      "estimated_cost_usd": 0.04111,
+      "wall_clock": 357.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 13,
+      "token_cost": 29576,
+      "estimated_cost_usd": 0.0498175,
+      "wall_clock": 15.2,
+      "signal_to_noise": 0.308
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 3,
+      "token_cost": 342,
+      "estimated_cost_usd": 0.00123,
+      "wall_clock": 2.4,
+      "signal_to_noise": 0.333
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 2,
+      "token_cost": 644,
+      "estimated_cost_usd": 0.0020675,
+      "wall_clock": 1.5,
+      "signal_to_noise": 0.5
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "null-pointer-config",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 0,
+      "token_cost": 0,
+      "estimated_cost_usd": 0,
+      "wall_clock": 300.3,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 7,
+      "token_cost": 6404,
+      "estimated_cost_usd": 0.0159225,
+      "wall_clock": 8.5,
+      "signal_to_noise": 0.286
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "off-by-one-array-slice",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 24896,
+      "estimated_cost_usd": 0.047200000000000006,
+      "wall_clock": 25.8,
+      "signal_to_noise": 0.1
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 330,
+      "estimated_cost_usd": 0.0017625,
+      "wall_clock": 1.6,
+      "signal_to_noise": 1.0
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "off-by-one-pagination",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 22029,
+      "estimated_cost_usd": 0.0457675,
+      "wall_clock": 23.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 56421,
+      "estimated_cost_usd": 0.0932025,
+      "wall_clock": 41.0,
+      "signal_to_noise": 0.6
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "performance-cliff-hash",
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 12,
+      "token_cost": 10487,
+      "estimated_cost_usd": 0.021755000000000004,
+      "wall_clock": 11.2,
+      "signal_to_noise": 0.083
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 30,
+      "token_cost": 177769,
+      "estimated_cost_usd": 0.2583775,
+      "wall_clock": 32.4,
+      "signal_to_noise": 0.867
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "postgres-migration-schema-drift",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 0,
+      "token_cost": 0,
+      "estimated_cost_usd": 0,
+      "wall_clock": 546.7,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 4,
+      "token_cost": 2098,
+      "estimated_cost_usd": 0.0059575,
+      "wall_clock": 2.7,
+      "signal_to_noise": 0.25
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "race-condition-counter",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 129363,
+      "estimated_cost_usd": 0.1866375,
+      "wall_clock": 166.2,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 13,
+      "token_cost": 30430,
+      "estimated_cost_usd": 0.04790749999999999,
+      "wall_clock": 12.6,
+      "signal_to_noise": 0.077
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "rate-limit-bypass-header",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 0,
+      "token_cost": 0,
+      "estimated_cost_usd": 0,
+      "wall_clock": 414.1,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 7,
+      "token_cost": 12926,
+      "estimated_cost_usd": 0.027710000000000002,
+      "wall_clock": 6.9,
+      "signal_to_noise": 0.143
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 266759,
+      "estimated_cost_usd": 0.377975,
+      "wall_clock": 429.6,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 16,
+      "token_cost": 46219,
+      "estimated_cost_usd": 0.07819500000000001,
+      "wall_clock": 23.1,
+      "signal_to_noise": 0.312
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "silent-data-corruption",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 40,
+      "token_cost": 58026,
+      "estimated_cost_usd": 0.0966025,
+      "wall_clock": 157.3,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 24,
+      "token_cost": 30343,
+      "estimated_cost_usd": 0.05763000000000001,
+      "wall_clock": 19.8,
+      "signal_to_noise": 0.667
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "split-brain-leader-election",
+    "bare": {
+      "resolved": true,
+      "turns_to_fix": 6,
+      "token_cost": 2435,
+      "estimated_cost_usd": 0.0071,
+      "wall_clock": 5.2,
+      "signal_to_noise": 0.167
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 51,
+      "token_cost": 192514,
+      "estimated_cost_usd": 0.2811775,
+      "wall_clock": 46.0,
+      "signal_to_noise": 0.471
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "sql-injection-search",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 0,
+      "token_cost": 0,
+      "estimated_cost_usd": 0,
+      "wall_clock": 7.8,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 1,
+      "token_cost": 245,
+      "estimated_cost_usd": 0.0015875,
+      "wall_clock": 2.0,
+      "signal_to_noise": 1.0
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 188969,
+      "estimated_cost_usd": 0.27299749999999995,
+      "wall_clock": 544.8,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": true,
+      "turns_to_fix": 29,
+      "token_cost": 52279,
+      "estimated_cost_usd": 0.0857775,
+      "wall_clock": 23.9,
+      "signal_to_noise": 0.241
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "timezone-scheduling",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 2261,
+      "estimated_cost_usd": 0.008254999999999998,
+      "wall_clock": 359.9,
+      "signal_to_noise": 0
+    },
+    "silent": {
+      "resolved": false,
+      "turns_to_fix": 20,
+      "token_cost": 43981,
+      "estimated_cost_usd": 0.07340999999999999,
+      "wall_clock": 17.1,
+      "signal_to_noise": 1.0
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "benchmark": "timing-attack-comparison",
+    "bare": {
+      "resolved": false,
+      "turns_to_fix": 60,
+      "token_cost": 137410,
+      "estimated_cost_usd": 0.20512500000000003,
+      "wall_clock": 182.4,
+      "signal_to_noise": 0
+    },
+    "silent": null
   },
   {
     "model": "grok-4-1-fast",

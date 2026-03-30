@@ -1,0 +1,21 @@
+{
+  "benchmark": "off-by-one-array-slice",
+  "agent": "gpt-4o-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "bafc6aa3",
+  "timestamp": "2026-03-30T02:59:39Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 14,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.1,
+  "false_positives": 0,
+  "token_cost": 24896,
+  "estimated_cost_usd": 0.047200000000000006,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 25.8,
+  "tool_calls_per_turn": 1.55,
+  "read_tool_ratio": 0.0
+}

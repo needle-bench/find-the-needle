@@ -15,3 +15,7 @@
 {"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/"], "tokens_in": 619, "tokens_out": 34, "test_exit": null}
 {"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/home", "/var", "/etc"], "tokens_in": 668, "tokens_out": 39, "test_exit": null}
 {"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/"], "tokens_in": 718, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/"], "tokens_in": 766, "tokens_out": 32, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/home", "/var", "/etc"], "tokens_in": 813, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/", "/proc"], "tokens_in": 855, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/", "/proc"], "tokens_in": 895, "tokens_out": 33, "test_exit": null}

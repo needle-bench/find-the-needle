@@ -1,0 +1,21 @@
+{
+  "benchmark": "wrong-operator-discount",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "f5edb661",
+  "timestamp": "2026-03-30T02:39:47Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.5,
+  "false_positives": 0,
+  "token_cost": 4486,
+  "estimated_cost_usd": 0.011503999999999999,
+  "dollars_per_correct_line": 0.011504,
+  "tokens_per_correct_line": 4486.0,
+  "wall_clock": 12.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

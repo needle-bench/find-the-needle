@@ -16,3 +16,7 @@
 {"event": "agent.bash", "cmd": "find / -type f -exec grep -H \"needle\" {} \\; 2>/dev/null", "output_preview": "timeout: command exceeded 120s limit", "turn": 14}
 {"event": "agent.bash", "cmd": "find /home /var /etc -type f -exec grep -H \"needle\" {} \\; 2>/dev/null", "output_preview": "", "turn": 15}
 {"event": "agent.bash", "cmd": "find / -type f -name \"needle\" 2>/dev/null | xargs grep -l \"needle\"", "output_preview": "", "turn": 16}
+{"event": "agent.bash", "cmd": "find / -type f 2>/dev/null | xargs grep -l \"needle\"", "output_preview": "timeout: command exceeded 120s limit", "turn": 17}
+{"event": "agent.bash", "cmd": "grep -rIl \"needle\" /home /var /etc 2>/dev/null", "output_preview": "", "turn": 18}
+{"event": "agent.bash", "cmd": "find / -path /proc -prune -o -name needle -print", "output_preview": "", "turn": 19}
+{"event": "agent.bash", "cmd": "find / -path /proc -prune -o -name \"*needle*\" -print", "output_preview": "", "turn": 20}

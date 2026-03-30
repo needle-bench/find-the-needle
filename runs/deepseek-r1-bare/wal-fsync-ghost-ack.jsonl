@@ -2,3 +2,10 @@
 {"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 86, "test_exit": null}
 {"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 633, "tokens_out": 69, "test_exit": null}
 {"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 854, "tokens_out": 87, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.git"], "tokens_in": 933, "tokens_out": 76, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/.git/objects", "/workspace/."], "tokens_in": 1279, "tokens_out": 84, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/.git/objects/3b/9e4fc44dcad6fb562014cb37c083754cabcabf"], "tokens_in": 1594, "tokens_out": 121, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1803, "tokens_out": 89, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 2112, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 2189, "tokens_out": 87, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 2259, "tokens_out": 69, "test_exit": null}

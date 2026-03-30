@@ -15,3 +15,7 @@
 {"event": "token.usage", "turn": 15, "input_tokens": 668, "output_tokens": 39, "cumulative_input": 5527, "cumulative_output": 460}
 {"event": "token.usage", "turn": 16, "input_tokens": 718, "output_tokens": 37, "cumulative_input": 6245, "cumulative_output": 497}
 {"event": "token.usage", "turn": 17, "input_tokens": 766, "output_tokens": 32, "cumulative_input": 7011, "cumulative_output": 529}
+{"event": "token.usage", "turn": 18, "input_tokens": 813, "output_tokens": 31, "cumulative_input": 7824, "cumulative_output": 560}
+{"event": "token.usage", "turn": 19, "input_tokens": 855, "output_tokens": 29, "cumulative_input": 8679, "cumulative_output": 589}
+{"event": "token.usage", "turn": 20, "input_tokens": 895, "output_tokens": 33, "cumulative_input": 9574, "cumulative_output": 622}
+{"event": "token.usage", "turn": 21, "input_tokens": 939, "output_tokens": 42, "cumulative_input": 10513, "cumulative_output": 664}

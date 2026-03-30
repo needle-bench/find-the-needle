@@ -1,0 +1,21 @@
+{"event": "run.start", "timestamp": "2026-03-30T03:14:15Z", "benchmark": "rate-limit-bypass-header", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 66, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/app/needle.txt", "/"], "tokens_in": 100, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 185, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 220, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 260, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 295, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/"], "tokens_in": 330, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/home", "/var", "/etc", "/lib", "/opt", "/usr", "/tmp"], "tokens_in": 388, "tokens_out": 38, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/home", "/var", "/etc", "/lib", "/opt", "/usr", "/tmp"], "tokens_in": 437, "tokens_out": 39, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/"], "tokens_in": 487, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/system.'"], "tokens_in": 532, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/"], "tokens_in": 568, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/"], "tokens_in": 607, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/"], "tokens_in": 644, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/"], "tokens_in": 691, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/home", "/var", "/etc", "/lib", "/opt", "/usr", "/tmp"], "tokens_in": 739, "tokens_out": 46, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/usr/bin/wcurl", "/usr/bin/git", "/usr/local/bin/node", "/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs.py", "/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/msvs_emulation.py", "/usr/libexec/git-core/git-http-push"], "tokens_in": 864, "tokens_out": 92, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/usr/bin/wcurl;", "/usr/bin/git;", "/usr/local/bin/node;", "/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs.py;", "/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/msvs_emulation.py;", "/usr/libexec/git-core/git-http-push"], "tokens_in": 1187, "tokens_out": 142, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/usr/bin/wcurl;", "/usr/bin/git;", "/usr/local/bin/node;", "/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs.py;", "/usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/msvs_emulation.py;", "/usr/libexec/git-core/git-http-push"], "tokens_in": 1476, "tokens_out": 162, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T03:21:00Z", "test_exit": 1, "total_turns": 19, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "timezone-scheduling",
+  "agent": "gpt-4o-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "bafc6aa3",
+  "timestamp": "2026-03-30T03:51:25Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 20,
+  "signal_to_noise": 1.0,
+  "false_positives": 0,
+  "token_cost": 43981,
+  "estimated_cost_usd": 0.07340999999999999,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 17.1,
+  "tool_calls_per_turn": 1.15,
+  "read_tool_ratio": null
+}
