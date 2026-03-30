@@ -28,16 +28,16 @@ import Base from '../layouts/Base.astro';
           <tr id="lb-tier-row"></tr>
           <tr id="lb-header-row">
             <th class="sticky-col col-model" data-key="model" data-type="string">Model</th>
-            <th class="sticky-col col-boot" data-key="boot" data-type="tier">Boot</th>
-            <th class="sticky-col col-post" data-key="post" data-type="boolean">POST</th>
-            <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean">Entity</th>
-            <th class="sticky-col col-bare" data-key="bareResolved" data-type="number">Bare</th>
-            <th class="sticky-col col-os" data-key="silentResolved" data-type="number">OS</th>
-            <th class="sticky-col col-delta" data-key="expDelta" data-type="number">&Delta;</th>
-            <th class="sticky-col col-cost" data-key="silentCostTotal" data-type="number">$/b</th>
-            <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number">Tok</th>
-            <th class="sticky-col col-turns" data-key="totalTurns" data-type="number">Trn</th>
-            <th class="sticky-col col-time" data-key="totalTime" data-type="number">Time</th>
+            <th class="sticky-col col-boot" data-key="boot" data-type="tier" title="Boot protocol: can the model boot the OS from a cold start?">Boot</th>
+            <th class="sticky-col col-post" data-key="post" data-type="boolean" title="POST: did the model complete power-on self-test?">POST</th>
+            <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean" title="Entity: did the model write a valid entity file?">Entity</th>
+            <th class="sticky-col col-bare" data-key="bareResolved" data-type="number" title="Bare: benchmarks solved with generic prompt + bash only">Bare</th>
+            <th class="sticky-col col-os" data-key="silentResolved" data-type="number" title="OS: benchmarks solved with silent kernel context injected">OS</th>
+            <th class="sticky-col col-delta" data-key="expDelta" data-type="number" title="Delta: percentage point lift from the kernel (OS rate - Bare rate)">&Delta;</th>
+            <th class="sticky-col col-cost" data-key="silentCostTotal" data-type="number" title="Cost per benchmark (top: bare, bottom: with OS)">$/b</th>
+            <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number" title="Total tokens consumed (top: bare, bottom: with OS)">Tok</th>
+            <th class="sticky-col col-turns" data-key="totalTurns" data-type="number" title="Total turns used (top: bare, bottom: with OS)">Trn</th>
+            <th class="sticky-col col-time" data-key="totalTime" data-type="number" title="Wall clock time (top: bare, bottom: with OS)">Time</th>
           </tr>
         </thead>
         <tbody id="lb-body">
@@ -175,12 +175,22 @@ import Base from '../layouts/Base.astro';
     margin: 0 auto; border-radius: 3px;
     overflow: hidden; cursor: default;
   }
-  .hm-split > span { flex: 1; height: 100%; }
+  .hm-split > span {
+    flex: 1; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.85);
+  }
   .hm-split .arm-pass { background: rgba(63,185,80,0.5); }
   .hm-split .arm-fail { background: rgba(248,81,73,0.4); }
   .hm-split .arm-untested { background: transparent; border-bottom: 1px dashed rgba(139,148,158,0.5); }
   .hm-split .arm-pass:first-child { border-right: 1px solid rgba(255,255,255,0.1); }
   .hm-split .arm-fail:first-child { border-right: 1px solid rgba(255,255,255,0.1); }
+  .hm-split .arm-pass::after { content: '\2713'; }
+  .hm-split .arm-fail::after { content: '\2717'; }
+  th[title] { cursor: help; border-bottom: 1px dashed rgba(139,148,158,0.4); }
+  .col-dual { font-size: 0.65rem; line-height: 1.3; }
+  .col-dual .bare-val { color: #8b949e; }
+  .col-dual .os-val { color: #c9d1d9; }
 
   .verdict-badge {
     display: inline-block; font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
@@ -286,6 +296,9 @@ import Base from '../layouts/Base.astro';
     silentResolved: number; silentTested: number;
     expDelta: number; // percentage point delta (silent - bare) over shared benchmarks
     bareCostTotal: number; silentCostTotal: number; // total cost across all benchmarks
+    bareTokTotal: number; silentTokTotal: number;
+    bareTurnsTotal: number; silentTurnsTotal: number;
+    bareTimeTotal: number; silentTimeTotal: number;
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────
@@ -420,9 +433,10 @@ import Base from '../layouts/Base.astro';
         let bareR = 0, bareT = 0, silentR = 0, silentT = 0;
         let sharedBareR = 0, sharedSilentR = 0, sharedCount = 0;
         let bareCost = 0, silentCost = 0;
+        let bareTok = 0, silentTok = 0, bareTrn = 0, silentTrn = 0, bareTm = 0, silentTm = 0;
         for (const [_bench, exp] of expMap) {
-          if (exp.bare) { bareT++; if (exp.bare.resolved) bareR++; bareCost += exp.bare.estimated_cost_usd || 0; }
-          if (exp.silent) { silentT++; if (exp.silent.resolved) silentR++; silentCost += exp.silent.estimated_cost_usd || 0; }
+          if (exp.bare) { bareT++; if (exp.bare.resolved) bareR++; bareCost += exp.bare.estimated_cost_usd || 0; bareTok += exp.bare.token_cost || 0; bareTrn += exp.bare.turns_to_fix || 0; bareTm += exp.bare.wall_clock || 0; }
+          if (exp.silent) { silentT++; if (exp.silent.resolved) silentR++; silentCost += exp.silent.estimated_cost_usd || 0; silentTok += exp.silent.token_cost || 0; silentTrn += exp.silent.turns_to_fix || 0; silentTm += exp.silent.wall_clock || 0; }
           // Delta only over benchmarks where BOTH arms were tested
           if (exp.bare && exp.silent) {
             sharedCount++;
@@ -433,6 +447,12 @@ import Base from '../layouts/Base.astro';
         m.bareResolved = bareR;
         m.bareCostTotal = bareCost;
         m.silentCostTotal = silentCost;
+        m.bareTokTotal = bareTok;
+        m.silentTokTotal = silentTok;
+        m.bareTurnsTotal = bareTrn;
+        m.silentTurnsTotal = silentTrn;
+        m.bareTimeTotal = bareTm;
+        m.silentTimeTotal = silentTm;
         m.bareTested = bareT;
         m.silentResolved = silentR;
         m.silentTested = silentT;
@@ -596,21 +616,22 @@ import Base from '../layouts/Base.astro';
         } else {
           r += '<td class="sticky-col col-delta" style="color:#484f58">\u2014</td>';
         }
-        // Cost per benchmark (silent arm — the "with OS" cost)
-        const costPerBench = m.silentTested > 0 ? m.silentCostTotal / m.silentTested : 0;
-        if (costPerBench > 0) {
-          const costStr = costPerBench < 0.01 ? '$' + costPerBench.toFixed(3) : '$' + costPerBench.toFixed(2);
-          r += '<td class="sticky-col col-cost">' + costStr + '</td>';
-        } else {
-          r += '<td class="sticky-col col-cost" style="color:#484f58">\u2014</td>';
-        }
+        // Cost per benchmark — dual bare/OS
+        const bareCpb = m.bareTested > 0 ? m.bareCostTotal / m.bareTested : 0;
+        const silentCpb = m.silentTested > 0 ? m.silentCostTotal / m.silentTested : 0;
+        const fmtCost = (c: number) => c > 0 ? (c < 0.01 ? '$' + c.toFixed(3) : '$' + c.toFixed(2)) : '\u2014';
+        r += '<td class="sticky-col col-cost col-dual"><div class="bare-val">' + fmtCost(bareCpb) + '</div><div class="os-val">' + fmtCost(silentCpb) + '</div></td>';
       }
 
-      // Tok / Trn / Time
+      // Tok / Trn / Time — dual bare/OS
       if (isControl) {
         r += '<td class="sticky-col col-tokens">\u2014</td>';
         r += '<td class="sticky-col col-turns">\u2014</td>';
         r += '<td class="sticky-col col-time">\u2014</td>';
+      } else if (hasExp) {
+        r += '<td class="sticky-col col-tokens col-dual"><div class="bare-val">' + fmtN(m.bareTokTotal) + '</div><div class="os-val">' + fmtN(m.silentTokTotal) + '</div></td>';
+        r += '<td class="sticky-col col-turns col-dual"><div class="bare-val">' + m.bareTurnsTotal + 't</div><div class="os-val">' + m.silentTurnsTotal + 't</div></td>';
+        r += '<td class="sticky-col col-time col-dual"><div class="bare-val">' + fmtT(m.bareTimeTotal) + '</div><div class="os-val">' + fmtT(m.silentTimeTotal) + '</div></td>';
       } else {
         r += '<td class="sticky-col col-tokens">' + fmtN(m.tokens) + '</td>';
         r += '<td class="sticky-col col-turns">' + m.turns + 't</td>';
