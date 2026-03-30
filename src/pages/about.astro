@@ -40,7 +40,7 @@ LIMIT turns 20
 LIMIT tokens 100000
 LIMIT wall_clock 300</code></pre>
       </div>
-      <p>32 benchmarks span easy, medium, and hard tiers across logic errors, concurrency bugs, data integrity issues, and more.</p>
+      <p>34 benchmarks span easy, medium, and hard tiers across logic errors, concurrency bugs, data integrity issues, and more.</p>
     </section>
 
     <section class="section" id="experiment">
@@ -50,7 +50,7 @@ LIMIT wall_clock 300</code></pre>
         <li><strong>Bare</strong>: generic system prompt + bash. No project context.</li>
         <li><strong>OS (silent)</strong>: same prompt + bash, but project context (README, file listing, test output) is silently injected into the system prompt. The model cannot tell which arm it&rsquo;s in.</li>
       </ul>
-      <p>25 models &times; 32 benchmarks &times; 2 arms = 1,600 runs. All runs go through <a href="https://openrouter.ai">OpenRouter</a> for fair cross-vendor comparison.</p>
+      <p>26 models &times; 34 benchmarks &times; 2 arms = 1,768 runs. All runs go through <a href="https://openrouter.ai">OpenRouter</a> for fair cross-vendor comparison.</p>
     </section>
 
     <section class="section" id="scoring">
