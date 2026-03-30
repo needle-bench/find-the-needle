@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:34:32Z", "benchmark": "silent-data-corruption", "model": "gemini-2-0-flash-001", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# silent-data-corruption\n\n## Project\n\nA Rust CLI tool (`fileproc`) that processes files through a transformation pipel"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 301, "tokens_out": 133, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1135, "tokens_out": 200, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:34:35Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:35:36Z", "benchmark": "memory-leak-event-listener", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/monitor.js\n/app/app/processor.js\n/app/app/queue.js\n/app/app/server.js\n/app/app/utils.js\n\nCurrent tes"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/server.js"], "tokens_in": 174, "tokens_out": 570, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 926, "tokens_out": 201, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:35:47Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

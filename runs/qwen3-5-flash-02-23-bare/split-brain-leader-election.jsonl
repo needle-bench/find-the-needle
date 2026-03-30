@@ -1,0 +1,15 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:34:53Z", "benchmark": "split-brain-leader-election", "model": "qwen3-5-flash-02-23", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 294, "tokens_out": 207, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 587, "tokens_out": 50, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 655, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 713, "tokens_out": 145, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 774, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/"], "tokens_in": 869, "tokens_out": 48, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/"], "tokens_in": 935, "tokens_out": 32, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/"], "tokens_in": 1571, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app"], "tokens_in": 1629, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 1924, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/app"], "tokens_in": 2187, "tokens_out": 101, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/app/main.go"], "tokens_in": 2370, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 2745, "tokens_out": 34, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:35:09Z", "test_exit": 1, "total_turns": 13, "correct_lines": 0, "arm": "bare"}

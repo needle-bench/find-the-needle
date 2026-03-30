@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:28:16Z", "benchmark": "encoding-mojibake", "model": "gemini-2-5-pro", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 624, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 64, "tokens_out": 123, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 140, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 204, "tokens_out": 32, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:28:43Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

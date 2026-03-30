@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:25:41Z", "benchmark": "deadlock-transfer", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/opt/", "/etc/", "/root/", "/srv/", "/usr/local/", "/run/"], "tokens_in": 862, "tokens_out": 297, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/", "/", "/", "/root/.gitconfig"], "tokens_in": 1328, "tokens_out": 212, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/root/.gitconfig", "/"], "tokens_in": 2060, "tokens_out": 162, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/usr/bin/aserver", "/usr/bin/aserver", "/usr/bin/aserver"], "tokens_in": 4232, "tokens_out": 174, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/usr/bin/aserver", "/", "/app/\".git\""], "tokens_in": 4815, "tokens_out": 184, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/", "/app"], "tokens_in": 5091, "tokens_out": 118, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app", "/app/.", "/app/.git", "/app", "/app"], "tokens_in": 5444, "tokens_out": 162, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app", "/app/test.sh", "/app", "/app", "/app/app/Main.java"], "tokens_in": 5812, "tokens_out": 163, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:26:20Z", "test_exit": 0, "total_turns": 9, "correct_lines": 0, "arm": "bare"}

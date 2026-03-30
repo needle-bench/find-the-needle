@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:47:31Z", "benchmark": "timing-attack-comparison", "model": "grok-4-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 371, "tokens_out": 321, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 420, "tokens_out": 520, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 726, "tokens_out": 253, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 998, "tokens_out": 267, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/main.go"], "tokens_in": 1042, "tokens_out": 172, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1423, "tokens_out": 421, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 1593, "tokens_out": 287, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1678, "tokens_out": 211, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:47:54Z", "test_exit": 0, "total_turns": 8, "correct_lines": 0, "arm": "bare"}

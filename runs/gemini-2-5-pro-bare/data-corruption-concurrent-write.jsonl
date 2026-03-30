@@ -1,0 +1,14 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:25:01Z", "benchmark": "data-corruption-concurrent-write", "model": "gemini-2-5-pro", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 559, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 84, "tokens_out": 445, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 120, "tokens_out": 302, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 195, "tokens_out": 86, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 305, "tokens_out": 88, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/src/writer.rs"], "tokens_in": 829, "tokens_out": 289, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/src/verify.rs"], "tokens_in": 1783, "tokens_out": 353, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 2626, "tokens_out": 799, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 3328, "tokens_out": 537, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/./target/release/concurrent-writer", "/app/a.dat", "/app/./target/release/concurrent-writer", "/app/a.dat"], "tokens_in": 3531, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/./target/release/concurrent-writer", "/app/a.dat", "/app/./target/release/concurrent-writer", "/app/a.dat"], "tokens_in": 3716, "tokens_out": 1534, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 4113, "tokens_out": 205, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:26:19Z", "test_exit": 0, "total_turns": 12, "correct_lines": 0, "arm": "bare"}

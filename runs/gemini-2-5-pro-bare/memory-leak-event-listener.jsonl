@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:35:16Z", "benchmark": "memory-leak-event-listener", "model": "gemini-2-5-pro", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 398, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 98, "tokens_out": 41, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 178, "tokens_out": 38, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 239, "tokens_out": 42, "test_exit": 1}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 307, "tokens_out": 68, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:35:28Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

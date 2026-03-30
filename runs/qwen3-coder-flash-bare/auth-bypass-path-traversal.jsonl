@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:21:31Z", "benchmark": "auth-bypass-path-traversal", "model": "qwen3-coder-flash", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 283, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 394, "tokens_out": 136, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 779, "tokens_out": 153, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:21:41Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

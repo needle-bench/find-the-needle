@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:03:09Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 73, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace", "/workspace/."], "tokens_in": 524, "tokens_out": 72, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace", "/workspace/.", "/workspace/\"./.git/*\""], "tokens_in": 1085, "tokens_out": 86, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace", "/workspace/.", "/workspace/\"./.git/*\"", "/workspace/\"./__pycache__/*\""], "tokens_in": 1348, "tokens_out": 112, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace", "/workspace/."], "tokens_in": 1485, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 1728, "tokens_out": 84, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1835, "tokens_out": 62, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T02:03:39Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:44:44Z", "benchmark": "performance-cliff-hash", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 165, "tokens_out": 88, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 268, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 351, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 593, "tokens_out": 91, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 882, "tokens_out": 81, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:44:55Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

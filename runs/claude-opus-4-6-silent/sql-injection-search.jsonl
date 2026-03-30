@@ -1,0 +1,3 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:53:02Z", "benchmark": "sql-injection-search", "model": "claude-opus-4-6", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/config.py\n/app/app/database.py\n/app/app/search.py\n/app/app/server.py\n/app/app/validators.py\n\nCurrent"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/test.sh", "/app/app/config.py", "/app/app/database.py", "/app/app/search.py", "/app/app/server.py", "/app/app/validators.py"], "tokens_in": 657, "tokens_out": 287, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:53:06Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

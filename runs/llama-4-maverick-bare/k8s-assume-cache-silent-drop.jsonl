@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:33:51Z", "benchmark": "k8s-assume-cache-silent-drop", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/", "/home/user", "/home/user"], "tokens_in": 165, "tokens_out": 323, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 577, "tokens_out": 317, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 896, "tokens_out": 60, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1101, "tokens_out": 182, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1297, "tokens_out": 131, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1443, "tokens_out": 181, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1705, "tokens_out": 135, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 1855, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 1939, "tokens_out": 128, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:36:19Z", "test_exit": 1, "total_turns": 9, "correct_lines": 0, "arm": "bare"}

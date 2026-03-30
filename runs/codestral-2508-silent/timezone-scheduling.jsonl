@@ -1,10 +1,5 @@
-{"event": "run.start", "timestamp": "2026-03-24T11:07:29Z", "benchmark": "timezone-scheduling", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/models.py\n/app/app/scheduler.py\n/app/app/event_store.py\n/app/app/runner.py\n\nCurrent test output (tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/"], "tokens_in": 499, "tokens_out": 19, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 710, "tokens_out": 43, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/window_start.date()/today_utc", "/app/window_start.date()\\ntomorrow_utc", "/app/app/scheduler.py", "/app/datetime(today_utc.year,", "/app/today_utc.month,", "/app/today_utc.day,", "/app/event.hour,", "/app/event.minute,", "/app/datetime(tomorrow_utc.year,", "/app/tomorrow_utc.month,", "/app/tomorrow_utc.day,", "/app/event.hour,", "/app/event.minute,", "/app/app/scheduler.py"], "tokens_in": 1348, "tokens_out": 262, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1624, "tokens_out": 57, "test_exit": 1}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 2978, "tokens_out": 67, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 3053, "tokens_out": 37, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 3098, "tokens_out": 37, "test_exit": null}
-{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 3143, "tokens_out": 44, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-24T11:07:37Z", "test_exit": 1, "total_turns": 8, "correct_lines": 0, "arm": "silent"}
+{"event": "run.start", "timestamp": "2026-03-30T01:31:02Z", "benchmark": "timezone-scheduling", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/event_store.py\n/app/app/models.py\n/app/app/runner.py\n/app/app/scheduler.py\n\nCurrent test output (tes"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/"], "tokens_in": 499, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 861, "tokens_out": 94, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1550, "tokens_out": 505, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:31:07Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

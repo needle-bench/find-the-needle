@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:44:08Z", "benchmark": "split-brain-leader-election", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 371, "tokens_out": 302, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.", "/app/test.sh"], "tokens_in": 600, "tokens_out": 276, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:44:12Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

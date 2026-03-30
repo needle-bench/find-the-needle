@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:08:54Z", "benchmark": "silent-data-corruption", "model": "deepseek-r1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# silent-data-corruption\n\n## Project\n\nA Rust CLI tool (`fileproc`) that processes files through a transformation pipel"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 551, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/transform.rs"], "tokens_in": 1203, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1536, "tokens_out": 62, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T02:09:05Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

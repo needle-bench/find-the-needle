@@ -1,0 +1,62 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:40:37Z", "benchmark": "data-corruption-concurrent-write", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 66, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 108, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 143, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 192, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 232, "tokens_out": 18, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/"], "tokens_in": 269, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/"], "tokens_in": 309, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/details.'"], "tokens_in": 346, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/*"], "tokens_in": 382, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/approaches.", "/app/hints.'"], "tokens_in": 422, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/var/log"], "tokens_in": 486, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/var/log", "/app/results.", "/app/again.'"], "tokens_in": 533, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/var/log/syslog"], "tokens_in": 591, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/var/log/messages"], "tokens_in": 647, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/var/log/dmesg"], "tokens_in": 701, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app/results.", "/app/keyword.'"], "tokens_in": 759, "tokens_out": 39, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/"], "tokens_in": 829, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/app/needle.", "/app/keyword.'"], "tokens_in": 864, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app/search.", "/app/needle.'"], "tokens_in": 936, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/app/unsuccessful.'"], "tokens_in": 1002, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": ["/app/discovery.'"], "tokens_in": 1054, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/app/parameters.'"], "tokens_in": 1114, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 23, "files_edited": [], "files_read": ["/app/search.'"], "tokens_in": 1168, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 24, "files_edited": [], "files_read": ["/app/needle.'"], "tokens_in": 1218, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 25, "files_edited": [], "files_read": ["/app/needle.", "/app/results.'"], "tokens_in": 1266, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 26, "files_edited": [], "files_read": ["/app/strategy.'"], "tokens_in": 1318, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 27, "files_edited": [], "files_read": ["/app/needed.'"], "tokens_in": 1370, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 28, "files_edited": [], "files_read": ["/app/required.'"], "tokens_in": 1422, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 29, "files_edited": [], "files_read": ["/app/futile.'"], "tokens_in": 1470, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 30, "files_edited": [], "files_read": ["/app/protocols.'"], "tokens_in": 1514, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 31, "files_edited": [], "files_read": ["/app/realization.'"], "tokens_in": 1558, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 32, "files_edited": [], "files_read": ["/app/needle.'"], "tokens_in": 1606, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 33, "files_edited": [], "files_read": ["/app/success.'"], "tokens_in": 1652, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 34, "files_edited": [], "files_read": ["/app/system.'"], "tokens_in": 1702, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 35, "files_edited": [], "files_read": ["/app/discovery.'"], "tokens_in": 1750, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 36, "files_edited": [], "files_read": ["/app/contexts.'"], "tokens_in": 1792, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 37, "files_edited": [], "files_read": ["/app/detection.'"], "tokens_in": 1836, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 38, "files_edited": [], "files_read": ["/app/tracking.'"], "tokens_in": 1878, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 39, "files_edited": [], "files_read": ["/app/process.'"], "tokens_in": 1918, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 40, "files_edited": [], "files_read": ["/app/pathways.'"], "tokens_in": 1964, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 41, "files_edited": [], "files_read": ["/app/location.'"], "tokens_in": 2006, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 42, "files_edited": [], "files_read": ["/app/needle.'"], "tokens_in": 2052, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 43, "files_edited": [], "files_read": ["/app/efficacy.'"], "tokens_in": 2096, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 44, "files_edited": [], "files_read": ["/app/needle.'"], "tokens_in": 2142, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 45, "files_edited": [], "files_read": ["/app/needle.'"], "tokens_in": 2190, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 46, "files_edited": [], "files_read": ["/app/pursuit.'"], "tokens_in": 2236, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 47, "files_edited": [], "files_read": ["/app/revelation.'"], "tokens_in": 2282, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 48, "files_edited": [], "files_read": ["/app/success.'"], "tokens_in": 2324, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 49, "files_edited": [], "files_read": ["/app/directory.'"], "tokens_in": 2370, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 50, "files_edited": [], "files_read": ["/app/location.'"], "tokens_in": 2412, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 51, "files_edited": [], "files_read": ["/app/detection.'"], "tokens_in": 2456, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 52, "files_edited": [], "files_read": ["/app/outcomes.'"], "tokens_in": 2500, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 53, "files_edited": [], "files_read": ["/app/discovery.'"], "tokens_in": 2548, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 54, "files_edited": [], "files_read": ["/app/needle.'"], "tokens_in": 2592, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 55, "files_edited": [], "files_read": ["/app/cues.'"], "tokens_in": 2640, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 56, "files_edited": [], "files_read": ["/app/scenario.'"], "tokens_in": 2688, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 57, "files_edited": [], "files_read": ["/app/search.'"], "tokens_in": 2738, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 58, "files_edited": [], "files_read": ["/app/operations.'"], "tokens_in": 2784, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 59, "files_edited": [], "files_read": ["/app/techniques.'"], "tokens_in": 2828, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 60, "files_edited": [], "files_read": ["/app/success.'"], "tokens_in": 2878, "tokens_out": 28, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:47:35Z", "test_exit": 1, "total_turns": 60, "correct_lines": 0, "arm": "bare"}

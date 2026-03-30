@@ -1,0 +1,22 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:02:21Z", "benchmark": "type-coercion-comparison", "model": "qwen3-5-plus-02-15", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 294, "tokens_out": 145, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/", "/home", "/root", "/tmp", "/var"], "tokens_in": 352, "tokens_out": 138, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/", "/home/", "/tmp/", "/var/", "/"], "tokens_in": 474, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 571, "tokens_out": 103, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/"], "tokens_in": 652, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/", "/app.orig/"], "tokens_in": 1312, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/.git/config"], "tokens_in": 1890, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/.git/"], "tokens_in": 1966, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app"], "tokens_in": 2359, "tokens_out": 39, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app"], "tokens_in": 2420, "tokens_out": 44, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app"], "tokens_in": 2641, "tokens_out": 45, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app"], "tokens_in": 2704, "tokens_out": 50, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app"], "tokens_in": 2781, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app"], "tokens_in": 2833, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app"], "tokens_in": 2886, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app"], "tokens_in": 2952, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/app", "/app/.git/objects"], "tokens_in": 3010, "tokens_out": 45, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/app", "/app/.git/objects", "/app/'s|.git/objects/||'"], "tokens_in": 3395, "tokens_out": 82, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app"], "tokens_in": 3819, "tokens_out": 272, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/app"], "tokens_in": 4508, "tokens_out": 74, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T02:05:09Z", "test_exit": 1, "total_turns": 20, "correct_lines": 0, "arm": "bare"}

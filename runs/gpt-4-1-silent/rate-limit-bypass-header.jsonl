@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:42:02Z", "benchmark": "rate-limit-bypass-header", "model": "gpt-4-1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/ratelimiter.ts\n/app/app/routes.ts\n/app/app/server.ts\n/app/app/utils.ts\n/app/app/node_modules/@types/"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/"], "tokens_in": 522, "tokens_out": 17, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/ratelimiter.ts"], "tokens_in": 1015, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/ratelimiter.ts"], "tokens_in": 1318, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/server.ts"], "tokens_in": 1731, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/routes.ts"], "tokens_in": 1937, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/utils.ts"], "tokens_in": 2185, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/app/ratelimiter.ts"], "tokens_in": 2343, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/app/ratelimiter.ts"], "tokens_in": 2406, "tokens_out": 17, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2525, "tokens_out": 13, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:42:11Z", "test_exit": 0, "total_turns": 9, "correct_lines": 0, "arm": "silent"}

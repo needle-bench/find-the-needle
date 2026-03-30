@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:34:19Z", "benchmark": "memory-leak-event-listener", "model": "gpt-4-1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 73, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 258, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 434, "tokens_out": 9, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 537, "tokens_out": 9, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:34:24Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

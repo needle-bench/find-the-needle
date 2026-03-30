@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:49:16Z", "benchmark": "wal-fsync-ghost-ack", "model": "grok-4-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 371, "tokens_out": 326, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 418, "tokens_out": 327, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 470, "tokens_out": 311, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 748, "tokens_out": 417, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 931, "tokens_out": 364, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 974, "tokens_out": 307, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1065, "tokens_out": 375, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1120, "tokens_out": 573, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:49:39Z", "test_exit": 0, "total_turns": 8, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,16 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:25:33Z", "benchmark": "data-corruption-concurrent-write", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/'*/.*'"], "tokens_in": 32, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 146, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.", "/app/'*/.*'"], "tokens_in": 467, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 520, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 555, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 737, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 984, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/src/writer.rs"], "tokens_in": 1425, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 2309, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/./test.sh"], "tokens_in": 2828, "tokens_out": 11, "test_exit": 1}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/src/verify.rs"], "tokens_in": 3545, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/verification.", "/app/run_until_fail.sh", "/app/{1..100}", "/app/./target/release/concurrent-writer", "/app/./target/release/concurrent-writer", "/app/run_until_fail.sh", "/app/./run_until_fail.sh"], "tokens_in": 4158, "tokens_out": 133, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/src/config.rs", "/app/src/config.rs", "/app/src/config.rs", "/app/./run_until_fail.sh"], "tokens_in": 6048, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 8604, "tokens_out": 0, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:26:03Z", "test_exit": 1, "total_turns": 14, "correct_lines": 0, "arm": "bare"}

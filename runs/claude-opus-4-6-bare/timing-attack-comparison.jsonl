@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:54:13Z", "benchmark": "timing-attack-comparison", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 583, "tokens_out": 178, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/README.md", "/app/."], "tokens_in": 1106, "tokens_out": 98, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.", "/app/app/auth/compare.go", "/app/app/auth/security.go", "/app/app/auth/timing_test.go", "/app/app/main.go", "/app/app/server/server.go", "/app/app/auth/store.go", "/app/test.sh"], "tokens_in": 2459, "tokens_out": 353, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:54:25Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,27 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:38:25Z", "benchmark": "timing-attack-comparison", "model": "gemini-2-0-flash-001", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# timing-attack-comparison\n\n## Project\n\nA Go authentication server (`authserver`) that stores user credentials as SHA-"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 511, "tokens_out": 228, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/subtle.ConstantTimeCompare([]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 815, "tokens_out": 166, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/subtle.ConstantTimeCompare([]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 1009, "tokens_out": 100, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1132, "tokens_out": 56, "test_exit": 1}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/equality.\\nfunc", "/app/subtle.ConstantTimeCompare([]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 1364, "tokens_out": 290, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 1677, "tokens_out": 84, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 1865, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 1965, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 2052, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/subtle.ConstantTimeCompare(\\[]byte(stored),", "/app/subtle.ConstantTimeCompare(\\[]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 2110, "tokens_out": 103, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2236, "tokens_out": 20, "test_exit": 1}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 2341, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 2496, "tokens_out": 71, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2594, "tokens_out": 19, "test_exit": 1}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 2700, "tokens_out": 43, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app/equality.\\nfunc", "/app/subtle.ConstantTimeCompare([]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 2842, "tokens_out": 168, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 3034, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/app/equality.\\nfunc", "/app/subtle.ConstantTimeCompare([]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 3115, "tokens_out": 108, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3246, "tokens_out": 19, "test_exit": 1}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/app/equality.\\nfunc", "/app/subtle.ConstantTimeCompare([]byte(stored),", "/tmp/compare.go"], "tokens_in": 3412, "tokens_out": 156, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": ["/tmp/compare.go", "/app/app/auth/compare.go"], "tokens_in": 3592, "tokens_out": 19, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3635, "tokens_out": 19, "test_exit": 1}
+{"event": "turn", "turn": 23, "files_edited": [], "files_read": ["/app/equality.\\nfunc", "/app/subtle.ConstantTimeCompare([]byte(stored),", "/tmp/compare.go"], "tokens_in": 3801, "tokens_out": 149, "test_exit": null}
+{"event": "turn", "turn": 24, "files_edited": [], "files_read": ["/tmp/compare.go", "/app/app/auth/compare.go"], "tokens_in": 3972, "tokens_out": 19, "test_exit": null}
+{"event": "turn", "turn": 25, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 4015, "tokens_out": 19, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:39:00Z", "test_exit": 0, "total_turns": 25, "correct_lines": 1, "arm": "silent"}

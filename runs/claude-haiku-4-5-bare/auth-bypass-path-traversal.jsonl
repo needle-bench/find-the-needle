@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:21:04Z", "benchmark": "auth-bypass-path-traversal", "model": "claude-haiku-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 582, "tokens_out": 163, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.", "/app/test.sh"], "tokens_in": 1005, "tokens_out": 141, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:21:09Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

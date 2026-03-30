@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:04:17Z", "benchmark": "timing-attack-comparison", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 619, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app"], "tokens_in": 959, "tokens_out": 97, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T02:06:30Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

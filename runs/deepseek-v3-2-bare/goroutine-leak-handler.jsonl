@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:30:58Z", "benchmark": "goroutine-leak-handler", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 542, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 640, "tokens_out": 71, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 873, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 963, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1191, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1283, "tokens_out": 52, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:31:22Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

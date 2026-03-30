@@ -1,0 +1,28 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:21:38Z", "benchmark": "compiler-macro-expansion", "model": "gemini-2-0-flash-001", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# compiler-macro-expansion\n\n## Project\n\nA Rust code generation engine (`codegen-engine`) that takes schema definitions"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 556, "tokens_out": 101, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/&self.{}\\\\n", "/app/&self.{}\\\\n", "/app/src/codegen.rs"], "tokens_in": 1851, "tokens_out": 318, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2190, "tokens_out": 37, "test_exit": 1}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 5112, "tokens_out": 41, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/false).trim_start_matches(\\\"&\\\").to_string()),/g'", "/app/src/codegen.rs"], "tokens_in": 6344, "tokens_out": 198, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 6567, "tokens_out": 12, "test_exit": 1}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 9465, "tokens_out": 41, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 10700, "tokens_out": 253, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/name.clone()/FieldType::Ref(name)", "/app/name.clone())/g'", "/app/src/codegen.rs"], "tokens_in": 12144, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 12248, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 12354, "tokens_out": 14, "test_exit": 1}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/name.clone())/FieldType::Ref(name)", "/app/name.clone()/g'", "/app/src/codegen.rs"], "tokens_in": 15255, "tokens_out": 131, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 15410, "tokens_out": 71, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 15504, "tokens_out": 13, "test_exit": 1}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/&self.{}\\\\n", "/app/&self.{}\\\\n", "/app/src/codegen.rs"], "tokens_in": 18404, "tokens_out": 129, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 18555, "tokens_out": 13, "test_exit": 1}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 21452, "tokens_out": 108, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/app/&self.{}\\\\n", "/app/&self.{}\\\\n", "/app/src/codegen.rs"], "tokens_in": 22755, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 22850, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 22932, "tokens_out": 6, "test_exit": 101}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": ["/app/&self.{}\\\\n", "/app/&self.{}\\\\n", "/app/src/codegen.rs"], "tokens_in": 25306, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 25428, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 23, "files_edited": [], "files_read": ["/app/&self.{}\\\\n", "/app/&self.{}\\\\n", "/app/src/codegen.rs"], "tokens_in": 25509, "tokens_out": 180, "test_exit": null}
+{"event": "turn", "turn": 24, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 25715, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 25, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 25797, "tokens_out": 13, "test_exit": 101}
+{"event": "turn", "turn": 26, "files_edited": [], "files_read": ["/app/{.*}}/fn", "/app/&field.name;\\n\\n", "/app/&field.field_type", "/app/type_to_rust(&field.field_type,", "/app/self.{}\\\\n", "/app/&self.{}\\\\n", "/app/&self.{}\\\\n", "/app/self.{}.as_ref()\\\\n", "/app/&self.{}\\\\n", "/app/src/codegen.rs"], "tokens_in": 27809, "tokens_out": 638, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:22:28Z", "test_exit": 101, "total_turns": 26, "correct_lines": 0, "arm": "silent"}

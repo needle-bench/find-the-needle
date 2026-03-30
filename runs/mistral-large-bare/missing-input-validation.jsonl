@@ -1,0 +1,15 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:51:11Z", "benchmark": "missing-input-validation", "model": "mistral-large", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 90, "tokens_out": 125, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 222, "tokens_out": 77, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/app/\".*needle*\""], "tokens_in": 306, "tokens_out": 170, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/tmp", "/var", "/home", "/etc"], "tokens_in": 483, "tokens_out": 92, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 582, "tokens_out": 60, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/var/log", "/etc"], "tokens_in": 649, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/", "/app/\"*.hidden\"", "/app/\"*.secret\"", "/app/\"*.needle\""], "tokens_in": 708, "tokens_out": 105, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/"], "tokens_in": 820, "tokens_out": 172, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/opt", "/srv", "/usr/local"], "tokens_in": 1004, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/"], "tokens_in": 1110, "tokens_out": 121, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/"], "tokens_in": 1240, "tokens_out": 89, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/home"], "tokens_in": 1341, "tokens_out": 145, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 1495, "tokens_out": 85, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:55:45Z", "test_exit": 1, "total_turns": 13, "correct_lines": 0, "arm": "bare"}

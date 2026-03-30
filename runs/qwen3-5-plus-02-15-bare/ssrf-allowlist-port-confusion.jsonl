@@ -1,0 +1,23 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:56:08Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "qwen3-5-plus-02-15", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 294, "tokens_out": 145, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 352, "tokens_out": 94, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/home", "/root", "/tmp", "/var"], "tokens_in": 410, "tokens_out": 107, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 500, "tokens_out": 54, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/"], "tokens_in": 578, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/root/"], "tokens_in": 633, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/", "/data/", "/opt/"], "tokens_in": 846, "tokens_out": 45, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/usr/share/"], "tokens_in": 961, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/usr"], "tokens_in": 1019, "tokens_out": 49, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/var/tmp/", "/tmp/"], "tokens_in": 1086, "tokens_out": 38, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/home/"], "tokens_in": 1252, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/etc/"], "tokens_in": 1353, "tokens_out": 39, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/bin/", "/sbin/"], "tokens_in": 1410, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/lib/", "/lib64/"], "tokens_in": 1470, "tokens_out": 49, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/usr/local/"], "tokens_in": 1537, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/usr/local/"], "tokens_in": 1894, "tokens_out": 46, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/usr/local/share/"], "tokens_in": 1958, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/usr/local/share/ca-certificates/"], "tokens_in": 2113, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": [], "tokens_in": 2259, "tokens_out": 121, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/workspace/"], "tokens_in": 2445, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 4799, "tokens_out": 33, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:58:52Z", "test_exit": 0, "total_turns": 21, "correct_lines": 0, "arm": "bare"}

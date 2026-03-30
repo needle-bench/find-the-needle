@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:49:37Z", "benchmark": "split-brain-leader-election", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/etc/", "/var/", "/opt/", "/root/", "/usr/"], "tokens_in": 862, "tokens_out": 290, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/", "/", "/root/.gitconfig"], "tokens_in": 1634, "tokens_out": 176, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 1998, "tokens_out": 140, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/", "/app.orig/"], "tokens_in": 3266, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/README.md", "/app/Agentfile", "/app/test.sh", "/app", "/app/\"*.go\"", "/app/\"*.py\"", "/app/\"*.js\"", "/app/\"*.txt\"", "/app/\"*.json\"", "/app/\"*.yaml\"", "/app/\"*.yml\"", "/app"], "tokens_in": 3832, "tokens_out": 280, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:50:22Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

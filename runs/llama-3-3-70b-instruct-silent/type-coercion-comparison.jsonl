@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:38:13Z", "benchmark": "type-coercion-comparison", "model": "llama-3-3-70b-instruct", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/data.js\n/app/filter.js\n/app/server.js\n/app/utils.js\n\nCurrent test output (test.sh):\nServer running on po"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 284, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 323, "tokens_out": 48, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:38:18Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

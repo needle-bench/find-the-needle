@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:00:50Z", "benchmark": "wrong-operator-discount", "model": "llama-4-maverick", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/cart.py\n/app/catalog.py\n/app/formatter.py\n/app/main.py\n/app/pricing.py\n\nCurrent test output (test.sh):\nF"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/pricing.py"], "tokens_in": 272, "tokens_out": 290, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/pricing.py"], "tokens_in": 836, "tokens_out": 177, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1026, "tokens_out": 69, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T02:00:58Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

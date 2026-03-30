@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:22:10Z", "benchmark": "cache-stale-invalidation", "model": "qwen-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 277, "tokens_out": 160, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/store.py"], "tokens_in": 902, "tokens_out": 87, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 1518, "tokens_out": 142, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/config.py"], "tokens_in": 2565, "tokens_out": 278, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2914, "tokens_out": 250, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:22:32Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

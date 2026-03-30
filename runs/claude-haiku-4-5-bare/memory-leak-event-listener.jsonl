@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:30:25Z", "benchmark": "memory-leak-event-listener", "model": "claude-haiku-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 582, "tokens_out": 97, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 694, "tokens_out": 96, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 957, "tokens_out": 81, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app", "/app/app"], "tokens_in": 1195, "tokens_out": 81, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/"], "tokens_in": 1534, "tokens_out": 73, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app"], "tokens_in": 1622, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1951, "tokens_out": 67, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:30:37Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

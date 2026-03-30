@@ -1,4 +1,4 @@
-{"event": "run.start", "timestamp": "2026-03-24T10:57:41Z", "benchmark": "api-version-field-drop", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/main.go\n/app/app/handlers.go\n/app/app/store.go\n/app/app/models.go\n/app/app/migration.go\n\nCurrent tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app"], "tokens_in": 354, "tokens_out": 19, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 461, "tokens_out": 51, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-24T10:57:44Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}
+{"event": "run.start", "timestamp": "2026-03-30T01:20:35Z", "benchmark": "api-version-field-drop", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/handlers.go\n/app/app/main.go\n/app/app/migration.go\n/app/app/models.go\n/app/app/store.go\n\nCurrent tes"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/"], "tokens_in": 354, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 462, "tokens_out": 27, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:20:39Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

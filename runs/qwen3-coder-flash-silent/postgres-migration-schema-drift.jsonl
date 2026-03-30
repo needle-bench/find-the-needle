@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:41:52Z", "benchmark": "postgres-migration-schema-drift", "model": "qwen3-coder-flash", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/start.sh\n/workspace/test.sh\n/workspace/app/main.go\n/workspace/app/vendor/github.com/lib/pq/array.go\n/workspace/"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace", "/workspace/.", "/workspace/\"*.go\""], "tokens_in": 640, "tokens_out": 103, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace", "/workspace/app/main.go"], "tokens_in": 875, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace", "/workspace/test.sh"], "tokens_in": 1989, "tokens_out": 42, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:41:56Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

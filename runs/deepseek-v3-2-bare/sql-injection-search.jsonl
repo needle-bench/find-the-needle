@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:00:44Z", "benchmark": "sql-injection-search", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 77, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 551, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 815, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1056, "tokens_out": 90, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T02:01:00Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

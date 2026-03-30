@@ -1,0 +1,30 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:40:27Z", "benchmark": "memory-leak-event-listener", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/."], "tokens_in": 32, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 312, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 368, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 778, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 817, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/."], "tokens_in": 972, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 2426, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 2764, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 2818, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 2857, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 2993, "tokens_out": 50, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 3155, "tokens_out": 50, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/.", "/app/\".*\""], "tokens_in": 3458, "tokens_out": 17, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/.", "/app/\".*\""], "tokens_in": 3493, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/.", "/app/'*/.*'"], "tokens_in": 3526, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/"], "tokens_in": 3575, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": [], "tokens_in": 3614, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": [], "tokens_in": 3909, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": [], "tokens_in": 4049, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": [], "tokens_in": 4085, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": [], "tokens_in": 4150, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/app/app/processor.js"], "tokens_in": 4224, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 23, "files_edited": [], "files_read": [], "tokens_in": 4907, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 24, "files_edited": [], "files_read": [], "tokens_in": 4968, "tokens_out": 47, "test_exit": null}
+{"event": "turn", "turn": 25, "files_edited": [], "files_read": [], "tokens_in": 5132, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 26, "files_edited": [], "files_read": [], "tokens_in": 5287, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 27, "files_edited": [], "files_read": [], "tokens_in": 5414, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 28, "files_edited": [], "files_read": [], "tokens_in": 5568, "tokens_out": 262, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:41:11Z", "test_exit": 1, "total_turns": 28, "correct_lines": 0, "arm": "bare"}

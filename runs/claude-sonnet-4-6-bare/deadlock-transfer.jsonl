@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:31:28Z", "benchmark": "deadlock-transfer", "model": "claude-sonnet-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 583, "tokens_out": 131, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 779, "tokens_out": 86, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/home", "/root", "/tmp", "/var", "/opt", "/srv", "/etc"], "tokens_in": 885, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1006, "tokens_out": 128, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:33:49Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

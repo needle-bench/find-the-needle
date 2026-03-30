@@ -1,0 +1,12 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:47:02Z", "benchmark": "split-brain-leader-election", "model": "gpt-4-1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 73, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.", "/app/'\\.git/'"], "tokens_in": 291, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/./Dockerfile"], "tokens_in": 373, "tokens_out": 9, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/./app"], "tokens_in": 549, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/./app/*", "/app/./app/cluster/*"], "tokens_in": 759, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 797, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/README.md", "/app/test.sh"], "tokens_in": 942, "tokens_out": 17, "test_exit": 1}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 978, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 1045, "tokens_out": 9, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1279, "tokens_out": 8, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:47:15Z", "test_exit": 0, "total_turns": 10, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:52:53Z", "benchmark": "missing-input-validation", "model": "deepseek-r1", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 322, "tokens_out": 93, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 712, "tokens_out": 86, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:53:01Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

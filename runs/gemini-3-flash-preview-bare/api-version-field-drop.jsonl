@@ -1,0 +1,13 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:20:23Z", "benchmark": "api-version-field-drop", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 94, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 359, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 2039, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2074, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2111, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 2142, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/."], "tokens_in": 2175, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/.git/logs/HEAD"], "tokens_in": 2232, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 2366, "tokens_out": 44, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 2528, "tokens_out": 50, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:22:39Z", "test_exit": 1, "total_turns": 11, "correct_lines": 0, "arm": "bare"}

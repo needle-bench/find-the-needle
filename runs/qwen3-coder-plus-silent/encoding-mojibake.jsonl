@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:24:58Z", "benchmark": "encoding-mojibake", "model": "qwen3-coder-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/CsvReader.java\n/app/app/CustomerRecord.java\n/app/app/Main.java\n/app/app/ReportGenerator.java\n\nCurren"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/"], "tokens_in": 592, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 875, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.git/refs/"], "tokens_in": 943, "tokens_out": 45, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/.git/refs/heads/"], "tokens_in": 1116, "tokens_out": 48, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/.", "/app/\".git\""], "tokens_in": 1264, "tokens_out": 60, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1342, "tokens_out": 398, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:25:19Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

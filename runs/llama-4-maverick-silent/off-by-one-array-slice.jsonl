@@ -1,0 +1,3 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:44:03Z", "benchmark": "off-by-one-array-slice", "model": "llama-4-maverick", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/config.py\n/app/data.py\n/app/main.py\n/app/processor.py\n/app/report.py\n\nCurrent test output (test.sh):\nFAI"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 303, "tokens_out": 106, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:44:05Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

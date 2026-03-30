@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:55:55Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "gemini-3-flash-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 32, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 130, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 387, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 1841, "tokens_out": 16, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/app/internal_service.py"], "tokens_in": 2006, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 2074, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/app/internal_service.py", "/workspace/app/server.py"], "tokens_in": 2691, "tokens_out": 87, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 2839, "tokens_out": 258, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:56:13Z", "test_exit": 1, "total_turns": 8, "correct_lines": 0, "arm": "bare"}

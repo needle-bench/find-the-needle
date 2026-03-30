@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:24:08Z", "benchmark": "data-corruption-concurrent-write", "model": "gemini-3-1-pro-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/."], "tokens_in": 32, "tokens_out": 199, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/README.md", "/app/test.sh", "/app/src/main.rs"], "tokens_in": 686, "tokens_out": 150, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:24:18Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

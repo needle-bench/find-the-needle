@@ -1,0 +1,18 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:26:09Z", "benchmark": "encoding-mojibake", "model": "gemini-3-1-pro-preview", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 32, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 69, "tokens_out": 43, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 261, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 523, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1950, "tokens_out": 95, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/"], "tokens_in": 1994, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 2037, "tokens_out": 139, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/root", "/tmp", "/var", "/etc", "/opt"], "tokens_in": 2117, "tokens_out": 211, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 2186, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/app/Main.java"], "tokens_in": 2286, "tokens_out": 154, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/app/CsvReader.java"], "tokens_in": 2618, "tokens_out": 13, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/app/customers.csv"], "tokens_in": 3218, "tokens_out": 12, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/app/customers.csv"], "tokens_in": 3460, "tokens_out": 12, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/app/*.java", "/app/app/customers.csv", "/tmp/report.txt", "/tmp/report.txt"], "tokens_in": 3498, "tokens_out": 43, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/app/CsvReader.java"], "tokens_in": 3990, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 4043, "tokens_out": 10, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:29:02Z", "test_exit": 0, "total_turns": 16, "correct_lines": 0, "arm": "bare"}

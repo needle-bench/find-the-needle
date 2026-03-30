@@ -1,0 +1,17 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:59:25Z", "benchmark": "split-brain-leader-election", "model": "deepseek-v3-2", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 322, "tokens_out": 97, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 438, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 720, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 991, "tokens_out": 60, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1277, "tokens_out": 59, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/main.go"], "tokens_in": 1462, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1851, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/./cluster/..."], "tokens_in": 2060, "tokens_out": 59, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/main.go"], "tokens_in": 2148, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/main.go"], "tokens_in": 2412, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/app/cluster/node.go"], "tokens_in": 2661, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/app/cluster/network.go"], "tokens_in": 3892, "tokens_out": 64, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/app/cluster/simulation.go"], "tokens_in": 4509, "tokens_out": 65, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/app/cluster/node_test.go"], "tokens_in": 5165, "tokens_out": 408, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 6095, "tokens_out": 58, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T02:00:35Z", "test_exit": 0, "total_turns": 15, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:50:40Z", "benchmark": "memory-leak-event-listener", "model": "mistral-large", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/monitor.js\n/app/app/processor.js\n/app/app/queue.js\n/app/app/server.js\n/app/app/utils.js\n\nCurrent tes"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/\"\\.on(\\|\\.addListener(\\|\\.once(\"", "/app/app"], "tokens_in": 210, "tokens_out": 154, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/server.js"], "tokens_in": 584, "tokens_out": 194, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/processor.js"], "tokens_in": 1348, "tokens_out": 360, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/s/this\\.eventBus\\.on/this.eventBus.once/g'", "/app/app/processor.js"], "tokens_in": 2270, "tokens_out": 438, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 2715, "tokens_out": 94, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:51:07Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

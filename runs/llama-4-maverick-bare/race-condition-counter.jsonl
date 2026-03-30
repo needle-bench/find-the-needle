@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:45:50Z", "benchmark": "race-condition-counter", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/app/."], "tokens_in": 165, "tokens_out": 319, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 712, "tokens_out": 396, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.", "/app/./.git", "/app/.", "/app/\"*/.git*\"", "/app/.", "/app/\"*/.git*\""], "tokens_in": 1457, "tokens_out": 275, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1782, "tokens_out": 72, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:46:12Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

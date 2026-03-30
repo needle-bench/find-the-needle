@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:46:30Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/internal_service.py\n/workspace/app/server.py\n/workspace/app/validator.py\n\nCurrent test o"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 825, "tokens_out": 256, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 1346, "tokens_out": 109, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/app/internal_service.py"], "tokens_in": 1690, "tokens_out": 540, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 2192, "tokens_out": 1487, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 2252, "tokens_out": 547, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2326, "tokens_out": 677, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:46:58Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

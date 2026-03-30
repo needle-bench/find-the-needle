@@ -1,0 +1,6 @@
+{"event": "post.start", "benchmark": "cache-stale-invalidation", "model": "gemini-2-5-pro-bare", "initial_test_output": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 5\nFAIL: Product list has 5 items after create, expected 6\n      List cache is stale \u2014 new product not visible\n", "prompt": "find the needle.", "timestamp": "2026-03-30T01:23:23Z"}
+{"event": "agent.bash", "cmd": "ls -F", "output_preview": "app/\ntest.sh*\n", "turn": 1}
+{"event": "agent.bash", "cmd": "grep needle test.sh", "output_preview": "", "turn": 2}
+{"event": "agent.bash", "cmd": "find app/ -name '*needle*'", "output_preview": "", "turn": 3}
+{"event": "agent.bash", "cmd": "grep -r needle app/", "output_preview": "", "turn": 4}
+{"event": "post.end", "resolved": false, "final_test_output": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 5\nFAIL: Product list has 5 items after create, expected 6\n      List cache is stale \u2014 new product not visible\n", "turns": 5, "timestamp": "2026-03-30T01:23:40Z"}

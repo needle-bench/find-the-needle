@@ -1,0 +1,22 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:22:31Z", "benchmark": "data-corruption-concurrent-write", "model": "gemini-2-0-flash-001", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# data-corruption-concurrent-write\n\n## Project\n\nA Rust CLI tool (`concurrent-writer`) that writes data to a file using"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/writer.rs"], "tokens_in": 618, "tokens_out": 91, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 1585, "tokens_out": 80, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/self.num_segments", "/app/self.num_workers;.*let", "/app/self.num_segments);/(", "/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/app/src/config.rs"], "tokens_in": 2176, "tokens_out": 460, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2661, "tokens_out": 36, "test_exit": 1}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 3349, "tokens_out": 50, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/{.*(start..end).collect()/pub", "/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/app/src/config.rs"], "tokens_in": 3908, "tokens_out": 162, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/tmp/new_segments_for_worker.rs"], "tokens_in": 4094, "tokens_out": 168, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/tmp/new_segments_for_worker.rs)'", "/app/src/config.rs"], "tokens_in": 4284, "tokens_out": 94, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 4403, "tokens_out": 40, "test_exit": 101}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 5127, "tokens_out": 127, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/\\/tmp\\/new_segments_for_worker.rs)/", "/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/app/src/config.rs"], "tokens_in": 5662, "tokens_out": 266, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 5953, "tokens_out": 40, "test_exit": 101}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 7839, "tokens_out": 140, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/src/config.rs.bak"], "tokens_in": 8004, "tokens_out": 59, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 8100, "tokens_out": 141, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app/{.*assert_eq!(cfg.num_workers,", "/app/self.segment_size", "/app/self.num_segments\\n", "/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/app/src/config.rs"], "tokens_in": 8549, "tokens_out": 187, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 8759, "tokens_out": 18, "test_exit": 101}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/app/\"/app/src/config.rs\"", "/app/f.read()", "/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/app/re.sub(r'def", "/app/segments_for_worker\\(.*?}\\n", "/app/flags=re.DOTALL)", "/app/f.write(content)'"], "tokens_in": 10623, "tokens_out": 246, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app/\"/app/src/config.rs\"", "/app/f.read()", "/app/0..self.num_segments", "/app/self.num_workers", "/app/segments.push(i);\\n", "/app/re.sub(r'pub", "/app/\\{.*?segments\\n", "/app/flags=re.DOTALL)", "/app/f.write(content)'"], "tokens_in": 10949, "tokens_out": 258, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": [], "tokens_in": 0, "tokens_out": 0, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:23:21Z", "test_exit": 101, "total_turns": 20, "correct_lines": 0, "arm": "silent"}

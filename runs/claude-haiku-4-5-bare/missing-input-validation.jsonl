@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:30:52Z", "benchmark": "missing-input-validation", "model": "claude-haiku-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 582, "tokens_out": 97, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 694, "tokens_out": 83, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 797, "tokens_out": 144, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 1371, "tokens_out": 76, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1771, "tokens_out": 184, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:33:05Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,17 @@
+{"event": "run.start", "timestamp": "2026-03-30T02:23:55Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "mistral-large", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 90, "tokens_out": 145, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/var", "/etc", "/opt", "/tmp"], "tokens_in": 242, "tokens_out": 94, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 343, "tokens_out": 84, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.git/logs/HEAD", "/workspace/.git/logs/refs/heads/master"], "tokens_in": 1090, "tokens_out": 164, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 1480, "tokens_out": 91, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/app"], "tokens_in": 1709, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/app"], "tokens_in": 1973, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/app/requirements.txt"], "tokens_in": 2059, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 2158, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 2741, "tokens_out": 66, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/workspace/app/internal_service.py"], "tokens_in": 3149, "tokens_out": 90, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/workspace", "/workspace/\"*.hidden\"", "/workspace/\".*\""], "tokens_in": 3756, "tokens_out": 158, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 3921, "tokens_out": 54, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 4000, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": [], "tokens_in": 5463, "tokens_out": 539, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T02:24:41Z", "test_exit": 1, "total_turns": 15, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,15 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:55:00Z", "benchmark": "goroutine-leak-handler", "model": "gpt-4o", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 66, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 102, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 142, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 229, "tokens_out": 18, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/"], "tokens_in": 267, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/"], "tokens_in": 307, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/"], "tokens_in": 347, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 384, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/"], "tokens_in": 418, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/"], "tokens_in": 455, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/"], "tokens_in": 495, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/", "/app/'*.txt'"], "tokens_in": 544, "tokens_out": 39, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/"], "tokens_in": 594, "tokens_out": 42, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T02:05:21Z", "test_exit": 1, "total_turns": 13, "correct_lines": 0, "arm": "bare"}

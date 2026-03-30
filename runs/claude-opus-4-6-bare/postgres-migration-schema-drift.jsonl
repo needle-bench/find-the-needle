@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:41:38Z", "benchmark": "postgres-migration-schema-drift", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/"], "tokens_in": 583, "tokens_out": 135, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 784, "tokens_out": 144, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/var/", "/tmp/", "/opt/", "/root/", "/srv/", "/etc/", "/"], "tokens_in": 1488, "tokens_out": 174, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/home/", "/root/", "/tmp/", "/var/tmp/", "/opt/", "/srv/"], "tokens_in": 1727, "tokens_out": 77, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/", "/workspace/\"*.txt\"", "/workspace/\"*.md\"", "/workspace/\"*.cfg\"", "/workspace/\"*.conf\"", "/workspace/\"*.dat\"", "/workspace/\"*.log\"", "/workspace/\"*.hidden\"", "/", "/workspace/\".*\""], "tokens_in": 1841, "tokens_out": 233, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/etc/", "/root/.bashrc", "/root/.profile", "/", "/etc/hostname"], "tokens_in": 2780, "tokens_out": 213, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/", "/workspace"], "tokens_in": 4510, "tokens_out": 116, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace", "/workspace/start.sh", "/workspace/test.sh", "/workspace/app/", "/workspace/migrations/"], "tokens_in": 4932, "tokens_out": 108, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:44:10Z", "test_exit": 0, "total_turns": 8, "correct_lines": 0, "arm": "bare"}

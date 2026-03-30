@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:59:43Z", "benchmark": "timing-attack-comparison", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/.", "/app/."], "tokens_in": 165, "tokens_out": 209, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/path/to/search", "/path/to/search"], "tokens_in": 590, "tokens_out": 108, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 744, "tokens_out": 77, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-30T01:59:52Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

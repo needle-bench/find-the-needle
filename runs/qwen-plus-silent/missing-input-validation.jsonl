@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:36:05Z", "benchmark": "missing-input-validation", "model": "qwen-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/dist/inventory.js\n/app/dist/inventory.d.ts\n/app/dist/utils.js\n/app/dist/utils.d.ts\n/app/dist/routes.js\n/"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/inventory.ts"], "tokens_in": 504, "tokens_out": 176, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/routes.ts"], "tokens_in": 986, "tokens_out": 219, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/types.ts"], "tokens_in": 1765, "tokens_out": 177, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2045, "tokens_out": 104, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:36:20Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

@@ -1,0 +1,16 @@
+{
+  "agent": "claude-3-5-sonnet-20241022",
+  "arm": "default",
+  "benchmark": "api-version-field-drop",
+  "control_type": "default",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": false,
+  "stop_reason": "error: API call failed: API error 404: model: claude-3-5-sonnet-20241022",
+  "timestamp": "2026-03-29T13:45:02Z",
+  "token_cost": 0,
+  "turns_to_fix": 0,
+  "wall_clock": 1.342
+}

@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:51:20Z", "benchmark": "timing-attack-comparison", "model": "qwen3-coder-flash", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# timing-attack-comparison\n\n## Project\n\nA Go authentication server (`authserver`) that stores user credentials as SHA-"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 708, "tokens_out": 82, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/auth/security.go"], "tokens_in": 854, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/auth/timing_test.go"], "tokens_in": 2036, "tokens_out": 46, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/auth/store.go"], "tokens_in": 2711, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/auth/"], "tokens_in": 3083, "tokens_out": 106, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/auth/compare.go", "//", "/app/time.", "//", "/app/subtle.ConstantTimeCompare", "//", "//", "/app/subtle.ConstantTimeCompare([]byte(stored),"], "tokens_in": 3327, "tokens_out": 169, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 3514, "tokens_out": 40, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:51:34Z", "test_exit": 0, "total_turns": 7, "correct_lines": 2, "arm": "silent"}

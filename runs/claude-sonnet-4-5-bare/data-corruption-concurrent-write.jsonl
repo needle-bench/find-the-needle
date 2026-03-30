@@ -1,0 +1,24 @@
+{"event": "run.start", "timestamp": "2026-03-30T01:23:06Z", "benchmark": "data-corruption-concurrent-write", "model": "claude-sonnet-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 582, "tokens_out": 87, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 684, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 1108, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 1384, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/./src"], "tokens_in": 1692, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/./src/main.rs"], "tokens_in": 1806, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/./src/config.rs"], "tokens_in": 2316, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/./src/writer.rs"], "tokens_in": 2890, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/./src/verify.rs"], "tokens_in": 3874, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/tmp/test_segments.rs", "/app/0..num_workers", "/", "/app/(start..end).collect();", "/tmp/test_segments.rs", "/tmp/test_segments", "/tmp/test_segments"], "tokens_in": 4650, "tokens_out": 325, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/tmp/config_fix.patch", "/app/a/src/config.rs", "/app/b/src/config.rs", "/app/self.num_segments", "/", "/app/self.num_workers;", "//", "/app/self.num_segments);", "/app/(start..end).collect()", "/tmp/config_fix.patch"], "tokens_in": 5077, "tokens_out": 456, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/", "/tmp/config_fix.patch"], "tokens_in": 5722, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/self.num_segments);/let", "/app/./src/config.rs"], "tokens_in": 5813, "tokens_out": 102, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": ["/app/./src/config.rs"], "tokens_in": 5930, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app/./src/config.rs"], "tokens_in": 6019, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/"], "tokens_in": 6226, "tokens_out": 76, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": [], "tokens_in": 6334, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": [], "tokens_in": 6399, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app/./target/release/concurrent-writer", "/tmp/test.dat", "/app/./target/release/concurrent-writer", "/tmp/test.dat"], "tokens_in": 6515, "tokens_out": 81, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/app/{1..10};", "/app/./target/release/concurrent-writer", "/tmp/test$i.dat", "/app/./target/release/concurrent-writer", "/tmp/test$i.dat"], "tokens_in": 6723, "tokens_out": 140, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": ["/app/{1..10};", "/app/./target/release/concurrent-writer", "/tmp/test$i.dat", "/app/result=$(./target/release/concurrent-writer", "/tmp/test$i.dat"], "tokens_in": 6878, "tokens_out": 125, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/app/./test.sh"], "tokens_in": 7135, "tokens_out": 71, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-30T01:24:35Z", "test_exit": 0, "total_turns": 22, "correct_lines": 0, "arm": "bare"}
