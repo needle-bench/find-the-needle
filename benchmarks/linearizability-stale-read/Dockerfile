@@ -16,7 +16,8 @@ COPY --from=builder /build/kv-cluster /usr/local/bin/kv-cluster
 WORKDIR /app
 
 COPY . .
-RUN chmod +x test.sh
+RUN chmod +x test.sh && \
+    git init && git add -A && git commit -m 'init'
 
 # Install Go toolchain in final image so agent can rebuild
 RUN apk add --no-cache go && \

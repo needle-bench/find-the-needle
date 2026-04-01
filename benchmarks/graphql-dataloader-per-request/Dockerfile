@@ -1,10 +1,11 @@
 FROM node:22-slim AS builder
 
-RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/* && \
+    npm config set update-notifier false
 
 WORKDIR /build
 COPY app/package.json app/tsconfig.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY app/src/ ./src/
 RUN npx tsc
@@ -20,7 +21,7 @@ RUN apt-get update && \
 WORKDIR /app
 
 COPY app/package.json app/tsconfig.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY --from=builder /build/dist/ ./dist/
 COPY app/src/ ./src/

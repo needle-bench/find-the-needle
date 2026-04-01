@@ -1,19 +1,20 @@
+diff --git a/src/context.ts b/src/context.ts
+index b7a438a..3de1f28 100644
 --- a/src/context.ts
 +++ b/src/context.ts
 @@ -1,4 +1,5 @@
  import { getDatabase } from "./db";
 +import { createLoaders } from "./loaders";
  import Database from "better-sqlite3";
-
+ 
  /**
-@@ -8,18 +9,18 @@
-  * Resolvers receive this via the `context` argument.
+@@ -9,17 +10,17 @@ import Database from "better-sqlite3";
   */
  export interface GqlContext {
    db: Database.Database;
 +  loaders: ReturnType<typeof createLoaders>;
  }
-
+ 
  /**
   * Factory function invoked by express-graphql for every request.
   *
@@ -30,13 +31,82 @@
 -  return { db };
 +  return { db, loaders: createLoaders(db) };
  }
---- a/src/resolvers/userResolver.ts
-+++ b/src/resolvers/userResolver.ts
-@@ -1,21 +1,5 @@
+diff --git a/src/resolvers/postResolver.ts b/src/resolvers/postResolver.ts
+index 53f4338..e866cce 100644
+--- a/src/resolvers/postResolver.ts
++++ b/src/resolvers/postResolver.ts
+@@ -1,30 +1,6 @@
 -import DataLoader from "dataloader";
  import { GqlContext } from "../context";
  import { trackedQuery } from "../db";
+ 
+-/**
+- * Create a fresh DataLoader to batch-fetch posts by author ID.
+- *
+- * A new loader per resolver call ensures we don't accidentally
+- * cache stale data across different resolution branches.
+- */
+-function makePostsByAuthorLoader(ctx: GqlContext) {
+-  return new DataLoader(async (authorIds: readonly number[]) => {
+-    const placeholders = authorIds.map(() => "?").join(",");
+-    const rows = trackedQuery(
+-      ctx.db,
+-      `SELECT id, title, body, author_id, created_at FROM posts WHERE author_id IN (${placeholders})`,
+-      ...authorIds
+-    );
+-    const grouped = new Map<number, any[]>();
+-    for (const row of rows) {
+-      const list = grouped.get(row.author_id) || [];
+-      list.push(row);
+-      grouped.set(row.author_id, list);
+-    }
+-    return authorIds.map((id) => grouped.get(id) || []);
+-  });
+-}
+ 
+ export const postResolvers = {
+   /**
+@@ -80,8 +56,7 @@ export const postResolvers = {
+   /**
+    * Field resolver: Post.author — resolve the author of a post.
+    *
+-   * Creates a new DataLoader for each Post being resolved, ensuring
+-   * clean loader state per resolution.
++   * Uses the request-scoped DataLoader for batching.
+    */
+   postAuthor(post: any, _args: any, ctx: GqlContext) {
+     // If author was already eager-loaded (e.g. from postsByDepartment), return it
+@@ -89,20 +64,6 @@ export const postResolvers = {
+       return post.author;
+     }
+ 
+-    const loader = makePostsByAuthorLoader(ctx);
+-    // NOTE: this loader is for fetching a single user by ID.
+-    // We create a one-off loader each time to keep things isolated.
+-    const userLoader = new DataLoader(async (ids: readonly number[]) => {
+-      const placeholders = ids.map(() => "?").join(",");
+-      const rows = trackedQuery(
+-        ctx.db,
+-        `SELECT id, name, email, department FROM users WHERE id IN (${placeholders})`,
+-        ...ids
+-      );
+-      const byId = new Map(rows.map((r: any) => [r.id, r]));
+-      return ids.map((id) => byId.get(id) || null);
+-    });
 -
+-    return userLoader.load(post.author_id);
++    return ctx.loaders.userLoader.load(post.author_id);
+   },
+ };
+diff --git a/src/resolvers/userResolver.ts b/src/resolvers/userResolver.ts
+index 70393d3..ec578af 100644
+--- a/src/resolvers/userResolver.ts
++++ b/src/resolvers/userResolver.ts
+@@ -1,25 +1,6 @@
+-import DataLoader from "dataloader";
+ import { GqlContext } from "../context";
+ import { trackedQuery } from "../db";
+ 
 -/**
 - * Create a fresh DataLoader to batch-fetch users by ID.
 - *
@@ -55,10 +125,10 @@
 -    return ids.map((id) => byId.get(id) || null);
 -  });
 -}
-
+ 
  export const userResolvers = {
-@@ -30,37 +14,16 @@
    /**
+@@ -34,33 +15,14 @@ export const userResolvers = {
     * Top-level query: fetch a single user by ID.
     */
    user(_: any, args: { id: number }, ctx: GqlContext) {
@@ -66,7 +136,7 @@
 -    return loader.load(args.id);
 +    return ctx.loaders.userLoader.load(args.id);
    },
-
+ 
    /**
     * Field resolver: User.posts — fetch posts authored by this user.
 -   *
@@ -93,59 +163,5 @@
 -
 -    return loader.load(user.id);
 +    return ctx.loaders.postsByAuthorLoader.load(user.id);
-   },
- };
---- a/src/resolvers/postResolver.ts
-+++ b/src/resolvers/postResolver.ts
-@@ -1,24 +1,5 @@
--import DataLoader from "dataloader";
- import { GqlContext } from "../context";
- import { trackedQuery } from "../db";
--
--/**
-- * Create a fresh DataLoader to batch-fetch posts by author ID.
-- *
-- * A new loader per resolver call ensures we don't accidentally
-- * cache stale data across different resolution branches.
-- */
--function makePostsByAuthorLoader(ctx: GqlContext) {
--  return new DataLoader(async (authorIds: readonly number[]) => {
--    const placeholders = authorIds.map(() => "?").join(",");
--    const rows = trackedQuery(
--      ctx.db,
--      `SELECT id, title, body, author_id, created_at FROM posts WHERE author_id IN (${placeholders})`,
--      ...authorIds
--    );
--    const grouped = new Map<number, any[]>();
--    for (const row of rows) {
--      const list = grouped.get(row.author_id) || [];
--      list.push(row);
--      grouped.set(row.author_id, list);
--    }
--    return authorIds.map((id) => grouped.get(id) || []);
--  });
--}
-
- export const postResolvers = {
-@@ -78,22 +59,7 @@
-       return post.author;
-     }
-
--    const loader = makePostsByAuthorLoader(ctx);
--    // NOTE: this loader is for fetching a single user by ID.
--    // We create a one-off loader each time to keep things isolated.
--    const userLoader = new DataLoader(async (ids: readonly number[]) => {
--      const placeholders = ids.map(() => "?").join(",");
--      const rows = trackedQuery(
--        ctx.db,
--        `SELECT id, name, email, department FROM users WHERE id IN (${placeholders})`,
--        ...ids
--      );
--      const byId = new Map(rows.map((r: any) => [r.id, r]));
--      return ids.map((id) => byId.get(id) || null);
--    });
--
--    return userLoader.load(post.author_id);
-+    return ctx.loaders.userLoader.load(post.author_id);
    },
  };

@@ -153,7 +153,6 @@ func (n *Node) Read(key string) (string, bool) {
 func (n *Node) ReadLinearizable(key string) (string, bool) {
 	n.mu.RLock()
 	role := n.role
-	leaderID := n.leader
 	commitIdx := n.commitIndex
 	n.mu.RUnlock()
 
@@ -168,26 +167,48 @@ func (n *Node) ReadLinearizable(key string) (string, bool) {
 		return v, ok
 	}
 
-	// Follower: ask leader for the current commit index via read-index protocol
-	if leaderID < 0 {
-		return "", false
+	// Follower: ask leader for the current commit index via read-index protocol.
+	// Retry to handle leader changes (e.g., after a partition heals and triggers
+	// a new election, the follower's cached leader ID may be stale).
+	var leaderCommitIdx uint64
+	acquired := false
+
+	for attempt := 0; attempt < 5; attempt++ {
+		n.mu.RLock()
+		leaderID := n.leader
+		n.mu.RUnlock()
+
+		if leaderID < 0 {
+			// No known leader yet; wait for a heartbeat to arrive
+			time.Sleep(200 * time.Millisecond)
+			continue
+		}
+
+		respCh := make(chan uint64, 1)
+		n.setReadIndexWaiter(respCh)
+
+		n.transport.Send(Msg{
+			Type: MsgReadIndex,
+			From: n.ID,
+			To:   leaderID,
+		})
+
+		select {
+		case leaderCommitIdx = <-respCh:
+			acquired = true
+		case <-time.After(500 * time.Millisecond):
+			// Leader may have changed; retry with fresh leader ID
+			continue
+		case <-n.stopCh:
+			return "", false
+		}
+
+		if acquired {
+			break
+		}
 	}
 
-	respCh := make(chan uint64, 1)
-	n.setReadIndexWaiter(respCh)
-
-	n.transport.Send(Msg{
-		Type: MsgReadIndex,
-		From: n.ID,
-		To:   leaderID,
-	})
-
-	var leaderCommitIdx uint64
-	select {
-	case leaderCommitIdx = <-respCh:
-	case <-time.After(2 * time.Second):
-		return "", false
-	case <-n.stopCh:
+	if !acquired {
 		return "", false
 	}
 
@@ -391,6 +412,8 @@ func (n *Node) handleMessage(msg Msg, electionTimer *time.Timer) {
 		n.handleAppendResp(msg)
 	case MsgHeartbeat:
 		n.handleHeartbeat(msg, electionTimer)
+	case MsgHeartbeatResp:
+		n.handleHeartbeatResp(msg)
 	case MsgReadIndex:
 		n.handleReadIndex(msg)
 	case MsgReadIndexResp:
@@ -547,8 +570,22 @@ func (n *Node) handleHeartbeat(msg Msg, electionTimer *time.Timer) {
 		From:    n.ID,
 		To:      msg.From,
 		Term:    msg.Term,
+		Index:   n.log.LastIndex(),
 		Success: true,
 	})
+}
+
+// handleHeartbeatResp processes a heartbeat response from a follower.
+// The leader uses the follower's reported last log index to update nextIndex
+// so subsequent heartbeats carry any entries the follower is missing.
+func (n *Node) handleHeartbeatResp(msg Msg) {
+	n.mu.Lock()
+	defer n.mu.Unlock()
+	if n.role != Leader {
+		return
+	}
+	n.matchIndex[msg.From] = msg.Index
+	n.nextIndex[msg.From] = msg.Index + 1
 }
 
 func (n *Node) handleAppendEntries(msg Msg, electionTimer *time.Timer) {

@@ -1,31 +1,11 @@
---- a/app/sanitizer.py
-+++ b/app/sanitizer.py
-@@ -7,6 +7,7 @@ Used across the application for XSS prevention and general input hygiene.
-
- import re
- import html
-+import unicodedata
-
-
- # Matches any HTML tag (opening, closing, self-closing)
-@@ -33,6 +34,10 @@ def sanitize_username(username: str) -> str:
-     # Step 2: Strip any residual HTML tags (belt-and-suspenders)
-     cleaned = _HTML_TAG_RE.sub("", cleaned)
-
-+    # Step 2.5: Strip Unicode control characters (Cc, Cf, Co, Cs)
-+    # This blocks BIDI override chars (U+202E, U+202D, etc.) and other
-+    # invisible control characters that could be used for spoofing.
-+    cleaned = "".join(ch for ch in cleaned if unicodedata.category(ch)[0] not in ("C",))
-+
-     # Step 3: Reject script injection patterns
-     if _SCRIPT_RE.search(cleaned):
-         raise ValueError("Username contains disallowed script patterns")
+diff --git a/app/auth.py b/app/auth.py
+index 4de6ae5..8f92e84 100644
 --- a/app/auth.py
 +++ b/app/auth.py
-@@ -143,14 +143,10 @@ def check_admin_access(token: str) -> tuple[bool, str]:
-
+@@ -143,13 +143,9 @@ def check_admin_access(token: str) -> tuple[bool, str]:
+ 
      username = session["username"]
-
+ 
 -    # Render the display name as it appears in the UI, then compare
 -    # against the admin allowlist. This ensures consistency between
 -    # what the admin sees in the user management panel and the access
@@ -37,6 +17,30 @@
 +    # Never use a display-rendered form for authorization decisions.
 +    if username in ADMIN_USERS:
          return True, "admin access granted"
-
+ 
 -    return False, f"user '{display_name}' is not an admin"
 +    return False, f"user '{username}' is not an admin"
+diff --git a/app/sanitizer.py b/app/sanitizer.py
+index 1170dcb..b1c656d 100644
+--- a/app/sanitizer.py
++++ b/app/sanitizer.py
+@@ -6,6 +6,7 @@ Used across the application for XSS prevention and general input hygiene.
+ 
+ import re
+ import html
++import unicodedata
+ 
+ 
+ # Matches any HTML tag (opening, closing, self-closing)
+@@ -33,6 +34,11 @@ def sanitize_username(username: str) -> str:
+     # Step 2: Strip any residual HTML tags (belt-and-suspenders)
+     cleaned = _HTML_TAG_RE.sub("", cleaned)
+ 
++    # Step 2.5: Strip Unicode control characters (Cc, Cf, Co, Cs)
++    # This blocks BIDI override chars (U+202E, U+202D, etc.) and other
++    # invisible control characters that could be used for spoofing.
++    cleaned = "".join(ch for ch in cleaned if unicodedata.category(ch)[0] not in ("C",))
++
+     # Step 3: Reject script injection patterns
+     if _SCRIPT_RE.search(cleaned):
+         raise ValueError("Username contains disallowed script patterns")

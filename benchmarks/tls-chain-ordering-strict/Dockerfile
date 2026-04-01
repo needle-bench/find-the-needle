@@ -49,7 +49,10 @@ RUN mkdir -p /certs && \
         -extfile /certs/leaf.ext \
         -out /certs/leaf.crt && \
     # Assemble full chain PEM for the server (all 3 certs) \
-    cat /certs/root.crt /certs/intermediate.crt /certs/leaf.crt > /certs/chain.pem && \
+    # BUG: chain order is leaf, root, intermediate instead of \
+    #      leaf, intermediate, root (RFC 5246 Section 7.4.2). \
+    #      Lenient clients tolerate this; strict validators reject it. \
+    cat /certs/leaf.crt /certs/root.crt /certs/intermediate.crt > /certs/chain.pem && \
     # Clean up temporary files \
     rm -f /certs/*.csr /certs/*.srl /certs/*.ext
 

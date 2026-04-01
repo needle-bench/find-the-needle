@@ -1,18 +1,19 @@
+diff --git a/app/tlssetup/loader.go b/app/tlssetup/loader.go
+index c749b4d..7f38195 100644
 --- a/app/tlssetup/loader.go
 +++ b/app/tlssetup/loader.go
-@@ -2,7 +2,9 @@ package tlssetup
-
+@@ -1,6 +1,7 @@
+ package tlssetup
+ 
  import (
 +	"bytes"
  	"crypto/tls"
  	"crypto/x509"
  	"fmt"
- 	"os"
- )
-@@ -39,6 +41,10 @@ func LoadTLSConfig(chainPEMPath, keyPath string) (*tls.Config, error) {
+@@ -40,6 +41,10 @@ func LoadTLSConfig(chainPEMPath, keyPath string) (*tls.Config, error) {
  		return nil, fmt.Errorf("loading X509 key pair: %w", err)
  	}
-
+ 
 +	// Sort the chain certificates (indices 1..n) so each cert[i] is
 +	// issued by cert[i+1], conforming to RFC 5246 Section 7.4.2.
 +	sortChainCerts(&tlsCert)
@@ -20,41 +21,33 @@
  	// Parse the leaf for SNI matching
  	leaf, err := x509.ParseCertificate(tlsCert.Certificate[0])
  	if err != nil {
-@@ -54,3 +60,47 @@ func LoadTLSConfig(chainPEMPath, keyPath string) (*tls.Config, error) {
-
+@@ -54,3 +59,54 @@ func LoadTLSConfig(chainPEMPath, keyPath string) (*tls.Config, error) {
+ 
  	return config, nil
  }
 +
 +// sortChainCerts reorders Certificate[1:] so that each certificate is
 +// followed by its issuer. Certificate[0] (the leaf) is left in place.
-+// This ensures the chain conforms to RFC 5246 Section 7.4.2:
-+//   "Each following certificate MUST directly certify the one preceding it."
 +func sortChainCerts(cert *tls.Certificate) {
 +	if len(cert.Certificate) <= 2 {
-+		// 0 or 1 chain cert — nothing to reorder
 +		return
 +	}
 +
-+	chain := cert.Certificate[1:] // chain certs only (skip leaf)
-+
-+	// Parse all chain certs
++	chain := cert.Certificate[1:]
 +	parsed := make([]*x509.Certificate, len(chain))
 +	for i, der := range chain {
 +		c, err := x509.ParseCertificate(der)
 +		if err != nil {
-+			return // can't parse — leave original order
++			return
 +		}
 +		parsed[i] = c
 +	}
 +
-+	// Parse the leaf to find its issuer
 +	leaf, err := x509.ParseCertificate(cert.Certificate[0])
 +	if err != nil {
 +		return
 +	}
 +
-+	// Build the ordered chain: find the cert that issued the leaf,
-+	// then the cert that issued that one, etc.
 +	ordered := make([][]byte, 0, len(chain))
 +	used := make([]bool, len(chain))
 +	currentIssuer := leaf.RawIssuer
@@ -75,7 +68,6 @@
 +		}
 +	}
 +
-+	// Append any remaining certs that weren't part of the chain
 +	for i, der := range chain {
 +		if !used[i] {
 +			ordered = append(ordered, der)
