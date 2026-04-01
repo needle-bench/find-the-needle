@@ -1,0 +1,151 @@
+--- a/src/context.ts
++++ b/src/context.ts
+@@ -1,4 +1,5 @@
+ import { getDatabase } from "./db";
++import { createLoaders } from "./loaders";
+ import Database from "better-sqlite3";
+
+ /**
+@@ -8,18 +9,18 @@
+  * Resolvers receive this via the `context` argument.
+  */
+ export interface GqlContext {
+   db: Database.Database;
++  loaders: ReturnType<typeof createLoaders>;
+ }
+
+ /**
+  * Factory function invoked by express-graphql for every request.
+  *
+- * NOTE: DataLoader instances should ideally live here so that all
+- * resolvers within a single request share the same loader and
+- * batching works across the full query tree.  Currently loaders
+- * are created in individual resolvers — see user and post resolvers.
++ * DataLoader instances are created here so that all resolvers within
++ * a single request share the same loader and batching works across
++ * the full query tree.
+  */
+ export function createContext(): GqlContext {
+   const db = getDatabase();
+-  return { db };
++  return { db, loaders: createLoaders(db) };
+ }
+--- a/src/resolvers/userResolver.ts
++++ b/src/resolvers/userResolver.ts
+@@ -1,21 +1,5 @@
+-import DataLoader from "dataloader";
+ import { GqlContext } from "../context";
+ import { trackedQuery } from "../db";
+-
+-/**
+- * Create a fresh DataLoader to batch-fetch users by ID.
+- *
+- * Each call produces a new loader, ensuring isolation between
+- * different parts of the query tree.
+- */
+-function makeUserLoader(ctx: GqlContext) {
+-  return new DataLoader(async (ids: readonly number[]) => {
+-    const placeholders = ids.map(() => "?").join(",");
+-    const rows = trackedQuery(
+-      ctx.db,
+-      `SELECT id, name, email, department FROM users WHERE id IN (${placeholders})`,
+-      ...ids
+-    );
+-    const byId = new Map(rows.map((r: any) => [r.id, r]));
+-    return ids.map((id) => byId.get(id) || null);
+-  });
+-}
+
+ export const userResolvers = {
+@@ -30,37 +14,16 @@
+   /**
+    * Top-level query: fetch a single user by ID.
+    */
+   user(_: any, args: { id: number }, ctx: GqlContext) {
+-    const loader = makeUserLoader(ctx);
+-    return loader.load(args.id);
++    return ctx.loaders.userLoader.load(args.id);
+   },
+
+   /**
+    * Field resolver: User.posts — fetch posts authored by this user.
+-   *
+-   * Creates a new DataLoader for each User object being resolved.
+-   * This guarantees each resolver invocation gets a clean loader.
++   * Uses the request-scoped DataLoader for batching.
+    */
+   userPosts(user: any, _args: any, ctx: GqlContext) {
+-    const loader = new DataLoader(async (authorIds: readonly number[]) => {
+-      const placeholders = authorIds.map(() => "?").join(",");
+-      const rows = trackedQuery(
+-        ctx.db,
+-        `SELECT id, title, body, author_id, created_at FROM posts WHERE author_id IN (${placeholders})`,
+-        ...authorIds
+-      );
+-      const grouped = new Map<number, any[]>();
+-      for (const row of rows) {
+-        const list = grouped.get(row.author_id) || [];
+-        list.push(row);
+-        grouped.set(row.author_id, list);
+-      }
+-      return authorIds.map((id) => grouped.get(id) || []);
+-    });
+-
+-    return loader.load(user.id);
++    return ctx.loaders.postsByAuthorLoader.load(user.id);
+   },
+ };
+--- a/src/resolvers/postResolver.ts
++++ b/src/resolvers/postResolver.ts
+@@ -1,24 +1,5 @@
+-import DataLoader from "dataloader";
+ import { GqlContext } from "../context";
+ import { trackedQuery } from "../db";
+-
+-/**
+- * Create a fresh DataLoader to batch-fetch posts by author ID.
+- *
+- * A new loader per resolver call ensures we don't accidentally
+- * cache stale data across different resolution branches.
+- */
+-function makePostsByAuthorLoader(ctx: GqlContext) {
+-  return new DataLoader(async (authorIds: readonly number[]) => {
+-    const placeholders = authorIds.map(() => "?").join(",");
+-    const rows = trackedQuery(
+-      ctx.db,
+-      `SELECT id, title, body, author_id, created_at FROM posts WHERE author_id IN (${placeholders})`,
+-      ...authorIds
+-    );
+-    const grouped = new Map<number, any[]>();
+-    for (const row of rows) {
+-      const list = grouped.get(row.author_id) || [];
+-      list.push(row);
+-      grouped.set(row.author_id, list);
+-    }
+-    return authorIds.map((id) => grouped.get(id) || []);
+-  });
+-}
+
+ export const postResolvers = {
+@@ -78,22 +59,7 @@
+       return post.author;
+     }
+
+-    const loader = makePostsByAuthorLoader(ctx);
+-    // NOTE: this loader is for fetching a single user by ID.
+-    // We create a one-off loader each time to keep things isolated.
+-    const userLoader = new DataLoader(async (ids: readonly number[]) => {
+-      const placeholders = ids.map(() => "?").join(",");
+-      const rows = trackedQuery(
+-        ctx.db,
+-        `SELECT id, name, email, department FROM users WHERE id IN (${placeholders})`,
+-        ...ids
+-      );
+-      const byId = new Map(rows.map((r: any) => [r.id, r]));
+-      return ids.map((id) => byId.get(id) || null);
+-    });
+-
+-    return userLoader.load(post.author_id);
++    return ctx.loaders.userLoader.load(post.author_id);
+   },
+ };

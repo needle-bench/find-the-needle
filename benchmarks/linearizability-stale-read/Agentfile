@@ -1,0 +1,8 @@
+FROM linearizability-stale-read:latest
+PROMPT "The distributed KV store claims to be linearizable but test.sh fails — reads return stale data after a network partition heals. Find and fix the bug. Run test.sh to verify."
+TOOL shell
+TOOL file:read
+TOOL file:edit
+LIMIT turns 80
+LIMIT tokens 600000
+LIMIT wall_clock 2400

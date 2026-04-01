@@ -1,0 +1,26 @@
+--- a/app/snapshot.go
++++ b/app/snapshot.go
+@@ -44,14 +44,20 @@
+ 			Term:  snap.LastIncludedTerm,
+ 		}}
+ 	}
+-	// Note: when the snapshot covers only part of our log, we keep
+-	// existing entries intact. The log compaction happens separately
+-	// when the node takes its own snapshot via TakeSnapshot().
+
++	// Discard log entries that the snapshot supersedes
++	n.raftLog.CompactUpTo(snap.LastIncludedIndex)
++
+ 	// Restore state machine from snapshot
+ 	n.stateMachine.Restore(snap.Data)
+
+ 	// Update lastApplied — the state machine now reflects everything
+ 	// up to and including the snapshot's last index.
+ 	n.lastApplied = snap.LastIncludedIndex
++
++	// Update commitIndex to reflect that everything in the snapshot
++	// has been committed.
++	if snap.LastIncludedIndex > n.commitIndex {
++		n.commitIndex = snap.LastIncludedIndex
++	}
+ }

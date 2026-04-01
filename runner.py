@@ -24,6 +24,10 @@ OPENROUTER_MODELS = {
     "claude-sonnet-4-6": "anthropic/claude-sonnet-4.6",
     "claude-opus-4-6": "anthropic/claude-opus-4.6",
     "gemini-2.5-pro": "google/gemini-2.5-pro-preview",
+    # Moonshot AI (Kimi)
+    "kimi-k2.5": "moonshotai/kimi-k2.5",
+    "kimi-k2-0905": "moonshotai/kimi-k2-0905",
+    "kimi-k2-thinking": "moonshotai/kimi-k2-thinking",
 }
 
 # Reverse mapping: OpenRouter path → canonical short name
@@ -61,6 +65,10 @@ MODEL_PRICING = {
     "gemini-2.0-flash": (0.075, 0.30),
     "gemini-1.5-flash": (0.075, 0.30),
     "gemini-1.5-pro": (1.25, 5.0),
+    # Moonshot AI (Kimi)
+    "kimi-k2.5": (0.60, 3.00),
+    "kimi-k2-0905": (0.60, 2.50),
+    "kimi-k2-thinking": (0.60, 2.50),
     # defaults
     "_default_input": 3.0,
     "_default_output": 15.0,
@@ -563,6 +571,8 @@ def detect_provider(model):
     # Prefer OpenRouter if ANTHROPIC_API_KEY is absent but OPENROUTER_API_KEY is set
     if model.startswith("gemini") and os.environ.get("GOOGLE_API_KEY"):
         return "google"
+    if model.startswith("kimi"):
+        return "openrouter"
     if not os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("OPENROUTER_API_KEY"):
         return "openrouter"
     if model.startswith("gemini"):

@@ -24,3 +24,6 @@ qwen/qwen3-coder-plus
 qwen/qwen3-coder-flash
 qwen/qwen3.5-flash-02-23
 qwen/qwen3.5-plus-02-15
+moonshotai/kimi-k2.5
+moonshotai/kimi-k2-0905
+moonshotai/kimi-k2-thinking

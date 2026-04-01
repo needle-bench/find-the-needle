@@ -1,8 +1,9 @@
 {
   "tiers": {
-    "easy": {"turns": 10, "tokens": 50000, "wall_clock": 180},
-    "medium": {"turns": 30, "tokens": 150000, "wall_clock": 600},
-    "hard": {"turns": 50, "tokens": 300000, "wall_clock": 900}
+    "easy": {"turns": 20, "tokens": 100000, "wall_clock": 300},
+    "medium": {"turns": 40, "tokens": 200000, "wall_clock": 600},
+    "hard": {"turns": 60, "tokens": 400000, "wall_clock": 1200},
+    "extreme": {"turns": 80, "tokens": 600000, "wall_clock": 2400}
   },
   "benchmarks": {
     "off-by-one-pagination": "easy",
@@ -36,6 +37,12 @@
     "postgres-migration-schema-drift": "hard",
     "ssrf-allowlist-port-confusion": "hard",
     "wal-fsync-ghost-ack": "hard",
-    "retry-storm-duplicate-transfer": "hard"
+    "retry-storm-duplicate-transfer": "hard",
+    "linearizability-stale-read": "extreme",
+    "graphql-dataloader-per-request": "extreme",
+    "bidi-override-injection": "extreme",
+    "raft-snapshot-commit-gap": "extreme",
+    "tls-chain-ordering-strict": "extreme",
+    "relaxed-ordering-ringbuf": "extreme"
   }
 }

@@ -1,5 +1,4 @@
 {
-  "_template": "{1-2 sentence description of the actual bug. What's wrong, where it is, what symptom it causes.}",
   "api-version-field-drop": "The v2 API user struct in `app/models.go` is missing three fields that exist in v1 (`avatar_url`, `bio`, `location`). Th",
   "auth-bypass-path-traversal": "The auth middleware in `app/middleware.go` checks the raw `r.URL.Path` for the `/api/` prefix to decide if authenticatio",
   "cache-stale-invalidation": "The write endpoints (PUT and POST) in `app/server.py` update the data store but never invalidate the cache. After a prod",

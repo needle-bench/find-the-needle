@@ -1,0 +1,32 @@
+diff --git a/app/handler.go b/app/handler.go
+--- a/app/handler.go
++++ b/app/handler.go
+@@ -85,7 +85,7 @@ func (h *Handler) handleRead(w http.ResponseWriter, r *http.Request) {
+ 		return
+ 	}
+
+-	value, found := h.node.Read(key)
++	value, found := h.node.ReadLinearizable(key)
+
+ 	resp := ReadResponse{
+ 		Key:   key,
+diff --git a/app/raft/node.go b/app/raft/node.go
+--- a/app/raft/node.go
++++ b/app/raft/node.go
+@@ -542,6 +542,16 @@ func (n *Node) handleHeartbeat(msg Msg, electionTimer *time.Timer) {
+ 		}
+ 	}
+
++	// Advance commit index based on leader's commit index
++	leaderCommit := msg.Index
++	if leaderCommit > 0 {
++		lastIdx := n.log.LastIndex()
++		if leaderCommit > lastIdx {
++			leaderCommit = lastIdx
++		}
++		n.advanceCommitIndex(leaderCommit)
++	}
++
+ 	n.transport.Send(Msg{
+ 		Type:    MsgHeartbeatResp,
+ 		From:    n.ID,

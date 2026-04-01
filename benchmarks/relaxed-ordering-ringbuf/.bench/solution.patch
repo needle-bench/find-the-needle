@@ -1,0 +1,50 @@
+--- a/app/ring_buffer.c
++++ b/app/ring_buffer.c
+@@ -76,7 +76,7 @@ void ringbuf_destroy(ring_buffer_t *rb)
+ bool ringbuf_push(ring_buffer_t *rb, int64_t value)
+ {
+     size_t w = atomic_load_explicit(&rb->write_idx, memory_order_relaxed);
+-    size_t r = atomic_load_explicit(&rb->read_idx,  memory_order_relaxed);
++    size_t r = atomic_load_explicit(&rb->read_idx,  memory_order_acquire);
+
+     /* Full? Leave one slot empty to distinguish full from empty. */
+     if (((w + 1) & rb->mask) == (r & rb->mask))
+@@ -86,11 +86,11 @@ bool ringbuf_push(ring_buffer_t *rb, int64_t value)
+     rb->slots[w & rb->mask] = value;
+
+     /*
+-     * Publish the new write index. Relaxed is fine here — on x86,
+-     * the store to slots[] above is guaranteed to be visible before
+-     * this store due to TSO (Total Store Order).
++     * Publish the new write index with release semantics. This ensures
++     * the data write to slots[] above is visible to the consumer before
++     * the updated write_idx is observed.
+      */
+-    atomic_store_explicit(&rb->write_idx, w + 1, memory_order_relaxed);
++    atomic_store_explicit(&rb->write_idx, w + 1, memory_order_release);
+
+     return true;
+ }
+@@ -102,7 +102,7 @@ bool ringbuf_push(ring_buffer_t *rb, int64_t value)
+ bool ringbuf_pop(ring_buffer_t *rb, int64_t *out)
+ {
+     size_t r = atomic_load_explicit(&rb->read_idx,  memory_order_relaxed);
+-    size_t w = atomic_load_explicit(&rb->write_idx, memory_order_relaxed);
++    size_t w = atomic_load_explicit(&rb->write_idx, memory_order_acquire);
+
+     /* Empty? */
+     if ((r & rb->mask) == (w & rb->mask) && r == w)
+@@ -112,10 +112,10 @@ bool ringbuf_pop(ring_buffer_t *rb, int64_t *out)
+     *out = rb->slots[r & rb->mask];
+
+     /*
+-     * Advance the read index. Relaxed ordering — the consumer only
+-     * needs to signal that the slot is available for reuse.
++     * Advance the read index with release semantics, ensuring the
++     * slot read above completes before the producer can reuse the slot.
+      */
+-    atomic_store_explicit(&rb->read_idx, r + 1, memory_order_relaxed);
++    atomic_store_explicit(&rb->read_idx, r + 1, memory_order_release);
+
+     return true;
+ }
