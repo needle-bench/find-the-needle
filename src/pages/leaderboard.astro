@@ -6,28 +6,39 @@ import Base from '../layouts/Base.astro';
   <main>
     <div class="experiment-info">
       <p><strong>Three-arm experiment.</strong> 34 models &times; 24 benchmarks &times; 3 arms.</p>
-      <p class="muted"><strong>Native</strong>: vendor CLI (Claude Code, Gemini CLI, etc). <strong>Kernel</strong>: ostk agent loop via OpenRouter. <strong>CPU</strong>: ostk with optimized native drivers. Same prompt, same tools. Click headers to sort.</p>
+      <p class="muted"><strong>Native</strong>: vendor CLI. <strong>Kernel</strong>: ostk via OpenRouter. <strong>CPU</strong>: ostk + optimized driver. Click headers to sort.</p>
     </div>
 
     <div class="lb-container" id="lb-container">
       <table id="lb">
         <thead>
+          <tr id="lb-group-row">
+            <th colspan="2"></th>
+            <th colspan="4" class="group-header group-native">Native (vendor CLI)</th>
+            <th colspan="4" class="group-header group-kernel">Kernel (OpenRouter)</th>
+            <th colspan="4" class="group-header group-cpu">CPU (optimized driver)</th>
+            <th colspan="1"></th>
+          </tr>
           <tr id="lb-head">
             <th class="col-model" data-key="model">Model</th>
             <th class="col-price" data-key="price">$/M</th>
-            <th class="col-arm" data-key="nativePct" title="Native: vendor CLI, own API key">Native</th>
-            <th class="col-arm" data-key="kernelPct" title="Kernel: ostk agent loop via OpenRouter">Kernel</th>
-            <th class="col-arm" data-key="cpuPct" title="CPU: ostk with optimized native driver">CPU</th>
-            <th class="col-delta" data-key="bestDelta" title="Best kernel lift over native">&Delta;</th>
-            <th class="col-cost" data-key="bestCost" title="Total cost of best arm">Cost</th>
-            <th class="col-num" data-key="bestTokens" title="Total tokens (best arm)">Tokens</th>
-            <th class="col-num" data-key="bestTools" title="Tool invocations (best arm)">Tools</th>
-            <th class="col-num" data-key="bestTurns" title="Agent turns (best arm)">Turns</th>
-            <th class="col-num" data-key="bestWall" title="Wall clock (best arm)">Time</th>
+            <th class="col-solve arm-native" data-key="nativePct">Solve</th>
+            <th class="col-metric arm-native" data-key="nativeCost">Cost</th>
+            <th class="col-metric arm-native" data-key="nativeTokens">Tokens</th>
+            <th class="col-metric arm-native last" data-key="nativeTurns">Turns</th>
+            <th class="col-solve arm-kernel" data-key="kernelPct">Solve</th>
+            <th class="col-metric arm-kernel" data-key="kernelCost">Cost</th>
+            <th class="col-metric arm-kernel" data-key="kernelTokens">Tokens</th>
+            <th class="col-metric arm-kernel last" data-key="kernelTurns">Turns</th>
+            <th class="col-solve arm-cpu" data-key="cpuPct">Solve</th>
+            <th class="col-metric arm-cpu" data-key="cpuCost">Cost</th>
+            <th class="col-metric arm-cpu" data-key="cpuTokens">Tokens</th>
+            <th class="col-metric arm-cpu last" data-key="cpuTurns">Turns</th>
+            <th class="col-delta" data-key="bestDelta">&Delta;</th>
           </tr>
         </thead>
         <tbody id="lb-body">
-          <tr><td colspan="11" class="empty">Loading...</td></tr>
+          <tr><td colspan="15" class="empty">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -36,36 +47,32 @@ import Base from '../layouts/Base.astro';
 
     <section class="results-summary">
       <h2>Results</h2>
-      <p>The kernel doubles solve rate and cuts cost 83%. Same models, same tools, same prompt.</p>
-
       <div class="arm-comparison" id="arm-comparison"></div>
 
       <h3>Key findings</h3>
       <ul>
-        <li><strong>Kernel lift</strong>: native 40% &rarr; kernel 82%. Average +42pp across 34 models.</li>
-        <li><strong>Cost efficiency</strong>: optimized CPU driver achieves 82% solve at $15 total vs $87 for native CLIs.</li>
-        <li><strong>Cheap models win</strong>: Haiku ($1/M) with kernel matches o3 ($2/M) at 59%. Gemini Flash ($0.30/M) hits 100% with CPU driver.</li>
-        <li><strong>Driver matters</strong>: Devstral jumps 22% &rarr; 54% just by switching OpenRouter &rarr; native Mistral driver.</li>
-        <li><strong>Tool use signal</strong>: kernel runs average 5&ndash;15 tool calls in 1 turn vs native CLIs needing 200+ turns for the same solve.</li>
+        <li><strong>Kernel lift</strong>: native 40% &rarr; kernel-cpu 82%. Average +42pp.</li>
+        <li><strong>Cost</strong>: CPU driver achieves 82% at $15 vs native $87. Same models.</li>
+        <li><strong>Turns</strong>: kernel solves in 1 turn (582 total) vs native 2,827 turns. Context eliminates exploration.</li>
+        <li><strong>Tokens</strong>: CPU driver uses 12M tokens vs native 33M. Prompt caching cuts 65&ndash;77% for Anthropic.</li>
+        <li><strong>Cheap models win</strong>: Haiku ($1/M) + kernel = Opus ($5/M) + kernel. The kernel equalizes.</li>
       </ul>
 
       <h3>Methodology</h3>
       <ul>
-        <li>24 Docker-containerized benchmarks with real bugs (easy, medium, hard).</li>
-        <li>Deterministic test: <code>test.sh</code> exits 0 = fixed.</li>
-        <li>Kernel arm routes all models through OpenRouter for fair comparison.</li>
-        <li>CPU arm uses optimized native drivers (Anthropic prompt caching, Gemini, Mistral).</li>
-        <li>Native arm uses each vendor&rsquo;s own CLI with their API key.</li>
-        <li>System prompt: &ldquo;This is a benchmark. There is a hidden problem. Find the needle in the haystack.&rdquo;</li>
+        <li>24 Docker benchmarks with real bugs. <code>test.sh</code> exits 0 = fixed.</li>
+        <li>Kernel routes all models through OpenRouter for fair comparison.</li>
+        <li>CPU uses native drivers (Anthropic w/ caching, Gemini, Mistral).</li>
+        <li>Native uses each vendor&rsquo;s CLI with their own API key.</li>
       </ul>
     </section>
   </main>
 </Base>
 
 <style is:global>
-  main { max-width: none; padding: 1rem 2rem 2rem; }
+  main { max-width: none; padding: 1rem 1.5rem 2rem; }
 
-  .experiment-info { font-size: 0.85rem; max-width: 800px; margin-bottom: 1rem; line-height: 1.5; }
+  .experiment-info { font-size: 0.85rem; max-width: 800px; margin-bottom: 0.75rem; line-height: 1.5; }
   .experiment-info p { margin: 0 0 0.25rem; }
 
   .lb-container {
@@ -73,34 +80,57 @@ import Base from '../layouts/Base.astro';
     background: var(--bg); -webkit-overflow-scrolling: touch;
   }
 
-  #lb { border-collapse: separate; border-spacing: 0; min-width: 100%; font-size: 0.75rem; }
+  #lb { border-collapse: separate; border-spacing: 0; min-width: 100%; font-size: 0.72rem; }
+
+  /* Group headers */
+  .group-header {
+    text-align: center !important; font-size: 0.6rem; padding: 0.3rem 0.4rem !important;
+    border-bottom: 1px solid var(--border) !important; letter-spacing: 0.06em;
+  }
+  .group-native { background: rgba(248,81,73,0.08); color: #f85149; }
+  .group-kernel { background: rgba(210,153,34,0.08); color: #d29922; }
+  .group-cpu { background: rgba(63,185,80,0.08); color: #3fb950; }
+
   #lb th {
-    padding: 0.5rem 0.5rem; font-size: 0.65rem; letter-spacing: 0.04em;
+    padding: 0.4rem 0.4rem; font-size: 0.6rem; letter-spacing: 0.04em;
     text-transform: uppercase; background: var(--surface); border-bottom: 2px solid var(--border);
     white-space: nowrap; cursor: pointer; user-select: none; text-align: right;
   }
   #lb th.sorted { color: #d4a054; }
-  #lb th:first-child { text-align: left; position: sticky; left: 0; z-index: 3; }
+  #lb th:first-child { text-align: left; }
   #lb th[title] { cursor: help; }
+  #lb th.last { border-right: 2px solid rgba(139,148,158,0.2); }
 
-  .col-model { min-width: 160px; width: 160px; position: sticky; left: 0; z-index: 2; background: var(--surface); }
-  .col-price { min-width: 50px; text-align: right; }
-  .col-arm { min-width: 65px; text-align: center !important; }
-  .col-delta { min-width: 55px; text-align: center !important; }
-  .col-cost { min-width: 60px; }
-  .col-num { min-width: 55px; }
+  /* Sticky model column */
+  .col-model, #lb td:first-child {
+    position: sticky; left: 0; z-index: 2; background: var(--surface);
+    min-width: 150px; width: 150px;
+  }
+  #lb th:first-child { z-index: 3; }
+
+  .col-price { min-width: 45px; }
+  .col-solve { min-width: 52px; text-align: center !important; }
+  .col-metric { min-width: 50px; }
+  .col-delta { min-width: 45px; text-align: center !important; }
+
+  /* Arm column tinting */
+  .arm-native { background: rgba(248,81,73,0.03) !important; }
+  .arm-kernel { background: rgba(210,153,34,0.03) !important; }
+  .arm-cpu { background: rgba(63,185,80,0.03) !important; }
+  td.arm-native { background: rgba(248,81,73,0.03) !important; }
+  td.arm-kernel { background: rgba(210,153,34,0.03) !important; }
+  td.arm-cpu { background: rgba(63,185,80,0.03) !important; }
+  td.last { border-right: 2px solid rgba(139,148,158,0.15); }
 
   #lb td {
-    padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--border);
-    font-family: var(--mono); font-size: 0.7rem; white-space: nowrap; text-align: right;
+    padding: 0.3rem 0.4rem; border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 0.68rem; white-space: nowrap; text-align: right;
   }
-  #lb td:first-child { text-align: left; position: sticky; left: 0; z-index: 2; background: var(--surface); }
-  #lb tr:nth-child(even) td { background-color: rgba(255,255,255,0.02); }
-  #lb tr:nth-child(even) td:first-child { background-color: color-mix(in srgb, var(--surface) 97%, white); }
-  #lb tr:hover td { background: rgba(255,255,255,0.06); }
+  #lb tr:nth-child(even) td { background-color: rgba(255,255,255,0.015); }
+  #lb tr:hover td { background: rgba(255,255,255,0.05); }
   #lb tr:hover td:first-child { background: color-mix(in srgb, var(--surface) 94%, white); }
 
-  .model-name { font-weight: 600; font-size: 0.75rem; color: var(--text); }
+  .model-name { font-weight: 600; font-size: 0.72rem; color: var(--text); }
 
   .solve-pct { font-weight: 700; }
   .pct-100 { color: #3fb950; }
@@ -109,36 +139,38 @@ import Base from '../layouts/Base.astro';
   .pct-50  { color: #db6d28; }
   .pct-30  { color: #f85149; }
   .pct-0   { color: #484f58; }
-  .pct-na  { color: #484f58; font-weight: 400; }
+  .pct-na  { color: #30363d; font-weight: 400; }
 
   .delta-pos { color: #3fb950; font-weight: 600; }
   .delta-neg { color: #f85149; font-weight: 600; }
   .delta-zero { color: #484f58; }
 
-  .totals { font-size: 0.8rem; margin: 0.75rem 0; color: var(--text-muted); font-family: var(--mono); }
+  .dim { color: #484f58; }
+
+  .totals { font-size: 0.78rem; margin: 0.5rem 0; color: var(--text-muted); font-family: var(--mono); }
 
   .arm-comparison {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
     margin: 1rem 0; font-family: var(--mono); font-size: 0.8rem;
   }
   .arm-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.8rem;
   }
-  .arm-card h4 { margin: 0 0 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-  .arm-card .big { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
-  .arm-card .detail { font-size: 0.7rem; color: var(--text-muted); }
+  .arm-card h4 { margin: 0 0 0.4rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+  .arm-card .big { font-size: 1.4rem; font-weight: 700; }
+  .arm-card .detail { font-size: 0.68rem; color: var(--text-muted); line-height: 1.5; }
 
-  .results-summary { max-width: 800px; margin: 2rem auto; padding: 0 2rem; font-size: 0.9rem; line-height: 1.6; }
+  .results-summary { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; font-size: 0.88rem; line-height: 1.6; }
   .results-summary h2 { margin-top: 0; }
-  .results-summary h3 { margin: 1.25rem 0 0.5rem; font-size: 1rem; }
-  .results-summary ul { padding-left: 1.5rem; margin: 0.5rem 0; }
-  .results-summary li { margin-bottom: 0.35rem; }
+  .results-summary h3 { margin: 1rem 0 0.4rem; font-size: 0.95rem; }
+  .results-summary ul { padding-left: 1.5rem; margin: 0.4rem 0; }
+  .results-summary li { margin-bottom: 0.3rem; }
 
   @media (max-width: 768px) {
     .arm-comparison { grid-template-columns: 1fr; }
     main { padding: 0.5rem; }
-    .col-model { width: 110px; min-width: 110px; }
+    .col-model { width: 100px; min-width: 100px; }
   }
 </style>
 
@@ -150,30 +182,25 @@ import Base from '../layouts/Base.astro';
     price_per_m_input?: number; price_per_m_output?: number;
   }
 
-  function fmtN(n: number) { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
-  function fmtT(s: number) { return s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(0)+'m' : Math.round(s)+'s'; }
-  function fmtUsd(n: number) { return n >= 1 ? '$'+n.toFixed(2) : n > 0 ? '$'+n.toFixed(3) : '-'; }
-  function pctClass(pct: number) { return pct >= 100 ? 'pct-100' : pct >= 90 ? 'pct-90' : pct >= 70 ? 'pct-70' : pct >= 50 ? 'pct-50' : pct > 0 ? 'pct-30' : 'pct-0'; }
+  function fmtN(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
+  function fmtT(s: number): string { return s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(0)+'m' : Math.round(s)+'s'; }
+  function fmtUsd(n: number): string { return n >= 10 ? '$'+n.toFixed(0) : n >= 1 ? '$'+n.toFixed(2) : n > 0 ? '$'+n.toFixed(3) : ''; }
+  function pctClass(pct: number): string { return pct >= 100 ? 'pct-100' : pct >= 90 ? 'pct-90' : pct >= 70 ? 'pct-70' : pct >= 50 ? 'pct-50' : pct > 0 ? 'pct-30' : 'pct-0'; }
 
   function armPct(a: ArmAgg): number { return a.total > 0 ? a.solved / a.total * 100 : -1; }
-  function armLabel(a: ArmAgg): string {
-    if (a.total === 0) return '<span class="pct-na">-</span>';
+
+  function solveCell(a: ArmAgg, cls: string): string {
+    if (a.total === 0) return `<td class="${cls} col-solve"><span class="pct-na">-</span></td>`;
     const pct = armPct(a);
-    return `<span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span>`;
+    return `<td class="${cls} col-solve"><span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span></td>`;
   }
 
-  function bestArm(m: ModelData): { arm: ArmAgg; name: string } {
-    const arms: [ArmAgg, string][] = [[m.cpu, 'cpu'], [m.kernel, 'kernel'], [m.native, 'native']];
-    let best: [ArmAgg, string] = arms[0];
-    for (const [a, n] of arms) {
-      if (a.total === 0) continue;
-      const bPct = best[0].total > 0 ? best[0].solved / best[0].total : -1;
-      const aPct = a.solved / a.total;
-      if (aPct > bPct || (aPct === bPct && a.cost < best[0].cost && a.cost > 0)) {
-        best = [a, n];
-      }
-    }
-    return { arm: best[0], name: best[1] };
+  function metricCells(a: ArmAgg, cls: string): string {
+    if (a.total === 0) return `<td class="${cls}"><span class="dim">-</span></td><td class="${cls}"><span class="dim">-</span></td><td class="${cls} last"><span class="dim">-</span></td>`;
+    const cost = fmtUsd(a.cost);
+    const tok = a.tokens > 0 ? fmtN(a.tokens) : '-';
+    const turns = a.turns > 0 ? String(a.turns) : '-';
+    return `<td class="${cls}">${cost || '<span class="dim">-</span>'}</td><td class="${cls}">${tok}</td><td class="${cls} last">${turns}</td>`;
   }
 
   async function init() {
@@ -181,33 +208,31 @@ import Base from '../layouts/Base.astro';
     const data = await resp.json();
     const models: ModelData[] = data.models;
 
-    // Compute derived fields
     const rows = models.map(m => {
       const nPct = armPct(m.native);
       const kPct = armPct(m.kernel);
       const cPct = armPct(m.cpu);
-      const best = bestArm(m);
-      const bestPct = best.arm.total > 0 ? best.arm.solved / best.arm.total * 100 : 0;
-      const delta = nPct >= 0 ? Math.max(kPct, cPct) - nPct : (kPct >= 0 ? kPct : cPct);
+      // Best kernel arm pct vs native
+      const bestKernelPct = Math.max(kPct >= 0 ? kPct : 0, cPct >= 0 ? cPct : 0);
+      const delta = nPct >= 0 ? bestKernelPct - nPct : bestKernelPct;
+      // Best overall pct for sorting
+      const bestPct = Math.max(nPct >= 0 ? nPct : 0, kPct >= 0 ? kPct : 0, cPct >= 0 ? cPct : 0);
       return {
         ...m,
         nativePct: nPct, kernelPct: kPct, cpuPct: cPct,
-        bestDelta: delta,
-        bestCost: best.arm.cost,
-        bestTokens: best.arm.tokens,
-        bestTools: best.arm.tools,
-        bestTurns: best.arm.turns,
-        bestWall: best.arm.wall,
-        bestPct,
+        nativeCost: m.native.cost, kernelCost: m.kernel.cost, cpuCost: m.cpu.cost,
+        nativeTokens: m.native.tokens, kernelTokens: m.kernel.tokens, cpuTokens: m.cpu.tokens,
+        nativeTurns: m.native.turns, kernelTurns: m.kernel.turns, cpuTurns: m.cpu.turns,
+        bestDelta: delta, bestPct,
         price: m.price_per_m_input || 0,
       };
     });
 
-    // Sort by best solve % desc, then cost asc
     let sortKey = 'bestPct';
     let sortDir = -1;
     const sort = () => rows.sort((a: any, b: any) => {
       const av = a[sortKey] ?? 0, bv = b[sortKey] ?? 0;
+      if (av === bv) return (a.price || 99) - (b.price || 99); // tiebreak by price
       return sortDir * (typeof av === 'string' ? av.localeCompare(bv) : av - bv);
     });
 
@@ -215,32 +240,28 @@ import Base from '../layouts/Base.astro';
       sort();
       const tbody = document.getElementById('lb-body')!;
       tbody.innerHTML = rows.map(r => {
-        const delta = r.bestDelta;
-        const deltaHtml = delta > 0 ? `<span class="delta-pos">+${delta.toFixed(0)}</span>`
-          : delta < 0 ? `<span class="delta-neg">${delta.toFixed(0)}</span>`
+        const d = r.bestDelta;
+        const dHtml = d > 0 ? `<span class="delta-pos">+${d.toFixed(0)}</span>`
+          : d < 0 ? `<span class="delta-neg">${d.toFixed(0)}</span>`
           : `<span class="delta-zero">0</span>`;
         return `<tr>
-          <td class="col-model"><span class="model-name">${r.model_normalized}</span></td>
-          <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '-'}</td>
-          <td class="col-arm">${armLabel(r.native)}</td>
-          <td class="col-arm">${armLabel(r.kernel)}</td>
-          <td class="col-arm">${armLabel(r.cpu)}</td>
-          <td class="col-delta">${deltaHtml}</td>
-          <td class="col-cost">${fmtUsd(r.bestCost)}</td>
-          <td class="col-num">${r.bestTokens > 0 ? fmtN(r.bestTokens) : '-'}</td>
-          <td class="col-num">${r.bestTools > 0 ? r.bestTools : '-'}</td>
-          <td class="col-num">${r.bestTurns > 0 ? r.bestTurns : '-'}</td>
-          <td class="col-num">${r.bestWall > 0 ? fmtT(r.bestWall) : '-'}</td>
+          <td><span class="model-name">${r.model_normalized}</span></td>
+          <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '<span class="dim">-</span>'}</td>
+          ${solveCell(r.native, 'arm-native')}
+          ${metricCells(r.native, 'arm-native')}
+          ${solveCell(r.kernel, 'arm-kernel')}
+          ${metricCells(r.kernel, 'arm-kernel')}
+          ${solveCell(r.cpu, 'arm-cpu')}
+          ${metricCells(r.cpu, 'arm-cpu')}
+          <td class="col-delta">${dHtml}</td>
         </tr>`;
       }).join('');
 
-      // Update headers
       document.querySelectorAll('#lb-head th').forEach(th => {
         th.classList.toggle('sorted', (th as HTMLElement).dataset.key === sortKey);
       });
     };
 
-    // Header click sorting
     document.querySelectorAll('#lb-head th').forEach(th => {
       th.addEventListener('click', () => {
         const key = (th as HTMLElement).dataset.key;
@@ -254,32 +275,35 @@ import Base from '../layouts/Base.astro';
     render();
 
     // Totals
-    const totalScores = rows.reduce((s, r) => s + r.native.total + r.kernel.total + r.cpu.total, 0);
-    const totalSolved = rows.reduce((s, r) => s + r.native.solved + r.kernel.solved + r.cpu.solved, 0);
-    const totalCost = rows.reduce((s, r) => s + r.native.cost + r.kernel.cost + r.cpu.cost, 0);
+    const sum = (fn: (r: any) => number) => rows.reduce((s, r) => s + fn(r), 0);
+    const tScores = sum(r => r.native.total + r.kernel.total + r.cpu.total);
+    const tSolved = sum(r => r.native.solved + r.kernel.solved + r.cpu.solved);
+    const tCost = sum(r => r.native.cost + r.kernel.cost + r.cpu.cost);
+    const tTokens = sum(r => r.native.tokens + r.kernel.tokens + r.cpu.tokens);
     document.getElementById('totals')!.textContent =
-      `${rows.length} models \u00b7 ${totalScores.toLocaleString()} benchmarks \u00b7 ${totalSolved.toLocaleString()} solved \u00b7 $${totalCost.toFixed(2)} total spend`;
+      `${rows.length} models · ${tScores.toLocaleString()} runs · ${tSolved.toLocaleString()} solved · ${fmtN(tTokens)} tokens · $${tCost.toFixed(2)} spend`;
 
     // Arm comparison cards
-    const armTotals = (key: 'native' | 'kernel' | 'cpu') => {
-      const t = rows.reduce((a, r) => ({
-        s: a.s + r[key].solved, t: a.t + r[key].total, c: a.c + r[key].cost
-      }), { s: 0, t: 0, c: 0 });
-      return t;
-    };
-    const cards = (['native', 'kernel', 'cpu'] as const).map(arm => {
-      const labels: Record<string, string> = { native: 'Native (vendor CLI)', kernel: 'Kernel (OpenRouter)', cpu: 'Kernel-CPU (optimized)' };
-      const t = armTotals(arm);
-      const pct = t.t > 0 ? (t.s / t.t * 100).toFixed(0) : '0';
+    const armCard = (key: 'native' | 'kernel' | 'cpu', label: string, colorClass: string) => {
+      const s = sum(r => r[key].solved), t = sum(r => r[key].total);
+      const c = sum(r => r[key].cost), tok = sum(r => r[key].tokens);
+      const tools = sum(r => r[key].tools), turns = sum(r => r[key].turns);
+      const pct = t > 0 ? (s / t * 100).toFixed(0) : '0';
       return `<div class="arm-card">
-        <h4>${labels[arm]}</h4>
-        <div class="big ${pctClass(Number(pct))}">${pct}%</div>
-        <div class="detail">${t.s}/${t.t} solved \u00b7 $${t.c.toFixed(2)}</div>
+        <h4>${label}</h4>
+        <div class="big ${pctClass(Number(pct))}">${pct}% <span style="font-size:0.6em;font-weight:400">(${s}/${t})</span></div>
+        <div class="detail">
+          $${c.toFixed(2)} · ${fmtN(tok)} tokens<br>
+          ${tools.toLocaleString()} tools · ${turns.toLocaleString()} turns
+        </div>
       </div>`;
-    });
-    document.getElementById('arm-comparison')!.innerHTML = cards.join('');
+    };
+    document.getElementById('arm-comparison')!.innerHTML =
+      armCard('native', 'Native (vendor CLI)', 'pct-30') +
+      armCard('kernel', 'Kernel (OpenRouter)', 'pct-70') +
+      armCard('cpu', 'Kernel-CPU (optimized)', 'pct-90');
   }
 
   init();
 </script>
-</Base>
+</content>
