@@ -8,7 +8,7 @@
   "input_tokens": 420,
   "output_tokens": 62,
   "resolved": true,
-  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:streamGenerateContent?alt=sse&key=AIzaSyAlPdQkUavvsPIufqaLIEGJhskRdN9rKgo)",
+  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:streamGenerateContent?alt=sse&key=REDACTED",
   "summary": "I am going to check the files in the current directory and read `test.sh` to understand what the problem is and how to verify the fix. I'll use the Bash tool for this.",
   "timestamp": "2026-04-02T03:25:02Z",
   "token_cost": 482,
