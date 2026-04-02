@@ -2,32 +2,28 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="needle-bench — find the needle" description="26 models. 1,664 runs. One prompt: find the needle.">
-
+<Base title="needle-bench — find the needle" description="34 models. 3 arms. 1,511 runs. One prompt: find the needle.">
   <main>
-    <div class="lb-toolbar">
-      <div class="experiment-info">
-        <p><strong>Two-arm experiment.</strong> 26 models &times; 32 benchmarks &times; 2 arms = 1,664 runs.</p>
-        <p class="muted">Each model receives one prompt: &ldquo;find the needle.&rdquo; <strong>Bare</strong>: generic system prompt + bash. <strong>OS</strong>: same prompt + bash, but project context (README, file listing, test output) silently injected. The model can&rsquo;t tell which arm it&rsquo;s in. <strong>&Delta;</strong>: percentage point lift from the invisible OS. Click any header to sort.</p>
-      </div>
+    <div class="experiment-info">
+      <p><strong>Three-arm experiment.</strong> 34 models &times; 24 benchmarks &times; 3 arms.</p>
+      <p class="muted"><strong>Native</strong>: vendor CLI (Claude Code, Gemini CLI, etc). <strong>Kernel</strong>: ostk agent loop via OpenRouter. <strong>CPU</strong>: ostk with optimized native drivers. Same prompt, same tools. Click headers to sort.</p>
     </div>
 
-    <div class="leaderboard-container" id="lb-container">
-      <table id="leaderboard">
-        <thead id="lb-head">
-          <tr id="lb-tier-row"></tr>
-          <tr id="lb-header-row">
-            <th class="sticky-col col-model" data-key="model" data-type="string">Model</th>
-            <th class="sticky-col col-boot" data-key="boot" data-type="tier" title="Boot protocol: can the model boot the OS from a cold start?">Boot</th>
-            <th class="sticky-col col-post" data-key="post" data-type="boolean" title="POST: did the model complete power-on self-test?">POST</th>
-            <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean" title="Entity: did the model write a valid entity file?">Entity</th>
-            <th class="sticky-col col-bare" data-key="bareResolved" data-type="number" title="Bare: benchmarks solved with generic prompt + bash only">Bare</th>
-            <th class="sticky-col col-os" data-key="silentResolved" data-type="number" title="OS: benchmarks solved with silent kernel context injected">OS</th>
-            <th class="sticky-col col-delta" data-key="expDelta" data-type="number" title="Delta: percentage point lift from the kernel (OS rate - Bare rate)">&Delta;</th>
-            <th class="sticky-col col-cost" data-key="silentCostTotal" data-type="number" title="Cost per benchmark (top: bare, bottom: with OS)">$/b</th>
-            <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number" title="Total tokens consumed (top: bare, bottom: with OS)">Tok</th>
-            <th class="sticky-col col-turns" data-key="totalTurns" data-type="number" title="Total turns used (top: bare, bottom: with OS)">Trn</th>
-            <th class="sticky-col col-time" data-key="totalTime" data-type="number" title="Wall clock time (top: bare, bottom: with OS)">Time</th>
+    <div class="lb-container" id="lb-container">
+      <table id="lb">
+        <thead>
+          <tr id="lb-head">
+            <th class="col-model" data-key="model">Model</th>
+            <th class="col-price" data-key="price">$/M</th>
+            <th class="col-arm" data-key="nativePct" title="Native: vendor CLI, own API key">Native</th>
+            <th class="col-arm" data-key="kernelPct" title="Kernel: ostk agent loop via OpenRouter">Kernel</th>
+            <th class="col-arm" data-key="cpuPct" title="CPU: ostk with optimized native driver">CPU</th>
+            <th class="col-delta" data-key="bestDelta" title="Best kernel lift over native">&Delta;</th>
+            <th class="col-cost" data-key="bestCost" title="Total cost of best arm">Cost</th>
+            <th class="col-num" data-key="bestTokens" title="Total tokens (best arm)">Tokens</th>
+            <th class="col-num" data-key="bestTools" title="Tool invocations (best arm)">Tools</th>
+            <th class="col-num" data-key="bestTurns" title="Agent turns (best arm)">Turns</th>
+            <th class="col-num" data-key="bestWall" title="Wall clock (best arm)">Time</th>
           </tr>
         </thead>
         <tbody id="lb-body">
@@ -35,31 +31,33 @@ import Base from '../layouts/Base.astro';
         </tbody>
       </table>
     </div>
-    <p class="muted" id="last-updated" style="margin-top:0.5rem;font-size:0.75rem;"></p>
+
+    <div class="totals" id="totals"></div>
 
     <section class="results-summary">
       <h2>Results</h2>
-      <p>Across 26 models and 32 benchmarks, silent context injection improved resolve rates by an average of <strong>+34 percentage points</strong> (36% bare &rarr; 70% kernel). 23 of 26 models improved. The effect was consistent across all vendors (Anthropic, Google, OpenAI, xAI, DeepSeek, Mistral, Meta, Qwen).</p>
+      <p>The kernel doubles solve rate and cuts cost 83%. Same models, same tools, same prompt.</p>
+
+      <div class="arm-comparison" id="arm-comparison"></div>
 
       <h3>Key findings</h3>
       <ul>
-        <li><strong>Elite tier</strong> (opus, grok-4.1-fast, deepseek-r1, deepseek-v3.2): 96&ndash;100% bare, 97&ndash;100% OS. Same accuracy, but 61&ndash;81% fewer tokens. Opus solves in 1.3 turns with the kernel vs 6.0 bare.</li>
-        <li><strong>Mid tier</strong> (haiku, mistral-large, gemini-2.5-flash, devstral, qwen-plus): 0&ndash;41% bare &rarr; 69&ndash;91% OS. The kernel transforms unusable models into productive ones.</li>
-        <li><strong>Cost efficiency</strong>: the coordination layer matters more than the model. A cheap model with the kernel outperforms an expensive model without it.</li>
-        <li><strong>Token economy</strong>: Silent context adds ~200 tokens to the system prompt but eliminates 5&ndash;30 turns of blind exploration. Frontier models see 61&ndash;81% token reduction on solved benchmarks.</li>
+        <li><strong>Kernel lift</strong>: native 40% &rarr; kernel 82%. Average +42pp across 34 models.</li>
+        <li><strong>Cost efficiency</strong>: optimized CPU driver achieves 82% solve at $15 total vs $87 for native CLIs.</li>
+        <li><strong>Cheap models win</strong>: Haiku ($1/M) with kernel matches o3 ($2/M) at 59%. Gemini Flash ($0.30/M) hits 100% with CPU driver.</li>
+        <li><strong>Driver matters</strong>: Devstral jumps 22% &rarr; 54% just by switching OpenRouter &rarr; native Mistral driver.</li>
+        <li><strong>Tool use signal</strong>: kernel runs average 5&ndash;15 tool calls in 1 turn vs native CLIs needing 200+ turns for the same solve.</li>
       </ul>
 
       <h3>Methodology</h3>
       <ul>
-        <li>All runs via <a href="https://openrouter.ai">OpenRouter</a> for fair cross-vendor comparison.</li>
-        <li>34 Docker-containerized benchmarks with real bugs across easy, medium, and hard tiers.</li>
-        <li>Each benchmark has a deterministic test: <code>test.sh</code> exits 0 = fixed, 1 = still broken.</li>
-        <li>Both arms use identical tools (bash only) and identical user prompt (&ldquo;find the needle.&rdquo;).</li>
-        <li>Silent arm injects: project README (30 lines), source file listing (30 files), current test output (20 lines).</li>
-        <li>Score files, run logs, and CI workflows are public at <a href="https://github.com/os-tack/find-the-needle">os-tack/find-the-needle</a>.</li>
+        <li>24 Docker-containerized benchmarks with real bugs (easy, medium, hard).</li>
+        <li>Deterministic test: <code>test.sh</code> exits 0 = fixed.</li>
+        <li>Kernel arm routes all models through OpenRouter for fair comparison.</li>
+        <li>CPU arm uses optimized native drivers (Anthropic prompt caching, Gemini, Mistral).</li>
+        <li>Native arm uses each vendor&rsquo;s own CLI with their API key.</li>
+        <li>System prompt: &ldquo;This is a benchmark. There is a hidden problem. Find the needle in the haystack.&rdquo;</li>
       </ul>
-
-      <p class="muted">Last updated: March 2026. Contribute a benchmark: <a href="/contribute/">guide</a>. Full methodology: <a href="/about/">about</a>.</p>
     </section>
   </main>
 </Base>
@@ -67,709 +65,221 @@ import Base from '../layouts/Base.astro';
 <style is:global>
   main { max-width: none; padding: 1rem 2rem 2rem; }
 
-  .lb-toolbar {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 1rem; gap: 1rem;
-  }
-  #a11y-toggle { display: none; /* removed — indicators always on */
-    background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
-    font-size: 1.1rem; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer;
-    line-height: 1; transition: color 0.15s, border-color 0.15s;
-  }
-  #a11y-toggle:hover, #a11y-toggle.active { color: var(--accent); border-color: var(--accent); }
+  .experiment-info { font-size: 0.85rem; max-width: 800px; margin-bottom: 1rem; line-height: 1.5; }
+  .experiment-info p { margin: 0 0 0.25rem; }
 
-  .leaderboard-container {
+  .lb-container {
     overflow-x: auto; border: 1px solid var(--border); border-radius: 6px;
-    background: var(--bg); cursor: default; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; -ms-overflow-style: none;
+    background: var(--bg); -webkit-overflow-scrolling: touch;
   }
-  .leaderboard-container::-webkit-scrollbar { display: none; }
-  .leaderboard-container.dragging { cursor: grabbing; user-select: none; }
 
-  #leaderboard { border-collapse: separate; border-spacing: 0; min-width: 100%; font-size: 0.75rem; }
-  #leaderboard thead { border-bottom: none; }
-  #leaderboard th {
-    padding: 0.5rem 0.4rem; font-size: 0.65rem; letter-spacing: 0.04em;
+  #lb { border-collapse: separate; border-spacing: 0; min-width: 100%; font-size: 0.75rem; }
+  #lb th {
+    padding: 0.5rem 0.5rem; font-size: 0.65rem; letter-spacing: 0.04em;
     text-transform: uppercase; background: var(--surface); border-bottom: 2px solid var(--border);
-    vertical-align: bottom; white-space: nowrap; cursor: pointer; user-select: none;
+    white-space: nowrap; cursor: pointer; user-select: none; text-align: right;
   }
-  #leaderboard th.sorted { color: #d4a054; }
+  #lb th.sorted { color: #d4a054; }
+  #lb th:first-child { text-align: left; position: sticky; left: 0; z-index: 3; }
+  #lb th[title] { cursor: help; }
 
-  .sticky-col { position: sticky; z-index: 2; background: var(--surface); }
-  #leaderboard th.sticky-col { z-index: 3; }
-  .col-model  { left: 0; width: 140px; min-width: 140px; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
-  .col-boot   { left: 140px; min-width: 72px; width: 72px; }
-  .col-post   { left: 212px; min-width: 36px; width: 36px; text-align: center; }
-  .col-entity { left: 248px; min-width: 36px; width: 36px; text-align: center; }
-  .col-bare   { left: 284px; min-width: 50px; width: 50px; text-align: center; }
-  .col-os     { left: 334px; min-width: 50px; width: 50px; text-align: center; }
-  .col-delta  { left: 384px; min-width: 60px; width: 60px; text-align: center; }
-  .col-cost   { left: 444px; min-width: 50px; width: 50px; text-align: right; font-size: 0.75rem; }
-  .col-tokens { left: 494px; min-width: 55px; width: 55px; text-align: right; }
-  .col-turns  { left: 549px; min-width: 55px; width: 55px; text-align: right; }
-  .col-time   { left: 604px; min-width: 55px; width: 55px; text-align: right; border-right: 2px solid rgba(212,160,84,0.4); }
-  td.col-post, td.col-entity, td.col-bare, td.col-os, td.col-delta { text-align: center; }
-  td.col-cost { text-align: right; font-size: 0.75rem; }
-  td.col-tokens, td.col-turns, td.col-time { text-align: right; }
-  td.col-time { border-right: 2px solid rgba(212,160,84,0.4); }
+  .col-model { min-width: 160px; width: 160px; position: sticky; left: 0; z-index: 2; background: var(--surface); }
+  .col-price { min-width: 50px; text-align: right; }
+  .col-arm { min-width: 65px; text-align: center !important; }
+  .col-delta { min-width: 55px; text-align: center !important; }
+  .col-cost { min-width: 60px; }
+  .col-num { min-width: 55px; }
 
-  #leaderboard td {
-    padding: 0.35rem 0.4rem; border-bottom: 1px solid var(--border);
-    font-family: var(--mono); font-size: 0.7rem; white-space: nowrap;
+  #lb td {
+    padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 0.7rem; white-space: nowrap; text-align: right;
   }
-  #leaderboard td.sticky-col { background: var(--surface); position: sticky; z-index: 2; }
-  #leaderboard tr:nth-child(even) td { background-color: rgba(255,255,255,0.02); }
-  #leaderboard tr:nth-child(even) td.sticky-col { background-color: color-mix(in srgb, var(--surface) 97%, white); position: sticky; z-index: 2; }
-  #leaderboard tr:hover td { background: rgba(255,255,255,0.06); }
-  #leaderboard tr:hover td.sticky-col { background: color-mix(in srgb, var(--surface) 94%, white); position: sticky; z-index: 2; }
-  
+  #lb td:first-child { text-align: left; position: sticky; left: 0; z-index: 2; background: var(--surface); }
+  #lb tr:nth-child(even) td { background-color: rgba(255,255,255,0.02); }
+  #lb tr:nth-child(even) td:first-child { background-color: color-mix(in srgb, var(--surface) 97%, white); }
+  #lb tr:hover td { background: rgba(255,255,255,0.06); }
+  #lb tr:hover td:first-child { background: color-mix(in srgb, var(--surface) 94%, white); }
+
   .model-name { font-weight: 600; font-size: 0.75rem; color: var(--text); }
-  .model-link { font-weight: 600; font-size: 0.75rem; color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--text-muted); padding-bottom: 1px; }
-  .model-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-  .verdict-badge {
-    display: inline-block; padding: 0.15rem 0.4rem; border-radius: 3px;
-    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-    font-family: var(--mono);
-  }
-  .verdict-boots { background: rgba(63,185,80,0.15); color: #3fb950; border: 1px solid rgba(63,185,80,0.4); }
-  .verdict-noboot { color: var(--text-muted); }
-  .check-pass { color: #3fb950; font-weight: bold; }
-  .check-fail { color: #f85149; font-weight: bold; }
+  .solve-pct { font-weight: 700; }
+  .pct-100 { color: #3fb950; }
+  .pct-90  { color: #3fb950; }
+  .pct-70  { color: #d29922; }
+  .pct-50  { color: #db6d28; }
+  .pct-30  { color: #f85149; }
+  .pct-0   { color: #484f58; }
+  .pct-na  { color: #484f58; font-weight: 400; }
 
   .delta-pos { color: #3fb950; font-weight: 600; }
   .delta-neg { color: #f85149; font-weight: 600; }
+  .delta-zero { color: #484f58; }
 
-  .control-row { opacity: 0.6; transition: opacity 0.2s; }
-  .control-row:hover { opacity: 1; }
-  .control-separator td { border-top: 2px solid var(--border) !important; padding-top: 0.8rem !important; }
+  .totals { font-size: 0.8rem; margin: 0.75rem 0; color: var(--text-muted); font-family: var(--mono); }
 
-  .hm {
-    display: flex; align-items: center; justify-content: center;
-    width: 20px; height: 16px; margin: 0 auto; border-radius: 3px; cursor: default;
-    font-size: 0; line-height: 1;
+  .arm-comparison {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    margin: 1rem 0; font-family: var(--mono); font-size: 0.8rem;
   }
-  .hm-pass  { background: rgba(63,185,80,0.5);  border: 1px solid rgba(63,185,80,0.35); }
-  .hm-fail  { background: rgba(248,81,73,0.4);  border: 1px solid rgba(248,81,73,0.3); }
-  .hm-empty { background: transparent; border: 1px solid transparent; }
-  .hm-untested { background: transparent; border: none; }
-
-  .hm-pass::after  { content: '\2713'; color: #fff; font-size: 0.7rem; font-weight: 700; }
-  .hm-fail::after  { content: '\2717'; color: #fff; font-size: 0.7rem; font-weight: 700; }
-  .hm-empty::after { content: ''; }
-  .hm-untested::after { content: ''; }
-
-  .hm-split {
-    display: flex;
-    width: 20px; height: 16px;
-    margin: 0 auto; border-radius: 3px;
-    overflow: hidden; cursor: default;
+  .arm-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.75rem 1rem;
   }
-  .hm-split > span {
-    flex: 1; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.85);
-  }
-  .hm-split .arm-pass { background: rgba(63,185,80,0.5); }
-  .hm-split .arm-fail { background: rgba(248,81,73,0.4); }
-  .hm-split .arm-untested { background: transparent; border-bottom: 1px dashed rgba(139,148,158,0.5); }
-  .hm-split .arm-pass:first-child { border-right: 1px solid rgba(255,255,255,0.1); }
-  .hm-split .arm-fail:first-child { border-right: 1px solid rgba(255,255,255,0.1); }
-  .hm-split .arm-pass::after { content: '\2713'; }
-  .hm-split .arm-fail::after { content: '\2717'; }
-  th[title] { cursor: help; border-bottom: 1px dashed rgba(139,148,158,0.4); }
-  .col-dual { font-size: 0.65rem; line-height: 1.3; }
-  .col-dual .bare-val { color: #8b949e; }
-  .col-dual .os-val { color: #c9d1d9; }
+  .arm-card h4 { margin: 0 0 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+  .arm-card .big { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .arm-card .detail { font-size: 0.7rem; color: var(--text-muted); }
 
-  .verdict-badge {
-    display: inline-block; font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
-    padding: 0.15em 0.45em; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.4;
-  }
-  .verdict-boots   { background: rgba(63,185,80,0.25); color: #3fb950; border: 1px solid rgba(63,185,80,0.5); box-shadow: 0 0 6px rgba(63,185,80,0.2); }
-  .verdict-partial { background: rgba(210,153,34,0.25); color: #e3b341; border: 1px solid rgba(210,153,34,0.5); box-shadow: 0 0 6px rgba(210,153,34,0.2); }
-  .verdict-reads   { background: rgba(219,109,40,0.25); color: #f0883e; border: 1px solid rgba(219,109,40,0.5); box-shadow: 0 0 6px rgba(219,109,40,0.15); }
-  .verdict-explores { background: rgba(139,148,158,0.25); color: #9eaab6; border: 1px solid rgba(139,148,158,0.45); }
-  .verdict-noboot  { background: rgba(248,81,73,0.25); color: #ff7b72; border: 1px solid rgba(248,81,73,0.5); box-shadow: 0 0 6px rgba(248,81,73,0.2); }
-
-  .check-pass { color: #3fb950; font-weight: 700; }
-  .check-fail { color: #f85149; font-weight: 700; }
-
-  .model-name { font-weight: 600; color: var(--text); }
-  .model-link { color: var(--text); text-decoration: none; font-weight: 600; }
-  .model-link:hover { color: #d4a054; text-decoration: underline; }
-
-  .solved-high { color: #3fb950; font-weight: 700; }
-  .solved-mid  { color: #d29922; font-weight: 600; }
-  .solved-low  { color: #f85149; }
-  .solved-zero { color: #484f58; }
-
-  .rank-1 .model-link, .rank-1 .model-name { color: var(--text); }
-  .rank-2 .model-link, .rank-2 .model-name { color: var(--text); }
-  .rank-3 .model-link, .rank-3 .model-name { color: var(--text); }
-
-  .experiment-info {
-    font-size: 0.85rem; max-width: 800px; margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-  .experiment-info p { margin: 0 0 0.25rem; }
-
-  .results-summary {
-    max-width: 800px; margin: 2rem auto; padding: 0 2rem; font-size: 0.9rem;
-    line-height: 1.6;
-  }
+  .results-summary { max-width: 800px; margin: 2rem auto; padding: 0 2rem; font-size: 0.9rem; line-height: 1.6; }
   .results-summary h2 { margin-top: 0; }
   .results-summary h3 { margin: 1.25rem 0 0.5rem; font-size: 1rem; }
   .results-summary ul { padding-left: 1.5rem; margin: 0.5rem 0; }
   .results-summary li { margin-bottom: 0.35rem; }
-  .results-summary a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-  .results-summary a:hover { color: var(--accent); }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    .arm-comparison { grid-template-columns: 1fr; }
     main { padding: 0.5rem; }
-    .col-model { width: 100px; min-width: 100px; max-width: 100px; }
+    .col-model { width: 110px; min-width: 110px; }
   }
 </style>
 
 <script>
-  const REPO = 'https://github.com/os-tack/find-the-needle';
-
-  const VERDICT_TIER: Record<string, number> = { BOOTS: 0, NO_BOOT: 1 };
-  const VERDICT_DISPLAY: Record<string, string> = { BOOTS: 'BOOTS', NO_BOOT: 'N/A' };
-  const VERDICT_CLASS: Record<string, string> = { BOOTS: 'verdict-boots', NO_BOOT: 'verdict-noboot' };
-
-  // ── Model normalization ──────────────────────────────────────────────
-  function normalizeModel(raw: string): string {
-    let name = raw.includes('/') ? raw.split('/').pop()! : raw;
-    return name.toLowerCase().replace(/[._]/g, '-');
+  interface ArmAgg { solved: number; total: number; cost: number; tokens: number; tools: number; turns: number; wall: number; }
+  interface ModelData {
+    model: string; model_normalized: string; benchmarks: number;
+    native: ArmAgg; kernel: ArmAgg; cpu: ArmAgg;
+    price_per_m_input?: number; price_per_m_output?: number;
   }
 
-  /** Preferred display name: strip vendor prefix, keep dots */
-  function displayName(raw: string): string {
-    let name = raw.includes('/') ? raw.split('/').pop()! : raw;
-    // Clean up ugly suffixes like -20241022
-    name = name.replace(/-\d{8,}$/, '');
-    // Normalize hyphens between version parts back to dots for display
-    // e.g. claude-haiku-3-5 → claude-haiku-3.5  (only digit-dash-digit at end)
-    name = name.replace(/(\d)-(\d)/g, '$1.$2');
-    return name;
-  }
-
-  // ── Types ────────────────────────────────────────────────────────────
-  interface BootEntry {
-    model: string; verdict: string; total_score: number; total_possible: number;
-    read_score: number; write_score: number; tokens: number; wall_clock: number;
-    turns: number; directives: Record<string, boolean>;
-  }
-  interface ScoreEntry {
-    benchmark: string; agent: string; resolved: boolean; turns_to_fix: number;
-    token_cost: number; wall_clock: number; turns_to_discovery: number;
-    blind_discovery: boolean; timestamp?: string; commit?: string;
-    estimated_cost_usd?: number;
-  }
-  interface ArmScore {
-    resolved: boolean; turns_to_fix: number; token_cost: number;
-    estimated_cost_usd: number; wall_clock: number; signal_to_noise: number;
-  }
-  interface ExperimentEntry {
-    model: string; benchmark: string; bare: ArmScore | null; silent: ArmScore | null;
-  }
-  interface ModelRow {
-    display: string; key: string; boot: BootEntry | null;
-    benches: Record<string, ScoreEntry>; resolved: number;
-    tokens: number; turns: number; time: number;
-    tier: number; post: boolean; entity: boolean; commit: string;
-    isControl: boolean; controlType: string;
-    // Experiment fields
-    experiment: Record<string, ExperimentEntry>;
-    bareResolved: number; bareTested: number;
-    silentResolved: number; silentTested: number;
-    expDelta: number; // percentage point delta (silent - bare) over shared benchmarks
-    bareCostTotal: number; silentCostTotal: number; // total cost across all benchmarks
-    bareTokTotal: number; silentTokTotal: number;
-    bareTurnsTotal: number; silentTurnsTotal: number;
-    bareTimeTotal: number; silentTimeTotal: number;
-  }
-
-  // ── Helpers ──────────────────────────────────────────────────────────
-  function esc(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function fmtN(n: number) { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
-  function fmtT(s: number) { return s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(1)+'m' : Math.round(s)+'s'; }
-  function fmtUsd(n: number) { return '$' + n.toFixed(3); }
+  function fmtT(s: number) { return s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(0)+'m' : Math.round(s)+'s'; }
+  function fmtUsd(n: number) { return n >= 1 ? '$'+n.toFixed(2) : n > 0 ? '$'+n.toFixed(3) : '-'; }
+  function pctClass(pct: number) { return pct >= 100 ? 'pct-100' : pct >= 90 ? 'pct-90' : pct >= 70 ? 'pct-70' : pct >= 50 ? 'pct-50' : pct > 0 ? 'pct-30' : 'pct-0'; }
 
-  function deltaClass(pp: number): string {
-    if (pp >= 15) return 'delta-high';
-    if (pp >= 5) return 'delta-mid';
-    if (pp >= 1) return 'delta-low';
-    if (pp === 0) return 'delta-zero';
-    return 'delta-neg';
+  function armPct(a: ArmAgg): number { return a.total > 0 ? a.solved / a.total * 100 : -1; }
+  function armLabel(a: ArmAgg): string {
+    if (a.total === 0) return '<span class="pct-na">-</span>';
+    const pct = armPct(a);
+    return `<span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span>`;
   }
 
-  function fmtDelta(pp: number): string {
-    const sign = pp > 0 ? '+' : '';
-    return sign + Math.round(pp) + 'pp';
+  function bestArm(m: ModelData): { arm: ArmAgg; name: string } {
+    const arms: [ArmAgg, string][] = [[m.cpu, 'cpu'], [m.kernel, 'kernel'], [m.native, 'native']];
+    let best: [ArmAgg, string] = arms[0];
+    for (const [a, n] of arms) {
+      if (a.total === 0) continue;
+      const bPct = best[0].total > 0 ? best[0].solved / best[0].total : -1;
+      const aPct = a.solved / a.total;
+      if (aPct > bPct || (aPct === bPct && a.cost < best[0].cost && a.cost > 0)) {
+        best = [a, n];
+      }
+    }
+    return { arm: best[0], name: best[1] };
   }
 
-  // ── Main ─────────────────────────────────────────────────────────────
-  (async () => {
-    // Fetch all data in parallel
-    const [scoresResp, bootResp, diffResp, descResp, expResp] = await Promise.all([
-      fetch('/scores.json').catch(() => null),
-      fetch('/haystack-boot-leaderboard.json').catch(() => null),
-      fetch('/difficulty.json').catch(() => null),
-      fetch('/benchmark-descriptions.json').catch(() => null),
-      fetch('/experiment-scores.json').catch(() => null),
-    ]);
-    const scores: ScoreEntry[] = scoresResp?.ok ? await scoresResp.json() : [];
-    const bootData: BootEntry[] = bootResp?.ok ? await bootResp.json() : [];
-    const diffRaw = diffResp?.ok ? await diffResp.json() : { benchmarks: {} };
-    const diffMap: Record<string, string> = diffRaw.benchmarks || {};
-    const benchDescs: Record<string, string> = descResp?.ok ? await descResp.json() : {};
-    const expData: ExperimentEntry[] = expResp?.ok ? await expResp.json() : [];
+  async function init() {
+    const resp = await fetch('/experiment-scores.json');
+    const data = await resp.json();
+    const models: ModelData[] = data.models;
 
-    // ── Build experiment lookup: normalizedModel → benchmark → ExperimentEntry
-    const expLookup = new Map<string, Map<string, ExperimentEntry>>();
-    for (const e of expData) {
-      const key = normalizeModel(e.model);
-      if (!expLookup.has(key)) expLookup.set(key, new Map());
-      expLookup.get(key)!.set(e.benchmark, e);
-    }
-
-    // ── Build benchmark columns (only those in difficulty.json) ──────
-    const tierOrder: Record<string, number> = { easy: 0, medium: 1, hard: 2 };
-    const tiers = [
-      { name: 'Easy', cls: 'tier-easy', benches: [] as string[] },
-      { name: 'Medium', cls: 'tier-medium', benches: [] as string[] },
-      { name: 'Hard', cls: 'tier-hard', benches: [] as string[] },
-    ];
-    for (const [bench, tier] of Object.entries(diffMap)) {
-      tiers[tierOrder[tier] ?? 1].benches.push(bench);
-    }
-    for (const t of tiers) t.benches.sort();
-    const allBenches: string[] = tiers.flatMap(t => t.benches);
-    const benchSet = new Set(allBenches);
-    const totalBenches = allBenches.length;
-
-    // ── Merge models ─────────────────────────────────────────────────
-    const modelMap = new Map<string, ModelRow>();
-    function getModel(raw: string): ModelRow {
-      const key = normalizeModel(raw);
-      if (!modelMap.has(key)) {
-        modelMap.set(key, {
-          display: displayName(raw), key, boot: null, benches: {},
-          resolved: 0, tokens: 0, turns: 0, time: 0,
-          tier: 4, post: false, entity: false, commit: '',
-          isControl: raw.startsWith('control-'), controlType: '',
-          experiment: {}, bareResolved: 0, bareTested: 0,
-          silentResolved: 0, silentTested: 0, expDelta: 0,
-          bareCostTotal: 0, silentCostTotal: 0,
-        });
-      }
-      const m = modelMap.get(key)!;
-      // Prefer vendor-prefixed display name (shorter/cleaner)
-      if (raw.includes('/')) m.display = displayName(raw);
-      return m;
-    }
-
-    // Ingest boot data
-    for (const b of bootData) {
-      const m = getModel(b.model);
-      m.boot = b;
-      // Normalize verdict: anything that passed POST is BOOTS, rest is NO_BOOT
-      const verdict = (b as any).post === true ? 'BOOTS' : (b.verdict === 'BOOTS' ? 'BOOTS' : 'NO_BOOT');
-      m.boot.verdict = verdict;
-      m.tier = VERDICT_TIER[verdict] ?? 1;
-      // Use explicit post/entityfile fields if present, fall back to score-based check
-      m.post = (b as any).post === true || b.total_score === b.total_possible;
-      m.entity = (b as any).entityfile === true || b.directives?.wrote_entityfile === true;
-    }
-
-    // Ingest scores (skip haystack-boot, haystack-mint, and anything not in difficulty.json)
-    for (const s of scores) {
-      if (!benchSet.has(s.benchmark)) continue;
-      const m = getModel(s.agent);
-      // Tag control rows
-      if (s.agent.startsWith('control-')) {
-        m.isControl = true;
-        m.controlType = (s as any).control_type || s.agent.replace('control-', '');
-      }
-      const prev = m.benches[s.benchmark];
-      // Keep best run: resolved > not-resolved, then lower token cost
-      if (!prev || (!prev.resolved && s.resolved) ||
-          (prev.resolved === s.resolved && (s.token_cost||0) < (prev.token_cost||0))) {
-        m.benches[s.benchmark] = s;
-      }
-      if (s.commit && !m.commit) m.commit = s.commit;
-    }
-
-    // Compute aggregates (only code-solve benchmarks, NOT boot)
-    for (const m of modelMap.values()) {
-      let r = 0, tok = 0, trn = 0, tm = 0;
-      for (const b of Object.values(m.benches)) {
-        if (b.resolved) r++;
-        tok += (b.token_cost || 0);
-        trn += (b.turns_to_fix || 0);
-        tm += (b.wall_clock || 0);
-      }
-      m.resolved = r;
-      m.tokens = (m.boot?.tokens || 0) + tok;
-      m.turns = (m.boot?.turns || 0) + trn;
-      m.time = (m.boot?.wall_clock || 0) + tm;
-
-      // Attach experiment data
-      const expMap = expLookup.get(m.key);
-      if (expMap) {
-        m.experiment = Object.fromEntries(expMap);
-        let bareR = 0, bareT = 0, silentR = 0, silentT = 0;
-        let sharedBareR = 0, sharedSilentR = 0, sharedCount = 0;
-        let bareCost = 0, silentCost = 0;
-        let bareTok = 0, silentTok = 0, bareTrn = 0, silentTrn = 0, bareTm = 0, silentTm = 0;
-        for (const [_bench, exp] of expMap) {
-          if (exp.bare) { bareT++; if (exp.bare.resolved) bareR++; bareCost += exp.bare.estimated_cost_usd || 0; bareTok += exp.bare.token_cost || 0; bareTrn += exp.bare.turns_to_fix || 0; bareTm += exp.bare.wall_clock || 0; }
-          if (exp.silent) { silentT++; if (exp.silent.resolved) silentR++; silentCost += exp.silent.estimated_cost_usd || 0; silentTok += exp.silent.token_cost || 0; silentTrn += exp.silent.turns_to_fix || 0; silentTm += exp.silent.wall_clock || 0; }
-          // Delta only over benchmarks where BOTH arms were tested
-          if (exp.bare && exp.silent) {
-            sharedCount++;
-            if (exp.bare.resolved) sharedBareR++;
-            if (exp.silent.resolved) sharedSilentR++;
-          }
-        }
-        m.bareResolved = bareR;
-        m.bareCostTotal = bareCost;
-        m.silentCostTotal = silentCost;
-        m.bareTokTotal = bareTok;
-        m.silentTokTotal = silentTok;
-        m.bareTurnsTotal = bareTrn;
-        m.silentTurnsTotal = silentTrn;
-        m.bareTimeTotal = bareTm;
-        m.silentTimeTotal = silentTm;
-        m.bareTested = bareT;
-        m.silentResolved = silentR;
-        m.silentTested = silentT;
-        // Percentage point delta: (silentRate - bareRate) * 100
-        if (sharedCount > 0) {
-          const bareRate = sharedBareR / sharedCount;
-          const silentRate = sharedSilentR / sharedCount;
-          m.expDelta = (silentRate - bareRate) * 100;
-        }
-      }
-    }
-
-    // Separate control rows from real models
-    const controlModels: ModelRow[] = [];
-    let models: ModelRow[] = [];
-    for (const m of modelMap.values()) {
-      if (m.isControl) {
-        // Set friendly display names for control rows
-        if (m.key.includes('solution')) m.display = 'Control (solution)';
-        else if (m.key.includes('baseline')) m.display = 'Control (baseline)';
-        controlModels.push(m);
-      } else {
-        models.push(m);
-      }
-    }
-    // Sort controls: solution first, then baseline
-    controlModels.sort((a, b) => {
-      if (a.key.includes('solution')) return -1;
-      if (b.key.includes('solution')) return 1;
-      return 0;
+    // Compute derived fields
+    const rows = models.map(m => {
+      const nPct = armPct(m.native);
+      const kPct = armPct(m.kernel);
+      const cPct = armPct(m.cpu);
+      const best = bestArm(m);
+      const bestPct = best.arm.total > 0 ? best.arm.solved / best.arm.total * 100 : 0;
+      const delta = nPct >= 0 ? Math.max(kPct, cPct) - nPct : (kPct >= 0 ? kPct : cPct);
+      return {
+        ...m,
+        nativePct: nPct, kernelPct: kPct, cpuPct: cPct,
+        bestDelta: delta,
+        bestCost: best.arm.cost,
+        bestTokens: best.arm.tokens,
+        bestTools: best.arm.tools,
+        bestTurns: best.arm.turns,
+        bestWall: best.arm.wall,
+        bestPct,
+        price: m.price_per_m_input || 0,
+      };
     });
 
-    // ── Sort ─────────────────────────────────────────────────────────
-    let sortKey = '__default__';
-    let sortAsc = true;
+    // Sort by best solve % desc, then cost asc
+    let sortKey = 'bestPct';
+    let sortDir = -1;
+    const sort = () => rows.sort((a: any, b: any) => {
+      const av = a[sortKey] ?? 0, bv = b[sortKey] ?? 0;
+      return sortDir * (typeof av === 'string' ? av.localeCompare(bv) : av - bv);
+    });
 
-    function defaultCmp(a: ModelRow, b: ModelRow): number {
-      if (a.tier !== b.tier) return a.tier - b.tier;
-      if (a.resolved !== b.resolved) return b.resolved - a.resolved;
-      return a.tokens - b.tokens;
-    }
-
-    function doSort() {
-      if (sortKey === '__default__') { models.sort(defaultCmp); return; }
-      models.sort((a, b) => {
-        let av: any, bv: any;
-        switch (sortKey) {
-          case 'model': av = a.display.toLowerCase(); bv = b.display.toLowerCase();
-            return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
-          case 'boot': av = a.tier; bv = b.tier; break;
-          case 'post': av = a.post ? 0 : 1; bv = b.post ? 0 : 1; break;
-          case 'entityfile': av = a.entity ? 0 : 1; bv = b.entity ? 0 : 1; break;
-          case 'bareResolved': av = a.bareResolved; bv = b.bareResolved; return sortAsc ? av - bv : bv - av;
-          case 'silentResolved': av = a.silentResolved; bv = b.silentResolved; return sortAsc ? av - bv : bv - av;
-          case 'expDelta': av = a.bareTested ? a.expDelta : -Infinity; bv = b.bareTested ? b.expDelta : -Infinity;
-            return sortAsc ? av - bv : bv - av;
-          case 'silentCostTotal': av = a.silentCostTotal || 0; bv = b.silentCostTotal || 0;
-            return sortAsc ? av - bv : bv - av;
-          case 'totalTokens': av = a.tokens; bv = b.tokens; break;
-          case 'totalTurns': av = a.turns; bv = b.turns; break;
-          case 'totalTime': av = a.time; bv = b.time; break;
-          default: {
-            const ae = a.benches[sortKey], be = b.benches[sortKey];
-            const ar = ae?.resolved ? 1 : 0, br = be?.resolved ? 1 : 0;
-            if (ar !== br) return sortAsc ? br - ar : ar - br;
-            av = ae?.token_cost ?? Infinity; bv = be?.token_cost ?? Infinity; break;
-          }
-        }
-        if (av == null) av = Infinity; if (bv == null) bv = Infinity;
-        return sortAsc ? (av < bv ? -1 : av > bv ? 1 : 0) : (bv < av ? -1 : bv > av ? 1 : 0);
-      });
-    }
-
-    // ── Build tier header row ────────────────────────────────────────
-    const tierRow = document.getElementById('lb-tier-row')!;
-    const stickyCls = ['col-model','col-boot','col-post','col-entity','col-bare','col-os','col-delta','col-cost','col-tokens','col-turns','col-time'];
-    for (const cls of stickyCls) {
-      const th = document.createElement('th');
-      th.className = 'sticky-col tier-sticky-placeholder ' + cls;
-      if (cls === 'col-time') th.style.borderRight = '2px solid rgba(212,160,84,0.4)';
-      th.style.borderBottom = '1px solid var(--border)';
-      tierRow.appendChild(th);
-    }
-    for (const t of tiers) {
-      if (!t.benches.length) continue;
-      const th = document.createElement('th');
-      th.className = 'tier-header ' + t.cls;
-      th.setAttribute('colspan', String(t.benches.length));
-      th.textContent = t.name + ' (' + t.benches.length + ')';
-      tierRow.appendChild(th);
-    }
-
-    // ── Build benchmark name header row ──────────────────────────────
-    const headRow = document.getElementById('lb-header-row')!;
-    for (const bench of allBenches) {
-      const th = document.createElement('th');
-      th.className = 'bench-col'; th.dataset.key = bench; th.dataset.type = 'benchmark';
-      th.title = bench;
-      const a = document.createElement('a');
-      a.href = REPO + '/tree/main/benchmarks/' + encodeURIComponent(bench);
-      a.target = '_blank'; a.rel = 'noopener';
-      const sp = document.createElement('span');
-      sp.className = 'rotated';
-      const short = bench.replace(/-/g, ' ');
-      sp.textContent = short.length > 16 ? short.slice(0, 15) + '\u2026' : short;
-      a.appendChild(sp); th.appendChild(a); headRow.appendChild(th);
-    }
-
-    // ── Render ───────────────────────────────────────────────────────
-    function renderRow(m: ModelRow, index: number, isControl: boolean, isFirstReal: boolean): string {
-      const rc = (!isControl && index < 3) ? ' rank-' + (index + 1) : '';
-      const ctrlCls = isControl ? ' control-row' : '';
-      const sepCls = isFirstReal ? ' control-separator' : '';
-      let r = '<tr class="' + (rc + ctrlCls + sepCls).trim() + '">';
-
-      const hasExp = m.bareTested > 0 || m.silentTested > 0;
-
-      // Model
-      if (isControl) {
-        r += '<td class="sticky-col col-model"><span class="model-name">' + esc(m.display) + '</span></td>';
-      } else if (m.commit) {
-        r += '<td class="sticky-col col-model"><a class="model-link" href="' + REPO + '/commit/' + esc(m.commit) + '" target="_blank" rel="noopener">' + esc(m.display) + '</a></td>';
-      } else {
-        r += '<td class="sticky-col col-model"><span class="model-name">' + esc(m.display) + '</span></td>';
-      }
-
-      // Boot verdict
-      if (isControl) {
-        r += '<td class="sticky-col col-boot">\u2014</td>';
-      } else if (m.boot) {
-        const vc = VERDICT_CLASS[m.boot.verdict] || 'verdict-noboot';
-        const vd = VERDICT_DISPLAY[m.boot.verdict] || m.boot.verdict;
-        r += '<td class="sticky-col col-boot"><span class="verdict-badge ' + vc + '">' + vd + '</span></td>';
-      } else {
-        r += '<td class="sticky-col col-boot"><span class="verdict-badge verdict-noboot">N/A</span></td>';
-      }
-
-      // POST + Entity
-      if (isControl) {
-        r += '<td class="sticky-col col-post">\u2014</td>';
-        r += '<td class="sticky-col col-entity">\u2014</td>';
-      } else {
-        r += '<td class="sticky-col col-post">' + (m.post ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
-        r += '<td class="sticky-col col-entity">' + (m.entity ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
-      }
-
-      // BARE / OS / Delta / Cost columns
-      if (isControl || !hasExp) {
-        r += '<td class="sticky-col col-bare" style="color:#484f58">\u2014</td>';
-        r += '<td class="sticky-col col-os" style="color:#484f58">\u2014</td>';
-        r += '<td class="sticky-col col-delta" style="color:#484f58">\u2014</td>';
-        r += '<td class="sticky-col col-cost" style="color:#484f58">\u2014</td>';
-      } else {
-        r += '<td class="sticky-col col-bare">' + m.bareResolved + '/' + m.bareTested + '</td>';
-        r += '<td class="sticky-col col-os">' + m.silentResolved + '/' + m.silentTested + '</td>';
-        // Delta
-        const hasBoth = m.bareTested > 0 && m.silentTested > 0;
-        if (hasBoth) {
-          const dc = deltaClass(m.expDelta);
-          r += '<td class="sticky-col col-delta ' + dc + '">' + fmtDelta(m.expDelta) + '</td>';
-        } else {
-          r += '<td class="sticky-col col-delta" style="color:#484f58">\u2014</td>';
-        }
-        // Cost per benchmark — dual bare/OS
-        const bareCpb = m.bareTested > 0 ? m.bareCostTotal / m.bareTested : 0;
-        const silentCpb = m.silentTested > 0 ? m.silentCostTotal / m.silentTested : 0;
-        const fmtCost = (c: number) => c > 0 ? (c < 0.01 ? '$' + c.toFixed(3) : '$' + c.toFixed(2)) : '\u2014';
-        r += '<td class="sticky-col col-cost col-dual"><div class="bare-val">' + fmtCost(bareCpb) + '</div><div class="os-val">' + fmtCost(silentCpb) + '</div></td>';
-      }
-
-      // Tok / Trn / Time — dual bare/OS
-      if (isControl) {
-        r += '<td class="sticky-col col-tokens">\u2014</td>';
-        r += '<td class="sticky-col col-turns">\u2014</td>';
-        r += '<td class="sticky-col col-time">\u2014</td>';
-      } else if (hasExp) {
-        r += '<td class="sticky-col col-tokens col-dual"><div class="bare-val">' + fmtN(m.bareTokTotal) + '</div><div class="os-val">' + fmtN(m.silentTokTotal) + '</div></td>';
-        r += '<td class="sticky-col col-turns col-dual"><div class="bare-val">' + m.bareTurnsTotal + 't</div><div class="os-val">' + m.silentTurnsTotal + 't</div></td>';
-        r += '<td class="sticky-col col-time col-dual"><div class="bare-val">' + fmtT(m.bareTimeTotal) + '</div><div class="os-val">' + fmtT(m.silentTimeTotal) + '</div></td>';
-      } else {
-        r += '<td class="sticky-col col-tokens">' + fmtN(m.tokens) + '</td>';
-        r += '<td class="sticky-col col-turns">' + m.turns + 't</td>';
-        r += '<td class="sticky-col col-time">' + fmtT(m.time) + '</td>';
-      }
-
-      // Heatmap cells
-      for (const bench of allBenches) {
-        const e = m.benches[bench];
-        const desc = benchDescs[bench] || '';
-        const descLine = desc ? '\n' + desc : '';
-        const exp = hasExp ? m.experiment[bench] : null;
-
-        if (exp && (exp.bare || exp.silent)) {
-          // Split cell: bare left, silent right
-          const bareCls = exp.bare ? (exp.bare.resolved ? 'arm-pass' : 'arm-fail') : 'arm-untested';
-          const silentCls = exp.silent ? (exp.silent.resolved ? 'arm-pass' : 'arm-fail') : 'arm-untested';
-
-          // Build tooltip with both arms
-          let tip = esc(bench);
-          if (exp.bare) {
-            const sym = exp.bare.resolved ? '\u2713' : '\u2717';
-            tip += '\nBare: ' + sym + '  ' + fmtN(exp.bare.token_cost) + ' tok \u00B7 ' + exp.bare.turns_to_fix + 't \u00B7 ' + fmtUsd(exp.bare.estimated_cost_usd);
-          } else {
-            tip += '\nBare: untested';
-          }
-          if (exp.silent) {
-            const sym = exp.silent.resolved ? '\u2713' : '\u2717';
-            tip += '\nOS:   ' + sym + '  ' + fmtN(exp.silent.token_cost) + ' tok \u00B7 ' + exp.silent.turns_to_fix + 't \u00B7 ' + fmtUsd(exp.silent.estimated_cost_usd);
-          } else {
-            tip += '\nOS:   untested';
-          }
-          tip += descLine;
-
-          r += '<td class="bench-col"><span class="hm-split" title="' + esc(tip) + '">';
-          r += '<span class="' + bareCls + '"></span>';
-          r += '<span class="' + silentCls + '"></span>';
-          r += '</span></td>';
-        } else if (!e) {
-          // Untested: model has no score entry at all for this benchmark
-          const tip = esc(bench) + ': untested' + descLine;
-          r += '<td class="bench-col"><span class="hm hm-untested" title="' + tip + '"></span></td>';
-        } else {
-          // Standard single-cell rendering (no experiment data)
-          const ok = e.resolved;
-          const cls = ok ? 'hm-pass' : 'hm-fail';
-          const sym = ok ? '\u2713 resolved' : '\u2717 not resolved';
-          const costStr = e.estimated_cost_usd ? ' \u00B7 ' + fmtUsd(e.estimated_cost_usd) : '';
-          const metrics = Math.round((e.token_cost||0)/1000) + 'k tok \u00B7 ' + (e.turns_to_fix||0) + 't \u00B7 ' + Math.round(e.wall_clock) + 's' + costStr;
-          const tip = esc(bench) + '\n' + sym + ' \u00B7 ' + metrics + descLine;
-          r += '<td class="bench-col"><span class="hm ' + cls + '" title="' + tip + '"></span></td>';
-        }
-      }
-      r += '</tr>';
-      return r;
-    }
-
-    function render() {
-      doSort();
+    const render = () => {
+      sort();
       const tbody = document.getElementById('lb-body')!;
-      if (!models.length && !controlModels.length) {
-        tbody.innerHTML = '<tr><td colspan="' + (10 + totalBenches) + '" class="empty">No data.</td></tr>';
-        return;
-      }
-      const rows: string[] = [];
+      tbody.innerHTML = rows.map(r => {
+        const delta = r.bestDelta;
+        const deltaHtml = delta > 0 ? `<span class="delta-pos">+${delta.toFixed(0)}</span>`
+          : delta < 0 ? `<span class="delta-neg">${delta.toFixed(0)}</span>`
+          : `<span class="delta-zero">0</span>`;
+        return `<tr>
+          <td class="col-model"><span class="model-name">${r.model_normalized}</span></td>
+          <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '-'}</td>
+          <td class="col-arm">${armLabel(r.native)}</td>
+          <td class="col-arm">${armLabel(r.kernel)}</td>
+          <td class="col-arm">${armLabel(r.cpu)}</td>
+          <td class="col-delta">${deltaHtml}</td>
+          <td class="col-cost">${fmtUsd(r.bestCost)}</td>
+          <td class="col-num">${r.bestTokens > 0 ? fmtN(r.bestTokens) : '-'}</td>
+          <td class="col-num">${r.bestTools > 0 ? r.bestTools : '-'}</td>
+          <td class="col-num">${r.bestTurns > 0 ? r.bestTurns : '-'}</td>
+          <td class="col-num">${r.bestWall > 0 ? fmtT(r.bestWall) : '-'}</td>
+        </tr>`;
+      }).join('');
 
-      // Render control rows at the top (if any)
-      for (const cm of controlModels) {
-        rows.push(renderRow(cm, -1, true, false));
-      }
+      // Update headers
+      document.querySelectorAll('#lb-head th').forEach(th => {
+        th.classList.toggle('sorted', (th as HTMLElement).dataset.key === sortKey);
+      });
+    };
 
-      // Render real models
-      const hasControls = controlModels.length > 0;
-      for (let i = 0; i < models.length; i++) {
-        const isFirstReal = hasControls && i === 0;
-        rows.push(renderRow(models[i], i, false, isFirstReal));
-      }
-      tbody.innerHTML = rows.join('');
-    }
-
-    // ── Sort click handlers ──────────────────────────────────────────
-    document.querySelectorAll('#leaderboard th').forEach(th => {
+    // Header click sorting
+    document.querySelectorAll('#lb-head th').forEach(th => {
       th.addEventListener('click', () => {
         const key = (th as HTMLElement).dataset.key;
         if (!key) return;
-        if (sortKey === key) { sortAsc = !sortAsc; } else { sortKey = key; sortAsc = true; }
-        document.querySelectorAll('#leaderboard th').forEach(t => t.classList.remove('sorted'));
-        th.classList.add('sorted');
-        renderAndFix();
+        if (sortKey === key) sortDir *= -1;
+        else { sortKey = key; sortDir = key === 'model' ? 1 : -1; }
+        render();
       });
     });
 
-    // ── Sticky offset computation ────────────────────────────────────
-    function computeStickyOffsets() {
-      const headerCells = document.querySelectorAll('#lb-header-row th.sticky-col');
-      const offsets: number[] = [];
-      let off = 0;
-      headerCells.forEach((th, i) => {
-        (th as HTMLElement).style.left = off + 'px';
-        offsets[i] = off;
-        off += (th as HTMLElement).offsetWidth;
-      });
-      for (let i = 0; i < stickyCls.length; i++) {
-        if (offsets[i] === undefined) continue;
-        const px = offsets[i] + 'px';
-        document.querySelectorAll('#lb-tier-row th.' + stickyCls[i] + ', td.' + stickyCls[i]).forEach(el => {
-          (el as HTMLElement).style.left = px;
-        });
-      }
-    }
+    render();
 
-    function renderAndFix() { render(); requestAnimationFrame(computeStickyOffsets); }
+    // Totals
+    const totalScores = rows.reduce((s, r) => s + r.native.total + r.kernel.total + r.cpu.total, 0);
+    const totalSolved = rows.reduce((s, r) => s + r.native.solved + r.kernel.solved + r.cpu.solved, 0);
+    const totalCost = rows.reduce((s, r) => s + r.native.cost + r.kernel.cost + r.cpu.cost, 0);
+    document.getElementById('totals')!.textContent =
+      `${rows.length} models \u00b7 ${totalScores.toLocaleString()} benchmarks \u00b7 ${totalSolved.toLocaleString()} solved \u00b7 $${totalCost.toFixed(2)} total spend`;
 
-    // ── Last updated ─────────────────────────────────────────────────
-    let latest = '';
-    for (const s of scores) { if (s.timestamp && s.timestamp > latest) latest = s.timestamp; }
-    if (latest) {
-      const el = document.getElementById('last-updated');
-      if (el) el.textContent = 'Last updated: ' + new Date(latest).toISOString().slice(0, 10);
-    }
-
-    // ── Initial render ───────────────────────────────────────────────
-    renderAndFix();
-    window.addEventListener('resize', computeStickyOffsets);
-
-    // ── Drag to scroll ───────────────────────────────────────────────
-    const container = document.getElementById('lb-container') as HTMLElement;
-    let dragging = false, startX = 0, scrollStart = 0;
-    container.addEventListener('mousedown', (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest('a, th[data-key]')) return;
-      dragging = true; startX = e.pageX; scrollStart = container.scrollLeft;
-      container.classList.add('dragging'); e.preventDefault();
+    // Arm comparison cards
+    const armTotals = (key: 'native' | 'kernel' | 'cpu') => {
+      const t = rows.reduce((a, r) => ({
+        s: a.s + r[key].solved, t: a.t + r[key].total, c: a.c + r[key].cost
+      }), { s: 0, t: 0, c: 0 });
+      return t;
+    };
+    const cards = (['native', 'kernel', 'cpu'] as const).map(arm => {
+      const labels: Record<string, string> = { native: 'Native (vendor CLI)', kernel: 'Kernel (OpenRouter)', cpu: 'Kernel-CPU (optimized)' };
+      const t = armTotals(arm);
+      const pct = t.t > 0 ? (t.s / t.t * 100).toFixed(0) : '0';
+      return `<div class="arm-card">
+        <h4>${labels[arm]}</h4>
+        <div class="big ${pctClass(Number(pct))}">${pct}%</div>
+        <div class="detail">${t.s}/${t.t} solved \u00b7 $${t.c.toFixed(2)}</div>
+      </div>`;
     });
-    container.addEventListener('mousemove', (e: MouseEvent) => {
-      if (!dragging) return;
-      e.preventDefault();
-      container.scrollLeft = scrollStart - (e.pageX - startX);
-    });
-    window.addEventListener('mouseup', () => { if (dragging) { dragging = false; container.classList.remove('dragging'); } });
+    document.getElementById('arm-comparison')!.innerHTML = cards.join('');
+  }
 
-    // ── Colorblind toggle ────────────────────────────────────────────
-    const a11yBtn = document.getElementById('a11y-toggle')!;
-    const stored = localStorage.getItem('nb-colorblind');
-    if (stored === '1') { container.classList.add('colorblind'); a11yBtn.classList.add('active'); }
-    a11yBtn.addEventListener('click', () => {
-      const on = container.classList.toggle('colorblind');
-      a11yBtn.classList.toggle('active', on);
-      localStorage.setItem('nb-colorblind', on ? '1' : '0');
-    });
-  })();
+  init();
 </script>
+</Base>

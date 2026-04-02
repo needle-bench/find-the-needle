@@ -1,0 +1,57 @@
+{
+  "harnesses": {
+    "claude-code": {
+      "name": "Claude Code",
+      "package": "@anthropic-ai/claude-code",
+      "install": "npm install -g @anthropic-ai/claude-code",
+      "command": "claude",
+      "args": ["-p", "{prompt}", "--model", "{model}", "--permission-mode", "acceptEdits", "--max-turns", "{max_turns}", "--output-format", "json"],
+      "env_key": "ANTHROPIC_API_KEY",
+      "models": [
+        "claude-opus-4-6",
+        "claude-sonnet-4-6",
+        "claude-sonnet-4-5",
+        "claude-haiku-4-5"
+      ]
+    },
+    "gemini-cli": {
+      "name": "Gemini CLI",
+      "package": "@anthropic-ai/gemini-cli",
+      "install": "npm install -g @anthropic-ai/gemini-cli",
+      "command": "gemini",
+      "args": ["-p", "{prompt}", "--model", "{model}"],
+      "env_key": "GEMINI_API_KEY",
+      "models": [
+        "gemini-2.0-flash-001",
+        "gemini-2.5-flash",
+        "gemini-2.5-pro",
+        "gemini-3-flash-preview",
+        "gemini-3.1-pro-preview"
+      ]
+    },
+    "codex-cli": {
+      "name": "Codex CLI",
+      "package": "@openai/codex",
+      "install": "npm install -g @openai/codex",
+      "command": "codex",
+      "args": ["-p", "{prompt}"],
+      "env_key": "OPENAI_API_KEY",
+      "models": [
+        "gpt-4o",
+        "gpt-4.1"
+      ]
+    }
+  },
+  "fallback": {
+    "name": "runner.py",
+    "description": "Simple API agent loop — bash/read/edit tools via docker exec",
+    "env_key": "OPENROUTER_API_KEY"
+  },
+  "treatment": {
+    "name": "ostk",
+    "install": "curl -fsSL https://ostk.ai/install | OSTK_INSTALL_DIR=/usr/local/bin sh",
+    "init": "ostk init --non-interactive",
+    "boot": "ostk boot",
+    "description": "Full ostk kernel — boot, heartbeat, dying, governance, audit"
+  }
+}

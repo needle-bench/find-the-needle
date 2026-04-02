@@ -1,0 +1,24 @@
+# Pre-rolled base image for kernel arm benchmarks.
+# Contains ostk binary from latest release. Use `--local` to override
+# via docker cp with a cross-compiled dev binary.
+#
+# Build:  docker build -t needle-bench-kernel -f docker/Dockerfile.bench-kernel .
+# Use:    FROM needle-bench-kernel AS kernel
+#         COPY --from=kernel /usr/local/bin/ostk /usr/local/bin/ostk
+
+FROM debian:bookworm-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      bash curl git jq ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    git config --global user.email "bench@needle-bench.cc" && \
+    git config --global user.name "needle-bench"
+
+# Install ostk from release
+RUN curl -fsSL https://ostk.ai/install | OSTK_INSTALL_DIR=/usr/local/bin sh && \
+    ostk --version
+
+# When --local is passed, ostk bench does:
+#   docker cp target/x86_64-unknown-linux-musl/release/ostk <container>:/usr/local/bin/ostk
+# which overwrites the release binary with the dev build.
