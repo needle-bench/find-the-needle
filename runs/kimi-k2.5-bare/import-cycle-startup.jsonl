@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-04-01T16:56:26Z", "benchmark": "import-cycle-startup", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 75, "tokens_out": 135, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 183, "tokens_out": 97, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app"], "tokens_in": 819, "tokens_out": 66, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app"], "tokens_in": 3072, "tokens_out": 41, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app"], "tokens_in": 3260, "tokens_out": 94, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app", "/app/.git/config"], "tokens_in": 3356, "tokens_out": 43, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app"], "tokens_in": 3461, "tokens_out": 45, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app", "/app", "/app"], "tokens_in": 4644, "tokens_out": 130, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app", "/app"], "tokens_in": 4795, "tokens_out": 105, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-04-01T17:00:55Z", "test_exit": 1, "total_turns": 9, "correct_lines": 0, "arm": "bare"}

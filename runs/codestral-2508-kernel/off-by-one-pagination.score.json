@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0010835999999999999,
+  "input_tokens": 6714,
+  "output_tokens": 310,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test script is now passing. The pagination logic is correctly handling the page boundaries. The issue has been fixed.",
+  "timestamp": "2026-04-02T01:42:34Z",
+  "token_cost": 7024,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 8.23
+}

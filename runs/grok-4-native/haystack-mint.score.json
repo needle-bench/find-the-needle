@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-native",
+  "arm": "native",
+  "benchmark": "haystack-mint",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.5825985,
+  "input_tokens": 371164,
+  "output_tokens": 9765,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "bench@needle-bench.cc",
+  "timestamp": "2026-04-02T02:07:43Z",
+  "token_cost": 380929,
+  "tool_uses": 24,
+  "turns_to_fix": 24,
+  "wall_clock": 218.964
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7544,
+  "output_tokens": 2555,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! Let me summarize what I found and fixed:\n\n## Summary\n\n**The Vulnerability: Unicode BIDI Override Privilege Escalation**\n\nThe bug was in `/workspace/app/auth.py` in the `check_admin_access()` function. The application had two critical security flaws:\n\n1. **Insufficient Input Sanitization**: The `sanitize_username()` function in `sanitizer.py` did not strip Unicode BIDI (bidirectional text) control characters like U+202E (RIGHT-TO-LEFT OVERRIDE).\n\n2. **Display Form Used for Security Check**: The `check_admin_access()` function compared the rendered/display form of the username against the admin allowlist, rather than the actual stored username. This allowed an attacker to:\n   - Register with username `\\xe2\\x80\\xaenimda` (U+202E + \"nimda\")\n   - The BIDI override would render this visually as \"admin\" (RTL reversal)\n   - The security check would see the rendered form as \"admin\" and grant admin access\n   - But the actual stored username was the override character + \"nimda\", not \"admin\"\n\n**The Fix:**\n\n1. **Modified `sanitizer.py`**: Added Step 0 to strip all BIDI control characters (U+202A-U+202E) during username sanitization, before storage\n2. **Modified `auth.py`**: Changed `check_admin_access()` to compare against the actual stored username, not the rendered display form\n\n✅ **All tests pass** - The application now correctly:\n- Rejects or normalizes BIDI-injected usernames \n- Prevents privilege escalation through BIDI override attacks\n- Maintains normal functionality for legitimate users",
+  "timestamp": "2026-04-02T02:22:12Z",
+  "token_cost": 10099,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 25.13
+}

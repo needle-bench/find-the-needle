@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00481849,
+  "input_tokens": 10057,
+  "output_tokens": 1006,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests passed! The needle was to create the `ENTITYFILE` and populate the `audit.jsonl` file with specific keywords.",
+  "timestamp": "2026-04-02T01:34:17Z",
+  "token_cost": 11063,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 12.117
+}

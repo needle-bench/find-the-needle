@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 34442,
+  "output_tokens": 943,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests all passed, which means the fix was successful. The rate limiter now correctly blocks requests even when the `X-Forwarded-For` header is being spoofed.\n\nI have successfully identified and fixed the vulnerability in the rate limiter. The issue was that the `getClientIp` function in `app/ratelimiter.ts` was trusting the `X-Forwarded-For` header, which allowed for IP spoofing and bypassing the rate limit. I removed the code that reads this header and now rely solely on `req.socket.remoteAddress` to get the client's IP. This ensures that the rate limiter cannot be bypassed by manipulating HTTP headers. The successful test run confirms the fix.\n",
+  "timestamp": "2026-04-02T02:57:39Z",
+  "token_cost": 35385,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 42.335
+}

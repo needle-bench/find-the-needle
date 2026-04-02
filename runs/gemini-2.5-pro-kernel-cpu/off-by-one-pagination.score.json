@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8482,
+  "output_tokens": 520,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed, confirming the fix. The needle has been found. The Flask app's pagination logic now correctly handles page boundaries.",
+  "timestamp": "2026-04-02T02:51:18Z",
+  "token_cost": 9002,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 21.253
+}

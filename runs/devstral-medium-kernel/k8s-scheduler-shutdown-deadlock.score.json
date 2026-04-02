@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00908928,
+  "input_tokens": 35860,
+  "output_tokens": 2764,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test has passed, which means we've successfully fixed the deadlock issue. The key change was to call `s.queue.Close()` before waiting for the scheduler goroutine to finish (`<-done`). This ensures that any blocked `Pop()` calls are unblocked before we try to wait for the goroutine to exit.\n\nThe fix addresses the deadlock by:\n1. Closing the queue immediately after the context is cancelled\n2. This unblocks any `Pop()` calls that might be waiting\n3. Then we wait for the scheduler goroutine to finish its work\n\nThis ensures a clean shutdown without deadlocks.",
+  "timestamp": "2026-04-02T03:18:01Z",
+  "token_cost": 38624,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 28.38
+}

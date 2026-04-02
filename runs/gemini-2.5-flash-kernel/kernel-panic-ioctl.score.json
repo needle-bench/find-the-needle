@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.016604099999999997,
+  "input_tokens": 72161,
+  "output_tokens": 3702,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "It worked! The `test.sh` script now passes the fuzz test and reports \"PASS: IOCTL handler correctly validates all inputs\". The \"needle\" was the missing `NULL` pointer checks for `req->value` in `handle_set_config` and `handle_get_config`.",
+  "timestamp": "2026-04-02T01:36:37Z",
+  "token_cost": 75863,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 27.624
+}

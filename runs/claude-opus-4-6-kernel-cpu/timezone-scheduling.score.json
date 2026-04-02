@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9462,
+  "output_tokens": 1514,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n**The Bug:** In `scheduler.py`, the `_is_due` method was using the **UTC date** (`window_start.date()`) to construct the event's scheduled time in the event's local timezone. This breaks for late-night events that cross midnight when converted to UTC.\n\n**Example:** For `evt-002` (23:30 US/Eastern):\n- At `2025-01-16T04:30 UTC`, the UTC date is Jan 16\n- The buggy code built `2025-01-16 23:30 US/Eastern` → `2025-01-17 04:30 UTC` (doesn't match the window)\n- But the correct local date is Jan 15 (since 04:30 UTC on Jan 16 = 23:30 EST on Jan 15)\n\n**The Fix:** Changed `today_utc = window_start.date()` to instead convert `window_start` to the **event's local timezone** first (`local_now = window_start.astimezone(tz)`), then use that local date (`today_local = local_now.date()`) to construct the scheduled time. This correctly handles midnight-crossing timezone conversions.",
+  "timestamp": "2026-04-02T02:40:25Z",
+  "token_cost": 10976,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 35.105
+}

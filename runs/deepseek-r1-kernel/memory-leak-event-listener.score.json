@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.1451666,
+  "input_tokens": 164713,
+  "output_tokens": 11947,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've identified and fixed the hidden problem (the \"needle\") in the container. The issue was a memory leak in the event listener system.\n\n**The Problem:**\nIn `/app/app/processor.js`, the `DataProcessor.process()` method was registering new event listeners (`this.eventBus.on()`) for every request without ever removing them. This caused:\n- Unbounded growth of event listeners on the event bus\n- Memory leaks as closures captured request data\n- Event listener count increasing linearly with requests\n\n**Evidence:**\n1. The test script (`test.sh`) specifically checks for event listener accumulation\n2. The code comment in `processor.js` explicitly states: \"BUG: Every call to process() registers a NEW listener on the event bus but never removes it\"\n3. The listener captures `data` in its closure, preventing garbage collection\n4. `server.js` disables warnings with `eventBus.setMaxListeners(0)` to hide the issue\n\n**The Fix:**\nRemoved the unnecessary event listener registrations from the `process()` method in `processor.js`. The listeners weren't needed because:\n- The Monitor class already tracks these events with its own listeners\n- The events are emitted but no components were actually using these specific listeners\n- The listeners were the root cause of the memory leak\n\n**Verification:**\nAfter running `test.sh`:\n```\nServer listening on port 8080\nBaseline: listeners=1, heap=4.42MB\nAfter 500 requests: listeners=1, heap=5.04MB\nPASS: Listener count stable at 1\nPASS: No event listener leak detected\n```\n\nThe listener count remains stable at 1 (the Monitor's listener), heap memory usage is bounded, and the test passes consistently. The memory leak has been eliminated.",
+  "timestamp": "2026-04-02T02:38:13Z",
+  "token_cost": 176660,
+  "tool_uses": 29,
+  "turns_to_fix": 1,
+  "wall_clock": 542.678
+}

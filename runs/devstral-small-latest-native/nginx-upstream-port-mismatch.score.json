@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is complete. The issue was that nginx was configured to proxy to port 5001, but the Flask application was running on port 5000. I changed the proxy_pass directive in `/etc/nginx/sites-available/default` from `http://127.0.0.1:5001` to `http://127.0.0.1:5000`, and now all tests pass.",
+  "timestamp": "2026-04-02T01:56:22Z",
+  "token_cost": 0,
+  "tool_uses": 13,
+  "turns_to_fix": 14,
+  "wall_clock": 16.989
+}

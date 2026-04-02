@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 36216,
+  "output_tokens": 1164,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test script passes, which means the fix is working correctly. The API now properly validates inventory adjustments and rejects those that would result in a negative quantity.",
+  "timestamp": "2026-04-02T02:28:07Z",
+  "token_cost": 37380,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 18.019
+}

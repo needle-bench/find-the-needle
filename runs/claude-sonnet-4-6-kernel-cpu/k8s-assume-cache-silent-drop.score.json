@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 3902,
+  "output_tokens": 1036,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**PASS!** ✅\n\n---\n\n### The Needle (Bug)\n\n**Location:** `informerUpdate()` in `/workspace/main.go`\n\n**The Bug:** When the informer delivered a newer version of an object that was in the \"assumed\" state, the code silently deleted the assumed entry with no notification:\n\n```go\n// Silent drop — no notification to the assumer\ndelete(c.assumed, obj.Key)\n```\n\nThis is a reproduction of the real Kubernetes `assume_cache.go:426` bug — the scheduler optimistically assumes an object is in a certain state (e.g., a PV is bound), but when the informer delivers a conflicting update, the assumed state is **silently dropped**. The scheduler never learns its optimistic state was invalidated, leading to potential data-loss / stale-state bugs.\n\n**The Fix:** Set `conflictNotified = true` when dropping the assumed entry, so the caller is informed that their optimistic state was superseded:\n\n```go\ndelete(c.assumed, obj.Key)\nconflictNotified = true  // ← notify instead of silently dropping\n```",
+  "timestamp": "2026-04-02T02:26:44Z",
+  "token_cost": 4938,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 25.159
+}

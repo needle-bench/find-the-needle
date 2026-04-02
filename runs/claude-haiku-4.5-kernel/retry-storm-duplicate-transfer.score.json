@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4.5-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.151125,
+  "input_tokens": 114055,
+  "output_tokens": 7414,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! Let me explain what the bug was and how I fixed it:\n\n## Summary\n\n**The Needle (Bug):** The original code had a critical race condition in the idempotency check logic. The sequence was:\n\n1. Debit source account and commit\n2. Sleep 50ms (to simulate processing)\n3. Check if idempotency key already exists\n4. If not found, credit destination account and record the transfer\n\n**The Race Window:** During the 50ms sleep between the debit and the idempotency check, multiple concurrent requests with the same idempotency key could all:\n- Successfully debit the source account\n- See that the idempotency key doesn't exist yet (because no thread has reached step 4 yet)\n- All proceed to credit the destination account\n\nThis resulted in multiple credits for a single logical transfer, violating the money conservation invariant.\n\n**The Fix:** I restructured the idempotency logic to:\n\n1. Use `BEGIN IMMEDIATE` to acquire an exclusive lock\n2. Check if the idempotency key exists\n3. If not, immediately insert a \"processing\" placeholder record into `completed_transfers` while still holding the lock\n4. Commit the lock\n5. Then perform the actual debit/credit operations (outside the transaction)\n6. Finally update the placeholder record to mark it as \"success\"\n\nThis ensures that only ONE request can pass the idempotency check for a given key. Any concurrent requests will see that the key already exists (as a \"processing\" placeholder) and immediately return a duplicate response without executing the transfer.",
+  "timestamp": "2026-04-02T01:42:01Z",
+  "token_cost": 121469,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 94.968
+}

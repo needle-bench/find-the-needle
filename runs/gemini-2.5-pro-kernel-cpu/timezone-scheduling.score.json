@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 10881,
+  "output_tokens": 1123,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! All tests passed, which means the fix was successful. The late-night events now fire correctly. The issue was indeed that the scheduler was not correctly handling timezone differences that resulted in a date change. By first determining the date in the event's local timezone, the scheduler now correctly calculates the UTC firing time. I've found the needle.\n",
+  "timestamp": "2026-04-02T03:05:03Z",
+  "token_cost": 12004,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 27.318
+}

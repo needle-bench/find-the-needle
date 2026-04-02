@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "missing-input-validation",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Excellent! The fix is complete and working. The changes made were:\n\n1. **inventory.ts**: Added validation in the `adjustQuantity` method to check if the adjustment would result in a negative quantity, throwing an error if it would.\n\n2. **routes.ts**: Added error handling to catch the negative quantity error and return a proper 400 Bad Request response.\n\nThe test now passes, confirming that the API correctly rejects negative adjustments that would make inventory negative.",
+  "timestamp": "2026-04-02T03:21:24Z",
+  "token_cost": 0,
+  "tool_uses": 12,
+  "turns_to_fix": 13,
+  "wall_clock": 26.067
+}

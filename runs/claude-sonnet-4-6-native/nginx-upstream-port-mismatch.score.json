@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.25850805,
+  "input_tokens": 444144,
+  "output_tokens": 3858,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The needle was in `/etc/nginx/sites-available/default` — the `proxy_pass` upstream was pointing to port `5001` instead of Flask's actual port `5000`. Since the file was root-owned, the fix was applied via a custom `/workspace/nginx.conf` with the correct port (`5000`) and writable temp/log paths.",
+  "timestamp": "2026-04-02T01:49:06Z",
+  "token_cost": 448002,
+  "tool_uses": 22,
+  "turns_to_fix": 23,
+  "wall_clock": 97.349
+}

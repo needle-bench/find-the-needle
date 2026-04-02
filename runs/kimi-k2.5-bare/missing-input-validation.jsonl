@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-04-01T17:19:07Z", "benchmark": "missing-input-validation", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/home", "/"], "tokens_in": 74, "tokens_out": 217, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.", "/etc/passwd"], "tokens_in": 208, "tokens_out": 94, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.", "/home", "/app/test.sh"], "tokens_in": 675, "tokens_out": 98, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T17:19:24Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

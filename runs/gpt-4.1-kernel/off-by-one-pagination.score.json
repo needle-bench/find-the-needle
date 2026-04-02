@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.018486000000000002,
+  "input_tokens": 11035,
+  "output_tokens": 296,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle was a buggy pagination offset calculation in `app/app.py`:\n\n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\n\nI fixed it to:\n\n```python\noffset = (page - 1) * per_page\n```\n\nRunning `test.sh` now passes and pagination is correct across page boundaries. ✅",
+  "timestamp": "2026-04-02T01:29:52Z",
+  "token_cost": 11331,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 14.101
+}

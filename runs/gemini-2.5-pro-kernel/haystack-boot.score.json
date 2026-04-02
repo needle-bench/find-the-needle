@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0551125,
+  "input_tokens": 9994,
+  "output_tokens": 4262,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've found the needle. Please run `bash test.sh` to verify the fix.",
+  "timestamp": "2026-04-02T01:29:31Z",
+  "token_cost": 14256,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 76.036
+}

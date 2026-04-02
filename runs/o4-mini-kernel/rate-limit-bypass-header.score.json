@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0207262,
+  "input_tokens": 21050,
+  "output_tokens": 2040,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve removed reliance on the X-Forwarded-For header and now always use the socket’s remote address to identify clients. This prevents spoofing via rotating headers. All tests pass successfully.",
+  "timestamp": "2026-04-02T01:56:24Z",
+  "token_cost": 23090,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 41.79
+}

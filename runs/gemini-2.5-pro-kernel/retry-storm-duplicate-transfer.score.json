@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 1.1617773750000002,
+  "input_tokens": 1157791,
+  "output_tokens": 59710,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I have reverted `app/processor.py` to its original state. I will now modify `app/models.py`. I will add a line to set the PRAGMA `locking_mode` to `EXCLUSIVE`. This will serialize all writes to the database, preventing both the race condition and any deadlocks.",
+  "timestamp": "2026-04-02T02:10:58Z",
+  "token_cost": 1217501,
+  "tool_uses": 60,
+  "turns_to_fix": 1,
+  "wall_clock": 879.425
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0032919200000000003,
+  "input_tokens": 6858,
+  "output_tokens": 761,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reported `5/5`, indicating all checks passed. I have successfully found the \"needle\" (the missing files and content) and fixed the problem.\n",
+  "timestamp": "2026-04-02T01:34:37Z",
+  "token_cost": 7619,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 9.379
+}

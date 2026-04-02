@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.01566825,
+  "input_tokens": 37007,
+  "output_tokens": 850,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The tests are passing now. The \"needle\" was the incorrect port number in the nginx configuration. The Flask application runs on port 5000, but nginx was trying to forward requests to port 5001. I corrected the upstream URL from `http://127.0.0.1:5001` to `http://127.0.0.1:5000`, which resolved the issue.",
+  "timestamp": "2026-04-02T01:43:51Z",
+  "token_cost": 37857,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 32.86
+}

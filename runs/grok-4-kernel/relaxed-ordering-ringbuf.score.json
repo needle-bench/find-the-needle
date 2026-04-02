@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "relaxed-ordering-ringbuf",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.02975175,
+  "input_tokens": 5711,
+  "output_tokens": 1586,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: /* Single Producer / Single Consumer Ring Buffer for POD Types\n *\n * Implements a lock-free ring buffer for a single producer thread and\n * single consumer thread, suitable for passing POD types between two\n * threads without locks.\n *\n * The ring buffer is entirely lock-free for both producer and consumer\n * (uses atomics for synchronization).\n *\n * Producer and consumer must be separate threads. Behavior is undefined\n * if both try to produce or both try to consume.\n *\n * Not thread-safe for multiple producers or multiple consumers.\n *\n * The buffer size is fixed at creation time and must be a power of 2.\n */\n\n#ifndef RING_BUFFER_H\n#define RING_BUFFER_H\n\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n\ntypedef struct ring_buffer ring_buffer_t;\n\nring_buffer_t* ring_buffer_create(size_t num_items, size_t item_size);\n\nvoid ring_buffer_destroy(ring_buffer_t* rb);\n\n/* Producer API */\n\n/* Producer calls this to get a pointer to the next item slot to write to.\n * Caller MUST check ring_buffer_producer_full() first, else behavior is\n * undefined.\n *\n * Sets *out_ptr to point to the next empty slot.\n *\n * Ordering: Uses acquire semantics to sync with consumer.\n */\nvoid ring_buffer_producer_acquire(ring_buffer_t* rb, void** out_ptr);\n\n/* Producer calls this after writing to the slot acquired via\n * ring_buffer_producer_acquire.\n * \n * Ordering: Uses release semantics to publish item to consumer.\n */\nvoid ring_buffer_producer_release(ring_buffer_t* rb);\n\n/* Returns true if the ring buffer is full (no space for producer to write). */\nbool ring_buffer_producer_full(const ring_buffer_t* rb);\n\n/* Consumer API */\n\n/* Consumer calls this to get a pointer to the next item slot to read from.\n * Caller MUST check ring_buffer_consumer_empty() first, else behavior is\n * undefined.\n *\n * Sets *out_ptr to point to the next full slot.\n *\n * Ordering: Uses acquire semantics to sync with producer.\n */\nvoid ring_buffer_consumer_acquire(ring_buffer_t* rb, void** out_ptr);\n\n/* Consumer calls this after reading from the slot acquired via\n * ring_buffer_consumer_acquire.\n * \n * Ordering: Uses release semantics to publish slot back to producer.\n */\nvoid ring_buffer_consumer_release(ring_buffer_t* rb);\n\n/* Returns true if the ring buffer is empty (no items for consumer to read). */\nbool ring_buffer_consumer_empty(const ring_buffer_t* rb);\n\n#endif /* RING_BUFFER_H */",
+  "timestamp": "2026-04-02T01:48:55Z",
+  "token_cost": 7297,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 28.297
+}

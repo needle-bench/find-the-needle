@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 50964,
+  "output_tokens": 267,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The `test.sh` script passed. The bug has been fixed.",
+  "timestamp": "2026-04-02T01:58:24Z",
+  "token_cost": 51231,
+  "tool_uses": 6,
+  "turns_to_fix": 6,
+  "wall_clock": 20.142
+}

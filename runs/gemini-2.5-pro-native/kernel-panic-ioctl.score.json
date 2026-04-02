@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 212164,
+  "output_tokens": 5163,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found the needle and fixed the issue. I verified the fix by running `test.sh`, and all tests pass. The corrected code is staged for commit.",
+  "timestamp": "2026-04-02T02:13:40Z",
+  "token_cost": 217327,
+  "tool_uses": 59,
+  "turns_to_fix": 61,
+  "wall_clock": 233.446
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0174416,
+  "input_tokens": 8352,
+  "output_tokens": 1876,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I updated the batch slicing logic in processor.py to use an exclusive end index (`end = start + batch_size`) instead of an inclusive one. All tests now pass. Let me know if there’s anything else!",
+  "timestamp": "2026-04-02T01:48:43Z",
+  "token_cost": 10228,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 28.631
+}

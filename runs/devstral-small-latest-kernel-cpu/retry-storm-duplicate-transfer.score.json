@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 53922,
+  "output_tokens": 2374,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test passes now. Let me explain what was fixed:\n\n## The Problem\n\nThe original code had a critical race condition:\n\n1. **Debit first, check idempotency later**: The code would debit the source account and commit immediately\n2. **50ms delay**: This created a race window where multiple concurrent requests could all debit the account\n3. **Idempotency check**: Only after the delay would it check if the transfer was already processed\n4. **Result**: Multiple debits could occur before the idempotency check caught duplicates\n\n## The Solution\n\nI moved the idempotency check to the **beginning** of the function, before any account modifications:\n\n1. **Check idempotency FIRST**: Before touching any accounts, check if this transfer has already been processed\n2. **Return immediately if duplicate**: If the idempotency key exists, return without modifying anything\n3. **Then do the transfer**: Only if it's a new transfer, proceed with debiting, crediting, and recording\n\nThis ensures that even with concurrent requests and delays, only one transfer can ever succeed. The database's UNIQUE constraint on `idempotency_key` provides the final safety net for any remaining race conditions.\n\nThe key insight is that idempotency must be checked **atomically** with the transfer execution - you can't debit first and check later in a concurrent environment.",
+  "timestamp": "2026-04-02T03:09:11Z",
+  "token_cost": 56296,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 35.731
+}

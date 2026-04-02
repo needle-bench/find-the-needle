@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.08185334999999999,
+  "input_tokens": 87843,
+  "output_tokens": 580,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed. The bug was in `app.py:28` — the offset calculation subtracted 1 for pages after the first, causing items to be skipped at page boundaries. The correct formula is simply `(page - 1) * per_page`.",
+  "timestamp": "2026-04-02T01:50:40Z",
+  "token_cost": 88423,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 23.147
+}

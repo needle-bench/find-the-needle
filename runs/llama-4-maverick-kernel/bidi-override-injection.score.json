@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0190333,
+  "input_tokens": 49357,
+  "output_tokens": 1529,
+  "resolved": true,
+  "stop_reason": "error: [429] rate limited — retry 1/7, backoff 1000ms",
+  "summary": "The `test.sh` script has passed, indicating that the vulnerability has been fixed. The BIDI-injected usernames are now correctly handled, and the user is denied admin access as expected.\n\nThis concludes the task of finding and fixing the hidden problem in the container. The solution involved identifying the potential vulnerability, making targeted changes to the code, and verifying the fix using the provided test script.",
+  "timestamp": "2026-04-02T01:33:00Z",
+  "token_cost": 50886,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 30.858
+}

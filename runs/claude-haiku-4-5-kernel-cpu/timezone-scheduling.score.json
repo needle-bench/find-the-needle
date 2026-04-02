@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7010,
+  "output_tokens": 1848,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 I found the needle and fixed it!\n\n## Summary\n\n**The Problem:** The scheduler had a bug handling timezone conversions for late-night events that cross midnight UTC. When an event was scheduled for late at night in a timezone with negative UTC offset (like US/Eastern or US/Pacific), the conversion to UTC would push it to the next calendar day. However, the original code only checked if the scheduled time fell on \"today's\" date in the event's timezone, missing events that actually occur \"today\" in UTC but on \"yesterday\" in the event's timezone.\n\n**The Fix:** Modified the `_is_due` method in `/app/app/scheduler.py` to check both today's and yesterday's dates when constructing the scheduled time in the event's local timezone. This accounts for the midnight boundary crossing and ensures that late-night events that convert to early morning UTC times are properly detected.\n\n**Result:** All tests now pass! ✅",
+  "timestamp": "2026-04-02T02:34:57Z",
+  "token_cost": 8858,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 19.992
+}

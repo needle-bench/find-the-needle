@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.07338456000000002,
+  "input_tokens": 753744,
+  "output_tokens": 9292,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The error message indicates that the variable copy_len is undeclared in the handle_get_config function. This suggests that the copy_len variable is not defined in the handle_get_config function. Let's define the copy_len variable in the handle_get_config function and try again.",
+  "timestamp": "2026-04-02T01:38:44Z",
+  "token_cost": 763036,
+  "tool_uses": 62,
+  "turns_to_fix": 1,
+  "wall_clock": 75.265
+}

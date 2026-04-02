@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4.6-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.465235,
+  "input_tokens": 80997,
+  "output_tokens": 2410,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n## The Needle: Schema Drift Bug\n\n**Problem:** Migration `002_rename_status.sql` renamed the database column from `status` to `order_status`, but the Go application code in `main.go` still referenced the old column name `status` in two SQL queries:\n\n1. **`createOrder` function** — The `INSERT` statement used `status` in both the column list and `RETURNING` clause\n2. **`getOrder` function** — The `SELECT` statement used `status` instead of `order_status`\n\n**Fix:** Updated both SQL queries in `/workspace/app/main.go` to use `order_status` instead of `status`:\n\n- `INSERT INTO orders (user_id, total, status, ...)` → `INSERT INTO orders (user_id, total, order_status, ...)`\n- `RETURNING id, user_id, total, status, ...` → `RETURNING id, user_id, total, order_status, ...`\n- `SELECT id, user_id, total, status, ...` → `SELECT id, user_id, total, order_status, ...`\n\nThen recompiled the Go binary. This is a classic **schema drift** issue where database migrations get out of sync with application code.",
+  "timestamp": "2026-04-02T01:58:21Z",
+  "token_cost": 83407,
+  "tool_uses": 30,
+  "turns_to_fix": 1,
+  "wall_clock": 88.672
+}

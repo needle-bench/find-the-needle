@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00864996,
+  "input_tokens": 14479,
+  "output_tokens": 2092,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The needle has been found and fixed!\n\n**The Bug:** In `./app/scheduler.py`, the `_is_due` method was using the UTC date (`window_start.date()`) to build the scheduled time for events. This breaks for events scheduled late at night in timezones behind UTC (like US/Eastern or US/Pacific) because when it's \"tomorrow\" in UTC, it's still \"today\" in those timezones.\n\n**Example of the bug:**\n- Event scheduled at 23:30 US/Eastern\n- At 2025-01-16 04:30 UTC, it's 2025-01-15 23:30 EST\n- Old code: Used Jan 16 date → built 2025-01-16 23:30 EST → Jan 17 04:30 UTC (wrong!)\n- Fixed code: Uses Jan 15 date (local time) → built 2025-01-15 23:30 EST → Jan 16 04:30 UTC (correct!)\n\n**The Fix:** Changed to use the local date in the event's timezone (`window_start.astimezone(tz).date()`) instead of the UTC date.",
+  "timestamp": "2026-04-02T02:21:05Z",
+  "token_cost": 16571,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 44.995
+}

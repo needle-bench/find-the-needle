@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-native",
+  "arm": "native",
+  "benchmark": "import-cycle-startup",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.5369835,
+  "input_tokens": 219603,
+  "output_tokens": 11360,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "Wait, I forgot the workdir.\n\nCorrect.",
+  "timestamp": "2026-04-02T02:13:54Z",
+  "token_cost": 230963,
+  "tool_uses": 21,
+  "turns_to_fix": 13,
+  "wall_clock": 360.495
+}

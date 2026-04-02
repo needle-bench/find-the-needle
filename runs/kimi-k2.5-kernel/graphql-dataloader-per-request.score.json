@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.038206580000000004,
+  "input_tokens": 81321,
+  "output_tokens": 4433,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix was successful. All tests passed.\n\n**Summary of the bug and fix:**\n\n**The Bug:** DataLoader instances were being created inside each resolver call instead of at the request level. This meant:\n- Each time a resolver needed to load data, it created a new `DataLoader` instance\n- Each loader only had 1 key per call, so batching never fired\n- This caused the classic N+1 query problem\n\n**The Fix:** \n1. Updated `context.ts` to create DataLoaders once per request using the existing `createLoaders()` factory function\n2. Updated `userResolver.ts` to use `ctx.userLoader` and `ctx.postsByAuthorLoader` from the context\n3. Updated `postResolver.ts` to use `ctx.userLoader` from the context\n\n**Result:**\n- Query count dropped from 100+ queries (N+1) to just **2 queries** (one for users, one batched query for posts)\n- All functional tests still pass\n- The DataLoader batching now works correctly across the full query tree within a single request",
+  "timestamp": "2026-04-02T01:34:32Z",
+  "token_cost": 85754,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 297.931
+}

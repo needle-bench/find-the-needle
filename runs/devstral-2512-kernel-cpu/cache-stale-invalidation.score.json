@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 47428,
+  "output_tokens": 790,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test passes now. The issue was that the cache was not being invalidated after updates and creates. Here's what I fixed:\n\n1. In `_update_product`: Added `cache.delete(cache_key)` to remove the cached product after updating it.\n2. In `_create_product`: Added `cache.invalidate_prefix('products:list')` to clear the product list cache after creating a new product.\n\nThis ensures that fresh data is served after writes instead of stale cached data.",
+  "timestamp": "2026-04-02T03:15:36Z",
+  "token_cost": 48218,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 15.453
+}

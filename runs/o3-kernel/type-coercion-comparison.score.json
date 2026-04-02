@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.037744,
+  "input_tokens": 19108,
+  "output_tokens": 1189,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the bug causing incorrect rating filtering.\n\nRoot cause:\nmin_rating was being treated as a string, so comparison logic failed (e.g., '4' <= 5 produced ['4',5] in the acceptable list, mismatching product ratings stored as numbers).\n\nFix applied in utils.js:\nConverted min_rating query param to a number using parseInt and guard against NaN.\n\nKey patch (utils.js):\n\nif (searchParams.has('min_rating')) {\n  // Read the minimum rating from query string and convert to number\n  const val = parseInt(searchParams.get('min_rating'), 10);\n  if (!Number.isNaN(val)) {\n    query.minRating = val;\n  }\n}\n\nAll tests now pass: `test.sh` outputs PASS.",
+  "timestamp": "2026-04-02T01:54:18Z",
+  "token_cost": 20297,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 28.745
+}

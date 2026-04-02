@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 18809,
+  "output_tokens": 450,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The cache is now being invalidated after writes. The test has passed.",
+  "timestamp": "2026-04-02T03:15:38Z",
+  "token_cost": 19259,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 11.052
+}

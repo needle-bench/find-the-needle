@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "timezone-scheduling",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 18646,
+  "output_tokens": 957,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have successfully fixed the timezone scheduling bug in `app/scheduler.py` and confirmed that all tests, including those crossing midnight, now pass. \n\nThe issue was that the `_is_due` method was using the UTC date to build the local event time, which incorrectly shifted events scheduled near midnight into the wrong day. By shifting the logic to check the local dates immediately surrounding the window start time, the scheduler accurately detects due events across all timezones.",
+  "timestamp": "2026-04-02T02:08:22Z",
+  "token_cost": 19603,
+  "tool_uses": 5,
+  "turns_to_fix": 6,
+  "wall_clock": 46.069
+}

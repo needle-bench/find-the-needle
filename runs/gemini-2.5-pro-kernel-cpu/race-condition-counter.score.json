@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6955,
+  "output_tokens": 680,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! The counter now correctly reaches 100, which confirms that using the atomic `INCR` operation fixed the race condition. The problem is solved.\n",
+  "timestamp": "2026-04-02T02:56:45Z",
+  "token_cost": 7635,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 27.543
+}

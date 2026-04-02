@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.26488488,
+  "input_tokens": 1087373,
+  "output_tokens": 17225,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle (vulnerability) has been found and fixed! The BIDI Unicode attack allowed privilege escalation by exploiting the difference between how usernames are stored and how they're visually rendered. The fix ensures security checks use the actual stored data, not visually rendered representations.",
+  "timestamp": "2026-04-02T01:50:31Z",
+  "token_cost": 1104598,
+  "tool_uses": 67,
+  "turns_to_fix": 1,
+  "wall_clock": 1082.346
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.015597999999999999,
+  "input_tokens": 4751,
+  "output_tokens": 762,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle is found: all benchmark checks now pass (5/5).",
+  "timestamp": "2026-04-02T01:30:08Z",
+  "token_cost": 5513,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 21.939
+}

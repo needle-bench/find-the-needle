@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.7190199999999999,
+  "input_tokens": 792622,
+  "output_tokens": 6850,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The crash came from IOCTL_SET_CONFIG not validating value pointer/length.  \nFix added in src/ioctl_handler.c:\n\n1. At start of SET_CONFIG handler  \n   • check req->value is non-NULL  \n   • require req->value_len > 0\n\n2. Clamp copy length safely  \n   ```\n   size_t limit = req->value_len > MAX_VALUE_LEN ? MAX_VALUE_LEN : req->value_len;\n   size_t src_len = strnlen(req->value, limit);\n   memcpy(entry->value, req->value, src_len);\n   entry->value[src_len] = '\\0';\n   ```\n\n3. For GET_CONFIG added checks that output buffer pointer is non-NULL and value_len > 0.\n\n4. Unknown command now returns –1.\n\nAll other tests already passed; these changes stop the segfault and make the handler gracefully reject or truncate oversized inputs.\n\nRun:\n    ./test.sh\nand all tests should report PASS.",
+  "timestamp": "2026-04-02T01:35:52Z",
+  "token_cost": 799472,
+  "tool_uses": 53,
+  "turns_to_fix": 1,
+  "wall_clock": 161.409
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "bidi-override-injection",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 38321,
+  "output_tokens": 816,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The `test.sh` script passed successfully, indicating that the Unicode BIDI override privilege escalation vulnerability has been fixed.",
+  "timestamp": "2026-04-02T01:39:15Z",
+  "token_cost": 39137,
+  "tool_uses": 8,
+  "turns_to_fix": 9,
+  "wall_clock": 35.102
+}

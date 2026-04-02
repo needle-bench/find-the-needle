@@ -1,0 +1,10 @@
+{
+  "benchmark": "bidi-override-injection",
+  "agent": "control-baseline",
+  "timestamp": "2026-04-01T16:12:22Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 2.1,
+  "control_type": "no-agent"
+}

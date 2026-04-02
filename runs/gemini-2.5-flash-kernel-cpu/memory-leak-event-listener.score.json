@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 23653,
+  "output_tokens": 1421,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reported `PASS: No event listener leak detected`. The listener count remained stable at 1, and the heap memory usage had a negligible increase. This indicates that the memory leak caused by accumulating event listeners has been successfully resolved.",
+  "timestamp": "2026-04-02T02:28:09Z",
+  "token_cost": 25074,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 17.468
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.06356282,
+  "input_tokens": 240327,
+  "output_tokens": 7478,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "These are just utility functions, no event listeners.\n\nSo the fix is complete! The issue was in `processor.js` where event listeners were being registered per-request but never removed. The fix was to:\n\n1. Validate the data FIRST before registering any listeners\n2. Only register the listener for the event we're actually going to emit (either `data:validated` or `data:error`)\n3. Use `once()` instead of `on()` so the listener is automatically removed after firing\n\nThis ensures that:\n- No listeners accumulate over time\n- Memory doesn't leak due to captured closures\n- The listener count stays stable (at 1, from the Monitor)\n\nThe test now passes consistently.",
+  "timestamp": "2026-04-02T02:53:08Z",
+  "token_cost": 247805,
+  "tool_uses": 32,
+  "turns_to_fix": 1,
+  "wall_clock": 355.511
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.014748800000000001,
+  "input_tokens": 7116,
+  "output_tokens": 1573,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I fixed the pagination offset logic by removing the erroneous subtraction of 1 for pages beyond the first. Now `offset = (page - 1) * per_page` correctly slices the products list. The test confirms pages align without skipping or overlapping items. Let me know if you need anything else!",
+  "timestamp": "2026-04-02T01:49:24Z",
+  "token_cost": 8689,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 30.607
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "haystack-boot",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 49423,
+  "output_tokens": 273,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have successfully found the needle and verified the fix. The test passed with 5/5.",
+  "timestamp": "2026-04-02T02:00:03Z",
+  "token_cost": 49696,
+  "tool_uses": 11,
+  "turns_to_fix": 12,
+  "wall_clock": 56.948
+}

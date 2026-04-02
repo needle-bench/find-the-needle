@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00050034,
+  "input_tokens": 9243,
+  "output_tokens": 430,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test has passed, which means our fix was successful. The issue was in the `calculate_discount_amount` function in pricing.py, where the discount was being calculated incorrectly by adding the discount percentage to the subtotal instead of multiplying it.\n\nThe correct formula for calculating a percentage discount is:\n```\ndiscount = subtotal * (discount_percent / 100)\n```\n\nThis ensures that for example, a 20% discount on $100 would correctly calculate to $20 (100 * 20/100 = 20), rather than the incorrect $101 (100 + 20/100 = 101) that was happening before our fix.",
+  "timestamp": "2026-04-02T01:45:58Z",
+  "token_cost": 9673,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 5.552
+}

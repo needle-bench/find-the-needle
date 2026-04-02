@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 27005,
+  "output_tokens": 718,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test passes now. The issue was that the `Metrics` field was `nil` when `EnableMetrics` was `true`, causing a null pointer dereference. By initializing the `Metrics` field with default values when `EnableMetrics` is `true` and `Metrics` is `nil`, the server now starts and responds correctly.",
+  "timestamp": "2026-04-02T02:28:55Z",
+  "token_cost": 27723,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 14.111
+}

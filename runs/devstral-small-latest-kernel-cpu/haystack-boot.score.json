@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 49755,
+  "output_tokens": 417,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-02T02:24:20Z",
+  "token_cost": 50172,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 12.296
+}

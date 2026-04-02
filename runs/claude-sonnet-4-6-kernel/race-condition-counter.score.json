@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.076926,
+  "input_tokens": 20187,
+  "output_tokens": 1091,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**✅ PASS** — The test confirms the fix works.\n\n---\n\n### The Needle 🪡\n\n**File:** `/app/app/counter.js`\n\n**Bug:** A classic **read-modify-write race condition**. The original `incrementCounter()` did:\n1. `GET counter` → read value\n2. `value + 1` → compute new value\n3. `SET counter newValue` → write back\n\nWith 100 concurrent requests, many goroutines read the same stale value before any write landed, causing **lost increments** (e.g., 100 requests might only advance the counter to 10–20).\n\n**Fix:** Replaced the three-step read-modify-write with Redis's built-in atomic **`INCR`** command, which guarantees each increment is applied without any possibility of a race condition.",
+  "timestamp": "2026-04-02T01:37:38Z",
+  "token_cost": 21278,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 29.069
+}

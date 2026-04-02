@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.011569999999999999,
+  "input_tokens": 4965,
+  "output_tokens": 445,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle (bug) was a shutdown deadlock where the main goroutine waited for a worker goroutine to exit (which was blocked), while the worker was waiting for the queue to close. I fixed it by calling `s.queue.Close()` before waiting for the worker goroutine to finish. The test now passes:\n\n- Bug: Deadlock in main.go shutdown ordering.\n- Fix: Call `s.queue.Close()` before `<-done`.\n\nTest result:\n```\nOK: clean shutdown\nPASS\n```",
+  "timestamp": "2026-04-02T01:25:41Z",
+  "token_cost": 5410,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 14.181
+}

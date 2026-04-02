@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0444587,
+  "input_tokens": 22073,
+  "output_tokens": 6842,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve added the missing audit entries and provided an identity file. All 5 checks now pass. Let me know if there’s anything else!",
+  "timestamp": "2026-04-02T01:34:21Z",
+  "token_cost": 28915,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 74.187
+}

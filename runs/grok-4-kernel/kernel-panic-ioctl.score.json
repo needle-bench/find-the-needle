@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0261015,
+  "input_tokens": 6132,
+  "output_tokens": 1240,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: #include <string.h>\n#include <stdlib.h>\n#include <stdbool.h>\n#include \"ioctl_handler.h\"\n#include \"device.h\"\n\n#define MAX_CONFIG_KEYS 10\n\ntypedef struct {\n    char *key;\n    int value;\n} ConfigEntry;\n\nstatic ConfigEntry config_table[MAX_CONFIG_KEYS];\nstatic int config_count = 0;\n\nbool ioctl_handler_init(void) {\n    // Example configurations\n    config_table[config_count].key = strdup(\"mode\");\n    config_table[config_count].value = 1;\n    config_count++;\n\n    config_table[config_count].key = strdup(\"threshold\");\n    config_table[config_count].value = 50;\n    config_count++;\n\n    config_table[config_count].key = strdup(\"enabled\");\n    config_table[config_count].value = 1;\n    config_count++;\n\n    return true;\n}\n\nint ioctl_get_config(const char *key) {\n    for (int i = 0; i < config_count; i++) {\n        if (strcmp(config_table[i].key, key) == 0) {\n            return config_table[i].value;\n        }\n    }\n    printf(\"ioctl: GET_CONFIG: key '%s' not found\\n\", key);\n    return -1; // Key not found\n}\n\nvoid ioctl_set_config(const char *key, int value) {\n    for (int i = 0; i < config_count; i++) {\n        if (strcmp(config_table[i].key, key) == 0) {\n            config_table[i].value = value;\n            return;\n        }\n    }\n\n    if (config_count < MAX_CONFIG_KEYS) {\n        config_table[config_count].key = strdup(key);\n        config_table[config_count].value = value;\n        config_count++;\n    } else {\n        // Table full, cannot add more\n        printf(\"ioctl: SET_CONFIG: config table full\\n\");\n    }\n}\n\nvoid ioctl_handler_cleanup(void) {\n    for (int i = 0; i < config_count; i++) {\n        free(config_table[i].key);\n    }\n    config_count = 0;\n}\n\nint ioctl_handler(unsigned long request, void *data) {\n    if (data == NULL) {\n        printf(\"ioctl: NULL request pointer\\n\");\n        return -1;\n    }\n\n    IoctlData *ioctl_data = (IoctlData *)data;\n\n    switch (request) {\n        case IOCTL_GET_CONFIG:\n            if (ioctl_data->key == NULL) {\n                printf(\"ioctl: GET_CONFIG: NULL key pointer\\n\");\n                return -1;\n            }\n            ioctl_data->value = ioctl_get_config(ioctl_data->key);\n            return (ioctl_data->value != -1) ? 0 : -1;\n\n        case IOCTL_SET_CONFIG:\n            if (ioctl_data->key == NULL) {\n                printf(\"ioctl: SET_CONFIG: NULL key pointer\\n\");\n                return -1;\n            }\n            ioctl_set_config(ioctl_data->key, ioctl_data->value);\n            return 0;\n\n        default:\n            return -1; // Unsupported request\n    }\n}",
+  "timestamp": "2026-04-02T01:39:05Z",
+  "token_cost": 7372,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 27.442
+}

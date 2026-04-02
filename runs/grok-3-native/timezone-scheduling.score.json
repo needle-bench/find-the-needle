@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-native",
+  "arm": "native",
+  "benchmark": "timezone-scheduling",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.10974900000000001,
+  "input_tokens": 89967,
+  "output_tokens": 1001,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The fix worked. All tests now pass, including the late night events that cross midnight in UTC. The scheduler correctly handles timezone conversions by using the local timezone's date and checking the next day if needed.",
+  "timestamp": "2026-04-02T02:28:38Z",
+  "token_cost": 90968,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 19.718
+}

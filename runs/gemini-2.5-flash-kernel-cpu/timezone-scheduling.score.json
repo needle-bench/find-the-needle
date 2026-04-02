@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 17672,
+  "output_tokens": 1345,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reports \"PASS: All scheduling tests passed\". The fix successfully addressed the issue with late-night events crossing midnight. The problem was in how the scheduled date was determined in `scheduler.py`, where it was incorrectly using the UTC date instead of the event's local date when constructing the `naive_scheduled` datetime. By switching to `today_local`, the events are now correctly scheduled across midnight boundaries.\n",
+  "timestamp": "2026-04-02T02:34:23Z",
+  "token_cost": 19017,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 12.255
+}

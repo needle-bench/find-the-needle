@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 17746,
+  "output_tokens": 1422,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reports \"PASS\" for all tests, including \"BIDI-injected user correctly denied admin access\". This indicates that the fix for stripping BIDI control characters in `app/auth.py` was successful in preventing the privilege escalation vulnerability. The needle was indeed the `_render_display_name` function in `app/auth.py`, which was mishandling Unicode BIDI characters, leading to a visual spoofing vulnerability. By stripping these characters, the system now correctly identifies the malicious username and denies admin access.\n\nFinal Answer: The needle was the `_render_display_name` function in `app/auth.py`. It was vulnerable to Unicode BIDI override attacks. The fix involved modifying this function to strip BIDI control characters, ensuring that the actual, not the visually rendered, username is used for authentication and authorization checks.",
+  "timestamp": "2026-04-02T02:22:50Z",
+  "token_cost": 19168,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 59.999
+}

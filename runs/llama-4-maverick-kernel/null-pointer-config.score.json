@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00191245,
+  "input_tokens": 2760,
+  "output_tokens": 823,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Now that we have a list of files, let's examine `test.sh` to understand its purpose and what it might be checking for.\n\n```python\nRead(file_path=\"/app/test.sh\")\n```",
+  "timestamp": "2026-04-02T01:43:37Z",
+  "token_cost": 3583,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 15.247
+}

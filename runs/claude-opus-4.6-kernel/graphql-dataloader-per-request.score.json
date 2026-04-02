@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4.6-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.8918950000000001,
+  "input_tokens": 147959,
+  "output_tokens": 6084,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and the fix:\n\n## The Bug: N+1 Query Problem (DataLoader created per resolver call instead of per request)\n\n**Problem:** In both `userResolver.ts` and `postResolver.ts`, new `DataLoader` instances were being created **inside each resolver call**. Since DataLoader batches keys that are `.load()`-ed within the same tick on the **same instance**, creating a new loader per resolver meant each loader only ever saw 1 key — completely defeating the batching mechanism. This caused an N+1 query problem:\n- Fetching 100 users with their posts would fire **101+ DB queries** (1 for users + 100 individual post queries) instead of just 2.\n\n**Fix:** \n1. **`context.ts`** — Updated to import `createLoaders` from `loaders.ts` and attach the shared `userLoader` and `postsByAuthorLoader` to the per-request context object.\n2. **`userResolver.ts`** — Changed `userPosts` to use `ctx.loaders.postsByAuthorLoader.load(user.id)` instead of creating a new DataLoader each time. Same for `user` resolver using `ctx.loaders.userLoader`.\n3. **`postResolver.ts`** — Changed `postAuthor` to use `ctx.loaders.userLoader.load(post.author_id)` instead of creating new DataLoader instances each time.\n\nThe result: **2 DB queries** (1 for users + 1 batched query for all posts) instead of 101+.",
+  "timestamp": "2026-04-02T01:31:43Z",
+  "token_cost": 154043,
+  "tool_uses": 45,
+  "turns_to_fix": 1,
+  "wall_clock": 159.863
+}

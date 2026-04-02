@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.08417699999999999,
+  "input_tokens": 21349,
+  "output_tokens": 1342,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**PASS!** ✅\n\n---\n\n### Summary of the Bug\n\n**The Needle:** A null-pointer dereference (nil pointer dereference panic) in `makeStatusHandler`.\n\n| | Detail |\n|---|---|\n| **Location** | `main.go` → `makeStatusHandler` |\n| **Root Cause** | `cfg.Metrics` is a `*MetricsConfig` pointer. When `enable_metrics: true` is set in the config, the handler accesses `cfg.Metrics.Endpoint` and `cfg.Metrics.IntervalSec`. But `config.json` had **no `\"metrics\"` block**, so `cfg.Metrics` was `nil` → **panic on nil pointer dereference** → `/status` returns 500. |\n| **Fix** | Added a `\"metrics\"` object to `config.json` with `endpoint` and `interval_sec` fields, so the pointer is populated and safe to dereference. |",
+  "timestamp": "2026-04-02T01:35:08Z",
+  "token_cost": 22691,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 27.199
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 37718,
+  "output_tokens": 882,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "</body>\n",
+  "timestamp": "2026-04-02T02:55:29Z",
+  "token_cost": 38600,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 55.025
+}

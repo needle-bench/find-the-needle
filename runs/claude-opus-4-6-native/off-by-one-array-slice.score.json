@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.10443375,
+  "input_tokens": 86435,
+  "output_tokens": 701,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The bug was in `processor.py:17` — `end = start + batch_size - 1` should be `end = start + batch_size` because Python's slice syntax `records[start:end]` already excludes the `end` index. The `- 1` was causing each batch to drop its last element.",
+  "timestamp": "2026-04-02T02:03:36Z",
+  "token_cost": 87136,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 21.95
+}

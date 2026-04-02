@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.014592,
+  "input_tokens": 3848,
+  "output_tokens": 748,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 24\ndrwxr-xr-x 1 root root   94 Mar  9 02:37 .\ndrwxr-xr-x 1 root root    8 Apr  2 01:39 ..\ndrwxr-xr-x 1 root root   10 Mar  9 02:37 __pycache__\n-rw-r--r-- 1 root root 1857 Mar  9 02:37 handler.py\n-rw-r--r-- 1 root root  511 Mar  9 02:37 pyproject.toml\n-rw-r--r-- 1 root root  324 Mar  9 02:37 requirements.txt\n-rw-r--r-- 1 root root 3217 Mar  9 02:37 server.py\ndrwxr-xr-x 1 root root   12 Mar  9 02:37 test\n-rw-r--r-- 1 root root 1024 Mar  9 02:37 wsgi.py",
+  "timestamp": "2026-04-02T01:39:46Z",
+  "token_cost": 4596,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 24.548
+}

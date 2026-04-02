@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.011343760000000001,
+  "input_tokens": 363757,
+  "output_tokens": 15901,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-02T01:44:26Z",
+  "token_cost": 379658,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 49.816
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.150885,
+  "input_tokens": 38685,
+  "output_tokens": 2322,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the needle and the fix:\n\n## The Bug (Needle)\n\n**Location:** `informerUpdate()` in `/workspace/main.go` — a reproduction of the real Kubernetes `assume_cache.go:426` bug.\n\n**Problem:** When the informer delivers a newer version of an object that the scheduler had *assumed* (optimistically cached), the assumed entry was **silently deleted** with no notification:\n```go\n// BUG: Silent drop — no notification to the assumer\ndelete(c.assumed, obj.Key)\n```\nThe scheduler had no way to know its optimistic state was gone, leading to invisible data loss / stale scheduling decisions.\n\n## The Fix\n\nAdded a conflict notification callback (`onConflict func(assumed, informer *Object)`) to the `AssumeCache` struct. When `informerUpdate` detects that the informer's version supersedes the assumed version, it now **calls the callback before dropping the assumed entry**, allowing the caller (the scheduler) to react to the conflict:\n\n```go\n// FIX: Notify about the conflict before dropping the assumed state\nif c.onConflict != nil {\n    c.onConflict(assumed, obj)\n}\ndelete(c.assumed, obj.Key)\n```",
+  "timestamp": "2026-04-02T01:28:46Z",
+  "token_cost": 41007,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 41.709
+}

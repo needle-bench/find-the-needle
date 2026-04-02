@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4.6-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.27855,
+  "input_tokens": 47325,
+  "output_tokens": 1677,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix works. Here's what the bug was and how I fixed it:\n\n## The Bug\nIn the `informerUpdate` method, when an informer delivers a newer version of an object that was previously \"assumed\" by the scheduler, the assumed entry was **silently deleted** with no notification. The scheduler had no way to know its optimistic state was dropped — it would continue operating on stale assumptions.\n\n## The Fix\n1. **Added an `onConflict` callback** to the `AssumeCache` struct — a function that gets called whenever an assumed object is superseded by a newer informer update.\n2. **Invoked the callback** in `informerUpdate` right after deleting the assumed entry, passing both the assumed and informer versions so the caller knows exactly what happened.\n3. **Wired up the callback** in `main()` to set `conflictNotified = true`, so the scheduler is now aware when its assumed state gets dropped.",
+  "timestamp": "2026-04-02T01:38:30Z",
+  "token_cost": 49002,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 73.416
+}

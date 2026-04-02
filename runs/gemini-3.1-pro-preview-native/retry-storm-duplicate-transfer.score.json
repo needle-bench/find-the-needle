@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 14712,
+  "output_tokens": 266,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have investigated and resolved the bug in the transaction processing logic.\n\n### Cause\nThe \"needle\" was a subtle transaction management bug in `app/processor.py`. The `execute_transfer` method operates in multiple steps using implicit SQLite transactions:\n1. Debits the source account and `commit()`s the change to hold the funds.\n2. Checks for duplicate requests via idempotency key.\n3. If new, it issues an `UPDATE` to credit the destination account.\n4. It then issues an `INSERT` into `completed_transfers` to prevent duplicate processing, and `commit()`s again.\n\nIf multiple concurrent requests with the same idempotency key reach step 4 at the same time, one succeeds and the others fail with a `sqlite3.IntegrityError` (because the idempotency key must be unique). \nWhen this error occurred, the original exception handler caught it and correctly issued a compensating `UPDATE` transaction to refund the debited amount to the source account. **However**, it never rolled back the uncommitted credit to the destination account from step 3. Because it shared the same database connection and state, the subsequent `conn.commit()` intended to finalize the refund accidentally committed **both** the refund to the source account and the orphaned credit to the destination account. The result was money created out of thin air.\n\n### Solution\nI surgically fixed `app/processor.py` by ensuring that uncommitted statements from failed transaction attempts are cleanly discarded before attempting the compensating refund:\n- Introduced a `debit_committed` flag to track whether the first phase (the debit) successfully completed.\n- Added explicit `conn.rollback()` calls inside both the `sqlite3.IntegrityError` and generic `Exception` catch blocks.\n- Wrapped the undo-debit compensating transaction in a condition that checks `debit_committed` to avoid accidentally granting free money if an exception occurred *before* the debit was finalized.\n\nI have executed `test.sh` extensively, including looping it 20 times to provoke race conditions under chaos latency, and it now safely prevents duplicate transfers without leaking funds.",
+  "timestamp": "2026-04-02T02:06:04Z",
+  "token_cost": 14978,
+  "tool_uses": 47,
+  "turns_to_fix": 2,
+  "wall_clock": 580.656
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.077073,
+  "input_tokens": 21071,
+  "output_tokens": 924,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the needle and the fix:\n\n**File:** `/app/pricing.py`  \n**Function:** `calculate_discount_amount`  \n**Bug:** Wrong operator — used `+` (addition) instead of `*` (multiplication) when computing the percentage discount:\n\n```python\n# BEFORE (broken)\ndiscount = subtotal + discount_percent / 100\n\n# AFTER (fixed)\ndiscount = subtotal * discount_percent / 100\n```\n\nThe `+` operator was adding the raw fraction (e.g. `0.20`) to the subtotal instead of multiplying to get the actual discount amount (e.g. 20% of $1098.94 = **$219.79**).",
+  "timestamp": "2026-04-02T01:43:24Z",
+  "token_cost": 21995,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 21.605
+}

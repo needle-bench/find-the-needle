@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.03800475,
+  "input_tokens": 7684,
+  "output_tokens": 1861,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: import re\nimport unicodedata\nfrom typing import List\n\ndef a(needle: str, haystack_list: List[str]) -> bool:\n    \"\"\"\n    Performs fuzzy matching, checking if the needle exists in the haystack\n    after sanitization/normalize and regex sanitization.\n    \"\"\"\n    t = u(needle)\n    for haystack in haystack_list:\n        haystack_normalized = u(haystack)\n\n        sensitive_patterns = [\n            # Add your regex for needle in haystack here\n        ]\n        \n        for pattern in sensitive_patterns:\n            if re.search(pattern, haystack_normalized, re.IGNORECASE):\n                return True # needle matches sensitive\n    return False\n\ndef normalize_string(s: str) -> str:\n    return unicodedata.normalize(\"NFKC\", s)\n\ndef u(s: str) -> str:\n    t = normalize_string(s).lower().strip()\n    t = re.sub(r\"[\\W_]\", \"\", t) # remove non-alphanumeric\n    # zero width spaces, joiners etc\n    t = t.replace(\"\\u200c\", \"\").replace(\"\\u200d\", \"\").replace(\"\\u2060\", \"\")\n    return t\n\ndef is_valid_username(username: str) -> bool:\n    \"\"\"\n    We have a sensitive list that includes 'admin', 'root', and 'superuser'.\n    Check if the username matches a sensitive term after sanitization.\n\n    Allows unicode usernames, but attempts to prevent homograph attacks or spoofing admin usernames\n    by Santitizing and comparing use fuzzy matching:\n    - Remove all non-alphanumeric, normalize, lowercase,  strip whitespace\n    - Disallow if matches sensitive names\n    \"\"\"\n    sensitive_names = ['admin', 'root', 'superuser']\n\n    if a(username, sensitive_names):\n        return False\n\n    # prevent invalid characters that could cause issues\n    if re.search(r\"[;'\\\"]\", username):\n        return False\n\n    # Prevent invisible characters or excessive length\n    if len(username) > 50 or len(username) < 3:\n        return False\n\n    # Prevent bidirectional text overrides or confusable characters\n    # Here we just disallow certain unicode categories. You can expand.\n    if any(unicodedata.category(c).startswith(\"C\") for c in username):  # Control characters\n        return False\n\n    return True\n\nif __name__ == \"__main__\":\n    test_names = [\"admin\", \"Admin\", \"admĭn\", \"aDMIN\", \"root\", \"roo t\", \"superuser\", \"super.user\", \"sup3ruser\", \"4dmin\"]\n    for name in test_names:\n        print(f\"{name}: {is_valid_username(name)}\")",
+  "timestamp": "2026-04-02T01:33:18Z",
+  "token_cost": 9545,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 46.493
+}

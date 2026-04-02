@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2923,
+  "output_tokens": 2412,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the **needle** — the bugs found and fixed in `/app/src/ioctl_handler.c`:\n\n## The Bugs (The Needle)\n\nThe `ioctl_handler.c` had **two missing pointer/length validations** in the command handlers:\n\n### Bug 1 — `handle_set_config`: NULL `value` pointer dereference\n- **Root cause**: `req->value` was passed directly to `memcpy()` without any NULL check. An attacker sending a `SET_CONFIG` request with `value = NULL` caused a segfault (simulated kernel panic).\n- **Fix**: Added a NULL check on `req->value` before use, returning `-1` on failure.\n\n### Bug 2 — `handle_set_config`: Oversized `value_len` silently accepted\n- **Root cause**: `value_len = 999999` was silently clamped to `MAX_VALUE_LEN - 1` and the call succeeded (`return 0`), but the fuzz test expected this to be rejected as invalid.\n- **Fix**: Added a bounds check — reject `value_len == 0` or `value_len >= MAX_VALUE_LEN` with an error return.\n\n### Bug 3 — `handle_get_config`: NULL `value` buffer dereference\n- **Root cause**: `req->value` was used as the destination of `memcpy()` without any NULL check. An attacker sending a `GET_CONFIG` request with `value = NULL` caused a segfault.\n- **Fix**: Added NULL and zero-length checks on `req->value` / `req->value_len` before use.",
+  "timestamp": "2026-04-02T02:28:21Z",
+  "token_cost": 5335,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 51.093
+}

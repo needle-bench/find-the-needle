@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00068904,
+  "input_tokens": 4686,
+  "output_tokens": 202,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test script is now passing. The discount calculations are now correct.",
+  "timestamp": "2026-04-02T01:47:53Z",
+  "token_cost": 4888,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 3.562
+}

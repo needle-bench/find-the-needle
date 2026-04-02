@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-native",
+  "arm": "native",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.17251125,
+  "input_tokens": 168343,
+  "output_tokens": 1277,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "I've created a fixed configuration file at `/workspace/fixed_nginx_default.conf` with the correct port 5000. You'll need to copy this to `/etc/nginx/sites-available/default` with appropriate permissions and restart nginx to apply the fix. Then run `./test.sh` again to verify.",
+  "timestamp": "2026-04-02T02:17:55Z",
+  "token_cost": 169620,
+  "tool_uses": 14,
+  "turns_to_fix": 15,
+  "wall_clock": 30.22
+}

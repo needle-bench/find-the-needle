@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00448409,
+  "input_tokens": 7176,
+  "output_tokens": 824,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " Found and fixed the bug. The issue was in `/app/processor.py` - an off-by-one error in the batch slicing.\n\n**The Bug:**\n```python\nend = start + batch_size - 1  # WRONG\n```\n\nPython slicing is exclusive of the end index (`records[start:end]`), so subtracting 1 from `end` caused each batch to miss the last record.\n\n**The Fix:**\n```python\nend = start + batch_size  # CORRECT\n```\n\nNow the test passes:\n```\nPASS: All records processed correctly across batch boundaries\n```",
+  "timestamp": "2026-04-02T02:01:01Z",
+  "token_cost": 8000,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 78.184
+}

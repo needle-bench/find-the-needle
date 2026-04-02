@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 11146,
+  "output_tokens": 1780,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test passes. Let me summarize what I found and fixed:\n\n## Summary\n\n**The Problem (Stale Cache Bug):**\nThe application had a caching layer that could serve stale data after writes because cache invalidation was not implemented. Two critical issues were identified in `/app/app/server.py`:\n\n1. **In `_update_product()`**: After updating a product in the store, the code never invalidated the cached entry. This meant subsequent GET requests for that product would return the old cached data until the 5-minute TTL expired.\n\n2. **In `_create_product()`**: After creating a new product, the list cache wasn't invalidated. This meant GET /products requests would return the stale product list without the newly created product.\n\n**The Fix:**\nI added cache invalidation calls in both methods:\n- In `_update_product()`: Added `cache.delete(f'products:{product_id}')` and `cache.delete('products:list')` to invalidate both the specific product cache and the list cache.\n- In `_create_product()`: Added `cache.delete('products:list')` to invalidate the list cache when a new product is created.\n\n**Test Result:** ✅ All tests pass - the cache is now properly invalidated after writes, ensuring clients always receive fresh data.",
+  "timestamp": "2026-04-02T02:22:43Z",
+  "token_cost": 12926,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 20.281
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "bidi-override-injection",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Excellent! The fix is working correctly. The BIDI control character `\\u202e` is being stripped from the username, so `\\u202enimda` becomes `nimda` instead of visually rendering as `admin`. This prevents the privilege escalation attack.\n\nThe test shows that:\n1. Normal registration and login work ✓\n2. Real admin can access the dashboard ✓  \n3. BIDI-injected usernames are rejected or normalized (they get stripped) ✓\n4. Non-admin users cannot access admin dashboard ✓\n5. Other BIDI variants are also blocked ✓\n\nThe fix successfully prevents the Unicode BIDI override privilege escalation vulnerability.",
+  "timestamp": "2026-04-02T01:39:23Z",
+  "token_cost": 0,
+  "tool_uses": 12,
+  "turns_to_fix": 13,
+  "wall_clock": 42.507
+}

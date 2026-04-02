@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The test now passes. The fix involved adding two validation checks in the IOCTL handler:\n\n1. **In `handle_set_config`**: Added NULL pointer validation for `req->value` before attempting to copy\n2. **In `handle_get_config`**: Added NULL pointer validation for `req->value` before attempting to copy\n3. **In `handle_set_config`**: Added validation to reject oversized `value_len` values\n\nThe segmentation fault was caused by attempting to copy from a NULL pointer in the SET_CONFIG handler. All tests now pass, including the fuzz test with crafted inputs.",
+  "timestamp": "2026-04-02T03:20:12Z",
+  "token_cost": 0,
+  "tool_uses": 23,
+  "turns_to_fix": 24,
+  "wall_clock": 35.484
+}

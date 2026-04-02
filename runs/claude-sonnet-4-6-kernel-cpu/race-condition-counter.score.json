@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 4376,
+  "output_tokens": 1250,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **PASS: Counter is correct**\n\n---\n\n### The Needle 🪡\n\n**File:** `/app/app/counter.js`\n\n**Bug:** A **race condition** in the `incrementCounter()` function. It used a non-atomic **read-modify-write** pattern:\n```js\n// BROKEN: race condition\nconst current = await client.get(COUNTER_KEY);   // read\nconst newValue = parseInt(current) + 1;           // modify\nawait client.set(COUNTER_KEY, newValue.toString()); // write\n```\nWith 100 concurrent requests, multiple workers read the same value before any write completes, so increments are lost (e.g., 50 requests all read `42`, all write back `43` → only +1 instead of +50).\n\n**Fix:** Replace with Redis's atomic **`INCR`** command, which reads and increments in a single, uninterruptible operation:\n```js\n// FIXED: atomic\nconst newValue = await client.incr(COUNTER_KEY);\n```",
+  "timestamp": "2026-04-02T02:33:29Z",
+  "token_cost": 5626,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 31.797
+}

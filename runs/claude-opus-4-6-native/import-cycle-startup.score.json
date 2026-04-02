@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "import-cycle-startup",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.1747415,
+  "input_tokens": 106998,
+  "output_tokens": 1231,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The needle was a **circular import**: `users.py` → `notifications.py` → `users.py`. Fixed by moving `DEFAULT_ROLE` to `config.py` so both modules import it from there instead of from each other.",
+  "timestamp": "2026-04-02T01:55:44Z",
+  "token_cost": 108229,
+  "tool_uses": 12,
+  "turns_to_fix": 13,
+  "wall_clock": 27.099
+}

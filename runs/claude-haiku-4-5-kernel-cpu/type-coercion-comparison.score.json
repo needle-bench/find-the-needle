@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2485,
+  "output_tokens": 1064,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! ✅ **The needle is found and fixed!**\n\n## Summary\n\n**The Bug:** In `utils.js`, the `min_rating` query parameter was being parsed as a **string** instead of a **number**:\n```javascript\nquery.minRating = searchParams.get('min_rating');  // ❌ Returns string\n```\n\n**The Fix:** Convert it to a number using `parseFloat()`, consistent with how `min_price` and `max_price` are handled:\n```javascript\nquery.minRating = parseFloat(searchParams.get('min_rating'));  // ✅ Returns number\n```\n\nThis type-coercion bug would cause the comparison `p.rating >= query.minRating` to behave incorrectly (comparing number to string), leading to wrong filter results. The test now passes with all three rating filter tests returning the correct product counts!",
+  "timestamp": "2026-04-02T02:35:23Z",
+  "token_cost": 3549,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 13.472
+}

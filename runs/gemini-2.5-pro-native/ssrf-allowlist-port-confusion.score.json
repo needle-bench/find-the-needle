@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 39510,
+  "output_tokens": 708,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I've fixed the vulnerability, verified the fix with the provided test script, and cleaned up the background processes. All tests have passed, confirming that the SSRF vulnerability related to IPv6 loopback addresses is resolved. My work here is done.",
+  "timestamp": "2026-04-02T03:00:49Z",
+  "token_cost": 40218,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 91.396
+}

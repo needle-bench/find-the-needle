@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-04-01T17:42:12Z", "benchmark": "silent-data-corruption", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 75, "tokens_out": 100, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 355, "tokens_out": 47, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 408, "tokens_out": 49, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 466, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 644, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1245, "tokens_out": 385, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-04-01T17:44:31Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6671,
+  "output_tokens": 5528,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! ✅ \n\n## Summary\n\n**The Needle Found:** A critical race condition bug in the `execute_transfer()` function in `/workspace/app/processor.py`.\n\n**The Problem:**\nThe original code had the following order of operations:\n1. Debit the source account\n2. Commit the debit\n3. Sleep for 50ms (simulating external service call)\n4. Check if idempotency key exists\n5. If not found, credit the destination account\n6. Record the idempotency key\n\nThis created a race condition window: if multiple concurrent requests arrived during the 50ms sleep, they would all pass the debit stage and commit their debits. Then when they checked for idempotency afterwards, they would all find the key missing and proceed to credit the destination account, resulting in multiple credits for a single logical transfer.\n\n**The Fix:**\nChanged the order to:\n1. **First**, try to INSERT the idempotency key record (with unique constraint)\n2. If successful, proceed; if IntegrityError (duplicate key), immediately return duplicate status\n3. Only then proceed with balance checks, debit, sleep, and credit operations\n\nThis ensures that only ONE request can successfully reserve an idempotency key, and all other concurrent requests with the same key are immediately rejected. This prevents duplicate transfers even with concurrent requests and network delays.",
+  "timestamp": "2026-04-02T02:33:49Z",
+  "token_cost": 12199,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 69.628
+}

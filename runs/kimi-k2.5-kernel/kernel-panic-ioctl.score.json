@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.04585037,
+  "input_tokens": 95101,
+  "output_tokens": 4883,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " All tests pass! The needle was found and fixed. Here's a summary of the issues:\n\n**Bugs fixed:**\n1. **NULL value pointer in SET_CONFIG**: Added NULL validation for `req->value` in `handle_set_config()` before using memcpy\n2. **NULL value pointer in GET_CONFIG**: Added NULL validation for `req->value` in `handle_get_config()` before using memcpy\n3. **Oversized value_len**: Added validation to ensure `req->value_len` doesn't exceed the actual string length, preventing out-of-bounds reads\n\nThe core issue was inconsistent pointer validation - the code checked some pointers (device, request, key) but not others (value), allowing attackers to trigger segfaults by passing crafted requests with NULL value pointers.",
+  "timestamp": "2026-04-02T01:51:17Z",
+  "token_cost": 99984,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 239.018
+}

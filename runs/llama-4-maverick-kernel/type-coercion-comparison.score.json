@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.008469349999999999,
+  "input_tokens": 19999,
+  "output_tokens": 1278,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script has passed, indicating that our fix for handling `min_rating` as an integer in `utils.js` has resolved the issue. The server now correctly filters products based on the minimum rating provided in the query parameter.\n\nWe've successfully identified and fixed the problem, which was related to the incorrect handling of the `min_rating` query parameter as a string instead of a number.",
+  "timestamp": "2026-04-02T01:53:46Z",
+  "token_cost": 21277,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 26.935
+}

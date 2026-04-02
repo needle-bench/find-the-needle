@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.018027,
+  "input_tokens": 4971,
+  "output_tokens": 762,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: [\n    \"/workspace/migrations/0001_initial.sql\"\n]",
+  "timestamp": "2026-04-02T01:46:20Z",
+  "token_cost": 5733,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 17.053
+}

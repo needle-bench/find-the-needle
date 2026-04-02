@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.07026672,
+  "input_tokens": 632383,
+  "output_tokens": 3043,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix is still not working as expected. The assumed state is still being dropped silently, and the notification is not being triggered. Let's try one more approach. We will modify the Update function to not delete the assumed entry but update it with the informer version. This way, the scheduler will always have the latest version of the object.",
+  "timestamp": "2026-04-02T01:36:06Z",
+  "token_cost": 635426,
+  "tool_uses": 51,
+  "turns_to_fix": 1,
+  "wall_clock": 42.804
+}

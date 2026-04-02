@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.10691200000000001,
+  "input_tokens": 57544,
+  "output_tokens": 2842,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed race condition / “needle” in processor:\n\nRoot cause:\nexecute_transfer used read-then-write logic:\n1. Debit A\n2. Sleep 50 ms\n3. Check/insert idempotency_key\nConcurrent requests could both pass the idempotency check window, causing duplicate debits before the UNIQUE\nconstraint fired → total balance ≠ 2000.\n\nFix implemented in app/processor.py:\n\n1. Start a single DB transaction (BEGIN IMMEDIATE).\n2. Insert idempotency_key first inside the same txn.  \n   If the key already exists, IntegrityError is raised → rollback → duplicate response, no balance change.\n3. Perform balance check, debit and credit, then commit.\n4. On any exception rollback.\n\nBecause the idempotency row is written before any money moves and the whole transfer happens atomically, only one request can succeed; duplicates are safely rejected.\n\ntest.sh now prints PASS (money conserved).",
+  "timestamp": "2026-04-02T01:50:48Z",
+  "token_cost": 60386,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 53.332
+}

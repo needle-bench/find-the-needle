@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.1984472,
+  "input_tokens": 80968,
+  "output_tokens": 4239,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have investigated and fixed the issue.\n\nThe hidden problem (the needle) was an **N+1 query issue** caused by improper instantiation of `DataLoader` instances. \n\nIn `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts`, new `DataLoader` instances were being created *inside each individual resolver function or field resolve execution*. Because DataLoader relies on batching queries across the event loop for a single instantiated loader, creating a new DataLoader instance per item defeated the batching mechanism. It resulted in executing a separate SQL query for each nested item.\n\n**To fix this:**\n1. I modified `src/context.ts` to instantiate loaders via the `createLoaders` function *once per request* and store them in the GraphQL context (`GqlContext`).\n2. I refactored `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts` to utilize the shared `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader` from the context instead of instantiating their own.\n\nBy doing this, DataLoader can properly buffer and batch pending resolution IDs, converting N database SELECTs into 1 single query using an `IN (...)` clause. Running `test.sh` now confirms that the total DB queries executed for nested queries dropped from 101 to just 2, and all functional and performance tests pass successfully!",
+  "timestamp": "2026-04-02T01:31:48Z",
+  "token_cost": 85207,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 77.595
+}

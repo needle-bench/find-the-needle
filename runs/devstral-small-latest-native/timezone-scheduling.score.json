@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "timezone-scheduling",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is complete. The issue was in `app/scheduler.py` where the code was using the UTC date instead of the event's local timezone date when calculating scheduled times. This caused late-night events in timezones behind UTC to be scheduled on the wrong calendar day.\n\nThe fix:\n- Changed `today_utc = window_start.date()` to `local_now = window_start.astimezone(tz)` followed by `today_local = local_now.date()`\n- This ensures we use the correct date in the event's local timezone, not UTC\n\nAll tests now pass, including the late-night events that cross midnight in their local timezone.",
+  "timestamp": "2026-04-02T02:03:50Z",
+  "token_cost": 0,
+  "tool_uses": 15,
+  "turns_to_fix": 16,
+  "wall_clock": 19.126
+}

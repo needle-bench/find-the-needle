@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 65600,
+  "output_tokens": 1505,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The tests still fail, so the missing `fcp-haystack` file wasn't the issue. I've been focused on the boot process, but maybe the problem lies elsewhere. I'll examine the `audit.jsonl` file to see what's being logged. This might give me a better understanding of what's happening during the boot process and why the tests are failing.",
+  "timestamp": "2026-04-02T02:34:34Z",
+  "token_cost": 67105,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 53.589
+}

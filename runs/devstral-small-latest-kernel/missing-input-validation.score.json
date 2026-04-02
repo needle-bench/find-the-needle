@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0008492800000000001,
+  "input_tokens": 30412,
+  "output_tokens": 364,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-02T01:36:34Z",
+  "token_cost": 30776,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 367.346
+}

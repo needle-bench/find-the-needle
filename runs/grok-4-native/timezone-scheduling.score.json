@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-native",
+  "arm": "native",
+  "benchmark": "timezone-scheduling",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.40968524999999995,
+  "input_tokens": 265623,
+  "output_tokens": 6002,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fix applied, all tests pass.",
+  "timestamp": "2026-04-02T03:13:12Z",
+  "token_cost": 271625,
+  "tool_uses": 16,
+  "turns_to_fix": 17,
+  "wall_clock": 125.923
+}

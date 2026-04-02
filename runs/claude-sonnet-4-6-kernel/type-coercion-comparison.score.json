@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.09557399999999999,
+  "input_tokens": 25583,
+  "output_tokens": 1255,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. ✅\n\n---\n\n### The Needle: Type Coercion Bug in `utils.js`\n\n**File:** `/app/utils.js`  \n**Problem:** `min_rating` was parsed from the query string but stored as a **string** (`\"4\"`) instead of a **number** (`4`).\n\nIn `filter.js`, `buildRatingRange(min, max)` builds an array by iterating `for (let i = min; i <= max; i++)`. With a string `min`, the loop still runs (JS coerces `\"4\" <= 5` to `true`), but it pushes **string** values (`\"4\"`, `\"5\"`) into the range array. Then `acceptable.includes(p.rating)` compares those strings against the **numeric** ratings in the product data — `[\"4\",\"5\"].includes(4)` → `false` — so **no products ever matched** the rating filter.\n\n**Fix:** Parse `min_rating` with `parseInt(..., 10)` so the type matches the numeric ratings in the data.",
+  "timestamp": "2026-04-02T01:42:50Z",
+  "token_cost": 26838,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 28.947
+}

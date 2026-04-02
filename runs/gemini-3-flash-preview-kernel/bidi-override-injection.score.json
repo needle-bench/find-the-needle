@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0310605,
+  "input_tokens": 88959,
+  "output_tokens": 1275,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The vulnerability was a privilege escalation flaw caused by the application using a visually rendered version of a username for authorization checks instead of its canonical form. Specifically, the `check_admin_access` function in `auth.py` used `_render_display_name`, which processed Unicode bidirectional (BIDI) override characters (like U+202E, RIGHT-TO-LEFT OVERRIDE). An attacker could register a username like `\\u202enimda`, which renders visually as `admin`, and bypass the admin allowlist check.\n\nI fixed this by:\n1.  **Updating `app/auth.py`**: Changed `check_admin_access` to use the stored, canonical `username` for role-based access control instead of the rendered display name.\n2.  **Updating `app/sanitizer.py`**: Enhanced the `sanitize_username` function to strip Unicode BIDI control characters (`\\u202a-\\u202e` and `\\u2066-\\u2069`) during registration. This prevents users from even creating accounts with potentially deceptive usernames.\n\nAfter these changes, `test.sh` passes successfully, confirming that BIDI-injected usernames no longer grant admin access and are correctly rejected or normalized.\n\n```python\n# app/auth.py fix\ndef check_admin_access(token: str) -> tuple[bool, str]:\n    # ...\n    username = session[\"username\"]\n    if username in ADMIN_USERS:\n        return True, \"admin access granted\"\n    # ...\n```\n\n```python\n# app/sanitizer.py fix\n_BIDI_RE = re.compile(r\"[\\u202a-\\u202e\\u2066-\\u2069]\")\ndef sanitize_username(username: str) -> str:\n    # ...\n    cleaned = _BIDI_RE.sub(\"\", cleaned)\n    # ...\n```",
+  "timestamp": "2026-04-02T03:21:27Z",
+  "token_cost": 90234,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 44.163
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.1580502,
+  "input_tokens": 232386,
+  "output_tokens": 15360,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve moved DataLoader instantiation to the per-request context and updated all resolvers to use the shared loaders (userLoader and postsByAuthorLoader). This ensures batching works across the query and dramatically reduces query counts (e.g., fetching 100 users with posts now issues only 2 queries). All tests pass, including the performance assertion. Let me know if you need any further tweaks!",
+  "timestamp": "2026-04-02T01:32:57Z",
+  "token_cost": 247746,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 165.973
+}

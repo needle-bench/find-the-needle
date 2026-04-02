@@ -1,0 +1,21 @@
+{
+  "benchmark": "performance-cliff-hash",
+  "agent": "kimi-k2-thinking-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T17:04:57Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 7,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.5,
+  "false_positives": 0,
+  "token_cost": 55157,
+  "estimated_cost_usd": 0.01448542,
+  "dollars_per_correct_line": 0.014485,
+  "tokens_per_correct_line": 55157.0,
+  "wall_clock": 31.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": null
+}

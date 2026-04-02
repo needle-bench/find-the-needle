@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00861851,
+  "input_tokens": 45360,
+  "output_tokens": 1205,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests passed! The needle was the incorrect operator in the `calculate_discount_amount` function in `pricing.py`. I have successfully found it and fixed it.",
+  "timestamp": "2026-04-02T01:52:31Z",
+  "token_cost": 46565,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 18.244
+}

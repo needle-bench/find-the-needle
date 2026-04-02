@@ -1,0 +1,21 @@
+{
+  "benchmark": "linearizability-stale-read",
+  "agent": "kimi-k2.5-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T17:17:27Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 18,
+  "signal_to_noise": 0.722,
+  "false_positives": 0,
+  "token_cost": 108191,
+  "estimated_cost_usd": 0.028794635999999995,
+  "dollars_per_correct_line": 0.005759,
+  "tokens_per_correct_line": 21638.2,
+  "wall_clock": 218.1,
+  "tool_calls_per_turn": 1.44,
+  "read_tool_ratio": 0.0
+}

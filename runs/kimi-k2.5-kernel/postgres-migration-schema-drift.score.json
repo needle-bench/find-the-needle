@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.01918662,
+  "input_tokens": 44628,
+  "output_tokens": 1578,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " All tests passed. The bug was a **schema drift** issue between the database migrations and the application code.\n\n**Summary of the fix:**\n\nThe migration `002_rename_status.sql` renamed the `status` column to `order_status`, but the Go application in `/workspace/app/main.go` was still using the old column name `status` in its SQL queries:\n\n1. **In `createOrder` function** (line 101-103): Changed `status` to `order_status` in the INSERT and RETURNING clauses\n2. **In `getOrder` function** (line 117-118): Changed `status` to `order_status` in the SELECT clause\n\nThe fix ensures the application correctly references the `order_status` column as defined in the database schema after the migration.",
+  "timestamp": "2026-04-02T02:05:20Z",
+  "token_cost": 46206,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 130.646
+}

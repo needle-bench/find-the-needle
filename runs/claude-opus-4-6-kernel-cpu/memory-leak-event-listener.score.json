@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8758,
+  "output_tokens": 1945,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and fix:\n\n**The Bug (Memory Leak via Event Listener Accumulation):**\nIn `/app/app/processor.js`, the `process()` method was registering **new** event listeners on `data:validated` and `data:error` on **every single request**. These listeners were never removed. Each listener's closure also captured the `data` parameter from the request, preventing it from being garbage collected. After 500 requests, there would be 500+ listeners accumulated on the event bus, causing unbounded memory growth.\n\n**The Fix:**\nMoved the `eventBus.on('data:validated', ...)` and `eventBus.on('data:error', ...)` listener registrations from the `process()` method into the `constructor()`, so they are registered **once** when the `DataProcessor` is instantiated, not per-request. This keeps the listener count stable (2 from processor + 1 from monitor = stable) regardless of how many requests are processed.",
+  "timestamp": "2026-04-02T02:30:31Z",
+  "token_cost": 10703,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 44.787
+}

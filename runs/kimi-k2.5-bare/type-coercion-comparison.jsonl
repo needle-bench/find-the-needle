@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-04-01T17:58:24Z", "benchmark": "type-coercion-comparison", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 75, "tokens_out": 124, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/data.js", "/app/utils.js", "/app/filter.js"], "tokens_in": 395, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1488, "tokens_out": 754, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-04-01T17:58:47Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

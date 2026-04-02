@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.07388950000000001,
+  "input_tokens": 9011,
+  "output_tokens": 6531,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've found the problem. The `min_rating` query parameter was being treated as a string instead of a number, which caused the filtering logic to fail. I've corrected the code to parse the value as an integer, and all tests now pass.",
+  "timestamp": "2026-04-02T02:15:10Z",
+  "token_cost": 15542,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 81.388
+}

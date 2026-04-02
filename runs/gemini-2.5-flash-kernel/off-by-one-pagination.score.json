@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0037089000000000002,
+  "input_tokens": 13239,
+  "output_tokens": 720,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! The fix has been verified. I found the \"needle\" which was an off-by-one error in the pagination logic.",
+  "timestamp": "2026-04-02T01:45:57Z",
+  "token_cost": 13959,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 11.891
+}

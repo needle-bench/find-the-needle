@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 201441,
+  "output_tokens": 1240,
+  "resolved": false,
+  "stop_reason": "error: API call failed: API error 429: Rate limit exceeded",
+  "summary": "The test results indicate that there is a vulnerability in the system that allows a BIDI-injected user to gain admin access, which is a form of privilege escalation. This is a serious security issue that needs to be addressed immediately.",
+  "timestamp": "2026-04-02T03:15:17Z",
+  "token_cost": 202681,
+  "tool_uses": 80,
+  "turns_to_fix": 0,
+  "wall_clock": 81.263
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.05877599000000001,
+  "input_tokens": 375584,
+  "output_tokens": 12857,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Now I will replace the try block.\n",
+  "timestamp": "2026-04-02T01:50:36Z",
+  "token_cost": 388441,
+  "tool_uses": 40,
+  "turns_to_fix": 1,
+  "wall_clock": 139.446
+}

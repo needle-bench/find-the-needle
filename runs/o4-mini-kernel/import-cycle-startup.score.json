@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0427999,
+  "input_tokens": 26013,
+  "output_tokens": 6080,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve refactored the NotificationService to remove the module-level import of `users`, breaking the import cycle. Now, `DEFAULT_ROLE` is imported locally inside `send_welcome_email`. All tests pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-02T01:36:16Z",
+  "token_cost": 32093,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 58.278
+}

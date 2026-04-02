@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.012263029999999998,
+  "input_tokens": 29017,
+  "output_tokens": 1134,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test passed successfully. I've fixed the needle in the haystack. \n\nThe problem was an input validation vulnerability in the inventory management system:\n\n1. **Issue**: The `adjustQuantity` method in `inventory.ts` did not validate whether the resulting quantity after an adjustment would become negative, allowing inventory values to potentially go below zero.\n\n2. **Fix**: \n   - I added validation in the `adjustQuantity` method to prevent the new quantity from being less than zero.\n   - I also updated `routes.ts` to properly catch exceptions thrown by `adjustQuantity` and return HTTP 400 error responses instead of crashing the server.\n\nThese changes ensure that:\n- Inventory quantities cannot go negative\n- Invalid adjustments that would make inventory go negative are properly rejected with appropriate HTTP error codes\n- The server remains stable even when receiving invalid requests\n\nThe test script verified that the fix works correctly and the API now properly rejects negative adjustments that would lead to impossible inventory states.",
+  "timestamp": "2026-04-02T01:43:08Z",
+  "token_cost": 30151,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 40.072
+}

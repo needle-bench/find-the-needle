@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 25533,
+  "output_tokens": 257,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have successfully found the \"needle\" (the incorrect ordering of `s.queue.Close()` and `<-done` in `Scheduler.Run`) and applied the fix. The `test.sh` script now passes, indicating a clean shutdown.",
+  "timestamp": "2026-04-02T01:44:19Z",
+  "token_cost": 25790,
+  "tool_uses": 5,
+  "turns_to_fix": 4,
+  "wall_clock": 15.061
+}

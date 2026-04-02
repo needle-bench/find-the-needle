@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-native",
+  "arm": "native",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 118871,
+  "output_tokens": 929,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "Both resolvers have functions to create DataLoaders:\n- `makePostsByAuthorLoader(ctx)`\n- `makeUserLoader(ctx)`\nAnd they also define anonymous DataLoaders directly within resolver functions.\n\nI will:\n1. Move both `makePostsByAuthorLoader` and `makeUserLoader` logic into context creation (`createContext` in `src/context.ts`).\n2. Add fields to `GqlContext` for these loaders.\n3. Update resolvers to use the context DataLoaders instead of creating new ones for every call.\n\nLet’s start with patching `src/context.ts` to provide these DataLoaders per request.",
+  "timestamp": "2026-04-02T01:40:36Z",
+  "token_cost": 119800,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 30.852
+}

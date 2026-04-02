@@ -1,0 +1,10 @@
+{
+  "benchmark": "linearizability-stale-read",
+  "agent": "control-baseline",
+  "timestamp": "2026-04-01T16:12:01Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 6.7,
+  "control_type": "no-agent"
+}

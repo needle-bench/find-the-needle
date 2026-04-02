@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.02290425,
+  "input_tokens": 3642,
+  "output_tokens": 1330,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 24\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 .\ndrwxr-xr-x 1 root root 4096 Oct 29 22:02 ..\n-rw-r--r-- 1 root root  484 Jan  1  1970 agent.py\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 assets\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 benchmarks\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 needle\n-rw-r--r-- 1 root root   32 Jan  1  1970 test.sh\n",
+  "timestamp": "2026-04-02T01:51:59Z",
+  "token_cost": 4972,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 25.054
+}

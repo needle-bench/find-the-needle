@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 113399,
+  "output_tokens": 1477,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests have passed, indicating that the `ioctl_handler` now correctly validates all inputs and handles crafted inputs safely.",
+  "timestamp": "2026-04-02T01:45:20Z",
+  "token_cost": 114876,
+  "tool_uses": 14,
+  "turns_to_fix": 15,
+  "wall_clock": 49.893
+}

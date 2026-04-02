@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.11443175,
+  "input_tokens": 88202,
+  "output_tokens": 863,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Tests pass. The issue was a type coercion bug: `searchParams.get('min_rating')` returns a string, which was never converted to a number. This caused `buildRatingRange` to produce a mixed array (first element string, rest numbers), so `Array.includes` failed to match numeric ratings. Fixed by adding `parseInt()`.",
+  "timestamp": "2026-04-02T02:14:49Z",
+  "token_cost": 89065,
+  "tool_uses": 8,
+  "turns_to_fix": 9,
+  "wall_clock": 28.615
+}

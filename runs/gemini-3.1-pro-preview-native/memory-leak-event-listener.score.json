@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 17588,
+  "output_tokens": 906,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found and fixed the memory leak in the `DataProcessor` class. \n\nThe issue was that every call to the `process()` method was registering new event listeners (`data:validated` and `data:error`) on the shared `eventBus` without ever removing them, leading to unbounded listener accumulation and memory growth (due to closures capturing the `data` variable).\n\nI resolved this by moving the event listener registration into the `constructor` so that listeners are registered exactly once per `DataProcessor` instance rather than per-request.\n\nThe `test.sh` script has been run and it now passes successfully, confirming that the listener count remains stable across requests.",
+  "timestamp": "2026-04-02T01:46:53Z",
+  "token_cost": 18494,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 50.164
+}

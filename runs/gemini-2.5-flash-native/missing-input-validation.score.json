@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "missing-input-validation",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 70492,
+  "output_tokens": 963,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "`test.sh` passed, confirming the input validation bug, or \"needle,\" is fixed. I located the issue in `inventory.ts` and `routes.ts`, implemented the fix, and verified it with tests. Task complete.",
+  "timestamp": "2026-04-02T01:46:45Z",
+  "token_cost": 71455,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 34.552
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2342,
+  "output_tokens": 1344,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of what was found and fixed:\n\n---\n\n## The Needle 🪡\n\n**File:** `/app/app/ratelimiter.ts`  \n**Vulnerability:** Rate limiter bypass via `X-Forwarded-For` header spoofing\n\n### The Bug\nThe `getClientIp()` method trusted the client-supplied `X-Forwarded-For` HTTP header as the authoritative IP address. Since clients can freely set any value in this header, an attacker could rotate it on every request (e.g., `10.0.0.1`, `10.0.0.2`, `10.0.0.3`, …) to always appear as a \"new\" client — getting a fresh rate-limit window each time, effectively bypassing the limiter entirely.\n\n### The Fix\nRemoved the `X-Forwarded-For` logic and always use `req.socket.remoteAddress` — the actual TCP connection's IP address, which cannot be spoofed by the client. This ensures all requests from the same real client are correctly counted against a single rate-limit bucket.",
+  "timestamp": "2026-04-02T02:34:18Z",
+  "token_cost": 3686,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 37.727
+}

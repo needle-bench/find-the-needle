@@ -1,0 +1,21 @@
+{
+  "benchmark": "encoding-mojibake",
+  "agent": "kimi-k2-0905-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T16:36:24Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.167,
+  "false_positives": 0,
+  "token_cost": 4720,
+  "estimated_cost_usd": 0.0017136,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 13.7,
+  "tool_calls_per_turn": 0.83,
+  "read_tool_ratio": 0.0
+}

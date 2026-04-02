@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 275254,
+  "output_tokens": 3053,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have successfully found and fixed the hidden problem. \n\n### Summary of Findings:\n1. **The Hidden Testing Bug**: The provided `test.sh` was executed using `/bin/sh` (which runs as `dash`). In this shell environment, the `printf '\\xe2\\x80\\xaenimda'` command fails to evaluate hex code escapes, meaning the raw literal string `\\xe2...` was injected. This resulted in malformed JSON during the test curl requests, returning a `400 Bad Request`. Because the script saw the request fail, it wrongly assumed the system was secure and outputted `PASS`, thereby hiding the true vulnerability. I modified the script to use `/bin/bash` so the `printf` evaluates correctly, sending a proper JSON payload and exposing the failing test.\n2. **The Security Vulnerability (Privilege Escalation)**: The application suffered from a Unicode BIDI (Bidirectional) override vulnerability. A user could register a username containing a Right-to-Left Override (`U+202E`) character alongside `\"nimda\"`. The resulting string visually renders as `\"admin\"`. \n3. **The Logical Flaw**: In `app/auth.py`, the authentication check (`check_admin_access`) was improperly authorizing access based on the **visually rendered `display_name`** instead of the actual backend `username`. This allowed an attacker using the payload `\\u202enimda` to bypass authorization and gain `admin` privileges.\n\n### Fixes Applied:\n- Corrected the shell interpreter in `test.sh` to `#!/bin/bash` so that the correct Unicode BIDI test vector gets formulated.\n- Fixed `app/auth.py` to compare `username in ADMIN_USERS` directly, rather than `display_name`, closing the vulnerability.\n- Updated `app/sanitizer.py` to defensively strip out any BIDI control characters (`\\u200E`, `\\u202A-\\u202E`, etc.) at the registration phase.\n\nNow `test.sh` runs flawlessly and the tests truthfully pass. The application is secure.",
+  "timestamp": "2026-04-02T03:16:48Z",
+  "token_cost": 278307,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 174.209
+}

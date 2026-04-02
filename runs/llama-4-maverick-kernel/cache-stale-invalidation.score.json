@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0072327,
+  "input_tokens": 17274,
+  "output_tokens": 1032,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Bash(command=\"/app/test.sh\")",
+  "timestamp": "2026-04-02T01:33:27Z",
+  "token_cost": 18306,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 15.743
+}

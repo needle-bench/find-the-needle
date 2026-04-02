@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 12142,
+  "output_tokens": 697,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All five tests passed, as indicated by the \"5/5\" output. I have successfully found the \"needle\" by understanding the requirements of the `test.sh` script and creating/modifying files in the `.haystack` directory to satisfy those requirements.",
+  "timestamp": "2026-04-02T02:25:04Z",
+  "token_cost": 12839,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 12.519
+}

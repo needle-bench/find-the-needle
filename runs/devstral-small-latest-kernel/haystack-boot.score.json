@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0013773000000000001,
+  "input_tokens": 29820,
+  "output_tokens": 1419,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "It seems there was an issue with the previous command. Let's try to list the contents of the `.haystack` directory using the `ls` command.",
+  "timestamp": "2026-04-02T01:26:09Z",
+  "token_cost": 31239,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 15.374
+}

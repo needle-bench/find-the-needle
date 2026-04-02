@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-fast-native",
+  "arm": "native",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0321675,
+  "input_tokens": 19941,
+  "output_tokens": 198,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "The test script failed with a page boundary error. Page 1 ends at ID 10, and page 2 starts at ID 10, but it should start at ID 11.\n\nRegarding the 'needle', it was found in Git logs and configuration files, not in the application code. If you meant something specific by 'needle', please clarify.",
+  "timestamp": "2026-04-01T22:22:52Z",
+  "token_cost": 20139,
+  "tool_uses": 2,
+  "turns_to_fix": 2,
+  "wall_clock": 11.839
+}

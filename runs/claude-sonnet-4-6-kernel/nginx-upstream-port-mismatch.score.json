@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.08716499999999999,
+  "input_tokens": 23225,
+  "output_tokens": 1166,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the needle and the fix:\n\n**The Bug:** In `/etc/nginx/sites-available/default`, the nginx reverse proxy for `/api/` was pointing to the wrong port:\n\n```nginx\nproxy_pass http://127.0.0.1:5001;  # ❌ Wrong port\n```\n\n**The Fix:** Changed it to match the actual port Flask listens on (`5000`):\n\n```nginx\nproxy_pass http://127.0.0.1:5000;  # ✅ Correct port\n```\n\nThe `/health` endpoint always returned 200 because it was handled directly by nginx as a static response (no upstream needed), which masked the misconfiguration. Only `/api/data` actually proxied to the Flask backend — and it was hitting the wrong port (5001 instead of 5000), causing a connection failure.",
+  "timestamp": "2026-04-02T01:34:31Z",
+  "token_cost": 24391,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 32.531
+}

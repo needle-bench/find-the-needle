@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00035658,
+  "input_tokens": 1503,
+  "output_tokens": 164,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test results indicate that the application is vulnerable to Server-Side Request Forgery (SSRF) attacks via IPv6 loopback addresses. Specifically, the tests failed when attempting to access the internal secret using the IPv6 loopback addresses `[::1]` and the expanded form of the IPv6 loopback address. This vulnerability allows an attacker to bypass security measures and access internal resources that should be restricted.\n\nTo mitigate this vulnerability, you should implement proper input validation and sanitization to ensure that only trusted and expected IP addresses are allowed to access internal resources. Additionally, consider using a Web Application Firewall (WAF) to block malicious requests and monitor for SSRF attempts. Regular security testing and code reviews can also help identify and address such vulnerabilities.",
+  "timestamp": "2026-04-02T01:46:01Z",
+  "token_cost": 1667,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 4.8
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "relaxed-ordering-ringbuf",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.193613,
+  "input_tokens": 126895,
+  "output_tokens": 1878,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Tests pass. The fix: changed `memory_order_relaxed` to proper acquire/release semantics on the cross-thread atomic operations:\n\n- **Producer**: `acquire` on `read_idx` load, `release` on `write_idx` store — ensures slot data is written before the index is published\n- **Consumer**: `acquire` on `write_idx` load, `release` on `read_idx` store — ensures slot data is read before signaling the slot is free\n\nEach thread's own index load stays `relaxed` since only that thread writes to it.",
+  "timestamp": "2026-04-02T02:11:08Z",
+  "token_cost": 128773,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 41.667
+}

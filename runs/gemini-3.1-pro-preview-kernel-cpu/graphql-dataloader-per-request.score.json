@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 53227,
+  "output_tokens": 1920,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have successfully found and fixed the issue! \n\n### Summary of Findings & Fix\n- **The Needle:** The hidden problem was a classic N+1 querying issue in the GraphQL implementation. The `userResolvers` and `postResolvers` were creating brand-new `DataLoader` instances *inside* each resolver function call. Because each instance only ever saw one ID at a time, batching never triggered.\n- **The Fix:** I modified `src/context.ts` to properly instantiate the DataLoaders (`userLoader` and `postsByAuthorLoader`) once per HTTP request and attached them to the `GqlContext`. Then, I refactored the resolvers in `userResolver.ts` and `postResolver.ts` to consume `ctx.loaders` instead of instantiating their own. \n- **The Result:** We reduced the database query execution count from ~101 (1 for users + 100 for posts) to exactly **2** database queries (1 to fetch users, 1 to batch-fetch all posts for those users). The `test.sh` verification passed completely!",
+  "timestamp": "2026-04-02T03:18:35Z",
+  "token_cost": 55147,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 53.204
+}

@@ -1,0 +1,16 @@
+{
+  "agent": "gemini-2.5-flash",
+  "arm": "default",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "default",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 103,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "timestamp": "2026-04-01T19:36:48Z",
+  "token_cost": 103,
+  "turns_to_fix": 0,
+  "wall_clock": 2.585
+}

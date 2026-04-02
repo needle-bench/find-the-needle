@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9017,
+  "output_tokens": 820,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix is straightforward. The bug was in the `informerUpdate` method — when the informer delivers an update with a higher version than the assumed object, the assumed entry was deleted silently with no notification to the caller. The fix adds `conflictNotified = true` when this conflict is detected, so the scheduler is informed that its optimistic assumed state was dropped due to a newer version arriving from the API server.",
+  "timestamp": "2026-04-02T02:27:28Z",
+  "token_cost": 9837,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 22.575
+}

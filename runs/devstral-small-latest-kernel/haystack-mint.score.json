@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00047926,
+  "input_tokens": 16282,
+  "output_tokens": 639,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-02T01:26:33Z",
+  "token_cost": 16921,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 14.277
+}

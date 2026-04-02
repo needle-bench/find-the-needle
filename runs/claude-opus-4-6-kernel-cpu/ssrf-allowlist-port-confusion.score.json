@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 10066,
+  "output_tokens": 1926,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the problem and the fix:\n\n## The Needle: SSRF via IPv6 Loopback Bypass\n\n**Problem:** The webhook proxy's URL validator (`app/validator.py`) blocked IPv4 loopback addresses (`127.0.0.1`, `localhost`, `0.0.0.0`) but did **not** block IPv6 loopback addresses like `::1` or `0:0:0:0:0:0:0:1`. An attacker could use URLs like `http://[::1]:8888/metadata` to bypass the blocklist and access internal services (SSRF — Server-Side Request Forgery), leaking sensitive data like `INTERNAL_SECRET_12345`.\n\n**Fix:** Added an `ipaddress`-based check that parses any IP address (IPv4 or IPv6) and rejects it if it's a loopback, private, reserved, or link-local address. This covers:\n- `::1` (IPv6 loopback, compact form)\n- `0:0:0:0:0:0:0:1` (IPv6 loopback, expanded form)\n- Any other IPv6 private/reserved ranges that could be used for SSRF",
+  "timestamp": "2026-04-02T02:39:40Z",
+  "token_cost": 11992,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 38.701
+}

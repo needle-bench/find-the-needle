@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.01779675,
+  "input_tokens": 5214,
+  "output_tokens": 709,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: [\n  \"src/dataloader.ts\",\n  \"src/db.ts\",\n  \"src/models.ts\",\n  \"src/resolvers.ts\",\n  \"src/schema.ts\",\n  \"src/seed.ts\",\n  \"src/server.ts\"\n]",
+  "timestamp": "2026-04-02T01:34:27Z",
+  "token_cost": 5923,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 18.021
+}

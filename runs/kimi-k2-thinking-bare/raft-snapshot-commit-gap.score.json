@@ -1,0 +1,21 @@
+{
+  "benchmark": "raft-snapshot-commit-gap",
+  "agent": "kimi-k2-thinking-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T17:07:51Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_discovery": 7,
+  "turns_to_fix": 25,
+  "signal_to_noise": 0.36,
+  "false_positives": 0,
+  "token_cost": 95329,
+  "estimated_cost_usd": 0.028135699999999996,
+  "dollars_per_correct_line": 0.004019,
+  "tokens_per_correct_line": 13618.42857142857,
+  "wall_clock": 72.8,
+  "tool_calls_per_turn": 2.24,
+  "read_tool_ratio": 0.0
+}

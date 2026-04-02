@@ -1,0 +1,21 @@
+{
+  "benchmark": "timing-attack-comparison",
+  "agent": "kimi-k2-0905-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T17:30:17Z",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 60,
+  "signal_to_noise": 0.031,
+  "false_positives": 0,
+  "token_cost": 89035,
+  "estimated_cost_usd": 0.0164076,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 52.4,
+  "tool_calls_per_turn": 0.97,
+  "read_tool_ratio": 0.0
+}

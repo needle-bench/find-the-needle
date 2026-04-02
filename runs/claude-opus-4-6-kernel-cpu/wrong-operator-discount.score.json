@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6118,
+  "output_tokens": 822,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix is confirmed. The bug was in `/app/pricing.py` in the `calculate_discount_amount` function. The operator `+` was used instead of `*`:\n\n- **Buggy code:** `discount = subtotal + discount_percent / 100` — This was adding the subtotal to the percentage fraction (e.g., for 20% off $1098.94, it computed `1098.94 + 0.2 = 1099.14` instead of the correct discount amount).\n- **Fixed code:** `discount = subtotal * discount_percent / 100` — This correctly multiplies the subtotal by the discount percentage to get the discount amount (e.g., `1098.94 * 20 / 100 = 219.79`).",
+  "timestamp": "2026-04-02T02:41:40Z",
+  "token_cost": 6940,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 20.961
+}

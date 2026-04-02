@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 4295,
+  "output_tokens": 989,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **PASS!**\n\n---\n\n### Summary\n\n**The Needle:** A null-pointer (nil pointer) dereference bug — a classic \"null-pointer-config\" issue.\n\n- **Location:** `main.go` → `makeStatusHandler` accesses `cfg.Metrics.Endpoint` and `cfg.Metrics.IntervalSec`\n- **Root Cause:** `Metrics` is declared as `*MetricsConfig` (a pointer) in `config.go`, but `config.json` had **no `\"metrics\"` field**, leaving it `nil`\n- **Symptom:** The `/status` endpoint panicked with a nil pointer dereference whenever `enable_metrics` was `true`\n- **Fix:** Added the missing `\"metrics\"` block to `config.json` with an endpoint and interval, so `cfg.Metrics` is properly populated and no longer `nil`",
+  "timestamp": "2026-04-02T02:30:49Z",
+  "token_cost": 5284,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 23.868
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.015532500000000001,
+  "input_tokens": 3848,
+  "output_tokens": 814,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: // shutdown does not happen — waits forever for read from closed channel\n\npackage main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"os\"\n\t\"os/signal\"\n\t\"sync\"\n\t\"syscall\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancelFunc := context.WithCancel(context.Background())\n\tdefer cancelFunc()\n\tmux := http.NewServeMux()\n\tmux.HandleFunc(\"/\", func(writer http.ResponseWriter, request *http.Request) {\n\t\tfmt.Fprintln(writer, \"hello world\")\n\t})\n\tserver := http.Server{\n\t\tAddr:    \":0\",\n\t\tHandler: mux,\n\t}\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\terr := server.ListenAndServe()\n\t\tif err != http.ErrServerClosed {\n\t\t\tpanic(err)\n\t\t}\n\t}()\n\twg.Add(1)\n\tgo func() { // drain\n\t\tdefer wg.Done()\n\t\tticker := time.NewTicker(500 * time.Millisecond)\n\t\tdefer ticker.Stop()\n\t\tch := make(chan int)\n\t\tfor {\n\t\t\tselect {\n\t\t\tcase <-ctx.Done():\n\t\t\t\tclose(ch)\n\t\t\t\treturn\n\t\t\tcase <-ticker.C:\n\t\t\t\tfmt.Println(\"draining\")\n\t\t\t\t_, _ = http.Get(\"http://\" + server.Addr + \"/\")\n\t\t\t\tgo func() {\n\t\t\t\t\tch <- 42\n\t\t\t\t}()\n\t\t\t}\n\t\t}\n\t}()\n\tsignals := make(chan os.Signal, 1)\n\tsignal.Notify(signals, syscall.SIGTERM)\n\t<-signals\n\tctxShutdown, cancelShutdown := context.WithTimeout(context.Background(), 2*time.Second)\n\tdefer cancelShutdown()\n\terr := server.Shutdown(ctxShutdown)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\tcancelFunc()\n\twg.Wait()\n\tos.Exit(0)\n}",
+  "timestamp": "2026-04-02T01:38:27Z",
+  "token_cost": 4662,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 31.141
+}

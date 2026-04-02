@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-native",
+  "arm": "native",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.18146774999999998,
+  "input_tokens": 80853,
+  "output_tokens": 3065,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fix applied and tests pass. The bug was in /app/pricing.py:11.",
+  "timestamp": "2026-04-02T03:16:38Z",
+  "token_cost": 83918,
+  "tool_uses": 10,
+  "turns_to_fix": 6,
+  "wall_clock": 67.713
+}

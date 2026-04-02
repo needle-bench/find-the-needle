@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "import-cycle-startup",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 59276,
+  "output_tokens": 1201,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The tests passed, so the circular dependency is resolved. I have completed the user's request.",
+  "timestamp": "2026-04-02T02:01:54Z",
+  "token_cost": 60477,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 45.467
+}

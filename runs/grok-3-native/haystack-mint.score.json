@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-native",
+  "arm": "native",
+  "benchmark": "haystack-mint",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.024905999999999998,
+  "input_tokens": 29199,
+  "output_tokens": 188,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "The test script still reports 0/5. Let me explore the codebase to understand what \"finding the needle\" means in this context.",
+  "timestamp": "2026-04-02T01:52:41Z",
+  "token_cost": 29387,
+  "tool_uses": 3,
+  "turns_to_fix": 3,
+  "wall_clock": 661.068
+}

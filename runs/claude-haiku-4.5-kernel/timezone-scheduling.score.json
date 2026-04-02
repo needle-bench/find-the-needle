@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4.5-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.075107,
+  "input_tokens": 63157,
+  "output_tokens": 2390,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎯 I found and fixed the needle in the haystack!\n\n## Summary\n\n**The Problem:** The scheduler had a timezone-crossing bug. When checking if scheduled events should fire, it only checked the current UTC date. This failed for late-night events that cross midnight boundaries.\n\n**The Bug Location:** `app/scheduler.py` in the `_is_due()` method\n\n**Example of the bug:**\n- Event evt-002 is scheduled for 23:30 US/Eastern (EST)\n- When checking at 2025-01-16T04:30 UTC (which is 23:30 EST on Jan 15)\n- The code was checking if 23:30 EST on Jan 16 fell within the window\n- That would convert to Jan 17 at 04:30 UTC (wrong date!)\n- So it wouldn't find the event that actually occurred on Jan 15\n\n**The Fix:** Modified `_is_due()` to check both today's and yesterday's dates in UTC. This handles the case where an event scheduled for late at night in one timezone occurs earlier in UTC (on the previous day in UTC).\n\nAll tests now pass! ✅",
+  "timestamp": "2026-04-02T01:43:49Z",
+  "token_cost": 65547,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 42.127
+}

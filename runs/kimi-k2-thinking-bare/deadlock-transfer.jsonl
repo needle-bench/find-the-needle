@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-04-01T16:38:40Z", "benchmark": "deadlock-transfer", "model": "kimi-k2-thinking", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 82, "tokens_out": 182, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 142, "tokens_out": 109, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.git"], "tokens_in": 321, "tokens_out": 153, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/.git\\ndrwxr-xr-x", "/app/test.sh"], "tokens_in": 370, "tokens_out": 146, "test_exit": 127}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 538, "tokens_out": 124, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T16:38:49Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

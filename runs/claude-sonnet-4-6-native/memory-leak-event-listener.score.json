@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.1183002,
+  "input_tokens": 116589,
+  "output_tokens": 1465,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Listener count stays at 2 (one from `Monitor`, one from `DataProcessor`) across all 500 requests. Fixed.",
+  "timestamp": "2026-04-02T01:46:41Z",
+  "token_cost": 118054,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 36.693
+}

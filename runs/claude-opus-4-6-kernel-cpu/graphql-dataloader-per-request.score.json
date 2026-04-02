@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6665,
+  "output_tokens": 2709,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Bug:** DataLoader instances were being created **inside each resolver call** instead of at the request level. This meant each DataLoader instance only ever had a single key loaded into it, so batching never occurred. When fetching 100 users with their posts, this caused 100+ individual SQL queries (N+1 problem) instead of just 2 batched queries.\n\n**The Fix:**\n1. **`context.ts`** — Added `loaders` to `GqlContext` interface and created them in `createContext()` using the existing `createLoaders()` function. This ensures one set of DataLoader instances per request.\n\n2. **`resolvers/userResolver.ts`** — Changed `userPosts` resolver to use `ctx.loaders.postsByAuthorLoader.load(user.id)` instead of creating a new DataLoader each time. Also changed `user` resolver to use `ctx.loaders.userLoader`.\n\n3. **`resolvers/postResolver.ts`** — Changed `postAuthor` resolver to use `ctx.loaders.userLoader.load(post.author_id)` instead of creating new DataLoader instances each time.\n\n**Result:** Query count dropped from 101+ (N+1) to just **2** (1 for users + 1 batched query for all posts).",
+  "timestamp": "2026-04-02T02:24:25Z",
+  "token_cost": 9374,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 52.549
+}

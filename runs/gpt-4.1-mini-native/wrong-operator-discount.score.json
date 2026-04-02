@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-mini-native",
+  "arm": "native",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 36998,
+  "output_tokens": 280,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "There is a `test.sh` script present and executable. Please provide more details or point me to where the \"needle\" should be found or fixed, so I can proceed with the fix and then run `test.sh` to verify.",
+  "timestamp": "2026-04-02T00:45:47Z",
+  "token_cost": 37278,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 9.765
+}

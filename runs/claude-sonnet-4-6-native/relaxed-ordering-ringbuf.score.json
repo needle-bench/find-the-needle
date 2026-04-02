@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "relaxed-ordering-ringbuf",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.14934405,
+  "input_tokens": 131587,
+  "output_tokens": 2750,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All 5 runs passed. The fix was to replace `memory_order_relaxed` with proper acquire/release ordering at the two synchronization points:\n\n- **`ringbuf_push`**: load `read_idx` with `acquire`, store `write_idx` with `release`\n- **`ringbuf_pop`**: load `write_idx` with `acquire`, store `read_idx` with `release`\n\nThis establishes the required happens-before edges so the non-atomic slot writes in the producer are guaranteed to be visible to the consumer before it reads them.",
+  "timestamp": "2026-04-02T01:59:29Z",
+  "token_cost": 134337,
+  "tool_uses": 8,
+  "turns_to_fix": 9,
+  "wall_clock": 47.209
+}

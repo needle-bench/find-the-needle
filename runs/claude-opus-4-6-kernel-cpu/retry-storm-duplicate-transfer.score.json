@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9116,
+  "output_tokens": 3706,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and fix:\n\n## The Bug: Race Condition in Idempotency Check\n\nThe `execute_transfer` function in `processor.py` had a critical race condition caused by **wrong ordering of operations**:\n\n1. **Debit** the source account and **commit** immediately\n2. **Sleep** for 50ms (simulating processing)\n3. **Then** check the idempotency key\n\nThis created a wide race window where multiple concurrent requests with the same idempotency key could all:\n- Pass the balance check (seeing the original balance)\n- Debit the account (each one subtracting money)\n- Only then check idempotency (too late — money already moved)\n\nThe \"undo\" logic attempted to compensate, but with 20 concurrent requests and a 50ms sleep between debit-commit and idempotency-check, multiple requests could slip through and cause duplicate debits, destroying money conservation (A+B ≠ 2000).\n\n## The Fix\n\n1. **Check idempotency FIRST** — before touching any account balances\n2. **Use `BEGIN IMMEDIATE`** — acquires a write lock at transaction start, serializing concurrent access\n3. **Do everything in a single atomic transaction** — debit, credit, and idempotency record all commit together (or all roll back)\n4. **Removed the dangerous mid-transaction commit and sleep** — no more partial state visible to other transactions",
+  "timestamp": "2026-04-02T02:38:47Z",
+  "token_cost": 12822,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 80.066
+}

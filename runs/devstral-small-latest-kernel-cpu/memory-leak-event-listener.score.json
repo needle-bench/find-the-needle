@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 29698,
+  "output_tokens": 1235,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test script has passed, confirming that the event listener leak has been fixed. The listener count remained stable at 2, and there was no unbounded growth in memory usage.",
+  "timestamp": "2026-04-02T02:27:39Z",
+  "token_cost": 30933,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 20.245
+}

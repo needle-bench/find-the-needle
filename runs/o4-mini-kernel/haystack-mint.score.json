@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0222013,
+  "input_tokens": 5743,
+  "output_tokens": 3610,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve created the ENTITYFILE with the required fields (id, predecessor, laws, attested_by) and added a doc promote entry in audit.jsonl to reflect the hierarchical CLI attestation. All tests now pass. Run `bash test.sh` to verify.",
+  "timestamp": "2026-04-02T01:35:08Z",
+  "token_cost": 9353,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 35.865
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.07265400000000001,
+  "input_tokens": 37515,
+  "output_tokens": 2535,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the privilege-escalation “needle”.\n\nProblem  \ncheck_admin_access() was comparing the visually rendered username\n(_render_display_name) to the admin allow-list.  Crafting a username\nwith Unicode BIDI control characters such as “\\u202enimda” renders as\n“admin”, so the attacker was granted admin rights (Test 3 in test.sh).\n\nFix  \nChanged the function to compare the exact stored username against the\nallow-list and removed the rendering step.\n\napp/auth.py\n----------- \n• Rewrote check_admin_access():  \n  – Fetch session.  \n  – Compare session[\"username\"] directly with ADMIN_USERS.  \n  – Return reason strings that reference the canonical username.\n\nResult  \nAll tests in test.sh now pass:\n\nPASS: normal user registration works  \nPASS: normal user login works  \nPASS: real admin can access dashboard  \nPASS: BIDI-injected user correctly denied admin access  \nPASS: non-admin user correctly denied admin access  \nPASS: LRO-injected user correctly denied admin access  \n\nThe Unicode BIDI override privilege-escalation issue is eliminated.",
+  "timestamp": "2026-04-02T01:25:38Z",
+  "token_cost": 40050,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 41.457
+}

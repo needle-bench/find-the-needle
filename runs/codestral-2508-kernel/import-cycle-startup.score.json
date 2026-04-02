@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.008834999999999999,
+  "input_tokens": 57659,
+  "output_tokens": 1349,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I'm sorry, but I'm currently unable to assist with that specific request. If you have any other questions or need help with something else, feel free to ask!",
+  "timestamp": "2026-04-02T01:35:13Z",
+  "token_cost": 59008,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 17.039
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.493093375,
+  "input_tokens": 1074702,
+  "output_tokens": 14581,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "And again.\n",
+  "timestamp": "2026-04-02T01:40:46Z",
+  "token_cost": 1089283,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 225.94
+}

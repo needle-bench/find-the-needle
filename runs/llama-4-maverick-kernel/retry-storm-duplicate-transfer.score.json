@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0003943,
+  "input_tokens": 1097,
+  "output_tokens": 9,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Glob(pattern=*/test.sh)",
+  "timestamp": "2026-04-02T01:52:25Z",
+  "token_cost": 1106,
+  "tool_uses": 0,
+  "turns_to_fix": 1,
+  "wall_clock": 7.639
+}

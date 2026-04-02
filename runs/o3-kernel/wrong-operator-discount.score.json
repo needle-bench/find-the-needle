@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.032504,
+  "input_tokens": 22644,
+  "output_tokens": 490,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the calculation bug in pricing.py.\n\nProblem  \ncalculate_discount_amount mistakenly used addition:  \n    discount = subtotal + discount_percent / 100\n\nSo 20 % on 1098.94 produced 1099.14 instead of 219.79.\n\nFix  \nReplaced “+” with multiplication:  \n    discount = subtotal * discount_percent / 100\n\nAll tests in test.sh now pass.",
+  "timestamp": "2026-04-02T01:54:47Z",
+  "token_cost": 23134,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 17.654
+}

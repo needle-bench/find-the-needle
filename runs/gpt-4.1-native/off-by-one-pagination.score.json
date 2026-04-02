@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-native",
+  "arm": "native",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 57991,
+  "output_tokens": 377,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "The bug is in the pagination calculation:  \n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\nThis incorrectly subtracts 1 from the offset for any page after the first, causing items to be duplicated (the \"needle\" off-by-one bug). The standard way is:\n```python\noffset = (page - 1) * per_page\n```\nI’ll fix this in `app/app.py` and then run `test.sh` to verify the behavior.",
+  "timestamp": "2026-04-02T01:48:45Z",
+  "token_cost": 58368,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 19.194
+}

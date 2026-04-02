@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.15452525,
+  "input_tokens": 107870,
+  "output_tokens": 1472,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The fix adds `ipaddress.ip_address()` parsing in `validator.py` to catch IPv6 loopback addresses (`::1`, `0:0:0:0:0:0:0:1`) and any other loopback/private/link-local IPs that the string-based blocklist missed — closing the SSRF bypass.",
+  "timestamp": "2026-04-02T02:13:23Z",
+  "token_cost": 109342,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 32.356
+}

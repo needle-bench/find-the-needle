@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 11263,
+  "output_tokens": 483,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests passed, so the fix is confirmed. The problem was an incorrect operator in `pricing.py`, causing the discount to be added instead of multiplied. I have corrected the issue and verified the solution.\n",
+  "timestamp": "2026-04-02T03:06:38Z",
+  "token_cost": 11746,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 22.334
+}

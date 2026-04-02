@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0194254,
+  "input_tokens": 37762,
+  "output_tokens": 2660,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. Here's what I found and fixed:\n\n**The Bug (Memory Leak in `processor.js`):**\nThe `process()` method was registering new event listeners on `data:validated` and `data:error` every time it was called. Since `process()` was called per request, and listeners were never removed, the listener count (and memory usage) would grow unboundedly with each request.\n\n**The Fix:**\nMoved the event listener registration from `process()` to the `constructor`, so listeners are only registered once when the `DataProcessor` instance is created, not on every call to `process()`.\n\nKey changes in `/app/app/processor.js`:\n1. Moved `this.eventBus.on('data:validated', ...)` and `this.eventBus.on('data:error', ...)` from `process()` to `constructor()`\n2. Modified `_handleValidated()` to only take `validatedData` parameter (removed `originalData` that was causing closure retention)\n\nThe test passes - listener count stays stable at 2 (instead of growing to 500+), and memory remains bounded at ~5MB.",
+  "timestamp": "2026-04-02T01:54:04Z",
+  "token_cost": 40422,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 155.959
+}

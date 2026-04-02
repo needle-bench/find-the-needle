@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.00660504,
+  "input_tokens": 27126,
+  "output_tokens": 861,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test script has passed, indicating that the issue with the BIDI-injected username has been resolved. The `sanitize_username` function now strips BIDI control characters, preventing privilege escalation through visual spoofing of usernames.",
+  "timestamp": "2026-04-02T03:14:07Z",
+  "token_cost": 27987,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 13.445
+}

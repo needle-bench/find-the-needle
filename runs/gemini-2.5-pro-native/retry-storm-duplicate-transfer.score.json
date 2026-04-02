@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 41063,
+  "output_tokens": 2324,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The test passed with the correct final balances, so the fix for the race condition is verified. My work is complete.",
+  "timestamp": "2026-04-02T02:59:04Z",
+  "token_cost": 43387,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 81.132
+}

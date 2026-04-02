@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-native",
+  "arm": "native",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 80472,
+  "output_tokens": 531,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "I've found two clear bugs, both noted in the code comments:\n\n- After updating a product, the product cache (and possibly the product list cache) is not invalidated, so clients can read stale data.\n- After creating a new product, the product list cache is not invalidated, so the next list read misses the new entry.\n\nI will fix both by clearing relevant cache keys after `update` and `create` operations in `CatalogHandler`.",
+  "timestamp": "2026-04-02T01:39:47Z",
+  "token_cost": 81003,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 17.656
+}

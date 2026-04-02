@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2343,
+  "output_tokens": 1490,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the **needle** (the bug) and the fix:\n\n---\n\n### The Problem: Stale Cache After Writes\n\nIn `/app/app/server.py`, two methods wrote to the store but **never invalidated the cache**, causing stale data to be served for up to 5 minutes (the TTL):\n\n1. **`_update_product`** — Updated a product in the store but left the old product data in cache under `products:<id>` and the old list in `products:list`.\n2. **`_create_product`** — Created a new product in the store but left the stale product list in cache under `products:list`, so the new product was invisible to `GET /products`.\n\n### The Fix\n\nAfter each write operation, explicitly invalidate the relevant cache keys using the already-available `cache.delete()` method:\n\n- `_update_product`: delete `products:<id>` and `products:list`\n- `_create_product`: delete `products:list`",
+  "timestamp": "2026-04-02T02:23:16Z",
+  "token_cost": 3833,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 29.356
+}

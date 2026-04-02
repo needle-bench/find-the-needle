@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-native",
+  "arm": "native",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.07112774999999999,
+  "input_tokens": 29896,
+  "output_tokens": 288,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The discount calculation issue has been fixed. All tests in test.sh now pass successfully.",
+  "timestamp": "2026-04-02T02:29:44Z",
+  "token_cost": 30184,
+  "tool_uses": 3,
+  "turns_to_fix": 3,
+  "wall_clock": 26.615
+}

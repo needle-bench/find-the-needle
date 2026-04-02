@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.169367,
+  "input_tokens": 209198,
+  "output_tokens": 20345,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve added BIDI control character stripping to the username sanitization, applied the same sanitation on login, and changed admin checks to use the stored (sanitized) username rather than its visual rendering. All tests in test.sh now pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-02T01:28:51Z",
+  "token_cost": 229543,
+  "tool_uses": 28,
+  "turns_to_fix": 1,
+  "wall_clock": 233.791
+}

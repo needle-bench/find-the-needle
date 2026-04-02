@@ -1,0 +1,21 @@
+{
+  "benchmark": "tls-chain-ordering-strict",
+  "agent": "kimi-k2-thinking-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T17:23:07Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 80,
+  "signal_to_noise": 0.167,
+  "false_positives": 0,
+  "token_cost": 28650,
+  "estimated_cost_usd": 0.012707748,
+  "dollars_per_correct_line": 0.00027,
+  "tokens_per_correct_line": 609.5744680851063,
+  "wall_clock": 42.4,
+  "tool_calls_per_turn": 0.92,
+  "read_tool_ratio": null
+}

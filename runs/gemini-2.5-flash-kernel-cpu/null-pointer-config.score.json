@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9525,
+  "output_tokens": 647,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script passed, indicating that the server now starts and responds correctly with metrics enabled. The \"null-pointer-config bug\" has been resolved by initializing the `Metrics` configuration when it's enabled but not explicitly defined in `config.json`.",
+  "timestamp": "2026-04-02T02:29:19Z",
+  "token_cost": 10172,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 12.561
+}

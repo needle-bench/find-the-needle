@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-native",
+  "arm": "native",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 109588,
+  "output_tokens": 355,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "The source of the \"needle\" issue is now clear:  \nThere are comments noting a bug where the code uses an old column name \"status\" in the `orders` table, but the schema migration renamed it to `order_status`.  \n\nNext, I will update all SQL statements in `app/main.go` to use the correct column name `order_status` instead of `status`.",
+  "timestamp": "2026-04-02T01:49:16Z",
+  "token_cost": 109943,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 18.089
+}

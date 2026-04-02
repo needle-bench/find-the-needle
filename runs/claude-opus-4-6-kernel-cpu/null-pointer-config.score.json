@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8443,
+  "output_tokens": 1515,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n**The Bug (Null Pointer Dereference):**\n- In `config.json`, `features.enable_metrics` was set to `true`, but no `metrics` configuration section was provided.\n- In `main.go`, the `makeStatusHandler` function checked `cfg.Features.EnableMetrics` and then directly accessed `cfg.Metrics.Endpoint` and `cfg.Metrics.IntervalSec` — but `cfg.Metrics` is a pointer (`*MetricsConfig`) that was `nil` since the JSON didn't include a `metrics` block.\n- This caused a **nil pointer dereference** panic when hitting the `/status` endpoint.\n\n**The Fix (two parts):**\n1. **Code hardening** (`main.go`): Added a nil check `cfg.Metrics != nil` alongside the feature flag check, so the server won't panic even if the metrics config is missing.\n2. **Config completeness** (`config.json`): Added the missing `metrics` configuration section with `endpoint` and `interval_sec` values, so the `/status` endpoint properly returns metrics information when the feature is enabled.",
+  "timestamp": "2026-04-02T02:32:42Z",
+  "token_cost": 9958,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 34.02
+}

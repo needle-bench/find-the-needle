@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.17473755,
+  "input_tokens": 207436,
+  "output_tokens": 2135,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The two bugs were in `src/ioctl_handler.c`:\n\n1. **`handle_set_config`** (line 47): No NULL check on `req->value` and no bounds check on `req->value_len` before the `memcpy` — a NULL value or oversized length caused a segfault.\n2. **`handle_get_config`** (line 87): No NULL/zero-length check on the output buffer `req->value` before writing into it.\n\nThe fix adds the missing guards before any pointer dereference, consistent with how a kernel driver must validate all user-space pointers before use.",
+  "timestamp": "2026-04-02T01:45:53Z",
+  "token_cost": 209571,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 52.653
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0190146,
+  "input_tokens": 18818,
+  "output_tokens": 2137,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I updated utils.js to parse min_rating as an integer (using parseInt) instead of leaving it as a string. This ensures numeric comparisons in the filter work correctly. All tests now pass.",
+  "timestamp": "2026-04-02T02:08:51Z",
+  "token_cost": 20955,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 30.414
+}

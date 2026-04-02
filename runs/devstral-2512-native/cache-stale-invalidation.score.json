@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The fix is complete. The changes made were:\n\n1. **app/server.py:95** - Added `cache.delete(f'products:{product_id}')` to invalidate the product cache after updates\n2. **app/server.py:107** - Added `cache.delete('products:list')` to invalidate the product list cache after creates\n\nThe test now passes, confirming that cache invalidation works correctly after write operations.",
+  "timestamp": "2026-04-02T03:16:04Z",
+  "token_cost": 0,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 25.512
+}

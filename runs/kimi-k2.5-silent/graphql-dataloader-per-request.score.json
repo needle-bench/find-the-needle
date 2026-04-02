@@ -1,0 +1,21 @@
+{
+  "benchmark": "graphql-dataloader-per-request",
+  "agent": "kimi-k2.5-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "9f6f8470",
+  "timestamp": "2026-04-01T16:56:25Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 5487,
+  "estimated_cost_usd": 0.00321768,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 15.3,
+  "tool_calls_per_turn": 2.0,
+  "read_tool_ratio": 0.0
+}

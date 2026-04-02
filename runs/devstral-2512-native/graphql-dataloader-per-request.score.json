@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is working. The test shows that the query count went from the N+1 pattern (likely 101 queries: 1 for users + 100 individual post queries) down to just 2 queries (1 for users + 1 batched query for all posts), which confirms that DataLoader batching is now working correctly.\n\nThe key changes made:\n\n1. **Modified `src/context.ts`**: Added `loaders` to the `GqlContext` interface and updated `createContext()` to create DataLoader instances once per request using the `createLoaders()` function.\n\n2. **Modified `src/resolvers/userResolver.ts`**: Removed the local DataLoader creation functions and instead used the shared loaders from `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader`.\n\n3. **Modified `src/resolvers/postResolver.ts`**: Removed the local DataLoader creation functions and used the shared `ctx.loaders.userLoader` for resolving post authors.\n\nThe fix ensures that DataLoader instances are created once per request in the context factory, allowing all resolvers within a single request to share the same loader instances and enabling proper batching across the full query tree.",
+  "timestamp": "2026-04-02T03:17:14Z",
+  "token_cost": 0,
+  "tool_uses": 14,
+  "turns_to_fix": 15,
+  "wall_clock": 53.763
+}

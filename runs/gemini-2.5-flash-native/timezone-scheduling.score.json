@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "timezone-scheduling",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 45085,
+  "output_tokens": 551,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All scheduling tests passed. The \"needle\" has been found and fixed.",
+  "timestamp": "2026-04-02T01:57:51Z",
+  "token_cost": 45636,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 26.957
+}

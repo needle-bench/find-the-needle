@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.053649,
+  "input_tokens": 13738,
+  "output_tokens": 829,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n**The Needle: Off-by-one error in `processor.py`**\n\n- **Location:** `processor.py`, line `end = start + batch_size - 1`\n- **Bug:** Python list slicing (`records[start:end]`) is *exclusive* of the `end` index. Using `start + batch_size - 1` meant each batch was missing its last element — effectively dropping 1 record per batch.\n- **Fix:** Changed to `end = start + batch_size` (no `- 1`), so the slice correctly captures all `batch_size` elements.",
+  "timestamp": "2026-04-02T01:35:42Z",
+  "token_cost": 14567,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 23.076
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0040326599999999995,
+  "input_tokens": 12430,
+  "output_tokens": 666,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests passed! The problem was indeed the type coercion of `min_rating`. Parsing it as an integer in `utils.js` fixed the issue.\n",
+  "timestamp": "2026-04-02T01:52:01Z",
+  "token_cost": 13096,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 12.125
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6426,
+  "output_tokens": 1646,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n**The Bug (Needle):** The `adjustQuantity` method in `inventory.ts` had no validation to prevent inventory quantities from going negative. A POST to `/inventory/:sku/adjust` with a large negative quantity (e.g., -200 when only 110 items exist) would happily set the inventory to a negative number and return a 200 OK response.\n\n**The Fix:**\n1. **`inventory.ts`**: Added a check in `adjustQuantity()` that calculates the new quantity before applying it, and throws an error if the result would be negative.\n2. **`routes.ts`**: Wrapped the `adjustQuantity()` call in a try-catch block so that when the validation error is thrown, it returns a `400 Bad Request` status with an error message instead of crashing or returning 200.",
+  "timestamp": "2026-04-02T02:31:18Z",
+  "token_cost": 8072,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 36.703
+}

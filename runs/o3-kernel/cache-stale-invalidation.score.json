@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.053632,
+  "input_tokens": 34092,
+  "output_tokens": 1061,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed.\n\nRoot cause:\nAfter updating or creating products, the server wrote to the data store but never invalidated the corresponding cache entries, so reads returned stale data.\n\nFix applied in app/server.py:\n1. In _update_product():\n   • Refresh the updated product’s cache entry.\n   • Delete the cached product-list entry.\n\n2. In _create_product():\n   • Delete the cached product-list entry so the newly-created product appears immediately.\n\nAll tests now pass:\n\n$ bash test.sh\nInitial product count: 5  \nOriginal product name: Widget A  \nName after update: UPDATED-NAME-XYZ  \nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'  \nProduct count after create: 6  \nPASS: Product list correctly shows 6 items  \nPASS: Cache correctly invalidated after writes",
+  "timestamp": "2026-04-02T01:26:16Z",
+  "token_cost": 35153,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 28.369
+}

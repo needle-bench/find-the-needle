@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 163188,
+  "output_tokens": 1915,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I will inspect the Git repository's objects, including unreachable ones, to see if the \"needle\" or the solution to the \"hidden problem\" is hidden in a discarded commit or stash.",
+  "timestamp": "2026-04-02T03:20:45Z",
+  "token_cost": 165103,
+  "tool_uses": 41,
+  "turns_to_fix": 1,
+  "wall_clock": 120.32
+}

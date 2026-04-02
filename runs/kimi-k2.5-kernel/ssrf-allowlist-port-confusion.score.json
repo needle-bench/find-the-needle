@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.015893360000000002,
+  "input_tokens": 25563,
+  "output_tokens": 3144,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. The needle was an **SSRF (Server-Side Request Forgery) vulnerability via IPv6 loopback bypass** in the webhook proxy validator.\n\n**The Problem:**\nThe original `validator.py` only blocked IPv4 loopback addresses (`127.0.0.1`, `0.0.0.0`) and localhost, but it didn't block IPv6 loopback addresses like `[::1]` or `[0:0:0:0:0:0:0:1]`. This allowed attackers to bypass the SSRF protection and access internal services via IPv6 loopback.\n\n**The Fix:**\nI modified `validator.py` to:\n1. Import the `ipaddress` module for proper IP validation\n2. Add IPv6 loopback addresses (`::1` and `0:0:0:0:0:0:0:1`) to the blocklist\n3. Strip IPv6 brackets from hostnames before validation (e.g., `[::1]` → `::1`)\n4. Use `ipaddress.ip_address()` to properly detect and block all loopback, private, and link-local addresses\n5. Return 403 Forbidden when blocking malicious URLs\n\nAll tests now pass:\n- ✅ Health endpoint works\n- ✅ IPv4 loopback (`127.0.0.1`) blocked\n- ✅ IPv6 loopback (`[::1]`) blocked  \n- ✅ Expanded IPv6 loopback (`[0:0:0:0:0:0:0:1]`) blocked\n- ✅ AWS metadata IP (`169.254.169.254`) blocked",
+  "timestamp": "2026-04-02T02:20:10Z",
+  "token_cost": 28707,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 177.587
+}

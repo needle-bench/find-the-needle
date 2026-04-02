@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed. The pagination now works correctly. Page 1 ends at ID 10, page 2 starts at ID 11 with no gaps or overlaps.",
+  "timestamp": "2026-04-02T01:57:49Z",
+  "token_cost": 0,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 23.99
+}

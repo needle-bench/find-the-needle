@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2342,
+  "output_tokens": 794,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests passed! ✅\n\n**The needle:** In `/etc/nginx/sites-available/default`, the `proxy_pass` directive for `/api/` was pointing to port **`5001`** instead of the correct port **`5000`** where the Flask backend actually listens.\n\n**The fix:** Changed `proxy_pass http://127.0.0.1:5001;` → `proxy_pass http://127.0.0.1:5000;`",
+  "timestamp": "2026-04-02T02:30:15Z",
+  "token_cost": 3136,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 19.96
+}

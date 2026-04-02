@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-04-01T18:01:05Z", "benchmark": "linearizability-stale-read", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/opt/", "/etc/", "/root/", "/"], "tokens_in": 862, "tokens_out": 274, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/", "/app.orig/", "/root/.gitconfig"], "tokens_in": 2299, "tokens_out": 133, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/Agentfile", "/app/test.sh", "/app"], "tokens_in": 2968, "tokens_out": 114, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T18:01:28Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

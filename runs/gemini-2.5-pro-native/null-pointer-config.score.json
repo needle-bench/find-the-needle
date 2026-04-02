@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "null-pointer-config",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 90736,
+  "output_tokens": 1785,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Defunct processes are gone. Task complete: found and fixed a nil pointer dereference, resolved a subsequent metrics data error with defaults, and verified everything with the test script. I'm done.",
+  "timestamp": "2026-04-02T02:34:27Z",
+  "token_cost": 92521,
+  "tool_uses": 18,
+  "turns_to_fix": 19,
+  "wall_clock": 80.731
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.264318,
+  "input_tokens": 74446,
+  "output_tokens": 2732,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n## The Bug: N+1 DataLoader Anti-Pattern\n\n**Problem:** `DataLoader` instances were being created **inside each individual resolver call** — a new loader for every single `User.posts` or `Post.author` resolution. Since DataLoader batches keys that are enqueued on the **same instance** within the same tick, creating a fresh loader per resolver meant each loader only ever saw 1 key → batching never fired → N+1 DB queries.\n\n**Root cause files:**\n- `userResolver.ts`: `makeUserLoader(ctx)` and an inline `new DataLoader(...)` were called inside each resolver invocation.\n- `postResolver.ts`: `makePostsByAuthorLoader(ctx)` and another inline `new DataLoader(...)` were created fresh per `postAuthor` call.\n\n## The Fix\n\n1. **`context.ts`** — Added `loaders` (created via the already-correct `createLoaders()` from `loaders.ts`) to the `GqlContext` interface and `createContext()` factory. Now loaders are created **once per request** and shared across the entire resolver tree.\n\n2. **`userResolver.ts`** — Replaced per-call `makeUserLoader()` / inline DataLoaders with `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader`.\n\n3. **`postResolver.ts`** — Replaced per-call inline `new DataLoader(...)` with `ctx.loaders.userLoader`.\n\n**Result:** Fetching 100 users with all their posts now takes **2 DB queries** (1 for users + 1 batched for posts) instead of 101+ queries.",
+  "timestamp": "2026-04-02T01:24:29Z",
+  "token_cost": 77178,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 57.222
+}

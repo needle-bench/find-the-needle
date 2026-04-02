@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "bidi-override-injection",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.17806335000000004,
+  "input_tokens": 186080,
+  "output_tokens": 2180,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All 5 tests pass. Here's what was fixed:\n\n**Root cause:** `check_admin_access` in `auth.py:150` used `_render_display_name()` to process BIDI control characters before comparing against the admin allowlist. A username like `\\u202enimda` (U+202E RLO + \"nimda\") would be rendered visually as \"admin\" by reversing the RTL segment, passing the allowlist check.\n\n**Fixes:**\n1. **`sanitizer.py`** — strip all Unicode BIDI control characters (U+202A–U+202E, U+2066–U+2069, etc.) during registration so they never reach the database.\n2. **`auth.py:144-147`** — compare the stored `username` directly against `ADMIN_USERS` instead of using the rendered display form.",
+  "timestamp": "2026-04-02T01:39:35Z",
+  "token_cost": 188260,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 54.445
+}

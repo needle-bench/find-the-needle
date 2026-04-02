@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7354,
+  "output_tokens": 1228,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Needle (Bug):** The server had a stale cache problem. When products were updated (`PUT /products/:id`) or created (`POST /products`), the cache was never invalidated. This meant subsequent reads would return stale cached data until the 5-minute TTL expired.\n\n**The Fix:** Added cache invalidation after write operations in `server.py`:\n\n1. **`_update_product`**: After updating a product in the store, invalidate both the individual product cache (`products:{id}`) and the product list cache (`products:list`).\n\n2. **`_create_product`**: After creating a new product, invalidate the product list cache (`products:list`) so the new product appears in listings.",
+  "timestamp": "2026-04-02T02:23:17Z",
+  "token_cost": 8582,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 31.558
+}

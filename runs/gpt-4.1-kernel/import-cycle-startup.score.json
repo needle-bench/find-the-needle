@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.021424,
+  "input_tokens": 9040,
+  "output_tokens": 418,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "You have a **circular import** problem between `users.py` and `notifications.py`:\n\n- `users.py` does `from notifications import NotificationService`\n- `notifications.py` does `import users` and accesses `users.DEFAULT_ROLE`\n\nSo, when Python loads them, it gets stuck: one needs the other at import time.\n\n**How to fix:**\n- Move `DEFAULT_ROLE` somewhere both can safely import (like a `constants.py`)\n- Or import inside functions, not at module level.\n\nWould you like to move `DEFAULT_ROLE` to a `constants.py` file and fix both imports?",
+  "timestamp": "2026-04-02T01:24:56Z",
+  "token_cost": 9458,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 16.483
+}

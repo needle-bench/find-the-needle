@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.007630089999999999,
+  "input_tokens": 11897,
+  "output_tokens": 808,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The issue was in the `Scheduler.Run` method where there was a race condition/deadlock. Here's what was happening:\n\n1. The goroutine runs the scheduling loop, calling `s.ScheduleOne(ctx)`\n2. When there's no work, `ScheduleOne` calls `Pop()` which blocks waiting for items\n3. When the context is cancelled via `cancel()`, the main thread reaches `<-done`\n4. Since the scheduled goroutine might be blocked in `Pop()`, it never checks `ctx.Done()` \n5. Meanwhile, `s.queue.Close()` is never called because we're waiting on the goroutine\n6. This creates a deadlock: `Pop()` waits for `Close()` to notify it, while `Close()` waits for the goroutine to finish\n\nThe fix was simple: call `s.queue.Close()` before waiting for the goroutine with `<-done`. This ensures the queue is closed and any blocked `Pop()` calls will return with an error, allowing the goroutine to terminate properly.\n\nThe test script now passes successfully, confirming that the needle (the bug) in the haystack (the code) has been found and fixed.",
+  "timestamp": "2026-04-02T01:39:21Z",
+  "token_cost": 12705,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 24.539
+}

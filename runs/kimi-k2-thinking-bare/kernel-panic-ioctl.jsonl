@@ -1,0 +1,12 @@
+{"event": "run.start", "timestamp": "2026-04-01T16:51:03Z", "benchmark": "kernel-panic-ioctl", "model": "kimi-k2-thinking", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/home"], "tokens_in": 82, "tokens_out": 261, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 167, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root"], "tokens_in": 218, "tokens_out": 124, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 287, "tokens_out": 117, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 340, "tokens_out": 107, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 393, "tokens_out": 137, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 452, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 493, "tokens_out": 365, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 544, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/tmp", "/app/test.sh"], "tokens_in": 619, "tokens_out": 43, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T16:51:20Z", "test_exit": 0, "total_turns": 10, "correct_lines": 0, "arm": "bare"}

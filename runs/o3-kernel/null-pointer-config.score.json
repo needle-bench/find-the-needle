@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.08088399999999998,
+  "input_tokens": 45782,
+  "output_tokens": 2241,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed nil-pointer bug when metrics are enabled but no metrics block is present.\n\nKey change (config.go):\n1. Added sensible defaults for Port and Version (moved to top for clarity).\n2. If features.enable_metrics is true and Metrics field is nil, initialize it with default Endpoint “/metrics” and IntervalSec 15.\n\nRunning test.sh now passes:\n\nPASS: Server starts and responds correctly with metrics enabled",
+  "timestamp": "2026-04-02T01:40:36Z",
+  "token_cost": 48023,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 51.408
+}

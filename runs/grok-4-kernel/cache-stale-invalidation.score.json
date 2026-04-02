@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.02341725,
+  "input_tokens": 6539,
+  "output_tokens": 1092,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 28\ndrwxr-xr-x 1 root root   68 Mar  9 02:39 .\ndrwxr-xr-x 1 root root   18 Mar  9 02:39 ..\ndrwxr-xr-x 1 root root   18 Mar  9 02:39 __pycache__\ndrwxr-xr-x 1 root root   34 Mar  9 02:39 data\n-rw-r--r-- 1 root root  931 Mar  9 02:39 app.py\n-rw-r--r-- 1 root root 1195 Mar  9 02:39 cache.py\n-rw-r--r-- 1 root root 2048 Mar  9 02:39 database.py\n-rw-r--r-- 1 root root  479 Mar  9 02:39 purge.sh\n-rw-r--r-- 1 root root 1653 Mar  9 02:39 server.py\n-rw-r--r-- 1 root root  481 Mar  9 02:39 utils.py\n-rw-r--r-- 1 root root   81 Mar  9 02:39 validators.py",
+  "timestamp": "2026-04-02T01:33:53Z",
+  "token_cost": 7631,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 25.449
+}

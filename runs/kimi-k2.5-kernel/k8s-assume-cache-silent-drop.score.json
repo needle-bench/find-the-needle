@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.02183758,
+  "input_tokens": 27464,
+  "output_tokens": 5762,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. The needle was:\n\nIn the `informerUpdate` function, when an assumed object's state was being silently dropped (because the informer delivered a newer version), there was no notification mechanism. The fix adds `conflictNotified = true` before deleting the assumed entry, ensuring that callers are notified when their assumed state is dropped due to a conflict.\n\nThe test now passes! 🎉",
+  "timestamp": "2026-04-02T01:45:18Z",
+  "token_cost": 33226,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 270.494
+}

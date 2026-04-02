@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00357496,
+  "input_tokens": 22858,
+  "output_tokens": 741,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! We've passed all the checks. The needle in the haystack was the need to create an `ENTITYFILE` with specific content and add a \"commit\" entry to the `audit.jsonl` file. The test script has confirmed that our fix is correct.",
+  "timestamp": "2026-04-02T03:16:11Z",
+  "token_cost": 23599,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 13.256
+}

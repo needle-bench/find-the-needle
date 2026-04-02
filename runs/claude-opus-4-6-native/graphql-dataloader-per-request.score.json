@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.23290475000000005,
+  "input_tokens": 175316,
+  "output_tokens": 2292,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The fix: moved DataLoader instances from individual resolver calls to the request-scoped context (`createContext()`), so all resolvers in a single request share the same loaders. This enables proper batching — query count dropped from 101 (N+1) to just 2.",
+  "timestamp": "2026-04-02T01:53:22Z",
+  "token_cost": 177608,
+  "tool_uses": 12,
+  "turns_to_fix": 13,
+  "wall_clock": 44.843
+}

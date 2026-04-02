@@ -1,0 +1,18 @@
+{
+  "agent": "ollama/qwen2.5-coder:32b-native",
+  "arm": "native",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 3900,
+  "output_tokens": 186,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "```",
+  "timestamp": "2026-04-01T22:22:09Z",
+  "token_cost": 4086,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 74.709
+}

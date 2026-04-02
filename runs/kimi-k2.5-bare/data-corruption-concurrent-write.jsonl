@@ -1,0 +1,14 @@
+{"event": "run.start", "timestamp": "2026-04-01T16:35:29Z", "benchmark": "data-corruption-concurrent-write", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 75, "tokens_out": 136, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 141, "tokens_out": 76, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 199, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 435, "tokens_out": 19, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 753, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 934, "tokens_out": 20, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/src/writer.rs"], "tokens_in": 1312, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 2063, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/src/verify.rs"], "tokens_in": 2491, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 3060, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 3239, "tokens_out": 39, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3520, "tokens_out": 46, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T16:38:17Z", "test_exit": 0, "total_turns": 12, "correct_lines": 0, "arm": "bare"}

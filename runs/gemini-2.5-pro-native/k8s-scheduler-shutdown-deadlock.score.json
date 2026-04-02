@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 63928,
+  "output_tokens": 540,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found the deadlock bug in `main.go` and fixed it. The provided test script `test.sh` now passes consistently, indicating that the fix is correct and stable.",
+  "timestamp": "2026-04-02T02:09:36Z",
+  "token_cost": 64468,
+  "tool_uses": 8,
+  "turns_to_fix": 9,
+  "wall_clock": 38.256
+}

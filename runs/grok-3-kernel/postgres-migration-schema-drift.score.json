@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.41949449999999994,
+  "input_tokens": 418735,
+  "output_tokens": 3790,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "arit\n\nFunction:",
+  "timestamp": "2026-04-02T01:45:09Z",
+  "token_cost": 422525,
+  "tool_uses": 62,
+  "turns_to_fix": 1,
+  "wall_clock": 111.619
+}

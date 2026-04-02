@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2341,
+  "output_tokens": 1057,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **Test passes!**\n\n### The Needle (Bug)\n\n**Location:** `/app/routes.ts` — the `POST /inventory/:sku/adjust` handler.\n\n**Problem:** There was **no validation** to prevent an adjustment that would make inventory go negative. A request like `{\"quantity\": -200}` on a product with only 110 units would be accepted with HTTP 200, resulting in a quantity of `-90` — an impossible inventory state.\n\n**Fix:** Added a guard before applying the adjustment:\n```ts\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'adjustment would result in negative inventory' }));\n  return;\n}\n```\n\nThis rejects any adjustment where `currentQuantity + adjustment < 0` with a `400 Bad Request`, while still allowing valid negative adjustments (e.g., `-50` from `110` → `60`).",
+  "timestamp": "2026-04-02T02:29:45Z",
+  "token_cost": 3398,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 23.78
+}

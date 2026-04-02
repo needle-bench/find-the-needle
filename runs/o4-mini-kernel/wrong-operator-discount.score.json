@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0193534,
+  "input_tokens": 22266,
+  "output_tokens": 1904,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I fixed the discount calculation in pricing.py: changed the formula from “subtotal + discount_percent/100” to “subtotal * discount_percent/100”. All tests now pass.",
+  "timestamp": "2026-04-02T02:09:38Z",
+  "token_cost": 24170,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 36.075
+}

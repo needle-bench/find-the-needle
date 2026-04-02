@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.10143,
+  "input_tokens": 110774,
+  "output_tokens": 860,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Both tests pass. The fix was in `ratelimiter.ts:30-41` — `getClientIp` was trusting the `X-Forwarded-For` header, allowing an attacker to rotate IP values and get a fresh rate limit window on every request. The fix ignores that header and uses only `req.socket.remoteAddress`.",
+  "timestamp": "2026-04-02T01:58:32Z",
+  "token_cost": 111634,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 38.973
+}

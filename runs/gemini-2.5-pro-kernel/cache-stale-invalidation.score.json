@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0337075,
+  "input_tokens": 11726,
+  "output_tokens": 1905,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've identified and fixed the bug. The `app/server.py` file had missing cache invalidation logic. After a product was updated or created, the cache was not being cleared, leading to stale data being served. I added the necessary `cache.delete()` calls in the `_update_product` and `_create_product` methods to ensure the cache is properly invalidated. The `test.sh` script now passes, confirming the fix.",
+  "timestamp": "2026-04-02T01:26:15Z",
+  "token_cost": 13631,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 44.407
+}

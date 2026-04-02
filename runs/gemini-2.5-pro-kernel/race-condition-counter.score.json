@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0359125,
+  "input_tokens": 13458,
+  "output_tokens": 1909,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed, confirming that the race condition is fixed. The counter now correctly increments to 100.\nThe test passed, confirming that the race condition is fixed. The counter now correctly increments to 100.\nThe test passed, confirming the race condition is fixed. The counter now correctly increments to 100.",
+  "timestamp": "2026-04-02T01:52:06Z",
+  "token_cost": 15367,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 39.31
+}

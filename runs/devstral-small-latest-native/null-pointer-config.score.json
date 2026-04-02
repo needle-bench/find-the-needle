@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "null-pointer-config",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix works. The server now starts successfully and passes all tests. The issue was that when `enable_metrics` was true in the config, but no `metrics` field was present, the code would try to access the nil `Metrics` pointer, causing a panic. The fix initializes the `Metrics` field with default values when it's enabled but not configured.",
+  "timestamp": "2026-04-02T01:56:52Z",
+  "token_cost": 0,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 20.137
+}

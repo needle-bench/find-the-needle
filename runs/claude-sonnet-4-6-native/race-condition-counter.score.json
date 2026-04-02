@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "race-condition-counter",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.10779255,
+  "input_tokens": 106565,
+  "output_tokens": 762,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The bug was a race condition in `counter.js:16-22` — the read-modify-write pattern (`GET` then `SET`) lost concurrent increments. Fixed by using Redis's atomic `INCR` command instead.",
+  "timestamp": "2026-04-02T01:57:42Z",
+  "token_cost": 107327,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 30.426
+}

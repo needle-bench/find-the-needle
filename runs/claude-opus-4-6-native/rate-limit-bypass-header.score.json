@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-native",
+  "arm": "native",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.14183824999999997,
+  "input_tokens": 106924,
+  "output_tokens": 913,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The vulnerability was in `ratelimiter.ts:getClientIp` — it trusted the `X-Forwarded-For` header, letting attackers rotate it to get a fresh rate limit window per request. Fixed by using only the actual socket address (`req.socket.remoteAddress`).",
+  "timestamp": "2026-04-02T02:10:17Z",
+  "token_cost": 107837,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 40.369
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4.6-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.21048,
+  "input_tokens": 34256,
+  "output_tokens": 1568,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n**The Bug (Type Coercion Comparison):**\nIn `/app/utils.js`, `query.minRating` was being set as a **string** (the raw return value of `searchParams.get('min_rating')`), not a number.\n\nIn `/app/filter.js`, `buildRatingRange(min, max)` uses a `for` loop starting at `min`. When `min` is the string `\"4\"`:\n1. The loop starts with `i = \"4\"` (string)\n2. `range.push(\"4\")` pushes a **string** `\"4\"`\n3. `i++` coerces it to number `5`, so the next push is numeric `5`\n4. The resulting array is `[\"4\", 5]` — a mix of string and number types\n5. `Array.includes()` uses strict equality (`===`), so `[\"4\", 5].includes(4)` returns `false` because `\"4\" !== 4`\n\nThis caused products with rating `4` to be excluded from results.\n\n**The Fix:**\nChanged `searchParams.get('min_rating')` to `parseInt(searchParams.get('min_rating'), 10)` in `utils.js` so the rating is properly parsed as a number before being used in comparisons.",
+  "timestamp": "2026-04-02T02:09:04Z",
+  "token_cost": 35824,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 65.348
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0036867000000000002,
+  "input_tokens": 21868,
+  "output_tokens": 1127,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test script passed. The server starts and responds correctly with metrics enabled. The issue has been fixed.",
+  "timestamp": "2026-04-02T01:42:01Z",
+  "token_cost": 22995,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 16.233
+}

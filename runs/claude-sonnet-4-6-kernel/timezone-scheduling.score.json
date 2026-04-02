@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.14310599999999998,
+  "input_tokens": 38122,
+  "output_tokens": 1916,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 7 tests pass. Here's a summary of the needle and the fix:\n\n---\n\n## The Bug: Wrong Date Anchor in `scheduler.py`\n\n**Location:** `/app/app/scheduler.py`, method `_is_due`\n\n**Root cause:** The code was using **`window_start.date()` (UTC date)** to construct the event's scheduled datetime in its local timezone:\n\n```python\n# BUG: anchors to UTC date\ntoday_utc = window_start.date()\nnaive_scheduled = datetime(today_utc.year, today_utc.month, today_utc.day,\n                           event.hour, event.minute, 0)\n```\n\nThis is wrong for events in **negative-offset timezones** (US/Eastern UTC-5, US/Pacific UTC-8). For example:\n- `evt-002` fires at **23:30 US/Eastern** → that's **04:30 UTC the next day**\n- When checking at `2025-01-16T04:30 UTC`, the code incorrectly used Jan 16 (UTC date) as the local date, built `2025-01-16 23:30 EST = 2025-01-17 04:30 UTC`, and missed the window entirely.\n\n**Fix:** Anchor to **the local date in the event's own timezone**:\n\n```python\n# FIX: convert window_start to local timezone first, then get local date\nlocal_now = window_start.astimezone(tz)\ntoday_local = local_now.date()\nnaive_scheduled = datetime(today_local.year, today_local.month, today_local.day,\n                           event.hour, event.minute, 0)\n```",
+  "timestamp": "2026-04-02T01:42:09Z",
+  "token_cost": 40038,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 41.47
+}

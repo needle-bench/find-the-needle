@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2341,
+  "output_tokens": 852,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n### The Needle 🪡\n**File:** `/app/processor.py`  \n**Bug:** Off-by-one error in the array slice end index.\n\n| | Code | Effect |\n|---|---|---|\n| **Before (buggy)** | `end = start + batch_size - 1` | `records[start:end]` grabs only `batch_size - 1` items — the last record of every batch was silently dropped |\n| **After (fixed)** | `end = start + batch_size` | `records[start:end]` correctly grabs `batch_size` items, since Python slice `stop` is **exclusive** |\n\nThe comment even said `\"grab exactly batch_size items\"` — but the code contradicted it. Because Python's `list[a:b]` returns `b - a` elements, the `- 1` caused one record per batch to be lost.",
+  "timestamp": "2026-04-02T02:31:20Z",
+  "token_cost": 3193,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 20.649
+}

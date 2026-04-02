@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.04403424,
+  "input_tokens": 151155,
+  "output_tokens": 2445,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix is complete. Let me summarize what was done:\n\n## Summary\n\nThe vulnerability was a **Unicode BIDI (Bidirectional) override privilege escalation attack**. Here's what was happening:\n\n### The Problem:\n1. An attacker could register with a username containing Unicode BIDI control characters (like U+202E RIGHT-TO-LEFT OVERRIDE) followed by \"nimda\"\n2. Visually, this would render as \"admin\" due to the BIDI override\n3. The `check_admin_access()` function in `auth.py` was using `_render_display_name()` to render the username and then comparing it against the `ADMIN_USERS` list\n4. This meant the visually rendered \"admin\" would match, granting admin access to the attacker\n\n### The Fix:\n1. **In `sanitizer.py`**: Added code to strip out Unicode BIDI control characters (`\\u202a`, `\\u202b`, `\\u202c`, `\\u202d`, `\\u202e`, `\\u2066`, `\\u2067`, `\\u2068`, `\\u2069`) from usernames during registration. This prevents the malicious username from being stored in the first place.\n\n2. **In `auth.py`**: Modified `check_admin_access()` to compare the stored username directly against the `ADMIN_USERS` list, without rendering it first. This ensures that access control decisions are based on the actual stored username, not the visually rendered form.\n\n### Result:\n- The test now passes all checks\n- Normal users can still register and login\n- Real admins can access the admin dashboard\n- BIDI-injected usernames are either rejected or normalized (stripped of BIDI characters)\n- The privilege escalation attack is prevented",
+  "timestamp": "2026-04-02T03:15:30Z",
+  "token_cost": 153600,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 39.202
+}

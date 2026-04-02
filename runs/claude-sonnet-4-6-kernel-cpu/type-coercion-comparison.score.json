@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2341,
+  "output_tokens": 1023,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**The needle was a type-coercion bug in `/app/utils.js`.**\n\n### The Problem\nIn `utils.js`, the `min_rating` query parameter was stored as a raw **string** (from `searchParams.get()`):\n```js\nquery.minRating = searchParams.get('min_rating'); // e.g., \"4\" (string)\n```\n\nIn `filter.js`, `buildRatingRange` iterates with `for (let i = min; i <= max; i++)`. When `min` is the string `\"4\"`, JavaScript's `<=` comparison coerces types — `\"4\" <= 5` is `true`, but the loop increments `i` as a number while the initial value is a string, causing unpredictable/incorrect range generation and wrong filtering results.\n\n### The Fix\nParse `min_rating` as an integer in `utils.js`:\n```js\nquery.minRating = parseInt(searchParams.get('min_rating'), 10); // now a number\n```\n\nThis ensures proper numeric comparison in `buildRatingRange`, making all three rating filter tests pass correctly.",
+  "timestamp": "2026-04-02T02:38:03Z",
+  "token_cost": 3364,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 23.979
+}

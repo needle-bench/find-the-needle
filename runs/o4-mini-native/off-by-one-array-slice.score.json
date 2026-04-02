@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-native",
+  "arm": "native",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 29807,
+  "output_tokens": 3892,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "Could you show me the stub implementation (and the accompanying `test.sh`) so I can locate where “needle” needs to be found and add the proper search logic? Then I can run `test.sh` locally to verify the fix.",
+  "timestamp": "2026-04-02T01:49:15Z",
+  "token_cost": 33699,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 36.725
+}

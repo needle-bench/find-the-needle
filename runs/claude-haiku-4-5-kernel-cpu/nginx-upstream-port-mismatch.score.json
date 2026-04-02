@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 11452,
+  "output_tokens": 1092,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **All tests passed!**\n\n## Summary\n\n**The needle found:** \n- **File:** `/etc/nginx/sites-available/default`\n- **Issue:** nginx-upstream-port-mismatch\n- **Problem:** The nginx configuration was proxying `/api/` requests to `http://127.0.0.1:5001` but the Flask server was running on `http://127.0.0.1:5000`\n- **Fix:** Changed the `proxy_pass` directive from port `5001` to port `5000`\n\nThe test now successfully verifies that both the `/health` endpoint and the `/api/data` endpoint work correctly through nginx!",
+  "timestamp": "2026-04-02T02:28:31Z",
+  "token_cost": 12544,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 10.98
+}

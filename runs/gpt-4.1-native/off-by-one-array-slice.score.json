@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-native",
+  "arm": "native",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 143699,
+  "output_tokens": 643,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The bug is fixed!  \n- Adjusted batching code in `processor.py` to use the correct slice end.\n- Ran `test.sh`: all tests pass and all records are correctly processed.\n\nLet me know if you need a breakdown of the change or want to review any specific file.",
+  "timestamp": "2026-04-02T01:48:14Z",
+  "token_cost": 144342,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 24.04
+}

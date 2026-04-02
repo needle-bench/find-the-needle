@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.016938,
+  "input_tokens": 4090,
+  "output_tokens": 859,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 24\ndrwxr-xr-x 1 root root  110 Mar  9 02:41 .\ndrwxr-xr-x 1 root root    8 Apr  2 01:50 ..\ndrwxr-xr-x 1 root root   18 Mar  9 02:41 __pycache__\n-rw-r--r-- 1 root root 2125 Mar  9 02:41 config.py\ndrwxr-xr-x 1 root root   18 Mar  9 02:41 events\ndrwxr-xr-x 1 root root   92 Mar  9 02:41 logs\ndrwxr-xr-x 1 root root   18 Mar  9 02:41 scheduler\ndrwxr-xr-x 1 root root   18 Mar  9 02:41 tests\ndrwxr-xr-x 1 root root   18 Mar  9 02:41 utils",
+  "timestamp": "2026-04-02T01:50:52Z",
+  "token_cost": 4949,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 16.471
+}

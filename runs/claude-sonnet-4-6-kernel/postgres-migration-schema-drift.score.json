@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.181995,
+  "input_tokens": 51125,
+  "output_tokens": 1908,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and the fix:\n\n## The Needle: Schema Drift Bug\n\n**Problem:** Migration `002_rename_status.sql` renamed the `status` column to `order_status` in the `orders` table, but the Go application's SQL queries still referenced the old column name `status`.\n\n**Two places were broken in `/workspace/app/main.go`:**\n\n1. **`createOrder` function** — The `INSERT` statement used `status` in both the column list and the `RETURNING` clause:\n   ```sql\n   -- BROKEN:\n   INSERT INTO orders (user_id, total, status, shipping_address) ...\n   RETURNING id, user_id, total, status, shipping_address, created_at\n   ```\n\n2. **`getOrder` function** — The `SELECT` statement also used the old `status` column name:\n   ```sql\n   -- BROKEN:\n   SELECT id, user_id, total, status, shipping_address, created_at FROM orders WHERE id = $1\n   ```\n\n**Fix:** Updated both queries to use the correct column name `order_status`:\n```sql\n-- FIXED (INSERT):\nINSERT INTO orders (user_id, total, order_status, shipping_address) ...\nRETURNING id, user_id, total, order_status, shipping_address, created_at\n\n-- FIXED (SELECT):\nSELECT id, user_id, total, order_status, shipping_address, created_at FROM orders WHERE id = $1\n```",
+  "timestamp": "2026-04-02T01:36:58Z",
+  "token_cost": 53033,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 35.217
+}

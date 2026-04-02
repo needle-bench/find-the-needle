@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.005776010000000001,
+  "input_tokens": 17843,
+  "output_tokens": 1169,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! All tests passed, including Test 3 and Test 4, which were failing before. This indicates that the IPv6 loopback addresses are now correctly blocked by the validator. I have found the needle and fixed the problem.\n",
+  "timestamp": "2026-04-02T01:51:06Z",
+  "token_cost": 19012,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 16.391
+}

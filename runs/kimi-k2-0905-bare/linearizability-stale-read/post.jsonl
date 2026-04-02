@@ -1,0 +1,82 @@
+{"event": "post.start", "benchmark": "linearizability-stale-read", "model": "kimi-k2-0905-bare", "initial_test_output": "=== Linearizability Stale-Read Test ===\nBuilding...\n--- Round 1 ---\n[1/6] Waiting for leader election...\n      Leader elected: node 0\n      Follower to isolate: node 1\n      Remaining follower: node 2\n[2/6] Stabilizing cluster...\n[3/6] Partitioning node 1 from the cluster...\n[4/6] Writing K=1 via leader (while node is partitioned)...\n      Write acknowledged by leader (committed with majority)\n      Leader commit index: 1\n[5/6] Healing partition (node 1 rejoins)...\n[6/6] Reading K from formerly-isolated node 1...\n      Follower applied index: 0\n      Follower commit index:  0\n      Leader commit index:    1\nFAIL: Key K not found on node 1 (stale read \u2014 linearizability violated)\n      A committed write is invisible to a reader. The system claims to\n      be linearizable, but reads are served from stale local state without\n      confirming the applied index is current with the leader's commit index.\nFAIL: Linearizability violation detected in round 1\nFAIL: Reads are not linearizable \u2014 stale data returned after partition heal\n", "prompt": "find the needle.", "timestamp": "2026-04-01T16:49:26Z"}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 1}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 2}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 3}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 4}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 5}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 6}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 7}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 8}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 9}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 10}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 11}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 12}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 13}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 14}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 15}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 16}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 17}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 18}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 19}
+{"event": "agent.bash", "cmd": "}", "output_preview": "bash: -c: line 1: syntax error near unexpected token `}'\nbash: -c: line 1: `}'\n", "turn": 20}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 21}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 22}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 23}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 24}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 25}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 26}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 27}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 28}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 29}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 30}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 31}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 32}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 33}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 34}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 35}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 36}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 37}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 38}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 39}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 40}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 41}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 42}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 43}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 44}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 45}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 46}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 47}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 48}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 49}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 50}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 51}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 52}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 53}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 54}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 55}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 56}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 57}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 58}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 59}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 60}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 61}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 62}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 63}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 64}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 65}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 66}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 67}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 68}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 69}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 70}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 71}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 72}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 73}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 74}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 75}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 76}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 77}
+{"event": "agent.bash", "cmd": ")", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `)'\n", "turn": 78}
+{"event": "agent.bash", "cmd": "", "output_preview": "", "turn": 79}
+{"event": "agent.bash", "cmd": ") ", "output_preview": "bash: -c: line 1: syntax error near unexpected token `)'\nbash: -c: line 1: `) '\n", "turn": 80}
+{"event": "post.end", "resolved": false, "final_test_output": "=== Linearizability Stale-Read Test ===\nBuilding...\n--- Round 1 ---\n[1/6] Waiting for leader election...\n      Leader elected: node 1\n      Follower to isolate: node 0\n      Remaining follower: node 2\n[2/6] Stabilizing cluster...\n[3/6] Partitioning node 0 from the cluster...\n[4/6] Writing K=1 via leader (while node is partitioned)...\n      Write acknowledged by leader (committed with majority)\n      Leader commit index: 1\n[5/6] Healing partition (node 0 rejoins)...\n[6/6] Reading K from formerly-isolated node 0...\n      Follower applied index: 0\n      Follower commit index:  0\n      Leader commit index:    1\nFAIL: Key K not found on node 0 (stale read \u2014 linearizability violated)\n      A committed write is invisible to a reader. The system claims to\n      be linearizable, but reads are served from stale local state without\n      confirming the applied index is current with the leader's commit index.\nFAIL: Linearizability violation detected in round 1\nFAIL: Reads are not linearizable \u2014 stale data returned after partition heal\n", "turns": 80, "timestamp": "2026-04-01T16:51:15Z"}

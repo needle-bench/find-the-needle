@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.02184825,
+  "input_tokens": 8687,
+  "output_tokens": 826,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: const { parseQueryParam } = require('./utils');\n\nfunction filterProducts(products, query) {\n  let filtered = products;\n\n  // Filter by min_rating (if provided)\n  if (query.min_rating) {\n    const minRating = parseQueryParam(query.min_rating);\n    filtered = filtered.filter(prod => {\n      return prod.rating >= minRating;\n    });\n  }\n\n  // Filter by max_price (if provided)\n  if (query.max_price) {\n    const maxPrice = parseQueryParam(query.max_price);\n    filtered = filtered.filter(prod => {\n      return prod.price <= maxPrice;\n    });\n  }\n\n  return filtered;\n}\n\nmodule.exports = { filterProducts };",
+  "timestamp": "2026-04-02T01:51:22Z",
+  "token_cost": 9513,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 18.016
+}

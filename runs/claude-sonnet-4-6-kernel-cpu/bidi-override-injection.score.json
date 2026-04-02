@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2347,
+  "output_tokens": 2236,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the **needle** found and the fix applied:\n\n---\n\n## The Bug: Unicode BIDI Override Privilege Escalation\n\n### What was wrong\n\n**`auth.py` — `check_admin_access()`** was using a **`_render_display_name()`** function to transform a stored username before comparing it to the admin allowlist. This function processed Unicode BIDI control characters like `U+202E` (RIGHT-TO-LEFT OVERRIDE), which visually reverses text.\n\nAn attacker could register as `\\u202e` + `nimda` — which *visually renders* as `admin` — and the `check_admin_access` function would see the rendered form `\"admin\"`, match it against the allowlist, and **grant full admin access**.\n\n### The fixes\n\n1. **`auth.py` — `check_admin_access()`**: Replaced the `_render_display_name()` comparison with a **direct comparison of the raw stored username**. Access control decisions must never rely on visual/rendered representations.\n\n2. **`sanitizer.py` — `sanitize_username()`**: Added a step to **strip all Unicode BIDI control characters** (`U+200E`, `U+200F`, `U+202A`–`U+202E`, `U+2066`–`U+2069`) from usernames at registration time, so the attack vector is neutralized at the input layer as well.",
+  "timestamp": "2026-04-02T02:22:37Z",
+  "token_cost": 4583,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 50.813
+}

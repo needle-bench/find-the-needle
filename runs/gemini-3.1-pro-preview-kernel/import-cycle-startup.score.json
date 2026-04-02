@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.19885999999999998,
+  "input_tokens": 78358,
+  "output_tokens": 3512,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-02T01:35:54Z",
+  "token_cost": 81870,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 76.844
+}

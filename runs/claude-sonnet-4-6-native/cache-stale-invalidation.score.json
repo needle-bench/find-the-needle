@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.10798215,
+  "input_tokens": 116520,
+  "output_tokens": 1074,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The fix was two missing cache invalidations in `server.py`:\n\n- `_update_product` (line 90): added `cache.delete(f'products:{product_id}')` after the store write\n- `_create_product` (line 99): added `cache.delete('products:list')` after the store write",
+  "timestamp": "2026-04-02T01:40:15Z",
+  "token_cost": 117594,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 30.061
+}

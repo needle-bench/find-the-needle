@@ -1,0 +1,16 @@
+{"event": "run.start", "timestamp": "2026-04-01T17:54:54Z", "benchmark": "timing-attack-comparison", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 75, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 323, "tokens_out": 102, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 376, "tokens_out": 32, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 608, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/./app"], "tokens_in": 788, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/./app"], "tokens_in": 875, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/./app"], "tokens_in": 927, "tokens_out": 49, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/./app/auth/compare.go", "/app/./app/auth/security.go", "/app/./app/auth/store.go", "/app/./app/auth/timing_test.go"], "tokens_in": 2102, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/app/.", "/app/\"*.go\""], "tokens_in": 3253, "tokens_out": 86, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/app/.", "/app/\".*\""], "tokens_in": 4432, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/app/.bench/"], "tokens_in": 4491, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/app/.bench/README.md"], "tokens_in": 4624, "tokens_out": 47, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 4880, "tokens_out": 59, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 4967, "tokens_out": 313, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-04-01T17:55:41Z", "test_exit": 1, "total_turns": 14, "correct_lines": 0, "arm": "bare"}

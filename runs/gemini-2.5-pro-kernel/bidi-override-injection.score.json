@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.264964,
+  "input_tokens": 192399,
+  "output_tokens": 14716,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test has passed. The vulnerability has been fixed. The needle has been found. The `test.sh` script now runs successfully, indicating that the bidirectional override attack has been mitigated. The application is now secure from this specific privilege escalation vulnerability.\nDone.\n",
+  "timestamp": "2026-04-02T01:25:20Z",
+  "token_cost": 207115,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 215.236
+}

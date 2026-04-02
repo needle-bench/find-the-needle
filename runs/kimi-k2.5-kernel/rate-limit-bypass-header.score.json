@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0101548,
+  "input_tokens": 20136,
+  "output_tokens": 1480,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. The issue was in `/app/app/ratelimiter.ts` where the `getClientIp` method was trusting the `X-Forwarded-For` header, which can be easily spoofed by clients.\n\n**The bug**: The code was using the `X-Forwarded-For` header value as the client identifier for rate limiting, but this header can be set by any client. An attacker could simply rotate `X-Forwarded-For` values (e.g., `10.0.0.1`, `10.0.0.2`, etc.) to appear as different clients and bypass rate limits entirely.\n\n**The fix**: Changed `getClientIp` to always use `req.socket.remoteAddress` (the actual IP address of the connection) instead of trusting the `X-Forwarded-For` header. The remote address is set by the TCP/IP stack and cannot be spoofed by the client.\n\nThe test now passes:\n- Without header spoofing: 10 passed, 5 blocked ✓\n- With header spoofing: 10 passed, 20 blocked (correctly limits all requests from the same IP) ✓",
+  "timestamp": "2026-04-02T02:08:15Z",
+  "token_cost": 21616,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 71.287
+}

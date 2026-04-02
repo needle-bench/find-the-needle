@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-native",
+  "arm": "native",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.09588150000000001,
+  "input_tokens": 102112,
+  "output_tokens": 910,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The test has passed. I've fixed the SSRF vulnerability by blocking all forms of IPv6 loopback addresses in the validator.",
+  "timestamp": "2026-04-02T02:28:08Z",
+  "token_cost": 103022,
+  "tool_uses": 8,
+  "turns_to_fix": 9,
+  "wall_clock": 27.125
+}

@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-04-01T16:33:37Z", "benchmark": "cache-stale-invalidation", "model": "kimi-k2-thinking", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/.", "/app/\"./.*\"", "/home/", "/home", "/tmp/", "/tmp\"", "/app/."], "tokens_in": 82, "tokens_out": 465, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.git", "/app/.git", "/app/.", "/app/..", "/app/.", "/app/.", "/app/\".*\"", "/app/\".git\"", "/app/."], "tokens_in": 601, "tokens_out": 285, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/cache.py", "/app/app/cache.py", "/app/config.py", "/app/app/config.py", "/app/server.py", "/app/app/server.py", "/app/store.py", "/app/app/store.py"], "tokens_in": 1623, "tokens_out": 314, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh", "/app/test.sh", "/app/.", "/app/\"*.py\""], "tokens_in": 2771, "tokens_out": 329, "test_exit": 1}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 5129, "tokens_out": 548, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T16:34:00Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

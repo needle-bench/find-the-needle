@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-04-01T17:52:57Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 75, "tokens_out": 130, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 304, "tokens_out": 112, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/app/server.py", "/workspace/app/internal_service.py"], "tokens_in": 688, "tokens_out": 38, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 1723, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 2069, "tokens_out": 355, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T17:53:16Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

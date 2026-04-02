@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4.6-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.166195,
+  "input_tokens": 28164,
+  "output_tokens": 1015,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. \n\n**The needle:** In `/app/pricing.py`, the `calculate_discount_amount` function had a wrong operator bug. The line:\n\n```python\ndiscount = subtotal + discount_percent / 100\n```\n\nwas using `+` (addition) instead of `*` (multiplication). This meant instead of calculating a percentage of the subtotal (e.g., 20% of $1098.94 = $219.79), it was adding the percentage divided by 100 to the subtotal (e.g., $1098.94 + 0.20 = $1099.14). \n\nThe fix was simply changing `+` to `*`:\n\n```python\ndiscount = subtotal * discount_percent / 100\n```",
+  "timestamp": "2026-04-02T02:09:55Z",
+  "token_cost": 29179,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 40.702
+}

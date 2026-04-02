@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00343126,
+  "input_tokens": 7616,
+  "output_tokens": 610,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! The output now includes \"OK: conflict notified\" and the script reports \"PASS\".\n",
+  "timestamp": "2026-04-02T01:35:39Z",
+  "token_cost": 8226,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 8.783
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 12538,
+  "output_tokens": 453,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I found the needle! The issue was a shutdown deadlock caused by the order of operations in the `Scheduler.Run` method. The `<-done` channel block was executing before `s.queue.Close()`.\n\nIf `ScheduleOne` was blocking on `s.queue.Pop()`, it would wait forever until `s.queue.Close()` unblocked it, but `s.queue.Close()` wouldn't be called until the `done` channel was closed (which would never happen since the goroutine is blocked).\n\nI swapped the order so that the queue is closed *before* waiting for the goroutine to finish. I've successfully run `test.sh` to verify the fix:\n\n```bash\nOK: clean shutdown\nPASS\n```",
+  "timestamp": "2026-04-02T01:44:54Z",
+  "token_cost": 12991,
+  "tool_uses": 4,
+  "turns_to_fix": 5,
+  "wall_clock": 24.673
+}

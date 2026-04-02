@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00535952,
+  "input_tokens": 23056,
+  "output_tokens": 1202,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test has passed. Here's a summary of the changes we made:\n\n1. Moved the event listener registration from the `process()` method to the constructor, ensuring listeners are registered only once.\n2. Modified the `_handleValidated` method to not rely on the original data, preventing memory leaks from closures.\n\nThe test confirms that the listener count remains stable at 2, and there's no event listener leak detected. The memory usage also remains stable, indicating that our fix has resolved the issue.",
+  "timestamp": "2026-04-02T03:19:06Z",
+  "token_cost": 24258,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 18.021
+}

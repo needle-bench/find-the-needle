@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 46074,
+  "output_tokens": 271,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The off-by-one error in `processor.py` has been fixed and verified by `test.sh`.",
+  "timestamp": "2026-04-02T01:51:39Z",
+  "token_cost": 46345,
+  "tool_uses": 5,
+  "turns_to_fix": 6,
+  "wall_clock": 15.706
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 17743,
+  "output_tokens": 783,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix works. The issue was indeed a deadlock caused by the incorrect ordering of operations in the `Run` method. By calling `s.queue.Close()` before waiting for the goroutine to finish (`<-done`), we ensure that any blocked `Pop()` calls are unblocked first, allowing the goroutine to exit cleanly.",
+  "timestamp": "2026-04-02T02:26:09Z",
+  "token_cost": 18526,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 13.121
+}

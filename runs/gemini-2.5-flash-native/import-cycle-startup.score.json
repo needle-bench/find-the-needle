@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "import-cycle-startup",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 69460,
+  "output_tokens": 646,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests passed. The circular import issue has been resolved.",
+  "timestamp": "2026-04-02T01:43:31Z",
+  "token_cost": 70106,
+  "tool_uses": 13,
+  "turns_to_fix": 12,
+  "wall_clock": 30.266
+}

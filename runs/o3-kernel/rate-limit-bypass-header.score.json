@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.25891600000000004,
+  "input_tokens": 192578,
+  "output_tokens": 4284,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the vulnerability – the rate-limiter used to trust any X-Forwarded-For value and could be bypassed by rotating that header.\n\nKey changes in app/ratelimiter.ts:\n\n1. Re-implemented getClientIp():\n   • By default we no longer trust X-Forwarded-For; we fall back to the socket’s remote address.  \n   • Trusting the header can be explicitly enabled by setting environment variable TRUST_PROXY=true for deployments behind a real reverse-proxy.\n\nWith the patch, ./test.sh now passes:\n\nWithout spoofing: 10 passed, 5 blocked  \nWith spoofing:    10 passed, 20 blocked  \nPASS: Rate limiter is not vulnerable to header spoofing",
+  "timestamp": "2026-04-02T01:47:50Z",
+  "token_cost": 196862,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 82.549
+}

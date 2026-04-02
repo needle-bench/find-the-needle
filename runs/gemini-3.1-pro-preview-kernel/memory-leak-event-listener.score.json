@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.11758200000000002,
+  "input_tokens": 22725,
+  "output_tokens": 6011,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I found the issue and fixed it. \n\n### The Problem\nThere was an event listener accumulation (memory leak) in `app/processor.js`. \n\nIn the `DataProcessor.process` method, the application was registering new event listeners on the `eventBus` every single time a request was processed:\n```javascript\n    this.eventBus.on('data:validated', (validatedData) => {\n      // This listener captures `data` in its closure, preventing GC\n      this._handleValidated(validatedData, data);\n    });\n\n    this.eventBus.on('data:error', (err) => { ... });\n```\nBecause these listeners were never removed, the application would constantly grow its event listeners array on every API call. Additionally, closures inside `data:validated` were caching the `data` request payload forever, causing an unbounded memory leak. \n\n### The Fix\nI refactored `app/processor.js` to register the `data:validated` and `data:error` event listeners exactly once in the `DataProcessor`'s `constructor()` rather than per request in the `process()` function. \n\nRunning `./test.sh` now confirms the fix with a stable memory footprint and a bounded listener count:\n```\nServer listening on port 8080\nBaseline: listeners=2, heap=4.42MB\nAfter 500 requests: listeners=2, heap=5.13MB\nPASS: Listener count stable at 2\nPASS: No event listener leak detected\n```",
+  "timestamp": "2026-04-02T01:43:57Z",
+  "token_cost": 28736,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 81.04
+}

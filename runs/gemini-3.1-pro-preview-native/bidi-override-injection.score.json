@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "bidi-override-injection",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 36967,
+  "output_tokens": 918,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found and patched the Unicode BIDI override vulnerability that allowed attackers to spoof an admin account. \n\nHere is what I fixed:\n1. **Sanitization (`app/sanitizer.py`)**: Added logic in `sanitize_username` to strip out BIDI control characters (`\\u200e`, `\\u200f`, `\\u202a`-`\\u202e`, `\\u2066`-`\\u2069`). This normalizes any malicious usernames (like `\\u202enimda`) before they can be registered.\n2. **Authorization (`app/auth.py`)**: Changed `check_admin_access` to check the actual, internal `username` against the `ADMIN_USERS` list rather than the BIDI-manipulated `display_name`.\n\nI also ran `test.sh`, which confirms the fix is successful and the vulnerability is mitigated:\n```\nPASS: normal user registration works\nPASS: normal user login works\nPASS: real admin can access dashboard\nPASS: BIDI-injected username was rejected or normalized\nPASS: non-admin user correctly denied admin access\nPASS: LRO-injected username was rejected or normalized\n\nPASS\n```",
+  "timestamp": "2026-04-02T01:39:39Z",
+  "token_cost": 37885,
+  "tool_uses": 10,
+  "turns_to_fix": 9,
+  "wall_clock": 58.558
+}

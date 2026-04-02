@@ -1,0 +1,3 @@
+{"event": "run.start", "timestamp": "2026-04-01T16:52:41Z", "benchmark": "linearizability-stale-read", "model": "kimi-k2-thinking", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cluster.go\n/app/app/handler.go\n/app/app/main.go\n/app/app/raft/log.go\n/app/app/raft/node.go\n/app/app/"}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 358, "tokens_out": 340, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-04-01T16:52:45Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

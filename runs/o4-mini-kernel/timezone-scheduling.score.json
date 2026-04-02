@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.028146800000000003,
+  "input_tokens": 29296,
+  "output_tokens": 3105,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I updated the scheduler to compute each event’s scheduled time by first translating the window start into the event’s local date. This ensures events scheduled around local midnight (which map to UTC on the next calendar day) are handled correctly. All tests now pass. Let me know if you need any further changes!",
+  "timestamp": "2026-04-02T02:08:08Z",
+  "token_cost": 32401,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 38.294
+}

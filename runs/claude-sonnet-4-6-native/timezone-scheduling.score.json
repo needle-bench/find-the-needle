@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "timezone-scheduling",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.11343705,
+  "input_tokens": 95693,
+  "output_tokens": 1545,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All 7 tests pass. The bug was in `scheduler.py:55`: it used the UTC date (`window_start.date()`) to build the scheduled time, which caused late-night events in negative-offset timezones to look up the wrong calendar date. The fix converts `window_start` to the event's local timezone first, then takes `.date()` from that.",
+  "timestamp": "2026-04-02T02:02:07Z",
+  "token_cost": 97238,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 27.456
+}

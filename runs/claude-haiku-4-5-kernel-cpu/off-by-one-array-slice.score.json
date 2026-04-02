@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 15092,
+  "output_tokens": 1088,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎯 \n\n**The needle found!**\n\nThe off-by-one array slice bug was in `/app/processor.py` at line 15:\n- **Bug**: `end = start + batch_size - 1`\n- **Fix**: `end = start + batch_size`\n\nThe issue was that Python slicing uses an exclusive upper bound, so `records[start:end-1]` drops the last item of each batch. This caused records to be lost when batch processing, especially noticeable at batch boundaries.\n\nThe test now passes all 4 test cases:\n1. ✅ Processing 25 records in batches of 10 returns all 25\n2. ✅ Processing 10 records in batches of 10 (exact boundary) returns all 10\n3. ✅ Processing 7 records in batches of 3 (uneven division) returns all 7\n4. ✅ All record IDs are present with no drops",
+  "timestamp": "2026-04-02T02:29:29Z",
+  "token_cost": 16180,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 10.901
+}

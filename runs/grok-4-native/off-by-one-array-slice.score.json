@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-native",
+  "arm": "native",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.41124525,
+  "input_tokens": 116281,
+  "output_tokens": 9558,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Tests now pass after fixing off-by-one error in processor.py:17.  \nThe \"needle\" was found in git logs as author \"needle-bench <bench@needle-bench.cc>\".",
+  "timestamp": "2026-04-02T02:41:07Z",
+  "token_cost": 125839,
+  "tool_uses": 12,
+  "turns_to_fix": 8,
+  "wall_clock": 178.65
+}

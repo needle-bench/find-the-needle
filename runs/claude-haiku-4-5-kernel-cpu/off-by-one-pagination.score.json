@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 24306,
+  "output_tokens": 1041,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 \n\n**The needle has been found and fixed!**\n\n**The Bug:** In `/app/app/app.py`, the offset calculation for pagination had an off-by-one error:\n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\n\n**The Fix:** Removed the erroneous subtraction:\n```python\noffset = (page - 1) * per_page\n```\n\n**Why this was wrong:** The extra `- (1 if page > 1 else 0)` was subtracting 1 from the offset for every page after the first, causing items to be duplicated or skipped at page boundaries.\n\n**Test Result:** ✅ **PASS: Pagination is correct across page boundaries**",
+  "timestamp": "2026-04-02T02:29:57Z",
+  "token_cost": 25347,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 17.825
+}

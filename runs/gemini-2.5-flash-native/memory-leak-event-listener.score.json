@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 51518,
+  "output_tokens": 737,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I've found the needle and successfully verified the fix by running `test.sh`. The tests indicate that the listener count is stable and no event listener leak was detected.",
+  "timestamp": "2026-04-02T01:46:00Z",
+  "token_cost": 52255,
+  "tool_uses": 5,
+  "turns_to_fix": 6,
+  "wall_clock": 28.528
+}

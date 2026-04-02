@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0157005,
+  "input_tokens": 3788,
+  "output_tokens": 815,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 32\ndrwxr-xr-x 1 root root  162 Mar  8 22:43 .\ndrwxr-xr-x 1 root root    8 Apr  2 01:46 ..\ndrwxr-xr-x 1 root root  122 Mar  8 22:43 abilities\ndrwxr-xr-x 1 root root   22 Apr  2 01:46 data\ndrwxr-xr-x 1 root root   22 Mar  8 22:43 hardware\ndrwxr-xr-x 1 root root  108 Mar  8 22:43 local-app\ndrwxr-xr-x 1 root root   32 Mar  8 22:43 local-app-2\ndrwxr-xr-x 1 root root   32 Mar  8 22:43 local-app-3\n-rwxr-xr-x 1 root root 1246 Mar  8 22:43 run.sh\ndrwxr-xr-x 1 root root   68 Mar  8 22:43 server\ndrwxr-xr-x 1 root root   32 Apr  2 01:46 tmp\ndrwxr-xr-x 1 root root   32 Mar  8 22:43 utils",
+  "timestamp": "2026-04-02T01:46:51Z",
+  "token_cost": 4603,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 16.892
+}

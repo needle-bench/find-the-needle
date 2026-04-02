@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 69234,
+  "output_tokens": 907,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test passes. The fix successfully prevents the Unicode BIDI override attack by comparing the stored username directly against the admin allowlist instead of the visually rendered display name. This ensures that attackers cannot gain admin access by using BIDI control characters to make their username appear as \"admin\" visually.",
+  "timestamp": "2026-04-02T03:15:11Z",
+  "token_cost": 70141,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 20.239
+}

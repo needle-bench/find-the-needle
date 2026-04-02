@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.1408306,
+  "input_tokens": 178283,
+  "output_tokens": 6413,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've found and fixed the needle! The hidden problem was in the GraphQL DataLoader implementation.\n\n## Problem\nDataLoader instances were being created inside each resolver call instead of at the request level. This meant that every resolver invocation got its own DataLoader instance, preventing batching across the query tree. Each loader would only ever have 1 key to load, defeating the entire purpose of DataLoader batching.\n\n## Solution\n1. **Updated the GraphQL context** (`src/context.ts`) to include DataLoader instances\n2. **Created shared loaders** (`src/loaders.ts`) that are instantiated once per request\n3. **Modified all resolvers** to use the shared loaders from context instead of creating new ones\n\n## Key Changes\n- **Before**: Each resolver created its own `new DataLoader()` instance\n- **After**: All resolvers share the same `userLoader` and `postsByAuthorLoader` from the request context\n\n## Verification\nThe test suite now passes with **2 DB queries** instead of **101 queries** (solving the N+1 problem):\n- **Performance test**: Query count reduced from 101 to 2 (well under the 15 threshold)\n- **All functional tests**: Continue to pass, confirming correctness is maintained\n\nThe fix ensures that when fetching 100 users with their posts, DataLoader properly batches all user ID requests into a single query and all post requests into another query, rather than making 1 + 100 individual queries.",
+  "timestamp": "2026-04-02T02:03:04Z",
+  "token_cost": 184696,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 273.484
+}

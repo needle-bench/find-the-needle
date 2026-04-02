@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.01117519,
+  "input_tokens": 18232,
+  "output_tokens": 1195,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix worked. The test now passes, showing that the listener count remains stable at 2 (instead of growing with each request). The issue was exactly as identified: the `DataProcessor`'s `process()` method was registering new event listeners on each call instead of registering them once in the constructor.\n\nIn the original code:\n1. Every call to `process()` added a new listener with `this.eventBus.on('data:validated', ...)`\n2. These listeners accumulated over time, causing a memory leak\n3. Each listener contained a closure that kept references to data, preventing garbage collection\n\nIn my fixed version:\n1. All necessary event listeners are registered once in the constructor\n2. The `'data:validated'` listener signature was updated to receive both validated data and original data\n3. The method now only handles the business logic without registering new listeners\n\nThis ensures that regardless of how many requests are processed, the number of event listeners remains constant and memory usage stays bounded.",
+  "timestamp": "2026-04-02T01:42:18Z",
+  "token_cost": 19427,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 33.875
+}

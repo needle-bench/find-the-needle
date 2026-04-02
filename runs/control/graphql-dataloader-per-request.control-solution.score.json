@@ -1,0 +1,10 @@
+{
+  "benchmark": "graphql-dataloader-per-request",
+  "agent": "control-solution",
+  "timestamp": "2026-04-01T16:12:18Z",
+  "resolved": true,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 1.4,
+  "control_type": "solution-applied"
+}

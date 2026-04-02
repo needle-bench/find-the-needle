@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0391755,
+  "input_tokens": 11372,
+  "output_tokens": 1678,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've found and fixed the issue, which was a memory leak caused by event listener accumulation in the DataProcessor class. The problem was that new event listeners were being registered for every call to `process()`, but they were never removed, leading to unbounded memory growth.\n\nI've modified the code to register the event listeners just once during the constructor initialization, rather than on every process call. I also removed the unnecessary closure capture of the original data in the handler.\n\nRunning the test script `/app/test.sh` after the fix confirms that the listener count remains stable at 2 even after 500 requests, and no memory leak is detected. The test passed successfully.",
+  "timestamp": "2026-04-02T01:29:07Z",
+  "token_cost": 13050,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 28.049
+}

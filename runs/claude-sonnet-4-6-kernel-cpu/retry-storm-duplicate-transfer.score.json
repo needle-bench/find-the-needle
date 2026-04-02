@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2343,
+  "output_tokens": 2389,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of what the bug was and how it was fixed:\n\n---\n\n## The Bug: Check-Then-Act Race Condition (TOCTOU)\n\n### Root Cause\nIn `processor.py`, the original `execute_transfer` function had a **time-of-check / time-of-use (TOCTOU) race condition**:\n\n1. It **debited** the source account and committed immediately.\n2. It then **slept 50ms** (simulating a downstream call).\n3. Only *then* did it check the `completed_transfers` table for the idempotency key.\n\nWith 20 concurrent requests all using the same `idempotency_key`, they would **all** pass the balance check and **all** commit a debit before any of them had a chance to record the idempotency key. This caused money to be deducted multiple times.\n\n### The Fix\nThe corrected `execute_transfer`:\n\n1. Opens a **`BEGIN IMMEDIATE`** transaction right away, acquiring a write lock from the start — preventing any other request from entering the critical section concurrently.\n2. Checks the **idempotency key first**, before touching any balances.\n3. Performs the debit, credit, and idempotency record insertion **all within a single atomic transaction**.\n4. Commits everything at once — so either the full transfer (including the idempotency record) is committed, or nothing is.\n5. The 50ms sleep was moved **after** the commit, so it no longer sits inside the transaction window.",
+  "timestamp": "2026-04-02T02:36:04Z",
+  "token_cost": 4732,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 48.075
+}

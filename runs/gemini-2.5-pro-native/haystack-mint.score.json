@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-native",
+  "arm": "native",
+  "benchmark": "haystack-mint",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 28095,
+  "output_tokens": 231,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have fixed the issue. The `test.sh` script now passes with a score of 5/5.",
+  "timestamp": "2026-04-02T02:00:58Z",
+  "token_cost": 28326,
+  "tool_uses": 9,
+  "turns_to_fix": 7,
+  "wall_clock": 44.821
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 3886,
+  "output_tokens": 1006,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Found and fixed!** ✅\n\n### The Needle 🪡\n\n**File:** `/workspace/main.go` — in the `Run()` method.\n\n### The Bug (Deadlock)\n\nThe original code had this ordering:\n```go\n<-ctx.Done()\n<-done         // wait for goroutine — but it's stuck in Pop()!\ns.queue.Close() // never reached\n```\n\n**Why it deadlocks:**\n1. `cancel()` is called → `ctx.Done()` fires.\n2. `Run()` blocks on `<-done`, waiting for the scheduler goroutine to exit.\n3. The scheduler goroutine is blocked inside `queue.Pop()`, waiting on the condition variable for a new item.\n4. `queue.Close()` (which would broadcast and wake `Pop()`) is never called because `Run()` is stuck waiting on `<-done`.\n5. **Circular wait → deadlock.**\n\n### The Fix\n\nSwap the order — **close the queue first**, then wait for the goroutine:\n```go\n<-ctx.Done()\ns.queue.Close() // wake up Pop() first\n<-done          // now the goroutine can exit cleanly\n```",
+  "timestamp": "2026-04-02T02:27:19Z",
+  "token_cost": 4892,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 25.026
+}

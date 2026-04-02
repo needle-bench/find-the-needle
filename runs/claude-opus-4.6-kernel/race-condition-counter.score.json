@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4.6-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.22529,
+  "input_tokens": 35628,
+  "output_tokens": 1886,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's what the bug was and how I fixed it:\n\n**The Problem: Race Condition in Read-Modify-Write**\n\nThe original `incrementCounter()` function used a non-atomic read-modify-write pattern:\n1. `GET` the current counter value from Redis\n2. Increment it in JavaScript (`value + 1`)\n3. `SET` the new value back to Redis\n\nWhen 100 concurrent requests hit this endpoint simultaneously, many of them would read the **same** value from Redis before any of them wrote back. For example, 10 requests might all read `5`, all compute `6`, and all write `6` — losing 9 increments.\n\n**The Fix: Atomic `INCR` Command**\n\nReplaced the three-step read-modify-write with Redis's built-in `INCR` command, which atomically increments a key's value in a single operation. This eliminates the race condition entirely because Redis executes `INCR` as a single atomic operation — no two concurrent requests can interleave.",
+  "timestamp": "2026-04-02T01:59:47Z",
+  "token_cost": 37514,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 75.74
+}

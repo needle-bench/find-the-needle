@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-native",
+  "arm": "native",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0361275,
+  "input_tokens": 19710,
+  "output_tokens": 193,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "I ran the test script, and it shows a failure: the product list has 5 items after creation, expected 6, indicating a stale cache issue. The search for 'needle' didn't yield any results in the codebase. If 'needle' refers to something specific, please provide more context or clarify its meaning.",
+  "timestamp": "2026-04-02T01:39:29Z",
+  "token_cost": 19903,
+  "tool_uses": 2,
+  "turns_to_fix": 2,
+  "wall_clock": 16.899
+}

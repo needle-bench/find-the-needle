@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00583634,
+  "input_tokens": 8449,
+  "output_tokens": 1286,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " Found the bug and fixed it!\n\n**The Needle**: A deadlock in the scheduler shutdown sequence. In the `Run()` method, the code was waiting for the goroutine to finish (`<-done`) **before** closing the queue (`s.queue.Close()`). \n\n**The Bug**: If the scheduling goroutine was blocked inside `Pop()` waiting for items, it would never receive the `ctx.Done()` signal (which is checked in the select, not during `Pop()`). Meanwhile, the main thread waited for the goroutine to exit before calling `Close()`. Result: deadlock - goroutine waits for `Close()`, main thread waits for goroutine.\n\n**The Fix**: Call `s.queue.Close()` **before** waiting for `<-done`. This wakes up any blocked `Pop()` calls, allowing the goroutine to exit cleanly.\n\nThe test now passes: `OK: clean shutdown / PASS`",
+  "timestamp": "2026-04-02T01:47:07Z",
+  "token_cost": 9735,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 98.713
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 5113,
+  "output_tokens": 1500,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎯 **Found and fixed the needle!**\n\n## Summary\n\n**The Bug:** Missing input validation for negative inventory adjustments\n\n**Location:** `/app/routes.ts` in the POST `/inventory/:sku/adjust` endpoint\n\n**The Problem:** The route handler was accepting any numeric adjustment without validating that it wouldn't result in negative inventory. The code would blindly apply adjustments like `inventory.adjustQuantity(sku, -200)` even when it would make inventory go negative.\n\n**The Fix:** Added validation before calling `adjustQuantity()`:\n```typescript\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'adjustment would result in negative inventory' }));\n  return;\n}\n```\n\nThis ensures that any adjustment attempt that would make inventory negative is rejected with a 400 Bad Request status code, preventing impossible inventory states.\n\nThe test now **PASSES** ✅",
+  "timestamp": "2026-04-02T02:28:10Z",
+  "token_cost": 6613,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 16.483
+}

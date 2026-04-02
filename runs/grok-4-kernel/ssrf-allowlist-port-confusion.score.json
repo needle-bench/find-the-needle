@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.010881,
+  "input_tokens": 2344,
+  "output_tokens": 607,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 32\ndrwxr-xr-x 1 root root 4096 Oct  2 11:29 .\ndrwxr-xr-x 1 root root 4096 Oct  2 11:30 ..\n-rw-r--r-- 1 root root  845 Oct  2 11:15 haystack.txt\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 .intern emergencies\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 needle dir\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 .needle temp\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 ~needle~\n-rwxr-xr-x 1 root root  178 Oct  2 11:15 test.sh\n",
+  "timestamp": "2026-04-02T01:50:25Z",
+  "token_cost": 2951,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 12.623
+}

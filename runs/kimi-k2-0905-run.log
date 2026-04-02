@@ -1,0 +1,815 @@
+
+============================================================
+=== api-version-field-drop (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 170 total ($0.0003)
+  [bare] ✗  40t  170 tok  $0.000  5s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 387 total ($0.0004)
+  [silent] ✓  1t  387 tok  $0.000  3s
+
+============================================================
+=== auth-bypass-path-traversal (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 111 total ($0.0001)
+  [bare] ✗  40t  111 tok  $0.000  2s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 4,773 total ($0.0036)
+  [silent] ✗  40t  4773 tok  $0.002  14s
+
+============================================================
+=== bidi-override-injection (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 5,019 total ($0.0041)
+  [bare] ✗  80t  5019 tok  $0.002  24s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 8,042 total ($0.0052)
+  [silent] ✓  4t  8042 tok  $0.002  11s
+
+============================================================
+=== cache-stale-invalidation (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 48,567 total ($0.0324)
+  [bare] ✗  40t  48567 tok  $0.011  95s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 96,796 total ($0.0609)
+  [silent] ✗  40t  96796 tok  $0.018  81s
+
+============================================================
+=== compiler-macro-expansion (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 19,379 total ($0.0134)
+  [bare] ✗  60t  19379 tok  $0.005  35s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 120,845 total ($0.0748)
+  [silent] ✓  33t  120845 tok  $0.022  57s
+
+============================================================
+=== data-corruption-concurrent-write (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 184 total ($0.0003)
+  [bare] ✗  60t  184 tok  $0.000  4s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 26,169 total ($0.0163)
+  [silent] ✗  60t  26169 tok  $0.005  17s
+
+============================================================
+=== deadlock-transfer (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 181 total ($0.0003)
+  [bare] ✗  40t  181 tok  $0.000  13s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 3,806 total ($0.0031)
+  [silent] ✗  40t  3806 tok  $0.002  27s
+
+============================================================
+=== encoding-mojibake (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 7,106 total ($0.0056)
+  [bare] ✗  20t  7106 tok  $0.003  31s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 4,720 total ($0.0036)
+  [silent] ✗  20t  4720 tok  $0.002  14s
+
+============================================================
+=== goroutine-leak-handler (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 30,653 total ($0.0207)
+  [bare] ✗  40t  30653 tok  $0.007  194s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 73,943 total ($0.0468)
+  [silent] ✗  40t  73943 tok  $0.014  98s
+
+============================================================
+=== graphql-dataloader-per-request (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 155 total ($0.0002)
+  [bare] ✗  80t  155 tok  $0.000  3s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 62,057 total ($0.0389)
+  [silent] ✗  80t  62057 tok  $0.012  46s
+
+============================================================
+=== import-cycle-startup (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 304 total ($0.0003)
+  [bare] ✗  20t  304 tok  $0.000  6s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 30,688 total ($0.0209)
+  [silent] ✗  20t  30688 tok  $0.007  52s
+
+============================================================
+=== k8s-assume-cache-silent-drop (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 23,044 total ($0.0155)
+  [bare] ✓  22t  23044 tok  $0.006  38s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 195 total ($0.0002)
+  [silent] ✓  1t  195 tok  $0.000  2s
+
+============================================================
+=== k8s-scheduler-shutdown-deadlock (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 209 total ($0.0004)
+  [bare] ✗  60t  209 tok  $0.000  8s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 178 total ($0.0002)
+  [silent] ✓  1t  178 tok  $0.000  5s
+
+============================================================
+=== kernel-panic-ioctl (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 930 total ($0.0009)
+  [bare] FAIL: The read operation timed out
+  [bare] ✗  0t  0 tok  $0.000  130s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 6,428 total ($0.0044)
+  [silent] FAIL: The read operation timed out
+  [silent] ✗  0t  0 tok  $0.000  133s
+
+============================================================
+=== linearizability-stale-read (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 216,131 total ($0.1335)
+  [bare] ✗  80t  216131 tok  $0.037  109s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 408 total ($0.0003)
+  [silent] ✓  1t  408 tok  $0.000  2s
+
+============================================================
+=== memory-leak-event-listener (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 21,189 total ($0.0147)
+  [bare] ✓  18t  21189 tok  $0.006  169s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 71,791 total ($0.0461)
+  [silent] ✗  40t  71791 tok  $0.014  103s
+
+============================================================
+=== missing-input-validation (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 141 total ($0.0002)
+  [bare] ✗  20t  141 tok  $0.000  7s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 486 total ($0.0004)
+  [silent] ✓  1t  486 tok  $0.000  7s
+
+============================================================
+=== nginx-upstream-port-mismatch (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 161 total ($0.0002)
+  [bare] ✗  40t  161 tok  $0.000  4s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 67,310 total ($0.0421)
+  [silent] ✓  33t  67310 tok  $0.012  187s
+
+============================================================
+=== null-pointer-config (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 0 total ($0.0000)
+  [bare] FAIL: The read operation timed out
+  [bare] ✗  0t  0 tok  $0.000  126s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 6,610 total ($0.0046)
+  [silent] ✗  40t  6610 tok  $0.002  20s
+
+============================================================
+=== off-by-one-array-slice (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 243 total ($0.0005)
+  [bare] ✗  20t  243 tok  $0.000  7s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 268 total ($0.0003)
+  [silent] ✗  20t  268 tok  $0.000  2s
+
+============================================================
+=== off-by-one-pagination (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 4,775 total ($0.0038)
+  [bare] ✓  8t  4775 tok  $0.002  24s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 26,318 total ($0.0175)
+  [silent] ✗  20t  26318 tok  $0.006  46s
+
+============================================================
+=== performance-cliff-hash (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 4,650 total ($0.0045)
+  [bare] ✓  6t  4650 tok  $0.003  39s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 639 total ($0.0005)
+  [silent] ✗  60t  639 tok  $0.000  4s
+
+============================================================
+=== postgres-migration-schema-drift (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 330 total ($0.0004)
+  [bare] ✓  2t  330 tok  $0.000  4s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 203,831 total ($0.1290)
+  [silent] ✗  60t  203831 tok  $0.038  161s
+
+============================================================
+=== race-condition-counter (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 196 total ($0.0003)
+  [bare] ✗  40t  196 tok  $0.000  10s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 42,899 total ($0.0274)
+  [silent] FAIL: The read operation timed out
+  [silent] ✗  0t  0 tok  $0.000  197s
+
+============================================================
+=== raft-snapshot-commit-gap (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 22,352 total ($0.0149)
+  [bare] ✓  18t  22352 tok  $0.005  48s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 1,487 total ($0.0011)
+  [silent] ✓  2t  1487 tok  $0.001  5s
+
+============================================================
+=== rate-limit-bypass-header (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 216 total ($0.0004)
+  [bare] ✗  40t  216 tok  $0.000  17s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 713 total ($0.0008)
+  [silent] ✗  40t  713 tok  $0.001  17s
+
+============================================================
+=== relaxed-ordering-ringbuf (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 3,526 total ($0.0029)
+  [bare] ✗  80t  3526 tok  $0.001  34s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 387 total ($0.0003)
+  [silent] ✓  1t  387 tok  $0.000  3s
+
+============================================================
+=== retry-storm-duplicate-transfer (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 2,242 total ($0.0018)
+  [bare] ✓  6t  2242 tok  $0.001  137s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 7,135 total ($0.0050)
+  [silent] ✓  10t  7135 tok  $0.002  22s
+
+============================================================
+=== silent-data-corruption (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 0 total ($0.0000)
+  [bare] FAIL: The read operation timed out
+  [bare] ✗  0t  0 tok  $0.000  122s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 4,203 total ($0.0028)
+  [silent] ✗  40t  4203 tok  $0.001  8s
+
+============================================================
+=== split-brain-leader-election (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 92,850 total ($0.0589)
+  [bare] ✓  43t  92850 tok  $0.018  184s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 7,709 total ($0.0060)
+  [silent] ✗  60t  7709 tok  $0.003  22s
+
+============================================================
+=== sql-injection-search (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 22,366 total ($0.0153)
+  [bare] ✗  40t  22366 tok  $0.005  44s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 37,356 total ($0.0238)
+  [silent] ✓  22t  37356 tok  $0.008  32s
+
+============================================================
+=== ssrf-allowlist-port-confusion (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 242 total ($0.0004)
+  [bare] ✗  60t  242 tok  $0.000  7s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 73,676 total ($0.0464)
+  [silent] FAIL: The read operation timed out
+  [silent] ✗  0t  0 tok  $0.000  179s
+
+============================================================
+=== timezone-scheduling (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 188 total ($0.0003)
+  [bare] ✗  20t  188 tok  $0.000  3s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 4,600 total ($0.0032)
+  [silent] ✓  4t  4600 tok  $0.001  7s
+
+============================================================
+=== timing-attack-comparison (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 10,008 total ($0.0071)
+  [bare] ✓  11t  10008 tok  $0.003  19s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 89,035 total ($0.0556)
+  [silent] ✗  60t  89035 tok  $0.016  52s
+
+============================================================
+=== tls-chain-ordering-strict (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 176 total ($0.0003)
+  [bare] ✗  80t  176 tok  $0.000  5s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 57,526 total ($0.0366)
+  [silent] FAIL: The read operation timed out
+  [silent] ✗  0t  0 tok  $0.000  187s
+
+============================================================
+=== type-coercion-comparison (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 10,358 total ($0.0073)
+  [bare] ✓  12t  10358 tok  $0.003  24s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 212 total ($0.0002)
+  [silent] ✓  1t  212 tok  $0.000  3s
+
+============================================================
+=== wal-fsync-ghost-ack (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 184 total ($0.0003)
+  [bare] ✗  60t  184 tok  $0.000  6s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 25,764 total ($0.0170)
+  [silent] ✓  23t  25764 tok  $0.006  42s
+
+============================================================
+=== wrong-operator-discount (kimi-k2-0905) ===
+============================================================
+
+  [bare] Starting...
+  [bare] Building Docker image...
+  [bare] tokens: 2,845 total ($0.0023)
+  [bare] FAIL: The read operation timed out
+  [bare] ✗  0t  0 tok  $0.000  136s
+
+  [silent] Starting...
+  [silent] Building Docker image...
+  [silent] tokens: 241 total ($0.0002)
+  [silent] ✓  1t  241 tok  $0.000  2s
+
+=== api-version-field-drop (kimi-k2-0905) ===
+  bare     ✗  40t   170 tok  $0.000  5s
+  silent   ✓   1t   387 tok  $0.000  3s
+
+  Delta (silent vs bare): +1 solves, +217 tok, $+0.000, -2s
+
+
+=== auth-bypass-path-traversal (kimi-k2-0905) ===
+  bare     ✗  40t   111 tok  $0.000  2s
+  silent   ✗  40t    4k tok  $0.002  14s
+
+  Delta (silent vs bare): +0 solves, +4k tok, $+0.002, +12s
+
+
+=== bidi-override-injection (kimi-k2-0905) ===
+  bare     ✗  80t    5k tok  $0.002  24s
+  silent   ✓   4t    8k tok  $0.002  11s
+
+  Delta (silent vs bare): +1 solves, +3k tok, $+0.000, -12s
+
+
+=== cache-stale-invalidation (kimi-k2-0905) ===
+  bare     ✗  40t   48k tok  $0.011  95s
+  silent   ✗  40t   96k tok  $0.018  81s
+
+  Delta (silent vs bare): +0 solves, +48k tok, $+0.007, -14s
+
+
+=== compiler-macro-expansion (kimi-k2-0905) ===
+  bare     ✗  60t   19k tok  $0.005  35s
+  silent   ✓  33t  120k tok  $0.022  57s
+
+  Delta (silent vs bare): +1 solves, +101k tok, $+0.017, +22s
+
+
+=== data-corruption-concurrent-write (kimi-k2-0905) ===
+  bare     ✗  60t   184 tok  $0.000  4s
+  silent   ✗  60t   26k tok  $0.005  17s
+
+  Delta (silent vs bare): +0 solves, +25k tok, $+0.005, +14s
+
+
+=== deadlock-transfer (kimi-k2-0905) ===
+  bare     ✗  40t   181 tok  $0.000  13s
+  silent   ✗  40t    3k tok  $0.002  27s
+
+  Delta (silent vs bare): +0 solves, +3k tok, $+0.001, +14s
+
+
+=== encoding-mojibake (kimi-k2-0905) ===
+  bare     ✗  20t    7k tok  $0.003  31s
+  silent   ✗  20t    4k tok  $0.002  14s
+
+  Delta (silent vs bare): +0 solves, -3k tok, $-0.001, -17s
+
+
+=== goroutine-leak-handler (kimi-k2-0905) ===
+  bare     ✗  40t   30k tok  $0.007  194s
+  silent   ✗  40t   73k tok  $0.014  98s
+
+  Delta (silent vs bare): +0 solves, +43k tok, $+0.007, -96s
+
+
+=== graphql-dataloader-per-request (kimi-k2-0905) ===
+  bare     ✗  80t   155 tok  $0.000  3s
+  silent   ✗  80t   62k tok  $0.012  46s
+
+  Delta (silent vs bare): +0 solves, +61k tok, $+0.011, +43s
+
+
+=== import-cycle-startup (kimi-k2-0905) ===
+  bare     ✗  20t   304 tok  $0.000  6s
+  silent   ✗  20t   30k tok  $0.007  52s
+
+  Delta (silent vs bare): +0 solves, +30k tok, $+0.007, +46s
+
+
+=== k8s-assume-cache-silent-drop (kimi-k2-0905) ===
+  bare     ✓  22t   23k tok  $0.006  38s
+  silent   ✓   1t   195 tok  $0.000  2s
+
+  Delta (silent vs bare): +0 solves, -23k tok, $-0.005, -36s
+
+
+=== k8s-scheduler-shutdown-deadlock (kimi-k2-0905) ===
+  bare     ✗  60t   209 tok  $0.000  8s
+  silent   ✓   1t   178 tok  $0.000  5s
+
+  Delta (silent vs bare): +1 solves, -31 tok, $-0.000, -3s
+
+
+=== kernel-panic-ioctl (kimi-k2-0905) ===
+  bare     ✗   0t     0 tok  $0.000  130s
+  silent   ✗   0t     0 tok  $0.000  133s
+
+  Delta (silent vs bare): +0 solves, +0 tok, $+0.000, +3s
+
+
+=== linearizability-stale-read (kimi-k2-0905) ===
+  bare     ✗  80t  216k tok  $0.037  109s
+  silent   ✓   1t   408 tok  $0.000  2s
+
+  Delta (silent vs bare): +1 solves, -216k tok, $-0.037, -106s
+
+
+=== memory-leak-event-listener (kimi-k2-0905) ===
+  bare     ✓  18t   21k tok  $0.006  169s
+  silent   ✗  40t   71k tok  $0.014  103s
+
+  Delta (silent vs bare): -1 solves, +50k tok, $+0.009, -66s
+
+
+=== missing-input-validation (kimi-k2-0905) ===
+  bare     ✗  20t   141 tok  $0.000  7s
+  silent   ✓   1t   486 tok  $0.000  7s
+
+  Delta (silent vs bare): +1 solves, +345 tok, $+0.000, +0s
+
+
+=== nginx-upstream-port-mismatch (kimi-k2-0905) ===
+  bare     ✗  40t   161 tok  $0.000  4s
+  silent   ✓  33t   67k tok  $0.012  187s
+
+  Delta (silent vs bare): +1 solves, +67k tok, $+0.012, +183s
+
+
+=== null-pointer-config (kimi-k2-0905) ===
+  bare     ✗   0t     0 tok  $0.000  126s
+  silent   ✗  40t    6k tok  $0.002  20s
+
+  Delta (silent vs bare): +0 solves, +6k tok, $+0.002, -106s
+
+
+=== off-by-one-array-slice (kimi-k2-0905) ===
+  bare     ✗  20t   243 tok  $0.000  7s
+  silent   ✗  20t   268 tok  $0.000  2s
+
+  Delta (silent vs bare): +0 solves, +25 tok, $-0.000, -5s
+
+
+=== off-by-one-pagination (kimi-k2-0905) ===
+  bare     ✓   8t    4k tok  $0.002  24s
+  silent   ✗  20t   26k tok  $0.006  46s
+
+  Delta (silent vs bare): -1 solves, +21k tok, $+0.004, +22s
+
+
+=== performance-cliff-hash (kimi-k2-0905) ===
+  bare     ✓   6t    4k tok  $0.003  39s
+  silent   ✗  60t   639 tok  $0.000  4s
+
+  Delta (silent vs bare): -1 solves, -5k tok, $-0.002, -35s
+
+
+=== postgres-migration-schema-drift (kimi-k2-0905) ===
+  bare     ✓   2t   330 tok  $0.000  4s
+  silent   ✗  60t  203k tok  $0.038  161s
+
+  Delta (silent vs bare): -1 solves, +203k tok, $+0.038, +156s
+
+
+=== race-condition-counter (kimi-k2-0905) ===
+  bare     ✗  40t   196 tok  $0.000  10s
+  silent   ✗   0t     0 tok  $0.000  197s
+
+  Delta (silent vs bare): +0 solves, -196 tok, $-0.000, +186s
+
+
+=== raft-snapshot-commit-gap (kimi-k2-0905) ===
+  bare     ✓  18t   22k tok  $0.005  48s
+  silent   ✓   2t    1k tok  $0.001  5s
+
+  Delta (silent vs bare): +0 solves, -21k tok, $-0.005, -43s
+
+
+=== rate-limit-bypass-header (kimi-k2-0905) ===
+  bare     ✗  40t   216 tok  $0.000  17s
+  silent   ✗  40t   713 tok  $0.001  17s
+
+  Delta (silent vs bare): +0 solves, +497 tok, $+0.000, -0s
+
+
+=== relaxed-ordering-ringbuf (kimi-k2-0905) ===
+  bare     ✗  80t    3k tok  $0.001  34s
+  silent   ✓   1t   387 tok  $0.000  3s
+
+  Delta (silent vs bare): +1 solves, -4k tok, $-0.001, -32s
+
+
+=== retry-storm-duplicate-transfer (kimi-k2-0905) ===
+  bare     ✓   6t    2k tok  $0.001  137s
+  silent   ✓  10t    7k tok  $0.002  22s
+
+  Delta (silent vs bare): +0 solves, +4k tok, $+0.001, -116s
+
+
+=== silent-data-corruption (kimi-k2-0905) ===
+  bare     ✗   0t     0 tok  $0.000  122s
+  silent   ✗  40t    4k tok  $0.001  8s
+
+  Delta (silent vs bare): +0 solves, +4k tok, $+0.001, -114s
+
+
+=== split-brain-leader-election (kimi-k2-0905) ===
+  bare     ✓  43t   92k tok  $0.018  184s
+  silent   ✗  60t    7k tok  $0.003  22s
+
+  Delta (silent vs bare): -1 solves, -86k tok, $-0.015, -162s
+
+
+=== sql-injection-search (kimi-k2-0905) ===
+  bare     ✗  40t   22k tok  $0.005  44s
+  silent   ✓  22t   37k tok  $0.008  32s
+
+  Delta (silent vs bare): +1 solves, +14k tok, $+0.002, -11s
+
+
+=== ssrf-allowlist-port-confusion (kimi-k2-0905) ===
+  bare     ✗  60t   242 tok  $0.000  7s
+  silent   ✗   0t     0 tok  $0.000  179s
+
+  Delta (silent vs bare): +0 solves, -242 tok, $-0.000, +172s
+
+
+=== timezone-scheduling (kimi-k2-0905) ===
+  bare     ✗  20t   188 tok  $0.000  3s
+  silent   ✓   4t    4k tok  $0.001  7s
+
+  Delta (silent vs bare): +1 solves, +4k tok, $+0.001, +4s
+
+
+=== timing-attack-comparison (kimi-k2-0905) ===
+  bare     ✓  11t   10k tok  $0.003  19s
+  silent   ✗  60t   89k tok  $0.016  52s
+
+  Delta (silent vs bare): -1 solves, +79k tok, $+0.014, +33s
+
+
+=== tls-chain-ordering-strict (kimi-k2-0905) ===
+  bare     ✗  80t   176 tok  $0.000  5s
+  silent   ✗   0t     0 tok  $0.000  187s
+
+  Delta (silent vs bare): +0 solves, -176 tok, $-0.000, +182s
+
+
+=== type-coercion-comparison (kimi-k2-0905) ===
+  bare     ✓  12t   10k tok  $0.003  24s
+  silent   ✓   1t   212 tok  $0.000  3s
+
+  Delta (silent vs bare): +0 solves, -11k tok, $-0.003, -21s
+
+
+=== wal-fsync-ghost-ack (kimi-k2-0905) ===
+  bare     ✗  60t   184 tok  $0.000  6s
+  silent   ✓  23t   25k tok  $0.006  42s
+
+  Delta (silent vs bare): +1 solves, +25k tok, $+0.006, +36s
+
+
+=== wrong-operator-discount (kimi-k2-0905) ===
+  bare     ✗   0t     0 tok  $0.000  136s
+  silent   ✓   1t   241 tok  $0.000  2s
+
+  Delta (silent vs bare): +1 solves, +241 tok, $+0.000, -134s
+
+
+============================================================
+AGGREGATE RESULTS (kimi-k2-0905, 38 benchmarks)
+============================================================
+  bare      10/38 solved  avg 34.4t  14411 tok  $0.003  49s
+  silent    16/38 solved  avg 24.2t  26029 tok  $0.005  49s
+
+  Delta (silent vs bare): +6 solves, +11618 avg tok, $+0.002 avg cost
+

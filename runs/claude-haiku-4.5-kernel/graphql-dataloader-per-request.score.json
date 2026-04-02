@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4.5-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.11949200000000001,
+  "input_tokens": 92827,
+  "output_tokens": 5333,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! \n\n## Summary\n\nI found and fixed the **needle in the haystack**: **DataLoader instances were being created inside each resolver call instead of at the request level**, completely defeating DataLoader's batching optimization.\n\n### The Bug\n- **userPosts()** and **postAuthor()** resolvers each created new DataLoader instances\n- This meant each resolver call got a fresh loader with exactly 1 key\n- DataLoader's batching feature requires all keys to be enqueued on the **same loader instance** within the same tick\n- Result: N+1 query problem - if you fetched 100 users with their posts, you'd get 1 query for users + 100 separate queries for posts\n\n### The Fix\nI moved DataLoader creation to the **request-level context** (the right place):\n1. **context.ts**: Added loaders to the GqlContext interface and created them once per request in `createContext()`\n2. **userResolver.ts**: Updated `user()` and `userPosts()` to use `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader`\n3. **postResolver.ts**: Updated `postAuthor()` to use `ctx.loaders.userLoader`\n\n### Result\nThe test now shows **only 2 DB queries** instead of 101+ queries, proving that DataLoader batching is now working correctly:\n- 1 query to fetch 100 users\n- 1 batched query to fetch all posts for those users in a single `WHERE author_id IN (...)` statement\n\nAll tests ✅ PASS!",
+  "timestamp": "2026-04-02T01:28:02Z",
+  "token_cost": 98160,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 84.637
+}

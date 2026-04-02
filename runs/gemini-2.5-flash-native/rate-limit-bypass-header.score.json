@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 17420,
+  "output_tokens": 368,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have successfully identified and fixed the rate limiter bypass vulnerability in `app/ratelimiter.ts`. The `test.sh` script confirmed that the rate limiter now correctly blocks excess requests and is no longer vulnerable to header spoofing.",
+  "timestamp": "2026-04-02T01:54:53Z",
+  "token_cost": 17788,
+  "tool_uses": 5,
+  "turns_to_fix": 4,
+  "wall_clock": 28.917
+}

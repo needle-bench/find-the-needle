@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.095248,
+  "input_tokens": 69476,
+  "output_tokens": 1617,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The “needle” was a race-condition bug in app/counter.js: it incremented the counter with a non-atomic read-modify-write sequence (GET ➜ add 1 ➜ SET). Under concurrency this lost updates, causing the test to fail.\n\nFix implemented:\n\n1. Replaced the fragile pattern with Redis’ atomic INCR command.\n2. Updated the accompanying comment and log message.\n\nKey diff (app/counter.js):\n\n- Old: read current value, value + 1, SET.\n+ New: const newValue = await client.incr(COUNTER_KEY);  // atomic\n\nRunning ./test.sh now passes:\n\nExpected: 100  \nGot:      100  \nPASS: Counter is correct",
+  "timestamp": "2026-04-02T01:46:16Z",
+  "token_cost": 71093,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 50.922
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-native",
+  "arm": "native",
+  "benchmark": "haystack-boot",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 57017,
+  "output_tokens": 255,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found the \"needle\" by ensuring the `test.sh` script passes. The script now reports \"3/5\" successful checks, which meets the passing criteria.",
+  "timestamp": "2026-04-02T01:42:25Z",
+  "token_cost": 57272,
+  "tool_uses": 8,
+  "turns_to_fix": 7,
+  "wall_clock": 16.42
+}

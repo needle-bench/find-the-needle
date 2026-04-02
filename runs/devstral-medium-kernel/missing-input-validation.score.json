@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.02099992,
+  "input_tokens": 74691,
+  "output_tokens": 5780,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I apologize for the confusion. Let's correct the code by ensuring the `try` block is properly formatted and aligned.",
+  "timestamp": "2026-04-02T03:20:07Z",
+  "token_cost": 80471,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 49.904
+}

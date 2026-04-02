@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "missing-input-validation",
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.10208865,
+  "input_tokens": 96006,
+  "output_tokens": 982,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Tests pass. The needle was in `routes.ts:57` — the adjust handler was missing a check for the would-be negative result. Added a guard that rejects (400) any adjustment where `product.quantity + quantity < 0`.",
+  "timestamp": "2026-04-02T01:47:19Z",
+  "token_cost": 96988,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 27.193
+}

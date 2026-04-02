@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2344,
+  "output_tokens": 1681,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 7 tests pass. ✅\n\n## The Bug (The Needle)\n\n**Location:** `/app/app/scheduler.py` — the `_is_due` method in the `Scheduler` class.\n\n**Root Cause:** The code was using **today's date in UTC** to construct the scheduled local time for an event. This broke for late-night events in **negative UTC offset timezones** (e.g., US/Eastern = UTC-5, US/Pacific = UTC-8):\n\n- `evt-002` fires at **23:30 US/Eastern** → that's **04:30 UTC the next day**\n- When checking at `2025-01-16T04:30 UTC`, the code took the UTC date (`Jan 16`) and built `23:30 Eastern on Jan 16`, which converts to `04:30 UTC on Jan 17` — **one day too late**, so it never matched.\n\n**Fix:** Use **today's date in the event's own local timezone** instead of today's UTC date:\n\n```python\n# BEFORE (wrong): uses UTC date\ntoday_utc = window_start.date()\n\n# AFTER (correct): uses the event's local date\ntoday_local = window_start.astimezone(tz).date()\n```\n\nThis correctly handles the midnight boundary crossing — when it's 04:30 UTC on Jan 16, it's still 23:30 on Jan 15 in US/Eastern, so the scheduled time `Jan 15 23:30 ET = Jan 16 04:30 UTC` matches perfectly.",
+  "timestamp": "2026-04-02T02:37:27Z",
+  "token_cost": 4025,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 34.361
+}

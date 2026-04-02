@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.13451,
+  "input_tokens": 78331,
+  "output_tokens": 5199,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fix implemented: the URL validator now correctly blocks IPv6 loop-back\naddresses (both compressed and expanded forms) together with every\nother private / link-local / loop-back / reserved range for IPv4 and\nIPv6.\n\nKey points of the patch (app/validator.py):\n1. Re-wrote validator using ipaddress to analyse literal IPs.\n2. Added explicit BLOCKED_HOSTS and BLOCKED_IPS for “localhost”, 127.0.0.1,\n   ::1, 0:0:0:0:0:0:0:1, 169.254.169.254, etc.\n3. _is_ip_blocked() rejects any ipaddress that is loopback, private,\n   link-local, multicast, reserved or unspecified.\n4. is_url_allowed() now:\n   • parses the URL,\n   • rejects empty hostnames,\n   • blocks static bad hosts / IP strings,\n   • blocks any IP literal caught by _is_ip_blocked(),\n   • otherwise allows the URL.\n\nRunning ./test.sh now produces:\n\nPASS: health endpoint OK\nPASS: 127.0.0.1 correctly blocked\nPASS: IPv6 loopback [::1] correctly blocked\nPASS: expanded IPv6 loopback correctly blocked\nPASS: AWS metadata IP correctly blocked\n\nPASS\n\nThe SSRF bypass is closed.",
+  "timestamp": "2026-04-02T01:52:46Z",
+  "token_cost": 83530,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 103.595
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.046629,
+  "input_tokens": 11928,
+  "output_tokens": 723,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**PASS** ✅\n\n### The Bug (Needle)\n\nIn `/app/app/app.py`, the offset calculation had an off-by-one error:\n\n```python\n# BUGGY\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n\n# FIXED\noffset = (page - 1) * per_page\n```\n\nThe extra `- (1 if page > 1 else 0)` subtracted 1 from the offset for any page beyond the first. This caused page 2 to start at index 9 (ID 10) instead of index 10 (ID 11), creating an **overlap** — the last item of page 1 was duplicated as the first item of page 2. The fix removes that spurious adjustment, restoring standard pagination logic.",
+  "timestamp": "2026-04-02T01:36:11Z",
+  "token_cost": 12651,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 19.38
+}

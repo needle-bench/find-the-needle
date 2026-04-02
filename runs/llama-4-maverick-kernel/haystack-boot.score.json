@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.013069850000000001,
+  "input_tokens": 34083,
+  "output_tokens": 992,
+  "resolved": false,
+  "stop_reason": "error: [429] rate limited — retry 1/7, backoff 1000ms",
+  "summary": "The test.sh script still fails, indicating that the issue is not resolved.\n\nHowever, based on the information gathered, it appears that the needle is the counter file with the value 0 in the .haystack/needles directory.\n\nTo fix the issue, we may need to modify the test.sh script or other relevant files",
+  "timestamp": "2026-04-02T01:34:42Z",
+  "token_cost": 35075,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 22.189
+}

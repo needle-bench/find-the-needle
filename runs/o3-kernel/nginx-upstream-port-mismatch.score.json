@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.065402,
+  "input_tokens": 26973,
+  "output_tokens": 3736,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Needle found: The Nginx reverse-proxy was pointing to the wrong upstream port.\n\nProblem  \n/etc/nginx/sites-available/default had\n\n    location /api/ {\n        proxy_pass http://127.0.0.1:5001;   # <- wrong port\n    }\n\nbut the Flask service actually runs on 127.0.0.1:5000.  \nThus every call that passed through Nginx to /api/* returned 502/504, while direct calls to Flask on :5000 succeeded.\n\nFix applied  \n\nChanged the proxy_pass line to the correct port:\n\n    location /api/ {\n        proxy_pass http://127.0.0.1:5000;\n    }\n\nAfter reloading Nginx, all endpoints work and test.sh reports:\n\n    ALL TESTS PASSED\n\nSo the upstream-port mismatch was the hidden bug, now resolved.",
+  "timestamp": "2026-04-02T01:39:34Z",
+  "token_cost": 30709,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 65.79
+}

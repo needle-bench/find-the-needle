@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-native",
+  "arm": "native",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 194399,
+  "output_tokens": 1001,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The bug in `AssumeCache.informerUpdate` is fixed—conflict notification is now triggered. The test output confirms that the silent drop is gone and conflict is reported:\n\n- Notifies on assumed state conflict (`conflictNotified = true`)\n- `test.sh` output:  \n  after assume: version=5 data=\"assumed-by-scheduler\"  \n  after informer: version=6 data=\"informer-update\"  \n  still assumed: false  \n  OK: conflict notified  \n  PASS\n\nLet me know if you want to see a diff or need further adjustments!",
+  "timestamp": "2026-04-02T01:43:31Z",
+  "token_cost": 195400,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 35.553
+}

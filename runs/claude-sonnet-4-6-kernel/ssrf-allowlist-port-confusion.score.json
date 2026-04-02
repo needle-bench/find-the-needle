@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.08599499999999999,
+  "input_tokens": 22945,
+  "output_tokens": 1144,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 5 tests pass. ✅\n\n## The Needle 🪡\n\n**File:** `/workspace/app/validator.py`\n\n**Bug:** The SSRF blocklist in `is_url_allowed()` was missing IPv6 loopback addresses. An attacker could bypass the proxy's security checks by using `http://[::1]:8888/metadata` or `http://[0:0:0:0:0:0:0:1]:8888/metadata` instead of the blocked `http://127.0.0.1:...`, causing the internal secret (`INTERNAL_SECRET_12345`) to be leaked.\n\n**Fix:** Added the two missing IPv6 loopback forms to `BLOCKED_HOSTS`:\n\n```python\n\"::1\",                   # IPv6 loopback short form      (parsed from [::1])\n\"0:0:0:0:0:0:0:1\",      # IPv6 loopback expanded form   (parsed from [0:0:0:0:0:0:0:1])\n```\n\n`urlparse` strips the surrounding brackets from IPv6 URLs (e.g. `[::1]` → `::1`), so those bracket-free strings are what must appear in the blocklist.",
+  "timestamp": "2026-04-02T01:41:17Z",
+  "token_cost": 24089,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 27.402
+}
