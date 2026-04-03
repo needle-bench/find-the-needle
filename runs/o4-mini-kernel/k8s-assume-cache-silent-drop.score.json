@@ -4,15 +4,15 @@
   "benchmark": "k8s-assume-cache-silent-drop",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.11262570000000001,
-  "input_tokens": 185195,
-  "output_tokens": 9706,
+  "estimated_cost_usd": 0.05641790000000001,
+  "input_tokens": 72761,
+  "output_tokens": 3968,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I added a notification flag in `informerUpdate` so that when an informer update supersedes an assumed object, the code sets `conflictNotified = true`. This signals the caller to log “OK: conflict notified” instead of silently dropping the assumed state. The change passes the `test.sh` validation.",
-  "timestamp": "2026-04-02T01:38:10Z",
-  "token_cost": 194901,
-  "tool_uses": 26,
+  "summary": "I added a notification path to signal when an assumed entry is dropped due to an informer update. Specifically, in informerUpdate, after deleting the stale assumed object, I set `conflictNotified = true`. The main function now prints “OK: conflict notified” and the tests pass. Let me know if any further adjustments are needed!",
+  "timestamp": "2026-04-03T01:36:46Z",
+  "token_cost": 76729,
+  "tool_uses": 20,
   "turns_to_fix": 1,
-  "wall_clock": 103.936
+  "wall_clock": 49.005
 }

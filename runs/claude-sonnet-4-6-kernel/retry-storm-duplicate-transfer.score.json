@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.19272899999999998,
-  "input_tokens": 47913,
-  "output_tokens": 3266,
+  "estimated_cost_usd": 0.146172,
+  "input_tokens": 34674,
+  "output_tokens": 2810,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**PASS!** ✅\n\n---\n\n## What the needle was\n\nThe bug was a **TOCTD (Time-of-Check-to-Time-of-Debit) race condition** in `/workspace/app/processor.py` — a classic **idempotency failure** in the transfer processor.\n\n### The broken logic (original order):\n1. Check balance ✓\n2. **DEBIT source account** → `commit()`\n3. `sleep(0.05)` ← 50ms window where the debit is committed but idempotency not yet recorded\n4. Check idempotency key\n5. Credit destination + record idempotency key → `commit()`\n\nWith 20 concurrent requests sharing the same `idempotency_key`, all of them could pass step 1 (sufficient funds), all debit the account in step 2, and then only the first one to reach step 4 would \"win\" — but the others had already committed their debits. This caused money to disappear (total < 2000).\n\n### The fix (new logic):\n1. **`BEGIN EXCLUSIVE`** — serialise all concurrent requests\n2. **Check idempotency key FIRST** — before any mutation; return duplicate immediately if found\n3. Check balance\n4. Debit source, credit destination, record idempotency key — all in one atomic transaction\n5. **`COMMIT`**\n6. `sleep(0.05)` — moved after commit so it doesn't hold the lock\n\nThe exclusive transaction ensures only one request at a time can pass through the idempotency gate, making duplicates impossible regardless of concurrency.",
-  "timestamp": "2026-04-02T01:40:35Z",
-  "token_cost": 51179,
-  "tool_uses": 17,
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n---\n\n## The Needle: TOCTOU Race Condition in `processor.py`\n\n### The Bug\n\nThe original `execute_transfer` function had a **Time-of-Check to Time-of-Use (TOCTOU) race condition**:\n\n1. **Debit** the source account → `COMMIT` ✓\n2. `time.sleep(0.05)` — 50ms window of vulnerability\n3. **Check** idempotency key (was this transfer already done?)\n4. If not found → **Credit** destination → record idempotency key → `COMMIT`\n\nWith 20 concurrent requests using the same `idempotency_key`, all of them could pass the idempotency check at step 3 (since none had recorded it yet), each having already committed its own debit. This led to the transfer being executed multiple times — money destroyed or duplicated.\n\n### The Fix\n\nRewrote the function to use a **single atomic `BEGIN IMMEDIATE` transaction** that:\n\n1. **Acquires a write lock immediately** (`BEGIN IMMEDIATE`) — serializing all concurrent writers\n2. **Checks idempotency first** — before any balance changes\n3. **Debits + Credits + Records idempotency key** all in one atomic `COMMIT`\n\nSince SQLite's `IMMEDIATE` lock prevents any other writer from entering the transaction while one is in progress, only one request can ever execute the transfer; all subsequent ones see the already-recorded idempotency key and return `\"duplicate\"`.",
+  "timestamp": "2026-04-03T02:22:02Z",
+  "token_cost": 37484,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 63.164
+  "wall_clock": 49.18
 }

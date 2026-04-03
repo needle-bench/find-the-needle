@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.027208000000000003,
+  "input_tokens": 15068,
+  "output_tokens": 762,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the off-by-one error in pagination.\n\nChange made in app/app.py (list_products):\n\nOld:\n    offset = (page - 1) * per_page - (1 if page > 1 else 0)\n\nNew:\n    offset = (page - 1) * per_page  # zero-based index of first item on page\n\nRunning ./test.sh now reports:\nPASS: Pagination is correct across page boundaries",
+  "timestamp": "2026-04-03T02:47:04Z",
+  "token_cost": 15830,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 19.408
+}

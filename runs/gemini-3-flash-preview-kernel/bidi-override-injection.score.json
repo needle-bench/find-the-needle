@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.0310605,
-  "input_tokens": 88959,
-  "output_tokens": 1275,
+  "estimated_cost_usd": 0.0245029,
+  "input_tokens": 49742,
+  "output_tokens": 1017,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The vulnerability was a privilege escalation flaw caused by the application using a visually rendered version of a username for authorization checks instead of its canonical form. Specifically, the `check_admin_access` function in `auth.py` used `_render_display_name`, which processed Unicode bidirectional (BIDI) override characters (like U+202E, RIGHT-TO-LEFT OVERRIDE). An attacker could register a username like `\\u202enimda`, which renders visually as `admin`, and bypass the admin allowlist check.\n\nI fixed this by:\n1.  **Updating `app/auth.py`**: Changed `check_admin_access` to use the stored, canonical `username` for role-based access control instead of the rendered display name.\n2.  **Updating `app/sanitizer.py`**: Enhanced the `sanitize_username` function to strip Unicode BIDI control characters (`\\u202a-\\u202e` and `\\u2066-\\u2069`) during registration. This prevents users from even creating accounts with potentially deceptive usernames.\n\nAfter these changes, `test.sh` passes successfully, confirming that BIDI-injected usernames no longer grant admin access and are correctly rejected or normalized.\n\n```python\n# app/auth.py fix\ndef check_admin_access(token: str) -> tuple[bool, str]:\n    # ...\n    username = session[\"username\"]\n    if username in ADMIN_USERS:\n        return True, \"admin access granted\"\n    # ...\n```\n\n```python\n# app/sanitizer.py fix\n_BIDI_RE = re.compile(r\"[\\u202a-\\u202e\\u2066-\\u2069]\")\ndef sanitize_username(username: str) -> str:\n    # ...\n    cleaned = _BIDI_RE.sub(\"\", cleaned)\n    # ...\n```",
-  "timestamp": "2026-04-02T03:21:27Z",
-  "token_cost": 90234,
-  "tool_uses": 15,
+  "summary": "The vulnerability was a **Unicode Bidirectional (BIDI) override privilege escalation**. The application's `check_admin_access` logic previously used a visually rendered version of the username (created by the `_render_display_name` function) to compare against the admin allowlist. This allowed an attacker to register a username like `\\u202enimda` (which renders as `admin`) and bypass security checks.\n\nI have fixed this by:\n1.  **Sanitizing inputs**: Added a regex in `app/sanitizer.py` to strip BIDI control characters (e.g., U+202E, U+202C) from usernames during registration.\n2.  **Hardening access control**: Modified `app/auth.py` to use the raw stored username for admin privilege checks instead of the rendered display name.\n\n```python\n# app/sanitizer.py\n_BIDI_RE = re.compile(r\"[\\u202a-\\u202e\\u2066-\\u2069\\u200e\\u200f\\u061c\\u202c]\")\n# ... (in sanitize_username)\ncleaned = _BIDI_RE.sub(\"\", username)\n\n# app/auth.py\n# (in check_admin_access)\nif username in ADMIN_USERS:\n    return True, \"admin access granted\"\n```\n\nThe `test.sh` script now passes completely.",
+  "timestamp": "2026-04-03T01:18:43Z",
+  "token_cost": 50759,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 44.163
+  "wall_clock": 25.045
 }

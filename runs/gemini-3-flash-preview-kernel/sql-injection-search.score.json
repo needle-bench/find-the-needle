@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0099725,
+  "input_tokens": 17161,
+  "output_tokens": 464,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The SQL injection vulnerability in the search endpoint was located in `app/search.py`, where user input was being directly concatenated into the SQL query string. I fixed this by refactoring the `search` method to use parameterized queries, which safely handle user input and prevent malicious SQL injection attacks.\n\nVerified the fix by running the provided `test.sh` script, which now passes all security tests including UNION-based and boolean-based SQL injection attempts.\n\n```python\n# app/search.py refactored to use parameterized queries\ndef search(self, query, category=None):\n    sql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\n    params = [f\"%{query}%\"]\n\n    if category:\n        sql += \" AND category = ?\"\n        params.append(category)\n\n    sql += \" ORDER BY name\"\n\n    return self.db.execute(sql, params)\n```",
+  "timestamp": "2026-04-03T04:37:22Z",
+  "token_cost": 17625,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 17.001
+}

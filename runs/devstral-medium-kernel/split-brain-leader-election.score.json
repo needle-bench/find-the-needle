@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0216044,
+  "input_tokens": 57539,
+  "output_tokens": 5400,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Bash",
+  "timestamp": "2026-04-03T02:01:38Z",
+  "token_cost": 62939,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 39.948
+}

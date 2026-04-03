@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Perfect! The test now passes. The fix was to implement proper atomic idempotency checking by:\n\n1. **Attempting to INSERT the idempotency key first** - This is atomic in SQLite and will fail with `IntegrityError` if another thread already inserted the same key\n2. **Only proceeding with the transfer** if we successfully insert the key (or if we get an IntegrityError, checking if it was already completed)\n3. **Using a \"pending\" state** initially and updating to \"success\" after the transfer completes\n4. **Proper cleanup** on errors to undo both the account changes and the idempotency record\n\nThis ensures that only one thread can successfully start processing a transfer with a given idempotency key, preventing the race condition that was causing duplicate transfers.",
-  "timestamp": "2026-04-02T03:44:59Z",
+  "summary": "Perfect! The test now passes. The fix was to check the idempotency key **before** making any database mutations (debiting the source account). This prevents the race condition where multiple concurrent requests could all debit the source account before any of them records the idempotency key.\n\nThe key changes:\n1. Moved idempotency check to the beginning of the function\n2. Removed the rollback logic for the debit since we no longer debit before checking\n3. Updated the IntegrityError handler to also undo the credit (since we now credit before the INSERT that might fail)\n4. Changed to a single commit at the end after all operations succeed\n\nThis ensures that only one request with a given idempotency key can successfully complete the transfer, even under concurrent retry scenarios.",
+  "timestamp": "2026-04-03T03:08:09Z",
   "token_cost": 0,
-  "tool_uses": 13,
-  "turns_to_fix": 14,
-  "wall_clock": 59.608
+  "tool_uses": 11,
+  "turns_to_fix": 12,
+  "wall_clock": 66.147
 }

@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:28:34Z", "benchmark": "goroutine-leak-handler", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/", "/"], "tokens_in": 371, "tokens_out": 384, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app", "/app.orig", "/root", "/home", "/app", "/app.orig"], "tokens_in": 957, "tokens_out": 853, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/app/test.sh", "/app", "/app/server", "/app.orig/server", "/app/.git"], "tokens_in": 2072, "tokens_out": 911, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:30:51Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

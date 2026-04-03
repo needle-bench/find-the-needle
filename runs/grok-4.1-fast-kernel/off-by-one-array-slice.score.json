@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0043532499999999995,
+  "input_tokens": 11346,
+  "output_tokens": 6605,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed! The bug was in `processor.py`: slicing used `records[start:end]` where `end = start + batch_size - 1`, which excluded the last item in each batch (Python slices are exclusive of end index).\n\nChanged to `batch = records[start:start + batch_size]` (standard Python slicing idiom).\n\nVerified: `./test.sh` now passes fully.",
+  "timestamp": "2026-04-03T02:35:50Z",
+  "token_cost": 17951,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 63.973
+}

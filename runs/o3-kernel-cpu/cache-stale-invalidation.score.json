@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.08970600000000001,
+  "input_tokens": 70705,
+  "output_tokens": 2681,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed cache invalidation bugs.\n\nChanges in app/server.py:\n1. After updating a product (PUT /products/{id})\n   - invalidate the specific product cache key\n   - invalidate the product list cache\n   - optionally write the fresh product back into the cache\n2. After creating a product (POST /products)\n   - invalidate the product list cache\n\nRunning test.sh now passes all checks:\n\n$ bash test.sh\nInitial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 6\nPASS: Product list correctly shows 6 items\nPASS: Cache correctly invalidated after writes",
+  "timestamp": "2026-04-03T01:33:09Z",
+  "token_cost": 73386,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 55.591
+}

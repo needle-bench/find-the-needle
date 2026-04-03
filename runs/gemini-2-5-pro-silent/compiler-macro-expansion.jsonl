@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:24:32Z", "benchmark": "compiler-macro-expansion", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# compiler-macro-expansion\n\n## Project\n\nA Rust code generation engine (`codegen-engine`) that takes schema definitions"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 556, "tokens_out": 330, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 607, "tokens_out": 153, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:24:59Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

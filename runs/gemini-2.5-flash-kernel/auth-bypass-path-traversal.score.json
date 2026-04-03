@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0077583999999999995,
+  "input_tokens": 26568,
+  "output_tokens": 1222,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script output shows \"PASS: Auth middleware correctly protects all API routes\". This indicates that the fix has been successfully applied and the authentication bypass vulnerabilities have been resolved. The needle has been found and fixed.",
+  "timestamp": "2026-04-03T01:15:31Z",
+  "token_cost": 27790,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 19.32
+}

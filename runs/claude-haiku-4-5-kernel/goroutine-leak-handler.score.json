@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.044328000000000006,
+  "input_tokens": 31858,
+  "output_tokens": 2494,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **Test passed!**\n\n## Summary\n\nI found the needle - a **goroutine leak in the HTTP handler**. Here's what was wrong and how I fixed it:\n\n### The Problem:\nThe `computeHandler` spawned a goroutine that performed long-running computations without any awareness of client disconnections. When clients disconnected (or timed out), the goroutines would continue running their computation loops indefinitely, leaking memory and CPU resources.\n\n### The Fix:\n1. **Added `context` import** - To handle request context and cancellation\n2. **Modified `computeHandler`** - Now passes `r.Context()` to the goroutine\n3. **Modified `performComputation`** - Now accepts a `context.Context` parameter and checks for cancellation in each iteration of the computation loop using `select { case <-ctx.Done(): ... }`\n\nWhen a client disconnects, the request context is automatically cancelled by the HTTP server, which allows the `ctx.Done()` channel to receive a signal. The goroutine can then exit cleanly instead of continuing to run.\n\nThe test now shows:\n- **Baseline**: 4 goroutines\n- **After 20 client disconnects**: 4 goroutines (no leaks!)\n- **After 5s wait**: 4 goroutines (still clean!)\n\nAll tests pass! ✨",
+  "timestamp": "2026-04-03T00:16:49Z",
+  "token_cost": 34352,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 41.278
+}

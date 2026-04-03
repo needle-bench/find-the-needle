@@ -4,15 +4,15 @@
   "benchmark": "haystack-mint",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0222013,
-  "input_tokens": 5743,
-  "output_tokens": 3610,
+  "estimated_cost_usd": 0.031100299999999994,
+  "input_tokens": 11401,
+  "output_tokens": 4218,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I’ve created the ENTITYFILE with the required fields (id, predecessor, laws, attested_by) and added a doc promote entry in audit.jsonl to reflect the hierarchical CLI attestation. All tests now pass. Run `bash test.sh` to verify.",
-  "timestamp": "2026-04-02T01:35:08Z",
-  "token_cost": 9353,
-  "tool_uses": 8,
+  "summary": "I’ve added the ENTITYFILE with required fields (predecessor, law, attested_by) and updated audit.jsonl with a \"doc promote\" event. All checks now pass (5/5). Let me know if any further adjustments are needed!",
+  "timestamp": "2026-04-03T01:33:54Z",
+  "token_cost": 15619,
+  "tool_uses": 14,
   "turns_to_fix": 1,
-  "wall_clock": 35.865
+  "wall_clock": 56.674
 }

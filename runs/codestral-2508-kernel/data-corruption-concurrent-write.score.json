@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0164241,
+  "input_tokens": 7014,
+  "output_tokens": 16583,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The config.rs file defines the configuration for the concurrent file writing process. It includes the Config struct with fields for the number of worker threads, segment size, number of segments, and passes per worker. It also provides methods to calculate the total size of the file and determine which segments each worker is responsible for. The segments_for_worker method intentionally assigns overlapping segments to workers to ensure redundancy in the writes.",
+  "timestamp": "2026-04-03T07:29:21Z",
+  "token_cost": 23597,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 114.375
+}

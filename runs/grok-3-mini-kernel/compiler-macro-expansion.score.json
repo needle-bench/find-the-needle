@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00078065,
+  "input_tokens": 552,
+  "output_tokens": 1231,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I need to find the needle first. Let's start by searching for files that might contain or relate to it.\n\n<function_call>{\"action\": \"Glob\", \"action_input\": {\"pattern\": \"*needle*}}</function_call>",
+  "timestamp": "2026-04-03T01:32:03Z",
+  "token_cost": 1783,
+  "tool_uses": 0,
+  "turns_to_fix": 1,
+  "wall_clock": 16.964
+}

@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 352906,
-  "output_tokens": 2208,
-  "resolved": true,
+  "input_tokens": 95966,
+  "output_tokens": 354,
+  "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "The normal functionality is working correctly. The set-config/get-config test shows that the configuration is being set and retrieved properly (the \"not found\" message is expected since each command creates a new device instance).\n\n## Summary\n\nThe issue was in the `ioctl_handler.c` file where two functions were missing proper input validation:\n\n1. **`handle_set_config`**: Was missing validation for the `req->value` pointer and was not checking if `req->value_len` was reasonable compared to the actual string length.\n\n2. **`handle_get_config`**: Was missing validation for the `req->value` pointer before using it in `memcpy`.\n\nThe fixes I made:\n\n1. Added NULL pointer validation for `req->value` in `handle_set_config`\n2. Added validation to ensure `req->value_len` doesn't exceed the actual string length + 1 in `handle_set_config`\n3. Added NULL pointer validation for `req->value` in `handle_get_config`\n\nThese changes prevent the segmentation fault that was occurring during the fuzz test and ensure that all crafted/invalid inputs are properly rejected without crashing.",
-  "timestamp": "2026-04-02T03:57:23Z",
-  "token_cost": 355114,
-  "tool_uses": 32,
+  "summary": "Bash",
+  "timestamp": "2026-04-03T02:16:30Z",
+  "token_cost": 96320,
+  "tool_uses": 18,
   "turns_to_fix": 1,
-  "wall_clock": 44.146
+  "wall_clock": 15.034
 }

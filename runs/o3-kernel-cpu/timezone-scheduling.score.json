@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.065566,
+  "input_tokens": 40563,
+  "output_tokens": 2375,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the bug: events scheduled near midnight in their local timezone were not firing when the corresponding UTC time landed on a different date.\n\nChanges made in app/scheduler.py (_is_due):\n1. Convert the window start to the event’s local timezone.\n2. Consider three candidate local dates: yesterday, today, tomorrow.\n3. Build the scheduled time for each candidate date, local-ize safely (handle DST edge cases).\n4. Convert each candidate to UTC and return True if any falls in the window.\n\nAll tests now pass:\n\n$ bash test.sh\nPASS: All scheduling tests passed",
+  "timestamp": "2026-04-03T03:55:57Z",
+  "token_cost": 42938,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 38.015
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.03709,
+  "input_tokens": 75344,
+  "output_tokens": 1131,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle has been found (the goroutine leak in the compute handler due to missing request context cancellation). The fix has been implemented by propagating and checking the request's context in the background computation goroutine. \n\n`test.sh` was executed and confirms the fix (all tests now PASS with no leaked goroutines).",
+  "timestamp": "2026-04-03T01:24:32Z",
+  "token_cost": 76475,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 25.368
+}

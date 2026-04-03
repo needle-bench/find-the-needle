@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.013990500000000001,
-  "input_tokens": 20637,
-  "output_tokens": 1224,
+  "estimated_cost_usd": 0.06567569999999999,
+  "input_tokens": 125406,
+  "output_tokens": 1467,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The SSRF vulnerability was caused by the webhook proxy validator not properly accounting for IPv6 loopback addresses (like `[::1]`) and other equivalent representations. While it blocked `127.0.0.1` and common IPv4 private ranges, it failed to check if a provided IPv6 address was a loopback or private address.\n\nI fixed this by using Python's `ipaddress` module to parse and validate the hostname if it's an IP address, ensuring that loopback, private, and link-local addresses are correctly identified and blocked regardless of their representation (IPv4 or IPv6).\n\n```python\nimport ipaddress\nfrom urllib.parse import urlparse\n\n# ... (existing constants)\n\ndef is_url_allowed(url: str) -> bool:\n    # ... (existing validation logic)\n\n    host = parsed.hostname\n    if not host:\n        return False\n\n    # Block well-known internal hostnames / IPs\n    if host in BLOCKED_HOSTS:\n        return False\n\n    # Block private network ranges\n    for net in BLOCKED_NETS:\n        if host.startswith(net):\n            return False\n\n    # Check for IPv6 loopback and other reserved addresses\n    try:\n        ip = ipaddress.ip_address(host.strip(\"[]\"))\n        if ip.is_loopback or ip.is_private or ip.is_link_local:\n            return False\n    except ValueError:\n        # Not an IP address, likely a hostname\n        pass\n\n    return True\n```",
-  "timestamp": "2026-04-02T03:43:12Z",
-  "token_cost": 21861,
-  "tool_uses": 8,
+  "summary": "The SSRF vulnerability was caused by the lack of IPv6 loopback address validation in `app/validator.py`. While it blocked `127.0.0.1` and `localhost`, it failed to account for IPv6 loopback forms like `[::1]` or its expanded version `[0:0:0:0:0:0:0:1]`.\n\nI fixed this by updating the `is_url_allowed` function to use Python's `ipaddress` module. This allows the validator to correctly identify and block any IP address (IPv4 or IPv6) that is a loopback, private, link-local, or unspecified address.\n\n```python\ndef is_url_allowed(url: str) -> bool:\n    try:\n        parsed = urlparse(url)\n    except Exception:\n        return False\n\n    host = parsed.hostname\n    if not host:\n        return False\n\n    # Block well-known internal hostnames\n    if host.lower() == \"localhost\":\n        return False\n\n    # Try to parse the host as an IP address\n    try:\n        ip = ipaddress.ip_address(host)\n        if ip.is_loopback or ip.is_private or ip.is_link_local or ip.is_unspecified:\n            return False\n    except ValueError:\n        # Not an IP address, continue with other checks\n        pass\n\n    # Legacy and additional blocklist checks\n    if host in BLOCKED_HOSTS:\n        return False\n\n    for net in BLOCKED_NETS:\n        if host.startswith(net):\n            return False\n\n    return True\n```\n\nThe `test.sh` script now passes all tests, confirming that both IPv4 and IPv6 loopback bypasses are correctly blocked.",
+  "timestamp": "2026-04-03T04:41:20Z",
+  "token_cost": 126873,
+  "tool_uses": 37,
   "turns_to_fix": 1,
-  "wall_clock": 20.277
+  "wall_clock": 53.734
 }

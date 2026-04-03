@@ -4,15 +4,15 @@
   "benchmark": "null-pointer-config",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.08417699999999999,
-  "input_tokens": 21349,
-  "output_tokens": 1342,
+  "estimated_cost_usd": 0.084909,
+  "input_tokens": 21388,
+  "output_tokens": 1383,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**PASS!** ✅\n\n---\n\n### Summary of the Bug\n\n**The Needle:** A null-pointer dereference (nil pointer dereference panic) in `makeStatusHandler`.\n\n| | Detail |\n|---|---|\n| **Location** | `main.go` → `makeStatusHandler` |\n| **Root Cause** | `cfg.Metrics` is a `*MetricsConfig` pointer. When `enable_metrics: true` is set in the config, the handler accesses `cfg.Metrics.Endpoint` and `cfg.Metrics.IntervalSec`. But `config.json` had **no `\"metrics\"` block**, so `cfg.Metrics` was `nil` → **panic on nil pointer dereference** → `/status` returns 500. |\n| **Fix** | Added a `\"metrics\"` object to `config.json` with `endpoint` and `interval_sec` fields, so the pointer is populated and safe to dereference. |",
-  "timestamp": "2026-04-02T01:35:08Z",
-  "token_cost": 22691,
+  "summary": "**PASS!** ✅\n\n---\n\n### Summary of the bug and fix\n\n**The Needle:** A null pointer dereference (`nil` pointer dereference) in `makeStatusHandler` in `main.go`.\n\n**Root Cause:**\n- `config.json` had `\"enable_metrics\": true` in `features`, but **no `\"metrics\"` object** in the config file.\n- In `Config`, the `Metrics` field is declared as `*MetricsConfig` (a pointer), so it defaulted to `nil` when the key was absent from the JSON.\n- When a request hit `/status`, the handler checked `cfg.Features.EnableMetrics` (true), then dereferenced `cfg.Metrics.Endpoint` and `cfg.Metrics.IntervalSec` — **crashing with a nil pointer panic** → 500 response.\n\n**Fix:** Added the missing `\"metrics\"` block to `config.json` with a valid `endpoint` and `interval_sec`, so `cfg.Metrics` is properly populated and no longer `nil`.",
+  "timestamp": "2026-04-03T02:01:08Z",
+  "token_cost": 22771,
   "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 27.199
+  "wall_clock": 33.466
 }

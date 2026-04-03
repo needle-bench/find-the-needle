@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.004616159999999999,
-  "input_tokens": 19752,
-  "output_tokens": 558,
+  "estimated_cost_usd": 0.00428192,
+  "input_tokens": 9449,
+  "output_tokens": 951,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The test passes. The fix was to call `s.queue.Close()` before waiting for the goroutine to finish (`<-done`), ensuring that any blocked `Pop()` calls are unblocked before we wait for the goroutine to exit. This prevents the deadlock.",
-  "timestamp": "2026-04-02T03:59:34Z",
-  "token_cost": 20310,
-  "tool_uses": 9,
+  "summary": "Great! The test passes, confirming that the fix resolves the deadlock issue. The key change was to call `s.queue.Close()` before waiting for the goroutine to exit (`<-done`), ensuring that any blocked `Pop()` calls can unblock and the goroutine can finish gracefully.",
+  "timestamp": "2026-04-03T02:14:08Z",
+  "token_cost": 10400,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 19.709
+  "wall_clock": 14.87
 }

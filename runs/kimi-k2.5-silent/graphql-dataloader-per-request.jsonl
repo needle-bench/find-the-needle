@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T16:56:10Z", "benchmark": "graphql-dataloader-per-request", "model": "kimi-k2.5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/src/context.ts\n/app/src/db.ts\n/app/src/loaders.ts\n/app/src/resolvers/postResolver.ts\n/app/src/resolvers/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/context.ts", "/app/src/db.ts", "/app/src/loaders.ts"], "tokens_in": 501, "tokens_out": 125, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/resolvers/userResolver.ts", "/app/src/resolvers/postResolver.ts"], "tokens_in": 1506, "tokens_out": 70, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 2967, "tokens_out": 318, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T16:56:25Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.006745300000000001,
+  "input_tokens": 6114,
+  "output_tokens": 2054,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Let me check the Config struct definition to understand how metrics configuration is handled:",
+  "timestamp": "2026-04-03T02:37:56Z",
+  "token_cost": 8168,
+  "tool_uses": 5,
+  "turns_to_fix": 0,
+  "wall_clock": 209.971
+}

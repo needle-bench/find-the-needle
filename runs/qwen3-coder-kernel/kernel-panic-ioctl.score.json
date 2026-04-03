@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.033405328,
+  "input_tokens": 609816,
+  "output_tokens": 10144,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Now let me test the fix:\n\n<tool_call>\n<function=Bash>\n<parameter=command>\n./test.sh\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T02:27:35Z",
+  "token_cost": 619960,
+  "tool_uses": 60,
+  "turns_to_fix": 1,
+  "wall_clock": 392.44
+}

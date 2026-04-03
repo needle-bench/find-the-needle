@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.204291,
+  "input_tokens": 59462,
+  "output_tokens": 1727,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of what the problem was and how it was fixed:\n\n## The Needle 🪡\n\n**The certificates in `/certs/chain.pem` were in the wrong order.**\n\n### The Bug\nThe `chain.pem` file had:\n1. **Position 0**: Leaf cert (`CN=localhost`) ✅ correct\n2. **Position 1**: Root CA (`CN=Test Root CA`) ❌ wrong\n3. **Position 2**: Intermediate CA (`CN=Test Intermediate CA`) ❌ wrong\n\nThe **Root CA and Intermediate CA were swapped**, violating RFC 5246 §7.4.2 which requires each certificate to be signed by the next one in the chain.\n\n### The Fix\nReordered the PEM blocks in `/certs/chain.pem` to the correct RFC 5246 order:\n1. **Position 0**: Leaf cert (`CN=localhost`) — the server's own certificate\n2. **Position 1**: Intermediate CA — the issuer of the leaf\n3. **Position 2**: Root CA — the issuer of the intermediate\n\nThis ensures strict TLS clients that process the chain sequentially (per the RFC) can validate it correctly.",
+  "timestamp": "2026-04-03T02:42:58Z",
+  "token_cost": 61189,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 52.625
+}

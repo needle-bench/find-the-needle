@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.012639500000000001,
+  "input_tokens": 22297,
+  "output_tokens": 497,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The character encoding issue in `CsvReader.java` was causing non-ASCII characters in the customer data to be misinterpreted. The CSV file is encoded in UTF-8, but the `CsvReader` was using `ISO-8859-1` to read it. I updated `CsvReader.java` to use `StandardCharsets.UTF_8` for reading the input file, which correctly preserves characters like 'é', 'ü', and 'ó'.\n\n```java\n<<<<\n    public CsvReader() {\n        // Use ISO-8859-1 for broad compatibility with legacy systems\n        this.charset = Charset.forName(\"ISO-8859-1\");\n    }\n====\n    public CsvReader() {\n        // Use UTF-8 which supports the special characters in the CSV\n        this.charset = StandardCharsets.UTF_8;\n    }\n>>>>\n```\n\nVerified with `test.sh`.",
+  "timestamp": "2026-04-03T01:28:49Z",
+  "token_cost": 22794,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 14.494
+}

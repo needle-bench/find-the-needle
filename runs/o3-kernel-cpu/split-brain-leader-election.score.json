@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.640344,
+  "input_tokens": 471104,
+  "output_tokens": 33355,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "We need to correct quorum check: should require strict majority > n/2. In node.go we change:\n\nif finalVotes >= totalNodes/2 { to >.\n\nAlso count totalNodes should be len(peers)+1? When partitioned peers list includes unreachable nodes, but they are still in count. That's okay.\n\nRebuild binary when tests run; Dockerfile build uses updated code; we do not modify test.sh.\n\n",
+  "timestamp": "2026-04-03T03:27:55Z",
+  "token_cost": 504459,
+  "tool_uses": 60,
+  "turns_to_fix": 1,
+  "wall_clock": 351.65
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0081228,
+  "input_tokens": 28335,
+  "output_tokens": 756,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test now passes. The issue was resolved by changing the `hashCode()` method in `Product.java` to use the `sku` field instead of the `category` field. This ensures that items are distributed evenly across the hash map buckets, avoiding severe collisions.\n\nThe needle in the haystack was the incorrect implementation of the `hashCode()` method in `Product.java`.",
+  "timestamp": "2026-04-03T02:45:48Z",
+  "token_cost": 29091,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 15.968
+}

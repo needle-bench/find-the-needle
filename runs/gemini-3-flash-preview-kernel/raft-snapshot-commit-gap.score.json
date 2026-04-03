@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.29925329999999994,
+  "input_tokens": 1797567,
+  "output_tokens": 15019,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "<ctrl46>",
+  "timestamp": "2026-04-03T03:59:21Z",
+  "token_cost": 1812586,
+  "tool_uses": 56,
+  "turns_to_fix": 1,
+  "wall_clock": 157.484
+}

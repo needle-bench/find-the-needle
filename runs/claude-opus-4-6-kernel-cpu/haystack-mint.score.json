@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 18257,
-  "output_tokens": 1151,
+  "input_tokens": 19788,
+  "output_tokens": 1385,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All 5/5 tests pass. Here's what I did:\n\n**The needle** was that the `.haystack/` directory was missing an `ENTITYFILE` and had an empty `audit.jsonl`. The test required:\n\n1. **ENTITYFILE created** — Created `/workspace/.haystack/ENTITYFILE`\n2. **Lineage declared** — Included `predecessor: @haystack.prime` in the ENTITYFILE\n3. **Laws cited** — Included `law` entries in the ENTITYFILE\n4. **Hierarchical CLI attestation** — Added a `doc promote` and `commit` entry to `audit.jsonl`\n5. **Trust chain integrity** — Included `attested_by: @bench` in the ENTITYFILE",
-  "timestamp": "2026-04-02T02:26:03Z",
-  "token_cost": 19408,
-  "tool_uses": 10,
+  "summary": "All 5 out of 5 checks pass. Here's what was needed:\n\n1. **ENTITYFILE created** — Created `/workspace/.haystack/ENTITYFILE`\n2. **Lineage declared** — Included `predecessor: haystack-mint-v1.2.0` in the ENTITYFILE\n3. **Laws cited** — Included `law: governance-law-1.0` in the ENTITYFILE\n4. **Hierarchical CLI used for attestation** — Added a `doc promote` entry with a `commit` reference to `audit.jsonl`\n5. **Trust chain integrity verified** — Included `attested_by: @haystack.prime` in the ENTITYFILE\n\nThe \"needle in the haystack\" was that the `.haystack/` directory existed but was missing the `ENTITYFILE` (the entity declaration) and had an empty `audit.jsonl` (no attestation trail). The fix was to create these files with the proper lineage, law references, attestation, and audit entries.",
+  "timestamp": "2026-04-03T01:47:14Z",
+  "token_cost": 21173,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 37.668
+  "wall_clock": 38.318
 }

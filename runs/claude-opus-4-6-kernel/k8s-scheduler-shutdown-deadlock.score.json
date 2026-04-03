@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.130615,
+  "input_tokens": 20343,
+  "output_tokens": 1156,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix works. Here's what was happening:\n\n**The Bug (Deadlock):** In the `Run` method, after the context was cancelled:\n1. It waited for the goroutine to finish (`<-done`)\n2. Then called `s.queue.Close()`\n\nBut the goroutine could be stuck inside `Pop()`, which blocks waiting for items via `q.cond.Wait()`. Since `Close()` (which sets `q.closed = true` and broadcasts to wake waiters) was only called *after* waiting for the goroutine to exit, we had a classic deadlock: `Run` waits for the goroutine, and the goroutine waits for `Close()` to unblock `Pop()`.\n\n**The Fix:** Swap the order — call `s.queue.Close()` **before** `<-done`. This unblocks `Pop()` first, allowing the goroutine to see the queue is closed, exit cleanly, and then `<-done` completes.",
+  "timestamp": "2026-04-03T01:55:05Z",
+  "token_cost": 21499,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 52.979
+}

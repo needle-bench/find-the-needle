@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 11133,
+  "output_tokens": 4551,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! Let me create a summary of what I found:\n\n## Summary\n\nI found **TWO bugs** in the distributed KV store that violated linearizability:\n\n### Bug #1: Heartbeat not updating commit index\n**Location:** `/app/app/raft/node.go` in the `handleHeartbeat()` function (around line 545)\n\n**Issue:** When a follower receives a heartbeat from the leader, the heartbeat message includes the leader's current commit index in the `Index` field. However, the `handleHeartbeat()` function was **not using this information to update the follower's commit index**. \n\nIn contrast, the `handleAppendEntries()` function (which handles regular log replication) correctly uses the leader's commit index to advance the follower's commit index:\n```go\nleaderCommit := msg.Index\nif leaderCommit > 0 {\n    lastIdx := n.log.LastIndex()\n    commitIdx := leaderCommit\n    if commitIdx > lastIdx {\n        commitIdx = lastIdx\n    }\n    n.advanceCommitIndex(commitIdx)\n}\n```\n\nThis code was missing from `handleHeartbeat()`, causing followers to never learn about committed entries after a network partition healed.\n\n**Fix:** Added the same commit index advancement logic to `handleHeartbeat()`.\n\n### Bug #2: Reads returning stale data\n**Location:** `/app/app/handler.go` in the `handleRead()` function (around line 85)\n\n**Issue:** The HTTP read handler was using `h.node.Read(key)` which returns data directly from the local KV store without any consistency guarantee. This violates linearizability because a client could receive stale data if the node hasn't yet learned about committed entries.\n\n**Fix:** Changed to use `h.node.ReadLinearizable(key)` which implements a read-index protocol to ensure the follower's state is up-to-date with the leader's commit index before returning data.\n\nBoth fixes together ensure the system provides **linearizable reads**: once a write is committed by the leader (acknowledged by a majority), any subsequent read from ANY node returns the written value, even after network partitions heal.",
+  "timestamp": "2026-04-03T00:45:48Z",
+  "token_cost": 15684,
+  "tool_uses": 29,
+  "turns_to_fix": 1,
+  "wall_clock": 69.709
+}

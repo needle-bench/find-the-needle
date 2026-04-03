@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T16:29:25Z", "benchmark": "auth-bypass-path-traversal", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 75, "tokens_out": 122, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.", "/app/test.sh"], "tokens_in": 319, "tokens_out": 72, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T16:29:32Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

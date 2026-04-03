@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T02:03:44Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "deepseek-v3-2", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/internal_service.py\n/workspace/app/server.py\n/workspace/app/validator.py\n\nCurrent test o"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/"], "tokens_in": 804, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1026, "tokens_out": 48, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T02:03:52Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

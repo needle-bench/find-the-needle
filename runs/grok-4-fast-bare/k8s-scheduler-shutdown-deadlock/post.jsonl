@@ -1,5 +1,0 @@
-{"event": "post.start", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "grok-4-fast-bare", "initial_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "prompt": "find the needle.", "timestamp": "2026-03-30T01:29:06Z"}
-{"event": "agent.bash", "cmd": "find / -name \"needle\" 2>/dev/null", "output_preview": "", "turn": 1}
-{"event": "agent.bash", "cmd": "find / -type f -name \"*needle*\" 2>/dev/null", "output_preview": "", "turn": 2}
-{"event": "agent.bash", "cmd": "find / -iname \"*needle*\" 2>/dev/null", "output_preview": "", "turn": 3}
-{"event": "post.end", "resolved": false, "final_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "turns": 4, "timestamp": "2026-03-30T01:29:28Z"}

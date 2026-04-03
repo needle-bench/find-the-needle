@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 37176,
+  "output_tokens": 2401,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found the issue and fixed the certificate chain ordering in `app/tlssetup/loader.go`.\n\nThe `tls.X509KeyPair` function parses the PEM certificates in the exact order they appear in the file. If the original `.pem` file presents them out of order (e.g., leaf, root, intermediate), strict clients that expect RFC 5246 compliant chains will reject the connection.\n\nI updated `LoadTLSConfig` to dynamically sort the loaded certificates so that each subsequent certificate correctly validates as the issuer of the previous one (i.e., `cert[i].Issuer == cert[i+1].Subject`).\n\nThe verification test `test.sh` now passes successfully.",
+  "timestamp": "2026-04-03T07:04:34Z",
+  "token_cost": 39577,
+  "tool_uses": 11,
+  "turns_to_fix": 12,
+  "wall_clock": 84.712
+}

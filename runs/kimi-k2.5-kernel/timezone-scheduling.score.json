@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.00864996,
-  "input_tokens": 14479,
-  "output_tokens": 2092,
+  "estimated_cost_usd": 0.0136080741,
+  "input_tokens": 26647,
+  "output_tokens": 2120,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " The needle has been found and fixed!\n\n**The Bug:** In `./app/scheduler.py`, the `_is_due` method was using the UTC date (`window_start.date()`) to build the scheduled time for events. This breaks for events scheduled late at night in timezones behind UTC (like US/Eastern or US/Pacific) because when it's \"tomorrow\" in UTC, it's still \"today\" in those timezones.\n\n**Example of the bug:**\n- Event scheduled at 23:30 US/Eastern\n- At 2025-01-16 04:30 UTC, it's 2025-01-15 23:30 EST\n- Old code: Used Jan 16 date → built 2025-01-16 23:30 EST → Jan 17 04:30 UTC (wrong!)\n- Fixed code: Uses Jan 15 date (local time) → built 2025-01-15 23:30 EST → Jan 16 04:30 UTC (correct!)\n\n**The Fix:** Changed to use the local date in the event's timezone (`window_start.astimezone(tz).date()`) instead of the UTC date.",
-  "timestamp": "2026-04-02T02:21:05Z",
-  "token_cost": 16571,
-  "tool_uses": 12,
+  "summary": " I found the bug and fixed it!\n\n**The Problem:**\nIn `scheduler.py`, the `_is_due` method was using `window_start.date()` (UTC date) to build the scheduled event time. This caused issues for events scheduled after midnight in their local timezone but before midnight in UTC.\n\nFor example, evt-002 (23:30 EST) at window_start 04:30 UTC on Jan 16:\n- Old code: Built schedule for \"Jan 16 23:30 EST\" → 04:30 UTC on Jan 17 (WRONG!)\n- Correct behavior: Should build schedule for \"Jan 15 23:30 EST\" → 04:30 UTC on Jan 16\n\n**The Fix:**\nChanged the code to first convert `window_start` to the event's local timezone, then use that local date when building the scheduled time. This ensures the event date is based on what day it actually is in the event's timezone, not in UTC.\n\n```python\n# Before (broken)\ntoday_utc = window_start.date()\n\n# After (fixed)\nlocal_now = window_start.astimezone(tz)\ntoday_local = local_now.date()\n```",
+  "timestamp": "2026-04-03T03:41:12Z",
+  "token_cost": 28767,
+  "tool_uses": 22,
   "turns_to_fix": 1,
-  "wall_clock": 44.995
+  "wall_clock": 103.61
 }

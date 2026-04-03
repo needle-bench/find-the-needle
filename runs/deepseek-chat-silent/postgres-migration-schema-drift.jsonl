@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:32:05Z", "benchmark": "postgres-migration-schema-drift", "model": "deepseek-chat", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/start.sh\n/workspace/test.sh\n/workspace/app/main.go\n/workspace/app/vendor/github.com/lib/pq/array.go\n/workspace/"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 886, "tokens_out": 104, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:32:10Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

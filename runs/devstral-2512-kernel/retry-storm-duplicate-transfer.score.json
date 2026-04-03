@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.01696632,
-  "input_tokens": 44780,
-  "output_tokens": 2099,
+  "estimated_cost_usd": 0.021585200000000002,
+  "input_tokens": 59303,
+  "output_tokens": 2388,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The test passes now. The fix was to move the idempotency check to BEFORE the debit operation, preventing the race condition where multiple requests could debit the account before any of them had a chance to record the idempotency key.\n\nThe key insight is that idempotency must be checked atomically with the entire operation - you can't debit first and then check if it's a duplicate. The check must happen first to prevent the duplicate debit from occurring in the first place.",
-  "timestamp": "2026-04-02T04:05:44Z",
-  "token_cost": 46879,
-  "tool_uses": 11,
+  "summary": "Perfect! The fix is working correctly. The key changes are:\n\n1. **Moved idempotency check to the beginning** of the function, before any account modifications\n2. **Removed the rollback logic** since we no longer debit before checking idempotency\n3. **Simplified the IntegrityError handling** since we don't need to rollback a debit that never happened\n4. **Moved the commit** to happen only once at the end after all operations succeed\n\nThis ensures that even with concurrent requests using the same idempotency key, only one transfer will actually execute, and the others will be rejected as duplicates before any account balances are modified.",
+  "timestamp": "2026-04-03T03:09:08Z",
+  "token_cost": 61691,
+  "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 30.576
+  "wall_clock": 39.462
 }

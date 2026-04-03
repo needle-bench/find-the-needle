@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.05219,
+  "input_tokens": 43175,
+  "output_tokens": 1803,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The fix is complete!**\n\n## Summary\n\n**The Needle Found:** The bug was a **character encoding mismatch** in `/app/app/CsvReader.java`.\n\n**The Problem:**\n- The CSV input file contains UTF-8 encoded international characters (é, ö, ü, å, ć, etc.)\n- `CsvReader.java` was reading the file using **ISO-8859-1** (Latin-1) charset\n- `ReportGenerator.java` was writing the output using **UTF-8** charset\n- This mismatch caused UTF-8 multi-byte characters to be incorrectly decoded as Latin-1, corrupting all non-ASCII names\n\n**The Fix:**\nChanged the charset in `CsvReader.java` from `ISO-8859-1` to `UTF-8` (using `StandardCharsets.UTF_8`)\n\n**Verification:**\nAll 12 test assertions now pass, including all international names with special characters (Renée, Müller, García, Kirkegård, Léger, Kovács, München, København, etc.)",
+  "timestamp": "2026-04-03T00:14:30Z",
+  "token_cost": 44978,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 32.376
+}

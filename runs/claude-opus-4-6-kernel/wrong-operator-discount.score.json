@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.173355,
+  "input_tokens": 29716,
+  "output_tokens": 991,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. The **needle** was a wrong operator bug in `/app/pricing.py` in the `calculate_discount_amount` function:\n\n- **Bug**: `discount = subtotal + discount_percent / 100` — this was *adding* the subtotal to (percent/100), producing a nonsensical value.\n- **Fix**: `discount = subtotal * discount_percent / 100` — this correctly *multiplies* the subtotal by the percentage to compute the discount amount (e.g., 20% of $1098.94 = $219.79).",
+  "timestamp": "2026-04-03T03:45:23Z",
+  "token_cost": 30707,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 55.389
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00299845,
+  "input_tokens": 12965,
+  "output_tokens": 3873,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug has been fixed, and test.sh now passes.",
+  "timestamp": "2026-04-03T01:20:27Z",
+  "token_cost": 16838,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 34.063
+}

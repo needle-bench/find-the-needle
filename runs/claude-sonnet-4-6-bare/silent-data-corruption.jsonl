@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T02:29:48Z", "benchmark": "silent-data-corruption", "model": "claude-sonnet-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 583, "tokens_out": 131, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 779, "tokens_out": 141, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/home", "/root", "/tmp", "/var", "/opt", "/usr/local", "/home", "/root", "/tmp", "/var", "/opt", "/usr/local"], "tokens_in": 995, "tokens_out": 152, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/root/.gitconfig", "/root/.rustup/toolchains/1.82.0-aarch64-unknown-linux-musl/share/doc/rust/html/std/primitive.slice.html"], "tokens_in": 3061, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 3961, "tokens_out": 167, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T02:34:42Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

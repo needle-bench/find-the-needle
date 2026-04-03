@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.27817416,
+  "input_tokens": 1787159,
+  "output_tokens": 17027,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test passes. \n\nLet me also verify that my fix handles edge cases by looking at the sortChainCerts function. The function:\n1. Takes certificates from indices 1..n (excluding the leaf at index 0)\n2. Parses them to get their subjects and issuers\n3. Builds an ordered chain where each certificate's subject matches the previous certificate's issuer\n4. Appends any unused certificates at the end\n\nThis should work correctly for our 3-certificate chain (leaf, root, intermediate) and reorder it to (leaf, intermediate, root).\n\nThe bug has been fixed! The issue was that the TLS certificate chain was not being sent in the correct order according to RFC 5246 Section 7.4.2. The server was sending certificates in the order: leaf, root CA, intermediate CA, but it should send: leaf, intermediate CA, root CA.\n\nThe fix was implemented in `app/tlssetup/loader.go` by adding a `sortChainCerts` function that reorders the certificates after loading them with `tls.X509KeyPair`. This function ensures that each certificate in the chain (after the leaf) is issued by the next certificate in the chain, forming a proper trust path.\n\nNow the test passes successfully.",
+  "timestamp": "2026-04-03T05:28:33Z",
+  "token_cost": 1804186,
+  "tool_uses": 76,
+  "turns_to_fix": 1,
+  "wall_clock": 1451.84
+}

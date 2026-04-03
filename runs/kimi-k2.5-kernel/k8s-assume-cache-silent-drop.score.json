@@ -4,15 +4,15 @@
   "benchmark": "k8s-assume-cache-silent-drop",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.02183758,
-  "input_tokens": 27464,
-  "output_tokens": 5762,
+  "estimated_cost_usd": 0.0054652400000000005,
+  "input_tokens": 10388,
+  "output_tokens": 1021,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " The fix is complete. The needle was:\n\nIn the `informerUpdate` function, when an assumed object's state was being silently dropped (because the informer delivered a newer version), there was no notification mechanism. The fix adds `conflictNotified = true` before deleting the assumed entry, ensuring that callers are notified when their assumed state is dropped due to a conflict.\n\nThe test now passes! 🎉",
-  "timestamp": "2026-04-02T01:45:18Z",
-  "token_cost": 33226,
-  "tool_uses": 19,
+  "summary": " The bug was found and fixed. The issue was in the `informerUpdate` method - when an assumed object's version was being silently dropped due to a newer informer update, there was no notification being sent to alert the scheduler that its assumed state was discarded.\n\n**The fix:** Added `conflictNotified = true` before deleting the assumed entry, so that when the assumed state is silently dropped, the conflict notification flag is set. This triggers the \"OK: conflict notified\" message that the test was looking for.",
+  "timestamp": "2026-04-03T02:12:09Z",
+  "token_cost": 11409,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 270.494
+  "wall_clock": 34.714
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.2358884,
+  "input_tokens": 466940,
+  "output_tokens": 14612,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I incorporated the missing steps in InstallSnapshot: discarding superseded log entries via CompactUpTo and updating commitIndex to the snapshot’s last included index. This ensures after a restart, the follower doesn’t reapply entries already in the snapshot. All tests now pass.",
+  "timestamp": "2026-04-03T02:13:12Z",
+  "token_cost": 481552,
+  "tool_uses": 42,
+  "turns_to_fix": 1,
+  "wall_clock": 170.745
+}

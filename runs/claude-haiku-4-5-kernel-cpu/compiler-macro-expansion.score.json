@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7220,
+  "output_tokens": 2084,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! \n\n## Summary\n\n**Found the needle!** \n\nThe bug was in `/app/src/codegen.rs` in the `generate_getter` function. When generating getter methods for `FieldType::Ref` (reference types), the code was producing an **inconsistent type signature**:\n\n**Before (buggy):**\n```rust\npub fn company(&self) -> Company {  // Return type: owned\n    &self.company                    // Body: returns reference\n}\n```\n\n**After (fixed):**\n```rust\npub fn company(&self) -> &Company {  // Return type: reference\n    &self.company                    // Body: returns reference\n}\n```\n\nThe fix was to add the `&` prefix to the return type in the format string:\n- Changed: `\"    pub fn {}(&self) -> {} {{\\n        &self.{}\\n    }}\\n\\n\"`\n- To: `\"    pub fn {}(&self) -> &{} {{\\n        &self.{}\\n    }}\\n\\n\"`\n\nThis ensures that reference-typed fields (nested structs) return reference types (`&Company`, `&Address`) instead of claiming to return owned types while actually returning references. This is crucial for Rust code correctness, especially for chained accessor patterns and preventing use-after-free issues.\n\nAll tests now pass! ✅",
+  "timestamp": "2026-04-03T00:07:25Z",
+  "token_cost": 9304,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 28.049
+}

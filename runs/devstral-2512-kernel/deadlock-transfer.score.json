@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.01566168,
+  "input_tokens": 44159,
+  "output_tokens": 1208,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix worked. The test script now passes, indicating that the deadlock issue has been resolved. The key change was enforcing a consistent lock ordering based on the account IDs, ensuring that all threads acquire locks in the same order and preventing deadlocks.",
+  "timestamp": "2026-04-03T01:21:35Z",
+  "token_cost": 45367,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 20.667
+}

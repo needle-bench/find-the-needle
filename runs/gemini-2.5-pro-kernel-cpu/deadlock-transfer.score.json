@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 10814,
+  "output_tokens": 1210,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script now passes, confirming that the deadlock issue is resolved. The concurrent transfers completed successfully without any timeouts or errors. This indicates that enforcing a consistent lock acquisition order by sorting the accounts based on their IDs has fixed the bug. The needle has been found. I'm now done.\n",
+  "timestamp": "2026-04-03T02:00:17Z",
+  "token_cost": 12024,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 32.971
+}

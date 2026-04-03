@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:51:49Z", "benchmark": "wal-fsync-ghost-ack", "model": "qwen3-coder-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/client.go\n/workspace/main.go\n/workspace/server.go\n/workspace/store.go\n/workspace/wal.go\n\nCur"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 507, "tokens_out": 63, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 1797, "tokens_out": 41, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/server.go"], "tokens_in": 2536, "tokens_out": 39, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 3401, "tokens_out": 290, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/wal.go"], "tokens_in": 3815, "tokens_out": 58, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/client.go"], "tokens_in": 5312, "tokens_out": 658, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 6645, "tokens_out": 39, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:52:23Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "silent"}

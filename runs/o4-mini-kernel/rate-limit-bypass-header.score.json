@@ -4,15 +4,15 @@
   "benchmark": "rate-limit-bypass-header",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0207262,
-  "input_tokens": 21050,
-  "output_tokens": 2040,
+  "estimated_cost_usd": 0.0306372,
+  "input_tokens": 45256,
+  "output_tokens": 2057,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I’ve removed reliance on the X-Forwarded-For header and now always use the socket’s remote address to identify clients. This prevents spoofing via rotating headers. All tests pass successfully.",
-  "timestamp": "2026-04-02T01:56:24Z",
-  "token_cost": 23090,
-  "tool_uses": 7,
+  "summary": "I’ve removed trust in the X-Forwarded-For header and now always use the socket’s remoteAddress for rate limiting. All tests pass, ensuring spoofed headers can’t bypass the rate limiter.",
+  "timestamp": "2026-04-03T02:14:06Z",
+  "token_cost": 47313,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 41.79
+  "wall_clock": 32.472
 }

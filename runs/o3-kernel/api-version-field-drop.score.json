@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.13783999999999996,
+  "input_tokens": 108972,
+  "output_tokens": 3811,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The “needle” was that API v2 had dropped three fields (avatar_url, bio, location) that existed in v1.  \nI restored those fields to the UserV2 struct and updated the ToV2() converter to populate them, making v2 a strict superset of v1.\n\nRunning test.sh now reports:\n\nPASS: All v1 fields present in v2  \nPASS: v2 has new fields …  \nPASS: v2 API is backward-compatible with v1\n\nThe compatibility regression is fixed.",
+  "timestamp": "2026-04-03T01:16:32Z",
+  "token_cost": 112783,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 68.464
+}

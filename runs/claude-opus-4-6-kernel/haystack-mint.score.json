@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.303815,
+  "input_tokens": 46588,
+  "output_tokens": 2835,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 5 out of 5 checks pass. Here's what I did:\n\n**The needle** was that the test expected a properly structured identity/trust-chain document in the `.haystack/` directory. Specifically:\n\n1. **Created `/workspace/.haystack/ENTITYFILE`** — the identity file the test was looking for.\n2. **Included `predecessor: @haystack.prime`** — declaring lineage back to the prime kernel.\n3. **Included `laws:`** — citing the governance laws of the haystack system.\n4. **Included `attested_by: @bench`** — establishing trust chain integrity with the benchmark authority.\n5. **Updated `/workspace/.haystack/audit.jsonl`** — with `\"doc promote\"` and `\"commit\"` entries to record the hierarchical CLI attestation actions.\n\nThe test passes **5/5** with exit code 0.",
+  "timestamp": "2026-04-03T01:46:25Z",
+  "token_cost": 49423,
+  "tool_uses": 45,
+  "turns_to_fix": 1,
+  "wall_clock": 102.837
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0322168,
+  "input_tokens": 26116,
+  "output_tokens": 4153,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I fixed the authentication bypass by normalizing the request path (using path.Clean and ensuring a leading “/”) in the auth middleware before checking for the “/api/” prefix. This prevents attackers from bypassing authentication with paths like “//api/*” or “/x/../api/*”. The test suite now passes.",
+  "timestamp": "2026-04-03T01:17:24Z",
+  "token_cost": 30269,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 46.502
+}

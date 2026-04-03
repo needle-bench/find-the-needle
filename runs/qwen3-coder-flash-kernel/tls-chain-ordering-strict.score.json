@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.000114153,
+  "input_tokens": 760,
+  "output_tokens": 47,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I'll help you find the needle in the haystack. Let me start by exploring the container to understand what we're working with.\n\n<function=Bash>\n<parameter=command>\nls -la\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T02:32:04Z",
+  "token_cost": 807,
+  "tool_uses": 0,
+  "turns_to_fix": 1,
+  "wall_clock": 2.229
+}

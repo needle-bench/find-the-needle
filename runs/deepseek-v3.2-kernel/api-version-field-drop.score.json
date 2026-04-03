@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.030266059999999997,
+  "input_tokens": 111804,
+  "output_tokens": 3369,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! Both responses now contain all the required fields. The v2 response is indeed a superset of v1 - it includes all v1 fields (`avatar_url`, `bio`, `location`) plus the new v2 fields (`department`, `phone_number`, `is_active`).\n\n## Summary\n\nI found and fixed the needle in the haystack! The problem was a backward compatibility regression in the v2 API:\n\n**The Issue:**\n- The `UserV2` struct in `models.go` was missing three fields from v1: `avatar_url`, `bio`, and `location`\n- The `ToV2()` method in `models.go` wasn't including these fields in the v2 response\n- This violated the API compatibility principle that v2 should be a superset of v1\n\n**The Fix:**\n1. Added the missing fields to the `UserV2` struct:\n   - `AvatarURL string `json:\"avatar_url\"``\n   - `Bio string `json:\"bio\"``  \n   - `Location string `json:\"location\"``\n2. Updated the `ToV2()` method to populate these fields from the `InternalUser`\n3. Cleaned up the comments to reflect that the bug was fixed\n\n**Verification:**\n- The test.sh script now passes completely\n- Both v1 and v2 API responses show all required fields\n- v2 responses contain all v1 fields plus new v2 fields, making it truly a superset of v1\n- The server builds successfully\n\nThe fix ensures that clients upgrading from v1 to v2 won't lose any data, maintaining backward compatibility as intended by the API design.",
+  "timestamp": "2026-04-03T01:22:25Z",
+  "token_cost": 115173,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 150.565
+}

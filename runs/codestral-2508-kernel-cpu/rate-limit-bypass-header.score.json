@@ -6,13 +6,13 @@
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
   "input_tokens": 1110,
-  "output_tokens": 39,
+  "output_tokens": 48,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The rate limiter is bypassed when using spoofed X-Forwarded-For headers. This is a security vulnerability.",
-  "timestamp": "2026-04-02T03:48:46Z",
-  "token_cost": 1149,
+  "summary": "The rate limiter is bypassed when spoofing the X-Forwarded-For header, allowing an attacker to make unlimited requests. This is a critical security issue.",
+  "timestamp": "2026-04-03T02:39:23Z",
+  "token_cost": 1158,
   "tool_uses": 1,
   "turns_to_fix": 1,
-  "wall_clock": 9.361
+  "wall_clock": 9.419
 }

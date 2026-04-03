@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.026906000000000003,
+  "input_tokens": 17089,
+  "output_tokens": 411,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The issue is that the benchmark looks for a file called `.haystack/ENTITYFILE*`, but no such file exists in the `.haystack` directory. \n\n**To find the needle, you should:**\n- Create a file named `.haystack/ENTITYFILE`.\n\nWould you like me to create this file with sample contents to try to pass the test? If so, should I attempt to infer its expected structure/contents from the test, or do you have desired data to use?",
+  "timestamp": "2026-04-03T01:25:39Z",
+  "token_cost": 17500,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 14.266
+}

@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9017,
-  "output_tokens": 820,
+  "input_tokens": 6927,
+  "output_tokens": 1033,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The fix is straightforward. The bug was in the `informerUpdate` method — when the informer delivers an update with a higher version than the assumed object, the assumed entry was deleted silently with no notification to the caller. The fix adds `conflictNotified = true` when this conflict is detected, so the scheduler is informed that its optimistic assumed state was dropped due to a newer version arriving from the API server.",
-  "timestamp": "2026-04-02T02:27:28Z",
-  "token_cost": 9837,
-  "tool_uses": 9,
+  "summary": "The fix works. Here's what the bug was:\n\n**The Needle:** In the `informerUpdate` method, when the informer delivers a newer version of an object that was previously \"assumed\" by the scheduler, the assumed state was silently dropped (`delete(c.assumed, obj.Key)`) with no notification whatsoever. The scheduler had no way to know its optimistic state was invalidated.\n\n**The Fix:** Added `conflictNotified = true` before deleting the assumed entry, so the caller is notified that their assumed state was superseded by an informer update. This mirrors the real Kubernetes bug at `assume_cache.go:426` where the assume cache silently drops assumed state without any conflict notification mechanism.",
+  "timestamp": "2026-04-03T01:53:32Z",
+  "token_cost": 7960,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 22.575
+  "wall_clock": 31.211
 }

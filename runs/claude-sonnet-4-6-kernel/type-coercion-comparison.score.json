@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.09557399999999999,
-  "input_tokens": 25583,
-  "output_tokens": 1255,
+  "estimated_cost_usd": 0.09500399999999999,
+  "input_tokens": 25523,
+  "output_tokens": 1229,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. ✅\n\n---\n\n### The Needle: Type Coercion Bug in `utils.js`\n\n**File:** `/app/utils.js`  \n**Problem:** `min_rating` was parsed from the query string but stored as a **string** (`\"4\"`) instead of a **number** (`4`).\n\nIn `filter.js`, `buildRatingRange(min, max)` builds an array by iterating `for (let i = min; i <= max; i++)`. With a string `min`, the loop still runs (JS coerces `\"4\" <= 5` to `true`), but it pushes **string** values (`\"4\"`, `\"5\"`) into the range array. Then `acceptable.includes(p.rating)` compares those strings against the **numeric** ratings in the product data — `[\"4\",\"5\"].includes(4)` → `false` — so **no products ever matched** the rating filter.\n\n**Fix:** Parse `min_rating` with `parseInt(..., 10)` so the type matches the numeric ratings in the data.",
-  "timestamp": "2026-04-02T01:42:50Z",
-  "token_cost": 26838,
+  "summary": "All tests pass. ✅\n\n---\n\n### The Needle 🪡\n\n**File:** `/app/utils.js`  \n**Bug:** Type coercion — `min_rating` was stored as a **string** instead of a **number**.\n\n```js\n// BUG: returns a string like \"4\"\nquery.minRating = searchParams.get('min_rating');\n\n// FIX: parse it as an integer\nquery.minRating = parseInt(searchParams.get('min_rating'), 10);\n```\n\n**Why it broke:** In `filter.js`, `buildRatingRange(min, max)` uses a `for` loop starting at `i = min`. When `min` is the string `\"4\"`, `i++` turns `i` into `NaN` on the very first increment (string arithmetic), so the loop body never executes a second time — the returned `acceptable` array contained only one element (`\"4\"`, the string), which never matched any product's numeric `rating` via `includes()`. The result was **0 products** returned for every `min_rating` query.",
+  "timestamp": "2026-04-03T02:44:57Z",
+  "token_cost": 26752,
   "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 28.947
+  "wall_clock": 26.639
 }

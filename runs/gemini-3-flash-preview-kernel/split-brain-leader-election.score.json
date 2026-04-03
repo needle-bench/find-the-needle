@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.1707521,
+  "input_tokens": 655165,
+  "output_tokens": 3171,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The leader election implementation had a critical bug in its quorum logic, specifically an off-by-one error in determining the number of votes required to become a leader. In a 5-node cluster, the original code allowed a node to become a leader with only 2 votes (calculated via `finalVotes >= totalNodes/2`, which for $N=5$ evaluates to 2 due to integer division). This permitted \"split-brain\" scenarios where two separate partitions (one of 2 nodes and one of 3 nodes) could both elect a leader.\n\nAdditionally, the implementation lacked a check to ensure the candidate's state and term hadn't changed while waiting for votes, which could lead to stale elections succeeding.\n\nThe fix involved:\n1.  **Correcting the Quorum Check:** Updating the condition to `finalVotes > totalNodes / 2` (or `finalVotes >= (totalNodes/2) + 1`), ensuring that a majority of the cluster must grant a vote.\n2.  **Adding Safety Checks:** Verifying that the node is still a `Candidate` and still in the same `Term` before transitioning to the `Leader` state.\n\n```go\n// app/cluster/node.go\n\n// Check if we have enough votes for a quorum\nif finalVotes > totalNodes/2 {\n    n.mu.Lock()\n    if n.Term == currentTerm && n.State == Candidate {\n        n.State = Leader\n        fmt.Printf(\"Node %d: became LEADER for term %d with %d votes\\n\", n.ID, currentTerm, finalVotes)\n    }\n    n.mu.Unlock()\n}\n```\n\nAfter applying these changes and rebuilding the `split-brain` binary, the `test.sh` script confirms that the system is now safe from split-brain scenarios under network partitions.",
+  "timestamp": "2026-04-03T04:33:49Z",
+  "token_cost": 658336,
+  "tool_uses": 47,
+  "turns_to_fix": 1,
+  "wall_clock": 101.068
+}

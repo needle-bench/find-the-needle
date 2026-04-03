@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.15249875000000002,
+  "input_tokens": 219303,
+  "output_tokens": 6053,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Identified severe hash collisions in the custom hash map implementation caused by `Product.hashCode()` returning the product category’s hash across only 10 categories.\n- Updated `Product.hashCode()` to use the SKU string (`sku.hashCode()`), ensuring a unique distribution per product.\n- Recompiled classes and reran the test suite; distribution analysis now shows even bucket usage with a max chain length of 4.\n\nTesting:\n- `./test.sh`",
+  "timestamp": "2026-04-03T02:01:01Z",
+  "token_cost": 225356,
+  "tool_uses": 37,
+  "turns_to_fix": 1,
+  "wall_clock": 83.65
+}

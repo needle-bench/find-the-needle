@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0039883,
+  "input_tokens": 9948,
+  "output_tokens": 718,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! All customer names, including those with non-ASCII characters, were preserved correctly. This confirms that changing the character encoding in `CsvReader.java` from `ISO-8859-1` to `UTF-8` has resolved the problem.\n",
+  "timestamp": "2026-04-03T01:22:21Z",
+  "token_cost": 10666,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 11.406
+}

@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.02427333,
-  "input_tokens": 41444,
-  "output_tokens": 4787,
+  "estimated_cost_usd": 0.04487727979999999,
+  "input_tokens": 97034,
+  "output_tokens": 6192,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " The test passes consistently. \n\n## Summary\n\n**The Needle:** A race condition in the transfer processor (`app/processor.py`) where the idempotency check was performed AFTER debiting the source account instead of BEFORE.\n\n**The Bug:** When multiple concurrent requests with the same idempotency key arrived:\n1. All requests passed the initial balance check\n2. All requests debited the source account (multiple debits!)\n3. Only then did they check idempotency - too late to prevent the duplicate debits\n\n**The Fix:** Atomically claim the idempotency key FIRST by inserting a \"pending\" record before any account mutations. If the insert fails due to `IntegrityError`, another request is already processing this transfer, so we return a duplicate status. Only after successfully claiming the key do we perform the debit and credit operations.",
-  "timestamp": "2026-04-02T02:16:59Z",
-  "token_cost": 46231,
-  "tool_uses": 18,
+  "summary": " The fix is complete and verified. Here's a summary of the bug and the solution:\n\n## The Bug (Race Condition)\n\nThe original `processor.py` had a critical race condition in `execute_transfer()`:\n\n1. It **debited the source account** and **committed** the transaction\n2. Then slept for 50ms \n3. Then checked for idempotency\n\nThis allowed multiple concurrent requests to all:\n- Pass the balance check simultaneously \n- Debit the account multiple times before any idempotency record was created\n- Result in duplicate transfers and lost money\n\n## The Fix\n\nThe solution uses proper database transaction serialization:\n\n1. **`BEGIN IMMEDIATE`** - Acquires an exclusive lock at the start, preventing concurrent access\n2. **Idempotency check FIRST** - Before any account modifications\n3. **Single transaction** - All operations (check, debit, credit, record) happen in one atomic transaction\n4. **Rollback on any failure** - Ensures no partial state changes\n\nThe key change was using `BEGIN IMMEDIATE` to serialize concurrent requests, ensuring only one transfer with a given idempotency key can be processed at a time.",
+  "timestamp": "2026-04-03T03:23:42Z",
+  "token_cost": 103226,
+  "tool_uses": 27,
   "turns_to_fix": 1,
-  "wall_clock": 332.648
+  "wall_clock": 616.539
 }

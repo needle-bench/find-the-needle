@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.08852585999999998,
-  "input_tokens": 201445,
-  "output_tokens": 6734,
+  "estimated_cost_usd": 0.027822819,
+  "input_tokens": 59464,
+  "output_tokens": 2859,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " ## Summary\n\nThe \"needle\" was a **Unicode BIDI override privilege escalation vulnerability** (CVE-2021-42574 class attack). \n\n**The Vulnerability:**\n- In `auth.py`, `check_admin_access()` used `_render_display_name()` to \"render\" usernames for display before comparing against the `ADMIN_USERS` allowlist\n- The rendering function processed BIDI control characters (U+202E RIGHT-TO-LEFT OVERRIDE reverses subsequent characters)\n- A user registering as `\\u202enimda` (visually renders as \"admin\") would get admin access because the `check_admin_access()` compared the rendered/display name, not the stored raw username\n\n**The Fix:**\n1. **`sanitizer.py`**: Added BIDI control character regex `_BIDI_CONTROL_RE` to strip these characters during registration/sanitization\n2. **`auth.py`**: Modified `check_admin_access()` to compare the raw stored username directly, removing the vulnerable `_render_display_name()` call\n\nAll tests now pass and the attack is prevented.",
-  "timestamp": "2026-04-02T01:27:10Z",
-  "token_cost": 208179,
-  "tool_uses": 30,
+  "summary": " The fix has been applied successfully. All tests pass. Here's a summary of what I found and fixed:\n\n## The Problem (CWE-182: Unicode BIDI Privilege Escalation)\n\nThe vulnerability was in `/workspace/app/auth.py` in the `check_admin_access()` function. It was using `_render_display_name()` to process Unicode BIDI control characters and comparing the **rendered display name** against the `ADMIN_USERS` allowlist instead of the actual stored username.\n\nA malicious user could register with `\\u202enimda` (RIGHT-TO-LEFT OVERRIDE + \"nimda\"), which when rendered visually displays as \"admin\" (reversed). The original code compared this rendered \"admin\" string against the allowlist, incorrectly granting admin access.\n\n## The Fixes\n\n1. **`/workspace/app/auth.py`** - Changed `check_admin_access()` to compare the actual stored `username` against `ADMIN_USERS` instead of the rendered display name.\n\n2. **`/workspace/app/sanitizer.py`** - Added BIDI control character stripping (U+202A-U+202E) to the username sanitizer to prevent these characters from being stored in the first place.\n\nBoth fixes ensure that BIDI-injected usernames cannot spoof admin access.",
+  "timestamp": "2026-04-03T01:26:22Z",
+  "token_cost": 62323,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 322.341
+  "wall_clock": 188.929
 }

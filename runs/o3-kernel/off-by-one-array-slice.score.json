@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-array-slice",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.021969999999999996,
-  "input_tokens": 9857,
-  "output_tokens": 570,
+  "estimated_cost_usd": 0.015781999999999997,
+  "input_tokens": 8075,
+  "output_tokens": 506,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Fixed off-by-one error in processor.py.\n\nChange made:\nprocessor.py  \n- end = start + batch_size - 1  \n+ end = min(total, start + batch_size)   # slice end is exclusive\n\nThe slice end index must be exclusive; removing “-1” and bounding by total ensures every record is included and none are duplicated or dropped.\n\nAll tests in test.sh now pass:\n\nPASS: All records processed correctly across batch boundaries",
-  "timestamp": "2026-04-02T01:41:04Z",
-  "token_cost": 10427,
+  "summary": "Fixed off-by-one error in processor.py.\n\nChange made:\nin process_batch, slice end index should be start + batch_size (exclusive), not start + batch_size - 1.\n\nAll tests in test.sh now pass:\n\nPASS: All records processed correctly across batch boundaries",
+  "timestamp": "2026-04-03T02:45:41Z",
+  "token_cost": 8581,
   "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 17.499
+  "wall_clock": 20.138
 }

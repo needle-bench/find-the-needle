@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.10130399999999999,
+  "input_tokens": 27223,
+  "output_tokens": 1309,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. ✅\n\n---\n\n### The Needle — Auth Bypass via Path Manipulation\n\n**File:** `/app/app/middleware.go`\n\n**Bug:** The `authMiddleware` checked `r.URL.Path` (the **raw**, uncleaned path) for the `/api/` prefix. The custom router, however, runs `path.Clean()` on the path **before** matching routes. This mismatch meant:\n\n- A request to `//api/admin` → raw path is `//api/admin` (doesn't start with `/api/`) → **middleware skips auth check** → router cleans it to `/api/admin` → **serves the protected handler unauthenticated**.\n- Same issue with `/health/../api/data` — the `..` traversal fooled the raw-path check.\n\n**Fix:** Apply the same `path.Clean()` normalization in the middleware before doing the prefix check, so both middleware and router see the same canonical path:\n\n```go\ncleanPath := path.Clean(r.URL.Path)\nif strings.HasPrefix(cleanPath, \"/api/\") {\n    // enforce auth\n}\n```",
+  "timestamp": "2026-04-03T01:14:53Z",
+  "token_cost": 28532,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 26.94
+}

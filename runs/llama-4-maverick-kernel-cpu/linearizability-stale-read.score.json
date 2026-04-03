@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": false,
+  "stop_reason": "error: API call failed: API error 404: model: llama-4-maverick",
+  "summary": "",
+  "timestamp": "2026-04-03T01:30:36Z",
+  "token_cost": 0,
+  "tool_uses": 0,
+  "turns_to_fix": 0,
+  "wall_clock": 1.017
+}

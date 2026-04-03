@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.060505039999999996,
+  "input_tokens": 169192,
+  "output_tokens": 6497,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test is now passing. The fix involved:\n\n1. Using a buffered channel for `resultCh` to avoid blocking when the client disconnects.\n2. Using `context.WithCancel` to create a cancellable context.\n3. Checking the context frequently during computation and exiting early if cancelled.\n4. Using a non-blocking send to the result channel, so the goroutine can exit immediately if the client disconnects.\n\nThe key insight was that the goroutine was getting stuck trying to send the result to an unbuffered channel when the client disconnected. By using a buffered channel and non-blocking operations, the goroutine can now exit cleanly when the client disconnects.",
+  "timestamp": "2026-04-03T01:26:22Z",
+  "token_cost": 175689,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 107.089
+}

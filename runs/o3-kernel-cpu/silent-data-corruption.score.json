@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.038374000000000005,
+  "input_tokens": 24387,
+  "output_tokens": 1580,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Fixed silent truncation bug.\n\nRoot cause:\nprocess_file() used a fixed 64 KB stack buffer and file.read(&mut buffer), so inputs larger than 64 KB were silently truncated.\n\nFix:\nChanged process_file() to read the entire file into a Vec<u8> with read_to_end, eliminating the size limit.\n\nsrc/main.rs diff (essentials):\n\n- let mut buffer = [0u8; BUFFER_SIZE];\n- let bytes_read = file.read(&mut buffer)?;\n- let data = &buffer[..bytes_read];\n- let transformed = transform::process(data);\n\n+ let mut buffer = Vec::new();\n+ file.read_to_end(&mut buffer)?;\n+ let transformed = transform::process(&buffer);\n\nRun the provided test:\n\n./test.sh  \nPASS: File processed correctly, no data loss\n\nThe binary now preserves files of any size (limited only by available memory).",
+  "timestamp": "2026-04-03T03:14:02Z",
+  "token_cost": 25967,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 31.313
+}

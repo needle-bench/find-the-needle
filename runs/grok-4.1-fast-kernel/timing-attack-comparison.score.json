@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.004357599999999999,
+  "input_tokens": 20177,
+  "output_tokens": 6051,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed! The vulnerability was in `./app/auth/compare.go`: the `compareHashes` function used `==` which leaks timing info. Replaced with `crypto/subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1` for constant-time comparison. `./test.sh` now passes.",
+  "timestamp": "2026-04-03T03:28:03Z",
+  "token_cost": 26228,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 52.144
+}

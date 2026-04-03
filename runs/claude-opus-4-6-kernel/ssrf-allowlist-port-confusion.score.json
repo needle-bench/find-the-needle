@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.28542999999999996,
+  "input_tokens": 44686,
+  "output_tokens": 2480,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the problem and fix:\n\n## The Needle: SSRF via IPv6 Loopback Bypass\n\n**The Bug:** The webhook proxy's URL validator (`validator.py`) blocked known internal IPv4 addresses (`127.0.0.1`, `localhost`, `0.0.0.0`, `169.254.169.254`) and private RFC-1918 ranges, but it **did not block IPv6 loopback addresses** like `::1` or `0:0:0:0:0:0:0:1`. \n\nThis meant an attacker could send a request like:\n```json\n{\"url\": \"http://[::1]:8888/metadata\"}\n```\n...and the proxy would happily forward it to the internal metadata service, leaking secrets (`INTERNAL_SECRET_12345`).\n\n**The Fix:** Added an `_is_ipv6_loopback()` helper function using Python's `ipaddress` module that normalizes any IPv6 address representation and checks if it equals `::1`. This catches all forms of the IPv6 loopback address (compressed `::1`, expanded `0:0:0:0:0:0:0:1`, etc.). The check is called in `is_url_allowed()` before returning `True`.",
+  "timestamp": "2026-04-03T03:19:11Z",
+  "token_cost": 47166,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 157.126
+}

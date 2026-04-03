@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0391755,
-  "input_tokens": 11372,
-  "output_tokens": 1678,
+  "estimated_cost_usd": 0.04671525,
+  "input_tokens": 15304,
+  "output_tokens": 1830,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I've found and fixed the issue, which was a memory leak caused by event listener accumulation in the DataProcessor class. The problem was that new event listeners were being registered for every call to `process()`, but they were never removed, leading to unbounded memory growth.\n\nI've modified the code to register the event listeners just once during the constructor initialization, rather than on every process call. I also removed the unnecessary closure capture of the original data in the handler.\n\nRunning the test script `/app/test.sh` after the fix confirms that the listener count remains stable at 2 even after 500 requests, and no memory leak is detected. The test passed successfully.",
-  "timestamp": "2026-04-02T01:29:07Z",
-  "token_cost": 13050,
-  "tool_uses": 6,
+  "summary": "I've found and fixed the issue. The problem was a memory leak in the DataProcessor class where event listeners were being added with each call to the process() method but never removed. This caused the listener count to grow with every request, leading to increased memory usage.\n\nI modified the code to register the event listeners once in the constructor instead of in the process() method. I also removed the unnecessary closure capturing the original data in the _handleValidated method.\n\nThe test.sh script now confirms the fix with a PASS result, showing the listener count remains stable at 2 even after 500 requests. The needle in the haystack—a memory leak due to accumulating event listeners—has been found and resolved.",
+  "timestamp": "2026-04-03T01:30:36Z",
+  "token_cost": 17134,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 28.049
+  "wall_clock": 31.995
 }

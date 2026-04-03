@@ -4,15 +4,15 @@
   "benchmark": "graphql-dataloader-per-request",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.11370519999999999,
-  "input_tokens": 231941,
-  "output_tokens": 2770,
+  "estimated_cost_usd": 0.1473748,
+  "input_tokens": 332831,
+  "output_tokens": 6278,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found and the bug fixed (DataLoaders are now properly instantiated once per request in context, enabling batching and eliminating the N+1 query problem). The test suite now passes.",
-  "timestamp": "2026-04-02T03:22:52Z",
-  "token_cost": 234711,
-  "tool_uses": 22,
+  "summary": "**The needle has been found and the fix applied!**  \nThe issue was the classic N+1 problem in the GraphQL resolvers: `DataLoader` instances were being created inside individual resolvers instead of once per request (in the GraphQL context). This meant each loader only ever saw a single key, so batching never occurred and each user/post triggered its own DB query.\n\n### Fix summary\n- Added `src/loaders.ts` with properly batched loaders (`userLoader` + `postsByAuthorLoader`).\n- Updated `src/context.ts` to create the loaders once per request and attach them to the context.\n- Refactored `userResolver.ts` and `postResolver.ts` to *use* the shared loaders from `context.loaders` (instead of creating new ones each time).\n- Re-ran `test.sh` — all functional tests now pass **and** the performance test succeeds with only **2 DB queries** (well under the <=15 threshold).\n\nThe benchmark now correctly demonstrates DataLoader batching.",
+  "timestamp": "2026-04-03T01:26:16Z",
+  "token_cost": 339109,
+  "tool_uses": 29,
   "turns_to_fix": 1,
-  "wall_clock": 29.799
+  "wall_clock": 73.056
 }

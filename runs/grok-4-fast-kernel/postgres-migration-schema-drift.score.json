@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0221978,
+  "input_tokens": 230512,
+  "output_tokens": 13065,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle was schema drift between the database migrations (which renamed the `status` column to `order_status`) and the Go application code (which was still referencing the old `status` column name).\n\nFixed by updating both the `INSERT` and `SELECT` SQL queries in `app/main.go` to reference `order_status` instead of `status`, adjusting `go.mod` to use a compatible Go version (1.19), and rebuilding the `orders-api` binary. Verified by running `./test.sh` (all tests passed).",
+  "timestamp": "2026-04-03T02:04:55Z",
+  "token_cost": 243577,
+  "tool_uses": 41,
+  "turns_to_fix": 1,
+  "wall_clock": 117.528
+}

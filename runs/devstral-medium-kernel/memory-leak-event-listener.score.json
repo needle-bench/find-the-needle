@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.00535952,
-  "input_tokens": 23056,
-  "output_tokens": 1202,
+  "estimated_cost_usd": 0.0036882399999999997,
+  "input_tokens": 10206,
+  "output_tokens": 1001,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Great! The test has passed. Here's a summary of the changes we made:\n\n1. Moved the event listener registration from the `process()` method to the constructor, ensuring listeners are registered only once.\n2. Modified the `_handleValidated` method to not rely on the original data, preventing memory leaks from closures.\n\nThe test confirms that the listener count remains stable at 2, and there's no event listener leak detected. The memory usage also remains stable, indicating that our fix has resolved the issue.",
-  "timestamp": "2026-04-02T03:19:06Z",
-  "token_cost": 24258,
-  "tool_uses": 11,
+  "summary": "Great! The test now passes. The fix worked because:\n\n1. We replaced `this.eventBus.on()` with `this.eventBus.once()` to automatically remove listeners after they're called\n2. We moved the handler functions outside the event registration to make the code cleaner\n3. The memory leak is resolved because we're no longer accumulating event listeners\n\nThe key insight was that the original code was registering new event listeners for every request but never removing them. By using `once()`, we ensure that each listener is automatically removed after it's called, preventing the memory leak.\n\nThis is a common pattern in Node.js applications - always be careful about event listener registration in frequently called functions, as it can lead to memory leaks if not properly managed.",
+  "timestamp": "2026-04-03T01:42:53Z",
+  "token_cost": 11207,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 18.021
+  "wall_clock": 20.713
 }

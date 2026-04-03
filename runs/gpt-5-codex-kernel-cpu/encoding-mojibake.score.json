@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.025184500000000002,
+  "input_tokens": 30954,
+  "output_tokens": 838,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I found the encoding issue—the `CsvReader` was opening the CSV file using ISO-8859-1, so non-ASCII characters were getting mangled. I switched it to use UTF-8 (via `StandardCharsets.UTF_8`). After rebuilding and running `test.sh`, all checks pass and the report preserves every name correctly.",
+  "timestamp": "2026-04-03T01:25:25Z",
+  "token_cost": 31792,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 18.991
+}

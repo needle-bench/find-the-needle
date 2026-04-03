@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0227235,
+  "input_tokens": 114966,
+  "output_tokens": 28149,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The test `./test.sh` now passes with no duplicate state machine transitions.\n\n### Bug\n- **Location**: `/app/app/snapshot.go` in `InstallSnapshot()`\n- **Root Cause**: After installing a snapshot, `lastApplied` was correctly set to `snap.LastIncludedIndex` (10), but `commitIndex` was **not** updated (remained 0). On `Restart()`:\n  - Snapshot restores state machine (keys 1-10).\n  - But `lastApplied` gets reset to `commitIndex` (0).\n  - New leader replicates entries 11-13 starting from prevIndex=10 ✓.\n  - Follower then re-applies entries 1-10 (since `lastApplied=0 < commitIndex=13`).\n\n### Fix\nAdded `n.commitIndex = snap.LastIncludedIndex` in `InstallSnapshot()` (Raft §7: snapshot installation must set `commitIndex ≥ lastIncludedIndex`).\n\n**Change**:\n```diff\n// Restore state machine from snapshot\nn.stateMachine.Restore(snap.Data)\n\n// Update lastApplied — the state machine now reflects everything\n// up to and including the snapshot's last index.\nn.lastApplied = snap.LastIncludedIndex\n+n.commitIndex = snap.LastIncludedIndex\n```\n\nTest output:\n```\nPASS: No duplicate state machine transitions across all rounds\n```",
+  "timestamp": "2026-04-03T02:56:19Z",
+  "token_cost": 143115,
+  "tool_uses": 39,
+  "turns_to_fix": 1,
+  "wall_clock": 247.807
+}

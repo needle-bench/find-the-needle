@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9828,
-  "output_tokens": 1586,
+  "input_tokens": 10433,
+  "output_tokens": 1521,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. \n\n**The needle:** The bug was a schema drift between the database migrations and the application code. Migration `002_rename_status.sql` renamed the `status` column to `order_status`, but the Go application code in `main.go` still used the old column name `status` in both the `INSERT` (createOrder) and `SELECT` (getOrder) SQL queries. \n\n**The fix:** Updated both SQL queries in `/workspace/app/main.go` to use `order_status` instead of `status`, then recompiled the binary.",
-  "timestamp": "2026-04-02T02:34:49Z",
-  "token_cost": 11414,
-  "tool_uses": 18,
+  "summary": "All tests pass. \n\n**The needle:** The bug was a **schema drift** between the database migrations and the application code. Migration `002_rename_status.sql` renamed the column `status` to `order_status`, but the Go application code in `main.go` still referenced the old column name `status` in both the `INSERT` (createOrder) and `SELECT` (getOrder) SQL queries. \n\n**The fix:** Updated the two SQL queries in `/workspace/app/main.go` to use `order_status` instead of `status`:\n1. In `createOrder()`: Changed `INSERT INTO orders (..., status, ...)` and `RETURNING ..., status, ...` → `order_status`\n2. In `getOrder()`: Changed `SELECT ..., status, ...` → `order_status`",
+  "timestamp": "2026-04-03T02:43:31Z",
+  "token_cost": 11954,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 43.094
+  "wall_clock": 37.807
 }

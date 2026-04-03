@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.03628,
+  "input_tokens": 23068,
+  "output_tokens": 1720,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the bug causing incorrect results for rating filters.\n\nRoot cause:\nThe min_rating query parameter was being kept as a string, leading to string-number comparison problems in filtering.\n\nFix:\nutils.js – convert min_rating to an integer when parsing:\n  const val = parseInt(searchParams.get('min_rating'), 10);\n  if (!Number.isNaN(val)) query.minRating = val;\n\nAll tests in test.sh now pass.",
+  "timestamp": "2026-04-03T04:03:05Z",
+  "token_cost": 24788,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 31.851
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0406923,
+  "input_tokens": 40085,
+  "output_tokens": 4651,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve restored the missing v1 fields (avatar_url, bio, location) to the v2 UserV2 model and ensured they’re populated in the ToV2 conversion. All tests now pass, confirming v2 is backward-compatible with v1. Let me know if you need anything else!",
+  "timestamp": "2026-04-03T01:16:12Z",
+  "token_cost": 44736,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 48.501
+}

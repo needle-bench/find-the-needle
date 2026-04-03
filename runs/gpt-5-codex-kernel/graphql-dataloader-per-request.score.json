@@ -4,15 +4,15 @@
   "benchmark": "graphql-dataloader-per-request",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.1078455,
-  "input_tokens": 121406,
-  "output_tokens": 7820,
+  "estimated_cost_usd": 0.13161649999999997,
+  "input_tokens": 61074,
+  "output_tokens": 8753,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "✅ All set! I built shared DataLoader instances in the request context and updated the resolvers to use them instead of creating per-resolver loaders. After the change, `./test.sh` passes completely:\n\n```\nPASS: All tests passed\n```\n\nThis knocks the query count down from 101 to just 2, confirming the N+1 issue is fixed.",
-  "timestamp": "2026-04-02T03:24:18Z",
-  "token_cost": 129226,
-  "tool_uses": 21,
+  "summary": "The performance regression was due to DataLoaders being instantiated per resolver call, preventing request-wide batching. I moved loader creation into the request context and rewired resolvers to use these shared instances:\n\n- `src/loaders.ts`: Added `Loaders` type export for context.\n- `src/context.ts`: Added `loaders` to `GqlContext` and now instantiate them once per request.\n- `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts`: Replaced per-call DataLoader creation with context loaders.\n\nAll tests now pass:\n\n```\n=== Performance Test: Query Count ===\nTotal DB queries executed: 2\nOK: Query count 2 is within acceptable bounds (<=15)\n\nPASS: All tests passed\n```\n\nLet me know if anything else is needed!",
+  "timestamp": "2026-04-03T01:31:01Z",
+  "token_cost": 69827,
+  "tool_uses": 20,
   "turns_to_fix": 1,
-  "wall_clock": 90.18
+  "wall_clock": 82.301
 }

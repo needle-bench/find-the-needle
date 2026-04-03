@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:50:32Z", "benchmark": "sql-injection-search", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 190, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/", "/app/\"*.txt\"", "/var/", "/opt/", "/etc/"], "tokens_in": 865, "tokens_out": 295, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 1721, "tokens_out": 196, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/root/", "/"], "tokens_in": 3187, "tokens_out": 189, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 4142, "tokens_out": 129, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/config.py", "/app/app/database.py", "/app/app/search.py", "/app/app/server.py", "/app/app/validators.py", "/app/test.sh"], "tokens_in": 5057, "tokens_out": 280, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:51:00Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

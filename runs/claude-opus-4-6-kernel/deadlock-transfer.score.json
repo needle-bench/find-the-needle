@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.241635,
+  "input_tokens": 35927,
+  "output_tokens": 2480,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Both test passes completed successfully. Here's a summary of the bug and the fix:\n\n## The Needle: Deadlock Bug in `TransferService.java`\n\n**Problem:** The `transfer()` method locked accounts in **parameter order** (`from` first, then `to`). When two concurrent transfers went in opposite directions (e.g., A→B and B→A), they would acquire locks in opposite order, causing a classic **deadlock**:\n- Thread 1: locks A, tries to lock B (blocked)\n- Thread 2: locks B, tries to lock A (blocked)\n- Both threads wait forever.\n\n**Fix:** Instead of locking in parameter order, always lock in a **consistent global order** based on account ID (`compareTo`). This ensures that regardless of transfer direction, the same two accounts are always locked in the same order, eliminating the circular wait condition that causes deadlock.",
+  "timestamp": "2026-04-03T01:27:35Z",
+  "token_cost": 38407,
+  "tool_uses": 29,
+  "turns_to_fix": 1,
+  "wall_clock": 78.399
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.304821,
+  "input_tokens": 285121,
+  "output_tokens": 3940,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! I found and fixed TWO needles in the haystack:\n\n## Summary\n\nThe hidden problem was a **linearizability violation** in the distributed KV store. There were two bugs:\n\n### Bug #1: Missing commit index advancement in heartbeat handling\n**File:** `/app/app/raft/node.go`\n**Issue:** The `handleHeartbeat()` function was not advancing the follower's commit index based on the leader's commit index piggybacked in heartbeat messages. This meant that after a network partition healed, partitioned followers wouldn't learn about committed entries until they received an explicit AppendEntries RPC (which carries entries), not just heartbeats.\n**Fix:** Added code to advance the commit index based on `msg.Index` (the leader's commit index) in the `handleHeartbeat()` function, mirroring the logic already present in `handleAppendEntries()`.\n\n### Bug #2: Non-linearizable reads\n**File:** `/app/app/handler.go`\n**Issue:** The `/read` HTTP handler was using `h.node.Read(key)` which reads directly from local state without confirming linearizability. This allowed stale reads to be served.\n**Fix:** Changed the handler to use `h.node.ReadLinearizable(key)` instead, which confirms with the leader that the follower's state is up-to-date before returning the value.\n\nBoth fixes were necessary to ensure linearizable reads after network partitions heal.",
+  "timestamp": "2026-04-03T00:44:19Z",
+  "token_cost": 289061,
+  "tool_uses": 28,
+  "turns_to_fix": 1,
+  "wall_clock": 84.176
+}

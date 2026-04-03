@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "native",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.16174375000000002,
-  "input_tokens": 128467,
-  "output_tokens": 1077,
+  "estimated_cost_usd": 0.16162725,
+  "input_tokens": 128457,
+  "output_tokens": 1073,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. The fix: invalidate the relevant cache entries in `server.py` after write operations:\n\n- **`_update_product`** — delete both the individual product cache key and the list cache key\n- **`_create_product`** — delete the list cache key so the new product appears immediately",
-  "timestamp": "2026-04-02T01:52:21Z",
-  "token_cost": 129544,
+  "summary": "All tests pass. The fix: invalidate the relevant cache entries in `server.py` after write operations:\n\n- **`_update_product`** — delete both the individual product cache and the list cache\n- **`_create_product`** — delete the list cache so the new product appears immediately",
+  "timestamp": "2026-04-03T01:23:11Z",
+  "token_cost": 129530,
   "tool_uses": 10,
   "turns_to_fix": 11,
-  "wall_clock": 30.267
+  "wall_clock": 30.82
 }

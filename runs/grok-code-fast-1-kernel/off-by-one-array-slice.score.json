@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00412462,
+  "input_tokens": 6794,
+  "output_tokens": 2489,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug is an off-by-one-array-slice error in the `process_batch` function of `processor.py`. Specifically, the line setting the `end` index for slicing is `end = start + batch_size - 1`, which causes the last element of each batch to be dropped when using the slice notation `records[start:end]`. To fix it, change this line to `end = start + batch_size` (around line 12).\n\nAfter applying the fix and running `./test.sh`, all tests pass:\n\n```\nPASS: All records processed correctly across batch boundaries\n```",
+  "timestamp": "2026-04-03T02:05:09Z",
+  "token_cost": 9283,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 16.143
+}

@@ -4,15 +4,15 @@
   "benchmark": "rate-limit-bypass-header",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.03213072,
-  "input_tokens": 347038,
-  "output_tokens": 2956,
+  "estimated_cost_usd": 0.00457384,
+  "input_tokens": 19685,
+  "output_tokens": 988,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test script shows that the rate limiter is now correctly blocking excess requests, even when the `X-Forwarded-For` header is rotated. This confirms that the fix resolves the issue.",
-  "timestamp": "2026-04-02T03:34:36Z",
-  "token_cost": 349994,
-  "tool_uses": 37,
+  "summary": "The test results show that the rate limiter is now correctly limiting requests even when the `X-Forwarded-For` header is rotated. The fix has successfully addressed the issue, and the rate limiter is no longer vulnerable to header spoofing.",
+  "timestamp": "2026-04-03T01:56:35Z",
+  "token_cost": 20673,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 661.578
+  "wall_clock": 29.564
 }

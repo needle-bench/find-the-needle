@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.009173750000000001,
-  "input_tokens": 3259,
-  "output_tokens": 510,
+  "estimated_cost_usd": 0.01252375,
+  "input_tokens": 11387,
+  "output_tokens": 405,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The discount calculation bug has been fixed by correcting the formula in `pricing.py` to multiply the subtotal by the discount percentage. All tests now pass.",
-  "timestamp": "2026-04-02T03:53:13Z",
-  "token_cost": 3769,
-  "tool_uses": 5,
+  "summary": "The issue was in `calculate_discount_amount` inside `pricing.py`. The discount calculation mistakenly added the percentage to the subtotal instead of multiplying. I updated the function to compute the discount as `subtotal * discount_percent / 100`. After making this fix, running `test.sh` reports “PASS: Discount calculations are correct.”",
+  "timestamp": "2026-04-03T02:37:10Z",
+  "token_cost": 11792,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 9.657
+  "wall_clock": 9.923
 }

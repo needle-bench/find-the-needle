@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.8138593999999999,
+  "input_tokens": 1289323,
+  "output_tokens": 11913,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have fixed the issue! You can see that running `test.sh` now reliably produces `PASS: All rounds passed — reads are linearizable`. \n\nHere is what was wrong and how it was fixed:\n\n1. **Bug in Linearizability (`handler.go`)**: \n   When the handler processed typical `GET /read?key=X` requests, the implementation called `h.node.Read(key)`. This directly served whatever was in the follower's local map, allowing for very low-latency reads. However, this violates linearizability because a partitioned follower will serve heavily outdated states. \n   **Fix**: Modified the call to leverage `h.node.ReadLinearizable(key)`. This ensures that before responding to reads, the node asks the leader for the latest `commitIndex` and waits to catch up on log applications implicitly before unblocking.\n\n2. **Bug in advancing the commit log during heartbeats (`raft/node.go`)**: \n   A secondary and critical problem involved an isolated node fetching missed logs and the current `commitIndex` out of network-partitioned recovery via the leader's Heartbeat mechanism. While `handleHeartbeat` decoded and correctly appended missing entries locally, it lacked the logic to evaluate `msg.Index` (the leader's `commitIndex` given via piggybacks) and advance `n.commitIndex`. Because the commit index permanently stayed behind during a heartbeat cycle, newly appended log entries during recovery were orphaned on disk and never moved to the `applyCh` channel to get physically recorded into the KV state map. The node became gridlocked permanently out of synchronization.\n   **Fix**: Appended standard Raft commit advancement procedures at the bottom of `handleHeartbeat` using the provided index to apply them cleanly. \n   ```go\n\tleaderCommit := msg.Index\n\tif leaderCommit > 0 {\n\t\tlastIdx := n.log.LastIndex()\n\t\tcommitIdx := leaderCommit\n\t\tif commitIdx > lastIdx {\n\t\t\tcommitIdx = lastIdx\n\t\t}\n\t\tn.advanceCommitIndex(commitIdx)\n\t}\n   ```",
+  "timestamp": "2026-04-03T04:37:16Z",
+  "token_cost": 1301236,
+  "tool_uses": 69,
+  "turns_to_fix": 1,
+  "wall_clock": 372.687
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.5137330499999999,
+  "input_tokens": 821884,
+  "output_tokens": 9203,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Tests pass. Here's the summary:\n\n**The bug** was in `node.go:104` — the quorum check used `>=` instead of `>`:\n\n```go\n// Before (buggy)\nif finalVotes >= totalNodes/2 {\n\n// After (fixed)\nif finalVotes > totalNodes/2 {\n```\n\nWith a 5-node cluster, `totalNodes/2 = 2` (integer division). The `>=` check allowed partition A (2 nodes → 2 votes) to elect a leader alongside partition B (3 nodes → 3 votes), creating split-brain. A true Raft-style majority requires **strictly more than half** the nodes, so partition A's 2 votes correctly fail the `> 2` check while partition B's 3 votes pass.",
+  "timestamp": "2026-04-03T02:28:37Z",
+  "token_cost": 831087,
+  "tool_uses": 25,
+  "turns_to_fix": 26,
+  "wall_clock": 176.002
+}

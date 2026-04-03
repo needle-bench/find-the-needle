@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.007191800000000001,
+  "input_tokens": 19458,
+  "output_tokens": 715,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix was successful. The test now passes.\n\n**The bug:** In `src/Product.java`, the `hashCode()` method was using `category.hashCode()` instead of `sku.hashCode()`. Since there are only 10 categories but thousands of unique SKUs, this caused all products in the same category to collide in the hash map buckets. With 10,000 items and only ~10 categories, the max chain length was exploding to ~1000.\n\n**The fix:** Changed `hashCode()` to use `sku.hashCode()` instead, which properly distributes items across buckets since SKUs are unique.\n\n**Results after fix:**\n- Max chain length: 4 (within acceptable bounds of 50)\n- Test: PASS",
+  "timestamp": "2026-04-03T02:51:21Z",
+  "token_cost": 20173,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 33.65
+}

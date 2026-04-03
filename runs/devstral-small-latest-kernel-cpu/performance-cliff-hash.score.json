@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 35390,
+  "output_tokens": 486,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix has resolved the issue. The `hashCode()` method now uses the `sku` field instead of the `category` field, ensuring that products are distributed evenly across the hash map buckets. The test confirms that the max chain length is now within acceptable bounds (4), which is a significant improvement from the previous severe collisions.",
+  "timestamp": "2026-04-03T04:24:06Z",
+  "token_cost": 35876,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 13.384
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.032385,
+  "input_tokens": 15652,
+  "output_tokens": 1858,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I tracked down the issue in the URL validator: it only blocked IPv4 loopback via string checks, so IPv6 loopbacks like `[::1]` slipped through and let the proxy hit the internal service. I updated `validator.py` to parse hostnames with `ip_address` and block any non-public IP (loopback, private, link-local, etc.). After the fix, `test.sh` passes—IPv6 loopback requests are now blocked and no secrets leak.",
+  "timestamp": "2026-04-03T02:26:25Z",
+  "token_cost": 17510,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 26.744
+}

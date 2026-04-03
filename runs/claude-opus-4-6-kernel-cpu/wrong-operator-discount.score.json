@@ -6,13 +6,13 @@
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
   "input_tokens": 6118,
-  "output_tokens": 822,
+  "output_tokens": 790,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The fix is confirmed. The bug was in `/app/pricing.py` in the `calculate_discount_amount` function. The operator `+` was used instead of `*`:\n\n- **Buggy code:** `discount = subtotal + discount_percent / 100` — This was adding the subtotal to the percentage fraction (e.g., for 20% off $1098.94, it computed `1098.94 + 0.2 = 1099.14` instead of the correct discount amount).\n- **Fixed code:** `discount = subtotal * discount_percent / 100` — This correctly multiplies the subtotal by the discount percentage to get the discount amount (e.g., `1098.94 * 20 / 100 = 219.79`).",
-  "timestamp": "2026-04-02T02:41:40Z",
-  "token_cost": 6940,
+  "summary": "The fix is confirmed. The bug was in `/app/pricing.py` in the `calculate_discount_amount` function:\n\n- **Bug**: `discount = subtotal + discount_percent / 100` — used `+` (addition) instead of `*` (multiplication)\n- **Fix**: `discount = subtotal * discount_percent / 100` — correctly multiplies the subtotal by the discount percentage to get the discount amount\n\nFor example, 20% of $1098.94 should be $219.79 (via `1098.94 * 20 / 100`), but the buggy code was computing `1098.94 + 20 / 100 = 1099.14`.",
+  "timestamp": "2026-04-03T03:45:57Z",
+  "token_cost": 6908,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 20.961
+  "wall_clock": 23.686
 }

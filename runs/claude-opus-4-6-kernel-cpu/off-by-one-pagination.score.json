@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9062,
-  "output_tokens": 1049,
+  "input_tokens": 9038,
+  "output_tokens": 1063,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test passes. \n\n**The bug:** In `/app/app/app.py`, the pagination offset calculation had an off-by-one error:\n\n```python\n# Buggy:\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n\n# Fixed:\noffset = (page - 1) * per_page\n```\n\nThe `- (1 if page > 1 else 0)` subtracted 1 from the offset for any page after the first, causing page boundaries to overlap — the last item of page 1 (ID 10) would also appear as the first item of page 2, and page 2 would be missing its rightful last item.",
-  "timestamp": "2026-04-02T02:33:54Z",
-  "token_cost": 10111,
+  "summary": "The test passes. \n\n**The bug:** In `/app/app/app.py`, the pagination offset calculation had an off-by-one error:\n\n```python\n# Buggy:\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n\n# Fixed:\noffset = (page - 1) * per_page\n```\n\nThe `- (1 if page > 1 else 0)` was incorrectly subtracting 1 from the offset for all pages after page 1, causing items to overlap across page boundaries (e.g., the last item on page 1 would also appear as the first item on page 2).",
+  "timestamp": "2026-04-03T02:30:34Z",
+  "token_cost": 10101,
   "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 28.162
+  "wall_clock": 28.357
 }

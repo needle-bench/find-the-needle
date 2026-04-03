@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.01935818,
+  "input_tokens": 60805,
+  "output_tokens": 11257,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "This is a Raft consensus implementation bug where a follower receiving a snapshot and then restarting causes duplicate state machine applications. The symptoms show key-value entries applied twice after writes, snapshot installation on a slow follower, and leader change with crash-recovery.\n\nThe issue lies in InstallSnapshot not updating commitIndex (volatile state) and not compacting the log, leaving superseded entries for replay. After restart, Restart() drags lastApplied down if commitIndex isn't set, re-applying log entries on top of the transported snapshot.\n\nFixed by adding CompactUpTo and updating commitIndex in InstallSnapshot, as per thepatched code. Test.sh now passes without duplicates.",
+  "timestamp": "2026-04-03T02:14:12Z",
+  "token_cost": 72062,
+  "tool_uses": 30,
+  "turns_to_fix": 1,
+  "wall_clock": 90.87
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.303905,
+  "input_tokens": 52616,
+  "output_tokens": 1633,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the fix:\n\n**The Bug:** In `Product.java`, the `hashCode()` method was using `category.hashCode()` instead of `sku.hashCode()`. Since there are only 10 distinct categories, all 10,000 products were being hashed into approximately 10 buckets in the `ProductCache` hash map. This caused massive hash collisions, with chain lengths of ~1,000, degrading lookups from O(1) to O(n).\n\n**The Fix:** Changed `hashCode()` to return `sku.hashCode()` instead of `category.hashCode()`. Since each product has a unique SKU, this distributes items evenly across buckets. After the fix, the max chain length dropped from ~1,000 to just 4, and the test passes cleanly.",
+  "timestamp": "2026-04-03T02:32:59Z",
+  "token_cost": 54249,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 93.778
+}

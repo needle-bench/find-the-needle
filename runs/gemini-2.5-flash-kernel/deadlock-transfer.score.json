@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.005067449999999999,
+  "input_tokens": 15741,
+  "output_tokens": 927,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reports \"PASS: All concurrent transfers completed without deadlock\". The fix was successful! I have found the needle and confirmed the fix.",
+  "timestamp": "2026-04-03T01:21:12Z",
+  "token_cost": 16668,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 15.975
+}

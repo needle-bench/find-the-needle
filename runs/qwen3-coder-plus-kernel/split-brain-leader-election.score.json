@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.04205045,
+  "input_tokens": 127627,
+  "output_tokens": 5282,
+  "resolved": false,
+  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://openrouter.ai/api/v1/chat/completions)",
+  "summary": "Let's try:\n\n",
+  "timestamp": "2026-04-03T02:40:26Z",
+  "token_cost": 132909,
+  "tool_uses": 21,
+  "turns_to_fix": 0,
+  "wall_clock": 229.684
+}

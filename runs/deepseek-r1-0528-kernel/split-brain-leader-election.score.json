@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.026925619999999997,
+  "input_tokens": 18838,
+  "output_tokens": 7715,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Let's read the contents of this test.sh script",
+  "timestamp": "2026-04-03T03:32:57Z",
+  "token_cost": 26553,
+  "tool_uses": 12,
+  "turns_to_fix": 0,
+  "wall_clock": 505.306
+}

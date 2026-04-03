@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6907,
+  "output_tokens": 2841,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! ✅ **The test passes!**\n\n## Summary\n\nI found and fixed the **goroutine leak** in the HTTP handler:\n\n### The Problem:\nThe `computeHandler` function spawned a goroutine to perform heavy computation without any mechanism to cancel it when the client disconnected. When clients timed out and disconnected (simulated by curl's `-m 1` timeout), the goroutines continued running indefinitely, leaking resources.\n\n### The Solution:\nI added proper Go context cancellation:\n\n1. **Added `context` import** to use Go's cancellation patterns\n2. **Modified `computeHandler`** to create a context with a timeout and pass it to the computation\n3. **Modified `performComputation`** to:\n   - Accept `context.Context` as the first parameter\n   - Check for context cancellation on each iteration\n   - Return early when the context is cancelled (client disconnect)\n4. **Updated the select statement** to listen for context cancellation\n\n### Test Results:\n- **Before fix**: Goroutines would leak and accumulate with each client disconnect\n- **After fix**: All goroutines are properly cleaned up when clients disconnect (0 leaked goroutines above baseline)\n- ✅ **PASS: All goroutine lifecycle tests passed**",
+  "timestamp": "2026-04-03T00:17:35Z",
+  "token_cost": 9748,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 35.275
+}

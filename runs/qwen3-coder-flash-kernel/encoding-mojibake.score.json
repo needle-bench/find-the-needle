@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00521352,
+  "input_tokens": 40617,
+  "output_tokens": 1115,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix worked perfectly. The test now shows all the international characters correctly displayed as \"Renée Duböis\", \"Hans Müller\", \"María García\", etc., instead of the corrupted \"RenÃ©e DubÃ¶is\" format. All 12 name checks pass, confirming that the needle (the encoding issue) has been found and fixed.\n\nThe problem was in `/app/app/CsvReader.java` where the constructor was using `Charset.forName(\"ISO-8859-1\")` instead of `Charset.forName(\"UTF-8\")`. This caused international characters to be misinterpreted when reading the CSV file, leading to the corruption shown in the test output.\n\nBy changing the charset to UTF-8, the application now properly handles the international characters in the CSV file and displays them correctly in the output report.\n",
+  "timestamp": "2026-04-03T01:34:37Z",
+  "token_cost": 41732,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 28.91
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.02234125,
+  "input_tokens": 18797,
+  "output_tokens": 699,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! The bug is fixed. The needle was the missing update to `commitIndex` after installing a snapshot. This could cause the node to re-apply log entries that were already included in the snapshot, leading to a corrupt state machine. By setting `commitIndex` to `LastIncludedIndex` of the snapshot, we ensure that the node doesn't re-apply old log entries.",
+  "timestamp": "2026-04-03T04:15:14Z",
+  "token_cost": 19496,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 22.556
+}

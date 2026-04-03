@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.442105,
+  "input_tokens": 74266,
+  "output_tokens": 2831,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 5 tests pass. Here's a summary of the vulnerability and the fix:\n\n## The Needle: Unicode BIDI Override Privilege Escalation\n\n### Vulnerability\nAn attacker could register a username containing Unicode BIDI control characters (like U+202E RIGHT-TO-LEFT OVERRIDE) followed by `nimda`. The BIDI character causes the text to render visually as `admin` (the letters are reversed in display).\n\nThe bug was in two places:\n\n1. **`sanitizer.py`** — The `sanitize_username()` function did not strip Unicode BIDI control characters, so they passed through sanitization unchecked.\n\n2. **`auth.py`** — The `check_admin_access()` function used `_render_display_name()` to visually render the username (applying BIDI transformations), then compared that rendered form against the admin allowlist. This meant `\\u202enimda` rendered as `admin` and matched the allowlist, granting admin access to the attacker.\n\n### Fix\n1. **`sanitizer.py`**: Added a regex pattern to strip all Unicode BIDI control characters (U+202E, U+202D, U+202A, U+202B, U+202C, U+2066-U+2069, etc.) from usernames before any other sanitization.\n\n2. **`auth.py`**: Changed `check_admin_access()` to compare the **stored username** directly against the admin allowlist, instead of the visually-rendered display name.",
+  "timestamp": "2026-04-03T01:21:10Z",
+  "token_cost": 77097,
+  "tool_uses": 27,
+  "turns_to_fix": 1,
+  "wall_clock": 112.978
+}

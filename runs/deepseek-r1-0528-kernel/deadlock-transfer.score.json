@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0051344,
+  "input_tokens": 3643,
+  "output_tokens": 925,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Based on the file names, the TransferService.java likely contains the transfer logic that's causing deadlocks. Let's examine this file first:",
+  "timestamp": "2026-04-03T01:39:17Z",
+  "token_cost": 4568,
+  "tool_uses": 4,
+  "turns_to_fix": 0,
+  "wall_clock": 145.735
+}

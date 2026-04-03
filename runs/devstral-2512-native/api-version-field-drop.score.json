@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "api-version-field-drop",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is complete. The test now passes, confirming that:\n\n1. All v1 fields (`avatar_url`, `bio`, `location`) are now present in v2 responses\n2. The v2 API maintains backward compatibility with v1\n3. New v2 fields (`department`, `phone_number`, `is_active`) are also present\n\nThe issue was in the `UserV2` struct definition and the `ToV2()` conversion method, both of which were missing the three critical fields from v1.",
+  "timestamp": "2026-04-03T01:12:15Z",
+  "token_cost": 0,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 25.02
+}

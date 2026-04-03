@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.142702,
+  "input_tokens": 128571,
+  "output_tokens": 3047,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the “duplicate apply after snapshot” bug.\n\nCause  \nInstallSnapshot restored the state machine and lastApplied, but it never moved commitIndex forward. After a crash–restart, commitIndex = 0 dragged lastApplied back to 0, so entries 1-10 were replayed and applied a second time.\n\nFix (app/snapshot.go)  \n1. After accepting a snapshot, advance commitIndex to at least LastIncludedIndex.  \n2. Then restore the state machine and set lastApplied to LastIncludedIndex.\n\nOutcome  \nRunning test.sh now passes in all rounds:\n\n=== Raft Snapshot Commit-Gap Test ===  \nPASS: No duplicate state machine transitions across all rounds\n\nThe needle has been found and removed.",
+  "timestamp": "2026-04-03T02:59:27Z",
+  "token_cost": 131618,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 60.933
+}

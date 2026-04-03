@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0349755,
+  "input_tokens": 30494,
+  "output_tokens": 1673,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue was caused by overlapping segment assignments: the original `segments_for_worker` function gave each worker two extra segments, so multiple threads wrote to the same byte ranges. I updated the function to distribute segments uniquely (and handle any remainder segments). After rebuilding and running `test.sh`, both the integrity and overlap checks pass:\n\n```\n=== Concurrent Write Integrity Test ===\n--- Building ---\n   Compiling concurrent-writer v0.1.0 (/app)\n    Finished `release` profile [optimized] target(s) in 0.18s\nVERIFY: File integrity check passed\n--- Checking segment assignment overlap ---\nOK: No overlapping segment assignments\nPASS: All concurrent write runs produced correct output\n```\n\nThe “needle” has been found and fixed.",
+  "timestamp": "2026-04-03T07:27:45Z",
+  "token_cost": 32167,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 22.765
+}

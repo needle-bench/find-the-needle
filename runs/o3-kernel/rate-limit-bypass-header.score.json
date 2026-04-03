@@ -4,15 +4,15 @@
   "benchmark": "rate-limit-bypass-header",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.25891600000000004,
-  "input_tokens": 192578,
-  "output_tokens": 4284,
+  "estimated_cost_usd": 0.061228,
+  "input_tokens": 40218,
+  "output_tokens": 1967,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Fixed the vulnerability – the rate-limiter used to trust any X-Forwarded-For value and could be bypassed by rotating that header.\n\nKey changes in app/ratelimiter.ts:\n\n1. Re-implemented getClientIp():\n   • By default we no longer trust X-Forwarded-For; we fall back to the socket’s remote address.  \n   • Trusting the header can be explicitly enabled by setting environment variable TRUST_PROXY=true for deployments behind a real reverse-proxy.\n\nWith the patch, ./test.sh now passes:\n\nWithout spoofing: 10 passed, 5 blocked  \nWith spoofing:    10 passed, 20 blocked  \nPASS: Rate limiter is not vulnerable to header spoofing",
-  "timestamp": "2026-04-02T01:47:50Z",
-  "token_cost": 196862,
-  "tool_uses": 19,
+  "summary": "Fixed the vulnerability.\n\nProblem  \nThe rate-limiter trusted the X-Forwarded-For header unconditionally.  \nAn attacker could send a different spoofed address on every request and bypass the per-IP limit.\n\nFix (ratelimiter.ts)  \n1. Stop trusting X-Forwarded-For by default.  \n2. Only use it when the deployment explicitly sets TRUST_PROXY=true, assuming a sanitising reverse proxy.  \n3. Otherwise always use req.socket.remoteAddress.\n\nResult  \nRunning test.sh now passes:\n\nWithout spoofing: 10 passed, 5 blocked – limiter works  \nWith spoofing:    10 passed, 20 blocked – bypass prevented  \nPASS: Rate limiter is not vulnerable to header spoofing",
+  "timestamp": "2026-04-03T03:00:34Z",
+  "token_cost": 42185,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 82.549
+  "wall_clock": 56.887
 }

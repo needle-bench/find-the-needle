@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.6296180000000001,
+  "input_tokens": 817349,
+  "output_tokens": 7133,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the privilege-escalation “needle”.\n\nWhat was wrong\n• The admin check compared the visually-rendered username (after applying Unicode BIDI overrides) with the ADMIN_USERS allow-list.  \n• An attacker could register the string “\\u202Enimda”, which renders as “admin”, and sneak into the admin role.\n\nWhat I changed\n1. app/auth.py  \n   – Re-implemented check_admin_access(): it now compares the raw (case-insensitive) stored username to the allow-list instead of a BIDI-rendered version.\n\n2. app/sanitizer.py  \n   – Added a list/regex of all Unicode BIDI control characters.  \n   – sanitize_username() now strips those characters before any further processing.  \n   – Re-organised the file to keep helper regexes (_HTML_TAG_RE, _SCRIPT_RE, etc.) defined before use.\n\nResult\nRunning ./test.sh now reports:\n\nPASS: normal user registration works  \nPASS: normal user login works  \nPASS: real admin can access dashboard  \nPASS: BIDI-injected username was rejected or normalized  \nPASS: non-admin user correctly denied admin access  \nPASS: LRO-injected username was rejected or normalized  \n\nAll tests pass – the “needle” is removed.",
+  "timestamp": "2026-04-03T01:31:28Z",
+  "token_cost": 824482,
+  "tool_uses": 51,
+  "turns_to_fix": 1,
+  "wall_clock": 168.382
+}

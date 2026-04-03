@@ -6,13 +6,13 @@
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
   "input_tokens": 2341,
-  "output_tokens": 1057,
+  "output_tokens": 1024,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "✅ **Test passes!**\n\n### The Needle (Bug)\n\n**Location:** `/app/routes.ts` — the `POST /inventory/:sku/adjust` handler.\n\n**Problem:** There was **no validation** to prevent an adjustment that would make inventory go negative. A request like `{\"quantity\": -200}` on a product with only 110 units would be accepted with HTTP 200, resulting in a quantity of `-90` — an impossible inventory state.\n\n**Fix:** Added a guard before applying the adjustment:\n```ts\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'adjustment would result in negative inventory' }));\n  return;\n}\n```\n\nThis rejects any adjustment where `currentQuantity + adjustment < 0` with a `400 Bad Request`, while still allowing valid negative adjustments (e.g., `-50` from `110` → `60`).",
-  "timestamp": "2026-04-02T02:29:45Z",
-  "token_cost": 3398,
+  "summary": "✅ **Test passes!**\n\n---\n\n### What the bug was\n\n**Location:** `/app/routes.ts` — the `POST /inventory/:sku/adjust` handler\n\n**The needle:** Missing input validation — the endpoint accepted any numeric `quantity` adjustment (including large negative values) without checking whether the result would push inventory below zero.\n\n**The fix:** Added a guard before calling `adjustQuantity`:\n\n```ts\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'adjustment would result in negative inventory' }));\n  return;\n}\n```\n\nThis rejects any adjustment that would make the inventory negative (e.g., subtracting 200 from a stock of 110), returning a `400 Bad Request` instead of silently allowing an impossible inventory state.",
+  "timestamp": "2026-04-03T01:53:45Z",
+  "token_cost": 3365,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 23.78
+  "wall_clock": 22.424
 }

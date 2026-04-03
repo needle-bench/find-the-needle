@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:32:23Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 371, "tokens_out": 367, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/go.mod", "/workspace/main.go", "/workspace/test.sh", "/workspace", "/workspace/.git"], "tokens_in": 676, "tokens_out": 478, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:32:30Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

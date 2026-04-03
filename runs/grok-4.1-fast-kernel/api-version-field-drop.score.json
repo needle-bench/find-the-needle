@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.009411250000000001,
+  "input_tokens": 42322,
+  "output_tokens": 12991,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The needle was in `app/models.go`:\n\n**Problem:**\n- `UserV2` struct was missing `AvatarURL`, `Bio`, and `Location` fields (dropped accidentally during refactor).\n- `ToV2()` method omitted them.\n\n**Fix:**\n- Added missing fields to `UserV2`:\n  ```\n  AvatarURL   string    `json:\"avatar_url\"`\n  Bio         string    `json:\"bio\"`\n  Location    string    `json:\"location\"`\n  ```\n- Updated `ToV2()` to populate them:\n  ```\n  AvatarURL: u.AvatarURL,\n  Bio:       u.Bio,\n  Location:  u.Location,\n  ```\n\n**Verification:** `./test.sh` now passes fully:\n```\nv1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at\nv2 user response fields: avatar_url, bio, created_at, department, email, id, is_active, location, name, phone_number, role, updated_at\nChecking field compatibility...\nPASS: All v1 fields present in v2\nPASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)\nPASS: v2 API is backward-compatible with v1\n```",
+  "timestamp": "2026-04-03T01:21:35Z",
+  "token_cost": 55313,
+  "tool_uses": 27,
+  "turns_to_fix": 1,
+  "wall_clock": 101.948
+}

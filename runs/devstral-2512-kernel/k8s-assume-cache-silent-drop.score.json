@@ -4,15 +4,15 @@
   "benchmark": "k8s-assume-cache-silent-drop",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.02670664,
-  "input_tokens": 84594,
-  "output_tokens": 959,
+  "estimated_cost_usd": 0.0061226399999999995,
+  "input_tokens": 25145,
+  "output_tokens": 800,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Excellent! The fix is working correctly. The issue was that when the informer delivered an update for an assumed object, the assumed version was silently dropped without any notification. The fix adds a notification mechanism by setting the `conflictNotified` flag to `true` when this conflict occurs.\n\nThe key change was in the `informerUpdate` method of the `AssumeCache` struct, where we added:\n```go\nconflictNotified = true\n```\n\nThis ensures that when an assumed object is dropped due to a newer version from the informer, the conflict is properly notified, which is what the test was checking for.",
-  "timestamp": "2026-04-02T03:59:04Z",
-  "token_cost": 85553,
-  "tool_uses": 16,
+  "summary": "Task completed.",
+  "timestamp": "2026-04-03T02:13:00Z",
+  "token_cost": 25945,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 19.584
+  "wall_clock": 10.574
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.38274,
+  "input_tokens": 62008,
+  "output_tokens": 2908,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the **needle** (bug) and the fix:\n\n## The Bug: Goroutine Leak in HTTP Handler\n\n**Problem:** In `main.go`, the `computeHandler` spawned a goroutine to run `performComputation()` but had no mechanism to cancel it when a client disconnected. The issues were:\n\n1. **No context propagation** — The request's context (`r.Context()`) was never used. When a client disconnected, `r.Context()` would be cancelled, but nothing was listening to it.\n2. **No cancellation in computation loop** — `performComputation()` didn't accept a `context.Context` and had no way to stop its long-running loop (500 iterations × 100ms delay = 50 seconds of work per request).\n3. **`time.After` instead of context** — The `select` used `time.After(25s)` as a timeout, but even when that fired, the spawned goroutine kept running indefinitely.\n\n**Fix:**\n1. Created a `context.WithTimeout` derived from `r.Context()` — this cancels on both client disconnect AND timeout.\n2. Passed the context to `performComputation()`.\n3. Added a `select` on `ctx.Done()` inside the computation loop so the goroutine exits promptly when the context is cancelled.\n\nResult: Goroutines now clean up immediately when clients disconnect (0 leaked goroutines vs. 20+ before).",
+  "timestamp": "2026-04-03T01:34:17Z",
+  "token_cost": 64916,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 127.671
+}

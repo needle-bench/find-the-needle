@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.41445140000000014,
-  "input_tokens": 703506,
-  "output_tokens": 39685,
+  "estimated_cost_usd": 0.0624624,
+  "input_tokens": 29752,
+  "output_tokens": 9542,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I’ve improved the processor’s `execute_transfer` to run the entire transfer—including balance check, debit, credit, and idempotency-record insert—in a single transaction (`BEGIN IMMEDIATE`), ensuring atomicity and preventing race windows. The idempotency check now occurs before any writes, avoiding the original gap that allowed duplicate debits under high-concurrency+timeout scenarios. All error paths properly roll back. Tests now pass.",
-  "timestamp": "2026-04-02T02:06:00Z",
-  "token_cost": 743191,
-  "tool_uses": 50,
+  "summary": "I’ve updated the processor’s race-condition handling so that on an IntegrityError (idempotency insert conflict) it now correctly undoes both the debit and the credit, preventing duplicate transfers. All tests pass.",
+  "timestamp": "2026-04-03T02:20:37Z",
+  "token_cost": 39294,
+  "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 465.505
+  "wall_clock": 105.223
 }

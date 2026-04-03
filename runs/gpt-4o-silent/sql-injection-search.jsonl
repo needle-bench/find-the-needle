@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T03:35:25Z", "benchmark": "sql-injection-search", "model": "gpt-4o", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/config.py\n/app/app/database.py\n/app/app/search.py\n/app/app/server.py\n/app/app/validators.py\n\nCurrent"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/test.sh", "/app/app/config.py", "/app/app/database.py", "/app/app/search.py", "/app/app/server.py", "/app/app/validators.py"], "tokens_in": 115, "tokens_out": 130, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T03:35:26Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:25:20Z", "benchmark": "deadlock-transfer", "model": "grok-4-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 371, "tokens_out": 225, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 532, "tokens_out": 112, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 728, "tokens_out": 164, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 918, "tokens_out": 194, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:25:27Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

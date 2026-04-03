@@ -4,15 +4,15 @@
   "benchmark": "race-condition-counter",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.095248,
-  "input_tokens": 69476,
-  "output_tokens": 1617,
+  "estimated_cost_usd": 0.037678,
+  "input_tokens": 21035,
+  "output_tokens": 1131,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The “needle” was a race-condition bug in app/counter.js: it incremented the counter with a non-atomic read-modify-write sequence (GET ➜ add 1 ➜ SET). Under concurrency this lost updates, causing the test to fail.\n\nFix implemented:\n\n1. Replaced the fragile pattern with Redis’ atomic INCR command.\n2. Updated the accompanying comment and log message.\n\nKey diff (app/counter.js):\n\n- Old: read current value, value + 1, SET.\n+ New: const newValue = await client.incr(COUNTER_KEY);  // atomic\n\nRunning ./test.sh now passes:\n\nExpected: 100  \nGot:      100  \nPASS: Counter is correct",
-  "timestamp": "2026-04-02T01:46:16Z",
-  "token_cost": 71093,
-  "tool_uses": 14,
+  "summary": "Fixed the race-condition bug in the counter.\n\nProblem  \nincrementCounter did a read-modify-write:\n1. GET current value\n2. value + 1\n3. SET new value\n\nWhen many requests ran concurrently, multiple workers could read the same value before any wrote it back, so some increments were lost and the test failed.\n\nFix  \nUse Redis’ atomic INCR command, which increments the key and returns the new value in a single atomic operation.\n\nChanged app/counter.js:\n\n```diff\n-// Read-modify-write implementation\n-const current = await client.get(COUNTER_KEY);\n-const value   = parseInt(current || \"0\", 10);\n-const newValue = value + 1;\n-await client.set(COUNTER_KEY, newValue.toString());\n-\n-logger.debug(`Counter incremented: ${value} -> ${newValue}`);\n-return newValue;\n+// Atomic increment\n+const newValue = await client.incr(COUNTER_KEY);\n+logger.debug(`Counter incremented -> ${newValue}`);\n+return newValue;\n```\n\nRunning ./test.sh now prints:\n\nExpected: 100  \nGot:      100  \nPASS: Counter is correct",
+  "timestamp": "2026-04-03T02:55:59Z",
+  "token_cost": 22166,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 50.922
+  "wall_clock": 22.837
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9500,
+  "output_tokens": 1379,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the vulnerability and the fix:\n\n## The Needle: Auth Bypass via Path Manipulation\n\n**Vulnerability:** In `/app/app/middleware.go`, the `authMiddleware` was checking the **raw** `r.URL.Path` for the `/api/` prefix to decide whether authentication was required. However, the router in `main.go` normalizes/cleans paths using `path.Clean()` before matching routes.\n\nThis mismatch allowed an attacker to bypass authentication by manipulating the path:\n- `//api/admin` — raw path doesn't start with `/api/` (it starts with `//api/`), so auth is skipped, but the router cleans it to `/api/admin` and serves sensitive data.\n- `/health/../api/data` — raw path starts with `/health/`, so auth is skipped, but the router cleans it to `/api/data`.\n\n**Fix:** Added `path.Clean()` normalization in the middleware **before** checking the `/api/` prefix, ensuring the middleware and router use the same cleaned path for their decisions. This closes the path manipulation bypass.",
+  "timestamp": "2026-04-03T01:18:11Z",
+  "token_cost": 10879,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 39.316
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.239935,
+  "input_tokens": 39977,
+  "output_tokens": 1602,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. \n\n**The needle:** In `/app/app/CsvReader.java`, the CSV file was being read using `ISO-8859-1` charset instead of `UTF-8`. Since the CSV file (`customers.csv`) contains UTF-8 encoded international characters (like `Renée Duböis`, `Hans Müller`, `María García`, `Søren Kirkegård`, etc.), reading it with `ISO-8859-1` corrupted all the non-ASCII characters in the output report.\n\n**The fix:** Changed `Charset.forName(\"ISO-8859-1\")` to `Charset.forName(\"UTF-8\")` in the `CsvReader` constructor, so the charset matches the actual encoding of the CSV file and the output writer in `ReportGenerator` (which already correctly used `StandardCharsets.UTF_8`).",
+  "timestamp": "2026-04-03T01:30:15Z",
+  "token_cost": 41579,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 68.143
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.01996872,
+  "input_tokens": 53811,
+  "output_tokens": 1146,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix works. The test script now passes, indicating that the duplicate state machine transitions issue has been resolved.\n\n### Summary of the Fix:\nThe problem was in the `InstallSnapshot` function in `app/snapshot.go`. After installing a snapshot, the `lastApplied` was correctly updated to the snapshot's `lastIncludedIndex`, but the `commitIndex` was not updated. This caused the `Restart` function to incorrectly set the `lastApplied` to the old `commitIndex` value, leading to duplicate state machine transitions.\n\nThe fix ensures that the `commitIndex` is updated to at least the snapshot's `lastIncludedIndex` during the `InstallSnapshot` process, maintaining the invariant that `lastApplied <= commitIndex` and preventing duplicate log entry applications.",
+  "timestamp": "2026-04-03T03:03:08Z",
+  "token_cost": 54957,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 20.361
+}

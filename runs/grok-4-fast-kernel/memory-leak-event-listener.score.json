@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00376805,
+  "input_tokens": 16566,
+  "output_tokens": 5062,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle is the memory leak in `/app/app/processor.js` caused by per-request event listener accumulation on the global event bus. I fixed it by removing the `this.eventBus.on` calls and the `_handleValidated` method from the `process` function, which were registering unbounded listeners and capturing data closures. The test now passes (listener count stays stable at 1, heap usage bounded).",
+  "timestamp": "2026-04-03T01:45:33Z",
+  "token_cost": 21628,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 34.12
+}

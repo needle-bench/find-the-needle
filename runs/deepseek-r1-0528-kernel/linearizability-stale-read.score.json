@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0203088,
+  "input_tokens": 16863,
+  "output_tokens": 2841,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Based on the test.sh script, we can see that the test is failing due to a linearizability issue where a partitioned node returns stale data after rejoining the cluster. The main.go file shows that after a partition heals, we're reading directly from the partitioned node without verifying that it has caught up with the latest commit index.\n\nLet's look at how reads are implemented. We should examine the handler code that handles read requests:",
+  "timestamp": "2026-04-03T02:18:07Z",
+  "token_cost": 19704,
+  "tool_uses": 10,
+  "turns_to_fix": 0,
+  "wall_clock": 218.682
+}

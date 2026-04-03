@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.12005875,
+  "input_tokens": 135543,
+  "output_tokens": 3415,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I located the “needle” — the cache’s collisions stemmed from `Product.hashCode()` hashing on category instead of the unique SKU. I updated `hashCode()` to hash the SKU, recompiled, and ran `./test.sh`; it now passes (max chain length 4, benchmark OK).",
+  "timestamp": "2026-04-03T02:02:09Z",
+  "token_cost": 138958,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 56.805
+}

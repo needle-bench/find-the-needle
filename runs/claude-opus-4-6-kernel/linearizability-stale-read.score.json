@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.98363,
+  "input_tokens": 179551,
+  "output_tokens": 3435,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 3 rounds pass. Here's a summary of the two bugs I found and fixed:\n\n## Bug 1: Stale reads in the HTTP handler (`handler.go`)\n\nThe `handleRead` method was calling `h.node.Read(key)` which reads directly from the local KV state machine without any linearizability guarantee. After a network partition heals, a formerly-isolated follower could return stale data because its local state hasn't caught up with the leader's committed writes.\n\n**Fix:** Changed `h.node.Read(key)` → `h.node.ReadLinearizable(key)`, which implements the read-index protocol: the follower contacts the leader to get the current commit index, then waits until its own applied index catches up before serving the read.\n\n## Bug 2: Missing commit index advancement in heartbeat handler (`raft/node.go`)\n\nThe `handleHeartbeat` method correctly appended piggybacked log entries from the leader, but it **never advanced the follower's commit index**. The `handleAppendEntries` handler had this logic, but `handleHeartbeat` was missing it. This meant that even after a partition healed and the leader's heartbeats delivered the missing entries to the rejoining follower, the follower would never commit or apply them — so `ReadLinearizable` would time out waiting for the applied index to catch up.\n\n**Fix:** Added the same commit index advancement logic from `handleAppendEntries` to `handleHeartbeat`: after appending entries, it now advances the commit index to `min(leaderCommitIndex, lastLogIndex)` and triggers the apply loop.",
+  "timestamp": "2026-04-03T02:07:21Z",
+  "token_cost": 182986,
+  "tool_uses": 38,
+  "turns_to_fix": 1,
+  "wall_clock": 160.759
+}

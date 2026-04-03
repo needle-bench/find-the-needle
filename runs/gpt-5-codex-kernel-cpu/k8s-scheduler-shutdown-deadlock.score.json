@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.040972499999999995,
+  "input_tokens": 6834,
+  "output_tokens": 3243,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The deadlock occurred because the shutdown logic waited for the worker goroutine to finish before closing the queue. If the goroutine was blocked in `Pop`, it could never observe the closed state, causing the shutdown to hang. The fix closes the queue immediately after `ctx.Done()` is observed, ensuring blocked pops are released before waiting on the goroutine, which removes the deadlock. All tests now pass.",
+  "timestamp": "2026-04-03T01:43:02Z",
+  "token_cost": 10077,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 37.784
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.04114156000000001,
+  "input_tokens": 260671,
+  "output_tokens": 8446,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests passed! The message \"PASS: No duplicate state machine transitions across all rounds\" indicates that the bug has been fixed. I have successfully found the needle and verified the fix.",
+  "timestamp": "2026-04-03T02:43:54Z",
+  "token_cost": 269117,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 59.817
+}

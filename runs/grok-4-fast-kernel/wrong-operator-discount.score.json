@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00109415,
+  "input_tokens": 6314,
+  "output_tokens": 1346,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was in `pricing.py`: the discount calculation incorrectly added the percentage to the subtotal instead of multiplying. Fixed it, and `test.sh` now passes.",
+  "timestamp": "2026-04-03T02:41:08Z",
+  "token_cost": 7660,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 9.625
+}

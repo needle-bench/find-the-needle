@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.09309875000000001,
+  "input_tokens": 129079,
+  "output_tokens": 3183,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **Needle found and fix verified!**\n\nI ran `test.sh` and reproduced the issue where the state machine saw duplicate applies after a snapshot and restart. The root cause was that `InstallSnapshot` was updating `lastApplied` but not `commitIndex`, so during a restart the node “forgot” that those snapshot-covered entries were already committed and re-applied them from its log.\n\n### ✅ Fix\nIn `snapshot.go`, I added logic to bump `commitIndex` to the snapshot’s `LastIncludedIndex` whenever we install a snapshot. That way, the restart path keeps `lastApplied` aligned with the committed snapshot state and doesn’t replay those entries.\n\n### 🔧 Patch (applied)\n```go\n\t// Update lastApplied — the state machine now reflects everything\n\t// up to and including the snapshot's last index.\n\tn.lastApplied = snap.LastIncludedIndex\n\n\t// The snapshot represents committed state, so ensure commitIndex is\n\t// also advanced. Without this, a node that restarts soon after\n\t// installing the snapshot would reset commitIndex to 0 and reapply the\n\t// snapshot-covered log entries, causing duplicates.\n\tif n.commitIndex < snap.LastIncludedIndex {\n\t\tn.commitIndex = snap.LastIncludedIndex\n\t}\n```\n\n### ✅ Verification\n```\n./test.sh\n=== Raft Snapshot Commit-Gap Test ===\nBuilding...\n--- Round 1 ---\nPASS: All 13 keys present, no duplicate applies\nRound 1: OK\n--- Round 2 ---\nPASS: All 13 keys present, no duplicate applies\nRound 2: OK\n--- Round 3 ---\nPASS: All 13 keys present, no duplicate applies\nRound 3: OK\nPASS: No duplicate state machine transitions across all rounds\n```\n\nAll tests pass across multiple rounds with no duplicate applies—needle safely extracted. 🪡",
+  "timestamp": "2026-04-03T02:08:21Z",
+  "token_cost": 132262,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 44.122
+}

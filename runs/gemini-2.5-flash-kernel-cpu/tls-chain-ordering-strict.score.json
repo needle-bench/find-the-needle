@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 181205,
+  "output_tokens": 3888,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script passed successfully! This means I have found and fixed the problem.\n\nThe problem was that the `/certs/chain.pem` file, which contains the certificate chain (excluding the private key), was ordered incorrectly. The `tls.X509KeyPair` function in Go places the leaf certificate (matching the private key) as the first certificate (`Certificate[0]`), and then appends the *remaining* certificates from the `chain.pem` in their original order.\n\nThe original `chain.pem` had the Root CA before the Intermediate CA. This resulted in the final certificate chain being: Leaf -> Root CA -> Intermediate CA.\n\nAccording to RFC 5246 and the `test.sh` script, the required order for the chain is: Leaf -> Intermediate CA -> Root CA.\n\nMy fix involved reconstructing the `chain.pem` file by concatenating the individual certificate files from `/certs/` in the correct order: `leaf.crt`, `intermediate.crt`, and `root.crt`. This ensures that when `tls.X509KeyPair` processes `chain.pem`, the remaining certificates (intermediate and root) are appended in the correct order.",
+  "timestamp": "2026-04-03T03:14:37Z",
+  "token_cost": 185093,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 36.935
+}

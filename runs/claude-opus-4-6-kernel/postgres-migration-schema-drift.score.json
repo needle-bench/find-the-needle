@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.59919,
+  "input_tokens": 104803,
+  "output_tokens": 3007,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n## The Needle: Schema Drift Bug\n\n**Problem:** The database migrations renamed the `status` column to `order_status` (in `migrations/002_rename_status.sql`), but the Go application code in `app/main.go` still referenced the old column name `status` in its SQL queries. This caused both the `INSERT` (create order) and `SELECT` (get order) queries to fail with \"column does not exist\" errors.\n\n**Fix:** Updated two SQL queries in `app/main.go`:\n\n1. **`createOrder` function** — Changed the INSERT query from using `status` to `order_status`:\n   - `INSERT INTO orders (user_id, total, status, ...)` → `INSERT INTO orders (user_id, total, order_status, ...)`\n   - `RETURNING ..., status, ...` → `RETURNING ..., order_status, ...`\n\n2. **`getOrder` function** — Changed the SELECT query from using `status` to `order_status`:\n   - `SELECT ..., status, ...` → `SELECT ..., order_status, ...`\n\nThen recompiled the Go binary to apply the fix.",
+  "timestamp": "2026-04-03T02:42:43Z",
+  "token_cost": 107810,
+  "tool_uses": 33,
+  "turns_to_fix": 1,
+  "wall_clock": 191.508
+}

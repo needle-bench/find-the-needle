@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9116,
-  "output_tokens": 3706,
+  "input_tokens": 6418,
+  "output_tokens": 2935,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test passes. Here's a summary of the bug and fix:\n\n## The Bug: Race Condition in Idempotency Check\n\nThe `execute_transfer` function in `processor.py` had a critical race condition caused by **wrong ordering of operations**:\n\n1. **Debit** the source account and **commit** immediately\n2. **Sleep** for 50ms (simulating processing)\n3. **Then** check the idempotency key\n\nThis created a wide race window where multiple concurrent requests with the same idempotency key could all:\n- Pass the balance check (seeing the original balance)\n- Debit the account (each one subtracting money)\n- Only then check idempotency (too late — money already moved)\n\nThe \"undo\" logic attempted to compensate, but with 20 concurrent requests and a 50ms sleep between debit-commit and idempotency-check, multiple requests could slip through and cause duplicate debits, destroying money conservation (A+B ≠ 2000).\n\n## The Fix\n\n1. **Check idempotency FIRST** — before touching any account balances\n2. **Use `BEGIN IMMEDIATE`** — acquires a write lock at transaction start, serializing concurrent access\n3. **Do everything in a single atomic transaction** — debit, credit, and idempotency record all commit together (or all roll back)\n4. **Removed the dangerous mid-transaction commit and sleep** — no more partial state visible to other transactions",
-  "timestamp": "2026-04-02T02:38:47Z",
-  "token_cost": 12822,
-  "tool_uses": 19,
+  "summary": "The test passes. Here's what the bug was and how I fixed it:\n\n## The Bug (Needle in the Haystack)\n\nIn `app/processor.py`, the `execute_transfer` function had a **race condition** in its idempotency logic. The original order of operations was:\n\n1. **Debit** the source account and `commit()`\n2. **Sleep 50ms** (simulating processing)\n3. **Check idempotency** key — if already processed, undo the debit\n4. **Credit** the destination account\n5. **Record** the idempotency key\n\nThe problem: Between step 1 (debit committed) and step 3 (idempotency check), there's a 50ms window where multiple concurrent requests with the same idempotency key could all pass the check (since none had recorded the key yet). This caused the same transfer to execute multiple times, debiting account A multiple times and crediting account B multiple times — violating money conservation.\n\n## The Fix\n\nI reordered the operations to check and claim the idempotency key **first**, before touching any balances:\n\n1. **Check** if idempotency key exists → return duplicate if so\n2. **INSERT** the idempotency key (the UNIQUE constraint ensures only one thread wins)\n3. Check balance, **debit**, sleep, **credit**\n4. **Commit** everything in one transaction\n\nAny concurrent request with the same key either sees the existing record (step 1) or gets a `sqlite3.IntegrityError` on the INSERT (caught and handled as a duplicate). This eliminates the race window entirely.",
+  "timestamp": "2026-04-03T03:05:16Z",
+  "token_cost": 9353,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 80.066
+  "wall_clock": 61.994
 }

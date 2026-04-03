@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:27:51Z", "benchmark": "deadlock-transfer", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/Account.java\n/app/app/Bank.java\n/app/app/Main.java\n/app/app/TransferResult.java\n/app/app/TransferSer"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/TransferService.java"], "tokens_in": 187, "tokens_out": 525, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 651, "tokens_out": 634, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:28:15Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

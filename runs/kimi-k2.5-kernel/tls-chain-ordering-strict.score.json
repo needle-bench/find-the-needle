@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.032627074799999996,
+  "input_tokens": 66862,
+  "output_tokens": 3745,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The issue has been fixed and verified. Here's a summary:\n\n**Problem:** The certificate chain in `/certs/chain.pem` had certificates in the wrong order:\n1. Leaf certificate (CN=localhost)\n2. Root CA certificate (CN=Test Root CA) \n3. Intermediate CA certificate (CN=Test Intermediate CA)\n\nAccording to RFC 5246 Section 7.4.2, the chain must be ordered so that each certificate's issuer matches the next certificate's subject:\n- cert[0] = leaf (server cert, issued by Intermediate CA)\n- cert[1] = issuer of cert[0] (Intermediate CA, issued by Root CA)\n- cert[2] = issuer of cert[1] (Root CA, self-signed)\n\n**Fix:** Modified `/app/app/tlssetup/loader.go` to reorder the certificate chain after loading. The new code:\n1. Parses all certificates in the chain\n2. Starts with the leaf certificate at position 0\n3. Builds the chain by finding the certificate whose subject matches the current certificate's issuer\n4. Returns the properly ordered chain\n\n**Result:** All three tests now pass:\n- Test 1: Lenient TLS client connects successfully\n- Test 2: Chain is in correct RFC 5246 order\n- Test 3: First certificate is the leaf (CN=localhost)",
+  "timestamp": "2026-04-03T03:49:16Z",
+  "token_cost": 70607,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 206.872
+}

@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 58414,
-  "output_tokens": 2170,
+  "input_tokens": 21674,
+  "output_tokens": 692,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The fix is complete and working. Let me summarize what was done:\n\n## Summary\n\nThe problem was in the `AssumeCache` implementation where assumed states were being silently dropped when the informer delivered a newer version of an object. The scheduler had no way of knowing that its assumed state was invalidated.\n\n### The Fix\n\n1. **Added a callback mechanism**: Added a `conflictCallback` field to the `AssumeCache` struct to notify when a conflict occurs.\n\n2. **Added a method to set the callback**: Created `SetConflictCallback` method to allow callers to register a function that gets called when an assumed state is dropped due to a conflict.\n\n3. **Modified the conflict detection**: In the `informerUpdate` method, when a newer version is detected for an assumed object, the callback is triggered before dropping the assumed state.\n\n4. **Updated the main function**: Set up the conflict callback to mark `conflictNotified` as true and print a conflict message when a conflict occurs.\n\n5. **Updated the test logic**: Modified the final check to verify that the conflict was properly notified.\n\nThe test now passes, confirming that the conflict notification is working correctly. When the informer delivers a newer version (version 6) of an assumed object (version 5), the callback is triggered, setting `conflictNotified` to true and printing \"OK: conflict notified\".",
-  "timestamp": "2026-04-02T03:56:05Z",
-  "token_cost": 60584,
-  "tool_uses": 15,
+  "summary": "Perfect! The fix has been successfully implemented and verified. The issue was that the `informerUpdate` method was silently dropping assumed states when a newer version was received from the informer, without notifying the caller. The fix adds a notification mechanism (`conflictNotified = true` and a log message) to alert the caller about the conflict. The test script now passes, confirming that the fix works as expected.",
+  "timestamp": "2026-04-03T02:13:21Z",
+  "token_cost": 22366,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 25.046
+  "wall_clock": 10.735
 }

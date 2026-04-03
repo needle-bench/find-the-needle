@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.108726,
+  "input_tokens": 43755,
+  "output_tokens": 1768,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the issue and fixed it. \n\nThe file `app/CsvReader.java` was hardcoded to read the CSV files using `ISO-8859-1` encoding instead of `UTF-8`, which corrupted the names of customers containing non-ASCII characters (e.g. `Renée Duböis`, `Hans Müller`). \n\nI fixed the issue by updating `app/CsvReader.java` to use `UTF-8` encoding. The `test.sh` script now successfully runs and passes with:\n\n```\nPASS: All customer names preserved correctly\n```",
+  "timestamp": "2026-04-03T03:29:50Z",
+  "token_cost": 45523,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 49.969
+}

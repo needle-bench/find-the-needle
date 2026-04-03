@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0338371,
+  "input_tokens": 18945,
+  "output_tokens": 4322,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I removed the intentional overlap in segment assignments. Now each worker gets a unique contiguous chunk of segments, eliminating concurrent writes to the same offsets. All tests pass. Let me know if you need further adjustments!",
+  "timestamp": "2026-04-03T07:27:55Z",
+  "token_cost": 23267,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 49.491
+}

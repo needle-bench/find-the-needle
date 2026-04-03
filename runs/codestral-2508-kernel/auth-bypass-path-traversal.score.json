@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00023537999999999999,
+  "input_tokens": 1129,
+  "output_tokens": 154,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test results indicate that there are security vulnerabilities in the API server. Specifically, the following issues were identified:\n\n1. **Unauthenticated Access to /api/users**: The endpoint `/api/users` can be accessed without authentication, which should be restricted to authenticated users only.\n\n2. **Bypassing Authentication for /api/admin**: The endpoint `/api/admin` can be accessed without authentication, which is a critical security issue as it exposes sensitive data.\n\n3. **Path Traversal Vulnerability**: The path traversal technique allows accessing `/api/data` without authentication by using `/health/../api/data`.\n\nThese vulnerabilities need to be addressed to ensure the security and integrity of the API server.",
+  "timestamp": "2026-04-03T01:17:03Z",
+  "token_cost": 1283,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 6.085
+}

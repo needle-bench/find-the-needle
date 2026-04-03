@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9381,
+  "output_tokens": 1498,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The test passes!**\n\n## Summary\n\n**The Needle:** SQL Injection vulnerability in `/app/app/search.py`\n\n**The Problem:** The `search()` method was building SQL queries by directly concatenating user input:\n```python\nsql = f\"SELECT ... WHERE name LIKE '%{query}%'\"\nif category:\n    sql += f\" AND category = '{category}'\"\n```\n\nThis allowed attackers to inject arbitrary SQL code, such as:\n- UNION-based injection to extract data from other tables (e.g., users table)\n- Boolean-based injection to bypass the WHERE clause\n\n**The Fix:** Changed to parameterized queries using `?` placeholders:\n```python\nsql = \"SELECT ... WHERE name LIKE ?\"\nparams = [f'%{query}%']\nif category:\n    sql += \" AND category = ?\"\n    params.append(category)\nreturn self.db.execute(sql, tuple(params))\n```\n\nThe test now passes all security checks:\n- ✅ Normal search works\n- ✅ UNION injection blocked\n- ✅ Boolean injection blocked",
+  "timestamp": "2026-04-03T01:32:23Z",
+  "token_cost": 10879,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 16.632
+}

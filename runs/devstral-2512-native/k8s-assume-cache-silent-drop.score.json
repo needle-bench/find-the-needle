@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The fix is complete. The key changes made:\n\n1. Added `conflictCallback func(key string)` field to the `AssumeCache` struct\n2. Modified `informerUpdate` to call the callback when dropping an assumed entry\n3. Set up the callback in `main()` to set `conflictNotified = true`\n\nThe test now passes with \"OK: conflict notified\" output.",
-  "timestamp": "2026-04-02T03:19:06Z",
+  "summary": "The fix is complete. The test passes with \"OK: conflict notified\" output.\n\nThe changes made:\n1. Added a `ConflictCallback` function variable to notify when assumed state is dropped\n2. Modified `informerUpdate` to call the callback when dropping an assumed entry\n3. Set up the callback in `main()` to set `conflictNotified = true`\n\nNow when an informer delivers a newer version that conflicts with assumed state, the system is notified instead of silently dropping the assumed entry.",
+  "timestamp": "2026-04-03T02:12:39Z",
   "token_cost": 0,
-  "tool_uses": 16,
-  "turns_to_fix": 17,
-  "wall_clock": 24.863
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 21.921
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 825344,
+  "output_tokens": 3808,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I have identified and fixed the two compounding bugs that were causing stale reads and violating linearizability in the distributed KV store.\n\n1.  **Linearizability Bug in Handler**: The `handleRead` function in `app/handler.go` was serving reads directly from the node's local state by calling `node.Read()`. I changed this to call `node.ReadLinearizable()`, which implements the read-index protocol, ensuring the node's local state is current with the leader's commit index before returning a value.\n2.  **Commit Index Advancement in Heartbeats**: In `app/raft/node.go`, the `handleHeartbeat` function was appending piggybacked entries to the log but failed to advance the node's `commitIndex`. This meant that entries received during a heartbeat (such as those sent to a follower after a partition heals) were never applied to the state machine. I added logic to `handleHeartbeat` to advance the `commitIndex` based on the leader's commit index, mirroring the correct behavior already present in `handleAppendEntries`.\n\nThese changes ensure that all reads are linearizable, even after network partitions heal. I have verified the fix by running `test.sh`, which now consistently passes.",
+  "timestamp": "2026-04-03T03:07:03Z",
+  "token_cost": 829152,
+  "tool_uses": 47,
+  "turns_to_fix": 1,
+  "wall_clock": 2482.008
+}

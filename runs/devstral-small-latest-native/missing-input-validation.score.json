@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The fix is complete and verified. The changes:\n\n1. **inventory.ts**: Added validation in `adjustQuantity()` to check if the adjustment would result in negative quantity, throwing an error if it would\n2. **routes.ts**: Added try-catch block to handle the validation error and return a 400 status code\n\nThe test now passes, confirming that negative inventory states are properly prevented.",
-  "timestamp": "2026-04-02T01:55:54Z",
+  "summary": "Perfect! The fix is working. The test now passes, confirming that:\n\n1. Initial inventory is correct (100)\n2. Positive adjustments work (100 → 110)\n3. Negative adjustments that would make inventory negative are rejected with 400 status\n4. Inventory never goes negative\n5. Valid negative adjustments work correctly (110 → 60)\n\nThe fix adds validation in `inventory.ts` to check if an adjustment would result in negative quantity, and throws an error if so. The route handler in `routes.ts` catches this error and returns a 400 Bad Request response.",
+  "timestamp": "2026-04-03T03:40:17Z",
   "token_cost": 0,
-  "tool_uses": 13,
-  "turns_to_fix": 14,
-  "wall_clock": 26.137
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 30.148
 }

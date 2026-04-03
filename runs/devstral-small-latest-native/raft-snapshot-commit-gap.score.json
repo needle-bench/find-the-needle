@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The fix is complete. The issue was that `InstallSnapshot` wasn't updating `commitIndex` to match the snapshot boundary. After adding the commitIndex update, all tests pass with no duplicate state machine transitions.",
+  "timestamp": "2026-04-03T04:39:31Z",
+  "token_cost": 0,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 12.939
+}

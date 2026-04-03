@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.107742,
+  "input_tokens": 29254,
+  "output_tokens": 1332,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **PASS** — both verification runs completed without deadlock.\n\n---\n\n### What the needle was\n\n**File:** `/app/app/TransferService.java`\n\n**Bug:** Classic **lock-ordering deadlock**. The `transfer()` method always locked accounts in the order `(from → to)`. When two threads concurrently executed transfers in opposite directions (e.g., A→B and B→A), they would acquire locks in reverse order relative to each other:\n\n- Thread 1: locks A, then waits for B\n- Thread 2: locks B, then waits for A → **deadlock**\n\n**Fix:** Impose a **global, consistent lock-ordering** by comparing account IDs before acquiring locks. Both threads now always lock the account with the lexicographically-smaller ID first, regardless of transfer direction — eliminating the deadlock entirely while preserving correctness and balance conservation.",
+  "timestamp": "2026-04-03T01:21:49Z",
+  "token_cost": 30586,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 48.494
+}

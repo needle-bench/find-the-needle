@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:27:39Z", "benchmark": "goroutine-leak-handler", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 190, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/", "/var/", "/etc/"], "tokens_in": 865, "tokens_out": 240, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/home/", "/root/", "/tmp/"], "tokens_in": 1222, "tokens_out": 145, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 1660, "tokens_out": 110, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/", "/etc/passwd", "/etc/motd"], "tokens_in": 2252, "tokens_out": 133, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/", "/etc/passwd", "/root/.gitconfig"], "tokens_in": 2840, "tokens_out": 146, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/root/.cache/go-build/", "/", "/app/\"*.go\"", "/", "/app/\".git\""], "tokens_in": 4590, "tokens_out": 230, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:30:29Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

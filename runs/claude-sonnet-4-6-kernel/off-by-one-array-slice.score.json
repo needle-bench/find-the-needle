@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-array-slice",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.053649,
-  "input_tokens": 13738,
-  "output_tokens": 829,
+  "estimated_cost_usd": 0.06880800000000001,
+  "input_tokens": 17211,
+  "output_tokens": 1145,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n**The Needle: Off-by-one error in `processor.py`**\n\n- **Location:** `processor.py`, line `end = start + batch_size - 1`\n- **Bug:** Python list slicing (`records[start:end]`) is *exclusive* of the `end` index. Using `start + batch_size - 1` meant each batch was missing its last element — effectively dropping 1 record per batch.\n- **Fix:** Changed to `end = start + batch_size` (no `- 1`), so the slice correctly captures all `batch_size` elements.",
-  "timestamp": "2026-04-02T01:35:42Z",
-  "token_cost": 14567,
-  "tool_uses": 10,
+  "summary": "All tests pass. Here's a summary of the needle (the bug) and the fix:\n\n**File:** `/app/processor.py`\n\n**Bug — Off-by-one in array slice:**\n```python\n# WRONG: Python slices are exclusive of the end index,\n# so this silently drops the last record from every batch.\nend = start + batch_size - 1\nbatch = records[start:end]\n```\n\n**Fix:**\n```python\n# CORRECT: end is exclusive, so no -1 needed.\nend = start + batch_size\nbatch = records[start:end]\n```\n\nBecause Python's list slicing `[start:end]` excludes the element at `end`, subtracting 1 meant each batch was missing its last element. For example, with 25 records in batches of 10, only 22 records were returned instead of 25. Removing the `- 1` makes the slice grab exactly `batch_size` items (or fewer for the final partial batch), which is the correct behaviour.",
+  "timestamp": "2026-04-03T02:02:34Z",
+  "token_cost": 18356,
+  "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 23.076
+  "wall_clock": 20.734
 }

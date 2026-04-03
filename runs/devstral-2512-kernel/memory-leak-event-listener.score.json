@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.00785888,
-  "input_tokens": 30177,
-  "output_tokens": 751,
+  "estimated_cost_usd": 0.0070392,
+  "input_tokens": 24677,
+  "output_tokens": 845,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The test passes now. The listener count remains stable at 1, confirming that the event listeners are no longer being registered on every request. The memory leak has been fixed.",
-  "timestamp": "2026-04-02T04:00:56Z",
-  "token_cost": 30928,
-  "tool_uses": 12,
+  "summary": "Perfect! The test passes. The fix successfully resolves the memory leak issue by using `once()` instead of `on()` for event listeners, ensuring they are automatically removed after their first emission. This prevents the accumulation of listeners and closures that was causing the memory leak.",
+  "timestamp": "2026-04-03T02:37:30Z",
+  "token_cost": 25522,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 16.827
+  "wall_clock": 26.589
 }

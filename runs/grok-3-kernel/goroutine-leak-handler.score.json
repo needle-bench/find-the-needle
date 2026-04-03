@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.001584,
+  "input_tokens": 529,
+  "output_tokens": 79,
+  "resolved": true,
+  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://openrouter.ai/api/v1/chat/completions)",
+  "summary": "Let me help you find the needle in the haystack. I'll start by exploring the environment to locate any relevant files or information that might lead us to the solution. My first step will be to search for files that could be related to the problem or test script mentioned.\n\n",
+  "timestamp": "2026-04-03T01:22:42Z",
+  "token_cost": 608,
+  "tool_uses": 1,
+  "turns_to_fix": 0,
+  "wall_clock": 122.629
+}

@@ -4,15 +4,15 @@
   "benchmark": "graphql-dataloader-per-request",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.023308819999999997,
-  "input_tokens": 919097,
-  "output_tokens": 29460,
+  "estimated_cost_usd": 0.01297298,
+  "input_tokens": 842276,
+  "output_tokens": 3603,
   "resolved": false,
   "stop_reason": "end_turn",
   "summary": "",
-  "timestamp": "2026-04-02T01:25:43Z",
-  "token_cost": 948557,
+  "timestamp": "2026-04-03T02:54:06Z",
+  "token_cost": 845879,
   "tool_uses": 81,
   "turns_to_fix": 1,
-  "wall_clock": 84.467
+  "wall_clock": 1212.515
 }

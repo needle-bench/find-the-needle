@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.01584075,
+  "input_tokens": 5133,
+  "output_tokens": 755,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 32  \ndrwxr-xr-x 1 root root  102 Mar  9 02:41 .  \ndrwxr-xr-x 1 root root    8 Apr  3 01:47 ..  \ndrwxr-xr-x 1 root root   44 Mar  9 02:41 config  \ndrwxr-xr-x 1 root root   16 Mar  9 02:41 migrations  \ndrwxr-xr-x 1 root root   16 Mar  9 02:41 node_modules  \ndrwxr-xr-x 1 root root   16 Mar  9 02:41 public  \ndrwxr-xr-x 1 root root   16 Mar  9 02:41 services  \ndrwxr-xr-x 1 root root   16 Mar  9 02:41 test  \ndrwxr-xr-x 1 root root   98 Mar  9 02:41 views  \n-rw-r--r-- 1 root root  985 Mar  9 02:41 app.js  \n-rw-r--r-- 1 root root  353 Mar  9 02:41 package.json  \n-rw-r--r-- 1 root root 2468 Mar  9 02:41 products.db  \n-rw-r--r-- 1 root root  906 Mar  9 02:41 products.sql  \n-rw-r--r-- 1 root root  277 Mar  9 02:41 routes.js  \n\n",
+  "timestamp": "2026-04-03T01:48:16Z",
+  "token_cost": 5888,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 17.462
+}

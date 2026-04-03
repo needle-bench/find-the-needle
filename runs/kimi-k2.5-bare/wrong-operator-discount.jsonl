@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:59:47Z", "benchmark": "wrong-operator-discount", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 75, "tokens_out": 137, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 446, "tokens_out": 112, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 705, "tokens_out": 80, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/cart.py", "/app/catalog.py", "/app/formatter.py", "/app/main.py", "/app/pricing.py"], "tokens_in": 954, "tokens_out": 168, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2482, "tokens_out": 281, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T18:00:29Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

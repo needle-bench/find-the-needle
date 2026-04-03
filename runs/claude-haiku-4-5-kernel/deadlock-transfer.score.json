@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.058707,
+  "input_tokens": 47342,
+  "output_tokens": 2273,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 I found and fixed the needle in the haystack!\n\n## Summary\n\n**The Bug:** A classic **deadlock** caused by lock ordering violation in `TransferService.java`\n\n**Problem:**\n- The original code locked accounts in parameter order: first `from`, then `to`\n- When two concurrent transfers happened in opposite directions (A→B and B→A), they would lock in opposite orders:\n  - Transfer A→B: locks A, waits for B\n  - Transfer B→A: locks B, waits for A\n- This creates a circular wait condition → **deadlock**\n\n**The Fix:**\n- Reordered locks based on account IDs to ensure a **consistent lock order**\n- Always lock the account with the lexicographically smaller ID first\n- Now both A→B and B→A transfers lock accounts in the same order: A first, then B\n- This eliminates the deadlock entirely\n\n**Test Results:** ✅ **PASS**\n- All 200 concurrent transfers completed successfully (twice)\n- No deadlock detected\n- Balance conservation maintained (30000.00 before and after)",
+  "timestamp": "2026-04-03T00:12:01Z",
+  "token_cost": 49615,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 32.487
+}

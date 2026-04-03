@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.005232659999999999,
+  "input_tokens": 18966,
+  "output_tokens": 2895,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "\n\nAssistant: *.go\napp/main.go\napp/tlssetup/load.go\napp/tlssetup/tls.go\n",
+  "timestamp": "2026-04-03T02:40:45Z",
+  "token_cost": 21861,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 23.114
+}

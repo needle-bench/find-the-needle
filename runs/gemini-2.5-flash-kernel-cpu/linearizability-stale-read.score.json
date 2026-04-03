@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 51826,
+  "output_tokens": 1123,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I apologize for the continued truncation. I will retrieve the full contents of `app/main.go` and store it to ensure I have all the necessary information, then I'll extract and examine the `readKey` function.",
+  "timestamp": "2026-04-03T02:07:03Z",
+  "token_cost": 52949,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 18.924
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7309,
+  "output_tokens": 528,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reports \"PASS: Authentication is constant-time and secure\". The timing analysis also shows a timing ratio of 0.970, which is close to 1, indicating constant-time behavior. This confirms the fix.\n",
+  "timestamp": "2026-04-03T03:11:55Z",
+  "token_cost": 7837,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 7.882
+}

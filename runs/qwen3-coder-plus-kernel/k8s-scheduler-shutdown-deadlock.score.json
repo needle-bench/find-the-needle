@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.007630089999999999,
-  "input_tokens": 11897,
-  "output_tokens": 808,
+  "estimated_cost_usd": 0.01103843,
+  "input_tokens": 17370,
+  "output_tokens": 1653,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The issue was in the `Scheduler.Run` method where there was a race condition/deadlock. Here's what was happening:\n\n1. The goroutine runs the scheduling loop, calling `s.ScheduleOne(ctx)`\n2. When there's no work, `ScheduleOne` calls `Pop()` which blocks waiting for items\n3. When the context is cancelled via `cancel()`, the main thread reaches `<-done`\n4. Since the scheduled goroutine might be blocked in `Pop()`, it never checks `ctx.Done()` \n5. Meanwhile, `s.queue.Close()` is never called because we're waiting on the goroutine\n6. This creates a deadlock: `Pop()` waits for `Close()` to notify it, while `Close()` waits for the goroutine to finish\n\nThe fix was simple: call `s.queue.Close()` before waiting for the goroutine with `<-done`. This ensures the queue is closed and any blocked `Pop()` calls will return with an error, allowing the goroutine to terminate properly.\n\nThe test script now passes successfully, confirming that the needle (the bug) in the haystack (the code) has been found and fixed.",
-  "timestamp": "2026-04-02T01:39:21Z",
-  "token_cost": 12705,
-  "tool_uses": 6,
+  "summary": "Great! The fix worked. Let me just review what the problem was and how it was fixed:\n\nThe original issue was in the `Scheduler.Run` method - there was a race condition/deadlock:\n1. When context was cancelled with `cancel()`, the main flow waited for `<-done`\n2. The goroutine only closed its `done` channel after it fully exited the loop\n3. But the goroutine might be stuck inside `s.ScheduleOne()` calling `s.queue.Pop()`\n4. If `Pop()` was waiting (because no items left and queue wasn't closed), it would wait forever\n5. So `s.queue.Close()` was never reached on the main thread (because we were stuck waiting for goroutine)\n6. And goroutine wasn't exiting (because it was stuck in Pop())\n\nMy fix was to move `s.queue.Close()` to be before we wait on `<-done`, ensuring the queue gets closed so any blocked Pop() will wake up and return an error, allowing the goroutine to exit and close the `done` channel.\n\nThe needle (the bug) has been found and fixed successfully.\nThe test passes: OK: clean shutdown.",
+  "timestamp": "2026-04-03T01:44:49Z",
+  "token_cost": 19023,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 24.539
+  "wall_clock": 42.212
 }

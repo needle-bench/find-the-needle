@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.027273400000000003,
-  "input_tokens": 25294,
-  "output_tokens": 2923,
+  "estimated_cost_usd": 0.0519596,
+  "input_tokens": 29640,
+  "output_tokens": 8191,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I’ve removed the per-request listener registrations in DataProcessor.process(), invoking the validation handler directly instead. The test now passes without any listener leaks. Let me know if you need anything else!",
-  "timestamp": "2026-04-02T01:45:03Z",
-  "token_cost": 28217,
-  "tool_uses": 9,
+  "summary": "I switched the per-request `eventBus.on` registrations in DataProcessor.process to use `once` so each listener is automatically removed after firing, preventing accumulation. Test results now show stable listener counts and bounded memory.",
+  "timestamp": "2026-04-03T01:56:39Z",
+  "token_cost": 37831,
+  "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 40.678
+  "wall_clock": 91.707
 }

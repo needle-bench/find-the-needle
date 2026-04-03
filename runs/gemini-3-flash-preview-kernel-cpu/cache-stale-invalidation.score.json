@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 149455,
+  "output_tokens": 1517,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The \"needle\" was the stale cache in the product catalog API, specifically in `_update_product` and `_create_product` methods in `/app/app/server.py`. I fixed this by invalidating the cache when a product is updated or created.\n\nFinal `test.sh` run shows:\n- Initial product count: 5\n- Name after update: UPDATED-NAME-XYZ\n- Product count after create: 6\n- PASS: Cache correctly invalidated after writes",
+  "timestamp": "2026-04-03T01:23:37Z",
+  "token_cost": 150972,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 84.604
+}

@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.02694316,
-  "input_tokens": 102007,
-  "output_tokens": 2313,
+  "estimated_cost_usd": 0.027775299999999996,
+  "input_tokens": 102917,
+  "output_tokens": 2676,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The server isn't running. Let me start it and test. Actually, the test.sh script starts and stops the server. Let me run a manual test:\n\n\n\n\n\n\n\n<function_calls>\n<invoke name=\"Bash\">\n<parameter name=\"command\" string=\"true\">node dist/server.js &\nSERVER_PID=$!\nsleep 2\ncurl -s -X POST http://localhost:3000/inventory/WIDGET-001/adjust -H 'Content-Type: application/json' -d '{\"quantity\": -1000}' && echo\nkill $SERVER_PID 2>/dev/null</parameter>\n</invoke>\n</function_calls>",
-  "timestamp": "2026-04-02T02:55:37Z",
-  "token_cost": 104320,
+  "summary": "\n\n<function_calls>\n<invoke name=\"Bash\">\n<parameter name=\"command\" string=\"true\">cd /app && node test_fix.js</parameter>\n</invoke>\n</function_calls>",
+  "timestamp": "2026-04-03T03:26:10Z",
+  "token_cost": 105593,
   "tool_uses": 20,
   "turns_to_fix": 1,
-  "wall_clock": 136.296
+  "wall_clock": 149.185
 }

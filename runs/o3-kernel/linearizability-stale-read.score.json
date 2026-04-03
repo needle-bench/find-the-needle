@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 1.0459159999999998,
+  "input_tokens": 1445894,
+  "output_tokens": 11594,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I was unable to complete the fix within the time-limit.",
+  "timestamp": "2026-04-03T02:11:10Z",
+  "token_cost": 1457488,
+  "tool_uses": 70,
+  "turns_to_fix": 1,
+  "wall_clock": 300.386
+}

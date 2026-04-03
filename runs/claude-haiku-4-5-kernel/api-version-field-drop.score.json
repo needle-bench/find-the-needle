@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.065714,
+  "input_tokens": 54509,
+  "output_tokens": 2241,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The needle has been found and fixed!**\n\n## Summary\n\n**The Problem:** The v2 API had a backward compatibility regression - it was missing three fields from the v1 API:\n- `avatar_url`\n- `bio`\n- `location`\n\n**The Root Cause:** When the v2 API was created with new fields (department, phone_number, is_active), the old fields were accidentally removed from the `UserV2` struct and the `ToV2()` conversion method.\n\n**The Fix:** I restored the three missing fields to:\n1. The `UserV2` struct definition\n2. The `ToV2()` conversion method\n\nNow the v2 API is a proper superset of v1 - it includes all the original fields plus the new ones, ensuring backward compatibility. The test now passes with the message: **\"PASS: v2 API is backward-compatible with v1\"**",
+  "timestamp": "2026-04-02T23:58:09Z",
+  "token_cost": 56750,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 33.466
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0070048,
+  "input_tokens": 6110,
+  "output_tokens": 882,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Now let's examine the main server implementation to understand how it handles computation requests. I'll read `main.go` first.",
+  "timestamp": "2026-04-03T01:43:47Z",
+  "token_cost": 6992,
+  "tool_uses": 5,
+  "turns_to_fix": 0,
+  "wall_clock": 148.582
+}

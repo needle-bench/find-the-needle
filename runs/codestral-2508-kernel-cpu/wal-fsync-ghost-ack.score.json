@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 194895,
+  "output_tokens": 928,
+  "resolved": false,
+  "stop_reason": "error: API call failed: API error 429: Rate limit exceeded",
+  "summary": "",
+  "timestamp": "2026-04-03T02:58:16Z",
+  "token_cost": 195823,
+  "tool_uses": 60,
+  "turns_to_fix": 0,
+  "wall_clock": 52.98
+}

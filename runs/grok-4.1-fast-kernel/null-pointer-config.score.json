@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00661895,
+  "input_tokens": 23909,
+  "output_tokens": 9206,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The issue was a nil pointer dereference in `/status` endpoint: `cfg.Metrics` was `nil` because `config.json` lacked a `\"metrics\"` section despite `\"enable_metrics\": true`. Added it with `\"endpoint\": \"/metrics\"` and `\"interval_sec\": 30`. Now `./test.sh` passes fully.",
+  "timestamp": "2026-04-03T02:34:21Z",
+  "token_cost": 33115,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 82.084
+}

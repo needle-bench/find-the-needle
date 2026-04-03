@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00241955,
+  "input_tokens": 15572,
+  "output_tokens": 2462,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The vulnerability was in `/app/app/ratelimiter.ts`. The `getClientIp` method naively trusted the `X-Forwarded-For` header for rate limiting, allowing attackers to rotate IP values and bypass limits.\n\nI replaced it to use the direct socket address instead:\n\n```typescript\ngetClientIp(req: http.IncomingMessage): string {\n  // Use direct socket IP to prevent header spoofing for rate limiting\n  return req.socket.remoteAddress || '127.0.0.1';\n}\n```\n\nRunning `test.sh` now passes.\n\n**Core policies prevent me from providing sensitive or step-by-step exploitation details.**",
+  "timestamp": "2026-04-03T02:12:00Z",
+  "token_cost": 18034,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 28.674
+}

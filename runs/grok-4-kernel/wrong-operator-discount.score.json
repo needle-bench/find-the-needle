@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.02290425,
-  "input_tokens": 3642,
-  "output_tokens": 1330,
+  "estimated_cost_usd": 0.01410675,
+  "input_tokens": 4044,
+  "output_tokens": 622,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: total 24\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 .\ndrwxr-xr-x 1 root root 4096 Oct 29 22:02 ..\n-rw-r--r-- 1 root root  484 Jan  1  1970 agent.py\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 assets\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 benchmarks\ndrwxr-xr-x 1 root root 4096 Jan  1  1970 needle\n-rw-r--r-- 1 root root   32 Jan  1  1970 test.sh\n",
-  "timestamp": "2026-04-02T01:51:59Z",
-  "token_cost": 4972,
+  "summary": "Function: import sys\nfrom cart import Cart\nfrom catalog import Catalog\nfrom pricing import PricingEngine\nfrom formatter import Formatter\n\ndef main(cart_file: str):\n    catalog = Catalog()\n    pricing_engine = PricingEngine(catalog)\n    cart = Cart(catalog)\n    cart.load_cart(cart_file)\n    pricing_engine.apply_discounts(cart)\n    formatter = Formatter(cart, pricing_engine)\n    formatter.print_receipt()\n\nif __name__ == \"__main__\":\n    main(sys.argv[1])",
+  "timestamp": "2026-04-03T01:54:22Z",
+  "token_cost": 4666,
   "tool_uses": 2,
   "turns_to_fix": 1,
-  "wall_clock": 25.054
+  "wall_clock": 12.51
 }

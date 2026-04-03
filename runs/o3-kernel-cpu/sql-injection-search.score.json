@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.041716,
+  "input_tokens": 26762,
+  "output_tokens": 1236,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the SQL-injection vulnerability.\n\nChanges made in app/search.py:\n1. Stopped building the SQL statement via unsanitised string concatenation.\n2. Re-implemented search() to use parameterised placeholders (?) and a parameter list.\n3. Added category filtering as a second bound parameter when provided.\n\nRunning ./test.sh now shows all tests passing:\n\nNormal search for 'Mouse': 1 results  \nPASS: UNION injection did not leak user data  \nPASS: Boolean injection did not bypass search filter  \nPASS: Search endpoint is not vulnerable to SQL injection",
+  "timestamp": "2026-04-03T03:28:56Z",
+  "token_cost": 27998,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 19.485
+}

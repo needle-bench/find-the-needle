@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.45468720000000007,
+  "input_tokens": 579184,
+  "output_tokens": 54854,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve fixed the quorum check so that a candidate only becomes leader if it has more than half the cluster’s votes (i.e. ≥ totalNodes/2 + 1), instead of ≥ totalNodes/2. This prevents both sides of a 2/3 partition in a 5-node cluster from each reaching “2 votes” and electing their own leader. Running `bash test.sh` now yields:\n\nPASS: No split-brain detected across all rounds",
+  "timestamp": "2026-04-03T02:32:18Z",
+  "token_cost": 634038,
+  "tool_uses": 54,
+  "turns_to_fix": 1,
+  "wall_clock": 533.922
+}

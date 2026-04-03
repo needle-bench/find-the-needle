@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T02:00:23Z", "benchmark": "timing-attack-comparison", "model": "devstral-medium", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# timing-attack-comparison\n\n## Project\n\nA Go authentication server (`authserver`) that stores user credentials as SHA-"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app"], "tokens_in": 528, "tokens_out": 19, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/auth/compare.go"], "tokens_in": 921, "tokens_out": 156, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["//", "/app/time.", "/app/app/auth/compare.go"], "tokens_in": 1130, "tokens_out": 391, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1530, "tokens_out": 78, "test_exit": 1}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/auth/security.go"], "tokens_in": 1885, "tokens_out": 154, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["//", "/app/time.", "/app/subtle.ConstantTimeCompare([]byte(stored),", "/app/app/auth/compare.go"], "tokens_in": 3174, "tokens_out": 240, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3421, "tokens_out": 82, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T02:00:36Z", "test_exit": 0, "total_turns": 7, "correct_lines": 2, "arm": "silent"}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.02788614,
+  "input_tokens": 142648,
+  "output_tokens": 4563,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix is working correctly. \n\n## Summary\n\nThe bug was in the `InstallSnapshot` function in `snapshot.go`. When a follower installs a snapshot from a leader, it needs to update both `lastApplied` AND `commitIndex` to the snapshot's last included index. \n\nThe original code only updated `lastApplied`, leaving `commitIndex` unchanged (typically at 0). This caused a problem when the node restarted:\n\n1. On restart, the node would save the `commitIndex` value (which was 0)\n2. It would restore the state machine from the snapshot (applying entries 1-10)\n3. Since `savedCommitIndex` (0) was less than or equal to the snapshot index (10), the code would set `lastApplied = savedCommitIndex = 0`\n4. When new entries arrived, the node would re-apply entries 1-10 from its log, causing duplicates\n\nThe fix was to update `commitIndex` in `InstallSnapshot` according to the Raft paper specification: \"If lastIncludedIndex > commitIndex, set commitIndex = lastIncludedIndex.\"\n\nThe test now passes consistently, confirming that the duplicate state machine transitions have been eliminated.",
+  "timestamp": "2026-04-03T03:57:05Z",
+  "token_cost": 147211,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 231.622
+}

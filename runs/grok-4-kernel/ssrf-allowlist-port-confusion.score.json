@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.010881,
-  "input_tokens": 2344,
-  "output_tokens": 607,
+  "estimated_cost_usd": 0.03027975,
+  "input_tokens": 6154,
+  "output_tokens": 1598,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: total 32\ndrwxr-xr-x 1 root root 4096 Oct  2 11:29 .\ndrwxr-xr-x 1 root root 4096 Oct  2 11:30 ..\n-rw-r--r-- 1 root root  845 Oct  2 11:15 haystack.txt\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 .intern emergencies\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 needle dir\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 .needle temp\ndrwxr-xr-x 1 root root 4096 Oct  2 11:15 ~needle~\n-rwxr-xr-x 1 root root  178 Oct  2 11:15 test.sh\n",
-  "timestamp": "2026-04-02T01:50:25Z",
-  "token_cost": 2951,
-  "tool_uses": 1,
+  "summary": "Function: from flask import Flask, request\nfrom validator import is_valid_url, is_ssrf_safe\n\napp = Flask(__name__)\n\n@app.route('/health')\ndef health():\n  return 'ok', 200\n\n@app.route('/webhook/proxy', methods=['POST'])\ndef proxy():\n  url = request.json.get('url')\n  # This intentionally does some naive validation that is designed to be insufficient.\n  # If the URL we're proxying is not from our domain, reject it.\n  if not is_valid_url(url):\n    return 'Invalid URL', 400\n\n  # Use our SSRF filter\n  if not is_ssrf_safe(url):\n    return 'Forbidden URL', 403\n  # Proxy the request (we don't actually do this, but pretend we did)\n  return f'Proxied to {url}', 200\n\nif __name__ == '__main__':\n  #Bind to IPv4 only (intentionally allow dual-stack on 0.0.0.0)\n  app.run(host='0.0.0.0', port=5000)",
+  "timestamp": "2026-04-03T01:49:16Z",
+  "token_cost": 7752,
+  "tool_uses": 3,
   "turns_to_fix": 1,
-  "wall_clock": 12.623
+  "wall_clock": 32.75
 }

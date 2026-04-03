@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.000133653,
+  "input_tokens": 760,
+  "output_tokens": 67,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I need to find a \"needle\" in a haystack, which likely means finding some hidden problem or specific element in the container environment. Let me start by exploring the system to understand what's available and look for any obvious clues.\n\n<function=Bash>\n<parameter=command>\nls -la /\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T02:28:02Z",
+  "token_cost": 827,
+  "tool_uses": 0,
+  "turns_to_fix": 1,
+  "wall_clock": 2.72
+}

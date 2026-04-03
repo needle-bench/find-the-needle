@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.006383649999999999,
+  "input_tokens": 21855,
+  "output_tokens": 9284,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The memory leak was in `/app/app/processor.js`: the `process()` method registered new `'data:validated'` and `'data:error'` event listeners *per request*, causing unbounded accumulation (500 requests → 500× listeners).\n\n**Fix:** Removed the leaky `this.eventBus.on(...)` calls from `process()` (they belong in the constructor like in `monitor.js`).\n\n**Verification:** Ran `./test.sh` → **PASS** (listeners stable at 1, heap bounded ~5MB).",
+  "timestamp": "2026-04-03T02:29:31Z",
+  "token_cost": 31139,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 81.054
+}

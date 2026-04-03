@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.016585120000000002,
+  "input_tokens": 50555,
+  "output_tokens": 1171,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix works. The test now passes, confirming that:\n\n1. Direct `/api/users` without auth returns 401 (correctly blocked)\n2. Direct `/api/users` with valid auth returns 200 (correctly allowed)\n3. Double-slash bypass `//api/admin` without auth now returns 401 (correctly blocked)\n4. Path traversal `/health/../api/data` without auth now returns 401 (correctly blocked)\n\nThe issue was that the `authMiddleware` was checking the raw `r.URL.Path` instead of the cleaned path. By cleaning the path before checking for the `/api/` prefix, we ensure that path manipulation techniques like double slashes or dot-dot traversal cannot bypass the authentication check.",
+  "timestamp": "2026-04-03T01:16:10Z",
+  "token_cost": 51726,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 24.513
+}

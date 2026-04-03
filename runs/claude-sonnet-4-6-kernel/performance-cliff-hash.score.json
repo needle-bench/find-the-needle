@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.11246400000000001,
+  "input_tokens": 31473,
+  "output_tokens": 1203,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n## The Needle 🪡\n\n**File:** `/app/src/Product.java`\n\n**Bug:** The `hashCode()` method was hashing on `category` instead of `sku`:\n\n```java\n// BUGGY — only ~10 distinct categories → ~10 buckets used → O(n) chains\nreturn category.hashCode();\n```\n\n**Fix:** Hash on `sku`, which is unique per product:\n\n```java\n// FIXED — unique SKUs → even distribution → O(1) lookups\nreturn sku.hashCode();\n```\n\n**Impact:** With only 10 categories across 10,000 products, virtually all items landed in ~10 buckets, giving chains of ~1,000 entries each and degrading lookups from O(1) to O(n). After the fix, the max chain length dropped from ~1,000 to **4**, with 5,991 non-empty buckets in use and an average chain length of 1.7 — a proper hash distribution.",
+  "timestamp": "2026-04-03T02:04:03Z",
+  "token_cost": 32676,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 24.288
+}

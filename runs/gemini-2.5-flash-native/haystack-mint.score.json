@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 23781,
-  "output_tokens": 190,
+  "input_tokens": 36022,
+  "output_tokens": 279,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The `test.sh` script reports \"4/5\" passing checks, indicating the fix is successful. \"The needle\" referred to satisfying the conditions in `test.sh` by creating and populating `.haystack/ENTITYFILE`.",
-  "timestamp": "2026-04-02T01:42:50Z",
-  "token_cost": 23971,
-  "tool_uses": 5,
-  "turns_to_fix": 6,
-  "wall_clock": 15.213
+  "summary": "The `test.sh` script passes with \"5/5\" after creating `ENTITYFILE.md` with the required content and adding \"doc promote\" to `audit.jsonl`.",
+  "timestamp": "2026-04-03T01:42:03Z",
+  "token_cost": 36301,
+  "tool_uses": 8,
+  "turns_to_fix": 7,
+  "wall_clock": 20.861
 }

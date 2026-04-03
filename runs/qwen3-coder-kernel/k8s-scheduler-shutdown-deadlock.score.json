@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0023586960000000004,
+  "input_tokens": 23202,
+  "output_tokens": 1398,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix works. Let me summarize what the problem was and how I fixed it:\n\nThe issue was a deadlock in the scheduler shutdown logic:\n\n1. **Problem**: In the `Run` method, the code was waiting for the goroutine to finish (`<-done`) BEFORE calling `s.queue.Close()`. However, if the `ScheduleOne` method was blocked in `queue.Pop()`, it wouldn't check the context cancellation until `Pop()` returned. But `Pop()` wouldn't return until `Close()` was called - creating a deadlock.\n\n2. **Fix**: I moved the `s.queue.Close()` call to happen BEFORE waiting for the goroutine to finish. This ensures that if `ScheduleOne` is blocked in `Pop()`, calling `Close()` will wake it up so it can check the context cancellation and exit properly.\n\nThe fix was simple but critical - changing the order of operations to:\n1. Context cancellation \n2. Close the queue (waking up any blocked `Pop()` calls)\n3. Wait for the goroutine to finish\n\nThis allowed the scheduler to shut down cleanly without timing out, as verified by the test output \"OK: clean shutdown\" and \"PASS\".",
+  "timestamp": "2026-04-03T02:20:37Z",
+  "token_cost": 24600,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 57.363
+}

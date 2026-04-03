@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "api-version-field-drop",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 23033,
+  "output_tokens": 1007,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have found and fixed the issue. The \"needle\" was a regression where several fields from the `v1` API response (`avatar_url`, `bio`, and `location`) were missing in the `v2` API `UserV2` model and `ToV2()` conversion function, causing data loss for clients moving to `v2`. \n\nI added the missing fields to `UserV2` and updated `ToV2()` inside `app/models.go` to correctly map the `AvatarURL`, `Bio`, and `Location` fields. \n\nThe `test.sh` script now successfully verifies the backward compatibility:\n```\nPASS: All v1 fields present in v2\nPASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)\nPASS: v2 API is backward-compatible with v1\n```",
+  "timestamp": "2026-04-03T01:14:01Z",
+  "token_cost": 24040,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 130.902
+}

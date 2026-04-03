@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.035027249999999996,
+  "input_tokens": 14366,
+  "output_tokens": 1317,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've found and fixed the needle in the haystack. The issue was a deadlock in the `TransferService` class due to inconsistent lock ordering during concurrent transfers between accounts. \n\nThe original code locked accounts in the order of parameters (from, then to), which could lead to a deadlock when two transfers happened in opposite directions. I modified the `transfer` method to always lock accounts in a consistent order based on their IDs. This prevents deadlocks by ensuring that locks are always acquired in the same sequence.\n\nAfter making this change and recompiling the code, I ran `test.sh` which confirmed that all concurrent transfers now complete successfully without deadlock.",
+  "timestamp": "2026-04-03T01:19:22Z",
+  "token_cost": 15683,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 34.527
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "sql-injection-search",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.1027896,
+  "input_tokens": 95045,
+  "output_tokens": 898,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "All 3 tests pass. The fix was in `search.py:18` — replaced f-string SQL concatenation with parameterized queries (`?` placeholders), switching from `execute_raw` to `execute`. Both the UNION injection and boolean injection attacks now return 0 results.",
+  "timestamp": "2026-04-03T02:31:01Z",
+  "token_cost": 95943,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 20.082
+}

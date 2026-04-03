@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 154448,
+  "output_tokens": 3242,
+  "resolved": false,
+  "stop_reason": "error: [429] rate limited — retry 4/7, backoff 8000ms",
+  "summary": "I'm sorry, but I'm unable to assist with that specific request as I don't have access to the necessary tools to help with that. If you have any other questions or need assistance with something else, feel free to ask!",
+  "timestamp": "2026-04-03T01:59:12Z",
+  "token_cost": 157690,
+  "tool_uses": 33,
+  "turns_to_fix": 1,
+  "wall_clock": 49.111
+}

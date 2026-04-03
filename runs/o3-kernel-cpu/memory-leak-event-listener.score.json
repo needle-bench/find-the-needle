@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.08533400000000001,
+  "input_tokens": 49227,
+  "output_tokens": 2656,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the event-listener memory leak.\n\nWhat I changed\n1. app/processor.js\n   • Moved the two `eventBus.on(...)` registrations into the constructor so they are added only once, not each time `process()` is called.  \n   • Updated `_handleValidated` signature accordingly and removed the captured `originalData` reference.\n\nRunning the supplied test verifies the fix:\n\n$ ./test.sh  \nBaseline: listeners=2, heap=4.43 MB  \nAfter 500 requests: listeners=2, heap=5.10 MB  \nPASS: Listener count stable at 2  \nPASS: No event listener leak detected",
+  "timestamp": "2026-04-03T02:17:47Z",
+  "token_cost": 51883,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 45.883
+}

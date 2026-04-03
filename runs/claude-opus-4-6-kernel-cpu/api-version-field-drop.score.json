@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9807,
+  "output_tokens": 1627,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Needle:** The `UserV2` struct in `/app/app/models.go` was missing three fields that existed in `UserV1`: `avatar_url`, `bio`, and `location`. The v2 API was supposed to be a superset of v1 (additive changes only), but these fields were accidentally dropped during the v1→v2 refactor, causing a backward-compatibility regression.\n\n**The Fix:**\n1. Added the three missing fields (`AvatarURL`, `Bio`, `Location`) back to the `UserV2` struct with their proper JSON tags\n2. Updated the `ToV2()` conversion method to populate these fields from the `InternalUser`",
+  "timestamp": "2026-04-03T01:15:35Z",
+  "token_cost": 11434,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 38.865
+}

@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0141392,
-  "input_tokens": 25186,
-  "output_tokens": 374,
+  "estimated_cost_usd": 0.015208800000000001,
+  "input_tokens": 26064,
+  "output_tokens": 490,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found and fixed (stale cache on writes in the product catalog API). `test.sh` now passes.",
-  "timestamp": "2026-04-02T03:22:05Z",
-  "token_cost": 25560,
-  "tool_uses": 9,
+  "summary": "The needle has been found (stale caching bugs in the product update and create handlers). I've fixed it by properly invalidating the relevant cache entries/prefixes on writes. The test now passes cleanly.",
+  "timestamp": "2026-04-03T01:22:13Z",
+  "token_cost": 26554,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 9.5
+  "wall_clock": 8.217
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.1088922,
+  "input_tokens": 121526,
+  "output_tokens": 651,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed. `hashCode()` in `Product.java:32` now returns `sku.hashCode()` instead of `category.hashCode()`. Max chain length dropped from ~1000 to 4.",
+  "timestamp": "2026-04-03T02:03:28Z",
+  "token_cost": 122177,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 16.792
+}

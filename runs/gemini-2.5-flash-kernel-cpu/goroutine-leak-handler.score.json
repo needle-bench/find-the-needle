@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 24559,
+  "output_tokens": 2202,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script passed! The leaked goroutines above baseline is 0, which means the goroutines are properly cleaned up after client disconnects. The fix worked.",
+  "timestamp": "2026-04-03T01:25:04Z",
+  "token_cost": 26761,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 26.806
+}

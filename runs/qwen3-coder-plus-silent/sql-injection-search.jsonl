@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:49:45Z", "benchmark": "sql-injection-search", "model": "qwen3-coder-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/config.py\n/app/app/database.py\n/app/app/search.py\n/app/app/server.py\n/app/app/validators.py\n\nCurrent"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 334, "tokens_out": 97, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/search.py"], "tokens_in": 1010, "tokens_out": 111, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/database.py"], "tokens_in": 1369, "tokens_out": 132, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 2463, "tokens_out": 329, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:50:07Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "silent"}

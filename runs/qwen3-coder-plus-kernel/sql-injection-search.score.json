@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00994045,
+  "input_tokens": 18883,
+  "output_tokens": 818,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The tests now pass, which means I've successfully fixed the SQL injection vulnerability. The \"needle\" was the SQL injection vulnerability in the search functionality, which has now been patched by using parameterized queries instead of concatenating user input directly into the SQL string.",
+  "timestamp": "2026-04-03T02:41:11Z",
+  "token_cost": 19701,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 23.039
+}

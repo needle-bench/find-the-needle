@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 5522,
+  "output_tokens": 1510,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. \n\n**The Problem:** The TLS certificate chain in `/certs/chain.pem` had the certificates in the wrong order. The Root CA certificate (cert 2) and Intermediate CA certificate (cert 3) were swapped.\n\n**The Fix:** Rebuilt `chain.pem` with the correct RFC 5246 ordering:\n1. **Leaf certificate** (CN=localhost) — the server cert\n2. **Intermediate CA** (CN=Test Intermediate CA) — issuer of the leaf\n3. **Root CA** (CN=Test Root CA) — issuer of the intermediate\n\nThis ensures that each `cert[i].Issuer` matches `cert[i+1].Subject`, as required by the RFC 5246 §7.4.2 strict chain ordering.",
+  "timestamp": "2026-04-03T03:35:16Z",
+  "token_cost": 7032,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 44.195
+}

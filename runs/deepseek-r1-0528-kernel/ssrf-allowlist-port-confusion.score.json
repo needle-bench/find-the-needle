@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0009857,
+  "input_tokens": 585,
+  "output_tokens": 309,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "I'll help you find the needle in the haystack. First, let's run the test to see what's wrong:",
+  "timestamp": "2026-04-03T03:40:36Z",
+  "token_cost": 894,
+  "tool_uses": 1,
+  "turns_to_fix": 0,
+  "wall_clock": 135.888
+}

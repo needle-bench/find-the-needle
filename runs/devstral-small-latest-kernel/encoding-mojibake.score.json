@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00109722,
+  "input_tokens": 28884,
+  "output_tokens": 1119,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue has been successfully fixed. The `test.sh` script now runs without any errors, and all customer names, including those with non-ASCII characters, are correctly preserved in the report. The problem was that the `CsvReader` class was using the ISO-8859-1 charset, which is not suitable for handling international characters. By changing the charset to UTF-8, we ensured that all characters are correctly read and written.",
+  "timestamp": "2026-04-03T02:22:55Z",
+  "token_cost": 30003,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 11.821
+}

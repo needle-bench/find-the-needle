@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T02:26:38Z", "benchmark": "wal-fsync-ghost-ack", "model": "deepseek-r1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/client.go\n/workspace/main.go\n/workspace/server.go\n/workspace/store.go\n/workspace/wal.go\n\nCur"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/main.go"], "tokens_in": 523, "tokens_out": 162, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1348, "tokens_out": 62, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T02:26:49Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

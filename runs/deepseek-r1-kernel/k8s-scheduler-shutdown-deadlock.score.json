@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.0408851,
-  "input_tokens": 33518,
-  "output_tokens": 6969,
+  "estimated_cost_usd": 0.018376999999999998,
+  "input_tokens": 14360,
+  "output_tokens": 3330,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle was a deadlock bug in the Kubernetes scheduler shutdown sequence. The problem was in the `Scheduler.Run()` method's shutdown logic.\n\n**Bug Analysis:**\n1. The scheduler had a worker goroutine that continuously called `ScheduleOne()` (which blocks on `queue.Pop()`)\n2. On shutdown, the main goroutine waited for the worker to exit (`<-done`) **before** closing the queue\n3. If the worker was blocked in `queue.Pop()` waiting for items, it wouldn't check `ctx.Done()` until `Pop()` returned\n4. But `Pop()` would only return after the queue was closed (when `q.closed` becomes true)\n5. This created a circular deadlock: worker stuck in `Pop()` → main goroutine stuck at `<-done` → queue never gets closed → worker never exits\n\n**The Fix:**\nChanged the shutdown order in `Scheduler.Run()` from:\n1. Wait for worker to exit (`<-done`)\n2. Close queue (`s.queue.Close()`)\n\nTo:\n1. Close queue (`s.queue.Close()`) first to wake up any goroutine stuck in `Pop()`\n2. Wait for worker to exit (`<-done`)\n\nThis ensures that when the queue is closed, `Pop()` immediately returns an error, allowing the worker goroutine to exit cleanly.\n\nThe fix was verified by running `test.sh` which now prints \"OK: clean shutdown\" and \"PASS\".",
-  "timestamp": "2026-04-02T02:20:07Z",
-  "token_cost": 40487,
-  "tool_uses": 13,
+  "summary": "## Found the Needle\n\n**The Problem:** The Go scheduler in `main.go` has a shutdown deadlock bug. When the context is cancelled, the `Run()` method waits for the goroutine to finish (`<-done`) *before* closing the queue. However, the goroutine may be blocked in `Pop()`, which holds a mutex while waiting on a condition variable. The `Close()` method needs that same mutex to set the `closed` flag and broadcast. This creates a circular dependency leading to deadlock.\n\n**The Fix:** Changed the order in `Run()` to close the queue *before* waiting for the goroutine to exit:\n\n```go\n// BEFORE (deadlock-prone):\n<-ctx.Done()\n<-done // wait for goroutine — but it might be stuck in Pop()\ns.queue.Close()\n\n// AFTER (fixed):\n<-ctx.Done()\ns.queue.Close() // Unblock any goroutine stuck in Pop()\n<-done // Now goroutine can exit\n```\n\n**Verification:** Running `test.sh` shows the fix works - \"OK: clean shutdown\" instead of \"BUG: shutdown deadlock — timed out after 2s\".",
+  "timestamp": "2026-04-03T02:23:13Z",
+  "token_cost": 17690,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 298.914
+  "wall_clock": 139.159
 }

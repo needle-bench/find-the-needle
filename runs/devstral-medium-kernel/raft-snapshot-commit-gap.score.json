@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.007600719999999999,
+  "input_tokens": 38415,
+  "output_tokens": 1094,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test script now passes, indicating that the issue with duplicate state machine transitions has been resolved. The fix involved updating the `commitIndex` to the snapshot's last included index when a snapshot is installed, ensuring that `lastApplied` and `commitIndex` are consistent.",
+  "timestamp": "2026-04-03T01:55:16Z",
+  "token_cost": 39509,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 17.853
+}

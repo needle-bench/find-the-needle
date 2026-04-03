@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 12538,
-  "output_tokens": 453,
+  "input_tokens": 28023,
+  "output_tokens": 621,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "I found the needle! The issue was a shutdown deadlock caused by the order of operations in the `Scheduler.Run` method. The `<-done` channel block was executing before `s.queue.Close()`.\n\nIf `ScheduleOne` was blocking on `s.queue.Pop()`, it would wait forever until `s.queue.Close()` unblocked it, but `s.queue.Close()` wouldn't be called until the `done` channel was closed (which would never happen since the goroutine is blocked).\n\nI swapped the order so that the queue is closed *before* waiting for the goroutine to finish. I've successfully run `test.sh` to verify the fix:\n\n```bash\nOK: clean shutdown\nPASS\n```",
-  "timestamp": "2026-04-02T01:44:54Z",
-  "token_cost": 12991,
-  "tool_uses": 4,
-  "turns_to_fix": 5,
-  "wall_clock": 24.673
+  "summary": "I have found the deadlock bug (\"the needle\") in `Scheduler.Run()` and fixed it. \n\nThe issue was that `Scheduler.Run()` was waiting for the internal scheduling goroutine to exit (`<-done`) before it called `s.queue.Close()`. If the internal goroutine was blocked inside `s.queue.Pop()`, it would never reach the `select` block to check `ctx.Done()`, causing a deadlock since `Pop()` requires `Close()` to be called to unblock.\n\nTo fix this, I swapped the shutdown sequence to close the queue **before** waiting for the worker goroutine to exit:\n\n```go\nfunc (s *Scheduler) Run(ctx context.Context) {\n\t// ...\n\t<-ctx.Done()\n\n\ts.queue.Close()\n\t<-done // wait for goroutine\n}\n```\n\nI've also cleaned up the bug comments and successfully run `test.sh`, which now yields `PASS` without timing out.",
+  "timestamp": "2026-04-03T04:15:50Z",
+  "token_cost": 28644,
+  "tool_uses": 9,
+  "turns_to_fix": 9,
+  "wall_clock": 45.783
 }

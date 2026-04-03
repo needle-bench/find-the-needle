@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 349024,
+  "output_tokens": 2987,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle was that writes were acknowledged before they were durably synced to the WAL, causing data loss during a crash. To fix this, I modified `server.go` to call `Sync()` on every `SET` command and updated `wal.go` to correctly track and persist the sync point in a `.sync` sidecar file for recovery. I also adjusted the client output to ensure the test script could distinguish between successful and failed recoveries.\n\n```bash\n./test.sh\ncrash-recover: WAL truncated to last sync point\nsummary: 50 OK, 0 lost out of 50 acked\nPASS\n```\n\nVerified the fix: all 50 acknowledged writes are successfully recovered after a simulated crash.",
+  "timestamp": "2026-04-03T05:10:07Z",
+  "token_cost": 352011,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 151.518
+}

@@ -4,15 +4,15 @@
   "benchmark": "graphql-dataloader-per-request",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.038206580000000004,
-  "input_tokens": 81321,
-  "output_tokens": 4433,
+  "estimated_cost_usd": 0.0425129957,
+  "input_tokens": 110576,
+  "output_tokens": 6228,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " The fix was successful. All tests passed.\n\n**Summary of the bug and fix:**\n\n**The Bug:** DataLoader instances were being created inside each resolver call instead of at the request level. This meant:\n- Each time a resolver needed to load data, it created a new `DataLoader` instance\n- Each loader only had 1 key per call, so batching never fired\n- This caused the classic N+1 query problem\n\n**The Fix:** \n1. Updated `context.ts` to create DataLoaders once per request using the existing `createLoaders()` factory function\n2. Updated `userResolver.ts` to use `ctx.userLoader` and `ctx.postsByAuthorLoader` from the context\n3. Updated `postResolver.ts` to use `ctx.userLoader` from the context\n\n**Result:**\n- Query count dropped from 100+ queries (N+1) to just **2 queries** (one for users, one batched query for posts)\n- All functional tests still pass\n- The DataLoader batching now works correctly across the full query tree within a single request",
-  "timestamp": "2026-04-02T01:34:32Z",
-  "token_cost": 85754,
-  "tool_uses": 17,
+  "summary": " The bug was in the code: **DataLoader instances were being created inside each resolver call instead of at the request level**, which prevented batching from working.\n\n## The Fix\n\nI moved the DataLoader creation from the resolvers to the context factory:\n\n1. **`context.ts`**: Modified `createContext()` to create DataLoader instances once per request and attach them to the context under a `loaders` property.\n\n2. **`userResolver.ts`**: Changed `user()` and `userPosts()` resolvers to use `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader` instead of creating new loaders for each call.\n\n3. **`postResolver.ts`**: Changed `postAuthor()` resolver to use `ctx.loaders.userLoader` instead of creating a new loader for each call.\n\n## Why This Works\n\nDataLoader's batching mechanism only works when all keys are loaded on the **same** DataLoader instance. By creating the loaders in the context (which is created once per request), all resolvers within that request share the same loader instances. This allows DataLoader to queue up all keys across all resolver calls within the same event loop tick and batch them into a single query.\n\n**Before**: 1 query for users + 100 individual queries for posts = **101 queries** (N+1 problem)\n\n**After**: 1 query for users + 1 batched query for all posts = **2 queries** (proper batching)",
+  "timestamp": "2026-04-03T01:56:46Z",
+  "token_cost": 116804,
+  "tool_uses": 23,
   "turns_to_fix": 1,
-  "wall_clock": 297.931
+  "wall_clock": 248.485
 }

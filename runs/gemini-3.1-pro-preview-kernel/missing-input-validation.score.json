@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.07653800000000001,
-  "input_tokens": 20911,
-  "output_tokens": 2893,
+  "estimated_cost_usd": 0.087572,
+  "input_tokens": 23116,
+  "output_tokens": 3445,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I have found the missing input validation bug that allowed the inventory to go below 0 and fixed it. \n\nI added a check in `routes.ts` before calling `inventory.adjustQuantity(sku, quantity)` to ensure that the adjusted inventory doesn't fall below zero. If it does, the server will now return a `400 Bad Request` status code indicating insufficient inventory, rather than blindly updating the inventory into a negative state.\n\nRunning `./test.sh` now results in:\n```\nInventory API running on port 3000\nPASS: Input validation correctly prevents impossible inventory states\n```",
-  "timestamp": "2026-04-02T01:44:57Z",
-  "token_cost": 23804,
-  "tool_uses": 8,
+  "summary": "I noticed that the API lacked validation when adjusting product quantities, allowing the inventory to drop below zero into negative values. \n\nI fixed this in `routes.ts` by checking if the requested adjustment would result in a negative quantity. If it does, we now return a `400 Bad Request` with an appropriate error message:\n\n```typescript\n    if (product.quantity + quantity < 0) {\n      res.statusCode = 400;\n      res.end(JSON.stringify({ error: 'insufficient inventory' }));\n      return;\n    }\n\n    const result = inventory.adjustQuantity(sku, quantity);\n```\n\nI've tested the fix by running `./test.sh` and it now correctly passes:\n\n```\nInventory API running on port 3000\nPASS: Input validation correctly prevents impossible inventory states\n```",
+  "timestamp": "2026-04-03T05:04:01Z",
+  "token_cost": 26561,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 49.692
+  "wall_clock": 75.132
 }

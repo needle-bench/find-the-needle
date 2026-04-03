@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.2297472,
+  "input_tokens": 132186,
+  "output_tokens": 5910,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I found the issue. The hidden problem was in the Raft protocol implementation of `InstallSnapshot` within `/app/app/snapshot.go`. \n\nWhen a follower received a snapshot from the leader, the node restored the state machine and updated `lastApplied = snap.LastIncludedIndex`, but crucially forgot to update its `commitIndex`. Because the commit index remained below the snapshot boundary, if the node subsequently crashed and restarted, `Restart()` would see `commitIndex < snapshot boundary` and incorrectly drag `lastApplied` back down. This caused the node to re-apply the snapshot's state transitions all over again from the log, breaking the exactly-once consistency semantics.\n\nI fixed the bug by modifying `/app/app/snapshot.go` to also advance `commitIndex` if the snapshot's index is higher than our current commit index:\n\n```go\n\t// Restore state machine from snapshot\n\tn.stateMachine.Restore(snap.Data)\n\n\t// Update lastApplied — the state machine now reflects everything\n\t// up to and including the snapshot's last index.\n\tn.lastApplied = snap.LastIncludedIndex\n\t\n\t// FIX: Update commitIndex to reflect that these snapshot entries are committed\n\tif n.commitIndex < snap.LastIncludedIndex {\n\t\tn.commitIndex = snap.LastIncludedIndex\n\t}\n}\n```\n\nRunning `./test.sh` successfully passes:\n```\n=== Raft Snapshot Commit-Gap Test ===\nBuilding...\n--- Round 1 ---\nPASS: All 13 keys present, no duplicate applies\nRound 1: OK\n--- Round 2 ---\nPASS: All 13 keys present, no duplicate applies\nRound 2: OK\n--- Round 3 ---\nPASS: All 13 keys present, no duplicate applies\nRound 3: OK\nPASS: No duplicate state machine transitions across all rounds\n```",
+  "timestamp": "2026-04-03T05:26:32Z",
+  "token_cost": 138096,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 123.402
+}

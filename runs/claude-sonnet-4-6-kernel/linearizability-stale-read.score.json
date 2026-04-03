@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.418134,
+  "input_tokens": 128673,
+  "output_tokens": 2141,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 3 rounds pass. Here's a summary of the **two bugs** found and fixed:\n\n---\n\n## The Needle(s) — Two Bugs Causing Stale Reads\n\n### Bug 1: `handler.go` — Stale read in HTTP handler\n**File:** `/app/app/handler.go`  \n**Problem:** `handleRead` called `h.node.Read(key)` — a direct local-state read that returns whatever is in the KV map, even if the node is behind the leader's commit index.  \n**Fix:** Changed to `h.node.ReadLinearizable(key)`, which implements the read-index protocol: the follower asks the leader for its current commit index, then waits until the local applied index catches up before returning the value.\n\n### Bug 2: `raft/node.go` — `handleHeartbeat` never advances commit index\n**File:** `/app/app/raft/node.go`  \n**Problem:** When a follower received a heartbeat (which includes the leader's commit index in `msg.Index` and any missing log entries), it appended the entries to its log but **never called `advanceCommitIndex`**. So entries were logged but never applied to the KV state machine — the follower's `commitIndex` and `appliedIndex` stayed at 0 even after partition healing.  \n**Fix:** Added an `advanceCommitIndex(commitIdx)` call at the end of `handleHeartbeat`, mirroring the same logic already present in `handleAppendEntries`.",
+  "timestamp": "2026-04-03T01:48:16Z",
+  "token_cost": 130814,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 56.124
+}

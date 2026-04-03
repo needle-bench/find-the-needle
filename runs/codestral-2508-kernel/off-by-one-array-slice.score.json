@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-array-slice",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0009706799999999999,
-  "input_tokens": 5263,
-  "output_tokens": 457,
+  "estimated_cost_usd": 0.00063702,
+  "input_tokens": 4791,
+  "output_tokens": 186,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The fix has been successfully applied, and the test script is now passing. The batch processing logic has been corrected to ensure that all records are processed correctly, even when the total number of records isn't a multiple of the batch size.",
-  "timestamp": "2026-04-02T01:42:16Z",
-  "token_cost": 5720,
+  "summary": "The fix has been applied successfully. All tests are now passing.",
+  "timestamp": "2026-04-03T02:07:23Z",
+  "token_cost": 4977,
   "tool_uses": 5,
   "turns_to_fix": 1,
-  "wall_clock": 4.825
+  "wall_clock": 4.307
 }

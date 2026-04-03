@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.166554,
+  "input_tokens": 49017,
+  "output_tokens": 5710,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have successfully identified and fixed the hidden problem in your Go code. \n\n**The Needle:** \nThere was a **goroutine leak** inside `app/main.go`. When a client would hit `/compute`, the request handler spawned a background goroutine to perform heavy computation. However, the background worker was unaware of whether the client had disconnected or timed out because the HTTP request's context (`r.Context()`) wasn't being passed to it. So, if the client disconnected prematurely, the main handler would eventually bail out, but the detached worker goroutine would keep crunching numbers indefinitely leading to a massive CPU and memory leak.\n\n**The Fix:**\nI edited `app/main.go` to thread the request context into `performComputation`. Now, in the heavy computation loop, I use a `select` statement that listens on the `ctx.Done()` channel:\n\n```go\nfunc performComputation(ctx context.Context, req ComputeRequest) ComputeResult {\n    // ...\n    for i := 0; i < req.Iterations; i++ {\n        // ... heavy work loop ...\n        \n        select {\n        case <-ctx.Done():\n            return ComputeResult{} // End early if request is cancelled/client disconnected\n        case <-time.After(time.Duration(req.DelayMs) * time.Millisecond):\n            // Keep going normally\n        }\n    }\n    // ...\n}\n```\nAnd inside `computeHandler`, I passed `r.Context()` to the `performComputation` call. I also added a `<-r.Context().Done()` case to the main struct's `select` block so the parent handler cleans up immediately alongside the cancelled context. \n\nI then re-compiled the executable and ran `./test.sh` which yielded `PASS: All goroutine lifecycle tests passed` with 0 leaked goroutines remaining.",
+  "timestamp": "2026-04-03T03:35:01Z",
+  "token_cost": 54727,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 151.28
+}

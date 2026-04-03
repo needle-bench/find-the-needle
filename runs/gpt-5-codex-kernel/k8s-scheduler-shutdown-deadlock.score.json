@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.017873,
-  "input_tokens": 6188,
-  "output_tokens": 1273,
+  "estimated_cost_usd": 0.016537999999999997,
+  "input_tokens": 4816,
+  "output_tokens": 1311,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The shutdown deadlock was resolved by ensuring the queue is closed before waiting for the scheduling goroutine to exit. Tests confirm the fix (`OK: clean shutdown` and `PASS`).",
-  "timestamp": "2026-04-02T03:31:18Z",
-  "token_cost": 7461,
-  "tool_uses": 7,
+  "summary": "The deadlock was caused by waiting for the worker goroutine to exit before closing the scheduling queue. If the worker was blocked in `Pop()`, it would never finish, preventing shutdown. I fixed this by closing the queue **before** waiting on the worker goroutine:\n\n```go\n<-ctx.Done()\n\n// Close the queue before waiting for the worker to finish\n// so that any goroutines blocked in Pop() are released and\n// can observe the shutdown.\ns.queue.Close()\n\n<-done // wait for goroutine to exit after queue is closed\n```\n\nRunning `bash test.sh` now reports:\n\n```\nOK: clean shutdown\nPASS\n```\n\nLet me know if you need anything else!",
+  "timestamp": "2026-04-03T01:42:14Z",
+  "token_cost": 6127,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 22.622
+  "wall_clock": 23.692
 }

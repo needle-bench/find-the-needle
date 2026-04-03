@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.24549949999999998,
+  "input_tokens": 252558,
+  "output_tokens": 13961,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **Needle found!**\n\n### Summary\nI’ve fixed the Raft snapshot bug that caused duplicate state machine transitions during snapshot installation followed by a restart.\n\n### What I changed\n- **`InstallSnapshot` behavior**: it now replaces superseded log entries and retains only those after the snapshot’s boundary, ensuring consistency.\n- **Snapshot persistence**: the snapshot data is now copied to prevent issues if a caller reuses it.\n- **Volatile state updates**: both `lastApplied` and `commitIndex` are synchronized with the snapshot's last-included index, maintaining critical invariants required during crash recovery.\n- **Term alignment**: the node’s `currentTerm` is updated to match the snapshot to prevent term regressions.\n\n### Testing\nI ran the provided `test.sh`, which builds the system and runs the reproduction scenario three times. All rounds pass without duplicate applies.\n\n```\n=== Raft Snapshot Commit-Gap Test ===\nBuilding...\n--- Round 1 ---\nPASS: All 13 keys present, no duplicate applies\nRound 1: OK\n--- Round 2 ---\nPASS: All 13 keys present, no duplicate applies\nRound 2: OK\n--- Round 3 ---\nPASS: All 13 keys present, no duplicate applies\nRound 3: OK\nPASS: No duplicate state machine transitions across all rounds\n```\n\nNeedle ✅: the commit-gap bug is resolved.",
+  "timestamp": "2026-04-03T02:10:34Z",
+  "token_cost": 266519,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 122.957
+}

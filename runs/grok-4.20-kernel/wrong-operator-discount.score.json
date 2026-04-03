@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.013453199999999998,
-  "input_tokens": 25149,
-  "output_tokens": 176,
+  "estimated_cost_usd": 0.0134384,
+  "input_tokens": 30160,
+  "output_tokens": 308,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found (a `+` mistakenly used instead of `*` in the discount formula) and the bug has been fixed. Running the test now passes.",
-  "timestamp": "2026-04-02T03:38:17Z",
-  "token_cost": 25325,
-  "tool_uses": 9,
+  "summary": "The needle has been found and fixed (wrong arithmetic operator in the discount calculation). `test.sh` now passes.",
+  "timestamp": "2026-04-03T02:00:32Z",
+  "token_cost": 30468,
+  "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 5.327
+  "wall_clock": 8.007
 }

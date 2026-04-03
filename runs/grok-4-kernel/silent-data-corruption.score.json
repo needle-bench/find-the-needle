@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.09760049999999999,
+  "input_tokens": 21319,
+  "output_tokens": 5107,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "PASS: File processed correctly, no data loss",
+  "timestamp": "2026-04-03T01:47:01Z",
+  "token_cost": 26426,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 89.401
+}

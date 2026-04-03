@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8553,
+  "output_tokens": 1666,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Both verification passes succeeded. Here's a summary of the bug and fix:\n\n**Bug:** In `TransferService.java`, the `transfer()` method locked accounts in parameter order (first `from`, then `to`). When two concurrent transfers went in opposite directions (e.g., A→B and B→A), thread 1 would lock A and wait for B, while thread 2 would lock B and wait for A — a classic **deadlock** caused by inconsistent lock ordering.\n\n**Fix:** Instead of locking in parameter order, I changed the code to always lock accounts in a **consistent order based on account ID** (alphabetical comparison). This ensures that regardless of transfer direction, both threads acquire locks in the same order (e.g., always A first, then B), eliminating the deadlock. I also removed the artificial `Thread.sleep(1)` delay that was there to increase deadlock probability.",
+  "timestamp": "2026-04-03T01:28:19Z",
+  "token_cost": 10219,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 33.089
+}

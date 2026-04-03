@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.016487250000000002,
+  "input_tokens": 3823,
+  "output_tokens": 881,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: Dockerfile\nREADME.md\napp/index.js\napp/package.json\napp/yarn.lock\ntest.sh\nAgentfile",
+  "timestamp": "2026-04-03T01:50:43Z",
+  "token_cost": 4704,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 18.167
+}

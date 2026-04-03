@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0190146,
-  "input_tokens": 18818,
-  "output_tokens": 2137,
+  "estimated_cost_usd": 0.025889600000000002,
+  "input_tokens": 16860,
+  "output_tokens": 2965,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I updated utils.js to parse min_rating as an integer (using parseInt) instead of leaving it as a string. This ensures numeric comparisons in the filter work correctly. All tests now pass.",
-  "timestamp": "2026-04-02T02:08:51Z",
-  "token_cost": 20955,
-  "tool_uses": 8,
+  "summary": "I’ve fixed the type-coercion issue by parsing the `min_rating` query parameter as an integer in `parseQuery`. All tests now pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-03T02:39:32Z",
+  "token_cost": 19825,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 30.414
+  "wall_clock": 38.448
 }

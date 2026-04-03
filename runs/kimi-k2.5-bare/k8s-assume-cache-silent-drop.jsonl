@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:03:49Z", "benchmark": "k8s-assume-cache-silent-drop", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 75, "tokens_out": 149, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/tmp", "/var", "/"], "tokens_in": 193, "tokens_out": 134, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace", "/workspace", "/workspace"], "tokens_in": 911, "tokens_out": 77, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/main.go", "/workspace/assume-cache"], "tokens_in": 1567, "tokens_out": 45, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/assume-cache", "/workspace/assume-cache", "/workspace/assume-cache"], "tokens_in": 2704, "tokens_out": 78, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/assume-cache", "/workspace/*.go", "/workspace/test.sh"], "tokens_in": 3364, "tokens_out": 108, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:07:06Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

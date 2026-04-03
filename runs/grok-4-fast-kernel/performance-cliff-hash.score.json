@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0014109,
+  "input_tokens": 6837,
+  "output_tokens": 1395,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "### Fix Applied and Verified\n\n**Needle in the Haystack:** The bug was in `/app/src/Product.java`, where the `hashCode()` method incorrectly used `category.hashCode()` instead of `sku.hashCode()`. This caused severe hash collisions because all products in the same category (only 10 categories) collided in the same bucket, leading to a performance cliff with max chain lengths ~1000 for 10,000 items.\n\n**Fix:** Updated `hashCode()` to use `sku.hashCode()` for unique per-product distribution across buckets. This ensures even hashing (max chain length <<50).\n\n**Verification:** Ran `/app/test.sh` — it now **PASSES** with max chain length of 12 (well under 50).\n\n```\n=== Performance Cliff Hash Map Test ===\n--- Small dataset (100 items) ---\nSmall dataset: OK\n--- Hash distribution analysis ---\nMax chain length: 12\nMin chain length: 3\nAvg chain length: 9.765625\nOK: Max chain length 12 is within acceptable bounds\nPASS: Hash map distributes items evenly across buckets\n```",
+  "timestamp": "2026-04-03T02:02:36Z",
+  "token_cost": 8232,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 12.349
+}

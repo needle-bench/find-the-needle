@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0073104,
+  "input_tokens": 3723,
+  "output_tokens": 1805,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "The test results reveal the issue - there's a backwards compatibility problem between API versions. The v2 version is missing several important fields that exist in v1: `avatar_url`, `bio`, and `location`. \n\nThis is causing client data loss during upgrades. Let me inspect the code to identify where these fields are defined and fix the compatibility issue. I'll start by examining the user model definitions in models.go.",
+  "timestamp": "2026-04-03T01:23:13Z",
+  "token_cost": 5528,
+  "tool_uses": 4,
+  "turns_to_fix": 0,
+  "wall_clock": 198.432
+}

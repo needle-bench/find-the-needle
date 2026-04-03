@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 222598,
+  "output_tokens": 2789,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I found the needle: a race condition in `app/processor.py` that caused duplicate transfers when multiple requests with the same idempotency key were processed concurrently. \n\nThe original code committed the debit before recording the transfer's success, and its error-handling logic incorrectly committed a credit to the destination account even when it tried to undo a duplicate debit.\n\nI fixed it by:\n1.  **Making the entire transfer atomic**: All operations (checking idempotency, checking balance, debiting, and crediting) now happen within a single database transaction.\n2.  **Using `BEGIN IMMEDIATE`**: This ensures that only one request can modify the database at a time, preventing multiple concurrent requests from interfering with each other.\n3.  **Correcting Error Handling**: If any step fails, the entire transaction is rolled back, ensuring money is never lost or duplicated.\n\nI verified the fix by running `test.sh`, which now passes consistently.\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS",
+  "timestamp": "2026-04-03T04:26:27Z",
+  "token_cost": 225387,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 145.179
+}

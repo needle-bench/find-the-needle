@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0194989123,
+  "input_tokens": 34614,
+  "output_tokens": 3995,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The tests pass. Here's a summary of the \"needle\" I found:\n\n## The Bug (Goroutine Leak)\n\nThe original code in `/app/app/main.go` had a **goroutine leak bug**:\n\n1. The `computeHandler` spawned a goroutine for computation without passing the request context\n2. `performComputation` didn't accept or check for context cancellation\n3. When clients disconnected (e.g., via timeout), the goroutines kept running their computation loops forever\n\n## The Fix\n\n1. **Modified `performComputation`** to accept a `context.Context` parameter and check for cancellation at key points in the computation loop\n\n2. **Updated the goroutine** in `computeHandler` to pass `r.Context()` to `performComputation`, so when the client disconnects, the context is cancelled and the goroutine exits\n\n3. **Added cancellation handling** for the result channel to prevent blocking on send when client disconnects\n\n4. **Added `Error` field** to `ComputeResult` to report when computation was cancelled\n\nThe test now shows:\n- **Baseline goroutines: 4** (normal server goroutines)\n- **After 20 client disconnects: 4** (no leaked goroutines!)\n- **Leaked goroutines: 0**",
+  "timestamp": "2026-04-03T01:49:55Z",
+  "token_cost": 38609,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 127.818
+}

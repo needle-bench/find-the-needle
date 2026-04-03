@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0084961,
+  "input_tokens": 30998,
+  "output_tokens": 1149,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test passes now. The issue was that the `CsvReader` was using ISO-8859-1 encoding instead of UTF-8 to read the CSV file. When UTF-8 encoded text (which contains multi-byte characters for accented letters) is read as ISO-8859-1, each multi-byte UTF-8 character gets interpreted as multiple ISO-8859-1 characters, resulting in garbled output (mojibake).\n\nThe fix was simple: change the charset from `ISO-8859-1` to `UTF-8` in the `CsvReader` constructor. This ensures that the CSV file, which contains UTF-8 encoded international characters, is read correctly.\n\nThe needle was found in `app/CsvReader.java` line 17-20 where the wrong charset was being used.",
+  "timestamp": "2026-04-03T01:49:33Z",
+  "token_cost": 32147,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 57.856
+}

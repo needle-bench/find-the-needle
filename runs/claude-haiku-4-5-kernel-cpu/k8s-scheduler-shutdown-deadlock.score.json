@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 17127,
-  "output_tokens": 1226,
+  "input_tokens": 10920,
+  "output_tokens": 985,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! ✅ **Found and fixed the needle!**\n\n## Summary\n\n**The Problem**: A deadlock in the scheduler shutdown sequence in `main.go`\n\n**Root Cause**: In the `Run()` method, the code was:\n1. Waiting for the scheduler goroutine to exit (`<-done`)\n2. THEN calling `Close()` to signal blocked queue operations\n\nThis caused a deadlock when the goroutine was blocked in `Pop()`:\n- The goroutine couldn't exit because `Pop()` was waiting for items or the `closed` flag\n- `Close()` was never called because the code was stuck waiting for the goroutine\n- Classic circular dependency\n\n**The Fix**: Reverse the order - call `s.queue.Close()` BEFORE `<-done` so that:\n- `Close()` signals all waiters immediately, unblocking any `Pop()` calls\n- The goroutine can exit cleanly\n- No deadlock occurs\n\nThe test now passes with \"OK: clean shutdown\"! ✅",
-  "timestamp": "2026-04-02T02:26:16Z",
-  "token_cost": 18353,
-  "tool_uses": 8,
+  "summary": "Perfect! 🎯 **Found and fixed the needle!**\n\n## The Problem\nThere was a **shutdown deadlock** in the Kubernetes scheduler implementation. The issue occurred because:\n\n1. When `ctx.Done()` was triggered, the goroutine would exit its main loop\n2. However, if `ScheduleOne()` was blocked waiting in `queue.Pop()`, it wouldn't respond to context cancellation immediately\n3. `Pop()` would block until either an item became available OR `Close()` was called\n4. **The deadlock**: The code waited for the goroutine (`<-done`) BEFORE calling `Close()`, so the goroutine was stuck in `Pop()` waiting for `Close()`, while `Close()` was waiting for the goroutine to exit\n\n## The Fix\n**Swap the order**: Call `s.queue.Close()` IMMEDIATELY after `ctx.Done()` triggers, BEFORE waiting for the goroutine. This allows `Pop()` to wake up and return with a \"queue closed\" error, letting the goroutine exit cleanly.\n\nThe test now passes with `OK: clean shutdown` ✅",
+  "timestamp": "2026-04-03T00:36:02Z",
+  "token_cost": 11905,
+  "tool_uses": 5,
   "turns_to_fix": 1,
-  "wall_clock": 16.163
+  "wall_clock": 13.02
 }

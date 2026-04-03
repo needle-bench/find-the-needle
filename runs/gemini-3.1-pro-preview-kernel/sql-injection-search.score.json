@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.057372000000000006,
+  "input_tokens": 19614,
+  "output_tokens": 1512,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the vulnerability in `/app/app/search.py` and fixed it. \n\nThe issue was a SQL injection vulnerability in the `search` method where user input (`query` and optionally `category`) were directly being concatenated into the raw SQL string without any sanitization or parameterization:\n```python\n        sql = f\"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE '%{query}%'\"\n\n        if category:\n            sql += f\" AND category = '{category}'\"\n\n        sql += \" ORDER BY name\"\n\n        return self.db.execute_raw(sql)\n```\n\nI've modified the `search` method to use parameterized queries and the `db.execute` method (which supports parameterized arguments) instead, preventing the SQL injection attacks:\n```python\n    def search(self, query, category=None):\n        \"\"\"\n        Search for products matching the query string.\n        Optionally filter by category.\n        \"\"\"\n        sql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\n        params = [f\"%{query}%\"]\n        \n        if category:\n            sql += \" AND category = ?\"\n            params.append(category)\n            \n        sql += \" ORDER BY name\"\n        \n        return self.db.execute(sql, params)\n```\n\nRunning `./test.sh` now results in success indicating the endpoint is no longer vulnerable:\n```\nNormal search for 'Mouse': 1 results\nSQL injection UNION attack: 0 results\nPASS: UNION injection did not leak user data\nSQL injection boolean attack ('OR 1=1'): 0 results\nTotal products in database: 10\nPASS: Boolean injection did not bypass search filter\nPASS: Search endpoint is not vulnerable to SQL injection\n```",
+  "timestamp": "2026-04-03T06:46:39Z",
+  "token_cost": 21126,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 46.39
+}

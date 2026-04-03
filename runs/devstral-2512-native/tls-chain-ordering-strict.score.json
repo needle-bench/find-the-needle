@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Excellent! The fix is working consistently. Let me summarize what was done:\n\n## Summary\n\n**Problem**: The TLS certificate chain was not in the correct order according to RFC 5246 Section 7.4.2. The chain was being sent as: Leaf → Root → Intermediate, but it should be: Leaf → Intermediate → Root.\n\n**Root Cause**: The `tls.X509KeyPair` function automatically places the leaf certificate at position 0, but the remaining certificates are appended in their original file order from the PEM bundle, which didn't follow the RFC specification.\n\n**Solution**: Modified `app/tlssetup/loader.go` to:\n1. Parse all certificates in the chain\n2. Build a proper chain by walking up from the leaf certificate to its issuer (intermediate), then to the issuer's issuer (root)\n3. Reorder the certificates to comply with RFC 5246: cert[0] = leaf, cert[1] = issuer of cert[0], cert[2] = issuer of cert[1]\n\n**Changes Made**:\n- Added `bytes` import\n- Added certificate reordering logic that builds the chain in the correct order by matching each certificate's issuer to the next certificate's subject\n\nThe test now passes, confirming that the TLS chain is correctly ordered per RFC 5246.",
+  "timestamp": "2026-04-03T03:31:50Z",
+  "token_cost": 0,
+  "tool_uses": 17,
+  "turns_to_fix": 18,
+  "wall_clock": 47.918
+}

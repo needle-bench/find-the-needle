@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 129778,
+  "output_tokens": 1569,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have fixed the auth bypass vulnerability in the application's middleware and verified the fix with `test.sh`. All tests passed.\n",
+  "timestamp": "2026-04-03T01:17:21Z",
+  "token_cost": 131347,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 79.532
+}

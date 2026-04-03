@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.05034,
+  "input_tokens": 33770,
+  "output_tokens": 1426,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Root cause:\nCsvReader was hard-coded to read the CSV file using the single-byte encoding ISO-8859-1.  \nAll names that contain characters not representable in that legacy code page (é, ü, ø, æ, etc.) were corrupted as soon as the file was read, so the generated report failed the tests.\n\nFix applied (in app/CsvReader.java):\n1. Replaced the import and field initialisation:\n   • removed Charset.forName(\"ISO-8859-1\")  \n   • now sets charset = StandardCharsets.UTF_8\n2. Added an explanatory comment.\n\nThis makes CsvReader interpret the source file as UTF-8 – the encoding in which customers.csv is actually stored – so every international character is preserved end-to-end.\n\nThe updated code compiles and test.sh now passes, confirming that the “needle” (encoding bug) is fixed.",
+  "timestamp": "2026-04-03T01:38:21Z",
+  "token_cost": 35196,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 33.62
+}

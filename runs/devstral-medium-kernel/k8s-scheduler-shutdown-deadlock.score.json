@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.00908928,
-  "input_tokens": 35860,
-  "output_tokens": 2764,
+  "estimated_cost_usd": 0.009421599999999999,
+  "input_tokens": 31974,
+  "output_tokens": 2636,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Great! The test has passed, which means we've successfully fixed the deadlock issue. The key change was to call `s.queue.Close()` before waiting for the scheduler goroutine to finish (`<-done`). This ensures that any blocked `Pop()` calls are unblocked before we try to wait for the goroutine to exit.\n\nThe fix addresses the deadlock by:\n1. Closing the queue immediately after the context is cancelled\n2. This unblocks any `Pop()` calls that might be waiting\n3. Then we wait for the scheduler goroutine to finish its work\n\nThis ensures a clean shutdown without deadlocks.",
-  "timestamp": "2026-04-02T03:18:01Z",
-  "token_cost": 38624,
+  "summary": "Great! The test has passed. The fix worked. The issue was indeed a deadlock caused by the incorrect order of operations in the `Run` method. By moving the `s.queue.Close()` call before waiting for the goroutine to exit, we ensure that any blocked `Pop()` calls will be unblocked before we wait for the goroutine to finish.\n\nThe key changes we made:\n1. Moved `s.queue.Close()` to happen immediately after `<-ctx.Done()` and before waiting for the goroutine to finish.\n2. This ensures that if the scheduling goroutine is blocked in `Pop()`, it will be unblocked by the `Close()` call before we wait for it to exit.\n\nThis fix prevents the deadlock that could occur when the scheduling goroutine was blocked in `Pop()` while waiting for the queue to be closed.",
+  "timestamp": "2026-04-03T01:29:38Z",
+  "token_cost": 34610,
   "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 28.38
+  "wall_clock": 26.272
 }

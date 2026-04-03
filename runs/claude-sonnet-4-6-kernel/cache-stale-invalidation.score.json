@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.07875299999999999,
-  "input_tokens": 20021,
-  "output_tokens": 1246,
+  "estimated_cost_usd": 0.10191299999999999,
+  "input_tokens": 27286,
+  "output_tokens": 1337,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the **needle** — the bug and the fix:\n\n---\n\n### The Bug: Stale Cache After Writes\n\nIn `/app/app/server.py`, two methods had intentional cache-invalidation omissions:\n\n1. **`_update_product`** — After updating a product in the store, it never removed the old entry from the cache. Any subsequent `GET /products/<id>` would hit the cache and return the **old, stale data**.\n\n2. **`_create_product`** — After creating a new product, it never invalidated the product list cache. Any subsequent `GET /products` would return the **old list** missing the newly created product.\n\n### The Fix\n\nAdded `cache.delete(...)` calls after each write operation:\n\n```python\n# In _update_product:\ncache.delete(f'products:{product_id}')  # evict stale per-product entry\ncache.delete('products:list')           # evict stale list\n\n# In _create_product:\ncache.delete('products:list')           # evict stale list\n```\n\nThis ensures reads after writes always go to the source of truth (the store) and return fresh data.",
-  "timestamp": "2026-04-02T01:23:16Z",
-  "token_cost": 21267,
-  "tool_uses": 7,
+  "summary": "All tests pass. Here's a summary of the **needle** — two cache invalidation bugs in `/app/app/server.py`:\n\n---\n\n### Bug 1 — Stale product after update (`_update_product`)\nAfter calling `store.update_product(...)`, the old product data remained cached under `products:<id>`. Any subsequent `GET /products/<id>` would return the **stale cached value** instead of the updated one until the 5-minute TTL expired.\n\n**Fix:** Call `cache.delete(f'products:{product_id}')` immediately after the store update.\n\n---\n\n### Bug 2 — Stale list after create (`_create_product`)\nAfter calling `store.create_product(...)`, the list cache key `products:list` still held the old product list. Any subsequent `GET /products` would return the **old list without the new product** until the TTL expired.\n\n**Fix:** Call `cache.delete('products:list')` immediately after creating the product.",
+  "timestamp": "2026-04-03T01:19:28Z",
+  "token_cost": 28623,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 23.996
+  "wall_clock": 25.91
 }

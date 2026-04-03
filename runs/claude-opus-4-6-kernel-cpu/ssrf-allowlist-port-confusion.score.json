@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 10066,
-  "output_tokens": 1926,
+  "input_tokens": 10075,
+  "output_tokens": 1946,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the problem and the fix:\n\n## The Needle: SSRF via IPv6 Loopback Bypass\n\n**Problem:** The webhook proxy's URL validator (`app/validator.py`) blocked IPv4 loopback addresses (`127.0.0.1`, `localhost`, `0.0.0.0`) but did **not** block IPv6 loopback addresses like `::1` or `0:0:0:0:0:0:0:1`. An attacker could use URLs like `http://[::1]:8888/metadata` to bypass the blocklist and access internal services (SSRF — Server-Side Request Forgery), leaking sensitive data like `INTERNAL_SECRET_12345`.\n\n**Fix:** Added an `ipaddress`-based check that parses any IP address (IPv4 or IPv6) and rejects it if it's a loopback, private, reserved, or link-local address. This covers:\n- `::1` (IPv6 loopback, compact form)\n- `0:0:0:0:0:0:0:1` (IPv6 loopback, expanded form)\n- Any other IPv6 private/reserved ranges that could be used for SSRF",
-  "timestamp": "2026-04-02T02:39:40Z",
-  "token_cost": 11992,
+  "summary": "All tests pass. Here's a summary of the problem and the fix:\n\n## The Needle: SSRF via IPv6 Loopback Bypass\n\n**The vulnerability:** The webhook proxy's URL validator (`app/validator.py`) blocked IPv4 loopback addresses (`127.0.0.1`, `localhost`, `0.0.0.0`) but completely missed IPv6 loopback addresses. An attacker could bypass the blocklist by using:\n- `http://[::1]:8888/metadata` — compact IPv6 loopback\n- `http://[0:0:0:0:0:0:0:1]:8888/metadata` — expanded IPv6 loopback\n\nThis allowed Server-Side Request Forgery (SSRF) to access internal services and leak sensitive data like `INTERNAL_SECRET_12345`.\n\n**The fix:** Added a `_is_ipv6_loopback()` helper function that uses Python's `ipaddress` module to parse the hostname and check if it equals `::1`. This correctly handles all representations of the IPv6 loopback address (both `::1` and `0:0:0:0:0:0:0:1` normalize to the same address). The check is called in `is_url_allowed()` before allowing the request through.",
+  "timestamp": "2026-04-03T03:19:58Z",
+  "token_cost": 12021,
   "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 38.701
+  "wall_clock": 36.612
 }

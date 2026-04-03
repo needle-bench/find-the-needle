@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 36967,
-  "output_tokens": 918,
+  "input_tokens": 5146,
+  "output_tokens": 117,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "I have found and patched the Unicode BIDI override vulnerability that allowed attackers to spoof an admin account. \n\nHere is what I fixed:\n1. **Sanitization (`app/sanitizer.py`)**: Added logic in `sanitize_username` to strip out BIDI control characters (`\\u200e`, `\\u200f`, `\\u202a`-`\\u202e`, `\\u2066`-`\\u2069`). This normalizes any malicious usernames (like `\\u202enimda`) before they can be registered.\n2. **Authorization (`app/auth.py`)**: Changed `check_admin_access` to check the actual, internal `username` against the `ADMIN_USERS` list rather than the BIDI-manipulated `display_name`.\n\nI also ran `test.sh`, which confirms the fix is successful and the vulnerability is mitigated:\n```\nPASS: normal user registration works\nPASS: normal user login works\nPASS: real admin can access dashboard\nPASS: BIDI-injected username was rejected or normalized\nPASS: non-admin user correctly denied admin access\nPASS: LRO-injected username was rejected or normalized\n\nPASS\n```",
-  "timestamp": "2026-04-02T01:39:39Z",
-  "token_cost": 37885,
-  "tool_uses": 10,
-  "turns_to_fix": 9,
-  "wall_clock": 58.558
+  "summary": "I have identified and fixed the Unicode BIDI override vulnerability as requested.\n\n### Root Cause\n1. **Broken Test:** First, I discovered that `test.sh` was incorrectly using `#!/bin/sh`. On systems where `/bin/sh` maps to a shell (like `dash`) whose `printf` built-in does not interpret `\\x` escape sequences natively, the JSON payload being generated literally contained a backslash, x, e, 2, etc. This caused the registration JSON to fail early with an HTTP `400` status. Because it was rejected, the flawed test script interpreted this as a successful mitigation and erroneously printed \"PASS\" without actually exercising the buggy payload.\n2. **Vulnerability:**\n   - **`app/auth.py`:** The `check_admin_access()` middleware compared the maliciously altered (but visually appearing correct) display name directly against the `ADMIN_USERS` list rather than the stored `username`.\n   - **`app/sanitizer.py`:** The `sanitize_username()` function did not strip BIDI control characters like `\\u202E` (Right-To-Left Override).\n\n### Changes Implemented\n1. **`test.sh`:** Updated the shebang to `#!/bin/bash` so that `printf` properly interprets the hex sequences (`\\x`). Once this was corrected, the unpatched codebase appropriately resulted in a `FAIL` (indicating privilege escalation as an attacker gained admin access) exactly as the comments in the test specified.\n2. **`app/sanitizer.py`:** Added a stripping pass within `sanitize_username()` using a regex `_BIDI_RE` (`[\\u202A-\\u202E\\u2066-\\u2069]`) to remove BIDI control characters before completing standard HTML escaping rules.\n3. **`app/auth.py`:** Modified `check_admin_access()` to compare the session's actual internal `username` against the `ADMIN_USERS` allowed list, avoiding the use of the UI-rendered name for authentication comparisons.\n\nAfter these modifications, running `./test.sh` successfully catches and averts the attempted BIDI injections and prints `PASS` for all validation criteria.",
+  "timestamp": "2026-04-03T02:02:53Z",
+  "token_cost": 5263,
+  "tool_uses": 37,
+  "turns_to_fix": 1,
+  "wall_clock": 1894.576
 }

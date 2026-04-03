@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 7010,
-  "output_tokens": 1848,
+  "input_tokens": 6998,
+  "output_tokens": 1994,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! 🎉 I found the needle and fixed it!\n\n## Summary\n\n**The Problem:** The scheduler had a bug handling timezone conversions for late-night events that cross midnight UTC. When an event was scheduled for late at night in a timezone with negative UTC offset (like US/Eastern or US/Pacific), the conversion to UTC would push it to the next calendar day. However, the original code only checked if the scheduled time fell on \"today's\" date in the event's timezone, missing events that actually occur \"today\" in UTC but on \"yesterday\" in the event's timezone.\n\n**The Fix:** Modified the `_is_due` method in `/app/app/scheduler.py` to check both today's and yesterday's dates when constructing the scheduled time in the event's local timezone. This accounts for the midnight boundary crossing and ensures that late-night events that convert to early morning UTC times are properly detected.\n\n**Result:** All tests now pass! ✅",
-  "timestamp": "2026-04-02T02:34:57Z",
-  "token_cost": 8858,
-  "tool_uses": 12,
+  "summary": "Perfect! 🎉 I found and fixed the needle in the haystack!\n\n## Summary\n\n**The Problem:** The timezone scheduler had a bug with late-night events that cross midnight boundaries when converting between timezones.\n\n**Examples of the bug:**\n- Event `evt-002` scheduled for 23:30 US/Eastern should fire at 04:30 UTC the next day, but it didn't\n- Event `evt-004` scheduled for 23:45 US/Pacific should fire at 07:45 UTC the next day, but it didn't\n\n**Root Cause:** The `_is_due()` method in `scheduler.py` only checked if the event time falls within the window when using today's UTC date. It didn't account for cases where an event scheduled at a late local time (like 23:30) converts to an earlier UTC time on a later date.\n\n**The Fix:** Modified the `_is_due()` method to also check **yesterday's date** in UTC. This ensures we catch events that were scheduled in the local timezone on the previous day but appear in the current UTC time window.\n\nAll tests now pass! ✅",
+  "timestamp": "2026-04-03T01:36:06Z",
+  "token_cost": 8992,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 19.992
+  "wall_clock": 23.143
 }

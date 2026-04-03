@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.07637200000000001,
+  "input_tokens": 55926,
+  "output_tokens": 2117,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The “needle” was that the v2 API response dropped three fields (avatar_url, bio, location) that exist in v1, breaking backward-compatibility.  \n\nFix applied:\n\n1. app/models.go  \n   • Added the missing fields to UserV2 struct.  \n   • Updated the comment to stress the backward-compatibility rule.  \n   • Updated (*InternalUser).ToV2 so it populates every field, including the restored ones.\n\nAll tests now pass:\n\n$ ./test.sh\nPASS: v2 API is backward-compatible with v1",
+  "timestamp": "2026-04-03T01:17:23Z",
+  "token_cost": 58043,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 40.884
+}

@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 18646,
-  "output_tokens": 957,
+  "input_tokens": 16921,
+  "output_tokens": 932,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "I have successfully fixed the timezone scheduling bug in `app/scheduler.py` and confirmed that all tests, including those crossing midnight, now pass. \n\nThe issue was that the `_is_due` method was using the UTC date to build the local event time, which incorrectly shifted events scheduled near midnight into the wrong day. By shifting the logic to check the local dates immediately surrounding the window start time, the scheduler accurately detects due events across all timezones.",
-  "timestamp": "2026-04-02T02:08:22Z",
-  "token_cost": 19603,
+  "summary": "I have successfully found and fixed the bug! \n\nThe issue occurred when a scheduled local time crossed the UTC midnight boundary. The scheduler was building the event's local time using the `window_start`'s UTC date rather than the event's local date. Because of this, late-night events (from the perspective of UTC) were mapping to the wrong day in their local timezone, causing the time to mismatch.\n\nI updated `_is_due` in `app/scheduler.py` to:\n1. Translate the current checking window into the event's local timezone.\n2. Form the event's target datetime based on the dates spanned by this *local* window.\n3. Compare the correctly constructed UTC time against the actual checking window.\n\nI ran `./test.sh` to verify the fix, and all the timezone scheduling tests (including the previously failing late-night ones) now pass perfectly.",
+  "timestamp": "2026-04-03T06:55:43Z",
+  "token_cost": 17853,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 46.069
+  "wall_clock": 65.561
 }

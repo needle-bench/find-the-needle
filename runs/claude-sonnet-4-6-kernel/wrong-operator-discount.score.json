@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.077073,
-  "input_tokens": 21071,
-  "output_tokens": 924,
+  "estimated_cost_usd": 0.07686899999999999,
+  "input_tokens": 21043,
+  "output_tokens": 916,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the needle and the fix:\n\n**File:** `/app/pricing.py`  \n**Function:** `calculate_discount_amount`  \n**Bug:** Wrong operator — used `+` (addition) instead of `*` (multiplication) when computing the percentage discount:\n\n```python\n# BEFORE (broken)\ndiscount = subtotal + discount_percent / 100\n\n# AFTER (fixed)\ndiscount = subtotal * discount_percent / 100\n```\n\nThe `+` operator was adding the raw fraction (e.g. `0.20`) to the subtotal instead of multiplying to get the actual discount amount (e.g. 20% of $1098.94 = **$219.79**).",
-  "timestamp": "2026-04-02T01:43:24Z",
-  "token_cost": 21995,
+  "summary": "✅ **Fixed!** The needle was in `/app/pricing.py` in the `calculate_discount_amount` function.\n\n**The Bug:** A wrong operator — `+` (addition) was used instead of `*` (multiplication):\n\n```python\n# BROKEN (wrong operator):\ndiscount = subtotal + discount_percent / 100\n\n# FIXED (correct):\ndiscount = subtotal * discount_percent / 100\n```\n\nDue to operator precedence, the broken code was computing `subtotal + (discount_percent / 100)` — e.g., adding `0.20` to the subtotal instead of multiplying to get 20% of it. The fix correctly multiplies `subtotal * discount_percent / 100` to produce the proper percentage discount amount.",
+  "timestamp": "2026-04-03T02:51:33Z",
+  "token_cost": 21959,
   "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 21.605
+  "wall_clock": 21.721
 }

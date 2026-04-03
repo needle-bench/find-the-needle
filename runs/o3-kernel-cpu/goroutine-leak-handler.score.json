@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.08534599999999998,
+  "input_tokens": 50225,
+  "output_tokens": 3896,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the goroutine leak.\n\nWhat was wrong\n• computeHandler spawned a goroutine that ignored client disconnects (no context cancellation), so work continued after the response writer was gone, leaking goroutines.\n\nWhat I changed\n1. Added context import.\n2. Re-implemented computeHandler to run performComputation synchronously using r.Context() so cancellation is propagated automatically.\n3. Re-wrote performComputation(ctx, req) to:\n   • increment / decrement activeGoroutines,\n   • check ctx.Done() on every iteration and return when the client disconnects.\n4. Removed the old leaking goroutine logic.\n\nResult\nRunning test.sh now reports:\n\nBaseline goroutines: 4  \nGoroutines after 20 client disconnects: 4  \nGoroutines after 5s wait: 4  \nPASS: All goroutine lifecycle tests passed\n\nThe server cleans up correctly with no leaked goroutines.",
+  "timestamp": "2026-04-03T01:42:17Z",
+  "token_cost": 54121,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 64.832
+}

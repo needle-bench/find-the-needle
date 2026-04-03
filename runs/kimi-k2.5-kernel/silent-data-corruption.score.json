@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0097152907,
+  "input_tokens": 20490,
+  "output_tokens": 1128,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix has been verified. The \"needle\" was the silent data truncation bug in `src/main.rs`:\n\n**The Problem:** The original code used a fixed 64KB buffer and `file.read(&mut buffer)` which only reads up to the buffer size. For files larger than 64KB, data was silently truncated.\n\n**The Fix:** Changed to use a dynamically-sized `Vec<u8>` and `file.read_to_end(&mut buffer)` which reads the entire file regardless of size.\n\nThe test now passes - files larger than 64KB are processed correctly with no data loss.",
+  "timestamp": "2026-04-03T03:26:55Z",
+  "token_cost": 21618,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 96.76
+}

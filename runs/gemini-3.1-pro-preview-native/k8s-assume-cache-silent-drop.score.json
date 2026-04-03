@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 7885,
-  "output_tokens": 357,
+  "input_tokens": 10700,
+  "output_tokens": 375,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "I have identified the bug location in `main.go` and added the conflict notification whenever the informer delivers an update that overrides the assumed version. \n\nI've updated the script to set `conflictNotified = true` prior to deleting the optimistically assumed object state. Afterwards, I ran `test.sh`, which successfully outputs `OK: conflict notified` and passes the test logic.",
-  "timestamp": "2026-04-02T01:44:19Z",
-  "token_cost": 8242,
+  "summary": "I've found the issue and updated `main.go`. The cache now notifies the assumer of the conflict by setting the `conflictNotified` flag when an assumed object's version is updated and dropped, preventing the silent data loss. \n\nI also ran `test.sh`, which successfully confirmed the fix:\n\n```\nafter assume: version=5 data=\"assumed-by-scheduler\"\nafter informer: version=6 data=\"informer-update\"\nstill assumed: false\nOK: conflict notified\nPASS\n```",
+  "timestamp": "2026-04-03T04:13:08Z",
+  "token_cost": 11075,
   "tool_uses": 4,
   "turns_to_fix": 4,
-  "wall_clock": 24.409
+  "wall_clock": 19.706
 }

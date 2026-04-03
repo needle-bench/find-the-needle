@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 118034,
+  "output_tokens": 4318,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Everything's fine. Submitting.\nI found that the N+1 query problem was caused by `DataLoader` instances being created within each resolver call instead of being shared across the entire request via the GraphQL context.\n\nSpecifically, in `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts`, new `DataLoader` instances were being instantiated every time `userPosts` or `postAuthor` was called, which prevented them from batching the requests for different parent objects.\n\nI fixed this by:\n1.  Modifying `src/context.ts` to include `loaders` in the `GqlContext` interface and using the `createLoaders` function in `createContext` to instantiate the loaders once per request.\n2.  Updating the resolvers in `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts` to use the `DataLoader` instances from the `context` instead of creating new ones.\n\nAfter these changes, the number of database queries for fetching 100 users with their posts dropped from 101 to 2, and all tests in `test.sh` passed.\n",
+  "timestamp": "2026-04-03T01:38:22Z",
+  "token_cost": 122352,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 52.293
+}

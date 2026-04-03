@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 35438,
+  "output_tokens": 1206,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test now passes. The issue was that the `UserV2` struct was missing the `AvatarURL`, `Bio`, and `Location` fields that were present in `UserV1`. By adding these fields back to the `UserV2` struct and updating the `ToV2()` method to include them, we've restored backward compatibility.\n\nThe v2 API now includes all the fields from v1 plus the new v2-specific fields (`department`, `phone_number`, and `is_active`), making it a proper superset of the v1 API.",
+  "timestamp": "2026-04-03T01:26:02Z",
+  "token_cost": 36644,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 19.427
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.04862,
+  "input_tokens": 25218,
+  "output_tokens": 2269,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the shutdown dead-lock.\n\nChanges in main.go (Scheduler.Run):\n\n1. After ctx cancellation we now:\n   a. Close the queue first → releases any goroutine blocked in Pop().\n   b. Then wait for the worker goroutine to exit.\n\nThis removes the deadlock window and lets test.sh pass.",
+  "timestamp": "2026-04-03T02:00:31Z",
+  "token_cost": 27487,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 55.455
+}

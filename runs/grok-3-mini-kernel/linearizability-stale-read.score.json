@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.15637615,
+  "input_tokens": 1161571,
+  "output_tokens": 83078,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The edit you attempted failed because the specified `old_string` was not found in the file. This is likely due to a mismatch in the exact string content. To proceed, I need to verify the current content of `/app/app/raft/node.go` and make a precise edit.\n\n",
+  "timestamp": "2026-04-03T02:25:23Z",
+  "token_cost": 1244649,
+  "tool_uses": 81,
+  "turns_to_fix": 1,
+  "wall_clock": 1087.126
+}

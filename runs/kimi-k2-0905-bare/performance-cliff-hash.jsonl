@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:03:51Z", "benchmark": "performance-cliff-hash", "model": "kimi-k2-0905", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 82, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/'needle'...\"", "/app/."], "tokens_in": 166, "tokens_out": 168, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 377, "tokens_out": 125, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/'needle'...\"", "/app/.", "/app/files...\"", "/app/README.md"], "tokens_in": 765, "tokens_out": 178, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/.", "/app/.", "/app/."], "tokens_in": 995, "tokens_out": 254, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh", "/app/test.sh", "/app/test.sh"], "tokens_in": 1340, "tokens_out": 138, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:04:30Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

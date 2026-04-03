@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0070515000000000005,
+  "input_tokens": 47973,
+  "output_tokens": 5910,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix is complete. All names are preserved correctly in the report.",
+  "timestamp": "2026-04-03T01:26:46Z",
+  "token_cost": 53883,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 50.989
+}

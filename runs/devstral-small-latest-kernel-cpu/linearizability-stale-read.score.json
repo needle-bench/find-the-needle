@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 508212,
+  "output_tokens": 2628,
+  "resolved": true,
+  "stop_reason": "error: [429] rate limited — retry 2/7, backoff 2000ms",
+  "summary": "Perfect! The fix works. The issue was that the follower node was not advancing its commit index when receiving heartbeats from the leader. By adding the logic to advance the commit index in the `handleHeartbeat` function, the follower now correctly updates its commit index and applies the committed entries, ensuring linearizable reads after a partition heals.",
+  "timestamp": "2026-04-03T03:38:03Z",
+  "token_cost": 510840,
+  "tool_uses": 49,
+  "turns_to_fix": 1,
+  "wall_clock": 115.706
+}

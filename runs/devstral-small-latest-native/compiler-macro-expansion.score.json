@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is working correctly. The generated getters now return references (`&Address` and `&Company`) instead of owned values.\n\n## Summary\n\nThe bug was in `src/codegen.rs` in the `generate_getter` function. For `FieldType::Ref` fields, it was generating:\n```rust\npub fn field_name(&self) -> Type {\n```\n\nBut it should generate:\n```rust\npub fn field_name(&self) -> &Type {\n```\n\nThe fix was simple - adding a `&` before the type name in the return type signature for Ref-typed fields. This ensures that getters return references to nested structs rather than owned copies, which is the correct behavior for maintaining reference identity and avoiding unnecessary cloning.",
+  "timestamp": "2026-04-03T01:47:45Z",
+  "token_cost": 0,
+  "tool_uses": 15,
+  "turns_to_fix": 16,
+  "wall_clock": 20.155
+}

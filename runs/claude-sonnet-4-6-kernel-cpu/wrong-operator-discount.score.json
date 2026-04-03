@@ -6,13 +6,13 @@
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
   "input_tokens": 2341,
-  "output_tokens": 800,
+  "output_tokens": 819,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**Found and fixed!** ✅\n\n**The needle:** In `/app/pricing.py`, the `calculate_discount_amount` function used the wrong operator (`+` instead of `*`) to compute the discount:\n\n```python\n# BEFORE (buggy) — addition instead of multiplication\ndiscount = subtotal + discount_percent / 100\n\n# AFTER (fixed) — correct percentage calculation\ndiscount = subtotal * discount_percent / 100\n```\n\nThis caused wildly wrong discount amounts — for example, a 20% discount on a $1098.94 subtotal would return `$1099.14` (subtotal + 0.20) instead of the correct `$219.79` (subtotal × 0.20). All four tests now pass.",
-  "timestamp": "2026-04-02T02:38:34Z",
-  "token_cost": 3141,
+  "summary": "**Found and fixed!** 🎯\n\n### The Needle\n\n**File:** `/app/pricing.py` — `calculate_discount_amount` function\n\n**Bug:** Wrong operator — `+` (addition) was used instead of `*` (multiplication) in the discount formula:\n\n```python\n# BEFORE (broken)\ndiscount = subtotal + discount_percent / 100\n\n# AFTER (fixed)\ndiscount = subtotal * discount_percent / 100\n```\n\nInstead of multiplying the subtotal by the percentage (e.g., `1098.94 * 20 / 100 = 219.79`), the code was adding the percentage to the subtotal (e.g., `1098.94 + 20 / 100 = 1099.14`), producing wildly incorrect discount amounts. The test now passes. ✅",
+  "timestamp": "2026-04-03T02:51:59Z",
+  "token_cost": 3160,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 19.79
+  "wall_clock": 15.881
 }

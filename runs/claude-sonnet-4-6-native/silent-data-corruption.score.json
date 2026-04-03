@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "silent-data-corruption",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.19895625000000003,
+  "input_tokens": 342908,
+  "output_tokens": 2360,
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "Test passes. The bug was in `main.rs:16` — a single `file.read(&mut buffer)` into a 64KB fixed buffer silently truncated any file larger than 64KB. Fixed by replacing the whole read logic with `fs::read(input_path)`, which reads the entire file regardless of size.",
+  "timestamp": "2026-04-03T02:24:20Z",
+  "token_cost": 345268,
+  "tool_uses": 19,
+  "turns_to_fix": 20,
+  "wall_clock": 63.965
+}

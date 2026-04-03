@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0139002808,
+  "input_tokens": 28584,
+  "output_tokens": 1904,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The needle was found and fixed! \n\n**The Problem:** The `UserV2` struct in `/app/app/models.go` was missing three fields from v1: `avatar_url`, `bio`, and `location`. When the v2 API was created by \"copying v1 and adding new fields\", those fields were accidentally deleted during the refactor. This meant clients upgrading from v1 to v2 would silently lose those fields.\n\n**The Fix:** \n1. Added the missing `AvatarURL`, `Bio`, and `Location` fields to the `UserV2` struct\n2. Updated the `ToV2()` conversion function to include these fields when mapping from `InternalUser`\n\n**Test Result:** All tests pass:\n- `PASS: All v1 fields present in v2`\n- `PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)`\n- `PASS: v2 API is backward-compatible with v1`",
+  "timestamp": "2026-04-03T01:18:18Z",
+  "token_cost": 30488,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 115.03
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00217755,
+  "input_tokens": 17091,
+  "output_tokens": 1722,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS",
+  "timestamp": "2026-04-03T02:34:50Z",
+  "token_cost": 18813,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 14.462
+}

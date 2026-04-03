@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.39858499999999997,
+  "input_tokens": 66212,
+  "output_tokens": 2701,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's what the bug was:\n\n**The Needle:** The `UserV2` struct in `/app/app/models.go` was missing three fields that existed in `UserV1`: `avatar_url`, `bio`, and `location`. This meant that when clients upgraded from the v1 API to the v2 API, they would silently lose those fields from responses.\n\n**The Fix:**\n1. Added the three missing fields (`AvatarURL`, `Bio`, `Location`) back to the `UserV2` struct with their proper JSON tags.\n2. Updated the `ToV2()` method on `InternalUser` to populate those three fields when converting to a v2 response.\n\nThis ensures v2 is a proper superset of v1 — all v1 fields are preserved, and the new v2 fields (`department`, `phone_number`, `is_active`) are added on top.",
+  "timestamp": "2026-04-03T01:14:46Z",
+  "token_cost": 68913,
+  "tool_uses": 31,
+  "turns_to_fix": 1,
+  "wall_clock": 129.426
+}

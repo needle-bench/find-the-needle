@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.06854,
+  "input_tokens": 32066,
+  "output_tokens": 2831,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The problem is caused by CsvReader reading the CSV file with ISO-8859-1, which cannot represent many of the accented characters contained in customers.csv.  \nThose bytes are therefore decoded incorrectly, so the report later produced by ReportGenerator no longer contains the original names and cities, making the test script fail.\n\nFix applied\n1. CsvReader.java  \n   • Import java.nio.charset.StandardCharsets.  \n   • Change the constructor to use UTF-8 (which can encode every character in the file):\n\n```java\nimport java.nio.charset.Charset;\nimport java.nio.charset.StandardCharsets;\n…\npublic CsvReader() {\n    // Use UTF-8 which supports all Unicode characters in the CSV\n    this.charset = StandardCharsets.UTF_8;\n}\n```\n\n2. No other files needed changes.\n\nAfter this modification all Unicode characters survive the round-trip.\n\nVerification\nRunning the supplied test script now:\n\n```\n$ ./test.sh\n--- Building ---\n--- Report Output ---\n=== Customer Summary Report ===\n\nTotal customers: 11\n\n--- Customer List ---\n  [1001] John Smith <john.smith@example.com> - New York\n  [1002] Renée Duböis <renee.dubois@example.fr> - Paris\n  [1003] Hans Müller <hans.mueller@example.de> - München\n  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo\n  [1005] María García <maria.garcia@example.es> - Madrid\n  [1006] Søren Kirkegård <soren.k@example.dk> - København\n  [1007] Alice Johnson <alice.j@example.com> - London\n  [1008] François Léger <francois.leger@example.fr> - Lyon\n  [1009] Bob Williams <bob.w@example.com> - Chicago\n  [1010] Zoltán Kovács <zoltan.k@example.hu> - Budapest\n\n--- City Breakdown ---\n  Budapest: 1 customer(s)\n  Chicago: 1 customer(s)\n  København: 1 customer(s)\n  London: 1 customer(s)\n  Lyon: 1 customer(s)\n  Madrid: 1 customer(s)\n  München: 1 customer(s)\n  New York: 1 customer(s)\n  Paris: 1 customer(s)\n  Tokyo: 1 customer(s)\n\n=== End of Report ===\n---------------------\nOK: Found 'Renée Duböis'\nOK: Found 'Hans Müller'\nOK: Found 'María García'\nOK: Found 'Søren Kirkegård'\nOK: Found 'François Léger'\nOK: Found 'Zoltán Kovács'\nOK: Found 'München'\nOK: Found 'København'\nOK: Found 'Budapest'\nOK: Found 'John Smith'\nOK: Found 'Alice Johnson'\nOK: Found 'Bob Williams'\n\nPASS: All customer names preserved correctly\n```\n\nThe “needle” was the wrong character set; switching to UTF-8 fixes the issue and the test passes.",
+  "timestamp": "2026-04-03T01:39:28Z",
+  "token_cost": 34897,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 55.74
+}

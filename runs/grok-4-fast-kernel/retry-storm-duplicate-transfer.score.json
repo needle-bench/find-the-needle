@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0078994,
+  "input_tokens": 25594,
+  "output_tokens": 11737,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS: The bug in `app/processor.py` within the `IntegrityError` handler has been fixed. The test now passes with balances A=500, B=1500, and total=2000.",
+  "timestamp": "2026-04-03T02:15:42Z",
+  "token_cost": 37331,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 91.523
+}

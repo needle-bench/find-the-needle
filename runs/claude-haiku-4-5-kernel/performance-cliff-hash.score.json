@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.033717000000000004,
+  "input_tokens": 27127,
+  "output_tokens": 1318,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The needle is found and fixed!**\n\n## Summary\n\n**The Bug:** In the `Product.java` file, the `hashCode()` method was incorrectly using `category.hashCode()` instead of `sku.hashCode()`.\n\n**The Problem:** Since products are keyed by SKU but the hash was based on category, all products in the same category would collide in the hash map. With only 10 categories and 10,000 items, this resulted in:\n- All items landing in ~10 buckets instead of being distributed across 16,384 buckets\n- Max chain length of 1,000 (severe hash collisions)\n- Poor performance due to long linked lists in buckets\n\n**The Fix:** Changed line 30 in `/app/src/Product.java` from:\n```java\nreturn category.hashCode();\n```\nto:\n```java\nreturn sku.hashCode();\n```\n\n**Verification:** After recompiling and running the test, the hash map now:\n- Distributes 10,000 items across 5,991 non-empty buckets (36.6%)\n- Has a max chain length of only 4 (well under the 50 threshold)\n- Passes the test with \"PASS: Hash map distributes items evenly across buckets\"",
+  "timestamp": "2026-04-03T01:00:23Z",
+  "token_cost": 28445,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 25.707
+}

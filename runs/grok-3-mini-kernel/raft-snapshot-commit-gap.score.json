@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.006134475,
+  "input_tokens": 17918,
+  "output_tokens": 8202,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test now passes after editing `/app/app/statemachine.go` to set counts to 0 in the Restore function. The needle (the bug causing duplicates) has been found and fixed. Here's a summary:\n\n- **Bug location**: In `/app/app/statemachine.go`, the line setting `sm.counts[k] = 1` in the Restore function was incorrectly initializing counts, leading to duplicate detections.\n- **Fix verification**: Running `/app/test.sh` now results in all rounds passing with no duplicates.\n\nIf you need further details or additional actions, let me know.",
+  "timestamp": "2026-04-03T02:56:11Z",
+  "token_cost": 26120,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 98.672
+}

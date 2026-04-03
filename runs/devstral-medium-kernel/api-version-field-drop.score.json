@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-medium-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00423288,
+  "input_tokens": 14420,
+  "output_tokens": 995,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue has been resolved. The `UserV2` struct now includes the missing fields (`avatar_url`, `bio`, and `location`), and the `ToV2` method has been updated to populate these fields. The test script confirms that the v2 API is now backward-compatible with v1.",
+  "timestamp": "2026-04-03T01:12:27Z",
+  "token_cost": 15415,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 16.883
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.04443199999999999,
+  "input_tokens": 36277,
+  "output_tokens": 1631,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **Found and fixed the needle!**\n\n## Summary\n\n**The Vulnerability:** The rate limiter in `ratelimiter.ts` was trusting the `X-Forwarded-For` HTTP header without validation. An attacker could rotate this header value on each request to get a different \"client IP\" for each request, effectively bypassing the rate limiting by creating a fresh rate limit window for every request.\n\n**The Fix:** Changed the `getClientIp()` method to use the actual socket address (`req.socket.remoteAddress`) instead of trusting the `X-Forwarded-For` header. This ensures the rate limiter identifies the real client making the request, making it impossible to bypass via header spoofing.\n\n**Test Results:** All tests now pass:\n- ✅ Rate limiter correctly blocks excess requests without header spoofing (10 passed, 5 blocked)\n- ✅ Rate limiter correctly limits requests even with rotating X-Forwarded-For headers (10 passed, 20 blocked)",
+  "timestamp": "2026-04-03T01:10:02Z",
+  "token_cost": 37908,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 36.788
+}

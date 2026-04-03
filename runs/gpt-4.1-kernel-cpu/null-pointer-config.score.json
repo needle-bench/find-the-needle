@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.05716600000000001,
+  "input_tokens": 51491,
+  "output_tokens": 849,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Here’s the likely bug:\n\n- In `config.json` you have `\"enable_metrics\": true`, but there is **no `\"metrics\": { ... }`** section, and in `Config` struct `Metrics` is `*MetricsConfig` (pointer).\n- In `main.go`, you do:  \n  ```go\n  if cfg.Features.EnableMetrics {\n      resp[\"metrics\"] = cfg.Metrics.Endpoint\n      resp[\"metrics_interval\"] = cfg.Metrics.IntervalSec\n  }\n  ```\n  If `cfg.Features.EnableMetrics == true`, but `cfg.Metrics == nil`, you will get a **nil pointer dereference**.\n\n**The \"needle\" is**:  \nWhen `enable_metrics` is enabled in your config *but no `\"metrics\"` section is provided*, the server will panic with a nil pointer.\n\n# How to Fix\n\nIn `main.go`, you should check that `cfg.Metrics != nil` before accessing `cfg.Metrics.Endpoint` or `cfg.Metrics.IntervalSec`.\n\n**Replace:**\n```go\nif cfg.Features.EnableMetrics {\n    resp[\"metrics\"] = cfg.Metrics.Endpoint\n    resp[\"metrics_interval\"] = cfg.Metrics.IntervalSec\n}\n```\n**With:**\n```go\nif cfg.Features.EnableMetrics && cfg.Metrics != nil {\n    resp[\"metrics\"] = cfg.Metrics.Endpoint\n    resp[\"metrics_interval\"] = cfg.Metrics.IntervalSec\n}\n```\n\nDo you want me to make this edit and run the test script?",
+  "timestamp": "2026-04-03T01:35:06Z",
+  "token_cost": 52340,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 30.728
+}

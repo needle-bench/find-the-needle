@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8658,
+  "output_tokens": 2796,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 3 rounds pass. Here's a summary of the two bugs I found and fixed:\n\n## Bug 1: Missing commit index advancement in `handleHeartbeat` (raft/node.go)\n\nThe `handleHeartbeat` method appended piggybacked log entries from the leader but **never advanced the follower's commit index** based on the leader's commit index (`msg.Index`). This meant that after a partition healed, the formerly-isolated follower would receive the entries via heartbeats but never commit/apply them to its KV state machine, resulting in stale reads.\n\n**Fix:** Added the same commit index advancement logic that exists in `handleAppendEntries` — taking `min(leaderCommitIndex, lastLogIndex)` and calling `advanceCommitIndex()`.\n\n## Bug 2: Non-linearizable reads in the HTTP handler (handler.go)\n\nThe `handleRead` method used `h.node.Read(key)` which reads directly from local KV state without any consistency guarantees. The node already had a `ReadLinearizable` method that implements a read-index protocol (asking the leader for the current commit index and waiting for the local applied index to catch up).\n\n**Fix:** Changed `h.node.Read(key)` to `h.node.ReadLinearizable(key)` to ensure reads are linearizable.",
+  "timestamp": "2026-04-03T02:08:49Z",
+  "token_cost": 11454,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 77.607
+}

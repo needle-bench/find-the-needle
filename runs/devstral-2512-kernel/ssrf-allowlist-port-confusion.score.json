@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.00452112,
-  "input_tokens": 21814,
-  "output_tokens": 484,
+  "estimated_cost_usd": 0.005365439999999999,
+  "input_tokens": 21759,
+  "output_tokens": 465,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The test script now passes, confirming that the IPv6 loopback addresses `[::1]` and `[0:0:0:0:0:0:0:1]` are correctly blocked. The fix prevents SSRF attacks via IPv6 loopback bypass.",
-  "timestamp": "2026-04-02T04:06:09Z",
-  "token_cost": 22298,
+  "summary": "Perfect! The test now passes. The issue was that the validator was not blocking IPv6 loopback addresses. By adding `::1` and `0:0:0:0:0:0:0:1` to the `BLOCKED_HOSTS` list, the SSRF vulnerability via IPv6 loopback is now fixed.",
+  "timestamp": "2026-04-03T03:27:34Z",
+  "token_cost": 22224,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 11.837
+  "wall_clock": 11.228
 }

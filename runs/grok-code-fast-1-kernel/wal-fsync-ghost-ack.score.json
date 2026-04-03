@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.07480023999999999,
+  "input_tokens": 113183,
+  "output_tokens": 47394,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test now passes, indicating the issue has been fixed. The problem was in `server.go`: the server acknowledged client writes (`+OK`) immediately after appending to the WAL buffer, but before syncing the data to disk. This meant writes could be lost on crash despite being acknowledged.\n\nThe fix added `s.wal.Sync()` in the `handleCommand` function before acknowledging the write, ensuring durability before confirmation.\n\nAdditionally, corrected a bug in the `SimulateCrash` function to properly truncate the WAL.",
+  "timestamp": "2026-04-03T02:49:38Z",
+  "token_cost": 160577,
+  "tool_uses": 82,
+  "turns_to_fix": 1,
+  "wall_clock": 355.229
+}

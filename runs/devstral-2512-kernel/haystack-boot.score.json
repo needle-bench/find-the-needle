@@ -4,15 +4,15 @@
   "benchmark": "haystack-boot",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.01274896,
-  "input_tokens": 62358,
-  "output_tokens": 452,
+  "estimated_cost_usd": 0.0120288,
+  "input_tokens": 50916,
+  "output_tokens": 468,
   "resolved": false,
   "stop_reason": "end_turn",
   "summary": "",
-  "timestamp": "2026-04-02T03:57:39Z",
-  "token_cost": 62810,
+  "timestamp": "2026-04-03T02:08:45Z",
+  "token_cost": 51384,
   "tool_uses": 21,
   "turns_to_fix": 1,
-  "wall_clock": 14.237
+  "wall_clock": 13.448
 }

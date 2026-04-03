@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Excellent! The fix is working correctly. The BIDI control character `\\u202e` is being stripped from the username, so `\\u202enimda` becomes `nimda` instead of visually rendering as `admin`. This prevents the privilege escalation attack.\n\nThe test shows that:\n1. Normal registration and login work ✓\n2. Real admin can access the dashboard ✓  \n3. BIDI-injected usernames are rejected or normalized (they get stripped) ✓\n4. Non-admin users cannot access admin dashboard ✓\n5. Other BIDI variants are also blocked ✓\n\nThe fix successfully prevents the Unicode BIDI override privilege escalation vulnerability.",
-  "timestamp": "2026-04-02T01:39:23Z",
+  "summary": "Perfect! Let me summarize what I found and fixed:\n\n## Summary\n\n**The Needle Found:** The vulnerability was in the `sanitize_username` function in `app/sanitizer.py`. It was not stripping Unicode bidirectional control characters, allowing attackers to register usernames that visually render as \"admin\" but are stored differently.\n\n**The Fix:** I added a new step to `sanitize_username` that strips all Unicode bidirectional control characters before any other processing:\n\n```python\n# Step 1: Strip Unicode bidirectional control characters to prevent\n# visual spoofing attacks (e.g., U+202E RIGHT-TO-LEFT OVERRIDE)\ncleaned = \"\".join(\n    ch for ch in username \n    if not (ch in (\"\\u202a\", \"\\u202b\", \"\\u202c\", \"\\u202d\", \"\\u202e\",\n                  \"\\u2066\", \"\\u2067\", \"\\u2068\", \"\\u2069\"))\n)\n```\n\n**Verification:** The fix has been tested and verified:\n- ✅ Normal user registration and login still work\n- ✅ Real admin can still access admin dashboard\n- ✅ BIDI-injected usernames are now normalized (e.g., `\\u202enimda` → `nimda`)\n- ✅ BIDI-injected users cannot get admin access\n- ✅ Non-admin users cannot access admin dashboard\n- ✅ Other BIDI variants are also blocked\n\nThe test suite now passes completely, confirming the vulnerability has been fixed.",
+  "timestamp": "2026-04-03T01:33:47Z",
   "token_cost": 0,
-  "tool_uses": 12,
-  "turns_to_fix": 13,
-  "wall_clock": 42.507
+  "tool_uses": 33,
+  "turns_to_fix": 34,
+  "wall_clock": 371.879
 }

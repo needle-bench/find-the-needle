@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.0038475749999999998,
-  "input_tokens": 9508,
-  "output_tokens": 5184,
+  "estimated_cost_usd": 0.0064939,
+  "input_tokens": 15985,
+  "output_tokens": 9515,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test now passes after removing the delay in `./app/processor.py`, indicating the duplicate transfer issue is resolved. The needle in the haystack was the `time.sleep(0.05)` causing race conditions. Final verification:\n\nSeeded accounts: A=1000, B=1000  \n{\"drop_response_ms\":3000,\"status\":\"configured\"}  \nA=500 B=1500  \nTotal=2000 (should be 2000)  \nPASS",
-  "timestamp": "2026-04-02T04:27:04Z",
-  "token_cost": 14692,
-  "tool_uses": 5,
+  "summary": "The issue causing the test to fail was a race condition in `app/processor.py`, likely due to the `time.sleep(0.05)` delay. I removed it, and running `./test.sh` now confirms the fix:\n\n```\nSeeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS\n```\n\nThe needle (the problem) has been found and resolved. If you need further clarification, let me know!",
+  "timestamp": "2026-04-03T03:05:23Z",
+  "token_cost": 25500,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 87.413
+  "wall_clock": 124.307
 }

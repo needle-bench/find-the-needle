@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.036424,
+  "input_tokens": 14684,
+  "output_tokens": 1146,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The \"needle\" bug was that inventory adjustments allowed negative quantities, which should not be possible. \n\n**Fixes applied:**\n- Updated `Inventory.adjustQuantity()` so it does not allow inventory counts to go negative—if an adjustment would make it negative, the operation is not carried out.\n- Updated the route handler in `routes.ts` to return a 400 error if a requested adjustment would result in a negative inventory.\n\n**Result:**  \nAfter these fixes, running `test.sh` now passes all tests:\n```\nPASS: Input validation correctly prevents impossible inventory states\n```\n\nThe bug is fixed!",
+  "timestamp": "2026-04-03T01:32:21Z",
+  "token_cost": 15830,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 24.217
+}

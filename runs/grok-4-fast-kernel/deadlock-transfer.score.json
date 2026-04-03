@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0059662000000000005,
+  "input_tokens": 35369,
+  "output_tokens": 7107,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed the deadlock bug in `/app/app/TransferService.java` by ensuring locks are always acquired in a consistent order (lower ID first) to prevent circular waits during opposite-direction transfers.**  \n**Verified by running `/app/test.sh`, which passed with no deadlocks or balance issues.**",
+  "timestamp": "2026-04-03T01:25:23Z",
+  "token_cost": 42476,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 44.365
+}

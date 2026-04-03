@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0061452500000000005,
+  "input_tokens": 27379,
+  "output_tokens": 6579,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS: All code generation tests passed",
+  "timestamp": "2026-04-03T01:35:33Z",
+  "token_cost": 33958,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 60.415
+}

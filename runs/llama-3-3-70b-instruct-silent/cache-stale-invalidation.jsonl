@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:21:48Z", "benchmark": "cache-stale-invalidation", "model": "llama-3-3-70b-instruct", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 304, "tokens_out": 24, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 341, "tokens_out": 87, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:21:53Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8572,
+  "output_tokens": 1129,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **Found the needle and fixed it!**\n\n## Summary\n\n**The Problem:** Character encoding mismatch in CsvReader.java\n- The CSV file contains international characters encoded in UTF-8\n- CsvReader was reading the file using ISO-8859-1 (Latin-1) encoding\n- This caused non-ASCII characters to be corrupted during reading\n- Even though ReportGenerator correctly wrote UTF-8, the damage was already done\n\n**The Fix:** Changed CsvReader.java to use UTF-8 charset instead of ISO-8859-1\n\n**Result:** All 12 checks passed! All customer names with international characters (Renée Duböis, Hans Müller, María García, Søren Kirkegård, François Léger, Zoltán Kovács, München, København, Budapest) are now correctly preserved in the report output.",
+  "timestamp": "2026-04-03T00:14:55Z",
+  "token_cost": 9701,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 15.108
+}

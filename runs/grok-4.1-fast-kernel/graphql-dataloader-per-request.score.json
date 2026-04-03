@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.04008485,
+  "input_tokens": 241046,
+  "output_tokens": 38213,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The test.sh suite now passes completely (functional + performance tests). The bug was the classic DataLoader misuse: loaders created *per-resolver* instead of *per-request* in context, disabling batching and causing N+1 queries.\n\n**Changes:**\n- `context.ts`: Added `loaders: createLoaders(db)` to `GqlContext`; updated interface.\n- `userResolver.ts`: Use `ctx.loaders.userLoader.load(args.id)` and `ctx.loaders.postsByAuthorLoader.load(user.id)`.\n- `postResolver.ts`: Use `ctx.loaders.userLoader.load(post.author_id)` for `postAuthor`.\n\nRecompile + test confirmed: nested \"100 users + posts\" query now uses **2 DB queries** (vs. 100+ before). 🎯",
+  "timestamp": "2026-04-03T01:49:41Z",
+  "token_cost": 279259,
+  "tool_uses": 69,
+  "turns_to_fix": 1,
+  "wall_clock": 277.437
+}

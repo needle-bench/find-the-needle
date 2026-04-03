@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0198743104,
+  "input_tokens": 42268,
+  "output_tokens": 2566,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. The bug was in `/app/src/codegen.rs` in the `generate_getter` function. For `Ref` field types, the body was returning a reference (`&self.{name}`) but the return type was missing the reference symbol, returning just the owned type (e.g., `Company`).\n\nThe fix was simple - change this:\n```rust\nformat!(\n    \"    pub fn {}(&self) -> {} {{\\n        &self.{}\\n    }}\\n\\n\",\n    name, type_name, name\n)\n```\n\nto this:\n```rust\nformat!(\n    \"    pub fn {}(&self) -> &{} {{\\n        &self.{}\\n    }}\\n\\n\",\n    name, type_name, name\n)\n```\n\nNow the generated code correctly shows `pub fn address(&self) -> &Address` which matches the body returning `&self.address`.",
+  "timestamp": "2026-04-03T01:35:47Z",
+  "token_cost": 44834,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 141.639
+}

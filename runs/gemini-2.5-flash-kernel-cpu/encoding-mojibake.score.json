@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8523,
+  "output_tokens": 571,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script ran successfully, and all customer names, including those with international characters, were preserved correctly. The test output confirms that the fix for character encoding was successful.\n\nThe \"needle\" was the incorrect character encoding (`ISO-8859-1`) in `CsvReader.java` which was incompatible with international customer names. Changing it to `UTF-8` resolved the issue.",
+  "timestamp": "2026-04-03T01:22:40Z",
+  "token_cost": 9094,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 8.728
+}

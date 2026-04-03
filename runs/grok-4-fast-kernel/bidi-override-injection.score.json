@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.07724510000000001,
-  "input_tokens": 323818,
-  "output_tokens": 104889,
+  "estimated_cost_usd": 0.00497605,
+  "input_tokens": 29662,
+  "output_tokens": 5359,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle is a Unicode BIDI override privilege escalation vulnerability in `app/auth.py`. An attacker can register with username `\\u202enimda` (which visually renders as \"admin\" due to RIGHT-TO-LEFT OVERRIDE at U+202E), but is stored with the BIDI character intact. The `check_admin_access` function then incorrectly uses `_render_display_name` (visual rendering) instead of the raw stored username to check against `ADMIN_USERS`, granting admin privileges.\n\n### Fix\n1. In `app/sanitizer.py`, strip BIDI control characters (U+202A–U+202E) from usernames after HTML escaping:\n   ```\n   # After: cleaned = html.escape(username, quote=True)\n   cleaned = re.sub(r\"[\\u202A-\\u202E]\", \"\", cleaned)\n   ```\n\n2. In `app/server.py` (login route), sanitize incoming username before calling `login_user` (similar to registration):\n   ```\n   username = body.get(\"username\", \"\")\n   password = body.get(\"password\", \"\")\n\n   try:\n       clean_username = sanitize_username(username)\n       token = login_user(clean_username, password)\n   except ValueError as e:\n       return jsonify({\"error\": str(e)}), 401\n   ```\n\n3. In `app/auth.py`, fix `check_admin_access` to compare the raw stored `username` (not rendered `display_name`) against `ADMIN_USERS`:\n   ```\n   def check_admin_access(token: str) -> tuple[bool, str]:\n       session = get_session(token)\n       if not session:\n           return False, \"invalid session\"\n\n       username = session[\"username\"]\n\n       # Use raw stored username, not rendered display name\n       if username in ADMIN_USERS:\n           return True, \"admin access granted\"\n\n       return False, f\"user '{username}' is not an admin\"\n   ```\n\nWith these changes, `test.sh` passes (BIDI usernames are normalized to \"nimda\" on registration/login, stored without controls, and correctly denied admin access). No flag file found; the vulnerability itself is the \"needle\".",
-  "timestamp": "2026-04-02T03:31:41Z",
-  "token_cost": 428707,
-  "tool_uses": 50,
+  "summary": "**Fix applied successfully!** Added BIDI control character stripping to `app/sanitizer.py` in `sanitize_username()`. The test suite now passes fully with no privilege escalation.",
+  "timestamp": "2026-04-03T01:22:17Z",
+  "token_cost": 35021,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 848.933
+  "wall_clock": 41.611
 }

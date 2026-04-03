@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.03443076,
+  "input_tokens": 47481,
+  "output_tokens": 21784,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle is now patched. Running `test.sh` confirms the fix blocks IPv6 loopback SSRF bypasses.\n\n**Needle Details:**  \nThe validator (`app/validator.py`) did not block IPv6 loopback addresses. Added `ipaddress` import + `BLOCKED_IPV6_RANGES` list including `::1/128`. In `is_url_allowed()`, added IP parsing logic to check IPv6 hosts against these ranges (normalizing expanded forms like `0:0:0:0:0:0:0:1`).\n\n**Test Output:**\n```\nPreflight OK: internal service reachable on both IPv4 and IPv6\nPASS: health endpoint OK\nPASS: 127.0.0.1 correctly blocked\nPASS: IPv6 loopback [::1] correctly blocked\nPASS: expanded IPv6 loopback correctly blocked\nPASS: AWS metadata IP correctly blocked\nPASS\n```",
+  "timestamp": "2026-04-03T02:35:57Z",
+  "token_cost": 69265,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 137.739
+}

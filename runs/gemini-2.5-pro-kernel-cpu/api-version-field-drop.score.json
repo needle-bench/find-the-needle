@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9703,
+  "output_tokens": 977,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: SSE idle timeout: no data for 60s",
+  "summary": "I've added the missing fields to the `UserV2` struct and updated the `ToV2` function. Now, I'll run the `test.sh` script again to verify that my changes have fixed the problem.",
+  "timestamp": "2026-04-03T01:19:39Z",
+  "token_cost": 10680,
+  "tool_uses": 7,
+  "turns_to_fix": 0,
+  "wall_clock": 91.211
+}

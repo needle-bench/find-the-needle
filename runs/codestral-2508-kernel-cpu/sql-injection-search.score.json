@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 1070,
+  "output_tokens": 166,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test results indicate that there are SQL injection vulnerabilities in the application. Specifically:\n\n1. **Normal Search for 'Mouse'**: The search returned 1 result, which is expected.\n2. **SQL Injection UNION Attack**: The search returned 13 results, indicating that the UNION attack was successful, and data from the users table was leaked.\n3. **SQL Injection Boolean Attack ('OR 1=1')**: The search returned all 10 products, indicating that the boolean SQL injection bypassed the WHERE clause.\n\nThese results suggest that the application is vulnerable to SQL injection attacks, which could potentially allow an attacker to access sensitive data or manipulate the database. It is recommended to implement proper input validation and use parameterized queries to prevent such vulnerabilities.",
+  "timestamp": "2026-04-03T02:48:09Z",
+  "token_cost": 1236,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 5.561
+}

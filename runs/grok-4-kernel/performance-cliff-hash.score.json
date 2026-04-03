@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.018248999999999998,
+  "input_tokens": 4208,
+  "output_tokens": 939,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 32\ndrwxr-xr-x 1 root root  118 Mar  9 02:45 .\ndrwxr-xr-x 1 root root    8 Apr  3 01:37 ..\ndrwxr-xr-x 1 root root   18 Mar 20 02:50 cache\ndrwxr-xr-x 1 root root   18 Mar 20 16:02 common\ndrwxr-xr-x 1 root root   18 Mar 20 15:50 data\ndrwxr-xr-x 1 root root   18 Mar 20 15:50 hash\ndrwxr-xr-x 1 root root   18 Mar 20 15:50 io\ndrwxr-xr-x 1 root root   18 Mar 20 16:01 map\ndrwxr-xr-x 1 root root   18 Mar 20 15:50 perf\ndrwxr-xr-x 1 root root   18 Mar 20 15:50 sorting\ndrwxr-xr-x 1 root root   18 Mar 20 16:02 test",
+  "timestamp": "2026-04-03T01:37:48Z",
+  "token_cost": 5147,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 20.28
+}

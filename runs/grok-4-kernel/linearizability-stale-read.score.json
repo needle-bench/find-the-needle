@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0997365,
+  "input_tokens": 38455,
+  "output_tokens": 3285,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: // handleAppendEntries processes a replication message from the leader.\nfunc (n *Node) handleAppendEntries(msg Msg, electionTimer *time.Timer) {\n\tn.mu.Lock()\n\tn.leader = msg.From\n\tn.role = Follower\n\tn.mu.Unlock()\n\n\telectionTimer.Reset(n.randomElectionTimeout())\n\n\t// Log replication logic\n\t// Reject if we have a newer term\n\tn.mu.RLock()\n\tmyTerm := n.term\n\tn.mu.RUnlock()\n\tif myTerm > msg.Term {\n\t\tn.transport.Send(Msg{\n\t\t\tType:    MsgAppendResp,\n\t\t\tFrom:    n.ID,\n\t\t\tTo:      msg.From,\n\t\t\tSuccess: false,\n\t\t\tTerm:    myTerm,\n\t\t})\n\t\treturn\n\t}\n\n\t// Check if prevLogIndex/prevLogTerm match\n\tprev, ok := n.log.Get(msg.PrevLogIndex)",
+  "timestamp": "2026-04-03T01:31:33Z",
+  "token_cost": 41740,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 64.838
+}

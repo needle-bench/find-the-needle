@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0013299800000000001,
+  "input_tokens": 21119,
+  "output_tokens": 1512,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script ran successfully, and all tests passed:\n\n- Direct access to `/api/users` without authentication was rejected (HTTP 401).\n- Direct access to `/api/users` with valid authentication worked (HTTP 200).\n- The double-slash bypass (`//api/admin`) was correctly blocked (HTTP 401).\n- The path traversal (`/health/../api/data`) was correctly blocked (HTTP 401).\n- The `/api/admin` endpoint contains sensitive data when accessed with valid authentication.\n\nThe fix was successful, and the authentication middleware now correctly protects all API routes, even against path manipulation attempts.",
+  "timestamp": "2026-04-03T01:26:58Z",
+  "token_cost": 22631,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 13.584
+}

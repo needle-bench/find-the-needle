@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.18218899999999996,
+  "input_tokens": 170559,
+  "output_tokens": 2326,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉\n\n## Summary\n\n**Found the needle!** The bug was in the `generate_getter` function in `/app/src/codegen.rs`, specifically in the handling of `FieldType::Ref` fields.\n\n### The Problem\nWhen generating getter methods for fields that reference other structs (e.g., `company: Ref(\"Company\")`), the code generator was producing a **type mismatch**:\n- **Return type signature**: `-> Company` (owned type)\n- **Actual return value**: `&self.company` (reference)\n\nThis mismatch is subtle for single-level access due to Rust's auto-deref, but breaks chained accessor patterns like `obj.company().address()`.\n\n### The Fix\nChanged line 69 in `/app/src/codegen.rs` from:\n```rust\nformat!(\n    \"    pub fn {}(&self) -> {} {{\\n        &self.{}\\n    }}\\n\\n\",\n    name, type_name, name\n)\n```\n\nTo:\n```rust\nformat!(\n    \"    pub fn {}(&self) -> &{} {{\\n        &self.{}\\n    }}\\n\\n\",\n    name, type_name, name\n)\n```\n\nThis adds the `&` prefix to the return type, so the signature correctly matches the reference being returned:\n- **Before**: `pub fn company(&self) -> Company { &self.company }`\n- **After**: `pub fn company(&self) -> &Company { &self.company }` ✓\n\nAll tests now pass! ✅",
+  "timestamp": "2026-04-03T00:06:47Z",
+  "token_cost": 172885,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 50.106
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-native",
+  "arm": "native",
+  "benchmark": "deadlock-transfer",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.1089087,
+  "input_tokens": 94942,
+  "output_tokens": 1351,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Tests pass. The fix enforces a **consistent lock ordering** by always acquiring the lock for the lexicographically smaller account ID first. This breaks the circular wait condition — both `A→B` and `B→A` transfers will now always lock `A` before `B`, eliminating the deadlock.",
+  "timestamp": "2026-04-03T01:20:50Z",
+  "token_cost": 96293,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 26.891
+}

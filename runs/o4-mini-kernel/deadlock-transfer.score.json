@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.05479319999999999,
+  "input_tokens": 49736,
+  "output_tokens": 7219,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I fixed the deadlock by ordering the account locks consistently based on account IDs. Transfers now acquire the locks in a global order, preventing circular wait. All tests pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-03T01:22:20Z",
+  "token_cost": 56955,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 61.277
+}

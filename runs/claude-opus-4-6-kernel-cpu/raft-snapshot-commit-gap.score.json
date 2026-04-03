@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9040,
+  "output_tokens": 2232,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix addresses the two omissions in the `InstallSnapshot` RPC handler described in the README:\n\n### Bug Analysis\n\nThe `InstallSnapshot` handler had two omissions that interacted with the crash recovery path:\n\n1. **Missing `commitIndex` update**: The handler updated `lastApplied` to `snap.LastIncludedIndex` but never updated `commitIndex`. This is the \"another piece of volatile state\" mentioned in the README. After installing a snapshot at index 10, `lastApplied=10` but `commitIndex=0`.\n\n2. **Missing log compaction**: When the snapshot covered entries already in the log (the `else` branch — snapshot index ≤ last log index), the old log entries were kept intact. These are the \"superseded data structures\" mentioned in the README.\n\n### How the bug manifested\n\nAfter `Restart()`:\n- `savedCommitIndex = 0` (never updated by InstallSnapshot)\n- Snapshot restored state machine, `snapshotAppliedTo = 10`\n- Since `savedCommitIndex (0) ≤ snapshotAppliedTo (10)`, the recovery code entered the `else` branch\n- `lastApplied` was dragged back down to `savedCommitIndex = 0`\n- When the new leader sent AppendEntries with `leaderCommit=13`, entries 1–10 (still present in the uncompacted log) were re-applied to the state machine, causing duplicates\n\n### Fix\n- Added `n.commitIndex = snap.LastIncludedIndex` when the snapshot index exceeds the current commitIndex\n- Added `n.raftLog.CompactUpTo(snap.LastIncludedIndex)` to discard log entries already baked into the snapshot",
+  "timestamp": "2026-04-03T02:51:05Z",
+  "token_cost": 11272,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 58.872
+}

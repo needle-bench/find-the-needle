@@ -6,13 +6,13 @@
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
   "input_tokens": 9941,
-  "output_tokens": 1267,
+  "output_tokens": 1235,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Needle (Bug):** The `getClientIp` method in `/app/app/ratelimiter.ts` was blindly trusting the `X-Forwarded-For` HTTP header to determine the client's IP address. This is a **rate limit bypass vulnerability** — an attacker could simply rotate the `X-Forwarded-For` header value on each request (e.g., `10.0.0.1`, `10.0.0.2`, `10.0.0.3`, ...) to get a fresh rate limit window for every request, completely defeating the rate limiter.\n\n**The Fix:** Removed the `X-Forwarded-For` header trust logic and changed `getClientIp` to always use the actual TCP socket remote address (`req.socket.remoteAddress`). This ensures the rate limiter tracks the real client IP regardless of any spoofed headers.",
-  "timestamp": "2026-04-02T02:36:23Z",
-  "token_cost": 11208,
+  "summary": "All tests pass. \n\n**The needle:** The `getClientIp` method in `/app/app/ratelimiter.ts` was blindly trusting the `X-Forwarded-For` HTTP header to determine the client's IP address. An attacker could rotate this header value on every request (e.g., `X-Forwarded-For: 10.0.0.1`, `10.0.0.2`, etc.), causing each request to be treated as coming from a different client — effectively bypassing the rate limiter entirely.\n\n**The fix:** Removed the `X-Forwarded-For` header trust and instead always use `req.socket.remoteAddress` to identify clients by their actual connection IP address. This ensures that spoofed headers cannot be used to circumvent rate limiting.",
+  "timestamp": "2026-04-03T02:54:51Z",
+  "token_cost": 11176,
   "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 37.84
+  "wall_clock": 36.85
 }

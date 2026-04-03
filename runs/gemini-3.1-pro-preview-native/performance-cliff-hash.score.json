@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 23781,
+  "output_tokens": 571,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have fixed the hash collision bug in `src/Product.java`. \n\nThe `hashCode()` method was originally using the `category` string to generate its hash. Since there were only 10 unique categories for 10,000 items, this caused massive collisions and forced the `ProductCache` into a state of O(n) lookups across long chain entries.\n\nI updated `hashCode()` to use the unique `sku` instead:\n\n```java\n    @Override\n    public int hashCode() {\n        return sku.hashCode();\n    }\n```\n\nThis properly distributes the entries across the buckets. I have rebuilt the classes and run `test.sh`, which now successfully passes with the max chain length drastically reduced from ~1000 down to 4.",
+  "timestamp": "2026-04-03T05:14:18Z",
+  "token_cost": 24352,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 40.557
+}

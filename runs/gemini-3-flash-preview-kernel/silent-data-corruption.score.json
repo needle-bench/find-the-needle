@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0628755,
+  "input_tokens": 120585,
+  "output_tokens": 861,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T04:28:13Z",
+  "token_cost": 121446,
+  "tool_uses": 41,
+  "turns_to_fix": 1,
+  "wall_clock": 50.732
+}

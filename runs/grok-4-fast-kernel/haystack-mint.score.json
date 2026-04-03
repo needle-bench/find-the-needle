@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0044411,
+  "input_tokens": 25639,
+  "output_tokens": 5601,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle is found and the fix is verified. test.sh now passes with 5/5.",
+  "timestamp": "2026-04-03T01:33:43Z",
+  "token_cost": 31240,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 41.839
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 51925,
+  "output_tokens": 807,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I will check if `hs` is a valid command.\n",
+  "timestamp": "2026-04-03T01:46:21Z",
+  "token_cost": 52732,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 40.579
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.1148864,
+  "input_tokens": 149277,
+  "output_tokens": 4157,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "## Solution Found: TLS Certificate Chain Ordering Bug\n\nThe issue was in the Dockerfile where the certificate chain (`/certs/chain.pem`) was assembled in the wrong order. According to **RFC 5246 Section 7.4.2**, TLS servers must send certificates in order:\n\n1. **Leaf certificate** (server certificate) - `CN=localhost`\n2. **Intermediate CA certificate** - `CN=Test Intermediate CA` (issuer of leaf)\n3. **Root CA certificate** - `CN=Test Root CA` (issuer of intermediate)\n\nHowever, the Dockerfile was concatenating them as: **leaf → root → intermediate**, which violates the RFC specification.\n\n### The Fix:\n\nChanged the certificate concatenation order in the Dockerfile from:\n```dockerfile\ncat /certs/leaf.crt /certs/root.crt /certs/intermediate.crt > /certs/chain.pem\n```\n\nTo the correct RFC 5246 order:\n```dockerfile\ncat /certs/leaf.crt /certs/intermediate.crt /certs/root.crt > /certs/chain.pem\n```\n\n### Impact:\n- **Lenient clients** (curl, browsers, Go's default TLS) were able to connect because they build a certificate graph and can handle any order\n- **Strict validators** that process certificates sequentially (per RFC 5246) would reject the out-of-order chain\n- The test script verified that after the fix, the chain is correctly ordered and passes all validation tests\n\nThe fix ensures that the TLS server presents certificates in the proper hierarchical order required by the TLS specification.",
+  "timestamp": "2026-04-03T07:33:33Z",
+  "token_cost": 153434,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 201.628
+}

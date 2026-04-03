@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.09323700000000001,
+  "input_tokens": 25174,
+  "output_tokens": 1181,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. ✅\n\n---\n\n### What the needle was\n\n**File:** `/app/app/search.py` — the `search()` method\n\n**The bug:** SQL injection vulnerability via **string interpolation** (f-strings) in SQL queries:\n\n```python\n# VULNERABLE — user input inserted directly into SQL string\nsql = f\"SELECT ... WHERE name LIKE '%{query}%'\"\nsql += f\" AND category = '{category}'\"\nreturn self.db.execute_raw(sql)\n```\n\n**The fix:** Use **parameterized queries** (placeholders `?`) so user input is never interpreted as SQL:\n\n```python\n# SAFE — user input passed as a parameter, never part of the SQL string\nsql = \"SELECT ... WHERE name LIKE ?\"\nparams = [f'%{query}%']\nreturn self.db.execute(sql, params)\n```\n\nThis prevented both attack vectors tested:\n- **UNION injection** (`' UNION SELECT ... FROM users--`) — which could leak password hashes and API keys from the `users` table\n- **Boolean injection** (`' OR '1'='1`) — which bypassed the `WHERE` clause to return all products",
+  "timestamp": "2026-04-03T02:31:45Z",
+  "token_cost": 26355,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 33.857
+}

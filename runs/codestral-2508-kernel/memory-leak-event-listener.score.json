@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0027093,
-  "input_tokens": 11494,
-  "output_tokens": 331,
+  "estimated_cost_usd": 0.00614154,
+  "input_tokens": 38590,
+  "output_tokens": 911,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The fix has been applied successfully. The listener count is now stable, and no event listener leak is detected.",
-  "timestamp": "2026-04-02T01:39:10Z",
-  "token_cost": 11825,
-  "tool_uses": 6,
+  "summary": "The listener count is now stable at 1 after 500 requests, and no event listener leak is detected. This suggests that the event listeners are no longer being registered per-request and are being removed properly.",
+  "timestamp": "2026-04-03T01:59:53Z",
+  "token_cost": 39501,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 14.109
+  "wall_clock": 30.506
 }

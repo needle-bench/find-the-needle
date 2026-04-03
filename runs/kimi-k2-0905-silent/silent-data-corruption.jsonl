@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:18:39Z", "benchmark": "silent-data-corruption", "model": "kimi-k2-0905", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# silent-data-corruption\n\n## Project\n\nA Rust CLI tool (`fileproc`) that processes files through a transformation pipel"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 306, "tokens_out": 43, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 378, "tokens_out": 14, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 438, "tokens_out": 15, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 475, "tokens_out": 34, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/transform.rs"], "tokens_in": 1089, "tokens_out": 21, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1378, "tokens_out": 12, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-04-01T17:18:46Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

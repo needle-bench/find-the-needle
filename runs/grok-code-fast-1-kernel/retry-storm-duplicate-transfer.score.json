@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.013126620000000002,
+  "input_tokens": 20076,
+  "output_tokens": 8025,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed, confirming the fix for the race condition in the transfer processor. The issue was a race window between debiting the account and checking idempotency (due to the 50ms sleep), allowing concurrent requests with the same idempotency key to execute duplicate transfers.\n\n**Fix Applied:**\n- Wrapped the entire `execute_transfer` function's database operations in a transaction using `BEGIN IMMEDIATE` to acquire an exclusive lock on the database, preventing concurrent access during the sensitive operations.\n- Removed intermediate `conn.commit()` calls to ensure atomicity (commit only happens for successful, new transfers; otherwise, the transaction rolls back on connection close/return).\n- This ensures the debit, sleep, idempotency check, credit, and record insertion are all atomic and isolated, eliminating the race condition while preserving correctness for duplicates and errors.",
+  "timestamp": "2026-04-03T02:20:31Z",
+  "token_cost": 28101,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 66.705
+}

@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:32:57Z", "benchmark": "goroutine-leak-handler", "model": "llama-4-maverick", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/config.go\n/app/app/main.go\n/app/app/middleware.go\n/app/app/worker.go\n\nCurrent test output (test.sh):"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 298, "tokens_out": 661, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:33:22Z", "test_exit": 1, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

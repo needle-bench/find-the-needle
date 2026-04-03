@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0648615,
+  "input_tokens": 13323,
+  "output_tokens": 4983,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the needle and fixed the issue.\n\nThe problem was in `app/CsvReader.java`. The code was reading the `customers.csv` file using the `ISO-8859-1` character set, which does not support the international characters present in the customer names (e.g., \"Renée Duböis\", \"Hans Müller\"). This caused the names to be corrupted when the report was generated.\n\nI corrected the issue by changing the character set to `UTF-8` in `app/CsvReader.java`.\n\nAfter applying the fix, I ran the provided `test.sh` script. The script recompiled the application and verified that all customer names, including those with special characters, were correctly processed and written to the final report. The test passed, confirming the fix.",
+  "timestamp": "2026-04-03T02:04:18Z",
+  "token_cost": 18306,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 90.51
+}

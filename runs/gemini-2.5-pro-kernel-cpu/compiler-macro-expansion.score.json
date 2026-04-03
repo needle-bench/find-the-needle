@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 1131704,
+  "output_tokens": 14059,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I've created a simple test script to isolate the `grep` command. I will now make it executable and then run it.",
+  "timestamp": "2026-04-03T01:54:03Z",
+  "token_cost": 1145763,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 301.465
+}

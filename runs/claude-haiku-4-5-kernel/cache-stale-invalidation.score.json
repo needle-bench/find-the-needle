@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.041073,
+  "input_tokens": 32968,
+  "output_tokens": 1621,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 I found and fixed the needles. Here's a summary:\n\n## The Problem (Needles Found):\nThe test was checking for **cache invalidation after writes**. The server had two cache invalidation bugs:\n\n1. **In `_update_product()`**: After updating a product in the store, the cache was never invalidated. This caused subsequent reads to return stale product data until the 5-minute TTL expired.\n\n2. **In `_create_product()`**: After creating a new product, the products list cache was never invalidated. This caused the list endpoint to return stale data missing the newly created product.\n\n## The Fix:\nI added cache invalidation calls to both methods:\n\n- **`_update_product()`**: Now calls `cache.delete(f'products:{product_id}')` to clear the individual product cache and `cache.delete('products:list')` to clear the list cache.\n\n- **`_create_product()`**: Now calls `cache.delete('products:list')` to clear the list cache so new products are immediately visible.\n\nThe test now passes with all checks passing:\n- ✅ Product name correctly updated\n- ✅ Product list correctly shows new items\n- ✅ Cache correctly invalidated after writes",
+  "timestamp": "2026-04-03T00:04:01Z",
+  "token_cost": 34589,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 29.803
+}

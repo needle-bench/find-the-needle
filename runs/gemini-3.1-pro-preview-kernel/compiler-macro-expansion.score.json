@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.41785640000000007,
+  "input_tokens": 384460,
+  "output_tokens": 3235,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T03:00:19Z",
+  "token_cost": 387695,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 217.428
+}

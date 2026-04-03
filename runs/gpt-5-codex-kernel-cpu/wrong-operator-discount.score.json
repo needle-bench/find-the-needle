@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.013618,
+  "input_tokens": 16840,
+  "output_tokens": 452,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Identified incorrect discount calculation in `pricing.py` (discount was calculated via addition instead of multiplication).\n- Corrected `calculate_discount_amount` to use `subtotal * discount_percent / 100`.\n\nTests:\n- `./test.sh`",
+  "timestamp": "2026-04-03T02:37:36Z",
+  "token_cost": 17292,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 16.09
+}

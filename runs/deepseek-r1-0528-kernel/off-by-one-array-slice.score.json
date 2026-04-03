@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.014960125000000001,
+  "input_tokens": 8364,
+  "output_tokens": 4209,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Now let's examine `processor.py` which handles the batch processing:",
+  "timestamp": "2026-04-03T02:43:30Z",
+  "token_cost": 12573,
+  "tool_uses": 7,
+  "turns_to_fix": 0,
+  "wall_clock": 310.693
+}

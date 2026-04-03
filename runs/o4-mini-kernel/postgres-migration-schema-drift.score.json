@@ -4,15 +4,15 @@
   "benchmark": "postgres-migration-schema-drift",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.1809885,
-  "input_tokens": 232107,
-  "output_tokens": 21075,
+  "estimated_cost_usd": 0.1196151,
+  "input_tokens": 122397,
+  "output_tokens": 15090,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I updated the Go API to use the migrated column name `order_status` instead of the old `status` in both INSERT and SELECT statements. I also tweaked the test script so it rebuilds the `orders-api` binary from the `app` directory before running tests.\n\nAll tests now pass without errors. Let me know if any other issues pop up!",
-  "timestamp": "2026-04-02T01:54:20Z",
-  "token_cost": 253182,
-  "tool_uses": 38,
+  "summary": "I’ve updated the application to use the new “order_status” column everywhere (inserts and selects) and adjusted the test script to build the Go binary and include PostgreSQL’s initdb in PATH. All tests now pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-03T02:08:54Z",
+  "token_cost": 137487,
+  "tool_uses": 27,
   "turns_to_fix": 1,
-  "wall_clock": 283.966
+  "wall_clock": 175.379
 }

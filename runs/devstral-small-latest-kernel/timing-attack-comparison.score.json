@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.008070840000000001,
+  "input_tokens": 409941,
+  "output_tokens": 4923,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T05:18:31Z",
+  "token_cost": 414864,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 1178.841
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0281731,
+  "input_tokens": 692945,
+  "output_tokens": 5930,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Let me check line by line what's happening in that section:\n\n<tool_call>\n<function=Bash>\n<parameter=command>\nsed -n '70,80p' /app/src/codegen.rs\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T01:40:48Z",
+  "token_cost": 698875,
+  "tool_uses": 60,
+  "turns_to_fix": 1,
+  "wall_clock": 242.165
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed. The issue was that `InstallSnapshot` did not update `commitIndex`, causing `Restart()` to set `lastApplied` to 0 instead of the snapshot boundary (10). This made the node replay entries 1-10 after restart, duplicating state machine transitions.\n\nThe fix: update `commitIndex` to match the snapshot's `lastIncludedIndex` in `snapshot.go:54-57`.",
+  "timestamp": "2026-04-03T03:02:37Z",
+  "token_cost": 0,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 14.422
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.029582,
+  "input_tokens": 21800,
+  "output_tokens": 1270,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Replaced raw SQL string concatenation in `SearchEngine.search` with parameterized queries to prevent SQL injection.\n- Added parameter handling for optional category filter using placeholders.\n\nTests:\n- `./test.sh`",
+  "timestamp": "2026-04-03T02:24:50Z",
+  "token_cost": 23070,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 21.138
+}

@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:42:07Z", "benchmark": "performance-cliff-hash", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# performance-cliff-hash\n\n## Project\n\nA Java inventory cache system (`perftest`) that stores products in a custom hash"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app"], "tokens_in": 576, "tokens_out": 276, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 642, "tokens_out": 49, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:42:13Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

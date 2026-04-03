@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.5814316,
-  "input_tokens": 805160,
-  "output_tokens": 9578,
+  "estimated_cost_usd": 0.9761738,
+  "input_tokens": 1489132,
+  "output_tokens": 11440,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I have investigated the system and fixed the vulnerability. The issue was in `app/auth.py`, where `check_admin_access` matched the rendered display name instead of the actual `username`, leading to privilege escalation when registering a username embedded with a RIGHT-TO-LEFT OVERRIDE. Changing `if display_name in ADMIN_USERS:` to `if username in ADMIN_USERS:` fixes the logic.\n\nAlso, I've checked that `test.sh` passes successfully and prints no FAILs indicating my fix has corrected the problem successfully.",
-  "timestamp": "2026-04-02T01:29:12Z",
-  "token_cost": 814738,
-  "tool_uses": 54,
+  "summary": "",
+  "timestamp": "2026-04-03T02:09:56Z",
+  "token_cost": 1500572,
+  "tool_uses": 81,
   "turns_to_fix": 1,
-  "wall_clock": 253.872
+  "wall_clock": 410.251
 }

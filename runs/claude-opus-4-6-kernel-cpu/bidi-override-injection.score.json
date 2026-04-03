@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 6328,
-  "output_tokens": 1815,
+  "input_tokens": 6330,
+  "output_tokens": 2402,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the vulnerability and the fix:\n\n## The Vulnerability: Unicode BIDI Override Privilege Escalation\n\n**The Problem:** The `check_admin_access()` function in `auth.py` was comparing the *visually rendered* form of a username (after applying BIDI Unicode transformations) against the admin allowlist, rather than the stored username. An attacker could register with the username `\\u202enimda` (RIGHT-TO-LEFT OVERRIDE + \"nimda\"), which when visually rendered becomes \"admin\" (the characters are reversed by the BIDI algorithm). This gave the attacker full admin access.\n\n**The Fix (two parts):**\n\n1. **`sanitizer.py`** — Added stripping of Unicode BIDI control characters (category `Cf`) during username sanitization, so usernames containing `U+202E` (RLO), `U+202D` (LRO), `U+202C` (PDF), and similar formatting characters are cleaned before storage.\n\n2. **`auth.py`** — Changed `check_admin_access()` to compare the **stored username** directly against the admin allowlist, instead of first passing it through `_render_display_name()`. Access control decisions should never be based on visual rendering of data.",
-  "timestamp": "2026-04-02T02:22:35Z",
-  "token_cost": 8143,
-  "tool_uses": 14,
+  "summary": "All tests pass. Here's a summary of the vulnerability and the fix:\n\n## The Vulnerability: Unicode BIDI Override Privilege Escalation\n\n**The Problem:** The `check_admin_access()` function in `auth.py` was using `_render_display_name()` to convert the stored username to its visual/rendered form before comparing against the admin allowlist. An attacker could register with the username `\\u202enimda` (RIGHT-TO-LEFT OVERRIDE + \"nimda\"), which visually renders as \"admin\" due to the RTL override reversing the character order. When the auth check rendered this display name, it matched \"admin\" in the allowlist, granting unauthorized admin access.\n\n**The Fix (two layers of defense):**\n\n1. **`auth.py` - `check_admin_access()`**: Changed to compare the **raw stored username** directly against the admin allowlist instead of using the rendered display name. Access control decisions should never be based on visual representations.\n\n2. **`sanitizer.py` - `sanitize_username()`**: Added stripping of Unicode BIDI control characters (U+202E, U+202D, U+202C, etc.) during registration as defense-in-depth, preventing these dangerous characters from being stored in the first place.",
+  "timestamp": "2026-04-03T01:22:29Z",
+  "token_cost": 8732,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 49.08
+  "wall_clock": 69.731
 }

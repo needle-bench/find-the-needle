@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 41376,
+  "output_tokens": 954,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I've identified the root cause of the issue: when a Raft follower receives and applies an `InstallSnapshot` RPC, it needs to ensure that its `commitIndex` is updated to at least the snapshot's `LastIncludedIndex`. Without this, a restart could incorrectly reset the node's `commitIndex` to `0`, resulting in a bug where duplicate log entries get re-applied to the state machine during recovery.\n\nI have updated the `InstallSnapshot` function in `app/snapshot.go` to update the `commitIndex` alongside `lastApplied`:\n```go\n\t// Update lastApplied — the state machine now reflects everything\n\t// up to and including the snapshot's last index.\n\tn.lastApplied = snap.LastIncludedIndex\n\tif snap.LastIncludedIndex > n.commitIndex {\n\t\tn.commitIndex = snap.LastIncludedIndex\n\t}\n```\n\nRunning `./test.sh` now completes with success, confirming the fix prevents the duplicate entries bug:\n```\n=== Raft Snapshot Commit-Gap Test ===\nBuilding...\n--- Round 1 ---\nPASS: All 13 keys present, no duplicate applies\nRound 1: OK\n--- Round 2 ---\nPASS: All 13 keys present, no duplicate applies\nRound 2: OK\n--- Round 3 ---\nPASS: All 13 keys present, no duplicate applies\nRound 3: OK\nPASS: No duplicate state machine transitions across all rounds\n```",
+  "timestamp": "2026-04-03T05:24:18Z",
+  "token_cost": 42330,
+  "tool_uses": 12,
+  "turns_to_fix": 13,
+  "wall_clock": 62.821
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.069499,
+  "input_tokens": 53148,
+  "output_tokens": 2380,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The missing v1 fields in the `UserV2` struct have been restored (`avatar_url`, `bio`, `location`), and `ToV2` now populates them. After running `test.sh`, all compatibility checks pass.",
+  "timestamp": "2026-04-03T01:16:07Z",
+  "token_cost": 55528,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 43.03
+}

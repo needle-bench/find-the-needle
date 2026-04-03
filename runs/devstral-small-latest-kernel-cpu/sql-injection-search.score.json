@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 23326,
+  "output_tokens": 552,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix works. The search endpoint is now protected against SQL injection attacks by using parameterized queries instead of string concatenation.",
+  "timestamp": "2026-04-03T04:55:20Z",
+  "token_cost": 23878,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 12.824
+}

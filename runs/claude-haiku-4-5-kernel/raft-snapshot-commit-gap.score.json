@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.264544,
+  "input_tokens": 249114,
+  "output_tokens": 3086,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The simulation now shows:\n- `[node-3] installing snapshot: lastIncludedIndex=10 lastIncludedTerm=1` \n- `[node-3] restarting node (commitIndex=10, lastApplied=10)` (note commitIndex is now properly set to 10!)\n- `[node-3] recovery complete: commitIndex=10 lastApplied=10`\n- No entries are re-applied\n\n## Summary\n\nI found and fixed the **needle in the haystack**! \n\n**The Bug:** The `InstallSnapshot` function in `/app/app/snapshot.go` was updating `lastApplied` to mark the state machine as having entries applied up to the snapshot boundary, but it **failed to update `commitIndex`**. This caused an inconsistency.\n\nWhen a node crashed and restarted after receiving a snapshot:\n1. `lastApplied` was correctly restored from the snapshot to index 10\n2. But `commitIndex` remained at 0 (never updated during snapshot installation)\n3. During restart/recovery, the code saw `savedCommitIndex (0) <= snapshotAppliedTo (10)` and incorrectly set `lastApplied = savedCommitIndex = 0`\n4. This caused the log entries 1-10 to be re-applied to the state machine, creating duplicates\n\n**The Fix:** Added code to update `commitIndex` in `InstallSnapshot`:\n```go\n// Update commitIndex — entries up to the snapshot boundary are\n// committed (they were committed when the leader took the snapshot).\n// Ensure commitIndex is at least the snapshot boundary.\nif n.commitIndex < snap.LastIncludedIndex {\n    n.commitIndex = snap.LastIncludedIndex\n}\n```\n\nThe test now passes all 3 rounds with no duplicate state machine transitions!",
+  "timestamp": "2026-04-03T01:07:46Z",
+  "token_cost": 252200,
+  "tool_uses": 27,
+  "turns_to_fix": 1,
+  "wall_clock": 59.051
+}

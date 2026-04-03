@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9195,
+  "output_tokens": 1236,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Needle (Bug):** SQL injection vulnerability in `/app/app/search.py`\n\n**The Problem:** The `search` method in `SearchEngine` was building SQL queries by directly interpolating user input via f-strings:\n```python\nsql = f\"SELECT ... WHERE name LIKE '%{query}%'\"\n```\nThis allowed attackers to:\n1. Use `UNION SELECT` to extract data from other tables (like the `users` table containing admin credentials and API keys)\n2. Use boolean injection (`' OR '1'='1`) to bypass the WHERE clause and dump all records\n\n**The Fix:** Replaced the raw string concatenation with parameterized queries using `?` placeholders:\n```python\nsql = \"SELECT ... WHERE name LIKE ?\"\nparams = [f'%{query}%']\n```\nThis ensures user input is treated as data, not as SQL code, preventing all forms of SQL injection.",
+  "timestamp": "2026-04-03T03:15:47Z",
+  "token_cost": 10431,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 29.376
+}

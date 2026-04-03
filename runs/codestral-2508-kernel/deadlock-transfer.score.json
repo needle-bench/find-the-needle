@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00080622,
+  "input_tokens": 2394,
+  "output_tokens": 501,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The problem is that the `Account` class uses a single lock object for all instances, which can lead to deadlocks when multiple threads try to transfer money between accounts in opposite directions. This is because the threads can end up waiting for each other indefinitely, as they each hold a lock on one account while trying to acquire a lock on the other.\n\nTo fix this, you should use a unique lock object for each account. This way, threads transferring money between different pairs of accounts won't block each other, as they'll be using different locks. Here's an example of how you can modify the `Account` class to use a unique lock object for each account:\n\n```java\npublic class Account {\n    private final Object lock = new Object();\n    private double balance;\n\n    public Account(double balance) {\n        this.balance = balance;\n    }\n\n    public void withdraw(double amount) {\n        synchronized (lock) {\n            balance -= amount;\n        }\n    }\n\n    public void deposit(double amount) {\n        synchronized (lock) {\n            balance += amount;\n        }\n    }\n\n    public double getBalance() {\n        synchronized (lock) {\n            return balance;\n        }\n    }\n\n    public Object getLock() {\n        return lock;\n    }\n}\n```\n\nWith this change, the `TransferService` class can safely transfer money between accounts without the risk of deadlock. Here's an example of how you can modify the `TransferService` class to use the unique lock objects:\n\n```java\npublic class TransferService {\n    public void transfer(Account from, Account to, double amount) {\n        Object lock1 = from.getLock();\n        Object lock2 = to.getLock();\n\n        if (lock1.hashCode() > lock2.hashCode()) {\n            synchronized (lock1) {\n                synchronized (lock2) {\n                    from.withdraw(amount);\n                    to.deposit(amount);\n                }\n            }\n        } else {\n            synchronized (lock2) {\n                synchronized (lock1) {\n                    from.withdraw(amount);\n                    to.deposit(amount);\n                }\n            }\n        }\n    }\n}\n```\n\nWith these changes, the `TransferService` class will always acquire the locks in the same order, regardless of the order in which the accounts are passed to the `transfer` method. This will prevent deadlocks from occurring.",
+  "timestamp": "2026-04-03T01:21:25Z",
+  "token_cost": 2895,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 14.739
+}

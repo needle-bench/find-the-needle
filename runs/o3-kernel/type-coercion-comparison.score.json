@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.037744,
-  "input_tokens": 19108,
-  "output_tokens": 1189,
+  "estimated_cost_usd": 0.054574000000000004,
+  "input_tokens": 33995,
+  "output_tokens": 1995,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Fixed the bug causing incorrect rating filtering.\n\nRoot cause:\nmin_rating was being treated as a string, so comparison logic failed (e.g., '4' <= 5 produced ['4',5] in the acceptable list, mismatching product ratings stored as numbers).\n\nFix applied in utils.js:\nConverted min_rating query param to a number using parseInt and guard against NaN.\n\nKey patch (utils.js):\n\nif (searchParams.has('min_rating')) {\n  // Read the minimum rating from query string and convert to number\n  const val = parseInt(searchParams.get('min_rating'), 10);\n  if (!Number.isNaN(val)) {\n    query.minRating = val;\n  }\n}\n\nAll tests now pass: `test.sh` outputs PASS.",
-  "timestamp": "2026-04-02T01:54:18Z",
-  "token_cost": 20297,
-  "tool_uses": 9,
+  "summary": "Fixed the rating filter logic that caused incorrect results.\n\nChanges made:\n1. utils.js  \n   • Parse min_rating as a number with parseInt instead of leaving it a string.\n\n2. filter.js  \n   • Simplified rating filter: directly compare numeric rating (p.rating >= query.minRating) instead of building an array of acceptable values that mixed strings and numbers.  \n   • Removed now-unused buildRatingRange export.\n\nAll tests in test.sh now pass.",
+  "timestamp": "2026-04-03T04:02:23Z",
+  "token_cost": 35990,
+  "tool_uses": 13,
   "turns_to_fix": 1,
-  "wall_clock": 28.745
+  "wall_clock": 45.683
 }

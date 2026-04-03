@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.033408919999999995,
+  "input_tokens": 1804721,
+  "output_tokens": 15983,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The issue is that the `commitIndex` is not being updated correctly when a snapshot is installed. The `commitIndex` should be set to the snapshot's last included index, but it's not being updated in the `InstallSnapshot` method. Let's fix this by updating the `commitIndex` in the `InstallSnapshot` method.",
+  "timestamp": "2026-04-03T04:40:43Z",
+  "token_cost": 1820704,
+  "tool_uses": 81,
+  "turns_to_fix": 1,
+  "wall_clock": 61.713
+}

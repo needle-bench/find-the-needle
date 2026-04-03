@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.055633375,
-  "input_tokens": 20014,
-  "output_tokens": 4049,
+  "estimated_cost_usd": 0.0869,
+  "input_tokens": 18095,
+  "output_tokens": 7273,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I have found the needle and fixed the vulnerability. The `test.sh` script now passes, indicating that the SSRF vulnerability has been addressed. The issue was in `app/validator.py`, where the `BLOCKED_HOSTS` list was missing the IPv6 loopback addresses. I have added `::1` and `0:0:0:0:0:0:0:1` to the blocklist to prevent SSRF attacks via IPv6.",
-  "timestamp": "2026-04-02T02:12:30Z",
-  "token_cost": 24063,
+  "summary": "The vulnerability was a Server-Side Request Forgery (SSRF) issue in the `app/validator.py` file. The `BLOCKED_HOSTS` list was missing IPv6 loopback addresses, which allowed requests to internal services using those addresses.\n\nI have patched the file by adding `\"::1\"` and `\"0:0:0:0:0:0:0:1\"` to the `BLOCKED_HOSTS` list. The `test.sh` script now passes, confirming that the vulnerability has been fixed.",
+  "timestamp": "2026-04-03T05:21:34Z",
+  "token_cost": 25368,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 78.052
+  "wall_clock": 88.894
 }

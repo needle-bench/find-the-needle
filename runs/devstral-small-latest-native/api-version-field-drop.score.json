@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "api-version-field-drop",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is working. The v2 API now includes all the fields from v1 (`avatar_url`, `bio`, and `location`) plus the new v2 fields (`department`, `phone_number`, and `is_active`). The test passes, confirming backward compatibility.",
+  "timestamp": "2026-04-03T01:12:16Z",
+  "token_cost": 0,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 26.022
+}

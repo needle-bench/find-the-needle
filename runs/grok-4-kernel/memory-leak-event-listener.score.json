@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.014592,
-  "input_tokens": 3848,
-  "output_tokens": 748,
+  "estimated_cost_usd": 0.01972875,
+  "input_tokens": 5439,
+  "output_tokens": 977,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: total 24\ndrwxr-xr-x 1 root root   94 Mar  9 02:37 .\ndrwxr-xr-x 1 root root    8 Apr  2 01:39 ..\ndrwxr-xr-x 1 root root   10 Mar  9 02:37 __pycache__\n-rw-r--r-- 1 root root 1857 Mar  9 02:37 handler.py\n-rw-r--r-- 1 root root  511 Mar  9 02:37 pyproject.toml\n-rw-r--r-- 1 root root  324 Mar  9 02:37 requirements.txt\n-rw-r--r-- 1 root root 3217 Mar  9 02:37 server.py\ndrwxr-xr-x 1 root root   12 Mar  9 02:37 test\n-rw-r--r-- 1 root root 1024 Mar  9 02:37 wsgi.py",
-  "timestamp": "2026-04-02T01:39:46Z",
-  "token_cost": 4596,
-  "tool_uses": 2,
+  "summary": "Function: \"use strict\";\nconst http = require(\"http\");\nconst url = require(\"url\");\nconst os = require(\"os\");\nconst path = require(\"path\");\nconst fs = require(\"fs\");\nconst Queue = require(\"./queue\");\nconst Processor = require(\"./processor\");\nconst Monitor = require(\"./monitor\");\n\nconst port = process.env.PORT || 8080;\nconst queue = new Queue();\nconst processor = new Processor(queue);\nconst monitor = new Monitor(processor);\n\nprocessor.start();\n\n// Flag is in /haystack/needle\nconst flagPath = path.join( \"/\", \"haystack\", \"needle\");\n\nconst server = http.createServer((req, res) => {\n\treq.on(\"data\", () => {});\n\treq.on(\"end\", () => {\n\t\tconst path = url.parse(req.url).pathname;\n\t\tswitch (path) {\n\t\t\tcase \"/process\":\n\t\t\t\tqueue.enqueue(req.headers[\"x-data\"] || \"default\");\n\t\t\t\tres.writeHead(202);\n\t\t\t\tres.end(\"Accepted\");\n\t\t\t\tbreak;\n\t\t\tcase \"/stats\":\n\t\t\t\tres.writeHead(200, {\"Content-Type\": \"application/json\"});\n\t\t\t\tres.end(JSON.stringify(monitor.getStats()));\n\t\t\t\tbreak;\n\t\t\tcase \"/flag\":\n\t\t\t\tif (os.loadavg()[0] < 1) {\n\t\t\t\t\ttry {\n\t\t\t\t\t\tconst flag = fs.readFileSync(flagPath, \"utf8\").trim();\n\t\t\t\t\t\tres.writeHead(200);\n\t\t\t\t\t\tres.end(flag);\n\t\t\t\t\t} catch (err) {\n\t\t\t\t\t\tres.writeHead(500);\n\t\t\t\t\t\tres.end(\"Error reading flag\");\n\t\t\t\t\t}\n\t\t\t\t} else {\n\t\t\t\t\tres.writeHead(503);\n\t\t\t\t\tres.end(\"Server too busy\");\n\t\t\t\t}\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tres.writeHead(404);\n\t\t\t\tres.end(\"Not found\");\n\t\t\t\tbreak;\n\t\t}\n\t});\n});\n\nserver.listen(port, () => {\n\tconsole.log(`Server listening on port ${port}`);\n});\n",
+  "timestamp": "2026-04-03T01:32:27Z",
+  "token_cost": 6416,
+  "tool_uses": 3,
   "turns_to_fix": 1,
-  "wall_clock": 24.548
+  "wall_clock": 25.106
 }

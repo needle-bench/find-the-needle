@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.30374575,
+  "input_tokens": 317739,
+  "output_tokens": 14590,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Updated the server’s SET handling to call `wal.Sync()` immediately after appending, so clients only receive acknowledgements once the write is safely persisted.\n- Tweaked the client’s batch verification summary message to provide clearer wording when no keys are lost.\n\nTesting:\n- `./test.sh`",
+  "timestamp": "2026-04-03T02:36:50Z",
+  "token_cost": 332329,
+  "tool_uses": 36,
+  "turns_to_fix": 1,
+  "wall_clock": 163.523
+}

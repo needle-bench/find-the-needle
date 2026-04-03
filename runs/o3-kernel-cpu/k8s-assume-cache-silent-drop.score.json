@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.338552,
+  "input_tokens": 369128,
+  "output_tokens": 4877,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed: the cache now notifies when an assumed object is invalidated.\n\nChange made in main.go (in informerUpdate):\n1. Detects newer informer version for an assumed object.\n2. Sets conflictNotified = true before dropping the assumption.\n\n`test.sh` now prints “OK: conflict notified” and passes.",
+  "timestamp": "2026-04-03T01:58:40Z",
+  "token_cost": 374005,
+  "tool_uses": 34,
+  "turns_to_fix": 1,
+  "wall_clock": 130.942
+}

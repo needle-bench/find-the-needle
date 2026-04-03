@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0108845,
+  "input_tokens": 24502,
+  "output_tokens": 6447,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The hidden problem was a memory leak in the `DataProcessor` class, where event listeners for `data:validated` and `data:error` were being registered inside the `process` method on every call, never removed, and capturing closure variables (like `data`). This caused unbounded listener accumulation.\n\nTo fix it, I moved the listener registrations to the constructor so they're set up once per instance, and removed them from the `process` method to avoid per-request additions. The test now passes with stable listener counts.",
+  "timestamp": "2026-04-03T01:55:30Z",
+  "token_cost": 30949,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 57.555
+}

@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:32:22Z", "benchmark": "null-pointer-config", "model": "qwen3-coder-plus", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 283, "tokens_out": 60, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 361, "tokens_out": 26, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:32:28Z", "test_exit": 52, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

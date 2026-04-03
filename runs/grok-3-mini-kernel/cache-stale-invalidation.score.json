@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.003247425,
-  "input_tokens": 4630,
-  "output_tokens": 5574,
+  "estimated_cost_usd": 0.05245102500000001,
+  "input_tokens": 265279,
+  "output_tokens": 55248,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "The needle appears to be referenced in the file ./.git/logs/HEAD. Here's the content of that file:\n\n```\n0000000000000000000000000000000000000000 3fa3da91f55d5d60db700c80b8ac79804759b33b needle-bench <bench@needle-bench.cc> 1775100193 +0000\tcommit (initial): init\n```",
-  "timestamp": "2026-04-02T03:24:21Z",
-  "token_cost": 10204,
-  "tool_uses": 5,
+  "summary": "The test script indicates a failure due to a stale cache, specifically that a new product isn't visible after creation. To investigate, I'll examine the likely source of the issue.\n\n",
+  "timestamp": "2026-04-03T01:31:33Z",
+  "token_cost": 320527,
+  "tool_uses": 41,
   "turns_to_fix": 1,
-  "wall_clock": 67.333
+  "wall_clock": 677.248
 }

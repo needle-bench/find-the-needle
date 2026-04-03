@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.01700688,
-  "input_tokens": 14227,
-  "output_tokens": 16727,
+  "estimated_cost_usd": 0.0010628999999999999,
+  "input_tokens": 5955,
+  "output_tokens": 252,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test script is now passing, indicating that the server is correctly filtering products by the minimum rating.",
-  "timestamp": "2026-04-02T01:47:38Z",
-  "token_cost": 30954,
-  "tool_uses": 11,
+  "summary": "The fix has been applied successfully. The rating filter now returns the correct results.",
+  "timestamp": "2026-04-03T02:56:11Z",
+  "token_cost": 6207,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 67.568
+  "wall_clock": 10.956
 }

@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.006262872,
-  "input_tokens": 102912,
-  "output_tokens": 2871,
+  "estimated_cost_usd": 0.017289696000000004,
+  "input_tokens": 217456,
+  "output_tokens": 10532,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Great! The test is now passing. Let me summarize what I found and fixed:\n\n## Problem Analysis\n\nI found two cache invalidation bugs in the `server.py` file:\n\n1. **Update Bug**: When updating a product via PUT request, the cache for that specific product was not being invalidated, causing stale data to be served until the TTL (5 minutes) expired.\n\n2. **Create Bug**: When creating a new product via POST request, the cache for the product list was not being invalidated, causing the list to remain stale (missing the new product) until the TTL expired.\n\n## Solution Implemented\n\nI fixed both issues by adding proper cache invalidation:\n\n1. **In `_update_product` method**: Added code to delete the specific product's cache entry after updating:\n   ```python\n   # Invalidate the cache for this specific product to prevent stale reads\n   cache_key = f'products:{product_id}'\n   cache.delete(cache_key)\n   ```\n\n2. **In `_create_product` method**: Added code to delete the product list cache entry after creating:\n   ```python\n   # Invalidate the list cache to ensure new products appear immediately\n   list_cache_key = 'products:list'\n   cache.delete(list_cache_key)\n   ```\n\nThese changes ensure that:\n- Updated products immediately show their new data\n- New products immediately appear in product lists\n- Cache invalidation happens in real-time rather than waiting for TTL expiration\n\nThe test now passes, confirming that the cache correctly invalidates after writes.",
-  "timestamp": "2026-04-02T05:28:01Z",
-  "token_cost": 105783,
-  "tool_uses": 22,
+  "summary": "Great! The test is now passing. Let me summarize what I found and fixed:\n\n## The Hidden Problem\n\nThe issue was in the cache invalidation logic in the `app/server.py` file. There were two bugs:\n\n1. **Product Update Bug**: When updating a product with PUT request, the server would update the product in the store but never invalidate the cache for that specific product. This meant that subsequent GET requests would still return the old cached data until the TTL expired.\n\n2. **Product Creation Bug**: When creating a new product with POST request, the server would create the product but never invalidate the product list cache. This meant that subsequent GET /products requests would still return the old cached list without the new product until the TTL expired.\n\n## The Fix\n\nI fixed both issues by adding proper cache invalidation:\n\n1. In `_update_product` method: Added `cache.delete(cache_key)` to remove the specific product from cache after updating it.\n2. In `_create_product` method: Added `cache.delete(list_cache_key)` to remove the product list from cache after creating a new product.\n\nThese changes ensure that the cache is properly invalidated when data is modified, preventing stale data from being served to clients.\n\nThe test now passes, confirming that both cache invalidation issues have been resolved.",
+  "timestamp": "2026-04-03T01:36:23Z",
+  "token_cost": 227988,
+  "tool_uses": 33,
   "turns_to_fix": 1,
-  "wall_clock": 47.071
+  "wall_clock": 218.613
 }

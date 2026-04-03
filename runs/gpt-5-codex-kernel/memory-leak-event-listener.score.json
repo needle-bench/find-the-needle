@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.03284175,
-  "input_tokens": 17339,
-  "output_tokens": 2456,
+  "estimated_cost_usd": 0.0394955,
+  "input_tokens": 28430,
+  "output_tokens": 2023,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Identified and fixed the event-listener leak by registering long-lived listeners once in the `DataProcessor` constructor and removing per-request listener creation. Updated `_handleValidated` to avoid capturing request-specific data.\n\n**Tests run**\n- `./test.sh` (passes)",
-  "timestamp": "2026-04-02T03:34:35Z",
-  "token_cost": 19795,
-  "tool_uses": 7,
+  "summary": "The event listener leak in `DataProcessor` has been resolved by moving listener registration to the constructor (so listeners are added just once) and adding dedicated `_handleValidated` and `_handleError` helpers to avoid capturing per-request data. All tests in `./test.sh` now pass successfully:\n\n```\nServer listening on port 8080\nBaseline: listeners=2, heap=4.42MB\nAfter 500 requests: listeners=2, heap=5.07MB\nPASS: Listener count stable at 2\nPASS: No event listener leak detected\n```\n\nLet me know if you’d like any further adjustments!",
+  "timestamp": "2026-04-03T01:52:08Z",
+  "token_cost": 30453,
+  "tool_uses": 14,
   "turns_to_fix": 1,
-  "wall_clock": 35.158
+  "wall_clock": 39.448
 }

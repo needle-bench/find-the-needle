@@ -4,15 +4,15 @@
   "benchmark": "null-pointer-config",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.07133610000000001,
-  "input_tokens": 59639,
-  "output_tokens": 9199,
+  "estimated_cost_usd": 0.0771034,
+  "input_tokens": 76666,
+  "output_tokens": 8725,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I fixed the nil-pointer issue by ensuring that when metrics are enabled in the config but no MetricsConfig is provided, we initialize cfg.Metrics with sensible defaults (endpoint “/metrics” and 60s interval). I also corrected the misplaced braces in LoadConfig and restored the default version logic. All tests now pass.",
-  "timestamp": "2026-04-02T01:48:04Z",
-  "token_cost": 68838,
+  "summary": "I’ve added a nil-check around the Metrics config in the `/status` handler. This prevents panics when `cfg.Metrics` is nil while still including empty `metrics` fields when metrics are enabled but no metrics configuration is provided. All tests now pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-03T02:01:42Z",
+  "token_cost": 85391,
   "tool_uses": 21,
   "turns_to_fix": 1,
-  "wall_clock": 120.505
+  "wall_clock": 100.645
 }

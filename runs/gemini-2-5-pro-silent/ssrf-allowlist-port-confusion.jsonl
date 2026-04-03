@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:49:31Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/internal_service.py\n/workspace/app/server.py\n/workspace/app/validator.py\n\nCurrent test o"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 586, "tokens_out": 102, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 663, "tokens_out": 188, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/app/internal_service.py"], "tokens_in": 1054, "tokens_out": 671, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 1228, "tokens_out": 64, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/http://127.0.0.1:5000/webhook/proxy"], "tokens_in": 1900, "tokens_out": 638, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 2209, "tokens_out": 61, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:49:57Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

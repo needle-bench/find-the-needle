@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00910805,
+  "input_tokens": 22205,
+  "output_tokens": 1162,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script has run successfully, and all customer names (both non-ASCII and ASCII) have been preserved correctly in the report. The issue with handling non-ASCII characters has been resolved by changing the charset to `UTF-8` in `CsvReader.java`.",
+  "timestamp": "2026-04-03T01:23:48Z",
+  "token_cost": 23367,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 13.66
+}

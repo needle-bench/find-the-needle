@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.03221,
+  "input_tokens": 22445,
+  "output_tokens": 551,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the bug in pricing.py.\n\nIssue  \ncalculate_discount_amount mistakenly added instead of multiplied:  \ndiscount = subtotal + discount_percent / 100\n\nFix  \nCorrect formula to compute a percentage of the subtotal:  \ndiscount = subtotal * discount_percent / 100\n\nAll tests in test.sh now pass.",
+  "timestamp": "2026-04-03T04:07:14Z",
+  "token_cost": 22996,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 20.554
+}

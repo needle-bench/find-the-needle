@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.10956619999999996,
+  "input_tokens": 710815,
+  "output_tokens": 2271,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "To ensure linearizable reads in the distributed KV store, I have implemented two key changes:\n\n1.  **Switched to Linearizable Reads in the Handler**: In `app/handler.go`, I updated the read handler to call `h.node.ReadLinearizable(key)` instead of the stale local `h.node.Read(key)`. The `ReadLinearizable` method implements a read-index protocol that ensures the node's local state is up-to-date with a majority-confirmed leader before returning a value.\n\n2.  **Fixed Heartbeat Commit Index Advancement**: In `app/raft/node.go`, I modified `handleHeartbeat` to advance the node's `commitIndex` based on the leader's `commitIndex` provided in the heartbeat message. Previously, followers were only advancing their commit index through `MsgAppendEntries`, causing them to remain behind if they only received heartbeats after rejoining the cluster.\n\nThese changes ensure that even after a network partition heals, a follower will learn the latest commit index from heartbeats and wait for its local state machine to apply those entries before serving a read, thereby satisfies linearizability.\n\n```go\n// app/handler.go\n// Changed:\nvalue, found := h.node.ReadLinearizable(key)\n\n// app/raft/node.go (handleHeartbeat)\n// Added:\nleaderCommit := msg.Index\nif leaderCommit > 0 {\n    lastIdx := n.log.LastIndex()\n    commitIdx := leaderCommit\n    if commitIdx > lastIdx {\n        commitIdx = lastIdx\n    }\n    n.advanceCommitIndex(commitIdx)\n}\n```",
+  "timestamp": "2026-04-03T02:25:31Z",
+  "token_cost": 713086,
+  "tool_uses": 41,
+  "turns_to_fix": 1,
+  "wall_clock": 74.803
+}

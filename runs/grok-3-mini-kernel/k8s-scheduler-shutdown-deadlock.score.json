@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.010918775,
-  "input_tokens": 20849,
-  "output_tokens": 17020,
+  "estimated_cost_usd": 0.004068975,
+  "input_tokens": 8131,
+  "output_tokens": 6399,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The bug causing the shutdown deadlock has been fixed by editing `main.go` to correctly order the queue closure before waiting for the goroutine. Running `./test.sh` now confirms the fix:\n\n```\nOK: clean shutdown\nPASS\n```\n\nThe needle in the haystack was the deadlock issue in the scheduler code, and it has been resolved. If you have any further questions, let me know!",
-  "timestamp": "2026-04-02T03:37:46Z",
-  "token_cost": 37869,
-  "tool_uses": 15,
+  "summary": "The bug in `main.go` has been fixed by swapping the order of `s.queue.Close()` and `<-done` in the `Run` method. Running `./test.sh` confirms the fix is successful, as the test now passes with \"OK: clean shutdown\" and \"PASS\". The needle (the bug causing the deadlock) has been addressed.",
+  "timestamp": "2026-04-03T02:02:46Z",
+  "token_cost": 14530,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 213.126
+  "wall_clock": 82.474
 }

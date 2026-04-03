@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00350255,
+  "input_tokens": 15443,
+  "output_tokens": 4082,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Server running on port 3000\nPASS: Rating filter returns correct results",
+  "timestamp": "2026-04-03T03:31:31Z",
+  "token_cost": 19525,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 40.443
+}

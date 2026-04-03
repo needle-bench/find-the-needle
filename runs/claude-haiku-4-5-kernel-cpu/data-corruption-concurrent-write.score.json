@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6954,
+  "output_tokens": 1771,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 \n\n## Summary\n\n**The needle found:** A data race bug in `/app/src/config.rs` in the `segments_for_worker()` function.\n\n**Root cause:** The function was intentionally assigning overlapping segments to multiple workers (with a hardcoded overlap of 2 segments for \"write redundancy\"). This caused multiple threads to concurrently write to the same byte ranges without synchronization, violating thread-safe concurrent access.\n\n**The fix:** Removed the hardcoded overlap (`+ 2`) so that each segment is assigned to exactly one worker. This eliminates the data race while maintaining proper segment coverage across all workers.\n\n**Changed line:**\n- **Before:** `let end = std::cmp::min(start + segments_per_worker + 2, self.num_segments);`\n- **After:** `let end = std::cmp::min(start + segments_per_worker, self.num_segments);`\n\nThe test now passes successfully with no overlapping segment assignments! ✅",
+  "timestamp": "2026-04-03T00:10:14Z",
+  "token_cost": 8725,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 16.867
+}

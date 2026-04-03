@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.030110799999999997,
-  "input_tokens": 73160,
-  "output_tokens": 811,
+  "estimated_cost_usd": 0.027964400000000004,
+  "input_tokens": 58918,
+  "output_tokens": 823,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found and fixed (missing input validation logic in the inventory adjustment flow to reject adjustments that would result in negative quantity). Running the test now passes successfully.",
-  "timestamp": "2026-04-02T03:26:15Z",
-  "token_cost": 73971,
-  "tool_uses": 19,
+  "summary": "The needle has been found and fixed (missing negative quantity validation in the inventory adjustment endpoint, which could allow impossible negative stock levels). The test now passes.",
+  "timestamp": "2026-04-03T01:35:05Z",
+  "token_cost": 59741,
+  "tool_uses": 17,
   "turns_to_fix": 1,
-  "wall_clock": 16.482
+  "wall_clock": 21.163
 }

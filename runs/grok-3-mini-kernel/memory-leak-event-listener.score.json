@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.026345075000000003,
-  "input_tokens": 82880,
-  "output_tokens": 37294,
+  "estimated_cost_usd": 0.01671195,
+  "input_tokens": 55046,
+  "output_tokens": 23079,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test has passed, indicating the issue is resolved. Here's the output from the latest run of `./test.sh`:\n\n```\nServer listening on port 8080\nBaseline: listeners=1, heap=4.42MB\nAfter 500 requests: listeners=1, heap=5.18MB\nPASS: Listener count stable at 1\nPASS: No event listener leak detected\n```\n\nThe needle has been found and fixed. If you need further actions, let me know.",
-  "timestamp": "2026-04-02T03:58:45Z",
-  "token_cost": 120174,
-  "tool_uses": 28,
+  "summary": "The issue causing the event listener leak has been successfully fixed in `/app/app/processor.js`. Running `./test.sh` confirms the fix:\n\n- **Baseline:** listeners=1, heap=4.42MB\n- **After 500 requests:** listeners=1, heap=5.25MB\n- **Results:** PASS – Listener count is stable, and no event listener leak was detected.\n\nThe needle (memory leak due to repeated event listener registrations) is now resolved. If you have any further questions, let me know!",
+  "timestamp": "2026-04-03T02:30:46Z",
+  "token_cost": 78125,
+  "tool_uses": 22,
   "turns_to_fix": 1,
-  "wall_clock": 456.752
+  "wall_clock": 299.942
 }

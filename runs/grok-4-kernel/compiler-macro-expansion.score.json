@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.024867,
+  "input_tokens": 9058,
+  "output_tokens": 901,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: use serde::{Deserialize, Serialize};\n\n#[derive(Debug, Clone, Serialize, Deserialize)]\npub enum FieldType {\n    Integer,\n    String,\n    Boolean,\n    Float,\n    Object(String),\n    List(Box<FieldType>),\n}\n\n#[derive(Debug, Clone, Serialize, Deserialize)]\npub struct Field {\n    pub name: String,\n    pub field_type: FieldType,\n}\n\n#[derive(Debug, Clone, Serialize, Deserialize)]\npub struct Schema {\n    pub name: String,\n    pub fields: Vec<Field>,\n}",
+  "timestamp": "2026-04-03T07:26:03Z",
+  "token_cost": 9959,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 24.31
+}

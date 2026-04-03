@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.058364000000000006,
-  "input_tokens": 51610,
-  "output_tokens": 993,
+  "estimated_cost_usd": 0.090948,
+  "input_tokens": 83522,
+  "output_tokens": 1240,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "## Vulnerability Summary\n\n**The bug is here:**\n- In `auth.py`, the code uses a visual transformation (`_render_display_name`) to check admin access, which allows users with trick Unicode (BIDI override) usernames to become `admin` visually, and thus pass the check.\n\n**Test 3 fails** because this lets a user called \"`\\u202enimda`\" (renders as \"`admin`\") get admin access.\n\n## How to Fix\n\n**Solution:** Strip BIDI override/control characters (e.g., `\\u202e`, `\\u202d`, `\\u202c`, etc) when storing and comparing usernames for authentication/authorization purposes. The _admin check should be on the canonical username, not the visual display name!_\n\n- When registering users: **sanitize by removing BIDI controls from the username**.\n- When checking admin: **compare the stored username directly to the allowlist**.\n\n## Quick Solution (Recommended Fix)\n\n1. Implement a BIDI control character stripper (could be in `sanitizer.py`).\n2. Use it in `register_user` and admin check logic, so all checks are on sanitized usernames.\n\n---\n\n**Would you like me to show the patch for `auth.py` and `sanitizer.py` to fix this?**",
-  "timestamp": "2026-04-02T01:22:17Z",
-  "token_cost": 52603,
-  "tool_uses": 22,
+  "summary": "✅ The vulnerability was in the admin access check in `app/auth.py`. The code previously rendered the username (with Unicode BIDI controls applied) and then checked the visually rendered result against the admin allowlist, enabling privilege escalation using crafted usernames.\n\n**Fix applied:**  \nNow the admin check uses the raw stored username (no BIDI override) to validate against the allowlist:\n```python\nif username in ADMIN_USERS:\n    return True, \"admin access granted\"\nreturn False, f\"user '{username}' is not an admin\"\n```\n\n**Test results:**  \nAll tests in `test.sh` now **pass**, and BIDI/LRO-injected usernames are correctly rejected or normalized. The \"needle\" (the bug) has been found and fixed!",
+  "timestamp": "2026-04-03T01:17:45Z",
+  "token_cost": 84762,
+  "tool_uses": 31,
   "turns_to_fix": 1,
-  "wall_clock": 31.722
+  "wall_clock": 34.556
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.05088449999999999,
+  "input_tokens": 35498,
+  "output_tokens": 2840,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Added a `normalizePath` helper to ensure request paths are cleaned and prefixed with a slash before checking route protections.\n- Updated the authentication middleware to use the normalized path, preventing bypasses via malformed paths (e.g., `//api/...`, `/x/../api/...`).\n\nTests:\n- `./test.sh`",
+  "timestamp": "2026-04-03T01:18:14Z",
+  "token_cost": 38338,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 33.738
+}

@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.04905875,
-  "input_tokens": 16751,
-  "output_tokens": 2812,
+  "estimated_cost_usd": 0.020226375,
+  "input_tokens": 9346,
+  "output_tokens": 1012,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The tests passed! The inventory is no longer allowed to go negative. The problem is solved.\nThe bug was that the `adjustQuantity` function in `inventory.ts` didn't validate if the adjustment would result in a negative inventory. This allowed the inventory to become negative, which is not a valid state.\n\nTo fix this, I first added a check in `inventory.ts` to throw an error if the quantity would become negative. Then, I updated `routes.ts` to catch this error and return a 400 Bad Request response with an appropriate error message. After fixing a small TypeScript error, the tests passed, confirming the fix.\nI have identified the problem and the steps to fix it. Here's my plan:\n\n1.  **Run `test.sh` to confirm the problem.** The test output clearly shows that the inventory is allowed to go into a negative state, which is incorrect. This points to a flaw in the inventory adjustment logic.\n\n2.  **Examine `routes.ts`.** This file defines the API endpoints. I can see a `POST` endpoint at `/inventory/:sku/adjust` which calls the `inventory.adjustQuantity` function. This confirms that the logic for adjusting inventory is likely located in the `inventory.ts` file.\n\n3.  **Examine `inventory.ts`.** This file contains the core business logic. The `adjustQuantity` function here directly adds the adjustment to the product's quantity without any validation to prevent it from going below zero. This is the root of the bug.\n\n4.  **Fix the bug.** I will first modify `inventory.ts` to add a check within the `adjustQuantity` function. If an adjustment would result in a negative quantity, the function will throw an error. Then, I will modify `routes.ts` to wrap the call to `adjustQuantity` in a `try...catch` block. This will catch the error and return a `400 Bad Request` response with an appropriate error message to the client.\n\n5.  **Verify the fix.** After implementing the changes, I will run `./test.sh` again to ensure that the tests pass and the bug is resolved.\n\nThis approach will ensure that the inventory an never be negative, and the API will correctly report an error when an invalid adjustment is attempted.",
-  "timestamp": "2026-04-02T01:42:39Z",
-  "token_cost": 19563,
-  "tool_uses": 9,
+  "summary": "Great! The test now passes. The issue was twofold. First, the `inventory.ts` file allowed the inventory to become negative. I fixed this by adding a check in the `adjustQuantity` function. Second, the `routes.ts` file didn't handle the error thrown by `adjustQuantity`, causing the server to crash. I fixed this by adding a `try...catch` block to handle the error and return a 400 status code. The needle has been found and the fix is verified.\n",
+  "timestamp": "2026-04-03T03:29:00Z",
+  "token_cost": 10358,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 50.695
+  "wall_clock": 34.836
 }

@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:07:36Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 75, "tokens_out": 140, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/workspace/."], "tokens_in": 190, "tokens_out": 108, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/.", "/workspace/main.go"], "tokens_in": 489, "tokens_out": 84, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/~/.gitconfig"], "tokens_in": 1437, "tokens_out": 188, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/home", "/root"], "tokens_in": 1594, "tokens_out": 143, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/user.email", "/workspace/.git/config"], "tokens_in": 1748, "tokens_out": 75, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1853, "tokens_out": 94, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-04-01T17:09:22Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

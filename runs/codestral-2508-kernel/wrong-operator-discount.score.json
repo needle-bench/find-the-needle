@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.00068904,
-  "input_tokens": 4686,
-  "output_tokens": 202,
+  "estimated_cost_usd": 0.0008995200000000001,
+  "input_tokens": 5387,
+  "output_tokens": 183,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test script is now passing. The discount calculations are now correct.",
-  "timestamp": "2026-04-02T01:47:53Z",
-  "token_cost": 4888,
-  "tool_uses": 5,
+  "summary": "The discount calculations are now correct. All tests have passed.",
+  "timestamp": "2026-04-03T02:58:31Z",
+  "token_cost": 5570,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 3.562
+  "wall_clock": 4.347
 }

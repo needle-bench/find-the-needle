@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.014148431,
+  "input_tokens": 28660,
+  "output_tokens": 1688,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix worked. The \"needle\" was in `/app/src/config.rs` - the `segments_for_worker` function had an intentional \"overlap by 2 segments\" bug that caused each worker to write segments that overlapped with adjacent workers, creating data races.\n\n**The Bug:**\n```rust\n// Overlap by 2 segments for write redundancy — ensures durability\nlet end = std::cmp::min(start + segments_per_worker + 2, self.num_segments);\n```\n\n**The Fix:**\n```rust\n// Each worker writes exactly their segments, no overlap\nlet end = std::cmp::min(start + segments_per_worker, self.num_segments);\n```\n\n**Result:** Workers now have non-overlapping segment assignments:\n- Worker 0: segments 0-3\n- Worker 1: segments 4-7  \n- Worker 2: segments 8-11\n- Worker 3: segments 12-15\n\nThe test now passes with \"All concurrent write runs produced correct output\".",
+  "timestamp": "2026-04-03T01:38:52Z",
+  "token_cost": 30348,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 123.04
+}

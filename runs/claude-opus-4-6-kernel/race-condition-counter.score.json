@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.42630500000000005,
+  "input_tokens": 73946,
+  "output_tokens": 2263,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. \n\n**The bug:** In `/app/app/counter.js`, the `incrementCounter()` function used a non-atomic **read-modify-write** pattern (`GET` → add 1 in JS → `SET`). When 100 concurrent requests hit the endpoint simultaneously, many would read the same value before any writes completed, causing **lost updates** (a classic race condition).\n\n**The fix:** Replaced the three-step read-modify-write with Redis's atomic `INCR` command, which increments and returns the new value in a single atomic operation, eliminating the race condition entirely.",
+  "timestamp": "2026-04-03T02:46:10Z",
+  "token_cost": 76209,
+  "tool_uses": 33,
+  "turns_to_fix": 1,
+  "wall_clock": 106.34
+}

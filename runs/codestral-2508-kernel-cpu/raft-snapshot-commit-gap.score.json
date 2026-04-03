@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 152169,
+  "output_tokens": 34183,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I'm sorry, but I couldn't find the file you're looking for. Could you please provide more details or check the file path again?",
+  "timestamp": "2026-04-03T02:38:43Z",
+  "token_cost": 186352,
+  "tool_uses": 71,
+  "turns_to_fix": 1,
+  "wall_clock": 137.348
+}

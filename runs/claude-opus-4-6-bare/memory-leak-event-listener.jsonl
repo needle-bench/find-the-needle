@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:32:53Z", "benchmark": "memory-leak-event-listener", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/opt/", "/etc/", "/root/"], "tokens_in": 862, "tokens_out": 241, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/.gitconfig"], "tokens_in": 1222, "tokens_out": 73, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/", "/", "/app/\"*.txt\"", "/"], "tokens_in": 1328, "tokens_out": 185, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 2376, "tokens_out": 128, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/", "/app.orig/", "/app/app/", "/app.orig/app/"], "tokens_in": 3236, "tokens_out": 189, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh", "/app/app/server.js", "/app/app/utils.js", "/app/app/processor.js", "/app/app/queue.js", "/app/app/monitor.js"], "tokens_in": 3678, "tokens_out": 291, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:33:20Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:31:57Z", "benchmark": "retry-storm-duplicate-transfer", "model": "llama-3-3-70b-instruct", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/chaos_proxy.py\n/workspace/app/gateway.py\n/workspace/app/models.py\n/workspace/app/process"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 304, "tokens_out": 26, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 343, "tokens_out": 54, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:32:16Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

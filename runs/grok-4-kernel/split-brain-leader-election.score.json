@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.01294725,
+  "input_tokens": 2540,
+  "output_tokens": 709,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: The needle is not in the haystack. (if this message is shown, the test failed.)",
+  "timestamp": "2026-04-03T01:47:37Z",
+  "token_cost": 3249,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 14.461
+}

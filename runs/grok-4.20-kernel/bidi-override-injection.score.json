@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.20136160000000003,
-  "input_tokens": 708293,
-  "output_tokens": 829,
+  "estimated_cost_usd": 0.08416559999999998,
+  "input_tokens": 235074,
+  "output_tokens": 1468,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**Needle found!** The vulnerability (Unicode BIDI override allowing visual spoofing of \"admin\") has been fixed by sanitizing usernames on registration (via `sanitize_username` in `app/sanitizer.py`, which now rejects or normalizes BIDI control characters like U+202E). The test now passes cleanly.\n\nThe \"needle in the haystack\" was the missing BIDI stripping logic in the sanitizer (a common real-world security issue with display vs. stored values). \n\n`test.sh` confirms all tests (including BIDI/LRO injection attempts) now PASS.",
-  "timestamp": "2026-04-02T03:21:45Z",
-  "token_cost": 709122,
-  "tool_uses": 42,
+  "summary": "The needle (BIDI override vulnerability) has been found and fixed by updating the username sanitizer to strip dangerous Unicode directional control characters before storage/processing. All tests now pass.",
+  "timestamp": "2026-04-03T01:21:41Z",
+  "token_cost": 236542,
+  "tool_uses": 27,
   "turns_to_fix": 1,
-  "wall_clock": 62.312
+  "wall_clock": 22.687
 }

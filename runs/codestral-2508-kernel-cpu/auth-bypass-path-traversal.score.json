@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 61182,
+  "output_tokens": 918,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The test results indicate that the API server has several vulnerabilities:\n\n1. Direct access to `/api/users` without authentication returns a 401 Unauthorized response, which is correct. However, with authentication, it returns a 200 OK response, which is also correct.\n\n2. Direct access to `/api/admin` without authentication returns a 200 OK response, which is a security issue. This endpoint should be protected and only accessible with proper authentication.\n\n3. Double-slash `//api/admin` without authentication also returns a 200 OK response, indicating a path manipulation vulnerability that allows unauthenticated access to protected endpoints.\n\n4. Path traversal `/health/../api/data` without authentication returns a 200 OK response, which is another security issue. This endpoint should be protected and only accessible with proper authentication.\n\n5. The `/api/admin` endpoint contains sensitive data, which is a concern.\n\nThe server is initialized and starting on port 18082.",
+  "timestamp": "2026-04-03T01:17:38Z",
+  "token_cost": 62100,
+  "tool_uses": 41,
+  "turns_to_fix": 1,
+  "wall_clock": 22.955
+}

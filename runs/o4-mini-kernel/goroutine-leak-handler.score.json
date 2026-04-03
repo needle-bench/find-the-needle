@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0048576,
+  "input_tokens": 2008,
+  "output_tokens": 602,
+  "resolved": true,
+  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://openrouter.ai/api/v1/chat/completions)",
+  "summary": "",
+  "timestamp": "2026-04-03T01:26:32Z",
+  "token_cost": 2610,
+  "tool_uses": 4,
+  "turns_to_fix": 0,
+  "wall_clock": 142.219
+}

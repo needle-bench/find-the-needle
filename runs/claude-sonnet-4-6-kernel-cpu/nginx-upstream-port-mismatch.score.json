@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 2342,
-  "output_tokens": 794,
+  "input_tokens": 2343,
+  "output_tokens": 946,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests passed! ✅\n\n**The needle:** In `/etc/nginx/sites-available/default`, the `proxy_pass` directive for `/api/` was pointing to port **`5001`** instead of the correct port **`5000`** where the Flask backend actually listens.\n\n**The fix:** Changed `proxy_pass http://127.0.0.1:5001;` → `proxy_pass http://127.0.0.1:5000;`",
-  "timestamp": "2026-04-02T02:30:15Z",
-  "token_cost": 3136,
-  "tool_uses": 10,
+  "summary": "All tests passed! ✅\n\n## Summary\n\n**The Needle:** A port mismatch in `/etc/nginx/sites-available/default`.\n\n| | Port |\n|---|---|\n| Flask backend (`server.py`) | **5000** |\n| Nginx `proxy_pass` (buggy) | **5001** ❌ |\n| Nginx `proxy_pass` (fixed) | **5000** ✅ |\n\nNginx was proxying `/api/` requests to port `5001`, but the Flask app was listening on port `5000`. This caused nginx to return a `502 Bad Gateway` for all `/api/data` requests. The fix was a one-character change: `5001` → `5000`.",
+  "timestamp": "2026-04-03T01:59:53Z",
+  "token_cost": 3289,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 19.96
+  "wall_clock": 21.118
 }

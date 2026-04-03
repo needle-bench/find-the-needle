@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is complete. The issue was that the certificate chain in `/certs/chain.pem` was in the wrong order. I reordered it to match RFC 5246 requirements:\n\n**Before (incorrect order):**\n1. Leaf certificate (localhost)\n2. Root CA\n3. Intermediate CA\n\n**After (correct order):**\n1. Leaf certificate (localhost)\n2. Intermediate CA (issuer of leaf)\n3. Root CA (issuer of intermediate)\n\nThe test now passes, confirming the chain is properly ordered.",
+  "timestamp": "2026-04-03T05:40:24Z",
+  "token_cost": 0,
+  "tool_uses": 18,
+  "turns_to_fix": 19,
+  "wall_clock": 37.768
+}

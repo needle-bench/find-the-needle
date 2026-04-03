@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.24052999999999997,
+  "input_tokens": 41036,
+  "output_tokens": 1414,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n**The Needle (Bug):** In `/app/src/main.rs`, the `process_file` function used a fixed 64KB stack buffer with a single `file.read(&mut buffer)` call. The `read()` method reads **at most** `buffer.len()` bytes (64KB), so any file larger than 64KB was **silently truncated** — the remaining data was simply discarded without any error.\n\n**The Fix:** Replaced the fixed-size buffer and single `read()` call with a dynamically-sized `Vec<u8>` and `read_to_end()`, which reads the entire file regardless of size:\n\n```rust\n// Before (buggy):\nlet mut buffer = [0u8; BUFFER_SIZE];\nlet bytes_read = file.read(&mut buffer)?;\n\n// After (fixed):\nlet mut buffer = Vec::new();\nfile.read_to_end(&mut buffer)?;\n```",
+  "timestamp": "2026-04-03T03:08:47Z",
+  "token_cost": 42450,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 111.169
+}

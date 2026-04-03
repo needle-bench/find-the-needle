@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00256566,
+  "input_tokens": 7410,
+  "output_tokens": 1429,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug is in the pagination offset calculation in `app/app.py`, where an unnecessary adjustment ` - (1 if page > 1 else 0)` was causing an off-by-one error. Removing it fixes the issue. The verified test output confirms the fix works correctly.",
+  "timestamp": "2026-04-03T02:05:43Z",
+  "token_cost": 8839,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 12.076
+}

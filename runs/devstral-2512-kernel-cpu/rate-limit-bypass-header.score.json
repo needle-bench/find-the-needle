@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 21629,
-  "output_tokens": 748,
+  "input_tokens": 27542,
+  "output_tokens": 654,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The fix works. The rate limiter now correctly uses the actual client IP address from `req.socket.remoteAddress` instead of trusting the `X-Forwarded-For` header, which prevents the header spoofing attack.\n\nThe test confirms that:\n1. Normal requests are properly rate-limited (10 passed, 5 blocked)\n2. Even with rotating `X-Forwarded-For` headers, the rate limiter still enforces the limit (10 passed, 20 blocked)\n\nThis prevents attackers from bypassing rate limits by spoofing the `X-Forwarded-For` header.",
-  "timestamp": "2026-04-02T04:02:04Z",
-  "token_cost": 22377,
+  "summary": "Perfect! The fix works. The rate limiter now correctly ignores the `X-Forwarded-For` header and uses the actual client IP address from `req.socket.remoteAddress`, preventing the header spoofing attack. The test confirms that the rate limiter is no longer vulnerable to bypass via header rotation.",
+  "timestamp": "2026-04-03T03:05:30Z",
+  "token_cost": 28196,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 19.979
+  "wall_clock": 18.977
 }

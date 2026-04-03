@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.030082360000000002,
+  "input_tokens": 86271,
+  "output_tokens": 1962,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. The bug was in the `InstallSnapshot()` function in `/app/app/snapshot.go`.\n\n**The Bug**: When a follower received a snapshot via `InstallSnapshot()`, the code updated `lastApplied` to the snapshot's last included index but did **not** update `commitIndex`. This caused a commit gap:\n\n1. After `InstallSnapshot`: `lastApplied=10` but `commitIndex=0`\n2. On node restart, the recovery code used the stale `commitIndex=0` to determine what to replay\n3. This caused the node to re-apply log entries that were already applied via the snapshot\n\n**The Fix**: Added `n.commitIndex = snap.LastIncludedIndex` in `InstallSnapshot()` to keep `commitIndex` in sync with `lastApplied`, ensuring that after a restart, the node knows all entries up to the snapshot boundary have already been processed.",
+  "timestamp": "2026-04-03T03:03:18Z",
+  "token_cost": 88233,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 195.293
+}

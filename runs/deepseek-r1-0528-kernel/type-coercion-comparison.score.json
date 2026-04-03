@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00601525,
+  "input_tokens": 5489,
+  "output_tokens": 1394,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "I notice that in `utils.js`, the `parseQuery` function doesn't convert the min_rating parameter to a number. It's stored as a string, which could cause comparison issues. Let me check the filtering logic to confirm this hypothesis",
+  "timestamp": "2026-04-03T03:58:40Z",
+  "token_cost": 6883,
+  "tool_uses": 6,
+  "turns_to_fix": 0,
+  "wall_clock": 185.046
+}

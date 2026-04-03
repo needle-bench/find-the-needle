@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.00896766,
-  "input_tokens": 17095,
-  "output_tokens": 907,
+  "estimated_cost_usd": 0.00924521,
+  "input_tokens": 16502,
+  "output_tokens": 599,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The test passes now. The issue was in the `calculate_discount_amount` function in `/app/pricing.py`, where it was using addition (`+`) instead of multiplication (`*`) when calculating the discount amount.\n\nThe bug was on this line:\n```python\ndiscount = subtotal + discount_percent / 100\n```\n\nIt should be:\n```python\ndiscount = subtotal * discount_percent / 100\n```\n\nThis explains the test failures:\n- For 20% off $1098.94, it was doing `1098.94 + 20/100 = 1098.94 + 0.2 = 1099.14` instead of `1098.94 * 0.2 = 219.79`\n- Similarly for other test cases, it was adding to the subtotal instead of multiplying\n\nThe fix has resolved all test cases, so the \"needle\" in the haystack has been found and corrected.",
-  "timestamp": "2026-04-02T01:55:14Z",
-  "token_cost": 18002,
+  "summary": "Perfect! The tests are now passing. The \"needle\" (the hidden problem) was in the `pricing.py` file where there was an incorrect operator being used in the discount calculation. Instead of multiplying the subtotal by the discount percentage (which is the correct way to calculate a percentage-based discount), the code was adding the percentage to the subtotal, causing completely wrong calculations. \n\nThe bug was on line 8 in `/app/pricing.py` where:\n- It was using: `discount = subtotal + discount_percent / 100`\n- Should have been: `discount = subtotal * discount_percent / 100`\n\nThis has now been fixed and verified with the test script.",
+  "timestamp": "2026-04-03T03:08:11Z",
+  "token_cost": 17101,
   "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 25.404
+  "wall_clock": 18.64
 }

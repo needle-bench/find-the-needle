@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.00834383,
-  "input_tokens": 40199,
-  "output_tokens": 1676,
+  "estimated_cost_usd": 0.005443739999999999,
+  "input_tokens": 13708,
+  "output_tokens": 1041,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests passed! The `EventStore` was missing, which was the first needle.The second needle was the bug in the scheduler that improperly handled events crossing midnight in different timezones. The fix was to calculate the \"today's date\" for an event in its *local* timezone, not in UTC.\n\nI have found the needle and verified the fix.\n",
-  "timestamp": "2026-04-02T01:51:37Z",
-  "token_cost": 41875,
-  "tool_uses": 15,
+  "summary": "The tests passed! The fix has corrected the issue with timezone-aware scheduling, especially for events crossing midnight.\n",
+  "timestamp": "2026-04-03T03:10:15Z",
+  "token_cost": 14749,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 20.662
+  "wall_clock": 11.868
 }

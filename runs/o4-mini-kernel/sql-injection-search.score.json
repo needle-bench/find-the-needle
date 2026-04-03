@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0239085,
+  "input_tokens": 21331,
+  "output_tokens": 2501,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I’ve refactored the search method to use parameterized queries for both the name filter and optional category filter, eliminating direct string interpolation and preventing SQL injection. All tests now pass. Let me know if you need anything else!",
+  "timestamp": "2026-04-03T02:33:17Z",
+  "token_cost": 23832,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 37.892
+}

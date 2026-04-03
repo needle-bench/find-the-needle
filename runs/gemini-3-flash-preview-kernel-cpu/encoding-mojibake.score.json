@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 185442,
+  "output_tokens": 1079,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I will check the hex representation of the `test.sh` script to see how the names are encoded.\n",
+  "timestamp": "2026-04-03T01:30:54Z",
+  "token_cost": 186521,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 114.628
+}

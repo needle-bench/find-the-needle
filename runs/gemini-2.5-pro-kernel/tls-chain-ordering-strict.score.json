@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.20597825,
+  "input_tokens": 78949,
+  "output_tokens": 14655,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests all passed, which means my fix was successful. The needle has been found and the haystack is now in order.\n",
+  "timestamp": "2026-04-03T05:36:58Z",
+  "token_cost": 93604,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 149.019
+}

@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.023961750000000004,
-  "input_tokens": 19803,
-  "output_tokens": 1116,
+  "estimated_cost_usd": 0.020765000000000002,
+  "input_tokens": 7252,
+  "output_tokens": 1170,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The issue was that the `min_rating` query parameter was being treated as a string, causing the rating filter to compare strings instead of numbers. I updated `parseQuery` in `utils.js` to parse `min_rating` as an integer when present, ignoring it if parsing fails. After this change, `./test.sh` passes with all tests succeeding.",
-  "timestamp": "2026-04-02T03:52:52Z",
-  "token_cost": 20919,
+  "summary": "The issue was that `min_rating` values from the query string were being treated as strings, causing the rating filter to fail. I updated `parseQuery` in `utils.js` to parse `min_rating` into a number (using `parseInt` with validation). All tests now pass as confirmed by running `bash test.sh`.",
+  "timestamp": "2026-04-03T02:31:48Z",
+  "token_cost": 8422,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 19.458
+  "wall_clock": 20.915
 }

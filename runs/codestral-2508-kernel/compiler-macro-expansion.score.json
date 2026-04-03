@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.12266291999999998,
+  "input_tokens": 1276678,
+  "output_tokens": 3840,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The file `/tmp/generated.rs` still does not exist. This suggests that the code generation process might not have completed successfully or the file might have been deleted. Let's try to run the test script again to see if we can capture any additional information.",
+  "timestamp": "2026-04-03T07:26:46Z",
+  "token_cost": 1280518,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 67.208
+}

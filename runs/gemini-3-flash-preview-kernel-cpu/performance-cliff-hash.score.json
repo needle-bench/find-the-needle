@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 307728,
+  "output_tokens": 3509,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have fixed the issue where `Product.hashCode()` used the category instead of the SKU, causing severe hash collisions. I also improved the `ProductCache`'s `getBucketIndexForSku` and fixed a potential negative index issue with `Math.abs(Integer.MIN_VALUE)`. All tests passed.\n",
+  "timestamp": "2026-04-03T03:36:59Z",
+  "token_cost": 311237,
+  "tool_uses": 32,
+  "turns_to_fix": 1,
+  "wall_clock": 101.632
+}

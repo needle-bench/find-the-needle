@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0040326599999999995,
-  "input_tokens": 12430,
-  "output_tokens": 666,
+  "estimated_cost_usd": 0.0052955699999999994,
+  "input_tokens": 17663,
+  "output_tokens": 828,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The tests passed! The problem was indeed the type coercion of `min_rating`. Parsing it as an integer in `utils.js` fixed the issue.\n",
-  "timestamp": "2026-04-02T01:52:01Z",
-  "token_cost": 13096,
+  "summary": "The tests passed! The problem was indeed the type coercion of `min_rating`. Parsing it as an integer in `utils.js` resolved the issue.",
+  "timestamp": "2026-04-03T03:15:35Z",
+  "token_cost": 18491,
   "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 12.125
+  "wall_clock": 12.436
 }

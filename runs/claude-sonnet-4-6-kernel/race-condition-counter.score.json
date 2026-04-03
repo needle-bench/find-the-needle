@@ -4,15 +4,15 @@
   "benchmark": "race-condition-counter",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.076926,
-  "input_tokens": 20187,
-  "output_tokens": 1091,
+  "estimated_cost_usd": 0.076629,
+  "input_tokens": 20193,
+  "output_tokens": 1070,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**✅ PASS** — The test confirms the fix works.\n\n---\n\n### The Needle 🪡\n\n**File:** `/app/app/counter.js`\n\n**Bug:** A classic **read-modify-write race condition**. The original `incrementCounter()` did:\n1. `GET counter` → read value\n2. `value + 1` → compute new value\n3. `SET counter newValue` → write back\n\nWith 100 concurrent requests, many goroutines read the same stale value before any write landed, causing **lost increments** (e.g., 100 requests might only advance the counter to 10–20).\n\n**Fix:** Replaced the three-step read-modify-write with Redis's built-in atomic **`INCR`** command, which guarantees each increment is applied without any possibility of a race condition.",
-  "timestamp": "2026-04-02T01:37:38Z",
-  "token_cost": 21278,
+  "summary": "**Test passes! ✅**\n\n## The Needle (Bug)\n\n**File:** `/app/app/counter.js`\n\n**Problem:** The `incrementCounter` function used a non-atomic **read-modify-write** pattern:\n1. `GET` the current value\n2. Add 1 in JavaScript\n3. `SET` the new value back\n\nWith 100 concurrent requests hitting Node.js simultaneously, multiple requests would read the same value before any write completed — causing **lost increments** (race condition / TOCTOU bug).\n\n**Fix:** Replaced the three-step GET+increment+SET with Redis's built-in atomic **`INCR`** command, which reads and increments the value in a single atomic operation — no race condition possible.",
+  "timestamp": "2026-04-03T02:11:44Z",
+  "token_cost": 21263,
   "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 29.069
+  "wall_clock": 27.744
 }

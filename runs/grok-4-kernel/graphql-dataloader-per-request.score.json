@@ -4,15 +4,15 @@
   "benchmark": "graphql-dataloader-per-request",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.01779675,
-  "input_tokens": 5214,
-  "output_tokens": 709,
-  "resolved": true,
+  "estimated_cost_usd": 0.02185875,
+  "input_tokens": 4358,
+  "output_tokens": 1151,
+  "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: [\n  \"src/dataloader.ts\",\n  \"src/db.ts\",\n  \"src/models.ts\",\n  \"src/resolvers.ts\",\n  \"src/schema.ts\",\n  \"src/seed.ts\",\n  \"src/server.ts\"\n]",
-  "timestamp": "2026-04-02T01:34:27Z",
-  "token_cost": 5923,
+  "summary": "Function: total 88\ndrwxr-xr-x 1 root root 118 Apr  2 06:41 .\ndrwxr-xr-x 1 root root   8 Apr  3 01:23 ..\n-rw-r--r-- 1 root root 239 Apr  2 06:41 config.ts\ndrwxr-xr-x 1 root root  34 Apr  2 06:41 loaders\ndrwxr-xr-x 1 root root  22 Apr  2 06:41 migrations\ndrwxr-xr-x 1 root root  94 Apr  2 06:41 models\ndrwxr-xr-x 1 root root  98 Apr  2 06:41 resolvers\ndrwxr-xr-x 1 root root  48 Apr  2 06:41 schema\ndrwxr-xr-x 1 root root  26 Apr  2 06:41 seeders\ndrwxr-xr-x 1 root root  20 Apr  2 06:41 server\ndrwxr-xr-x 1 root root  24 Apr  2 06:41 typeDefs\ndrwxr-xr-x 1 root root  20 Apr  2 06:41 utils\n",
+  "timestamp": "2026-04-03T01:24:10Z",
+  "token_cost": 5509,
   "tool_uses": 2,
   "turns_to_fix": 1,
-  "wall_clock": 18.021
+  "wall_clock": 26.074
 }

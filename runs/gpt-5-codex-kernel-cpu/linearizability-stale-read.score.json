@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.20525575000000001,
+  "input_tokens": 224203,
+  "output_tokens": 6857,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The stale-read issue is fixed. I updated `handleHeartbeat` in `raft/node.go` to advance the follower’s commit index using the leader’s commit index, ensuring it catches up after partitions, and switched `Handler.handleRead` to use `ReadLinearizable` for linearizable reads. `test.sh` now passes in all rounds.",
+  "timestamp": "2026-04-03T01:51:18Z",
+  "token_cost": 231060,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 95.015
+}

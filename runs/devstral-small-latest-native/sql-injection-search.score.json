@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "sql-injection-search",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed SQL injection vulnerability in `app/search.py:12-25` by replacing string concatenation with parameterized queries using `db.execute()`. Tests pass.",
+  "timestamp": "2026-04-03T04:54:14Z",
+  "token_cost": 0,
+  "tool_uses": 10,
+  "turns_to_fix": 11,
+  "wall_clock": 18.792
+}

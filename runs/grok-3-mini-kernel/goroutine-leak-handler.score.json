@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.014204225000000003,
+  "input_tokens": 39519,
+  "output_tokens": 19354,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle, which was a goroutine leak in `/app/app/main.go`, has been successfully identified and fixed. Running `test.sh` now confirms the issue is resolved:\n\n- **Test Results:**  \n  Baseline goroutines: 4  \n  Goroutines after 20 client disconnects: 4  \n  Goroutines after 5s wait: 4  \n  Leaked goroutines above baseline: 0  \n  **PASS: All tests passed.**\n\nThe problem was due to uncancelled goroutines in the compute handler, and the fix involved passing the request context and checking for cancellation. No further actions are needed unless you have additional requests.",
+  "timestamp": "2026-04-03T01:47:16Z",
+  "token_cost": 58873,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 268.235
+}

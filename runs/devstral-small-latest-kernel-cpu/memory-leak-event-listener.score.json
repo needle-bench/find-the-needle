@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 29698,
-  "output_tokens": 1235,
+  "input_tokens": 26511,
+  "output_tokens": 1169,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Excellent! The test script has passed, confirming that the event listener leak has been fixed. The listener count remained stable at 2, and there was no unbounded growth in memory usage.",
-  "timestamp": "2026-04-02T02:27:39Z",
-  "token_cost": 30933,
-  "tool_uses": 11,
+  "summary": "Excellent! The test now passes. The listener count remains stable at 2, confirming that the event listeners are no longer being registered per request. The fix successfully resolves the memory leak issue.\n\nThe problem was in the `processor.js` file, where event listeners were being registered inside the `process` method, causing them to accumulate with each request. By moving the listener registration to the constructor, the listeners are now registered only once when the `DataProcessor` is instantiated, preventing the memory leak.",
+  "timestamp": "2026-04-03T03:39:37Z",
+  "token_cost": 27680,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 20.245
+  "wall_clock": 19.91
 }

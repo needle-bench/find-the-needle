@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.02745,
+  "input_tokens": 22285,
+  "output_tokens": 788,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the SQL-injection vulnerability.\n\nChanges made in app/search.py:\n1. Replaced the string-concatenated SQL with a parameterised query using ? placeholders.\n2. Added a params list (query pattern and optional category) passed to the database layer via db.execute.\n3. Removed use of execute_raw.\n\nAll tests now pass:  \n\n./test.sh  \nPASS: Search endpoint is not vulnerable to SQL injection",
+  "timestamp": "2026-04-03T03:28:27Z",
+  "token_cost": 23073,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 21.357
+}

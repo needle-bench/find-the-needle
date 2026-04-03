@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.045218,
+  "input_tokens": 40193,
+  "output_tokens": 596,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug appears to be in how reads are performed. The handler uses `n.Read(key)`, which just reads the local KV-store value, which can become **stale** after a partition: a follower may return old values until it hears from the latest leader. The file `/app/app/handler.go`'s `handleRead` does *not* use the correct linearizable logic.\n\n**Solution:**  \nChange `handleRead` to use `ReadLinearizable` instead of `Read`. This will ensure that even a follower will ask the leader before serving the read, preventing stale results.\n\n## How to fix\n\n**Edit `/app/app/handler.go`**  \nReplace:\n```go\nvalue, found := h.node.Read(key)\n```\nwith:\n```go\nvalue, found := h.node.ReadLinearizable(key)\n```\n\nWould you like me to make this code change?",
+  "timestamp": "2026-04-03T01:30:09Z",
+  "token_cost": 40789,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 18.922
+}

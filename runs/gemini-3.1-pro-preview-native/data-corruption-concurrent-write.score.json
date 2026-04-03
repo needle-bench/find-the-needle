@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 27557,
+  "output_tokens": 412,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have fixed the bug by removing the intentional overlap (`+ 2`) in the segment assignment calculation within `src/config.rs`. \n\nThe test `test.sh` now passes successfully:\n```\n=== Concurrent Write Integrity Test ===\n--- Building ---\n   Compiling concurrent-writer v0.1.0 (/app)\n    Finished `release` profile [optimized] target(s) in 0.14s\nVERIFY: File integrity check passed\n--- Checking segment assignment overlap ---\nOK: No overlapping segment assignments\nPASS: All concurrent write runs produced correct output\n```",
+  "timestamp": "2026-04-03T03:02:58Z",
+  "token_cost": 27969,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 51.533
+}

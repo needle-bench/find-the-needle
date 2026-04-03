@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.11770800000000001,
+  "input_tokens": 87606,
+  "output_tokens": 4428,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed.\n\nIssue  \nThe server sent the certificate chain in the order: leaf, root, intermediate. Strict TLS validators expect each certificate to be followed by its issuer: leaf, intermediate, root. The wrong ordering made test 2 in test.sh fail.\n\nFix  \nIn app/tlssetup/loader.go:\n\n1. After tls.X509KeyPair loads the certificates, parse the leaf and every remaining certificate.\n2. Build a new slice keeping the leaf first and then repeatedly look-up the certificate whose Subject matches the previous cert’s Issuer, producing leaf → intermediate → … → root.\n3. Append any certificates that could not be chained (keeps compatibility with extra roots).\n4. Replace the original Certificate slice with this ordered slice and return the tls.Config.\n\nRunning test.sh now prints PASS for all checks.",
+  "timestamp": "2026-04-03T04:01:28Z",
+  "token_cost": 92034,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 62.305
+}

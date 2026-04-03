@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 4376,
-  "output_tokens": 1250,
+  "input_tokens": 2918,
+  "output_tokens": 1206,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "✅ **PASS: Counter is correct**\n\n---\n\n### The Needle 🪡\n\n**File:** `/app/app/counter.js`\n\n**Bug:** A **race condition** in the `incrementCounter()` function. It used a non-atomic **read-modify-write** pattern:\n```js\n// BROKEN: race condition\nconst current = await client.get(COUNTER_KEY);   // read\nconst newValue = parseInt(current) + 1;           // modify\nawait client.set(COUNTER_KEY, newValue.toString()); // write\n```\nWith 100 concurrent requests, multiple workers read the same value before any write completes, so increments are lost (e.g., 50 requests all read `42`, all write back `43` → only +1 instead of +50).\n\n**Fix:** Replace with Redis's atomic **`INCR`** command, which reads and increments in a single, uninterruptible operation:\n```js\n// FIXED: atomic\nconst newValue = await client.incr(COUNTER_KEY);\n```",
-  "timestamp": "2026-04-02T02:33:29Z",
-  "token_cost": 5626,
+  "summary": "✅ **Test passes!**\n\n## The Needle: Race Condition in `counter.js`\n\n**Problem:** The `incrementCounter()` function used a non-atomic **read-modify-write** pattern:\n1. `GET` the current value from Redis\n2. Add 1 in JavaScript\n3. `SET` the new value back to Redis\n\nWith 100 concurrent requests, multiple requests would read the **same** value simultaneously, all compute the same incremented value, and write it back — causing lost updates (e.g., 100 concurrent requests might only result in a counter of 3–10).\n\n**Fix:** Replace the three-step operation with Redis's built-in atomic **`INCR`** command, which reads and increments the value in a single, indivisible operation — eliminating the race condition entirely.",
+  "timestamp": "2026-04-03T02:12:22Z",
+  "token_cost": 4124,
   "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 31.797
+  "wall_clock": 27.732
 }

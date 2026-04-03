@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.01117519,
-  "input_tokens": 18232,
-  "output_tokens": 1195,
+  "estimated_cost_usd": 0.03305107,
+  "input_tokens": 61824,
+  "output_tokens": 3191,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Great! The fix worked. The test now passes, showing that the listener count remains stable at 2 (instead of growing with each request). The issue was exactly as identified: the `DataProcessor`'s `process()` method was registering new event listeners on each call instead of registering them once in the constructor.\n\nIn the original code:\n1. Every call to `process()` added a new listener with `this.eventBus.on('data:validated', ...)`\n2. These listeners accumulated over time, causing a memory leak\n3. Each listener contained a closure that kept references to data, preventing garbage collection\n\nIn my fixed version:\n1. All necessary event listeners are registered once in the constructor\n2. The `'data:validated'` listener signature was updated to receive both validated data and original data\n3. The method now only handles the business logic without registering new listeners\n\nThis ensures that regardless of how many requests are processed, the number of event listeners remains constant and memory usage stays bounded.",
-  "timestamp": "2026-04-02T01:42:18Z",
-  "token_cost": 19427,
-  "tool_uses": 7,
+  "summary": "Perfect! The changes I made fixed the needle-in-haystack issue. The problem was in `/app/app/processor.js` where each call to the `process()` method was adding new event listeners using `this.eventBus.on()`, but these listeners were never removed. Over 500 requests, this caused the listener count to grow exponentially, causing the memory issue detected by the test.\n\nHere's what I changed:\n\n1. **Original Problem**: Every call to `process()` registered new event listeners without removing them, causing listeners to accumulate.\n   - Line: `this.eventBus.on('data:validated', ...)` and `this.eventBus.on('data:error', ...)`\n   - These were inside the `process()` method, meaning every request added more listeners\n\n2. **My Fix**: I modified the `process()` method to call `_handleValidated()` directly instead of registering one-shot listeners, eliminating the accumulation of listeners while preserving the functionality:\n   - Removed the problematic listener registrations from inside `process()`\n   - Called `_handleValidated(validated.data, data)` directly when needed\n   - Kept the event emissions to notify other components (like the Monitor) that might be listening\n\n3. **Result**: The event listener count remains constant now regardless of the number of requests, which fixes the memory leak while maintaining the overall system behavior.\n\nThe test now passes, confirming that event listener counts remain stable under high request volume.",
+  "timestamp": "2026-04-03T01:54:13Z",
+  "token_cost": 65015,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 33.875
+  "wall_clock": 82.722
 }

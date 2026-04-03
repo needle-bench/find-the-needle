@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.029755199999999996,
+  "input_tokens": 77037,
+  "output_tokens": 765,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**The needle (SQL injection vulnerability) has been found and patched in** `/app/app/search.py` by manually escaping single quotes (doubling them) in the user-controlled `query` and `category` values before they are interpolated into the dynamic SQL statement.\n\nThe `test.sh` script now passes cleanly:\n\n- Normal searches still return expected results.\n- UNION-based extraction attempts (leaking `users` table data including admin credentials/API keys) return 0 results.\n- Boolean-based bypass attempts (`' OR '1'='1`) are neutralized and do not return all products.\n\nThe fix ensures the search endpoint is no longer vulnerable to SQL injection while preserving core functionality. The test confirms the issue is resolved.",
+  "timestamp": "2026-04-03T01:56:20Z",
+  "token_cost": 77802,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 624.126
+}

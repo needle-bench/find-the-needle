@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.00583634,
-  "input_tokens": 8449,
-  "output_tokens": 1286,
+  "estimated_cost_usd": 0.0049038,
+  "input_tokens": 7311,
+  "output_tokens": 1138,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " Found the bug and fixed it!\n\n**The Needle**: A deadlock in the scheduler shutdown sequence. In the `Run()` method, the code was waiting for the goroutine to finish (`<-done`) **before** closing the queue (`s.queue.Close()`). \n\n**The Bug**: If the scheduling goroutine was blocked inside `Pop()` waiting for items, it would never receive the `ctx.Done()` signal (which is checked in the select, not during `Pop()`). Meanwhile, the main thread waited for the goroutine to exit before calling `Close()`. Result: deadlock - goroutine waits for `Close()`, main thread waits for goroutine.\n\n**The Fix**: Call `s.queue.Close()` **before** waiting for `<-done`. This wakes up any blocked `Pop()` calls, allowing the goroutine to exit cleanly.\n\nThe test now passes: `OK: clean shutdown / PASS`",
-  "timestamp": "2026-04-02T01:47:07Z",
-  "token_cost": 9735,
-  "tool_uses": 9,
+  "summary": " The fix has been applied successfully. Here's a summary of what was wrong and how I fixed it:\n\n## The Bug (Deadlock in Scheduler Shutdown)\n\nIn the `Run()` method of the scheduler, there was a classic synchronization deadlock:\n\n```go\n<-ctx.Done()\n<-done        // Wait for goroutine to exit FIRST (deadlock!)\ns.queue.Close() // Close queue SECOND\n```\n\n**The problem:** The goroutine running `ScheduleOne()` could be blocked inside `Pop()`, waiting for the queue to be closed. But the main goroutine waits for `done` to close before calling `Close()`. Since the goroutine is stuck in `Pop()`, it can never exit, and `done` never closes.\n\n## The Fix\n\n```go\n<-ctx.Done()\ns.queue.Close() // Close queue FIRST (unblocks Pop())\n<-done          // Now goroutine can exit\n```\n\nBy calling `s.queue.Close()` **before** waiting on `<-done`, any `Pop()` calls that are blocked waiting on the condition variable are woken up with the \"queue closed\" error, allowing the goroutine to return and the `done` channel to close.\n\nThe test now passes with \"OK: clean shutdown\".",
+  "timestamp": "2026-04-03T02:14:47Z",
+  "token_cost": 8449,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 98.713
+  "wall_clock": 60.256
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.031573,
+  "input_tokens": 75926,
+  "output_tokens": 705,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The performance issue was caused by a poor `hashCode()` implementation in the `Product` class, which used the `category` field (with only 10 distinct values) instead of the unique `sku` field. This led to severe hash collisions and $O(n)$ lookup times in the `ProductCache`. Additionally, `ProductCache.getBucketIndexForSku()` was unnecessarily reconstructing `Product` objects to compute the hash.\n\nI have:\n1.  Modified `src/Product.java` to use `sku.hashCode()` instead of `category.hashCode()`.\n2.  Simplified `src/ProductCache.java`'s `getBucketIndexForSku()` to directly use `sku.hashCode()`, ensuring consistency with the new `Product.hashCode()`.\n3.  Recompiled the classes and verified the fix with `test.sh`.\n\nThe maximum chain length has been reduced from 1000 to 4, and the lookup performance is now within acceptable bounds.\n\n```java\n// src/Product.java\n@Override\npublic int hashCode() {\n    return sku.hashCode();\n}\n\n// src/ProductCache.java\nprivate int getBucketIndexForSku(String sku) {\n    int hash = sku.hashCode();\n    return Math.abs(hash) % capacity;\n}\n```",
+  "timestamp": "2026-04-03T03:35:07Z",
+  "token_cost": 76631,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 25.245
+}

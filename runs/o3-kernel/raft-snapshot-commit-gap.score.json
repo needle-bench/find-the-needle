@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.29830199999999996,
+  "input_tokens": 341927,
+  "output_tokens": 3526,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The “needle” was in the InstallSnapshot handler.  \nIt forgot to:\n\n1. Advance commitIndex to at least the snapshot’s last-included index.\n2. Compact the local log so the covered entries aren’t replayed later.\n\nBecause commitIndex stayed behind (often at 0), a restart caused\nRestart() to believe nothing was committed after the snapshot and it\nre-applied the same entries, yielding duplicates.\n\nFix (snapshot.go):\n\n```\n\t// Ensure commitIndex includes the snapshot\n\tif snap.LastIncludedIndex > n.commitIndex {\n\t\tn.commitIndex = snap.LastIncludedIndex\n\t}\n\n\t// Drop log entries now covered by the snapshot\n\tn.raftLog.CompactUpTo(snap.LastIncludedIndex)\n```\n\n(plus existing state-machine restore & lastApplied update).\n\nAfter patching, running test.sh shows:\n\n```\nPASS: No duplicate state machine transitions across all rounds\n```\n\nProblem solved.",
+  "timestamp": "2026-04-03T02:58:16Z",
+  "token_cost": 345453,
+  "tool_uses": 34,
+  "turns_to_fix": 1,
+  "wall_clock": 76.631
+}

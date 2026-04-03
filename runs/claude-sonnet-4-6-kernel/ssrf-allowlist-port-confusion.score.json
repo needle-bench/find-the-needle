@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.08599499999999999,
-  "input_tokens": 22945,
-  "output_tokens": 1144,
+  "estimated_cost_usd": 0.103575,
+  "input_tokens": 28350,
+  "output_tokens": 1235,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All 5 tests pass. ✅\n\n## The Needle 🪡\n\n**File:** `/workspace/app/validator.py`\n\n**Bug:** The SSRF blocklist in `is_url_allowed()` was missing IPv6 loopback addresses. An attacker could bypass the proxy's security checks by using `http://[::1]:8888/metadata` or `http://[0:0:0:0:0:0:0:1]:8888/metadata` instead of the blocked `http://127.0.0.1:...`, causing the internal secret (`INTERNAL_SECRET_12345`) to be leaked.\n\n**Fix:** Added the two missing IPv6 loopback forms to `BLOCKED_HOSTS`:\n\n```python\n\"::1\",                   # IPv6 loopback short form      (parsed from [::1])\n\"0:0:0:0:0:0:0:1\",      # IPv6 loopback expanded form   (parsed from [0:0:0:0:0:0:0:1])\n```\n\n`urlparse` strips the surrounding brackets from IPv6 URLs (e.g. `[::1]` → `::1`), so those bracket-free strings are what must appear in the blocklist.",
-  "timestamp": "2026-04-02T01:41:17Z",
-  "token_cost": 24089,
-  "tool_uses": 8,
+  "summary": "All 5 tests pass. ✅\n\n---\n\n## The Needle 🪡\n\n**File:** `/workspace/app/validator.py`\n\n**Bug:** SSRF (Server-Side Request Forgery) via IPv6 loopback bypass.\n\nThe `BLOCKED_HOSTS` blocklist in the URL validator was missing IPv6 loopback addresses. While `127.0.0.1` and `localhost` were blocked, an attacker could bypass the filter by using:\n- `http://[::1]:8888/metadata` — the short-form IPv6 loopback\n- `http://[0:0:0:0:0:0:0:1]:8888/metadata` — the expanded-form IPv6 loopback\n\nBoth forms resolve to the loopback interface and allow the proxy to reach internal services, leaking sensitive data like `INTERNAL_SECRET_12345`.\n\n**Fix:** Added both IPv6 loopback forms to `BLOCKED_HOSTS`:\n```python\n\"::1\",              # IPv6 loopback (short form)\n\"0:0:0:0:0:0:0:1\", # IPv6 loopback (expanded form)\n```",
+  "timestamp": "2026-04-03T02:33:31Z",
+  "token_cost": 29585,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 27.402
+  "wall_clock": 28.972
 }

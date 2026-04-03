@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.029014,
+  "input_tokens": 46394,
+  "output_tokens": 1939,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue in the application was a goroutine leak in the `/compute` HTTP handler. When a client disconnected before the intensive computation was complete, the goroutine performing that computation would continue running indefinitely because it didn't monitor the request context for cancellation.\n\nI fixed this by:\n1. Passing the request context (`r.Context()`) to the `performComputation` function.\n2. Updating `performComputation` to periodically check `ctx.Done()` during its execution loop and sleep intervals.\n3. Updating the `computeHandler` to use a `select` statement that listens for `ctx.Done()` to handle client disconnections or timeouts promptly.\n\nThe `test.sh` script now confirms that goroutines are correctly cleaned up after client disconnects.\n\n```go\n// In computeHandler\nctx := r.Context()\ngo func() {\n    atomic.AddInt64(&activeGoroutines, 1)\n    defer atomic.AddInt64(&activeGoroutines, -1)\n\n    result, err := performComputation(ctx, req)\n    if err == nil {\n        resultCh <- result\n    }\n}()\n\nselect {\ncase result := <-resultCh:\n    w.Header().Set(\"Content-Type\", \"application/json\")\n    json.NewEncoder(w).Encode(result)\ncase <-ctx.Done():\n    return\ncase <-time.After(25 * time.Second):\n    http.Error(w, \"computation timed out\", http.StatusGatewayTimeout)\n}\n\n// In performComputation\nfor i := 0; i < req.Iterations; i++ {\n    select {\n    case <-ctx.Done():\n        return ComputeResult{}, ctx.Err()\n    default:\n    }\n    // ... computation logic ...\n    select {\n    case <-ctx.Done():\n        return ComputeResult{}, ctx.Err()\n    case <-time.After(time.Duration(req.DelayMs) * time.Millisecond):\n    }\n}\n```",
+  "timestamp": "2026-04-03T01:33:38Z",
+  "token_cost": 48333,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 68.006
+}

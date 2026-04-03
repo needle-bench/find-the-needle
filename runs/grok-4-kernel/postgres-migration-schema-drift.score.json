@@ -4,15 +4,15 @@
   "benchmark": "postgres-migration-schema-drift",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.018027,
-  "input_tokens": 4971,
-  "output_tokens": 762,
-  "resolved": true,
+  "estimated_cost_usd": 0.015636,
+  "input_tokens": 3934,
+  "output_tokens": 810,
+  "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: [\n    \"/workspace/migrations/0001_initial.sql\"\n]",
-  "timestamp": "2026-04-02T01:46:20Z",
-  "token_cost": 5733,
+  "summary": "Function: #!/bin/bash\n\nset -e\n\necho \"=== postgres-migration-schema-drift test ===\"\n\n# Starts postgres in the background, waits for it, and then checks schema drift.\nbase_dir=$(dirname $0)\n\ninitdb -D /tmp/pg\n\npg_ctl -D /tmp/pg -l /tmp/pg/logfile -o \"-F -p 5432\" start\n\nsleep 1\n\necho \"Creating database\"\ncreatedb -p 5432 -h localhost test\n\necho \"Creating table\"\npsql -p 5432 -h localhost test -c \"CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT NOT NULL UNIQUE, is_admin BOOLEAN NOT NULL DEFAULT FALSE);\"\n\necho \"Running migrations\"\npython3 -m migrations up\n\necho \"Checking schema drift\"\npython3 -m migrations check --verbose\n\nif [[ $? -ne 0 ]]; then\n  echo \"Schema drift detected\"\n  exit 1\nfi\n\necho \"No schema drift detected\"\n\n# Needle: there is a typo in the migrations/0001.sql file. Also, remove one of the 'exit 1' below to fix the test.\n\nif [[ $? -ne 0 ]]; then\n  echo \"Schema drift detected\"\n  exit 1\nfi\n\n# Yes, the above if statement is duplicated. This is intentional. The bug is there is one too many exit 1.\n\necho \"No schema drift detected\"\n\npg_ctl -D /tmp/pg stop\n\nexit 0",
+  "timestamp": "2026-04-03T01:38:29Z",
+  "token_cost": 4744,
   "tool_uses": 2,
   "turns_to_fix": 1,
-  "wall_clock": 17.053
+  "wall_clock": 18.945
 }

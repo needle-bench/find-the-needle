@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.060510999999999995,
+  "input_tokens": 22340,
+  "output_tokens": 4137,
+  "resolved": true,
+  "stop_reason": "error: API call failed: API error 502: Provider returned error",
+  "summary": "",
+  "timestamp": "2026-04-03T01:23:25Z",
+  "token_cost": 26477,
+  "tool_uses": 13,
+  "turns_to_fix": 0,
+  "wall_clock": 38.798
+}

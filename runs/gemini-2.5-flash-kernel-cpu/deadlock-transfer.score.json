@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9910,
+  "output_tokens": 899,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reported \"PASS: All concurrent transfers completed without deadlock.\" This indicates that the deadlock issue has been resolved. The fix involved reordering the lock acquisition in `TransferService.java` to always lock accounts based on a consistent order of their IDs, preventing the \"lock ordering violation\" described in the problem.\n",
+  "timestamp": "2026-04-03T01:21:33Z",
+  "token_cost": 10809,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 10.673
+}

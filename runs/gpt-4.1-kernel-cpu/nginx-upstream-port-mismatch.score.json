@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.045441999999999996,
+  "input_tokens": 32353,
+  "output_tokens": 520,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Found the problem (the \"needle\"):\n\nThe nginx config in `/etc/nginx/sites-enabled/default` proxies `/api/` to the wrong port:\n\n```nginx\nlocation /api/ {\n    proxy_pass http://127.0.0.1:5001;\n    ...\n}\n```\n\nYour Flask app runs on port 5000, not 5001.\n\n**To fix:** Change `proxy_pass http://127.0.0.1:5001;` to `proxy_pass http://127.0.0.1:5000;`.\n\nWould you like me to apply this fix automatically?",
+  "timestamp": "2026-04-03T01:33:37Z",
+  "token_cost": 32873,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 22.458
+}

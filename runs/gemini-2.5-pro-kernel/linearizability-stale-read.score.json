@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.058211374999999996,
+  "input_tokens": 10651,
+  "output_tokens": 4995,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the needle and run the test. The issue was that read requests were not linearizable, which could cause stale reads after network partitions. I have fixed this by ensuring that all read requests are handled by the leader. The `test.sh` now passes, verifying the fix.",
+  "timestamp": "2026-04-03T03:14:05Z",
+  "token_cost": 15646,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 75.807
+}

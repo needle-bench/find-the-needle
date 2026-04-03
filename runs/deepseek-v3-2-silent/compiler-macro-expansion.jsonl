@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:25:05Z", "benchmark": "compiler-macro-expansion", "model": "deepseek-v3-2", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# compiler-macro-expansion\n\n## Project\n\nA Rust code generation engine (`codegen-engine`) that takes schema definitions"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/./test.sh"], "tokens_in": 813, "tokens_out": 73, "test_exit": 1}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app", "/app/.", "/app/\"*.rs\""], "tokens_in": 3544, "tokens_out": 103, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app/test.sh"], "tokens_in": 3687, "tokens_out": 49, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:25:16Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.12993462999999997,
+  "input_tokens": 1288743,
+  "output_tokens": 17572,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "It appears that `getReadIndexWaiter` is missing again. This means that my bulk edit (which I thought was a failed edit) actually inserted the current corrected version of the code which did not include `getReadIndexWaiter`. I am going to insert the `getReadIndexWaiter` code.\n\nI need to re-insert the `getReadIndexWaiter`. I will insert it after `setReadIndexWaiter`.\n",
+  "timestamp": "2026-04-03T02:06:34Z",
+  "token_cost": 1306315,
+  "tool_uses": 65,
+  "turns_to_fix": 1,
+  "wall_clock": 161.189
+}

@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Perfect! The test now passes. The fix successfully prevents duplicate transfers by moving the idempotency check before any account mutations and using the INSERT operation's atomicity to ensure only one request can process a given idempotency key.\n\n**Summary of the fix:**\n- **File:** `app/processor.py`\n- **Change:** Moved idempotency check before debit operation and record the idempotency key before performing the transfer\n- **Result:** Race condition eliminated, money is conserved (A=500, B=1500, Total=2000)",
-  "timestamp": "2026-04-02T02:02:48Z",
+  "summary": "Perfect! The test now passes. The fix successfully prevents duplicate transfers while ensuring the single transfer completes correctly.\n\n**Summary of the fix:**\n\nThe issue was a race condition in the idempotency checking logic. The original code:\n1. Checked for existing idempotency key (SELECT)\n2. Debited the account\n3. Inserted the idempotency record\n\nMultiple concurrent requests could all pass step 1 before any completed step 3, leading to duplicate debits.\n\n**The solution:**\n- Use `INSERT OR IGNORE` to atomically claim the idempotency key\n- Check `cursor.rowcount` to determine if the insert succeeded (0 = duplicate, 1 = new)\n- Only proceed with the transfer if we successfully claimed the idempotency key\n- This makes the check-and-claim operation atomic at the database level\n\nThe fix ensures exactly-one semantics: the transfer executes exactly once regardless of how many concurrent retries the gateway sends.",
+  "timestamp": "2026-04-03T04:46:23Z",
   "token_cost": 0,
-  "tool_uses": 11,
-  "turns_to_fix": 12,
-  "wall_clock": 42.708
+  "tool_uses": 17,
+  "turns_to_fix": 18,
+  "wall_clock": 71.975
 }

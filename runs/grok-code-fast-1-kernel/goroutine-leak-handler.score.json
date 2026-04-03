@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.013064739999999997,
+  "input_tokens": 37238,
+  "output_tokens": 7147,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle in the haystack is the goroutine leak in the HTTP handler. To fix it, I added context cancellation support to the `performComputation` function and the `computeHandler`.\n\nRun `./test.sh` to verify the fix passes.",
+  "timestamp": "2026-04-03T01:32:23Z",
+  "token_cost": 44385,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 60.092
+}

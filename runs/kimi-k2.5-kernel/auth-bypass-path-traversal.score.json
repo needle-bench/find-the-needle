@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.008252883,
+  "input_tokens": 15294,
+  "output_tokens": 1468,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix is complete. Here's what I found and fixed:\n\n**The Needle (Bug):**\nThe authentication bypass vulnerability was in `/app/app/middleware.go`. The `authMiddleware` was checking `r.URL.Path` (the raw request path) to determine if a route required authentication. However, the Go HTTP router normalizes paths (collapsing double slashes `//` and resolving `..` traversal) before matching handlers.\n\nThis allowed two bypass techniques:\n1. **Double-slash:** `//api/admin` - The raw path doesn't start with `/api/`, so auth was skipped, but the router normalized it to `/api/admin`\n2. **Path traversal:** `/health/../api/data` - Same issue, raw path doesn't match but cleaned path does\n\n**The Fix:**\nAdded `path.Clean()` to normalize the path before checking if it starts with `/api/`:\n\n```go\ncleanPath := path.Clean(r.URL.Path)\nif strings.HasPrefix(cleanPath, \"/api/\") {\n```\n\nThis ensures the middleware and router both see the same normalized path, preventing the bypass.",
+  "timestamp": "2026-04-03T01:21:30Z",
+  "token_cost": 16762,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 119.761
+}

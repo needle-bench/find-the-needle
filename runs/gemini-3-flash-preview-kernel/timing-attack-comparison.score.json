@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0237904,
+  "input_tokens": 47948,
+  "output_tokens": 501,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The vulnerability was a timing side-channel in the password hash comparison function `compareHashes`. The original implementation used the `==` operator for string comparison, which performs a short-circuiting equality check. This allows an attacker to infer the content of the stored hash character-by-character by measuring the time taken for the comparison.\n\nI fixed this by replacing the short-circuiting equality operator with `crypto/subtle.ConstantTimeCompare`, which ensures the comparison takes the same amount of time regardless of how many characters match, provided the lengths are equal.\n\n```go\npackage auth\n\nimport \"crypto/subtle\"\n\n// compareHashes compares two hex-encoded hash strings for equality in constant time.\nfunc compareHashes(stored, input string) bool {\n\tif len(stored) != len(input) {\n\t\treturn false\n\t}\n\treturn subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1\n}\n```\n\nThe fix was verified by running `test.sh`, which performs both a static analysis of the source code and a timing analysis to ensure the side-channel is mitigated.",
+  "timestamp": "2026-04-03T04:51:46Z",
+  "token_cost": 48449,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 17.039
+}

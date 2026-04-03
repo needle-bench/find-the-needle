@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 1.0452,
+  "input_tokens": 187765,
+  "output_tokens": 4255,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Let me summarize what the problem was and how I fixed it:\n\n## Problem: TLS Certificate Chain Ordering (RFC 5246 Violation)\n\n**Root Cause:** The PEM bundle at `/certs/chain.pem` was assembled during Docker build as `cat root.crt intermediate.crt leaf.crt`. When Go's `tls.X509KeyPair` loaded this bundle, it correctly identified the leaf certificate (matching the private key) and placed it at `Certificate[0]`. However, the remaining chain certificates were appended in their original PEM file order: **root CA, then intermediate CA**.\n\nThis produced the chain: `[leaf, root, intermediate]` instead of the correct `[leaf, intermediate, root]`.\n\n**Why it matters:** RFC 5246 Section 7.4.2 requires that each certificate in the chain is followed by its issuer. Strict TLS validators (BoringSSL, Java TLS stacks, embedded devices) process the chain sequentially and fail because `cert[1]` (root CA) did not issue `cert[0]` (leaf) — the intermediate CA did.\n\n**Fix:** Added a `sortChain()` function in `/app/app/tlssetup/loader.go` that, after loading via `X509KeyPair`, reorders the chain certificates (indices 1..n) by walking the issuer relationship. Starting from the leaf, it finds each certificate's issuer using Authority/Subject Key ID matching (with CN fallback), producing the correct order: `[leaf, intermediate CA, root CA]`.",
+  "timestamp": "2026-04-03T03:34:21Z",
+  "token_cost": 192020,
+  "tool_uses": 39,
+  "turns_to_fix": 1,
+  "wall_clock": 230.923
+}

@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 7354,
-  "output_tokens": 1228,
+  "input_tokens": 9080,
+  "output_tokens": 1309,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Needle (Bug):** The server had a stale cache problem. When products were updated (`PUT /products/:id`) or created (`POST /products`), the cache was never invalidated. This meant subsequent reads would return stale cached data until the 5-minute TTL expired.\n\n**The Fix:** Added cache invalidation after write operations in `server.py`:\n\n1. **`_update_product`**: After updating a product in the store, invalidate both the individual product cache (`products:{id}`) and the product list cache (`products:list`).\n\n2. **`_create_product`**: After creating a new product, invalidate the product list cache (`products:list`) so the new product appears in listings.",
-  "timestamp": "2026-04-02T02:23:17Z",
-  "token_cost": 8582,
+  "summary": "All tests pass. Here's what the bug was and the fix:\n\n**The Problem:** The server had a caching layer with a 5-minute TTL, but after write operations (updating or creating products), the cache was never invalidated. This meant:\n\n1. **`_update_product`**: After updating a product in the store, the cache still held the old product data. Subsequent `GET /products/{id}` requests would return stale cached data until the TTL expired.\n\n2. **`_create_product`**: After creating a new product, the cached product list was never invalidated. Subsequent `GET /products` requests would return the old list (missing the new product) until the TTL expired.\n\n**The Fix:** Added cache invalidation after each write operation:\n- In `_update_product`: `cache.delete(f'products:{product_id}')` and `cache.delete('products:list')` to clear both the individual product cache and the list cache.\n- In `_create_product`: `cache.delete('products:list')` to clear the list cache so the new product appears immediately.",
+  "timestamp": "2026-04-03T01:25:26Z",
+  "token_cost": 10389,
   "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 31.558
+  "wall_clock": 34.532
 }

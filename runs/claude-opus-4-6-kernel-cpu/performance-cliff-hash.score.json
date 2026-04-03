@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8922,
+  "output_tokens": 1031,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. \n\n**The needle:** In `Product.java`, the `hashCode()` method was using `category.hashCode()` instead of `sku.hashCode()`. Since there are only 10 distinct categories, all 10,000 products were being hashed into just ~10 buckets, causing massive hash collisions and O(n) lookup degradation. The fix was simply changing `category.hashCode()` to `sku.hashCode()`, which properly distributes items across buckets (max chain length dropped from ~1000 to 4).",
+  "timestamp": "2026-04-03T02:33:39Z",
+  "token_cost": 9953,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 29.997
+}

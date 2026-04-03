@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0354315,
+  "input_tokens": 8415,
+  "output_tokens": 2919,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have fixed the SQL injection vulnerability in `app/search.py`. The `test.sh` script now passes, confirming the fix.",
+  "timestamp": "2026-04-03T05:14:33Z",
+  "token_cost": 11334,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 93.238
+}

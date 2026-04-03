@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.074532,
+  "input_tokens": 19859,
+  "output_tokens": 997,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. ✅\n\n## Summary\n\n**The Needle:** In `/app/app/CsvReader.java`, the constructor was configured to read files using `ISO-8859-1` encoding:\n```java\nthis.charset = Charset.forName(\"ISO-8859-1\");\n```\n\n**The Problem:** The `customers.csv` file is UTF-8 encoded and contains non-ASCII characters (e.g., `é`, `ü`, `ø`, `ñ`, `ç`, `á`). Reading a UTF-8 file as ISO-8859-1 silently misinterprets the multi-byte UTF-8 sequences, producing garbled/corrupted characters in the output.\n\n**The Fix:** Changed the charset to `UTF-8`:\n```java\nthis.charset = Charset.forName(\"UTF-8\");\n```\n\nThis ensures all international customer names (`Renée Duböis`, `Hans Müller`, `María García`, `Søren Kirkegård`, `François Léger`, `Zoltán Kovács`) and city names (`München`, `København`, `Budapest`) are read and preserved correctly.",
+  "timestamp": "2026-04-03T01:23:38Z",
+  "token_cost": 20856,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 27.673
+}

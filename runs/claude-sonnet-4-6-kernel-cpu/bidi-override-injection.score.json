@@ -6,13 +6,13 @@
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
   "input_tokens": 2347,
-  "output_tokens": 2236,
+  "output_tokens": 2528,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the **needle** found and the fix applied:\n\n---\n\n## The Bug: Unicode BIDI Override Privilege Escalation\n\n### What was wrong\n\n**`auth.py` — `check_admin_access()`** was using a **`_render_display_name()`** function to transform a stored username before comparing it to the admin allowlist. This function processed Unicode BIDI control characters like `U+202E` (RIGHT-TO-LEFT OVERRIDE), which visually reverses text.\n\nAn attacker could register as `\\u202e` + `nimda` — which *visually renders* as `admin` — and the `check_admin_access` function would see the rendered form `\"admin\"`, match it against the allowlist, and **grant full admin access**.\n\n### The fixes\n\n1. **`auth.py` — `check_admin_access()`**: Replaced the `_render_display_name()` comparison with a **direct comparison of the raw stored username**. Access control decisions must never rely on visual/rendered representations.\n\n2. **`sanitizer.py` — `sanitize_username()`**: Added a step to **strip all Unicode BIDI control characters** (`U+200E`, `U+200F`, `U+202A`–`U+202E`, `U+2066`–`U+2069`) from usernames at registration time, so the attack vector is neutralized at the input layer as well.",
-  "timestamp": "2026-04-02T02:22:37Z",
-  "token_cost": 4583,
-  "tool_uses": 16,
+  "summary": "All tests pass. Here's a summary of what was found and fixed:\n\n---\n\n## The Needle: Unicode BIDI Override Privilege Escalation\n\n### The Bug\n\nIn `auth.py`, the `check_admin_access()` function was checking the **visually-rendered** form of a username against the admin allowlist instead of the **raw stored** username:\n\n```python\n# BUGGY: renders the display name first, then compares\ndisplay_name = _render_display_name(username)\nif display_name in ADMIN_USERS:   # ← compared visual rendering!\n    return True, \"admin access granted\"\n```\n\nThe `_render_display_name()` function simulates Unicode BIDI (bidirectional) text rendering. A username registered as `\\u202e` + `\"nimda\"` (U+202E is the **Right-to-Left Override** character) would visually render as **`\"admin\"`** — tricking the allowlist check into granting admin privileges.\n\n### The Fixes\n\n1. **`auth.py` — `check_admin_access()`**: Compare the **raw stored username** directly against the allowlist, never the rendered display form:\n   ```python\n   if username in ADMIN_USERS:   # ← raw stored username, not rendered\n   ```\n\n2. **`sanitizer.py` — `sanitize_username()`**: Strip all Unicode BIDI control characters (`\\u202e`, `\\u202d`, `\\u202c`, etc.) at registration time, so they can never be stored in the first place. This is defense-in-depth — even if the auth check were somehow bypassed, the malicious characters would never make it into the user database.",
+  "timestamp": "2026-04-03T01:18:21Z",
+  "token_cost": 4875,
+  "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 50.813
+  "wall_clock": 53.756
 }

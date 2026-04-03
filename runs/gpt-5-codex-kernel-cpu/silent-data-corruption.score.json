@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.11208125000000001,
+  "input_tokens": 102593,
+  "output_tokens": 5368,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue causing silent truncation was that `fileproc` only read the first 64 KB of the input file. I replaced the single-buffer read with a loop that streams the input: we repeatedly read chunks into the 64 KB buffer, run each through the transform, and write them out, keeping track of the total bytes processed. That ensures files of any size are handled completely. After rebuilding and copying the new binary, `./test.sh` now passes:\n\n```\nInput file size: 102400 bytes\nOutput file size: 102400 bytes\nPASS: File processed correctly, no data loss\nProcessed /tmp/input.dat -> /tmp/output.dat (102400 bytes)\n```\n\nSo the regression test confirms there’s no more data loss.",
+  "timestamp": "2026-04-03T02:20:29Z",
+  "token_cost": 107961,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 68.927
+}

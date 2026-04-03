@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:23:19Z", "benchmark": "off-by-one-array-slice", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/."], "tokens_in": 74, "tokens_out": 146, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 319, "tokens_out": 101, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.", "/app/config.py", "/app/data.py"], "tokens_in": 695, "tokens_out": 88, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/main.py", "/app/processor.py", "/app/report.py"], "tokens_in": 1095, "tokens_out": 64, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh", "/app/main.py"], "tokens_in": 1829, "tokens_out": 82, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:23:40Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

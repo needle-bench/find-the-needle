@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.368049,
+  "input_tokens": 112103,
+  "output_tokens": 2116,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 3 rounds pass. Here's a summary of the bug and fix:\n\n---\n\n## The Needle 🪡\n\n**File:** `/app/app/snapshot.go` — `InstallSnapshot()`\n\n### Root Cause\n\nWhen a follower received and installed a snapshot, `lastApplied` was correctly updated to `snap.LastIncludedIndex`, but **`commitIndex` was left at 0**. This created a dangling inconsistency:\n\n```\nlastApplied = 10  (snapshot restored state through index 10)\ncommitIndex = 0   (never updated!)\n```\n\nWhen the node **restarted**, `Restart()` saved `commitIndex = 0` as `savedCommitIndex`. During recovery, it compared `savedCommitIndex (0) <= snapshotAppliedTo (10)`, fell into the `else` branch, and reset `lastApplied = 0`. The state machine was correctly restored from the snapshot (index 10), but `lastApplied` was dragged back to 0.\n\nWhen the new leader then sent `AppendEntries` with `leaderCommit=13`, `applyEntries()` started replaying from index `lastApplied+1 = 1` — **re-applying entries 1–10 that were already covered by the snapshot**, causing 10 duplicate state machine transitions.\n\n### Fix\n\nUpdate `commitIndex` alongside `lastApplied` in `InstallSnapshot()`:\n\n```go\n// Before (buggy):\nn.lastApplied = snap.LastIncludedIndex\n\n// After (fixed):\nif snap.LastIncludedIndex > n.commitIndex {\n    n.commitIndex = snap.LastIncludedIndex\n}\nn.lastApplied = snap.LastIncludedIndex\n```\n\nThis ensures that on restart, `savedCommitIndex = 10`, the recovery replay loop correctly starts from index 11, and no entries already covered by the snapshot are re-applied.",
+  "timestamp": "2026-04-03T02:14:10Z",
+  "token_cost": 114219,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 50.796
+}

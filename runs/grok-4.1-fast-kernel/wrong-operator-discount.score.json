@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00256145,
+  "input_tokens": 20371,
+  "output_tokens": 2313,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS: Discount calculations are correct\n\n**Fix applied:** Updated `pricing.py` to correct the discount calculation formula from `subtotal + discount_percent / 100` to `subtotal * (discount_percent / 100)`. This ensures percentage discounts are computed as multiplication, not addition. Verified by running `./test.sh`.",
+  "timestamp": "2026-04-03T03:34:45Z",
+  "token_cost": 22684,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 20.158
+}

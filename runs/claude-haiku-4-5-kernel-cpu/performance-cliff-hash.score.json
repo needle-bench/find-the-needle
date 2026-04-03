@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 19175,
+  "output_tokens": 1313,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "🎉 **Success!** The test passes now!\n\n## Summary\n\n**The Needle:** The bug was in the `Product.java` file's `hashCode()` method on line 30.\n\n**The Problem:** The `hashCode()` method was returning `category.hashCode()` instead of `sku.hashCode()`. Since:\n- There are only ~10 categories but 10,000 unique products (identified by SKU)\n- All products in the same category would hash to the same bucket\n- This caused severe hash collisions (max chain length of 1000)\n\n**The Fix:** Changed line 30 from:\n```java\nreturn category.hashCode();\n```\nto:\n```java\nreturn sku.hashCode();\n```\n\nThis aligns the `hashCode()` implementation with the `equals()` method (which compares by SKU), properly distributing the 10,000 items across 5,991 buckets with a maximum chain length of just 4 instead of 1000. The test now passes! ✅",
+  "timestamp": "2026-04-03T01:00:56Z",
+  "token_cost": 20488,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 21.906
+}

@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:17:32Z", "benchmark": "memory-leak-event-listener", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/."], "tokens_in": 74, "tokens_out": 152, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 323, "tokens_out": 53, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:17:42Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

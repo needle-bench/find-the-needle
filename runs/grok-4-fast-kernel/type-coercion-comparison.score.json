@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0032512,
+  "input_tokens": 18482,
+  "output_tokens": 3741,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was in `/app/utils.js`: `query.minRating` was parsed as a string instead of an integer, causing the `filter.js` rating filter to behave incorrectly. I fixed it by using `parseInt` on the `min_rating` parameter.\n\n`test.sh` now passes.",
+  "timestamp": "2026-04-03T02:38:34Z",
+  "token_cost": 22223,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 29.315
+}

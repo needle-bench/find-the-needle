@@ -4,15 +4,15 @@
   "benchmark": "race-condition-counter",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.011216,
-  "input_tokens": 19576,
-  "output_tokens": 476,
+  "estimated_cost_usd": 0.0052205,
+  "input_tokens": 7489,
+  "output_tokens": 492,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The issue was a classic race condition in the `incrementCounter` function in `app/counter.js`. It was performing a non-atomic read-modify-write operation (`get` followed by `set` in the application code), which caused concurrent requests to overwrite each other's increments.\n\nI have fixed this by using the atomic Redis `INCR` command, ensuring that each increment operation is handled safely by the Redis server regardless of concurrency.\n\n```javascript\n// app/counter.js\n\nasync function incrementCounter() {\n  const client = createClient();\n  const newValue = await client.incr(COUNTER_KEY);\n  logger.debug(`Counter incremented to: ${newValue}`);\n  return newValue;\n}\n```\n\nRunning `test.sh` now confirms that 100 concurrent increments correctly result in a final count of 100.",
-  "timestamp": "2026-04-02T03:39:16Z",
-  "token_cost": 20052,
-  "tool_uses": 11,
+  "summary": "The needle was a race condition in `app/counter.js` where the counter was being incremented using a non-atomic read-modify-write pattern. Multiple concurrent requests were reading the same initial value from Redis, incrementing it locally, and then writing back the same new value, leading to lost increments.\n\nI fixed this by using the atomic Redis `INCR` command, which ensures that the increment operation is performed safely even with high concurrency.\n\n```javascript\n/**\n * Increment the shared counter by 1.\n */\nasync function incrementCounter() {\n  const client = createClient();\n\n  const newValue = await client.incr(COUNTER_KEY);\n\n  logger.debug(`Counter incremented to: ${newValue}`);\n  return newValue;\n}\n```\n\nAfter applying this fix, the `test.sh` script confirmed that all 100 concurrent increments are correctly captured.",
+  "timestamp": "2026-04-03T03:48:30Z",
+  "token_cost": 7981,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 332.452
+  "wall_clock": 20.222
 }

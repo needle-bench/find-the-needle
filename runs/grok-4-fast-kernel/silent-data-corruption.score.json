@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0043186,
+  "input_tokens": 36501,
+  "output_tokens": 3971,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Input file size: 102400 bytes\nOutput file size: 102400 bytes\nPASS: File processed correctly, no data loss",
+  "timestamp": "2026-04-03T02:16:37Z",
+  "token_cost": 40472,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 26.202
+}

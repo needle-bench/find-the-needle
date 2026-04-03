@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.25554499999999997,
+  "input_tokens": 42019,
+  "output_tokens": 1818,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n## The Needle (Bug): Missing Input Validation for Negative Inventory\n\n**Problem:** The `/inventory/:sku/adjust` endpoint in `routes.ts` allowed inventory adjustments that would result in negative quantities. For example, if a product had 110 units in stock, you could adjust by -200, leaving the inventory at -90 — an impossible state.\n\n**Fix:** Added a validation check in `routes.ts` before calling `adjustQuantity()`:\n\n```typescript\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'adjustment would result in negative inventory' }));\n  return;\n}\n```\n\nThis ensures that any adjustment that would make the inventory go below zero is rejected with a `400 Bad Request` status, while valid negative adjustments (e.g., -50 from 110) are still allowed.",
+  "timestamp": "2026-04-03T02:14:54Z",
+  "token_cost": 43837,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 114.064
+}

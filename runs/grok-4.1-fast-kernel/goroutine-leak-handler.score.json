@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.020514099999999993,
+  "input_tokens": 61845,
+  "output_tokens": 30611,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The \"needle\" was a **goroutine leak** in `app/main.go` where background compute goroutines weren't cancelled on client disconnect (curl `-m 1` timeouts).\n\n**Root cause:**\n- `computeHandler` spawns a goroutine for `performComputation` that ignores HTTP request context.\n- Client disconnects don't cancel the goroutine → it runs full `iterations` (500) + delays → leaks ~2 goroutines per request ×20 = ~40 leaked.\n\n**Fix applied:**\n1. Added `import \"context\"`\n2. `ctx := r.Context()` in handler (cancels on disconnect/timeout).\n3. Pass `ctx` to `performComputation(req, ctx)`.\n4. Check `ctx.Err()` + `select { case <-ctx.Done(): ... }` in loop.\n5. Handler `select` watches `<-ctx.Done(): return`.\n\n**Verification:** `./test.sh` now **PASS**es (baseline:4, after:4, leaked:0).\n\nServer rebuilt automatically by test. No other files changed.",
+  "timestamp": "2026-04-03T01:44:33Z",
+  "token_cost": 92456,
+  "tool_uses": 36,
+  "turns_to_fix": 1,
+  "wall_clock": 261.095
+}

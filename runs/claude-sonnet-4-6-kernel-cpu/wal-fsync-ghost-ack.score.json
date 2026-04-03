@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 4134,
+  "output_tokens": 5339,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the **two bugs** found and fixed:\n\n---\n\n## The Needle(s)\n\n### Bug 1 — Stale sync-offset sidecar (the root durability bug) in `server.go` + `wal.go`\n\n**Problem:** `server.go`'s `handleCommand` called `writeSyncOffset()` after every `SET`. But `writeSyncOffset()` read `wal.LastSyncOffset()` — which returns the offset of the *last background fsync*, not the current write. Worse, this was called **before** any sync happened, so the sidecar file was constantly updated with the *pre-write* (or never-updated) offset. When `SimulateCrash` read the sidecar to truncate the WAL, it truncated to a point that discarded even already-fsynced data.\n\n**Fix:** Moved sidecar-writing into `WAL.Sync()` itself — the sidecar is only updated *after* a real `fsync()` completes, ensuring it always reflects truly durable data.\n\n### Bug 2 — `+OK` returned before fsync (the acknowledgment durability bug) in `server.go`\n\n**Problem:** `Append()` only buffered data in memory. The server returned `+OK` immediately, but the background sync goroutine ran every 100ms. A `kill -9` before the next tick meant all acknowledged writes were lost.\n\n**Fix:** The `SET` handler now calls `wal.Sync()` synchronously after `Append()`, ensuring data is flushed and fsynced to disk *before* `+OK` is sent to the client.\n\n### Bug 3 — Summary line always contained \"LOST\" in `client.go`\n\n**Problem:** `VerifyBatch` always printed `\"X LOST out of N acked\"` — even when `X=0` — so `grep -q \"LOST\"` in `test.sh` always triggered the failure condition.\n\n**Fix:** The summary only uses the word \"LOST\" (uppercase) when there are actual lost entries; zero-loss summary uses lowercase \"lost\".",
+  "timestamp": "2026-04-03T02:50:34Z",
+  "token_cost": 9473,
+  "tool_uses": 28,
+  "turns_to_fix": 1,
+  "wall_clock": 103.156
+}

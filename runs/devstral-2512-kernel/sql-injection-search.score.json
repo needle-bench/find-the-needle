@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0062498399999999996,
+  "input_tokens": 21537,
+  "output_tokens": 606,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix works. The test confirms that:\n\n1. Normal search still works (found 1 result for \"Mouse\")\n2. SQL injection UNION attack no longer leaks user data (0 results)\n3. Boolean SQL injection no longer bypasses the search filter (0 results instead of all 10 products)\n\nThe vulnerability has been fixed by replacing the raw SQL string concatenation with parameterized queries using the `execute` method instead of `execute_raw`.",
+  "timestamp": "2026-04-03T03:26:09Z",
+  "token_cost": 22143,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 14.133
+}

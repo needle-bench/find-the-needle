@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:47:48Z", "benchmark": "type-coercion-comparison", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 371, "tokens_out": 185, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 628, "tokens_out": 210, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 808, "tokens_out": 377, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/data.js", "/app/filter.js", "/app/utils.js", "/app/server.js", "/app/test.sh", "/app/package.json"], "tokens_in": 855, "tokens_out": 468, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:47:59Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

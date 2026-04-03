@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.035971300000000005,
+  "input_tokens": 94045,
+  "output_tokens": 2657,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `WaitForApply` function is currently inside the `Node` struct definition. It should be outside.\n\nLet's correct it.",
+  "timestamp": "2026-04-03T01:30:23Z",
+  "token_cost": 96702,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 31.429
+}

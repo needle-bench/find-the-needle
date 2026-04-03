@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:44:35Z", "benchmark": "silent-data-corruption", "model": "qwen-plus", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# silent-data-corruption\n\n## Project\n\nA Rust CLI tool (`fileproc`) that processes files through a transformation pipel"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 413, "tokens_out": 182, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/transform.rs"], "tokens_in": 1180, "tokens_out": 268, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1713, "tokens_out": 230, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:44:49Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

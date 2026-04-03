@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.024477800000000004,
+  "input_tokens": 918374,
+  "output_tokens": 31572,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T03:35:57Z",
+  "token_cost": 949946,
+  "tool_uses": 81,
+  "turns_to_fix": 1,
+  "wall_clock": 85.274
+}

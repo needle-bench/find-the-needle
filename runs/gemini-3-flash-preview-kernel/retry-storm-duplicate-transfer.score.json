@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.05430029999999999,
-  "input_tokens": 176187,
-  "output_tokens": 2931,
+  "estimated_cost_usd": 0.22335834999999993,
+  "input_tokens": 1127492,
+  "output_tokens": 5922,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The \"needle in the haystack\" was a race condition in `app/processor.py`. The original code used a \"non-atomic\" approach to idempotency by committing a debit to the source account, sleeping for 50ms (simulating work), and only then checking if the idempotency key had been recorded. If multiple concurrent requests arrived with the same key, they could all past the initial check, result in multiple debits, and fail to maintain the account total.\n\nI fixed this by wraping the entire transfer logic (idempotency check, balance check, debit, credit, and recording the transfer) within a single ACID transaction using `BEGIN IMMEDIATE`. This ensures that only one request can enter the critical section for a specific transfer, making the operation truly idempotent and thread-safe.\n\n```python\ndef execute_transfer(from_acct, to_acct, amount, idempotency_key):\n    conn = get_db()\n    try:\n        # Use a transaction for all operations to ensure atomicity and isolation.\n        conn.execute(\"BEGIN IMMEDIATE\")\n\n        # Check idempotency first, within the transaction.\n        existing = conn.execute(\n            \"SELECT result FROM completed_transfers WHERE idempotency_key = ?\",\n            (idempotency_key,)\n        ).fetchone()\n\n        if existing is not None:\n            conn.rollback()\n            return {\"status\": \"duplicate\", \"message\": \"transfer already completed\"}\n\n        # Check if source account has sufficient funds\n        row = conn.execute(\n            \"SELECT balance FROM accounts WHERE name = ?\",\n            (from_acct,)\n        ).fetchone()\n\n        if row is None:\n            conn.rollback()\n            return {\"status\": \"error\", \"message\": f\"account {from_acct} not found\"}\n\n        if row[\"balance\"] < amount:\n            conn.rollback()\n            return {\"status\": \"error\", \"message\": \"insufficient funds\"}\n\n        # Debit source account\n        conn.execute(\n            \"UPDATE accounts SET balance = balance - ? WHERE name = ?\",\n            (amount, from_acct)\n        )\n\n        # Credit destination account\n        conn.execute(\n            \"UPDATE accounts SET balance = balance + ? WHERE name = ?\",\n            (amount, to_acct)\n        )\n\n        # Record the completed transfer for idempotency\n        conn.execute(\n            \"INSERT INTO completed_transfers (idempotency_key, from_account, to_account, amount, result) \"\n            \"VALUES (?, ?, ?, ?, ?)\",\n            (idempotency_key, from_acct, to_acct, amount, \"success\")\n        )\n        \n        conn.commit()\n        return {\"status\": \"success\", \"message\": f\"transferred {amount} from {from_acct} to {to_acct}\"}\n    # ... error handling ...\n```\n\nBy running `test.sh`, the fix was verified to correctly handle concurrent requests under simulated network failure conditions, maintaining a consistent total balance and executing the transfer exactly once.",
-  "timestamp": "2026-04-02T03:42:38Z",
-  "token_cost": 179118,
-  "tool_uses": 26,
+  "summary": "",
+  "timestamp": "2026-04-03T04:23:51Z",
+  "token_cost": 1133414,
+  "tool_uses": 61,
   "turns_to_fix": 1,
-  "wall_clock": 110.983
+  "wall_clock": 649.631
 }

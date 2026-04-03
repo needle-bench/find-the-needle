@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "relaxed-ordering-ringbuf",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.5028600000000001,
+  "input_tokens": 85027,
+  "output_tokens": 3109,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the fix:\n\n## The Needle: Incorrect Memory Ordering in SPSC Ring Buffer\n\n**The bug** was in `/app/ring_buffer.c` — all atomic operations on `write_idx` and `read_idx` used `memory_order_relaxed`, which is incorrect for a lock-free SPSC queue on weakly-ordered architectures (like ARM64).\n\nThe code comments claimed this was safe because they only targeted x86-TSO, but that's a portability bug that ThreadSanitizer catches and that causes real data races/corruption on ARM.\n\n**The fix** — proper acquire/release semantics on the four critical atomic operations:\n\n| Operation | Before (broken) | After (fixed) | Why |\n|---|---|---|---|\n| **Producer** store to `write_idx` | `relaxed` | **`release`** | Ensures the slot data write is visible before the consumer sees the new index |\n| **Producer** load of `read_idx` | `relaxed` | **`acquire`** | Ensures the producer sees the consumer's completed reads before reusing slots |\n| **Consumer** load of `write_idx` | `relaxed` | **`acquire`** | Ensures the consumer sees the producer's slot data after seeing the new index |\n| **Consumer** store to `read_idx` | `relaxed` | **`release`** | Ensures the slot read completes before the producer sees the freed slot |",
+  "timestamp": "2026-04-03T02:58:55Z",
+  "token_cost": 88136,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 183.185
+}

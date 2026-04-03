@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.033694,
+  "input_tokens": 27464,
+  "output_tokens": 1246,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 **Found and fixed the needle!**\n\n## Summary\n\n**The Bug:** In `/app/pricing.py`, the `calculate_discount_amount` function had a wrong operator:\n\n```python\n# WRONG - uses addition (+)\ndiscount = subtotal + discount_percent / 100\n```\n\n**The Fix:** Changed it to use multiplication (*):\n\n```python\n# CORRECT - uses multiplication (*)\ndiscount = subtotal * discount_percent / 100\n```\n\n**What was happening:** \n- The bug was using addition instead of multiplication to calculate discount amounts\n- For example, with a subtotal of $1098.94 and a 20% discount, it was calculating: `1098.94 + 20/100 = 1098.94 + 0.2 = 1099.14` (wrong!)\n- The correct calculation should be: `1098.94 * 20 / 100 = 219.79` (correct!)\n\nThe test now passes all 4 test cases with correct discount calculations. ✅",
+  "timestamp": "2026-04-03T02:00:28Z",
+  "token_cost": 28710,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 20.507
+}

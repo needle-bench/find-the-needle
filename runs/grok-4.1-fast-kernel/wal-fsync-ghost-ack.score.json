@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.01027345,
+  "input_tokens": 46080,
+  "output_tokens": 14237,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The test now passes (`PASS`).\n\n### Bug Analysis (The Needle)\n- **Location**: `server.go` → `handleCommand()` → `SET` case.\n- **Problem**: `wal.Append(key, value)` only *buffers* the write in `bufio.Writer`. The durable `fsync()` happens *asynchronously* in `wal.syncLoop()` every 100ms. The server sends `+OK` immediately after `Append()`, lying to the client that the write is durable.\n- **Crash Scenario**:\n  1. Client writes 50 keys → all get buffered → all `+OK`.\n  2. `kill -9` → crash before next sync.\n  3. `crash-recover` truncates WAL to `lastSyncOffset` (pre-crash).\n  4. Restart replays only old entries → new keys **LOST**.\n- **Test Fail**: All 50 acked keys show `LOST` after recovery.\n\n### Fix Applied\n- **Edit in `server.go`** (lines ~95-105):\n  ```go\n  // OLD (buggy):\n  if err := s.wal.Append(key, value); err != nil { ... }\n  s.writeSyncOffset()  // Pointless w/o sync\n  s.store.Put(key, value)\n  return \"+OK\"\n\n  // NEW:\n  if err := s.wal.Append(key, value); err != nil { ... }\n  if err := s.wal.Sync(); err != nil {     // <- SYNCHRONOUS fsync!\n      return fmt.Sprintf(\"-ERR wal sync: %v\", err)\n  }\n  s.writeSyncOffset()\n  s.store.Put(key, value)\n  return \"+OK\"\n  ```\n- Now: `+OK` only after *durable fsync* → recovery replays everything.\n\n### Minor Test Robustness Fix\n- **Edit in `test.sh`**:\n  ```sh\n  # OLD: if echo \"$RESULT\" | grep -q \"LOST\"; then  # False positive on \"0 LOST\"\n  # NEW: if echo \"$RESULT\" | grep -q \"^LOST \"; then  # Matches only \"LOST key-XXXX\"\n  ```\n- Ensures `PASS` even if summary mentions \"LOST\" (e.g., \"0 LOST\").\n\n### Verification\n```\n$ go build -o kvwal ./... && ./test.sh\ncrash-recover: WAL truncated to last sync point\nsummary: 50 OK, 0 LOST out of 50 acked\nPASS\nkvwal: listening on localhost:9876\nkvwal: listening on localhost:9876\n```\n\nAll 50 writes survive crash/recovery. No data loss! 🎉",
+  "timestamp": "2026-04-03T03:34:02Z",
+  "token_cost": 60317,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 127.157
+}

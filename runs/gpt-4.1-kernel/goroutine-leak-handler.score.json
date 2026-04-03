@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.04001400000000001,
+  "input_tokens": 27931,
+  "output_tokens": 947,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The core issue causing the goroutine leak is clear in the `computeHandler` function:\n\n- The computation runs in a goroutine (`go func() {...}`) that has **no way of being cancelled** if the client disconnects.\n- The `performComputation` does not accept a `context.Context`, so there is no mechanism for cancellation/cooperative shutdown when the HTTP request ends.\n\n**Solution:**\n1. Pass a `context.Context` (from the HTTP request) down to `performComputation`.\n2. In the computation loop, periodically check the context for cancellation, and **exit if done**.\n\nHere's a patch to fix it:\n\n---\n\n### Step 1: Modify `performComputation` to take a context\n\n```go\nfunc performComputation(ctx context.Context, req ComputeRequest) ComputeResult {\n    start := time.Now()\n    sum := 0.0\n\n    for i := 0; i < req.Iterations; i++ {\n        select {\n        case <-ctx.Done():\n            return ComputeResult{\n                Value:    sum,\n                Duration: time.Since(start).String(),\n                Iters:    i,\n            }\n        default:\n        }\n        for j := 0; j < 10000; j++ {\n            sum += float64(i*j) / float64(j+1)\n        }\n        time.Sleep(time.Duration(req.DelayMs) * time.Millisecond)\n    }\n    return ComputeResult{\n        Value:    sum,\n        Duration: time.Since(start).String(),\n        Iters:    req.Iterations,\n    }\n}\n```\n\n---\n\n### Step 2: Pass `r.Context()` into spawn and call\n\nChange this in `computeHandler`:\n\n```go\n\tgo func() {\n\t\tatomic.AddInt64(&activeGoroutines, 1)\n\t\tdefer atomic.AddInt64(&activeGoroutines, -1)\n\t\tresult := performComputation(r.Context(), req)\n\t\tresultCh <- result\n\t}()\n```\n\nNow, when the request is canceled (connection drops, etc.), the goroutine will see the cancellation and exit—the leak is solved!\n\n---\n\nWould you like me to apply these code changes to `app/main.go`?",
+  "timestamp": "2026-04-03T01:22:12Z",
+  "token_cost": 28878,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 22.099
+}

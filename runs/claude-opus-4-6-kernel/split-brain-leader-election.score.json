@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.30857500000000004,
+  "input_tokens": 52725,
+  "output_tokens": 1798,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes with exit code 0.\n\n## The Problem & Fix\n\n**The needle (bug):** In `/app/app/cluster/node.go`, the leader election quorum check was incorrect:\n\n```go\n// BUG: totalNodes/2 for 5 nodes = 2 (integer division)\n// This means a node with only 2 votes could become leader!\nif finalVotes >= totalNodes/2 {\n```\n\nWith a 5-node cluster partitioned into groups of [2] and [3], both partitions could elect a leader because 2 ≥ 2 (5/2=2 in integer division). This is a **split-brain** scenario — two leaders simultaneously active in the same term.\n\n**The fix:** Changed the quorum requirement to a strict majority (`totalNodes/2 + 1`):\n\n```go\nmajority := totalNodes/2 + 1  // For 5 nodes: 5/2 + 1 = 3\nif finalVotes >= majority {\n```\n\nNow only the partition with 3 nodes can elect a leader (3 ≥ 3), while the minority partition with 2 nodes cannot (2 < 3), preventing split-brain.",
+  "timestamp": "2026-04-03T03:12:19Z",
+  "token_cost": 54523,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 99.388
+}

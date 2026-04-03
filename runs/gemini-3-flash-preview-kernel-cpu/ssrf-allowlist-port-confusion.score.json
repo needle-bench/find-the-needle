@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 139647,
+  "output_tokens": 1928,
+  "resolved": true,
+  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:streamGenerateContent?alt=sse?key=REDACTED)",
+  "summary": "I will verify how `ipaddress` handles `127.1`.\n",
+  "timestamp": "2026-04-03T04:42:50Z",
+  "token_cost": 141575,
+  "tool_uses": 24,
+  "turns_to_fix": 0,
+  "wall_clock": 78.311
+}

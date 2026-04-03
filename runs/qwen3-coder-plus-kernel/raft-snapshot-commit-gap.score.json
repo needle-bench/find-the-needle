@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.07278037,
+  "input_tokens": 277464,
+  "output_tokens": 4697,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix worked. The test passes now. To summarize:\n\nThe problem was in the `InstallSnapshot` function in `/app/app/snapshot.go`. When a follower received a snapshot from the leader, the function correctly updated `lastApplied` to reflect the snapshot's last included index, but it did NOT update `commitIndex`.\n\nThis caused an issue when the node restarted later:\n1. On restart, the node remembered `commitIndex` was 0 (because the follower never got the commit entry from the leader)\n2. During recovery, `savedCommitIndex` was 0 while the snapshot included entries up to index 10\n3. Because `savedCommitIndex` (0) was not greater than `snapshotAppliedTo` (10), the recovery code followed the wrong branch  \n4. This caused `lastApplied` to be reset to 0 instead of being maintained at the snapshot boundary (index 10)\n5. Later when the restarted node synchronized with the new leader, it reapplied entries 1-10, causing duplicates\n\nThe fix was to ensure that during `InstallSnapshot`, when we know that entries up through some index are definitely committed (since they're in the snapshot), `commitIndex` should also be updated to reflect this.\n\nThis fixes the \"snapshot-commit gap\" bug by ensuring that the commit index never falls behind the last included index of a snapshot.",
+  "timestamp": "2026-04-03T02:09:53Z",
+  "token_cost": 282161,
+  "tool_uses": 29,
+  "turns_to_fix": 1,
+  "wall_clock": 109.173
+}

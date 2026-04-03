@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9217,
-  "output_tokens": 832,
+  "input_tokens": 8967,
+  "output_tokens": 728,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The `test.sh` script ran successfully, printing \"OK: clean shutdown\" and \"PASS\". This confirms that the deadlock has been resolved by moving `s.queue.Close()` before waiting for the `ScheduleOne` goroutine to exit. The \"needle\" was indeed a concurrency-related deadlock during the shutdown process of the scheduler.",
-  "timestamp": "2026-04-02T02:26:28Z",
-  "token_cost": 10049,
+  "summary": "The test passed with \"OK: clean shutdown\" and \"PASS\"! The deadlock has been resolved. The issue was indeed the order of operations during shutdown: `Scheduler.Run` was waiting for the `ScheduleOne` goroutine to finish before closing the queue, which could lead to a deadlock if `ScheduleOne` was blocked on `queue.Pop()`. By calling `s.queue.Close()` first, we unblock `Pop()`, allowing the goroutine to complete gracefully.",
+  "timestamp": "2026-04-03T01:47:19Z",
+  "token_cost": 9695,
   "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 10.148
+  "wall_clock": 12.29
 }

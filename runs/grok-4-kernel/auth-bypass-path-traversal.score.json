@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.02429925,
+  "input_tokens": 5625,
+  "output_tokens": 1264,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: (Note: File content is truncated for verbosity. Use Read tool as needed for full content.)\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\t\"log\"\n\t\"net/http\"\n\t\"os\"\n\n\t\"github.com/gorilla/mux\"\n)\n\nfunc main() {\n\t// Initialize logger\n\tlogger, err := NewLogger(\"api.log\")\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer logger.Close()\n\n\t// Get server port from environment or default to 8080\n\tport := os.Getenv(\"PORT\")\n\tif port == \"\" {\n\t\tport = \"8080\"\n\t}\n\n\t// Create a new router\n\tr := mux.NewRouter()\n\n\t// Middleware: logging and rate limiting\n\tr.Use(LoggingMiddleware(logger))\n\tr.Use(RateLimitMiddleware(10)) // 10 requests per minute\n\n\t// Public health check endpoint\n\tr.HandleFunc(\"/health\", HealthCheckHandler).Methods(\"GET\")\n\n\t// Protected routes - require authentication\n\tprotected := r.PathPrefix(\"/api\").Subrouter()\n\tprotected.Use(AuthMiddleware)\n\n\t// Admin endpoint (should be protected)\n\tprotected.HandleFunc(\"/admin\", AdminHandler).Methods(\"GET\")\n\n\t// User data endpoint (protected)\n\tprotected.HandleFunc(\"/users\", UsersHandler).Methods(\"GET\")\n\n\t// Data endpoint (protected)\n\tprotected.HandleFunc(\"/data\", DataHandler).Methods(\"GET\")\n\n\t// Start the server\n\tfmt.Printf(\"API server initialized\\n\")\n\tlog.Printf(\"Server starting on port %s\\n\", port)\n\tif err := http.ListenAndServe(\":\"+port, r); err != nil {\n\t\tlog.Fatal(err)\n\t}\n}\n\n// HealthCheckHandler returns a simple health status\nfunc HealthCheckHandler(w http.ResponseWriter, r *http.Request) {\n\tw.WriteHeader(http.StatusOK)\n\tfmt.Fprintln(w, \"OK\")\n}\n\n// AdminHandler returns admin data (sensitive)\nfunc AdminHandler(w http.ResponseWriter, r *http.Request) {\n\tw.WriteHeader(http.StatusOK)\n\tfmt.Fprintln(w, \"Sensitive admin data\")\n}\n\n// UsersHandler returns user data\nfunc UsersHandler(w http.ResponseWriter, r *http.Request) {\n\tw.WriteHeader(http.StatusOK)\n\tfmt.Fprintln(w, \"[{\\\"id\\\":1,\\\"name\\\":\\\"John\\\"},{\\\"id\\\":2,\\\"name\\\":\\\"Jane\\\"}]\")\n}\n\n// DataHandler returns some data\nfunc DataHandler(w http.ResponseWriter, r *http.Request) {\n\tw.WriteHeader(http.StatusOK)\n\tfmt.Fprintln(w, \"Protected data\")\n}\n```",
+  "timestamp": "2026-04-03T01:16:58Z",
+  "token_cost": 6889,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 29.26
+}

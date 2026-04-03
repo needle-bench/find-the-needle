@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.08974595199999999,
+  "input_tokens": 1412621,
+  "output_tokens": 14065,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The edits are still problematic. Let me run the test as is and see what happens:\n\n<tool_call>\n<function=Bash>\n<parameter=command>\ncd /app && ./test.sh\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T02:10:58Z",
+  "token_cost": 1426686,
+  "tool_uses": 80,
+  "turns_to_fix": 1,
+  "wall_clock": 451.475
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.7829369000000004,
+  "input_tokens": 1055517,
+  "output_tokens": 17630,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "## Summary\n\nI found and fixed the linearizability bug in the distributed KV store. The issue was that the system was not properly advancing the commit index on followers when they received heartbeats from the leader.\n\n### The Problem\nThe test revealed a linearizability violation: after a network partition healed, a follower that had been isolated during a write operation was serving stale reads. The write had been committed by the majority (leader + remaining follower), but when the isolated follower rejoined, it didn't catch up to the latest committed state before serving reads.\n\n### Root Cause\nThe bug was in the `handleHeartbeat` function in `app/raft/node.go`. While `handleAppendEntries` correctly advanced the follower's commit index based on the leader's commit index, `handleHeartbeat` was missing this crucial logic. Heartbeats carry the leader's current commit index in the `msg.Index` field, but the follower wasn't using this information to advance its own commit index.\n\n### The Fix\nI added the commit index advancement logic to the `handleHeartbeat` function:\n\n```go\n// Advance commit index based on the leader's commit index\nleaderCommit := msg.Index\nif leaderCommit > 0 {\n    lastIdx := n.log.LastIndex()\n    commitIdx := leaderCommit\n    if commitIdx > lastIdx {\n        commitIdx = lastIdx\n    }\n    n.advanceCommitIndex(commitIdx)\n}\n```\n\nThis ensures that when a follower receives a heartbeat from the leader, it updates its commit index to match the leader's, which then triggers the application of committed entries to the local state machine.\n\n### Verification\nAfter applying the fix, the test passes successfully:\n- All three test rounds complete without linearizability violations\n- The formerly-isolated follower correctly reads the committed value after the partition heals\n- The follower's applied index and commit index catch up to the leader's\n\nThe system now provides linearizable reads even after network partitions, as required by the Raft consensus protocol.",
+  "timestamp": "2026-04-03T02:50:24Z",
+  "token_cost": 1073147,
+  "tool_uses": 66,
+  "turns_to_fix": 1,
+  "wall_clock": 757.862
+}

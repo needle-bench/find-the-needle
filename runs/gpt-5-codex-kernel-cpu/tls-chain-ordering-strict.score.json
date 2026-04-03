@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0733405,
+  "input_tokens": 39458,
+  "output_tokens": 3885,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The TLS chain is now correctly ordered. I reordered the intermediate certificates after loading the key pair in `tlssetup/loader.go` so each certificate is followed by its issuer as required by RFC 5246. All tests in `test.sh` pass.",
+  "timestamp": "2026-04-03T02:31:17Z",
+  "token_cost": 43343,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 33.844
+}

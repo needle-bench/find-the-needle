@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.012678000000000002,
+  "input_tokens": 18591,
+  "output_tokens": 332,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix has been applied and verified. The test now passes with no duplicate state machine applies.",
+  "timestamp": "2026-04-03T01:39:48Z",
+  "token_cost": 18923,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 5.302
+}

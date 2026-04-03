@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0161377,
+  "input_tokens": 137242,
+  "output_tokens": 11326,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The TLS certificate chain in `/certs/chain.pem` was in the wrong order (leaf → root → intermediate), violating RFC 5246 §7.4.2, which requires leaf → intermediate → root (optional).\n\n**Needle found and fixed:** Rewrote `/certs/chain.pem` as `cat /certs/leaf.crt /certs/intermediate.crt /certs/root.crt`.\n\n**Verification:** `./test.sh` now passes fully:\n```\n=== TLS Chain Ordering Test ===\n...\nOK: Chain is in correct RFC 5246 order\nOK: First certificate is the leaf (CN=localhost)\nPASS: TLS chain is correctly ordered per RFC 5246\n```",
+  "timestamp": "2026-04-03T03:30:25Z",
+  "token_cost": 148568,
+  "tool_uses": 52,
+  "turns_to_fix": 1,
+  "wall_clock": 120.456
+}

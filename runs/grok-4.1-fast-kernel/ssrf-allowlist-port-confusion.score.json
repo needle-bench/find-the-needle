@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00225075,
+  "input_tokens": 13259,
+  "output_tokens": 2386,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS: All tests passed after fixing the IPv6 loopback SSRF vulnerability in validator.py by adding \"::1\" and \"0:0:0:0:0:0:0:1\" to BLOCKED_HOSTS.",
+  "timestamp": "2026-04-03T03:25:10Z",
+  "token_cost": 15645,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 20.097
+}

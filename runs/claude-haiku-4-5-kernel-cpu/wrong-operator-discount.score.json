@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 4651,
-  "output_tokens": 1139,
+  "input_tokens": 4648,
+  "output_tokens": 1070,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! 🎯 **Found and fixed the needle!**\n\n## Summary\n\n**The Bug:** In `pricing.py`, line 7 of the `calculate_discount_amount` function:\n```python\ndiscount = subtotal + discount_percent / 100  # ❌ WRONG: addition operator\n```\n\n**The Fix:** Changed `+` to `*`:\n```python\ndiscount = subtotal * discount_percent / 100  # ✅ CORRECT: multiplication operator\n```\n\n**What was wrong:** The function was adding the discount percentage (divided by 100) to the subtotal instead of multiplying. For example, with a $1098.94 subtotal and 20% discount:\n- **Wrong**: 1098.94 + 20/100 = 1098.94 + 0.20 = 1099.14\n- **Correct**: 1098.94 * 20/100 = 219.788 ≈ 219.79\n\nThe test now passes with all discount calculations correct! ✅",
-  "timestamp": "2026-04-02T02:35:46Z",
-  "token_cost": 5790,
+  "summary": "Perfect! ✅ **Found and fixed the needle!**\n\n## Summary\n\nThe bug was in `/app/pricing.py` in the `calculate_discount_amount` function:\n\n**The Problem:** \nLine 8 used the **wrong operator** (addition instead of multiplication):\n```python\ndiscount = subtotal + discount_percent / 100  # WRONG!\n```\n\n**The Fix:**\nChanged it to use multiplication:\n```python\ndiscount = subtotal * discount_percent / 100  # CORRECT!\n```\n\nThis ensures that percentage discounts are calculated correctly. For example, a 20% discount on $1098.94 now correctly calculates as $219.79 instead of an incorrect value.\n\nThe test suite now passes all 4 test cases! ✅",
+  "timestamp": "2026-04-03T02:00:48Z",
+  "token_cost": 5718,
   "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 11.543
+  "wall_clock": 9.81
 }

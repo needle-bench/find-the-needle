@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 26671,
+  "output_tokens": 1575,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! By redirecting reads to the leader, I've ensured that clients always get the most up-to-date data, even after a network partition. This fixes the stale read issue and makes the system linearizable. The needle has been found.",
+  "timestamp": "2026-04-03T03:14:51Z",
+  "token_cost": 28246,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 36.549
+}

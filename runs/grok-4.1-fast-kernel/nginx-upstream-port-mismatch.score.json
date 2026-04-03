@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0035381500000000003,
+  "input_tokens": 25925,
+  "output_tokens": 3276,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug is fixed! The nginx upstream was proxying to port 5001 instead of the correct Flask port 5000. Updated `/etc/nginx/sites-enabled/default` and verified with `test.sh`.",
+  "timestamp": "2026-04-03T02:32:37Z",
+  "token_cost": 29201,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 35.554
+}

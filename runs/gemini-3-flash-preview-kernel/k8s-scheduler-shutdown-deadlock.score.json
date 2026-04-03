@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.0213975,
-  "input_tokens": 38883,
-  "output_tokens": 652,
+  "estimated_cost_usd": 0.006012,
+  "input_tokens": 9102,
+  "output_tokens": 487,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The bug was a deadlock during the scheduler's shutdown process. Specifically, the `Run` method was waiting for the scheduling goroutine to finish (`<-done`) *before* closing the queue. However, if the scheduling goroutine was blocked inside `queue.Pop()` waiting for new items, it could never reach the `ctx.Done()` check in its `select` loop. Since `queue.Close()` (which signals the condition variable to wake up `Pop()`) was only called *after* the goroutine finished, the system entered a deadlock.\n\nI fixed this by reordering the shutdown sequence: calling `s.queue.Close()` before waiting for the goroutine to terminate. This ensures that `Pop()` returns immediately, allowing the goroutine to exit cleanly.\n\n```go\n<<<<\n\t<-ctx.Done()\n\n\t// BUG: this ordering can deadlock if ScheduleOne is blocked on Pop()\n\t// The goroutine checks ctx.Done() in select, but if it's inside Pop(),\n\t// it won't check until Pop() returns — which needs Close().\n\t<-done // wait for goroutine — but it might be stuck in Pop()\n\ts.queue.Close()\n}\n====\n\t<-ctx.Done()\n\n\t// FIX: Close the queue BEFORE waiting for the goroutine to finish.\n\t// This ensures that any Pop() call blocked on the queue's condition variable \n\t// is unblocked and returns an error, allowing the goroutine to see <-ctx.Done()\n\t// and exit.\n\ts.queue.Close()\n\t<-done // wait for goroutine\n}\n>>>>\n```",
-  "timestamp": "2026-04-02T03:26:57Z",
-  "token_cost": 39535,
-  "tool_uses": 12,
+  "summary": "The deadlock occurred because the `Run` method waited for the scheduling goroutine to exit (via `<-done`) before calling `s.queue.Close()`. However, the scheduling goroutine was likely blocked in `s.queue.Pop()`, which waits indefinitely until an item is added or the queue is closed. By calling `s.queue.Close()` before waiting for the goroutine, the `Pop()` call is unblocked and return an error, allowing the goroutine to terminate and the shutdown to complete.\n\nI have fixed the issue by reordering the operations in `Scheduler.Run`:\n1. Call `s.queue.Close()` immediately after context cancellation.\n2. Then wait for the goroutine to exit via `<-done`.\n\n```go\nfunc (s *Scheduler) Run(ctx context.Context) {\n    // ... goroutine setup ...\n    <-ctx.Done()\n\n    // Fix: order of operations. Signal the queue to close BEFORE\n    // waiting for the goroutine to exit, so that Pop() returns.\n    s.queue.Close()\n    <-done\n}\n```\n\nVerification:\n- Ran `test.sh` after applying the fix.\n- Output: `OK: clean shutdown`.",
+  "timestamp": "2026-04-03T01:56:43Z",
+  "token_cost": 9589,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 21.493
+  "wall_clock": 14.492
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 17671,
+  "output_tokens": 2932,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The goroutine leaks have been fixed. The test script now shows that goroutines are properly cleaned up after client disconnects.",
+  "timestamp": "2026-04-03T01:28:49Z",
+  "token_cost": 20603,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 31.485
+}

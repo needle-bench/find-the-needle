@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:22:54Z", "benchmark": "data-corruption-concurrent-write", "model": "llama-4-maverick", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/.", "/app/needle.txt"], "tokens_in": 165, "tokens_out": 105, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/.", "/app/needle.txt"], "tokens_in": 284, "tokens_out": 97, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/.", "/app/needle.txt"], "tokens_in": 395, "tokens_out": 66, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 475, "tokens_out": 95, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 760, "tokens_out": 155, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:23:10Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

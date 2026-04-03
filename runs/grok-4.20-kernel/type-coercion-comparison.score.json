@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0171452,
-  "input_tokens": 23833,
-  "output_tokens": 174,
+  "estimated_cost_usd": 0.021896399999999996,
+  "input_tokens": 33864,
+  "output_tokens": 579,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found and fixed (type coercion bug in query parsing for `min_rating`). `test.sh` now passes.",
-  "timestamp": "2026-04-02T03:38:01Z",
-  "token_cost": 24007,
-  "tool_uses": 9,
+  "summary": "The needle (type coercion bug in rating filter) has been found and fixed. `test.sh` now passes.",
+  "timestamp": "2026-04-03T01:59:11Z",
+  "token_cost": 34443,
+  "tool_uses": 13,
   "turns_to_fix": 1,
-  "wall_clock": 8.806
+  "wall_clock": 11.173
 }

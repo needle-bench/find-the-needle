@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.00175392,
+  "input_tokens": 9771,
+  "output_tokens": 439,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I'm sorry, but I couldn't find the file you're looking for. Could you please check the file path and try again?",
+  "timestamp": "2026-04-03T02:53:49Z",
+  "token_cost": 10210,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 8.431
+}

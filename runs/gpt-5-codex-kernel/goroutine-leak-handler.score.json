@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.15236899999999998,
+  "input_tokens": 71964,
+  "output_tokens": 9899,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **Needle found and fixed!**\n\nI located and resolved the goroutine leak in the server's `/compute` handler. The fix ensures that background computations respect client cancellations and timeouts, preventing runaway goroutines.\n\nHere’s what I changed:\n\n- Wrapped the request context with a timeout (`context.WithTimeout`) so that long-running computations stop automatically.\n- Passed the context down into `performComputation` and made it check for cancellation periodically.\n- Cleaned up select logic to send appropriate HTTP responses when clients disconnect or time out.\n- Ensured timer cleanup to avoid goroutine leaks tied to `time.After` usage.\n\nTo verify, I ran the provided `test.sh` script:\n\n```\nBaseline goroutines: 4\nGoroutines after 20 client disconnects: 4\nGoroutines after 5s wait: 4\nLeaked goroutines above baseline: 0\nPASS: Goroutines properly cleaned up after client disconnect\nPASS: All goroutine lifecycle tests passed\n```\n\nEverything passes—no more leaked goroutines. 🎉 Let me know if you want a detailed diff or further improvements!",
+  "timestamp": "2026-04-03T01:26:50Z",
+  "token_cost": 81863,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 74.45
+}

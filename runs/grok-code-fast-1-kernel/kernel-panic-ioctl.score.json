@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0007098,
+  "input_tokens": 2865,
+  "output_tokens": 360,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "",
+  "timestamp": "2026-04-03T01:47:32Z",
+  "token_cost": 3225,
+  "tool_uses": 3,
+  "turns_to_fix": 0,
+  "wall_clock": 127.791
+}

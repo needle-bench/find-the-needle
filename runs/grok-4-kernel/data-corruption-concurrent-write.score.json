@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.019564500000000002,
+  "input_tokens": 4288,
+  "output_tokens": 1011,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Function: lib.rs\nmain.rs",
+  "timestamp": "2026-04-03T07:26:47Z",
+  "token_cost": 5299,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 22.379
+}

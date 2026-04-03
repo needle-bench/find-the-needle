@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.040204,
+  "input_tokens": 33089,
+  "output_tokens": 1423,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎯 **Found the needle!**\n\n## Summary\n\n**The Bug:** Type coercion vulnerability in `/app/utils.js`\n\nThe issue was in the `parseQuery` function where `min_rating` was being read as a **string** instead of being converted to a **number**:\n\n```javascript\n// BEFORE (Wrong)\nquery.minRating = searchParams.get('min_rating');  // Returns \"4\" as a string\n```\n\nThis caused the `buildRatingRange()` function in `filter.js` to fail because the loop condition `for (let i = min; i <= max; i++)` would not work correctly with a string value.\n\n**The Fix:** Convert the string to a number using `parseFloat()`:\n\n```javascript\n// AFTER (Correct)\nquery.minRating = parseFloat(searchParams.get('min_rating'));  // Returns 4 as a number\n```\n\nAll tests now pass! ✅",
+  "timestamp": "2026-04-03T01:49:26Z",
+  "token_cost": 34512,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 29.172
+}

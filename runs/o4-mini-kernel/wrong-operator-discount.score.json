@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0193534,
-  "input_tokens": 22266,
-  "output_tokens": 1904,
+  "estimated_cost_usd": 0.0109593,
+  "input_tokens": 4951,
+  "output_tokens": 1445,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I fixed the discount calculation in pricing.py: changed the formula from “subtotal + discount_percent/100” to “subtotal * discount_percent/100”. All tests now pass.",
-  "timestamp": "2026-04-02T02:09:38Z",
-  "token_cost": 24170,
-  "tool_uses": 9,
+  "summary": "I fixed the discount calculation in pricing.py. The formula in calculate_discount_amount was using “subtotal + percent/100” instead of “subtotal * percent/100.” After changing it to:\n\n    discount = subtotal * discount_percent / 100\n\nall of the existing tests pass.",
+  "timestamp": "2026-04-03T02:46:19Z",
+  "token_cost": 6396,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 36.075
+  "wall_clock": 21.709
 }

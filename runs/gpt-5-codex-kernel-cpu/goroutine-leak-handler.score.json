@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.26248850000000007,
+  "input_tokens": 191290,
+  "output_tokens": 17760,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The goroutine leak in `computeHandler` happened because the background worker wasn’t cancelled when clients disconnected. I hooked the computation into the request context, applied a timeout, and listened for cancellation in the heavy loop. Now when a client drops, the goroutine exits promptly. Running `./test.sh` confirms the fix:\n\n- baseline goroutines: 4  \n- after 20 disconnects: 4  \n- after waiting: 4  \n\nNo leaked goroutines remain, and all tests pass.",
+  "timestamp": "2026-04-03T01:29:28Z",
+  "token_cost": 209050,
+  "tool_uses": 28,
+  "turns_to_fix": 1,
+  "wall_clock": 148.403
+}

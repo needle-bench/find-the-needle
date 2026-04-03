@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.10950925,
+  "input_tokens": 52321,
+  "output_tokens": 6758,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue was due to non-atomic operations in `processor.py` where debits were committed before idempotency checks, allowing duplicate transfers during retries.\n\n**Fix applied:**\n- Wrapped the transfer logic in an explicit `BEGIN IMMEDIATE` transaction.\n- Checked the `completed_transfers` table before any debit occurs.\n- Rolled back on duplicates, insufficient funds, or errors.\n- Committed only after the idempotency record is written.\n\nAfter the fix, running `./test.sh` succeeds:\n\n```\nSeeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS\n```",
+  "timestamp": "2026-04-03T02:18:19Z",
+  "token_cost": 59079,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 78.919
+}

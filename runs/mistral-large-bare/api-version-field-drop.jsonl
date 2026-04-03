@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:20:21Z", "benchmark": "api-version-field-drop", "model": "mistral-large", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 90, "tokens_out": 148, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 245, "tokens_out": 100, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 357, "tokens_out": 128, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/root/.gitconfig"], "tokens_in": 563, "tokens_out": 142, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 727, "tokens_out": 82, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:22:41Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

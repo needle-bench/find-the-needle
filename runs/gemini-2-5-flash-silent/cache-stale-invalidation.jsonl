@@ -1,3 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:21:42Z", "benchmark": "cache-stale-invalidation", "model": "gemini-2-5-flash", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 164, "tokens_out": 50, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:21:43Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0, "arm": "silent"}

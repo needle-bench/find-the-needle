@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.10795070000000002,
+  "input_tokens": 156677,
+  "output_tokens": 8453,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I fixed the certificate chain ordering in the TLS loader. Now after loading the PEM bundle, the chain certificates are reordered so each cert’s issuer matches the next cert’s subject, producing leaf→intermediate→root. All tests pass.",
+  "timestamp": "2026-04-03T02:38:29Z",
+  "token_cost": 165130,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 80.418
+}

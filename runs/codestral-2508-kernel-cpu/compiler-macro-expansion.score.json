@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 49885,
+  "output_tokens": 2608,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "I'm sorry, but I couldn't find the specified text in the file. Could you please provide more details or check the file content again?",
+  "timestamp": "2026-04-03T07:27:17Z",
+  "token_cost": 52493,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 20.636
+}

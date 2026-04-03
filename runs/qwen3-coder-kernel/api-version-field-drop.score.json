@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.011049352000000002,
+  "input_tokens": 203998,
+  "output_tokens": 4680,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! I found and fixed the needle in the haystack. The problem was a backward compatibility issue in the API:\n\n**The Issue:**\nThe v2 API was missing several fields (`avatar_url`, `bio`, `location`) that existed in the v1 API. This would cause clients upgrading from v1 to v2 to silently lose data, breaking backward compatibility.\n\n**The Fix:**\nI added the missing fields to both:\n1. The `UserV2` struct definition \n2. The `ToV2()` method that converts internal users to the v2 API response format\n\n**Verification:**\nThe test now passes, confirming that:\n- All v1 fields are present in v2 (backward compatibility maintained)\n- v2 still has its new fields (`department`, `phone_number`, `is_active`)\n- The values are properly preserved between versions\n\nThis ensures that clients can safely upgrade from v1 to v2 without losing any existing user data.",
+  "timestamp": "2026-04-03T01:22:21Z",
+  "token_cost": 208678,
+  "tool_uses": 34,
+  "turns_to_fix": 1,
+  "wall_clock": 146.473
+}

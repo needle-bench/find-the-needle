@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9633,
-  "output_tokens": 198,
-  "resolved": true,
+  "input_tokens": 16076,
+  "output_tokens": 357,
+  "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "The discount calculation has been fixed. The test script now passes all the tests.",
-  "timestamp": "2026-04-02T03:51:27Z",
-  "token_cost": 9831,
-  "tool_uses": 7,
+  "summary": "The problem is in the `calculate_discount_amount` function in the `pricing.py` file. The discount is being calculated as `subtotal + discount_percent / 100` instead of `subtotal * discount_percent / 100`. This is causing the discount amount to be much larger than it should be. The fix is to change the `+` to a `*`.",
+  "timestamp": "2026-04-03T02:58:48Z",
+  "token_cost": 16433,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 7.078
+  "wall_clock": 6.783
 }

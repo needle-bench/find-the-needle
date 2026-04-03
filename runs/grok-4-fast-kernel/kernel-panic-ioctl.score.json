@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.026288199999999994,
+  "input_tokens": 191012,
+  "output_tokens": 28632,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS: IOCTL handler correctly validates all inputs",
+  "timestamp": "2026-04-03T01:40:03Z",
+  "token_cost": 219644,
+  "tool_uses": 29,
+  "turns_to_fix": 1,
+  "wall_clock": 204.488
+}

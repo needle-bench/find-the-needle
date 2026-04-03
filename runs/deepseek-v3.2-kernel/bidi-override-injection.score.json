@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.26488488,
-  "input_tokens": 1087373,
-  "output_tokens": 17225,
+  "estimated_cost_usd": 0.10958020000000002,
+  "input_tokens": 452043,
+  "output_tokens": 9729,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle (vulnerability) has been found and fixed! The BIDI Unicode attack allowed privilege escalation by exploiting the difference between how usernames are stored and how they're visually rendered. The fix ensures security checks use the actual stored data, not visually rendered representations.",
-  "timestamp": "2026-04-02T01:50:31Z",
-  "token_cost": 1104598,
-  "tool_uses": 67,
+  "summary": "Excellent! All tests still pass. Now let me write a summary of what I found and fixed:\n\n## Summary\n\nI found and fixed a **Unicode BIDI (Bidirectional Text) vulnerability** in the Flask application that could allow privilege escalation through visual spoofing attacks.\n\n### The Vulnerability (The \"Needle\")\n\n1. **In `auth.py`**: The `check_admin_access()` function was using `_render_display_name()` to render usernames for display and then comparing the rendered version against the admin allowlist. This meant that a username like `\\u202enimda` (RIGHT-TO-LEFT OVERRIDE + \"nimda\") would render visually as \"admin\" and be granted admin access.\n\n2. **In `sanitizer.py`**: The `sanitize_username()` function did not strip BIDI control characters, allowing them to be stored in the database.\n\n### The Fixes\n\n1. **Fixed `sanitizer.py`**: Added stripping of BIDI control characters (U+202A-U+202E, U+2066-U+2069, U+200E-U+200F, U+061C) from usernames during registration to prevent visual spoofing attacks.\n\n2. **Fixed `auth.py`**: Changed `check_admin_access()` to compare the actual stored username against the admin allowlist instead of the rendered display name, eliminating the BIDI spoofing vector.\n\n3. **Enhanced `server.py`**: Added username sanitization in the login endpoint for consistency with registration and better user experience.\n\n### Why This Was Dangerous\n\nAn attacker could register with a username containing BIDI control characters that would visually render as \"admin\" (e.g., `\\u202enimda` → visual \"admin\"). The `check_admin_access()` function would render this username for display, get \"admin\", check it against the admin allowlist, and grant admin privileges, enabling privilege escalation.\n\n### Defense-in-Depth\n\nThe fix employs defense-in-depth:\n- **Input sanitization**: Strip BIDI characters at registration\n- **Authorization logic**: Compare actual usernames, not rendered versions  \n- **Consistency**: Sanitize usernames at login too\n\nAll tests pass, confirming the vulnerability is fixed.",
+  "timestamp": "2026-04-03T01:31:07Z",
+  "token_cost": 461772,
+  "tool_uses": 35,
   "turns_to_fix": 1,
-  "wall_clock": 1082.346
+  "wall_clock": 388.779
 }

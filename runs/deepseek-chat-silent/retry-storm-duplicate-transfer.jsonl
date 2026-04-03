@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:34:31Z", "benchmark": "retry-storm-duplicate-transfer", "model": "deepseek-chat", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/chaos_proxy.py\n/workspace/app/gateway.py\n/workspace/app/models.py\n/workspace/app/process"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/app/models.py"], "tokens_in": 531, "tokens_out": 109, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/processor.py"], "tokens_in": 939, "tokens_out": 203, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/app/gateway.py"], "tokens_in": 1903, "tokens_out": 49, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/app/chaos_proxy.py"], "tokens_in": 2654, "tokens_out": 51, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 3244, "tokens_out": 268, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:35:01Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

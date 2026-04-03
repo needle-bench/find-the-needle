@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.24607750000000006,
+  "input_tokens": 209918,
+  "output_tokens": 14136,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I inspected the cluster leader-election code and found the quorum check in `app/cluster/node.go` was wrong. The code allowed a candidate to become leader with “half or more” of the votes using integer division (`finalVotes >= totalNodes/2`), so in a 5-node cluster each partition of size two could elect its own leader after a network split. I changed the code to require a strict majority:\n\n```go\n// Check if we have enough votes for a quorum\nmajority := totalNodes/2 + 1\nif finalVotes >= majority {\n    ...\n}\n```\n\nThis ensures only partitions containing more than half of the nodes can elect a leader. I also rebuilt the binary via `test.sh` and reran the provided script—both the single simulation and the repeated safety checks now report only a single leader being elected.",
+  "timestamp": "2026-04-03T02:22:58Z",
+  "token_cost": 224054,
+  "tool_uses": 31,
+  "turns_to_fix": 1,
+  "wall_clock": 139.447
+}

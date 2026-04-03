@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:35:03Z", "benchmark": "raft-snapshot-commit-gap", "model": "kimi-k2.5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# raft-snapshot-commit-gap\n\n## Project\n\nA Go implementation of a simplified Raft consensus protocol for a 3-node clust"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/.", "/app/\"*.go\""], "tokens_in": 629, "tokens_out": 231, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app", "/app/app/raft.go"], "tokens_in": 731, "tokens_out": 38, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app", "/app/app/raft.go"], "tokens_in": 1801, "tokens_out": 49, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app", "/app/app/raft.go"], "tokens_in": 3005, "tokens_out": 47, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app/app/snapshot.go"], "tokens_in": 3072, "tokens_out": 25, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app", "/app/app/log.go"], "tokens_in": 3575, "tokens_out": 47, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app", "/app/test.sh"], "tokens_in": 4591, "tokens_out": 38, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:35:39Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "silent"}

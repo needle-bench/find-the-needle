@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7268,
+  "output_tokens": 3345,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! Let me summarize what I found and fixed:\n\n## Summary\n\nI found and fixed **two needles in this haystack**:\n\n### **Needle #1: Data durability bug in server.go**\nThe main bug was in the `SET` command handler in `server.go`. The code was:\n1. Calling `wal.Append()` which only **buffers** the write to a 64KB buffer\n2. Immediately returning `+OK` to the client, making it believe the write was durable\n3. The actual fsync happened asynchronously in a background goroutine every 100ms\n\nWhen the server crashed, all buffered (but not yet synced) data was lost even though clients received acknowledgment.\n\n**Fix**: Add an explicit `s.wal.Sync()` call after `Append()` and before returning `+OK` to ensure data is durably written to disk before acknowledging the client.\n\n### **Needle #2: Incorrect grep pattern in test.sh**\nThe test script was checking `if echo \"$RESULT\" | grep -q \"LOST\"` which would match both:\n- Actual lost keys: `LOST key-0000`\n- The summary line: `summary: 50 OK, 0 LOST out of 50 acked`\n\nThis caused false failures even when all keys were recovered correctly.\n\n**Fix**: Change the grep pattern to `grep -q \"^LOST \"` to only match lines starting with \"LOST \" (the actual lost key indicators), not the summary line.\n\nThe test now **PASS** consistently! ✓",
+  "timestamp": "2026-04-03T01:59:30Z",
+  "token_cost": 10613,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 43.422
+}

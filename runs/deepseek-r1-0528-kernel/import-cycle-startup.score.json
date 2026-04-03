@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0166312,
+  "input_tokens": 9323,
+  "output_tokens": 3822,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Now let's check the configuration file to see if there's anything important there:",
+  "timestamp": "2026-04-03T02:04:47Z",
+  "token_cost": 13145,
+  "tool_uses": 6,
+  "turns_to_fix": 0,
+  "wall_clock": 304.382
+}

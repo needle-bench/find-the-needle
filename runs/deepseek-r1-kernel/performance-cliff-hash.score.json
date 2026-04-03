@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.07963829999999998,
+  "input_tokens": 97119,
+  "output_tokens": 4662,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "## Solution\n\nThe bug was in `Product.java` where the `hashCode()` method used `category.hashCode()` instead of `sku.hashCode()`. Since there are only 10 categories for 10,000 products, all products collided into approximately 10 buckets, causing extreme hash collisions with chain lengths of ~1000 items per bucket.\n\n### Changes Made:\n\n1. **Fixed `Product.java` - `hashCode()` method**:\n   - Changed from `return category.hashCode();` to `return sku.hashCode();`\n   - This ensures products are distributed based on their unique SKU rather than shared category\n\n### Verification:\n- **Before fix**: Max chain length = 1000, non-empty buckets = 10 (0.1%), average lookup degraded at scale\n- **After fix**: Max chain length = 4, non-empty buckets = 5991 (36.6%), average lookup = 2.10 µs\n- **Test output**: All tests pass with \"PASS: Hash map distributes items evenly across buckets\"\n\n### Root Cause Analysis:\nThe bug created a classic \"performance cliff\" scenario:\n- **Small datasets**: Short chains appeared performant\n- **Large datasets**: O(n) chain traversal dominated, turning hash map lookups into linear searches\n- **Distribution analysis**: Revealed the collision problem (10 buckets vs 10,000 items)\n\nThe fix ensures proper hash distribution by using the product's unique key (SKU) rather than a shared attribute (category), restoring O(1) hash map performance.",
+  "timestamp": "2026-04-03T03:22:15Z",
+  "token_cost": 101781,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 204.583
+}

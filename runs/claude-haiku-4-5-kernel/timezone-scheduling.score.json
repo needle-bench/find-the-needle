@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.067273,
+  "input_tokens": 54168,
+  "output_tokens": 2621,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 I found and fixed the needle!\n\n## Summary\n\n**The Needle:** A timezone handling bug in the `scheduler.py` file's `_is_due` method.\n\n**The Problem:** When checking if an event is due to fire, the scheduler was using the UTC date to build the scheduled time in the event's local timezone. This caused late-night events (especially in western timezones like US/Eastern and US/Pacific) to be scheduled for the wrong day when they cross midnight in UTC.\n\nFor example:\n- **evt-002** (23:30 EST) should fire when it's 04:30 UTC the next day\n- The bug made it look for 23:30 EST on Jan 16 (which is 04:30 UTC on Jan 17) instead of 23:30 EST on Jan 15 (which is 04:30 UTC on Jan 16)\n\n**The Fix:** Changed the code to convert the window_start time to the event's local timezone first before extracting the date. This ensures that events are scheduled using the correct calendar day in their local timezone.\n\nAll tests now pass! ✅",
+  "timestamp": "2026-04-03T01:35:32Z",
+  "token_cost": 56789,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 32.402
+}

@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.08540916,
-  "input_tokens": 76662,
-  "output_tokens": 54874,
+  "estimated_cost_usd": 0.03677342,
+  "input_tokens": 13423,
+  "output_tokens": 23947,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**Final Answer**\n\n**the needle I found is the Unicode bidirectional (BIDI) attack vulnerability in the Flask web app.**\n\nThe specific issues were:\n\n1. In `check_admin_access`, the function was comparing the rendered display name (after applying BIDI rendering) against the admin allowlist, instead of the stored username.\n\n2. The sanitizer was not stripping BIDI control characters, allowing usernames like \"\\u202enimda\" (which visually renders as \"admin\" due to right-to-left override) to be registered and potentially gain admin access.\n\nI fixed it by:\n\n1. Removing the `_render_display_name` call from `check_admin_access` so it checks the raw stored username against `ADMIN_USERS`.\n\n2. Adding a step in `sanitize_username` to strip BIDI control characters before storage, preventing such usernames from being registered in the first place.\n\nThe tests now pass fully.",
-  "timestamp": "2026-04-02T03:25:05Z",
-  "token_cost": 131536,
-  "tool_uses": 22,
+  "summary": "## Summary\n\nI found and fixed the hidden problem: a Unicode BIDI override privilege escalation vulnerability in the Flask application.\n\nThe issue allowed an attacker to create a username like \"\\u202enimda\" (which visually renders as \"admin\" in some environments due to the RIGHT-TO-LEFT OVERRIDE character U+202E), potentially tricking the admin access check if it compared against the rendered display instead of the stored username.\n\n### Fixes Applied:\n\n1. **In `app/sanitizer.py`**: Added explicit stripping of BIDI control characters `\\u202e` and `\\u202d` to prevent them from being stored in usernames.\n\n2. **In `app/auth.py`**: Modified `check_admin_access` to compare against the stored username directly, rather than attempting to simulate \"visual rendering\" by reversing the string when BIDI characters are present.\n\n### Verification:\n\nRunning `./test.sh` now passes all tests, confirming the privilege escalation is prevented. The test ensures that BIDI-injected usernames do not gain admin access, either through rejection/normalization or proper authentication checks.\n\nThe \"needle\" was this subtle Unicode manipulation exploit, now securely mitigated.",
+  "timestamp": "2026-04-03T01:24:31Z",
+  "token_cost": 37370,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 450.763
+  "wall_clock": 153.099
 }

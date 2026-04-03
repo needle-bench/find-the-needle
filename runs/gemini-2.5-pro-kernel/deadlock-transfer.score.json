@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.016470000000000002,
+  "input_tokens": 5000,
+  "output_tokens": 1022,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test now passes. The deadlock was caused by inconsistent lock ordering in `TransferService.java`. I fixed it by ensuring that locks are always acquired in a globally consistent order based on account IDs.",
+  "timestamp": "2026-04-03T01:59:34Z",
+  "token_cost": 6022,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 37.673
+}

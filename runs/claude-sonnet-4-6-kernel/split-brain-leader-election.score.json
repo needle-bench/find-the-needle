@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.26267399999999996,
+  "input_tokens": 75963,
+  "output_tokens": 2319,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. ✅\n\n## Summary\n\n**The bug:** An off-by-one error in the quorum check in `/app/app/cluster/node.go`:\n\n```go\n// BEFORE (buggy) — required only N/2 votes (too few)\nif finalVotes >= totalNodes/2 {\n\n// AFTER (fixed) — requires strict majority N/2 + 1\nif finalVotes >= totalNodes/2+1 {\n```\n\n**Why it caused split-brain:** With 5 nodes, `totalNodes/2 = 2` (integer division). A minority partition of 2 nodes (e.g., nodes 0 and 1) only needs 2 votes — the candidate votes for itself (1) and gets 1 peer vote = 2 total, satisfying `>= 2`. This allowed **both** the minority partition (2 nodes) and majority partition (3 nodes) to elect leaders simultaneously.\n\n**The fix:** A correct quorum requires a **strict majority** — more than half the nodes. For a 5-node cluster, that's at least **3 votes** (`5/2 + 1 = 3`). Only the majority partition (3 nodes) can ever gather 3 votes, guaranteeing at most one leader cluster-wide.\n\n**Also needed:** The pre-compiled binary at `/usr/local/bin/split-brain` was stale, so I rebuilt it from the fixed source with `go build -o /usr/local/bin/split-brain`.",
+  "timestamp": "2026-04-03T02:29:45Z",
+  "token_cost": 78282,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 57.816
+}

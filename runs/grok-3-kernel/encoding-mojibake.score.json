@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.027397499999999998,
+  "input_tokens": 14990,
+  "output_tokens": 672,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I've found and fixed the issue. The problem was related to character encoding in the application. The `CsvReader.java` file was using ISO-8859-1 encoding to read the CSV file, which was corrupting special characters in names and cities (like accents and other non-ASCII characters).\n\nI updated the encoding to UTF-8, which properly handles these characters. After making this change, I ran the test script again, and now all customer names and city names are displayed correctly in the report, as confirmed by the test output showing \"PASS: All customer names preserved correctly.\"\n\nThe needle in the haystack was the encoding mismatch, and the fix has been verified by running `test.sh`.",
+  "timestamp": "2026-04-03T01:20:15Z",
+  "token_cost": 15662,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 19.235
+}

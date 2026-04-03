@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.00660504,
-  "input_tokens": 27126,
-  "output_tokens": 861,
+  "estimated_cost_usd": 0.007747039999999999,
+  "input_tokens": 33364,
+  "output_tokens": 1682,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test script has passed, indicating that the issue with the BIDI-injected username has been resolved. The `sanitize_username` function now strips BIDI control characters, preventing privilege escalation through visual spoofing of usernames.",
-  "timestamp": "2026-04-02T03:14:07Z",
-  "token_cost": 27987,
-  "tool_uses": 8,
+  "summary": "Great! The test script is now passing. Our fix successfully prevents the Unicode BIDI override privilege escalation attack by removing BIDI control characters from usernames during registration.\n\nHere's a summary of what we did:\n\n1. We identified that the vulnerability was in the handling of Unicode BIDI control characters in usernames.\n2. We modified the `sanitize_username` function in `sanitizer.py` to remove BIDI control characters (U+202A to U+202E, U+2066 to U+2069) from usernames during registration.\n3. We ran the test script, which confirmed that our fix prevents the privilege escalation attack.\n\nThe fix ensures that usernames are stored and compared in their normalized form, without BIDI control characters, preventing attackers from exploiting visual rendering to gain admin access.",
+  "timestamp": "2026-04-03T01:14:33Z",
+  "token_cost": 35046,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 13.445
+  "wall_clock": 21.218
 }

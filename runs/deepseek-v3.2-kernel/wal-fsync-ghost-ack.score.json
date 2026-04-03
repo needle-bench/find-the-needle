@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.026986219999999998,
+  "input_tokens": 155569,
+  "output_tokens": 4598,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "No, `wal.go` doesn't write the sync file! It only reads it in `SimulateCrash`. The sync file is written by `server.go` in `writeSyncOffset()`. But that's called in the wrong place!\n\nThe fix should be to move the sync file writing into the `Sync()` method. Actually, let me think... The `Sync()` method is in `wal.go`, but it doesn't know about the file path. We could pass it as a parameter or store it in the WAL struct.\n\nActually wait, looking at the code again: `walPath` is a constant in `main.go`. The WAL doesn't know about it. But `server.go` imports `main` package? Actually all files are in the same package (`main`).\n\nSo `walPath` is accessible from `wal.go`! Let me check:\n\n\n\n\n\n",
+  "timestamp": "2026-04-03T05:41:24Z",
+  "token_cost": 160167,
+  "tool_uses": 24,
+  "turns_to_fix": 0,
+  "wall_clock": 516.637
+}

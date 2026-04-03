@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.168028,
+  "input_tokens": 175878,
+  "output_tokens": 3266,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "**What was wrong**\n\nThe API blindly applied any quantity adjustment that it received:\n\nroutes.ts  \n```ts\nconst result = inventory.adjustQuantity(sku, quantity);\n```\n\nBecause there was no guard-rail, a request such as\n\n```http\nPOST /inventory/WIDGET-001/adjust\n{ \"quantity\": -200 }\n```\n\ndrove the on-hand balance from 110 to –90 and the supplied test\n(`test.sh`) failed.\n\n**How I fixed it**\n\n1.  Reject non-integer / non-numeric quantities.\n2.  Reject adjustments that would make the resulting stock negative.\n\nroutes.ts (excerpt, new code in ❬bold❭)\n\n```ts\n// validate body.quantity\nif (typeof quantity !== 'number' || isNaN(quantity) || \n    !Number.isInteger(quantity)) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'quantity must be an integer' }));\n  return;\n}\n\n// ❬NEW❭ do not allow inventory to go below zero\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'resulting quantity cannot be negative' }));\n  return;\n}\n\nconst result = inventory.adjustQuantity(sku, quantity);\nres.end(JSON.stringify(result));\n```\n\n**Verification**\n\n```\n$ ./test.sh\nPASS: Input validation correctly prevents impossible inventory states\n```\n\nAll tests now pass; the “needle” (missing-input-validation bug) is fixed.",
+  "timestamp": "2026-04-03T02:25:49Z",
+  "token_cost": 179144,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 385.695
+}

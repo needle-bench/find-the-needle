@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00509185,
+  "input_tokens": 41692,
+  "output_tokens": 4615,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The issue was a race condition in `/app/app/counter.js`. The `incrementCounter()` function used a non-atomic read-modify-write pattern (`get` → local `+1` → `set`), causing lost updates under concurrency (test got 76/100).\n\n**Fix:** Replaced with atomic Redis `INCR`:\n\n```diff\n-  // Read current value\n-  const current = await client.get(COUNTER_KEY);\n-  const value = parseInt(current || \"0\", 10);\n-\n-  // Increment and write back\n-  const newValue = value + 1;\n-  await client.set(COUNTER_KEY, newValue.toString());\n-\n-  logger.debug(`Counter incremented: ${value} -> ${newValue}`);\n+  const newValue = await client.incr(COUNTER_KEY);\n+  logger.debug(`Counter incremented to ${newValue}`);\n```\n\n`./test.sh` now passes (100/100).",
+  "timestamp": "2026-04-03T02:51:46Z",
+  "token_cost": 46307,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 46.469
+}

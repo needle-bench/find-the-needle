@@ -1,0 +1,18 @@
+{
+  "agent": "llama-4-maverick-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.050955999999999994,
+  "input_tokens": 124537,
+  "output_tokens": 6407,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "It seems like we've exhausted our options.\n\nLet's directly provide the final answer based on our findings.\n\nThe final answer is: $\\boxed{0}$",
+  "timestamp": "2026-04-03T02:05:57Z",
+  "token_cost": 130944,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 70.763
+}

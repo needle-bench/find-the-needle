@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.20590370000000002,
+  "input_tokens": 274641,
+  "output_tokens": 5462,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "## Solution Found\n\nThe bug was in the `InstallSnapshot` RPC handler. When a follower receives and installs a snapshot from the leader, it was correctly updating `lastApplied` to the snapshot's last included index but failing to update `commitIndex` accordingly.\n\n### The Problem\nIn the 4-step reproduction scenario:\n1. Leader writes entries 1-10, replicates to all nodes\n2. Leader takes snapshot at index 10  \n3. Leader sends snapshot to slow follower (node3)\n4. Leader changes, node3 restarts, new leader replicates\n\nDuring step 3, when node3 receives the snapshot via `InstallSnapshot`:\n- ✅ `lastApplied` was set to 10 (snapshot's last included index)\n- ❌ `commitIndex` remained at 0 (never updated)\n\nWhen node3 restarts in step 4:\n- Recovery logic saw `commitIndex=0` (from persisted state)\n- It set `lastApplied=commitIndex=0` (instead of using the snapshot's index of 10)\n- State machine was restored from snapshot (keys 1-10 included)\n- But then `applyEntries()` replayed log entries 1-10 (since they existed in log and `lastApplied commitIndex`)\n- Result: duplicate applies for all keys in the snapshot\n\n### The Fix\nIn `InstallSnapshot`, after updating `lastApplied`, also update `commitIndex` to at least the snapshot's last included index:\n\n```go\n// Update lastApplied — the state machine now reflects everything\n// up to and including the snapshot's last index.\nn.lastApplied = snap.LastIncludedIndex\n\n// Also update commitIndex to at least the snapshot's last included index,\n// since the snapshot represents committed state (entries are committed\n// before being included in a snapshot). This prevents the restart bug\n// where commitIndex=0 causes replay of already-applied entries.\nif snap.LastIncludedIndex > n.commitIndex {\n    n.commitIndex = snap.LastIncludedIndex\n}\n```\n\n### Why This Fix Works\n- A snapshot represents **committed** state (Raft paper: entries must be committed before they can be included in a snapshot)\n- When a follower installs a snapshot, it should treat all entries up to the snapshot's last included index as committed\n- By updating `commitIndex` to match, the restart recovery logic correctly sees that entries 1-10 are already applied and doesn't replay them\n\nThe test now passes all three rounds without duplicate state machine transitions.",
+  "timestamp": "2026-04-03T03:47:13Z",
+  "token_cost": 280103,
+  "tool_uses": 31,
+  "turns_to_fix": 1,
+  "wall_clock": 235.986
+}

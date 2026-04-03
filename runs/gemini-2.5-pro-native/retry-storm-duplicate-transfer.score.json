@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 41063,
-  "output_tokens": 2324,
+  "input_tokens": 0,
+  "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The test passed with the correct final balances, so the fix for the race condition is verified. My work is complete.",
-  "timestamp": "2026-04-02T02:59:04Z",
-  "token_cost": 43387,
-  "tool_uses": 7,
-  "turns_to_fix": 8,
-  "wall_clock": 81.132
+  "summary": "",
+  "timestamp": "2026-04-03T04:40:50Z",
+  "token_cost": 0,
+  "tool_uses": 0,
+  "turns_to_fix": 0,
+  "wall_clock": 458.78
 }

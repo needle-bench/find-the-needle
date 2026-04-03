@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.01686084,
+  "input_tokens": 63492,
+  "output_tokens": 1607,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! I've successfully identified and fixed the needle in the haystack.\n\nThe problem was a missing input validation in the inventory management system. Specifically:\n\n1. **Issue**: The `adjustQuantity` method in `inventory.ts` was allowing inventory quantities to go negative without validation.\n\n2. **Fix**: I added validation logic to prevent adjustments that would result in negative inventory quantities:\n   - Added a check to calculate the new quantity before applying the adjustment\n   - If the new quantity would be negative, the method throws an error\n   - Updated the routes handler to catch this error and return a proper 400 response\n\n3. **Verification**: The test script now passes, confirming that:\n   - Attempts to adjust inventory beyond available quantities are properly rejected\n   - Inventory quantities never go negative\n   - Valid adjustments still work correctly\n\nThe fix ensures that the inventory system maintains data integrity by preventing impossible states while preserving all valid functionality.",
+  "timestamp": "2026-04-03T03:18:21Z",
+  "token_cost": 65099,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 50.034
+}

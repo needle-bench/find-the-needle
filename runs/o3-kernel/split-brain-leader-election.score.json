@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.7701399999999999,
+  "input_tokens": 576070,
+  "output_tokens": 40834,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T03:21:53Z",
+  "token_cost": 616904,
+  "tool_uses": 60,
+  "turns_to_fix": 1,
+  "wall_clock": 458.065
+}

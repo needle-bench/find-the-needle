@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.031846,
+  "input_tokens": 16871,
+  "output_tokens": 987,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was in the caching logic: after updating or adding a product, the cache for the specific product and for the product list was not being invalidated. This led to stale data being served from the cache until the TTL expired.\n\n**I fixed it in `server.py` by:**\n- Adding calls to `cache.delete()` for both the individual product and product list after a product is updated.\n- Adding a call to `cache.delete()` for the product list after a new product is created.\n\n**Test results:**  \nAfter the fix, running `test.sh` shows all tests passing, confirming the issue is resolved and fresh data is served after updates and writes.\n\n✅ The needle (the bug) has been found and fixed!",
+  "timestamp": "2026-04-03T01:19:54Z",
+  "token_cost": 17858,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 22.294
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0201865,
+  "input_tokens": 19242,
+  "output_tokens": 463,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The timing side-channel vulnerability in `compareHashes` has been fixed by using `crypto/subtle.ConstantTimeCompare` for constant-time comparison.  \nAll tests now pass:\n\n```\n./test.sh\n=== Timing Attack Resistance Test ===\n...\nPASS: Authentication is constant-time and secure\n```\n\nThe application no longer leaks timing information during hash comparisons.",
+  "timestamp": "2026-04-03T02:29:29Z",
+  "token_cost": 19705,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 16.703
+}

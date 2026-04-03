@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.004502829999999999,
-  "input_tokens": 16000,
-  "output_tokens": 634,
+  "estimated_cost_usd": 0.004888,
+  "input_tokens": 10610,
+  "output_tokens": 682,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test passed! My fix successfully addressed the BIDI override vulnerability.\n```\n```\n",
-  "timestamp": "2026-04-02T01:25:07Z",
-  "token_cost": 16634,
+  "summary": "The test now passes! The \"needle\" was the missing BIDI character sanitization in `app/sanitizer.py`.\n```\nIt seems the issue is resolved. All tests passed, which means the vulnerability has been patched. The vulnerability stemmed from the application not properly sanitizing usernames, specifically regarding Unicode BIDI override characters. The fix involved adding a regular expression to `sanitize_username` in `app/sanitizer.py` to remove these characters.\n```",
+  "timestamp": "2026-04-03T01:17:07Z",
+  "token_cost": 11292,
   "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 13.325
+  "wall_clock": 13.03
 }

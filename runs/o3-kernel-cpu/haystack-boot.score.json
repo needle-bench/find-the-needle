@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "haystack-boot",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.018828,
+  "input_tokens": 5430,
+  "output_tokens": 996,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All hidden benchmark checks now pass: test.sh reports 5/5.",
+  "timestamp": "2026-04-03T01:52:20Z",
+  "token_cost": 6426,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 31.551
+}

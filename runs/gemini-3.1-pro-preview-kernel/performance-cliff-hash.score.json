@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.03055,
+  "input_tokens": 9923,
+  "output_tokens": 892,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the needle and fixed the bug. The `hashCode` method in `src/Product.java` was using `category` instead of `sku` to generate the hash code, which caused massive collisions since there were many products across very few categories. \n\nI modified `hashCode` to use `sku.hashCode()`:\n```java\n    @Override\n    public int hashCode() {\n        return sku.hashCode();\n    }\n```\nAfter recompiling the source files, `test.sh` has verified that the max chain length is back to healthy levels and all tests passed.",
+  "timestamp": "2026-04-03T05:15:06Z",
+  "token_cost": 10815,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 38.271
+}

@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.11543399999999998,
-  "input_tokens": 31103,
-  "output_tokens": 1475,
+  "estimated_cost_usd": 0.134121,
+  "input_tokens": 36717,
+  "output_tokens": 1598,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n---\n\n## The Bug: Event Listener Leak in `processor.js`\n\n**Problem:** Every call to `processor.process()` registered **two new listeners** on the shared `eventBus` (`data:validated` and `data:error`) without ever removing them. After 500 requests, there would be 500+ listeners stacked up, each one holding a closure that captured the request's `data` object — preventing garbage collection and causing unbounded memory growth.\n\n**Fix:** Moved the `eventBus.on(...)` listener registrations from `process()` into the **constructor**, so they are registered exactly **once** per `DataProcessor` instance. The listener count stays at a stable 2 (one from `DataProcessor` + one from `Monitor`) regardless of how many requests are processed.\n\n| | Before fix | After fix |\n|---|---|---|\n| Listeners after 500 requests | 1000+ | 2 |\n| Heap growth | Unbounded | Minimal |",
-  "timestamp": "2026-04-02T01:31:34Z",
-  "token_cost": 32578,
-  "tool_uses": 9,
+  "summary": "All tests pass. Here's a summary of what was found and fixed:\n\n---\n\n## 🐛 The Needle: Event Listener Leak in `processor.js`\n\n**Root Cause:** Inside `DataProcessor.process()`, two new event listeners were registered on the shared `eventBus` **on every single request**:\n```js\n// Called per-request — BUG\nthis.eventBus.on('data:validated', (validatedData) => { ... });\nthis.eventBus.on('data:error', (err) => { ... });\n```\nAfter 500 requests → 500+ listeners accumulated, each holding a closure over the request's `data` object, preventing garbage collection and leaking memory indefinitely.\n\n**Fix:** Moved the listener registrations into the **constructor** so they are set up exactly once, regardless of how many requests are processed:\n```js\nconstructor(eventBus) {\n    // Registered once — no leak\n    this.eventBus.on('data:validated', ...);\n    this.eventBus.on('data:error', ...);\n}\n```\n\n**Result:** Listener count stays at **2** (stable) after 500 requests, instead of growing to 1000+.",
+  "timestamp": "2026-04-03T01:51:17Z",
+  "token_cost": 38315,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 35.857
+  "wall_clock": 40.397
 }

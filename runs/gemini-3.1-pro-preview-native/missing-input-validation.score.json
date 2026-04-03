@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 17974,
-  "output_tokens": 509,
+  "input_tokens": 18508,
+  "output_tokens": 495,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "I have found the bug where the API was allowing negative adjustments that pushed inventory levels below zero. I added validation in `routes.ts` to reject adjustments that would result in a negative inventory quantity and return a `400 Bad Request`.\n\nThe `./test.sh` script now runs successfully and passes all checks.",
-  "timestamp": "2026-04-02T01:47:42Z",
-  "token_cost": 18483,
-  "tool_uses": 6,
-  "turns_to_fix": 7,
-  "wall_clock": 38.327
+  "summary": "I have found the \"needle\" (the missing input validation for preventing inventory from going below zero) and fixed the bug in `routes.ts`. \n\nThe `/inventory/:sku/adjust` endpoint now correctly rejects adjustments that would result in a negative quantity with a 400 Bad Request status code.\n\nI ran `test.sh` and it successfully passed all tests, verifying that the input validation accurately prevents impossible inventory states.",
+  "timestamp": "2026-04-03T05:02:35Z",
+  "token_cost": 19003,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 38.044
 }

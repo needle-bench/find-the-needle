@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 2344,
-  "output_tokens": 1681,
+  "input_tokens": 2343,
+  "output_tokens": 1343,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All 7 tests pass. ✅\n\n## The Bug (The Needle)\n\n**Location:** `/app/app/scheduler.py` — the `_is_due` method in the `Scheduler` class.\n\n**Root Cause:** The code was using **today's date in UTC** to construct the scheduled local time for an event. This broke for late-night events in **negative UTC offset timezones** (e.g., US/Eastern = UTC-5, US/Pacific = UTC-8):\n\n- `evt-002` fires at **23:30 US/Eastern** → that's **04:30 UTC the next day**\n- When checking at `2025-01-16T04:30 UTC`, the code took the UTC date (`Jan 16`) and built `23:30 Eastern on Jan 16`, which converts to `04:30 UTC on Jan 17` — **one day too late**, so it never matched.\n\n**Fix:** Use **today's date in the event's own local timezone** instead of today's UTC date:\n\n```python\n# BEFORE (wrong): uses UTC date\ntoday_utc = window_start.date()\n\n# AFTER (correct): uses the event's local date\ntoday_local = window_start.astimezone(tz).date()\n```\n\nThis correctly handles the midnight boundary crossing — when it's 04:30 UTC on Jan 16, it's still 23:30 on Jan 15 in US/Eastern, so the scheduled time `Jan 15 23:30 ET = Jan 16 04:30 UTC` matches perfectly.",
-  "timestamp": "2026-04-02T02:37:27Z",
-  "token_cost": 4025,
-  "tool_uses": 14,
+  "summary": "All 7 tests pass. ✅\n\n## The Bug (The Needle)\n\n**File:** `/app/app/scheduler.py`, in the `_is_due` method.\n\n**Root cause:** The code was using **today's UTC date** to construct the scheduled event datetime in the event's local timezone:\n\n```python\n# WRONG: uses UTC date\ntoday_utc = window_start.date()\nnaive_scheduled = datetime(today_utc.year, today_utc.month, today_utc.day, ...)\n```\n\n**The problem:** For events scheduled late at night in **behind-UTC timezones** (e.g., `US/Eastern` at 23:30 or `US/Pacific` at 23:45), the UTC equivalent crosses into the **next day**. So when the scheduler checks \"Jan 16 04:30 UTC\" (which is Jan 15 23:30 EST), it was building the scheduled time using Jan 16 as the local date — producing \"Jan 16 23:30 EST = Jan 17 04:30 UTC\" — which never matched.\n\n**The fix:** Use **the local date in the event's timezone** (converted from `window_start`) instead of the raw UTC date:\n\n```python\n# CORRECT: uses the local date in the event's timezone\ntoday_local = window_start.astimezone(tz).date()\nnaive_scheduled = datetime(today_local.year, today_local.month, today_local.day, ...)\n```",
+  "timestamp": "2026-04-03T02:36:10Z",
+  "token_cost": 3686,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 34.361
+  "wall_clock": 27.564
 }

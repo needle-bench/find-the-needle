@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 164789,
+  "output_tokens": 1024,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was located in `pricing.py`, specifically within the `calculate_discount_amount` function. The original code used the addition operator (`+`) instead of the multiplication operator (`*`) to calculate the discount amount based on the subtotal and discount percentage. This resulted in incorrect discount calculations and final totals, as reported by the initial run of `test.sh`.\n\nI fixed the bug by correcting the formula:\n```python\ndef calculate_discount_amount(subtotal: float, discount_percent: float) -> float:\n    # Original: discount = subtotal + discount_percent / 100\n    discount = subtotal * (discount_percent / 100) # Fixed\n    return round(discount, 2)\n```\nAfter applying the fix, I verified that all tests in `test.sh` pass.\n",
+  "timestamp": "2026-04-03T05:13:11Z",
+  "token_cost": 165813,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 99.406
+}

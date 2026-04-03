@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.41192775,
+  "input_tokens": 771435,
+  "output_tokens": 14085,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was resolved with two changes:\n\n1. **Linearizable reads**: Updated `handleRead` in `app/handler.go` to use `node.ReadLinearizable(key)` instead of the stale local read path.\n2. **Heartbeat commit advancement**: In `app/raft/node.go`, enhanced `handleHeartbeat` to advance the follower’s commit index after processing entries, capped by the locally known log tail to avoid overcommit.\n\nAfter applying these fixes, `./test.sh` succeeds across all rounds, confirming linearizable reads even after partitions heal.",
+  "timestamp": "2026-04-03T01:49:33Z",
+  "token_cost": 785520,
+  "tool_uses": 48,
+  "turns_to_fix": 1,
+  "wall_clock": 190.106
+}

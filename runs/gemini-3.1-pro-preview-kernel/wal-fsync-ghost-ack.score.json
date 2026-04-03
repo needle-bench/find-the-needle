@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.5462987999999999,
+  "input_tokens": 701481,
+  "output_tokens": 8901,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T07:19:58Z",
+  "token_cost": 710382,
+  "tool_uses": 62,
+  "turns_to_fix": 1,
+  "wall_clock": 320.882
+}

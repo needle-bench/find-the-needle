@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0909475,
+  "input_tokens": 35758,
+  "output_tokens": 6569,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I tracked down the “needle”: events scheduled near local midnight were being evaluated only against the UTC date of the window’s start. That meant late-night events (like 23:30 US/Eastern) weren’t checked against the correct local date once converted to UTC.\n\nTo fix it, I updated `Scheduler._is_due` in `app/scheduler.py` to:\n\n- Normalize the window bounds to UTC.\n- Convert those bounds into the event’s local timezone.\n- Consider candidate local dates around the window (±1 day).\n- Handle DST gaps/ambiguous times safely.\n- Return true on any candidate datetime that falls inside the UTC window.\n\nAfter updating, `python -m compileall app` succeeds and the verification script `./test.sh` now passes: all expected events fire, and the negative checks stay quiet.",
+  "timestamp": "2026-04-03T02:28:20Z",
+  "token_cost": 42327,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 55.267
+}

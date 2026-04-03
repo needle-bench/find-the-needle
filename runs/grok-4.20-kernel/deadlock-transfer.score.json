@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.05766720000000001,
+  "input_tokens": 146640,
+  "output_tokens": 1992,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle has been found and fixed (deadlock in lock acquisition ordering within `TransferService.transfer()`). \n\n`test.sh` now passes reliably.",
+  "timestamp": "2026-04-03T01:23:00Z",
+  "token_cost": 148632,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 22.705
+}

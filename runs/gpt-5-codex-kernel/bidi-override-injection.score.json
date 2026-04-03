@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.10167625000000004,
-  "input_tokens": 216325,
-  "output_tokens": 3431,
+  "estimated_cost_usd": 0.205635,
+  "input_tokens": 262228,
+  "output_tokens": 8953,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Summary:\n- Added explicit stripping of Unicode BIDI control characters during username sanitization to prevent hidden text manipulations.\n- Updated admin access check to compare against the canonical stored username rather than the rendered display name, avoiding privilege escalation via display tricks.\n\nTests:\n- `sh test.sh`",
-  "timestamp": "2026-04-02T03:21:54Z",
-  "token_cost": 219756,
-  "tool_uses": 31,
+  "summary": "The “needle” was a privilege-escalation bug that let usernames with hidden Bidi override characters (e.g., `\\u202Enimda`) slip past the admin allow list. I fixed this by:\n\n* **Sanitizer:** removing all Unicode bidirectional control characters during username sanitization.\n* **Login endpoint:** passing the submitted username through `sanitize_username()` before authenticating, so logins and stored values stay consistent.\n\n`test.sh` now passes in full (verified locally).",
+  "timestamp": "2026-04-03T01:20:23Z",
+  "token_cost": 271181,
+  "tool_uses": 34,
   "turns_to_fix": 1,
-  "wall_clock": 71.134
+  "wall_clock": 116.449
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed. Changed `src/Product.java:36` from `return category.hashCode();` to `return sku.hashCode();`. Test passes.",
+  "timestamp": "2026-04-03T04:03:47Z",
+  "token_cost": 0,
+  "tool_uses": 22,
+  "turns_to_fix": 23,
+  "wall_clock": 20.818
+}

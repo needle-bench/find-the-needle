@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.041598,
+  "input_tokens": 24491,
+  "output_tokens": 1741,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the deadlock.\n\nCause: TransferService locked the two accounts in the order (from → to).  \nTwo simultaneous opposite-direction transfers (A→B and B→A) could therefore lock A then wait for B, while the other locked B then waited for A ⇒ circular wait → deadlock.\n\nFix: Impose a global lock order. Always acquire the lock of the account whose id is lexicographically smaller first, independent of transfer direction.\n\nKey change in app/TransferService.java:\n\n```\nAccount first, second;\nif (from.getId().compareTo(to.getId()) < 0) {\n    first = from; second = to;\n} else {\n    first = to; second = from;\n}\n\nsynchronized (first.getLock()) {\n    ...\n    synchronized (second.getLock()) {\n        ...\n```\n\nRe-ran test.sh: both passes succeed, no deadlock, balances conserved.\n\nAll good.",
+  "timestamp": "2026-04-03T01:37:37Z",
+  "token_cost": 26232,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 29.602
+}

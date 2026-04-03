@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.09161799999999999,
+  "input_tokens": 70949,
+  "output_tokens": 1827,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the lost-updates bug.\n\nProblem  \nincrementCounter() performed a naïve read-modify-write:\n1. GET counter\n2. +1\n3. SET counter\n\nUnder heavy concurrency two requests could read the same value and overwrite each other, so some increments were lost and test.sh failed.\n\nFix  \nUse Redis’ atomic INCR command so the increment is executed completely inside Redis.\n\napp/counter.js (new core)  \n• replaced the read-modify-write logic with:  \n  const newValue = await client.incr(COUNTER_KEY);\n\nAll other behaviour (get/reset) unchanged.\n\nResult  \n$ ./test.sh  \nExpected: 100  \nGot:      100  \nPASS: Counter is correct",
+  "timestamp": "2026-04-03T02:56:49Z",
+  "token_cost": 72776,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 39.545
+}

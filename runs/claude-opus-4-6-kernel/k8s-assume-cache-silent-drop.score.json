@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.22709,
+  "input_tokens": 38428,
+  "output_tokens": 1398,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's what the bug was and the fix:\n\n**The Bug (The Needle):** In the `informerUpdate` method, when an informer delivers a newer version of an object that was optimistically assumed by the scheduler, the assumed state was **silently dropped** — the entry was deleted from the `assumed` map without any notification to the caller. This mirrors a real Kubernetes bug in `assume_cache.go:426` where the scheduler loses track of its optimistic state without knowing it.\n\n**The Fix:** Added `conflictNotified = true` in the `informerUpdate` method when the assumed state is dropped due to a newer informer version. This ensures the caller is notified that their optimistic (assumed) state was superseded by a real update from the API server, instead of the state being silently discarded.",
+  "timestamp": "2026-04-03T01:52:50Z",
+  "token_cost": 39826,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 94.241
+}

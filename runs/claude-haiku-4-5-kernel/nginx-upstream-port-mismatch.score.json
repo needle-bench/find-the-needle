@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.029131,
+  "input_tokens": 23431,
+  "output_tokens": 1140,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The bug is fixed!**\n\n## Summary\n\n**The Needle:** A port mismatch in the nginx upstream configuration.\n\n- **Flask server** runs on port **5000**\n- **Nginx config** was trying to proxy to port **5001** (wrong!)\n- This caused `/api/data` requests through nginx to fail with connection errors\n\n**The Fix:** Changed the `proxy_pass` directive in `/etc/nginx/sites-available/default` from `http://127.0.0.1:5001` to `http://127.0.0.1:5000`\n\nAll tests now pass! ✨",
+  "timestamp": "2026-04-03T00:53:13Z",
+  "token_cost": 24571,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 23.504
+}

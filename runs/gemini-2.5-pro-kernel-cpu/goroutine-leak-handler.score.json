@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 34825,
+  "output_tokens": 1466,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! The goroutine leak has been fixed. The number of goroutines returns to the baseline after the clients disconnect, which indicates that the context cancellation is working as expected.\n\nI have successfully identified and fixed the hidden problem. The issue was a goroutine leak in the `/compute` handler, which I resolved by making the handler and its associated computation context-aware. This ensures that when a client disconnects, the corresponding goroutine is properly terminated. The successful test run confirms the fix.\n",
+  "timestamp": "2026-04-03T02:10:08Z",
+  "token_cost": 36291,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 49.446
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00961339,
+  "input_tokens": 28813,
+  "output_tokens": 2047,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test passed, and it shows \"Leaked goroutines above baseline: 0\" and \"PASS: Goroutines properly cleaned up after client disconnect\". This indicates that the goroutine leak has been successfully fixed. I have found the needle (the goroutine leak) and verified the fix.",
+  "timestamp": "2026-04-03T01:24:27Z",
+  "token_cost": 30860,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 41.468
+}

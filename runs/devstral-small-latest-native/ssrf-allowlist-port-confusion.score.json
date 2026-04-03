@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Perfect! The fix is complete and verified. The validator now blocks IPv6 loopback addresses, closing the SSRF vulnerability.",
-  "timestamp": "2026-04-02T02:03:21Z",
+  "summary": "Perfect! The fix works. All tests pass, including the IPv6 loopback blocking tests. The validator now correctly blocks both `[::1]` and `[0:0:0:0:0:0:0:1]` IPv6 loopback addresses.",
+  "timestamp": "2026-04-03T04:55:45Z",
   "token_cost": 0,
-  "tool_uses": 11,
-  "turns_to_fix": 12,
-  "wall_clock": 18.988
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 14.999
 }

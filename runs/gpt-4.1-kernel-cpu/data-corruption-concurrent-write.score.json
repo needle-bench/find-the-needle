@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.034522000000000004,
+  "input_tokens": 25237,
+  "output_tokens": 694,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was caused by overlapping segment assignments in the function `segments_for_worker` in `src/config.rs`. Changing\n\n```rust\nlet end = std::cmp::min(start + segments_per_worker + 2, self.num_segments);\n```\n\nto\n\n```rust\nlet end = std::cmp::min(start + segments_per_worker, self.num_segments);\n```\n\nremoves the overlap (the \"`+ 2`\" was causing redundant/overlapping assignments). After this fix, running `test.sh` passes all tests and verifies correct concurrent write output with no data corruption. The needle is found and the issue is resolved!",
+  "timestamp": "2026-04-03T07:27:14Z",
+  "token_cost": 25931,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 15.155
+}

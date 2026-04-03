@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.01099264,
+  "input_tokens": 42164,
+  "output_tokens": 580,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test passes now. The issue was indeed the character encoding. By changing the charset from `ISO-8859-1` to `UTF-8` in the `CsvReader.java` file, all the non-ASCII characters in the customer names are now properly preserved in the report output.\n\nThe needle in the haystack was the incorrect character encoding setting in the CSV reader, which was causing international characters to be corrupted.",
+  "timestamp": "2026-04-03T01:22:51Z",
+  "token_cost": 42744,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 14.464
+}

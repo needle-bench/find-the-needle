@@ -4,15 +4,15 @@
   "benchmark": "rate-limit-bypass-header",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.008208,
-  "input_tokens": 3176,
-  "output_tokens": 232,
+  "estimated_cost_usd": 0.002812,
+  "input_tokens": 550,
+  "output_tokens": 214,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test reveals a rate limiter vulnerability: \n\n- Without spoofing: 10 requests passed, 5 blocked (as expected)\n- With spoofed X-Forwarded-For header: All 30 requests passed (not blocked)\n\n**Problem:** The rate limiter can be bypassed by rotating the `X-Forwarded-For` header, allowing unlimited requests.\n\n**Next step:**  \nCheck the application source code, especially for rate limiting and request IP extraction logic. The goal is to ensure the real client IP is reliably extracted (not trusting spoofed headers blindly) before enforcing rate limits.\n\nWould you like me to locate and suggest the exact code fix for this vulnerability?",
-  "timestamp": "2026-04-02T01:31:43Z",
-  "token_cost": 3408,
-  "tool_uses": 5,
+  "summary": "The test output shows the following:\n\n- The rate limiter works correctly for regular requests, blocking excess requests as expected.\n- However, when an attacker rotates the `X-Forwarded-For` header, the rate limiter is bypassed, allowing unlimited requests to pass. The test fails on this.\n\n**The issue is with trusting the `X-Forwarded-For` header for rate limiting, which can be spoofed by attackers.**\n\n**To fix this:**\n- The rate limiter should not trust user-supplied `X-Forwarded-For` headers unless it is certain the headers are set by a trusted proxy, or only use server-validated client IP.\n\nWould you like step-by-step instructions on how to adjust the code, or should I look for and modify the rate limiting logic directly? If you share the relevant source code file for the rate-limiting logic (likely a file dealing with IP extraction), I can make the necessary fix.",
+  "timestamp": "2026-04-03T01:50:11Z",
+  "token_cost": 764,
+  "tool_uses": 1,
   "turns_to_fix": 1,
-  "wall_clock": 15.785
+  "wall_clock": 11.799
 }

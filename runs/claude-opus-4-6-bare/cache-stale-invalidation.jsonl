@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:24:13Z", "benchmark": "cache-stale-invalidation", "model": "claude-opus-4-6", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/home/", "/tmp/"], "tokens_in": 583, "tokens_out": 187, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/var/", "/opt/", "/etc/", "/root/"], "tokens_in": 862, "tokens_out": 237, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/.gitconfig", "/root/"], "tokens_in": 1242, "tokens_out": 95, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/", "/", "/app/\"*.txt\"", "/"], "tokens_in": 1499, "tokens_out": 172, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 2428, "tokens_out": 129, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/cache.py", "/app/app/config.py", "/app/app/server.py", "/app/app/store.py", "/app/test.sh"], "tokens_in": 3269, "tokens_out": 225, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:24:37Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "bare"}

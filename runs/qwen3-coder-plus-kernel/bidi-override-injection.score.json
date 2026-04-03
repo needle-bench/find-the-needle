@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.023389990000000003,
-  "input_tokens": 62187,
-  "output_tokens": 1948,
+  "estimated_cost_usd": 0.02836015,
+  "input_tokens": 74334,
+  "output_tokens": 1693,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Great! All tests pass. My fix successfully prevents the Unicode BIDI privilege escalation vulnerability. Let me explain what the fix does:\n\nThe issue was that the application was vulnerable to a Unicode Bidirectional Override attack, where users could register with usernames containing special Unicode characters like U+202E (RIGHT-TO-LEFT OVERRIDE) that cause text to be displayed differently than how it's stored. An attacker could register as `\\u202enimda` (the RLO character followed by 'nimda'), which would visually render as 'admin'.\n\nIn the authentication flow, the application:\n1. Stored the raw username including Unicode control chars during registration\n2. During login verification, extracted the potentially BIDI-altered stored username\n3. Rendered the display name using the internal `_render_display_name` function \n4. Checked the rendered name (the visual one) against the admin allowlist\n5. Since `nimda` with RLO rendered as `admin`, attackers could gain admin access\n\nMy fix was to modify the `sanitize_username` function in `sanitizer.py` to strip out all BIDI control characters before storing the username, preventing this type of attack. Now when someone tries to register with BIDI characters, those are removed and the plain username (\"nimda\") is stored, which doesn't match \"admin\" in the allowlist.\n\nThe fix passed all tests, confirming that:\n- Normal users can still register and log in normally\n- Real administrators can still access the admin panel\n- Users with BIDI characters in their names are either rejected during registration or properly denied admin access\n- The security vulnerability is mitigated\n\nThe needle in the haystack has been found and fixed.",
-  "timestamp": "2026-04-02T01:33:21Z",
-  "token_cost": 64135,
-  "tool_uses": 12,
+  "summary": "Great! The tests now pass. The fix is working properly. Let me summarize the problem and solution:\n\nThe issue was a security vulnerability related to Unicode BIDI (bidirectional) control characters. The flaw existed in how usernames were processed:\n\n1. When users registered, BIDI control characters were not stripped from their usernames\n2. During authentication, the vulnerable `_render_display_name` function in `auth.py` visually processed these BIDI characters \n3. A malicious user could register with a username like \"‎nimda\" (with U+202E RIGHT-TO-LEFT OVERRIDE), which would render visually as \"admin\"\n4. The `check_admin_access` function compared this visually-rendered name against the admin allowlist, granting unauthorized admin access\n\nMy fix involved modifying `sanitizer.py` to include a comprehensive filter that removes all dangerous BIDI control characters during username sanitization, preventing them from being stored in the system in the first place. This prevents the visual spoofing attack since BIDI characters never make it into the system.\n\nThe vulnerability is now fully mitigated as demonstrated by all tests passing.",
+  "timestamp": "2026-04-03T01:22:55Z",
+  "token_cost": 76027,
+  "tool_uses": 13,
   "turns_to_fix": 1,
-  "wall_clock": 51.787
+  "wall_clock": 50.737
 }

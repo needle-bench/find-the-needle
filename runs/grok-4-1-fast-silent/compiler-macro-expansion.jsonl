@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:22:11Z", "benchmark": "compiler-macro-expansion", "model": "grok-4-1-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# compiler-macro-expansion\n\n## Project\n\nA Rust code generation engine (`codegen-engine`) that takes schema definitions"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/./test.sh", "/app/src/schema.rs", "/app/src/codegen.rs"], "tokens_in": 833, "tokens_out": 799, "test_exit": 2}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app", "/app/./test.sh", "/app/test.sh", "/app/src/main.rs", "/app/src/runtime.rs"], "tokens_in": 2594, "tokens_out": 1394, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:22:28Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

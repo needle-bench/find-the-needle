@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.18328475000000002,
+  "input_tokens": 85727,
+  "output_tokens": 13099,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Found and fixed the missing pointer/length validation in `src/ioctl_handler.c`. Added checks for `req->value`, `req->value_len`, and safe `strnlen` handling in `handle_set_config`, plus pointer/length validation in `handle_get_config`. After rebuilding, `./test.sh` now passes both the normal self-test and the fuzz test; no segfaults remain.",
+  "timestamp": "2026-04-03T01:46:13Z",
+  "token_cost": 98826,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 116.398
+}

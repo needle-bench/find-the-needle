@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.05981895000000001,
+  "input_tokens": 192006,
+  "output_tokens": 2109,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The problem was a regression in the v2 API where several fields from the v1 API (`avatar_url`, `bio`, and `location`) were missing in the v2 response models and their corresponding conversion methods. This broke backward compatibility for clients migrating from v1 to v2.\n\nI fixed this by:\n1.  Updating the `UserV2` struct in `models.go` to include the missing fields (`AvatarURL`, `Bio`, and `Location`) with the correct JSON tags.\n2.  Ensuring the `InternalUser` struct (re-labeled from `User` to match `store.go`'s expectations) correctly contains all necessary fields.\n3.  Updating the `ToV2()` conversion method to map these fields from the internal user representation to the v2 API response.\n\nThe `test.sh` script now passes, verifying that v2 is a proper superset of v1.\n\n```go\n// /app/app/models.go (relevant changes)\ntype UserV2 struct {\n\tID          string    `json:\"id\"`\n\tName        string    `json:\"name\"`\n\tEmail       string    `json:\"email\"`\n\tRole        string    `json:\"role\"`\n\tAvatarURL   string    `json:\"avatar_url\"` // Added\n\tBio         string    `json:\"bio\"`        // Added\n\tLocation    string    `json:\"location\"`   // Added\n\tDepartment  string    `json:\"department\"`\n\tPhoneNumber string    `json:\"phone_number\"`\n\tIsActive    bool      `json:\"is_active\"`\n\tCreatedAt   time.Time `json:\"created_at\"`\n\tUpdatedAt   time.Time `json:\"updated_at\"`\n}\n```",
+  "timestamp": "2026-04-03T01:13:16Z",
+  "token_cost": 194115,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 45.839
+}

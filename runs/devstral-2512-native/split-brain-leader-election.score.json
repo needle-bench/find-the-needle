@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! Now the output shows \"Node 2: became LEADER for term 1 with 3 votes\" which is correct. The fix is complete.\n\n## Summary\n\nThe issue was in `app/cluster/node.go` line 124. The original code used:\n\n```go\nif finalVotes >= totalNodes/2 {\n```\n\nThis allowed split-brain because:\n- Partition A (2 nodes): needed 1 vote (2/2 = 1)\n- Partition B (3 nodes): needed 1 vote (3/2 = 1)\n\nBoth partitions could elect leaders with minimal votes.\n\n**The fix:** Changed the condition to require a strict majority of the entire cluster:\n\n```go\nif finalVotes > totalNodes/2 {\n```\n\nFor a 5-node cluster, this requires 3 votes (since 3 > 2.5), preventing split-brain.\n\n**Verification:** The test now passes - no split-brain detected across all rounds.",
+  "timestamp": "2026-04-03T03:12:43Z",
+  "token_cost": 0,
+  "tool_uses": 32,
+  "turns_to_fix": 33,
+  "wall_clock": 61.213
+}

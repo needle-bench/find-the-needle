@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8948,
+  "output_tokens": 1357,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix is successful! 🎉\n\n## Summary\n\n**The Needle:** The vulnerability was in `./app/auth/compare.go` in the `compareHashes()` function, which used the simple `==` operator for comparing password hashes.\n\n**Why it's vulnerable:** The `==` operator in Go short-circuits on the first differing byte, causing the comparison time to vary based on how many characters match the stored hash. This creates a timing side-channel that allows an attacker to guess the password hash byte-by-byte by measuring response times.\n\n**The Fix:** I replaced the vulnerable comparison:\n```go\nreturn stored == input\n```\n\nWith the constant-time comparison from Go's `crypto/subtle` package:\n```go\nimport \"crypto/subtle\"\n\nreturn subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1\n```\n\nThis ensures the comparison always examines every byte regardless of where mismatches occur, preventing timing-based attacks. The test confirms the timing ratio is now safe at 1.048 (below the 1.3 threshold).",
+  "timestamp": "2026-04-03T01:37:45Z",
+  "token_cost": 10305,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 15.402
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.005178,
+  "input_tokens": 1857,
+  "output_tokens": 183,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The test failed with a deadlock error caused by concurrent transfers in opposite directions, indicating a lock ordering violation. This \"needle\" is likely a concurrency bug (deadlock) in the codebase. \n\n**Next steps:**\n- Find where locks are being acquired in the transfer logic.\n- Ensure a consistent lock acquisition order to prevent deadlocks.\n\nWould you like help locating and fixing the locking bug in your source code? If so, please specify which language or files implement the transfer logic, or allow me to search for them.",
+  "timestamp": "2026-04-03T01:20:35Z",
+  "token_cost": 2040,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 18.602
+}

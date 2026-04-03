@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 53447,
+  "output_tokens": 766,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix is complete. The issue was in the `segments_for_worker` function in `/app/src/config.rs`. The original implementation intentionally assigned overlapping segments to workers for redundancy, but this caused concurrent writes to the same file offsets, leading to undefined behavior and data corruption.\n\nThe fix ensures that each segment is assigned to exactly one worker, preventing overlapping writes and ensuring data integrity. The test now passes successfully.",
+  "timestamp": "2026-04-03T02:09:52Z",
+  "token_cost": 54213,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 15.382
+}

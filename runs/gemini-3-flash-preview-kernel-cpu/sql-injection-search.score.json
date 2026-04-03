@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 370153,
+  "output_tokens": 3260,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have fixed the SQL injection vulnerability in `app/search.py` by using parameterized queries and removed the unsafe `execute_raw` method in `app/database.py`. All tests in `test.sh` passed.\n",
+  "timestamp": "2026-04-03T04:39:23Z",
+  "token_cost": 373413,
+  "tool_uses": 39,
+  "turns_to_fix": 1,
+  "wall_clock": 110.408
+}

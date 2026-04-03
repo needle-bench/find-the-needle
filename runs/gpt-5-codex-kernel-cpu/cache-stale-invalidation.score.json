@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.025928,
+  "input_tokens": 16712,
+  "output_tokens": 1195,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed cache invalidation issues in `server.py` by clearing relevant cache entries and refreshing updated product data after product updates and creations. All tests now pass successfully.",
+  "timestamp": "2026-04-03T01:22:34Z",
+  "token_cost": 17907,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 19.737
+}

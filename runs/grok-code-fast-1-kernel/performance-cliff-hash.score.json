@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.010423599999999998,
+  "input_tokens": 10394,
+  "output_tokens": 6600,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The needle is in `src/Product.java`. The issue is a hash collision bug in the `hashCode()` method, which groups by category instead of SKU, causing poor hash distribution when many products exist. I've fixed it by changing the hash to use SKU.\n\nThe test passes now:\n```\n=== Performance Cliff Hash Map Test ===\n--- Small dataset (100 items) ---\n=== Performance Benchmark (n=100) ===\nInsert 100 items: 10.83 ms\nLookup 100 items: 4.44 ms (found 100)\nAverage lookup: 44.38 us\nSmall dataset: OK\n--- Hash distribution analysis ---\nPicked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8\n=== Hash Distribution Analysis ===\nCapacity: 16384\nSize: 10000\nNon-empty buckets: 10000 (61.0%)\nMax chain length: 1\nAvg chain length: 1.0\nOK: Max chain length 1 is within acceptable bounds\nPASS: Hash map distributes items evenly across buckets\n```",
+  "timestamp": "2026-04-03T02:06:53Z",
+  "token_cost": 16994,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 46.537
+}

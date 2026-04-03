@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.035008000000000004,
+  "input_tokens": 25000,
+  "output_tokens": 934,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The \"needle\" in this benchmark was a SQL injection vulnerability in the search logic. I have fixed the vulnerability by switching from string concatenation to parameterized SQL queries in `/app/app/search.py`. \n\nRunning `test.sh` now passes all tests, confirming the issue is resolved:\n\n- PASS: UNION SQL injection did not leak user data\n- PASS: Boolean injection did not bypass search filter\n- PASS: Search endpoint is not vulnerable to SQL injection\n\n✅ The needle is found and fixed!",
+  "timestamp": "2026-04-03T01:54:05Z",
+  "token_cost": 25934,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 21.517
+}

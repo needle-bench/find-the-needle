@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.05634782,
+  "input_tokens": 141754,
+  "output_tokens": 33633,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "PASS: Linearizable read confirmed — value is consistent after partition heal\n\nThe \"needle\" was two compounding bugs in the Raft implementation:\n\n1. **Stale read handler**: The read endpoint (`app/handler.go`) served local KV state directly via `node.Read()`, without linearizability guarantees. This was fixed by switching to `node.ReadLinearizable()`, which confirms the applied index is current with the leader before reading.\n\n2. **Missing commit advancement on heartbeat catch-up**: In `app/raft/node.go`, `handleHeartbeat` appended missed entries to followers after partition heal but never advanced the commit index, leaving them unapplied forever. `handleAppendEntries` correctly advanced the commit index, masking the bug during normal operation. Fixed by adding commit advancement logic after appending entries in heartbeats. \n\nBoth fixes are required; either alone fails the test. The bug was triggered only after partition heal, during heartbeat-based entry synchronization, not during normal append-entries RPCs. This violated linearizability as committed writes became invisible to readers on certain nodes.",
+  "timestamp": "2026-04-03T01:54:09Z",
+  "token_cost": 175387,
+  "tool_uses": 98,
+  "turns_to_fix": 0,
+  "wall_clock": 372.072
+}

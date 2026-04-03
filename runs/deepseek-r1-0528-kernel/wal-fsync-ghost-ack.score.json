@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0011495,
+  "input_tokens": 585,
+  "output_tokens": 385,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "I'll begin by exploring the environment to find the issue. Let's start by checking the files in the current directory.",
+  "timestamp": "2026-04-03T04:01:17Z",
+  "token_cost": 970,
+  "tool_uses": 1,
+  "turns_to_fix": 0,
+  "wall_clock": 133.177
+}

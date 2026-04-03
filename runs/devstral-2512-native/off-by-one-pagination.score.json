@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed. The pagination now works correctly - page 1 ends at ID 10, page 2 starts at ID 11 with no overlap or gaps.",
-  "timestamp": "2026-04-02T03:23:13Z",
+  "summary": "The test passes. The pagination bug is fixed. The issue was the incorrect offset calculation that subtracted 1 for pages > 1, causing a gap between pages.",
+  "timestamp": "2026-04-03T02:44:11Z",
   "token_cost": 0,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 15.993
+  "wall_clock": 13.642
 }

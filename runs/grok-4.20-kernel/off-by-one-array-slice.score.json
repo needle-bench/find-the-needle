@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-array-slice",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.011552,
-  "input_tokens": 22693,
-  "output_tokens": 313,
+  "estimated_cost_usd": 0.0081132,
+  "input_tokens": 17247,
+  "output_tokens": 192,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The off-by-one error in `processor.py` (incorrect end index calculation in slicing) has been fixed. `test.sh` now passes.",
-  "timestamp": "2026-04-02T03:32:58Z",
-  "token_cost": 23006,
-  "tool_uses": 11,
+  "summary": "The off-by-one bug in the batch slicing logic (in `processor.py`) has been fixed. Running the test verifies that all records are now processed correctly with no drops across various batch sizes and boundaries.",
+  "timestamp": "2026-04-03T01:36:56Z",
+  "token_cost": 17439,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 19.088
+  "wall_clock": 9.814
 }

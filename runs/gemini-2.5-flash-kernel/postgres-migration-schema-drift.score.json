@@ -4,15 +4,15 @@
   "benchmark": "postgres-migration-schema-drift",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.013271100000000003,
-  "input_tokens": 70906,
-  "output_tokens": 1839,
+  "estimated_cost_usd": 0.026053770000000004,
+  "input_tokens": 212153,
+  "output_tokens": 3795,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests passed! The needle was that the `main.go` file used an old column name `status` instead of `order_status` which was changed in a migration, and the binary `orders-api` needed to be recompiled after the source code modification. I also had to make sure the environment variables for postgres were set correctly for the test script to run.",
-  "timestamp": "2026-04-02T01:46:36Z",
-  "token_cost": 72745,
-  "tool_uses": 16,
+  "summary": "Success! All tests passed. The \"needle\" was the incorrect column name usage in `app/main.go` and the need to rebuild the `orders-api` binary. I updated the column names in the Go code and rebuilt the binary, and also fixed direct paths to postgres binaries in `test.sh`.",
+  "timestamp": "2026-04-03T02:38:35Z",
+  "token_cost": 215948,
+  "tool_uses": 31,
   "turns_to_fix": 1,
-  "wall_clock": 25.993
+  "wall_clock": 49.012
 }

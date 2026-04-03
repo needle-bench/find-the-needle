@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0085971,
+  "input_tokens": 66216,
+  "output_tokens": 7992,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The fix is complete and verified: `./test.sh` now passes with only 2 DB queries in the performance test (1 for users + 1 batched query for all related posts). The core issue was that DataLoaders were created independently in each resolver (preventing cross-field batching), and the GraphQL context didn't provide shared loaders. I updated the following files to share loaders in the per-request context:\n\n- `src/context.ts`: Updated to create and include loaders.\n- `src/resolvers/userResolver.ts`: Removed per-resolver loaders; use shared `ctx.loaders`.\n- `src/resolvers/postResolver.ts`: Removed per-resolver loaders; use shared `ctx.loaders.userLoader` for authors.\n\nNo other changes were needed.",
+  "timestamp": "2026-04-03T01:30:53Z",
+  "token_cost": 74208,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 62.64
+}

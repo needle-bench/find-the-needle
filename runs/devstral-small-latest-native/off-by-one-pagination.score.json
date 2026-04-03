@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed. The pagination now works correctly. Page 1 ends at ID 10, page 2 starts at ID 11 with no gaps or overlaps.",
-  "timestamp": "2026-04-02T01:57:49Z",
+  "summary": "Fixed. The pagination offset calculation was incorrect, causing page 2 to start at ID 10 instead of ID 11. Removed the erroneous `- (1 if page > 1 else 0)` term. Test now passes.",
+  "timestamp": "2026-04-03T04:02:26Z",
   "token_cost": 0,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 23.99
+  "wall_clock": 15.431
 }

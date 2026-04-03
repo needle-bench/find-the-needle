@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00648524,
+  "input_tokens": 17641,
+  "output_tokens": 896,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The tests passed! The search endpoint is no longer vulnerable to SQL injection.",
+  "timestamp": "2026-04-03T03:07:39Z",
+  "token_cost": 18537,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 13.656
+}

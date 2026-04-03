@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "native",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.08496135,
-  "input_tokens": 105285,
-  "output_tokens": 713,
+  "estimated_cost_usd": 0.0883317,
+  "input_tokens": 105360,
+  "output_tokens": 763,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 5 tests pass. The fix was in `validator.py`: `BLOCKED_HOSTS` was missing IPv6 loopback forms. `urlparse` strips the brackets from `[::1]`, so the actual hostname to block is `::1` and `0:0:0:0:0:0:0:1`.",
-  "timestamp": "2026-04-02T02:01:30Z",
-  "token_cost": 105998,
+  "summary": "All 5 tests pass. The fix was adding `::1` and `0:0:0:0:0:0:0:1` to `BLOCKED_HOSTS` in `validator.py:12`. `urlparse` strips the brackets from IPv6 URLs (so `http://[::1]:8888/` yields `hostname == \"::1\"`), which the original blocklist never checked.",
+  "timestamp": "2026-04-03T02:32:52Z",
+  "token_cost": 106123,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 23.504
+  "wall_clock": 20.859
 }

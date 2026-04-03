@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 40195,
+  "output_tokens": 678,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix worked. The issue was that the `CsvReader` class was using `ISO-8859-1` encoding, which could not properly handle non-ASCII characters. By changing the encoding to `UTF-8`, all international characters in the customer names are now preserved correctly.\n\nThe test script confirms that all names, including those with non-ASCII characters like \"Renée Duböis\", \"Hans Müller\", and \"María García\", are correctly displayed in the report.",
+  "timestamp": "2026-04-03T02:23:20Z",
+  "token_cost": 40873,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 15.11
+}

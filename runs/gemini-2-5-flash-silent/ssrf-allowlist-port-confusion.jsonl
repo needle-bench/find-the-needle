@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:37:37Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "gemini-2-5-flash", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/workspace/test.sh\n/workspace/app/internal_service.py\n/workspace/app/server.py\n/workspace/app/validator.py\n\nCurrent test o"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 587, "tokens_out": 104, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 1076, "tokens_out": 351, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 1450, "tokens_out": 39, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:37:43Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0042489,
+  "input_tokens": 21805,
+  "output_tokens": 5117,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA\n</xai:function_call>",
+  "timestamp": "2026-04-03T02:37:41Z",
+  "token_cost": 26922,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 37.606
+}

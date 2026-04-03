@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:22:20Z", "benchmark": "cache-stale-invalidation", "model": "devstral-medium", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 205, "tokens_out": 134, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/store.py"], "tokens_in": 806, "tokens_out": 83, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 1414, "tokens_out": 84, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/cache.delete(\"products:list\")'", "/app/app/server.py"], "tokens_in": 2420, "tokens_out": 173, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 2600, "tokens_out": 47, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3577, "tokens_out": 91, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:22:29Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0, "arm": "silent"}

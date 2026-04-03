@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.036178,
+  "input_tokens": 21153,
+  "output_tokens": 1274,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The bug was in src/codegen.rs:  \ngetter methods for fields declared as FieldType::Ref returned the owned struct (e.g. `-> Company`) instead of a reference (e.g. `-> &Company`).  \nThis produced wrong signatures, causing the complex-accessor tests in test.sh to fail.\n\nFix applied (src/codegen.rs):\n\n```rust\nFieldType::Ref(type_name) => {\n    // Ref types: return the nested struct via accessor\n    format!(\n        \"    pub fn {}(&self) -> &{} {{\\n        &self.{}\\n    }}\\n\\n\",\n        name, type_name, name\n    )\n}\n```\n\n(Change is `-> &{}` rather than `-> {}`.)\n\nAfter recompiling and re-running the test script:\n\n```\nPASS: All code generation tests passed\n```\n\nAll tests now succeed, confirming the needle was found and fixed.",
+  "timestamp": "2026-04-03T01:33:40Z",
+  "token_cost": 22427,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 20.938
+}

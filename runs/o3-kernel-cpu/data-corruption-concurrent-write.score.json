@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.057988,
+  "input_tokens": 46954,
+  "output_tokens": 1702,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the concurrency bug.\n\nRoot cause  \nEach worker was intentionally given an overlapping range of segments (segments_for_worker in config.rs). That caused multiple threads to write to the same file offsets, which the test script rightfully treats as a data-race and fails.\n\nFix implemented (src/config.rs)  \nRe-wrote segments_for_worker so every segment is owned by exactly one worker using round-robin assignment:\n\npub fn segments_for_worker(&self, worker_id: usize) -> Vec<usize> {\n    (0..self.num_segments)\n        .filter(|seg| seg % self.num_workers == worker_id)\n        .collect()\n}\n\nResult  \ntest.sh now passes:\n\n=== Concurrent Write Integrity Test ===\n...\nOK: No overlapping segment assignments\nPASS: All concurrent write runs produced correct output",
+  "timestamp": "2026-04-03T01:36:12Z",
+  "token_cost": 48656,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 34.046
+}

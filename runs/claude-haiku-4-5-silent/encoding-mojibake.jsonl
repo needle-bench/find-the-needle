@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:23:55Z", "benchmark": "encoding-mojibake", "model": "claude-haiku-4-5", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/CsvReader.java\n/app/app/CustomerRecord.java\n/app/app/Main.java\n/app/app/ReportGenerator.java\n\nCurren"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app"], "tokens_in": 962, "tokens_out": 92, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1069, "tokens_out": 84, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:23:59Z", "test_exit": 0, "total_turns": 2, "correct_lines": 0, "arm": "silent"}

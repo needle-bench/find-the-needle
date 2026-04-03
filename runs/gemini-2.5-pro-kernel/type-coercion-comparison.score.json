@@ -4,15 +4,15 @@
   "benchmark": "type-coercion-comparison",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.07388950000000001,
-  "input_tokens": 9011,
-  "output_tokens": 6531,
+  "estimated_cost_usd": 0.017481625,
+  "input_tokens": 12138,
+  "output_tokens": 715,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I've found the problem. The `min_rating` query parameter was being treated as a string instead of a number, which caused the filtering logic to fail. I've corrected the code to parse the value as an integer, and all tests now pass.",
-  "timestamp": "2026-04-02T02:15:10Z",
-  "token_cost": 15542,
-  "tool_uses": 9,
+  "summary": "The test passed. The fix is correct. I have found the needle and verified the fix. I am done.\n",
+  "timestamp": "2026-04-03T05:39:23Z",
+  "token_cost": 12853,
+  "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 81.388
+  "wall_clock": 21.093
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00561595,
+  "input_tokens": 21518,
+  "output_tokens": 8106,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS: Rate limiter is not vulnerable to header spoofing  \ntest.sh exited with code 0.",
+  "timestamp": "2026-04-03T02:58:01Z",
+  "token_cost": 29624,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 79.832
+}

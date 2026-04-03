@@ -4,15 +4,15 @@
   "benchmark": "k8s-assume-cache-silent-drop",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.0125372,
-  "input_tokens": 21223,
-  "output_tokens": 372,
+  "estimated_cost_usd": 0.086466,
+  "input_tokens": 259989,
+  "output_tokens": 1476,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found (the silent drop in `informerUpdate` at the equivalent of k8s `assume_cache.go:426`). The fix adds conflict notification to surface when an assumed object is invalidated by a newer informer update. The test now passes.",
-  "timestamp": "2026-04-02T03:24:18Z",
-  "token_cost": 21595,
-  "tool_uses": 8,
+  "summary": "The needle has been found and the bug fixed (assumed state conflict is now notified instead of silently dropped). Verified with `./test.sh`.",
+  "timestamp": "2026-04-03T01:29:14Z",
+  "token_cost": 261465,
+  "tool_uses": 33,
   "turns_to_fix": 1,
-  "wall_clock": 11.073
+  "wall_clock": 22.841
 }

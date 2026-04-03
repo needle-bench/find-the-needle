@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0328198,
+  "input_tokens": 55598,
+  "output_tokens": 57954,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The test now passes consistently:\n\n```\nSeeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS\n```\n\n### The Needle (Bug)\n**Location**: `/workspace/app/processor.py`, `execute_transfer()` function, `except sqlite3.IntegrityError:` block.\n\n**Problem**: No transaction rollback after `INSERT` fails (duplicate `idempotency_key`). The `credit` UPDATE is queued *before* `INSERT`, but on `IntegrityError`:\n- No `conn.rollback()`: the queued credit commits later (with manual debit refund).\n- This allows duplicate credits (B +=500 twice) while debits are refunded inconsistently, breaking money conservation (total=2500).\n\n**Race Scenario** (with chaos delay + 20 concurrent requests):\n1. T1: Debit A→500 (commit), sleep(0.05s), credit B→1500, INSERT success (commit).\n2. T2: Debit A→0 (commit), sleep(0.05s), credit B→2000 *(queued)*, INSERT fails (duplicate key).\n3. T2 `except`: Manual A+=500 (queued), commit → applies *both* credit & refund → A=500, B=2000 (total=2500).\n\n**Fix Applied**:\n- Added `conn.rollback()` in `except sqlite3.IntegrityError:` **before** manual debit refund. Undoes queued credit atomically.\n- Also ensured `conn.rollback()` in general `except` for safety (undoes any queued ops post-debit-commit).\n- Edits via `Edit` tool confirmed.\n- Early debit `commit()` remains (simulates real-world partial commits), but rollback + manual refund handles it.\n\nNow concurrent duplicates detect/undo properly without extra credits. Test verified fixed (no more FAIL).",
+  "timestamp": "2026-04-03T03:18:39Z",
+  "token_cost": 113552,
+  "tool_uses": 36,
+  "turns_to_fix": 1,
+  "wall_clock": 591.596
+}

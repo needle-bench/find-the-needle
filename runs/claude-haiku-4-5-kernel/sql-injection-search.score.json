@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.040424,
+  "input_tokens": 32879,
+  "output_tokens": 1509,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The needle has been found and fixed!**\n\n## Summary\n\n**The Vulnerability:** SQL Injection in `/app/search.py`\n\nThe `search()` method was building SQL queries using string concatenation with user-supplied input:\n```python\nsql = f\"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE '%{query}%'\"\n```\n\nThis allowed attackers to inject malicious SQL, such as:\n- `' UNION SELECT id, username, password_hash, 0, email, 0 FROM users--` to extract user data\n- `' OR '1'='1` to bypass search filters and return all products\n\n**The Fix:** Used parameterized queries with the `?` placeholder:\n```python\nsql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\nparams = [f'%{query}%']\nreturn self.db.execute(sql, tuple(params))\n```\n\n**Test Results:** All tests now pass ✅\n- Normal search works correctly\n- UNION injection attack is blocked\n- Boolean-based injection attack is blocked",
+  "timestamp": "2026-04-03T01:31:56Z",
+  "token_cost": 34388,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 32.636
+}

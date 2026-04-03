@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.032504,
-  "input_tokens": 22644,
-  "output_tokens": 490,
+  "estimated_cost_usd": 0.023208000000000003,
+  "input_tokens": 16536,
+  "output_tokens": 687,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Fixed the calculation bug in pricing.py.\n\nProblem  \ncalculate_discount_amount mistakenly used addition:  \n    discount = subtotal + discount_percent / 100\n\nSo 20 % on 1098.94 produced 1099.14 instead of 219.79.\n\nFix  \nReplaced “+” with multiplication:  \n    discount = subtotal * discount_percent / 100\n\nAll tests in test.sh now pass.",
-  "timestamp": "2026-04-02T01:54:47Z",
-  "token_cost": 23134,
-  "tool_uses": 9,
+  "summary": "Fixed the percentage-discount calculation.\n\nRoot cause  \nIn pricing.py the function calculate_discount_amount used the wrong operator:\n\n    discount = subtotal + discount_percent / 100\n\nThis added the discount percentage (as a decimal) to the subtotal instead of multiplying, producing incorrect discount amounts.\n\nFix  \nReplaced the line with:\n\n    discount = subtotal * discount_percent / 100\n\nNow discounts are computed correctly and test.sh passes:\n\nPASS: Discount calculations are correct",
+  "timestamp": "2026-04-03T04:06:43Z",
+  "token_cost": 17223,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 17.654
+  "wall_clock": 25.142
 }

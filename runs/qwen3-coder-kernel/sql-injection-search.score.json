@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.013930904000000001,
+  "input_tokens": 240448,
+  "output_tokens": 5359,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Now let me create the fixed version by completely rewriting the search method:\n\n<tool_call>\n<function=Write>\n<parameter=file_path>\n/app/app/search.py\n</parameter>\n<parameter=content>\n\"\"\"\nSearch engine for product queries.\n\"\"\"\n\n\nclass SearchEngine:\n    def __init__(self, db):\n        self.db = db\n\n    def search(self, query, category=None):\n        \"\"\"\n        Search for products matching the query string.\n        Optionally filter by category.\n\n        Fixed: Using parameterized queries to prevent SQL injection.\n        \"\"\"\n        # Build parameterized query\n        sql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\n        params = [f\"%{query}%\"]\n        \n        if category:\n            sql += \" AND category = ?\"\n            params.append(category)\n\n        sql += \" ORDER BY name\"\n\n        return self.db.execute(sql, params)\n\n    def search_by_price_range(self, min_price, max_price):\n        \"\"\"Search products within a price range (safely parameterized).\"\"\"\n        return self.db.execute(\n            'SELECT * FROM products WHERE price BETWEEN ? AND ? ORDER BY price',\n            (min_price, max_price)\n        )\n\n    def get_categories(self):\n        \"\"\"Get all distinct categories.\"\"\"\n        return self.db.execute('SELECT DISTINCT category FROM products ORDER BY category')\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T03:43:39Z",
+  "token_cost": 245807,
+  "tool_uses": 40,
+  "turns_to_fix": 1,
+  "wall_clock": 117.085
+}

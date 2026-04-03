@@ -4,15 +4,15 @@
   "benchmark": "wrong-operator-discount",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.014926,
-  "input_tokens": 6303,
-  "output_tokens": 290,
+  "estimated_cost_usd": 0.016468,
+  "input_tokens": 6874,
+  "output_tokens": 340,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "I found a bug in your discount calculation. In `calculate_discount_amount`, the discount is currently calculated as:\n\n```python\ndiscount = subtotal + discount_percent / 100\n```\nThis should be:\n\n```python\ndiscount = subtotal * (discount_percent / 100)\n```\n\nWould you like me to automatically fix this for you?",
-  "timestamp": "2026-04-02T01:35:17Z",
-  "token_cost": 6593,
-  "tool_uses": 10,
+  "summary": "The function `calculate_discount_amount` in `/app/pricing.py` is implemented incorrectly:\n\n```python\ndiscount = subtotal + discount_percent / 100\n```\n\nThis should be:\n\n```python\ndiscount = subtotal * discount_percent / 100\n```\n\nCurrently, the function *adds* the percentage divided by 100 to the subtotal, rather than *multiplying* the subtotal by the percentage (to get the actual discount amount).\n\n**Would you like me to fix this and re-run the test?**",
+  "timestamp": "2026-04-03T01:59:53Z",
+  "token_cost": 7214,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 9.884
+  "wall_clock": 10.456
 }

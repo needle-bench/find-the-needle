@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 240923,
+  "output_tokens": 1994,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have fixed the duplicate apply bug in the Raft snapshot implementation. The bug occurred because `InstallSnapshot` did not update `commitIndex`, and the `Restart` method incorrectly dragged `lastApplied` back down to 0 if the persisted `commitIndex` was not correctly set. I also corrected `TakeSnapshot` to use the term of the last applied entry instead of the current term.\n\nSummary of changes:\n1.  **Modified `app/snapshot.go`**: Updated `InstallSnapshot` to update the node's `commitIndex` to at least the snapshot's `LastIncludedIndex`.\n2.  **Modified `app/raft.go`**: Fixed the `Restart` method to ensure `lastApplied` and `commitIndex` are initialized to at least the snapshot boundary when a snapshot is restored.\n3.  **Modified `app/raft.go`**: Corrected `TakeSnapshot` to use the term of the last applied entry for the `LastIncludedTerm` in the snapshot.\n\nAll tests passed successfully.\n",
+  "timestamp": "2026-04-03T04:01:11Z",
+  "token_cost": 242917,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 100.026
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.039021360000000005,
+  "input_tokens": 148158,
+  "output_tokens": 4338,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! Everything is working correctly. The server:\n1. Processes computations successfully\n2. Returns proper duration\n3. Shows 0 active computes after completion (no leaks)\n4. Health endpoint works\n5. Stats endpoint shows proper goroutine count\n\n## Summary\n\nI found and fixed the needle in the haystack! The problem was a **goroutine leak** in the HTTP server. When clients disconnected before long-running computations completed, the server would continue running those goroutines indefinitely because:\n\n1. **The bug**: The `computeHandler` function spawned goroutines without proper context cancellation\n2. **The symptom**: After client disconnects, goroutine count kept growing (from 4 baseline to 44)\n3. **The test failure**: Test showed \"40 goroutines still running after clients disconnected\"\n\n**The fix**: \n1. Added `context` import and used `r.Context()` which gets cancelled when clients disconnect\n2. Modified `performComputation` to accept a context and check for cancellation using `select` statements\n3. Updated the handler to properly handle cancellation signals\n4. Added error channel to communicate cancellation errors\n\n**Result**: After the fix, the test passes with 0 leaked goroutines, and all goroutines are properly cleaned up when clients disconnect.",
+  "timestamp": "2026-04-03T01:54:09Z",
+  "token_cost": 152496,
+  "tool_uses": 27,
+  "turns_to_fix": 1,
+  "wall_clock": 254.262
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "deadlock-transfer",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix works. The deadlock has been resolved by enforcing a consistent lock ordering based on account IDs. The test now passes both runs, showing that all 200 concurrent transfers complete successfully without deadlock and balance conservation is maintained.",
+  "timestamp": "2026-04-03T01:21:04Z",
+  "token_cost": 0,
+  "tool_uses": 11,
+  "turns_to_fix": 12,
+  "wall_clock": 30.277
+}

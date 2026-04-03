@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.012952319999999998,
+  "input_tokens": 46242,
+  "output_tokens": 894,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test now passes. The issue was that the `fileproc` binary in `/usr/local/bin` was outdated. After replacing it with the newly compiled version, the fix works correctly.\n\nThe \"needle in the haystack\" was the silent data truncation bug in the `process_file` function, where it used a fixed-size buffer and only read once, causing files larger than 64KB to be truncated. The fix was to use `read_to_end` to read the entire file into a dynamically sized buffer.",
+  "timestamp": "2026-04-03T03:11:04Z",
+  "token_cost": 47136,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 16.675
+}

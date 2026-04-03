@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": false,
+  "stop_reason": "error: API call failed: API error 404: model: o4-mini",
+  "summary": "",
+  "timestamp": "2026-04-03T01:36:57Z",
+  "token_cost": 0,
+  "tool_uses": 0,
+  "turns_to_fix": 0,
+  "wall_clock": 1.033
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "haystack-mint",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.01104935,
+  "input_tokens": 45661,
+  "output_tokens": 15552,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T01:55:06Z",
+  "token_cost": 61213,
+  "tool_uses": 54,
+  "turns_to_fix": 1,
+  "wall_clock": 130.819
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8345,
+  "output_tokens": 1261,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. \n\n**The needle:** The bug was in `/app/app/CsvReader.java` where the charset was set to `ISO-8859-1` instead of `UTF-8`. The CSV file contains UTF-8 encoded international characters (like `Renée`, `Müller`, `María`, `Søren`, `François`, `Zoltán`, `München`, `København`), but the reader was decoding them as ISO-8859-1, which corrupted all the non-ASCII characters. The fix was simply changing `Charset.forName(\"ISO-8859-1\")` to `Charset.forName(\"UTF-8\")`.",
+  "timestamp": "2026-04-03T01:31:00Z",
+  "token_cost": 9606,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 35.075
+}

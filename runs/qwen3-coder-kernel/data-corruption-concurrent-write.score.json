@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.007112959999999998,
+  "input_tokens": 105774,
+  "output_tokens": 3611,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix is working correctly. Each worker now gets non-overlapping segments:\n- Worker 0: segments [0, 1, 2, 3]\n- Worker 1: segments [4, 5, 6, 7]\n- Worker 2: segments [8, 9, 10, 11]\n- Worker 3: segments [12, 13, 14, 15]\n\nThere's no overlap between workers, which eliminates the data race that was causing the test to fail.\n\nThe problem was in the `segments_for_worker` function in `/app/src/config.rs`. The original implementation intentionally created overlapping segment assignments for \"write redundancy\", but this caused multiple worker threads to concurrently write to the same file offsets, resulting in undefined behavior and data corruption. My fix ensures that each segment is assigned to exactly one worker, eliminating the race condition while maintaining the same total work distribution.",
+  "timestamp": "2026-04-03T01:43:15Z",
+  "token_cost": 109385,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 125.453
+}

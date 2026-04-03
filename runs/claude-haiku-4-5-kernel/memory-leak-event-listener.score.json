@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.06235400000000001,
+  "input_tokens": 51459,
+  "output_tokens": 2179,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! ✅ **The needle has been found and fixed!**\n\n## Summary\n\n**The Bug:** In `/app/app/processor.js`, the `process()` method was registering new event listeners (`on('data:validated')` and `on('data:error')`) every time it was called, without ever removing them. This caused an event listener leak where:\n- Each call accumulated new listeners\n- The closures captured the `data` parameter, preventing garbage collection\n- Memory and listener counts grew unboundedly with each request\n\n**The Fix:** I moved the event listener registration from the `process()` method into the constructor. This way:\n- Listeners are registered only once when the DataProcessor is instantiated\n- No accumulation occurs on repeated calls to `process()`\n- The listener count stays constant at 2 (one for 'data:validated' and one for 'data:error')\n\n**Test Results:** ✅ All tests pass\n- Baseline: 2 listeners\n- After 500 requests: 2 listeners (stable, no growth)\n- No event listener leak detected",
+  "timestamp": "2026-04-03T00:47:21Z",
+  "token_cost": 53638,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 40.026
+}

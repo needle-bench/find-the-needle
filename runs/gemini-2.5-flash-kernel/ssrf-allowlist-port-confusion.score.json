@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.005776010000000001,
-  "input_tokens": 17843,
-  "output_tokens": 1169,
+  "estimated_cost_usd": 0.0054762100000000005,
+  "input_tokens": 17286,
+  "output_tokens": 1117,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Great! All tests passed, including Test 3 and Test 4, which were failing before. This indicates that the IPv6 loopback addresses are now correctly blocked by the validator. I have found the needle and fixed the problem.\n",
-  "timestamp": "2026-04-02T01:51:06Z",
-  "token_cost": 19012,
+  "summary": "Great! All tests passed, meaning the IPv6 loopback SSRF vulnerability has been successfully patched. The \"needle\" was the missing IPv6 loopback address in the `BLOCKED_HOSTS` list in `app/validator.py`, and specifically, the string `::1` that is returned by `urlparse().hostname`.",
+  "timestamp": "2026-04-03T03:09:01Z",
+  "token_cost": 18403,
   "tool_uses": 7,
   "turns_to_fix": 1,
-  "wall_clock": 16.391
+  "wall_clock": 16.075
 }

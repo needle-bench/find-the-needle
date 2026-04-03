@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.13887999999999998,
+  "input_tokens": 127424,
+  "output_tokens": 2520,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the performance cliff.\n\nProblem  \nProduct.hashCode() used the product’s category (only 10 distinct strings) so 10 000 products were being stored in ~10 buckets, producing long chains and O(n) look-ups. test.sh detected this by measuring the maximum chain length and failed when it was > 50.\n\nFix  \nChanged Product.hashCode() to hash on the SKU, which is unique and already well-distributed.\n\nsrc/Product.java\n```\n@Override\npublic int hashCode() {\n    // Use SKU – unique per product and provides good dispersion\n    return sku.hashCode();\n}\n```\n\nRe-compiled the classes and ran ./test.sh – all tests now pass:\n\n```\n=== Performance Cliff Hash Map Test ===\n--- Small dataset (100 items) ---\n...\nAverage lookup: 28.32 us\n--- Hash distribution analysis ---\nCapacity: 16384\nSize: 10000\nNon-empty buckets: 5991 (36.6%)\nMax chain length: 4\nOK: Max chain length 4 is within acceptable bounds\nPASS: Hash map distributes items evenly across buckets\n```\n\nThe cache now distributes entries evenly, removing the lookup performance cliff.",
+  "timestamp": "2026-04-03T02:48:08Z",
+  "token_cost": 129944,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 53.422
+}

@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-pagination",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0076116000000000005,
-  "input_tokens": 13557,
-  "output_tokens": 148,
+  "estimated_cost_usd": 0.009656,
+  "input_tokens": 17800,
+  "output_tokens": 188,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found and fixed (off-by-one error in pagination offset). Running `test.sh` now passes.",
-  "timestamp": "2026-04-02T03:33:20Z",
-  "token_cost": 13705,
-  "tool_uses": 7,
+  "summary": "The needle has been found and the off-by-one pagination bug has been fixed (in `app/app.py`). The test now passes.",
+  "timestamp": "2026-04-03T01:37:27Z",
+  "token_cost": 17988,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 12.128
+  "wall_clock": 9.743
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.004702650000000001,
+  "input_tokens": 32961,
+  "output_tokens": 4530,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "PASS: No split-brain detected across all rounds\n\nNode 0: starting election for term 1\nNode 1: starting election for term 1\nNode 2: starting election for term 1\nNode 3: starting election for term 1\nNode 4: starting election for term 1\nNode 0: received 1/5 votes for term 1\nNode 1: received 1/5 votes for term 1\nNode 2: received 1/5 votes for term 1\nNode 3: received 1/5 votes for term 1\nNode 4: received 1/5 votes for term 1\nNode 0: starting election for term 2\nNode 1: starting election for term 2\nNode 2: starting election for term 2\nNode 3: starting election for term 2\nNode 4: starting election for term 2\nNode 0: election timeout, proceeding with 1 votes\nNode 1: election timeout, proceeding with 1 votes\nNode 2: election timeout, proceeding with 1 votes\nNode 3: election timeout, proceeding with 1 votes\nNode 4: election timeout, proceeding with 1 votes\nNode 0: received 1/5 votes for term 2\nNode 1: received 1/5 votes for term 2\nNode 2: received 1/5 votes for term 2\nNode 3: received 1/5 votes for term 2\nNode 4: received 1/5 votes for term 2\nNode 0: starting election for term 3\nNode 1: starting election for term 3\nNode 2: starting election for term 3\nNode 3: starting election for term 3\nNode 4: starting election for term 3\nNode 0: received 1/5 votes for term 3\nNode 1: received 1/5 votes for term 3\nNode 2: received 1/5 votes for term 3\nNode 3: received 1/5 votes for term 3\nNode 4: received 1/5 votes for term 3",
+  "timestamp": "2026-04-03T03:23:24Z",
+  "token_cost": 37491,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 38.569
+}

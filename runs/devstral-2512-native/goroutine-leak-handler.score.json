@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "## Summary\n\nThe goroutine leak has been fixed. The changes made:\n\n**app/main.go:**\n1. Added `context` import\n2. Modified `computeHandler` to use `r.Context()` for cancellation\n3. Updated `performComputation` to accept `context.Context` and check for cancellation in each iteration loop\n4. Added proper cleanup in the goroutine to avoid sending on closed channels when context is cancelled\n\nThe test now passes with 0 leaked goroutines, confirming that goroutines are properly cancelled when clients disconnect.",
+  "timestamp": "2026-04-03T01:24:25Z",
+  "token_cost": 0,
+  "tool_uses": 12,
+  "turns_to_fix": 13,
+  "wall_clock": 50.944
+}

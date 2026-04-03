@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:21:49Z", "benchmark": "compiler-macro-expansion", "model": "grok-4-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 371, "tokens_out": 177, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 663, "tokens_out": 179, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/main.rs"], "tokens_in": 832, "tokens_out": 112, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/codegen.rs"], "tokens_in": 1190, "tokens_out": 133, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/src/schema.rs"], "tokens_in": 2186, "tokens_out": 131, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/src/runtime.rs"], "tokens_in": 2825, "tokens_out": 86, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 3803, "tokens_out": 726, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:22:04Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

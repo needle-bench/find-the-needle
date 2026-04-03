@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00205815,
+  "input_tokens": 10827,
+  "output_tokens": 2064,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "File fixed and test passed!\n\n**Bug location:** `/app/src/config.rs` in `segments_for_worker()`.\n\n**Root cause:** Overlapping segment assignments (`end = start + segments_per_worker + 2`) caused data races between workers writing to the same byte ranges concurrently.\n\n**Fix:** Removed `+ 2` so `let end = std::cmp::min(start + segments_per_worker, self.num_segments);` (non-overlapping assignments).\n\n**Verification:** `test.sh` now passes all checks (build, integrity, no overlaps, concurrent runs).",
+  "timestamp": "2026-04-03T01:36:15Z",
+  "token_cost": 12891,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 19.618
+}

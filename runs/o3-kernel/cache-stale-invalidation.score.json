@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.053632,
-  "input_tokens": 34092,
-  "output_tokens": 1061,
+  "estimated_cost_usd": 0.039076,
+  "input_tokens": 23178,
+  "output_tokens": 938,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Fixed.\n\nRoot cause:\nAfter updating or creating products, the server wrote to the data store but never invalidated the corresponding cache entries, so reads returned stale data.\n\nFix applied in app/server.py:\n1. In _update_product():\n   • Refresh the updated product’s cache entry.\n   • Delete the cached product-list entry.\n\n2. In _create_product():\n   • Delete the cached product-list entry so the newly-created product appears immediately.\n\nAll tests now pass:\n\n$ bash test.sh\nInitial product count: 5  \nOriginal product name: Widget A  \nName after update: UPDATED-NAME-XYZ  \nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'  \nProduct count after create: 6  \nPASS: Product list correctly shows 6 items  \nPASS: Cache correctly invalidated after writes",
-  "timestamp": "2026-04-02T01:26:16Z",
-  "token_cost": 35153,
-  "tool_uses": 11,
+  "summary": "Fixed cache invalidation bugs.\n\nChanges made in app/server.py:\n\n1. After updating a product (PUT /products/{id}):\n   • Delete cache entry for that product and the product list.\n   • Optionally repopulate cache with the updated product.\n\n2. After creating a product (POST /products):\n   • Delete the product list cache so subsequent list requests include the new product.\n\nRunning test.sh now passes:\n\nPASS: Cache correctly invalidated after writes",
+  "timestamp": "2026-04-03T01:32:03Z",
+  "token_cost": 24116,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 28.369
+  "wall_clock": 25.113
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0899708427,
+  "input_tokens": 288162,
+  "output_tokens": 8189,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " The fix has been applied successfully. The issue was in the `handleHeartbeat` function in `/app/app/raft/node.go`.\n\n**The bug:** When a follower receives a heartbeat from the leader, it was appending any piggybacked entries to its log, but it was **not** updating its `commitIndex` based on the leader's commit index (which is sent in `msg.Index`). This meant that after a network partition healed, the formerly-isolated follower would have the entries in its log (from heartbeats), but would never mark them as committed, so they wouldn't be applied to the KV state machine.\n\n**The fix:** I added the commit index advancement logic to the `handleHeartbeat` function, similar to what was already present in `handleAppendEntries`:\n\n```go\n// Advance commit index based on the leader's commit index\nleaderCommit := msg.Index\nif leaderCommit > 0 {\n    lastIdx := n.log.LastIndex()\n    commitIdx := leaderCommit\n    if commitIdx > lastIdx {\n        commitIdx = lastIdx\n    }\n    n.advanceCommitIndex(commitIdx)\n}\n```\n\nThis ensures that when a follower reconnects after being partitioned, it updates its commit index to match the leader's (up to the entries it has), allowing the apply loop to process and store the committed entries in the KV map.",
+  "timestamp": "2026-04-03T02:26:53Z",
+  "token_cost": 296351,
+  "tool_uses": 34,
+  "turns_to_fix": 1,
+  "wall_clock": 325.005
+}

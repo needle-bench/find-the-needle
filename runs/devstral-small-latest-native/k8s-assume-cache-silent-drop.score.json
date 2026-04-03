@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The fix is complete. The test now passes with \"OK: conflict notified\" output.\n\nThe changes made:\n1. Added a `conflictCallback` function variable to notify when assumed state is dropped\n2. Modified `informerUpdate` to call the callback when dropping assumed state due to version conflict\n3. Set up the callback in `main()` to set `conflictNotified = true`\n\nThe fix ensures that when an informer delivers a newer version that conflicts with assumed state, the caller is notified instead of silently dropping the assumed version.",
-  "timestamp": "2026-04-02T01:42:52Z",
+  "summary": "The fix has been applied and verified. The test now passes, showing \"OK: conflict notified\" as expected.",
+  "timestamp": "2026-04-03T03:06:46Z",
   "token_cost": 0,
-  "tool_uses": 8,
-  "turns_to_fix": 9,
-  "wall_clock": 23.035
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 14.517
 }

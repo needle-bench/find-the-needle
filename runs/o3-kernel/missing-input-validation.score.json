@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.14156999999999997,
-  "input_tokens": 106093,
-  "output_tokens": 2909,
-  "resolved": true,
+  "estimated_cost_usd": 0.10932999999999998,
+  "input_tokens": 72881,
+  "output_tokens": 2910,
+  "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "The bug was that the API accepted an adjustment that would drive a product’s inventory quantity below 0.  \nFixed by adding validation in two places:\n\n1. routes.ts  \n   • After reading the body, but before calling `adjustQuantity`, reject any adjustment that would leave the quantity negative and return HTTP 400.\n\n2. inventory.ts  \n   • Inside `adjustQuantity`, throw an error if the new quantity would become negative, safeguarding any direct use of the class.\n\nBoth changes ensure the server never allows impossible (negative) inventory states.  \nRunning `./test.sh` now prints\n\nPASS: Input validation correctly prevents impossible inventory states",
-  "timestamp": "2026-04-02T01:38:18Z",
-  "token_cost": 109002,
+  "summary": "We need to identify missing input validation causing negative inventory. In the system, dist/routes.js and dist/inventory.js implement API but allow negative adjustments.\n\nKey bug: Inventory.adjustQuantity doesn't prevent going below zero; routes handler doesn't reject if negative result.\n\nFix overview:\n1. In inventory.js, before applying adjustment, check if product.quantity + adjustment < 0; if true, throw error.\n2. In routes.js POST /adjust handler, after validating quantity is numeric, but before calling adjustQuantity, add check: if product.quantity + quantity < 0 respond 400 with error.\n\nAfter implementing those, run test.sh and all tests pass with message: \"PASS: Input validation correctly prevents impossible inventory states\".",
+  "timestamp": "2026-04-03T02:19:13Z",
+  "token_cost": 75791,
   "tool_uses": 20,
   "turns_to_fix": 1,
-  "wall_clock": 66.924
+  "wall_clock": 72.722
 }

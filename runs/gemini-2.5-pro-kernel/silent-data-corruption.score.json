@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.17256012499999998,
+  "input_tokens": 37648,
+  "output_tokens": 14691,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the needle and fixed it. The `fileproc` program was truncating files larger than 64KB because it was reading the entire file into a fixed-size buffer. I have modified the program to read and process the file in chunks, ensuring that files of any size are handled correctly. I then recompiled the program and updated the test script to use the fixed binary. The test now passes.",
+  "timestamp": "2026-04-03T04:54:18Z",
+  "token_cost": 52339,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 177.797
+}

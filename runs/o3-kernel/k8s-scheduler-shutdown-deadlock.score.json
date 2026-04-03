@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.09700800000000001,
-  "input_tokens": 54320,
-  "output_tokens": 3322,
+  "estimated_cost_usd": 0.02741,
+  "input_tokens": 7873,
+  "output_tokens": 1458,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Fixed the shutdown dead-lock.\n\nRoot cause  \nScheduler.Run() waited for the worker goroutine to finish before closing the queue.  \nIf the worker was blocked inside queue.Pop(), it would never observe ctx.Done();  \nmeanwhile Close() couldn’t be reached, so both goroutines were stuck.\n\nFix  \nRe-order the two operations:\n\n1. Wait for ctx.Done() (shutdown requested).  \n2. Close the queue immediately – this wakes any goroutine blocked in Pop().  \n3. Then wait for the worker goroutine to exit.\n\nmain.go – changed section in Scheduler.Run():\n\n    <-ctx.Done()\n\n    // First close the queue to unblock Pop().\n    s.queue.Close()\n\n    // Now it is safe to wait for the worker to return.\n    <-done\n\nRunning ./test.sh now prints:\n\n    OK: clean shutdown\n    PASS",
-  "timestamp": "2026-04-02T01:33:01Z",
-  "token_cost": 57642,
-  "tool_uses": 20,
+  "summary": "Fixed the shutdown dead-lock.\n\nRoot cause  \nScheduler waited for the worker goroutine to finish before it closed the queue.  \nIf the worker was blocked inside Pop(), it never observed ctx.Done(), so the\nmain goroutine waited forever.\n\nFix  \nSwap the two operations in Scheduler.Run:\n\n1. Close the queue first – this wakes anything blocked in Pop().  \n2. Then wait for the worker goroutine to exit.\n\nmain.go (diff)\n\n-     <-done // wait for goroutine — but it might be stuck in Pop()\n-     s.queue.Close()\n+     // Close the queue first so that any goroutine blocked in Pop() is woken\n+     s.queue.Close()\n+\n+     // Now wait for the scheduling loop to observe ctx.Done() and exit\n+     <-done\n\n`test.sh` now prints:\n\nOK: clean shutdown  \nPASS",
+  "timestamp": "2026-04-03T01:59:25Z",
+  "token_cost": 9331,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 66.925
+  "wall_clock": 35.04
 }

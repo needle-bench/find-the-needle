@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.104785,
+  "input_tokens": 91150,
+  "output_tokens": 2727,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **ALL TESTS PASSED!**\n\n## Summary\n\nI found and fixed the needle in the haystack:\n\n**The Bug:** Schema drift between database migrations and application code\n- Migration 002 renamed the column `status` → `order_status`\n- But the Go application code in `/workspace/app/main.go` still referenced the old column name `status` in two SQL queries:\n  1. In `createOrder()`: `INSERT INTO orders (..., status, ...)` \n  2. In `getOrder()`: `SELECT ..., status, ...`\n\n**The Fix:** Updated both SQL queries in main.go to use the correct column name `order_status`:\n1. Line in `createOrder()`: Changed `status` to `order_status` in both the INSERT and RETURNING clauses\n2. Line in `getOrder()`: Changed `status` to `order_status` in the SELECT clause\n\n**Verification:** All tests now pass successfully:\n- ✅ Health check works\n- ✅ Order creation works (POST /orders)\n- ✅ Order retrieval works (GET /orders/{id})\n- ✅ The response includes the correct `order_status` field",
+  "timestamp": "2026-04-03T01:03:11Z",
+  "token_cost": 93877,
+  "tool_uses": 26,
+  "turns_to_fix": 1,
+  "wall_clock": 47.722
+}

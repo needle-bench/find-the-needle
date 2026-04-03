@@ -4,15 +4,15 @@
   "benchmark": "rate-limit-bypass-header",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0169085,
-  "input_tokens": 30835,
-  "output_tokens": 497,
+  "estimated_cost_usd": 0.0126345,
+  "input_tokens": 22281,
+  "output_tokens": 498,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The rate limiter was vulnerable to IP spoofing because it trusted the `X-Forwarded-For` header without validation. Since the application was not behind a trusted proxy in the test environment, an attacker could rotate this header to bypass rate limits.\n\nI have updated the `getClientIp` method in `app/ratelimiter.ts` to use `req.socket.remoteAddress` instead of trusting the potentially spoofed header.\n\n```typescript\n  /**\n   * Get the client IP address from the request.\n   */\n  getClientIp(req: http.IncomingMessage): string {\n    // Fall back to socket address\n    return req.socket.remoteAddress || '127.0.0.1';\n  }\n```\n\nRunning `test.sh` now confirms the fix:\n- Normal requests are rate-limited after 10 requests.\n- Requests with rotating `X-Forwarded-For` headers are also correctly rate-limited to 10 requests total across the same client connection.",
-  "timestamp": "2026-04-02T03:40:05Z",
-  "token_cost": 31332,
-  "tool_uses": 9,
+  "summary": "The vulnerability in the rate limiter was that it blindly trusted the `X-Forwarded-For` HTTP header to identify the client's IP address. This allowed an attacker to bypass rate limits by providing a different IP address in each request's header.\n\nI fixed this by modifying `getClientIp` in `app/ratelimiter.ts` to ignore the `X-Forwarded-For` header and instead rely on the socket's remote address (`req.socket.remoteAddress`), which is controlled by the network stack and cannot be spoofed by an attacker in a standard TCP connection.\n\n```typescript\n  getClientIp(req: http.IncomingMessage): string {\n    // In this local environment, we don't trust any proxies.\n    // Fall back to socket address\n    return req.socket.remoteAddress || '127.0.0.1';\n  }\n```\n\nAfter applying the fix, I verified that the rate limiter correctly blocks requests even when the `X-Forwarded-For` header is rotated, as shown by the successful execution of `test.sh`.",
+  "timestamp": "2026-04-03T04:03:16Z",
+  "token_cost": 22779,
+  "tool_uses": 6,
   "turns_to_fix": 1,
-  "wall_clock": 37.76
+  "wall_clock": 19.024
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.02612,
+  "input_tokens": 20035,
+  "output_tokens": 1217,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 I found and fixed the needle!\n\n## Summary\n\n**The Bug:** A deadlock in the scheduler shutdown logic where:\n- `ScheduleOne()` could be blocked in `queue.Pop()` waiting on the condition variable\n- When context cancellation happened, the main goroutine tried to wait for the scheduling goroutine to exit\n- But then it called `queue.Close()` which needs the same mutex that `Pop()` holds\n- This created a circular wait: goroutine stuck in `Pop()` → needs `Close()` to wake it → but `Close()` can't acquire the mutex\n\n**The Fix:** Move the `s.queue.Close()` call **before** waiting for the goroutine to exit (`<-done`). This ensures that when `Close()` is called, it immediately wakes up any goroutines blocked in `Pop()` with a \"queue closed\" error, allowing them to exit cleanly.\n\nThe test now passes with \"OK: clean shutdown\"! ✅",
+  "timestamp": "2026-04-03T00:35:39Z",
+  "token_cost": 21252,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 19.96
+}

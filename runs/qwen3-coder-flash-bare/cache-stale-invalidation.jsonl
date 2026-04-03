@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:22:01Z", "benchmark": "cache-stale-invalidation", "model": "qwen3-coder-flash", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 283, "tokens_out": 175, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/"], "tokens_in": 476, "tokens_out": 66, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/tmp/"], "tokens_in": 567, "tokens_out": 99, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 684, "tokens_out": 132, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/root"], "tokens_in": 832, "tokens_out": 71, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/root/.gitconfig"], "tokens_in": 922, "tokens_out": 172, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1125, "tokens_out": 168, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:24:18Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.15988000000000002,
+  "input_tokens": 24581,
+  "output_tokens": 1479,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle was an **off-by-one error in the array slice** in `/app/processor.py`.\n\n**The bug:** On line 16, `end = start + batch_size - 1` was incorrect. Since Python's slice syntax `records[start:end]` already excludes the `end` index, subtracting 1 caused each batch to process only `batch_size - 1` records, dropping one record per batch.\n\n**The fix:** Changed `end = start + batch_size - 1` to `end = start + batch_size`, so each batch correctly includes all `batch_size` items.",
+  "timestamp": "2026-04-03T02:27:24Z",
+  "token_cost": 26060,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 95.713
+}

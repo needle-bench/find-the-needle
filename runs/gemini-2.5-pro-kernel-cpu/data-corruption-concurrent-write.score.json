@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 19789,
+  "output_tokens": 732,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed! The fix in `src/config.rs` has resolved the overlapping segment assignment issue, and the concurrent writes are now producing the correct output. The needle has been found.\n",
+  "timestamp": "2026-04-03T01:58:07Z",
+  "token_cost": 20521,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 19.428
+}

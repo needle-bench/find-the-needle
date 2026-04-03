@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.004436250000000001,
+  "input_tokens": 29438,
+  "output_tokens": 4759,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The vulnerability was in `/app/app/search.py`. The `search` method directly interpolated the user-provided `query` (and optionally `category`) into the raw SQL string using f-strings, enabling SQL injection attacks like UNION-based data extraction from the `users` table or boolean bypasses (e.g., `' OR '1'='1`).\n\n**Fix applied:** Rewrote the `search` method to build a parameterized query:\n- Base SQL: `SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?`\n- Params: `[\"%{query}%\"]`\n- Append `AND category = ?` with param if category provided.\n- Call `self.db.execute(sql, params)` (safe, unlike `execute_raw`).\n\nVerified by running `/app/test.sh`:\n```\nNormal search for 'Mouse': 1 results\nSQL injection UNION attack: 0 results\nPASS: UNION injection did not leak user data\nSQL injection boolean attack ('OR 1=1'): 0 results\nTotal products in database: 10\nPASS: Boolean injection did not bypass search filter\nPASS: Search endpoint is not vulnerable to SQL injection\n```\n\nThe test now passes cleanly.",
+  "timestamp": "2026-04-03T03:24:26Z",
+  "token_cost": 34197,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 40.577
+}

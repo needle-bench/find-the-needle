@@ -4,15 +4,15 @@
   "benchmark": "haystack-boot",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0551125,
-  "input_tokens": 9994,
-  "output_tokens": 4262,
+  "estimated_cost_usd": 0.051628499999999994,
+  "input_tokens": 18768,
+  "output_tokens": 3423,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I've found the needle. Please run `bash test.sh` to verify the fix.",
-  "timestamp": "2026-04-02T01:29:31Z",
-  "token_cost": 14256,
-  "tool_uses": 12,
+  "summary": "<thinking>\nI've added \"boot confidence\" to the audit file. Now I'll run the test script.\n</thinking>\n",
+  "timestamp": "2026-04-03T02:28:37Z",
+  "token_cost": 22191,
+  "tool_uses": 20,
   "turns_to_fix": 1,
-  "wall_clock": 76.036
+  "wall_clock": 83.737
 }

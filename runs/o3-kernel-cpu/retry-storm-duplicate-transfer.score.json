@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.083172,
+  "input_tokens": 46178,
+  "output_tokens": 4396,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The “needle” was a race condition in processor.py: the code debited the source account before recording the idempotency key. Two concurrent requests could therefore both pass the balance check and each debit the account before either inserted the key, resulting in duplicate transfers and money‐creation.\n\nFix implemented:\n\n1. In processor.py the transfer logic was rewritten to run inside a single SQL transaction begun with BEGIN IMMEDIATE.\n2. The idempotency key is now inserted (as “pending”) before any balance changes. A duplicate key raises IntegrityError immediately, stopping the duplicate transfer before debits occur.\n3. Debit/credit and final status update are executed in the same transaction; on any exception the whole transaction is rolled back.\n4. HTTP handler updated accordingly.\n\nRunning test.sh now prints PASS, confirming balances A=500, B=1500, total conserved.",
+  "timestamp": "2026-04-03T03:10:50Z",
+  "token_cost": 50574,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 58.303
+}

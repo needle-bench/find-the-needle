@@ -4,15 +4,15 @@
   "benchmark": "kernel-panic-ioctl",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.5205960000000001,
-  "input_tokens": 155602,
-  "output_tokens": 3586,
+  "estimated_cost_usd": 0.28963799999999995,
+  "input_tokens": 80266,
+  "output_tokens": 3256,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the **needle** — the bugs found and fixed in `/app/src/ioctl_handler.c`:\n\n---\n\n## Root Cause & Fixes\n\nThe `ioctl_handler.c` had **inconsistent input validation** — some pointer fields were checked before use, while others were dereferenced directly (simulating an exploitable kernel driver flaw).\n\n### Bug 1 — NULL `req->value` in `handle_set_config`\n**Problem:** `memcpy(entry->value, req->value, copy_len)` was called without checking if `req->value` was NULL → **segfault** when an attacker passes a NULL value pointer.  \n**Fix:** Added a NULL check on `req->value` before the copy, returning `-1` on failure.\n\n### Bug 2 — NULL `req->value` / zero `req->value_len` in `handle_get_config`\n**Problem:** `memcpy(req->value, ...)` and `req->value[copy_len] = '\\0'` were called without checking if `req->value` was NULL, and `req->value_len - 1` could underflow if `value_len == 0` → **segfault**.  \n**Fix:** Added NULL check on `req->value` and a zero-length check on `req->value_len`, both returning `-1` on failure.\n\n### Bug 3 — Oversized `value_len` in `handle_set_config`\n**Problem:** A `value_len` of 999999 with a tiny 5-byte `value` string would silently truncate but was still accepted (returned 0). The fuzz test expected this to be **rejected as invalid input**.  \n**Fix:** Changed the `>= MAX_VALUE_LEN` check to be a hard rejection (return `-1`) instead of silent truncation, mirroring how a kernel driver should validate user-supplied lengths.",
-  "timestamp": "2026-04-02T01:30:47Z",
-  "token_cost": 159188,
-  "tool_uses": 22,
+  "summary": "All tests pass. Here's a summary of the **three bugs** found and fixed in `ioctl_handler.c`:\n\n---\n\n### Bug 1: Missing NULL check for `req->value` in `handle_set_config`\n**Fuzz Test 3** passed a NULL value pointer. The code called `memcpy(entry->value, req->value, copy_len)` without checking `req->value` first → **segfault**.\n\n**Fix:** Added a NULL check for `req->value` before any use, returning `-1` with an error message.\n\n---\n\n### Bug 2: Missing validation of `req->value_len` in `handle_set_config`\n**Fuzz Test 7** passed `value_len = 999999` with a 5-byte string `\"small\"`. The code clamped `copy_len` to `MAX_VALUE_LEN - 1 = 255` then called `memcpy` reading 255 bytes from a 5-byte string → **out-of-bounds read / segfault**.\n\n**Fix:** Added a check rejecting `value_len == 0` or `value_len > MAX_VALUE_LEN`, returning `-1` with an error message.\n\n---\n\n### Bug 3: Missing NULL check for `req->value` and `req->value_len == 0` in `handle_get_config`\n**Fuzz Test 4** passed a NULL value buffer with `value_len = 0`. The code called `memcpy(req->value, ...)` and `req->value[copy_len] = '\\0'` without checking — and `value_len = 0` would also cause an integer underflow in `req->value_len - 1` → **segfault**.\n\n**Fix:** Added NULL check for `req->value` and a zero-check for `req->value_len`, returning `-1` with an error message for each case.",
+  "timestamp": "2026-04-03T01:43:24Z",
+  "token_cost": 83522,
+  "tool_uses": 19,
   "turns_to_fix": 1,
-  "wall_clock": 70.816
+  "wall_clock": 61.751
 }

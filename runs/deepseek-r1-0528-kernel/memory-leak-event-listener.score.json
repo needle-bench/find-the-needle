@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.023050300000000003,
+  "input_tokens": 9964,
+  "output_tokens": 6535,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "I found the issue! The problem is in the `process` method of `DataProcessor.js`. Let me explain:\n\n1. Every time `process()` is called, it registers two new event listeners (`data:validated` and `data:error`) on the event bus\n2. These event listeners are **never removed** and capture references to request data in their closures\n3. The captured `data` object prevents garbage collection\n4. As more requests come in, these listeners accumulate and consume increasing amounts of memory\n\nHere's the problematic code snippet:\n```javascript\nthis.eventBus.on('data:validated', (validatedData) => {\n  this._handleValidated(validatedData, data); // data is captured in closure\n});\n\nthis.eventBus.on('data:error', (err) => {\n  console.error(`Processing error for batch ${this.processedCount}: ${err.message}`);\n});\n```\n\nI need to modify this to register the event listeners only once during initialization, not per request. Let's edit the file:",
+  "timestamp": "2026-04-03T02:24:38Z",
+  "token_cost": 16499,
+  "tool_uses": 7,
+  "turns_to_fix": 0,
+  "wall_clock": 362.261
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.4079359999999999,
+  "input_tokens": 349726,
+  "output_tokens": 11642,
+  "resolved": false,
+  "stop_reason": "error: API call failed: streaming error: request failed: error sending request for url (https://openrouter.ai/api/v1/chat/completions)",
+  "summary": "The database uses WAL mode. Let me try a different approach - I'll use `BEGIN IMMEDIATE` to lock the transaction from the start, preventing other threads from modifying the idempotency table:",
+  "timestamp": "2026-04-03T01:26:29Z",
+  "token_cost": 361368,
+  "tool_uses": 38,
+  "turns_to_fix": 0,
+  "wall_clock": 696.481
+}

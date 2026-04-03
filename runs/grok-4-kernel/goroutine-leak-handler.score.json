@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.018309,
+  "input_tokens": 3930,
+  "output_tokens": 983,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Function: total 112\ndrwxr-xr-x 1 root root  88 Mar  9 02:36 .\ndrwxr-xr-x 1 root root   8 Apr  3 01:22 ..\n-rw-r--r-- 1 root root 864 Mar  9 02:36 config-tal.yaml\n-rw-r--r-- 1 root root 864 Mar  9 02:36 config.yaml\n-rw-r--r-- 1 root root 184 Mar  9 02:36 go.mod\n-rw-r--r-- 1 root root 560 Mar  9 02:36 go.sum\n-rw-r--r-- 1 root root 931 Mar  9 02:36 main.go\ndrwxr-xr-x 1 root root  50 Mar  9 02:36 prompts\ndrwxr-xr-x 1 root root  98 Mar  9 02:36 tool\ndrwxr-xr-x 1 root root  86 Mar  9 02:36 wsserver\n",
+  "timestamp": "2026-04-03T01:23:12Z",
+  "token_cost": 4913,
+  "tool_uses": 2,
+  "turns_to_fix": 1,
+  "wall_clock": 30.631
+}

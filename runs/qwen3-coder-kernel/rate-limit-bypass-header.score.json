@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.016179544,
+  "input_tokens": 269012,
+  "output_tokens": 6329,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Let me use a simpler sed command to fix this:\n\n<tool_call>\n<function=Bash>\n<parameter=command>\nsed -i '/getClientIp(req/,/return req.socket.remoteAddress/{\n    /const forwarded = req.headers\\[.x-forwarded-for.\\];/,/return req.socket.remoteAddress/c\\\n    // SECURITY FIX: Do not trust X-Forwarded-For header for rate limiting\\\n    // as it can be spoofed by attackers to bypass rate limits\\\n    return req.socket.remoteAddress || '\\''127.0.0.1'\\'';\n}' app/ratelimiter.ts\n</parameter>\n</function>\n</tool_call>",
+  "timestamp": "2026-04-03T03:30:37Z",
+  "token_cost": 275341,
+  "tool_uses": 40,
+  "turns_to_fix": 1,
+  "wall_clock": 107.697
+}

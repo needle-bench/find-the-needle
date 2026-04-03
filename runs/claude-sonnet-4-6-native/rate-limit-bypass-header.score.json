@@ -4,15 +4,15 @@
   "benchmark": "rate-limit-bypass-header",
   "control_type": "native",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.10143,
-  "input_tokens": 110774,
-  "output_tokens": 860,
+  "estimated_cost_usd": 0.09681105,
+  "input_tokens": 110796,
+  "output_tokens": 855,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Both tests pass. The fix was in `ratelimiter.ts:30-41` — `getClientIp` was trusting the `X-Forwarded-For` header, allowing an attacker to rotate IP values and get a fresh rate limit window on every request. The fix ignores that header and uses only `req.socket.remoteAddress`.",
-  "timestamp": "2026-04-02T01:58:32Z",
-  "token_cost": 111634,
+  "summary": "Both tests pass. The bug was in `getClientIp` (`ratelimiter.ts:30`) — it trusted the `X-Forwarded-For` header, letting attackers rotate IPs to bypass rate limiting. The fix ignores that header and always uses `req.socket.remoteAddress`.",
+  "timestamp": "2026-04-03T02:15:45Z",
+  "token_cost": 111651,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 38.973
+  "wall_clock": 34.056
 }

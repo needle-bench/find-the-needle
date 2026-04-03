@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00181825,
+  "input_tokens": 8869,
+  "output_tokens": 1813,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "PASS",
+  "timestamp": "2026-04-03T01:35:19Z",
+  "token_cost": 10682,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 20.736
+}

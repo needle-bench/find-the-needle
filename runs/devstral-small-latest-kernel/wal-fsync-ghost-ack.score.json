@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.011009479999999999,
+  "input_tokens": 375926,
+  "output_tokens": 13764,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T06:11:29Z",
+  "token_cost": 389690,
+  "tool_uses": 61,
+  "turns_to_fix": 1,
+  "wall_clock": 55.826
+}

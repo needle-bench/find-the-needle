@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0252816,
+  "input_tokens": 20022,
+  "output_tokens": 3860,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Let me verify the application code - we need to see if there are any issues in how it handles orders. The application is a Go binary named `orders-api`. Let's see what symbols we can extract from it:",
+  "timestamp": "2026-04-03T02:54:34Z",
+  "token_cost": 23882,
+  "tool_uses": 11,
+  "turns_to_fix": 0,
+  "wall_clock": 245.004
+}

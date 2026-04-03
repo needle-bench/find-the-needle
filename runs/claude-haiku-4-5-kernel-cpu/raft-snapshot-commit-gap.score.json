@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6650,
+  "output_tokens": 2411,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "## Summary\n\n**The Needle Found:** \n\nThe bug was in the `InstallSnapshot` function in `/app/app/snapshot.go`. \n\n**The Problem:**\n\nWhen a snapshot is installed on a follower node:\n1. `lastApplied` was correctly updated to `snap.LastIncludedIndex` (the point up to which the snapshot has applied entries)\n2. BUT `commitIndex` was NOT updated and remained at its old value (often 0)\n\nThis caused a critical issue during crash recovery:\n- On restart, the recovery logic reads the saved `commitIndex` (which was never updated to reflect the snapshot)\n- Since `commitIndex` was still 0 but the snapshot was at index 10, the recovery logic incorrectly thought only 0 entries were committed\n- It would then replay log entries 1-10 again, causing duplicate applications to the state machine\n\n**The Fix:**\n\nAdd code to update `commitIndex` whenever a snapshot is installed:\n\n```go\n// Update commitIndex to match — the snapshot represents committed state,\n// so commitIndex must be at least as large as lastApplied.\n// This ensures that after a crash-recovery cycle, the recovery logic\n// correctly recognizes that the snapshot entries have already been applied.\nif n.commitIndex < snap.LastIncludedIndex {\n    n.commitIndex = snap.LastIncludedIndex\n}\n```\n\nThis ensures that `commitIndex` and `lastApplied` stay consistent, so when the node restarts, the recovery logic correctly recognizes that the snapshot entries have already been applied and shouldn't be replayed.",
+  "timestamp": "2026-04-03T01:08:26Z",
+  "token_cost": 9061,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 30.593
+}

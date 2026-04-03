@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.07057150000000001,
+  "input_tokens": 83620,
+  "output_tokens": 4815,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Found and fixed the needle: **goroutine leak in the HTTP handler**.\n\n## Problem\nThe server's `/compute` endpoint spawned background goroutines to perform heavy computations but didn't properly cancel them when clients disconnected. This caused goroutines to accumulate indefinitely, consuming resources.\n\n## Root Cause\nIn `main.go`:\n1. The `computeHandler` spawned goroutines without context cancellation awareness\n2. `performComputation` had no way to receive cancellation signals\n3. The select statement only checked for results or timeout, not client disconnection\n\n## Solution\n1. **Added context cancellation**: Used `r.Context()` and `context.WithCancel()` to create cancellable contexts\n2. **Modified computation function**: Created `performComputationWithContext()` that regularly checks `ctx.Done()` \n3. **Updated handler logic**: Made the select statement listen for `ctx.Done()` to detect client disconnections\n4. **Added cancellation in loops**: Checked for context cancellation in both computation and sleep operations\n\n## Key Changes\n- Added `context` import\n- Modified `computeHandler` to create a cancellable context\n- Updated function to use `performComputationWithContext(ctx, req)`\n- Changed select to include `<-ctx.Done()` case\n- Added proper cancellation checks in the computation loop\n\n## Verification\nRunning `test.sh` now shows:\n- Baseline goroutines: 4\n- Goroutines after 20 client disconnects: 4  \n- Goroutines after 5s wait: 4\n- Leaked goroutines above baseline: 0\n- **PASS: Goroutines properly cleaned up after client disconnect**\n\nThe fix ensures that when clients disconnect, their computation goroutines are promptly cancelled, preventing resource leaks in the container.",
+  "timestamp": "2026-04-03T02:03:42Z",
+  "token_cost": 88435,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 224.228
+}

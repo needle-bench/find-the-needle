@@ -4,15 +4,15 @@
   "benchmark": "race-condition-counter",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.010024829999999998,
-  "input_tokens": 20266,
-  "output_tokens": 1157,
+  "estimated_cost_usd": 0.01072148,
+  "input_tokens": 20655,
+  "output_tokens": 1824,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " Found and fixed the issue. The bug was a race condition in `/app/app/counter.js`.\n\n**Problem:** The `incrementCounter()` function used a non-atomic read-modify-write pattern:\n1. Read current value from Redis\n2. Add 1 locally  \n3. Write the new value back\n\nWith concurrent requests, multiple requests could read the same value before any writes completed, causing lost increments.\n\n**Fix:** Changed to use Redis's atomic `INCR` command, which handles the read-modify-write atomically on the Redis server, eliminating the race condition.",
-  "timestamp": "2026-04-02T02:06:52Z",
-  "token_cost": 21423,
-  "tool_uses": 13,
+  "summary": " The bug was a **race condition** in `/app/app/counter.js`. \n\n**The Problem:** The `incrementCounter` function used a non-atomic read-modify-write pattern:\n1. Read the current value from Redis\n2. Parse and increment locally  \n3. Write back the new value\n\nWith concurrent requests, multiple clients could read the same value before any writes completed, causing lost increments (only 55/100 increments were recorded).\n\n**The Fix:** Replaced the read-modify-write pattern with Redis's atomic `incr` command:\n```javascript\n// Before (BUGGY)\nconst current = await client.get(COUNTER_KEY);\nconst newValue = parseInt(current || \"0\", 10) + 1;\nawait client.set(COUNTER_KEY, newValue.toString());\n\n// After (FIXED)  \nconst newValue = await client.incr(COUNTER_KEY);\n```\n\nThe test now passes with 100/100 increments correctly recorded.",
+  "timestamp": "2026-04-03T02:58:35Z",
+  "token_cost": 22479,
+  "tool_uses": 23,
   "turns_to_fix": 1,
-  "wall_clock": 81.883
+  "wall_clock": 86.904
 }

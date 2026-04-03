@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.00016368,
+  "input_tokens": 1112,
+  "output_tokens": 80,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test script is failing due to a timing side-channel vulnerability in the `compareHashes` function. The function uses the `==` operator for comparison, which is not constant-time and can leak timing information. This vulnerability allows an attacker to infer information about the password by measuring the time it takes to compare the hashes.",
+  "timestamp": "2026-04-03T02:52:21Z",
+  "token_cost": 1192,
+  "tool_uses": 1,
+  "turns_to_fix": 1,
+  "wall_clock": 2.579
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.13760599999999998,
+  "input_tokens": 121695,
+  "output_tokens": 1921,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**The vulnerability (the \"needle\") has been fixed and `test.sh` now passes.**\n\n## Root Cause\n\nThe function `check_admin_access` in `app/auth.py` was checking whether a username (after Unicode BIDI visual rendering) matched an admin name, like \"admin\". An attacker could register as a username like `\"\\u202enimda\"` (renders as \"admin\") and bypass access checks by exploiting Unicode BIDI controls.\n\n## Fix Applied\n\n**Before:**\n```python\ndisplay_name = _render_display_name(username)\nif display_name in ADMIN_USERS:\n    return True, \"admin access granted\"\n```\n\n**After:**\n```python\nif username in ADMIN_USERS:\n    return True, \"admin access granted\"\n```\n\n**We now check the actual username (as stored), not the visually rendered version.**\n\n---\n\n**All tests now pass. The application is no longer vulnerable to this BIDI admin spoofing issue.**",
+  "timestamp": "2026-04-03T01:18:50Z",
+  "token_cost": 123616,
+  "tool_uses": 37,
+  "turns_to_fix": 1,
+  "wall_clock": 55.146
+}

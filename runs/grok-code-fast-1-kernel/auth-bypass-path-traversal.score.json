@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.008685819999999999,
+  "input_tokens": 44153,
+  "output_tokens": 4619,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle was a bug in the authentication middleware that allowed path traversal attacks to bypass protection on `/api/` routes. The middleware checked the raw `r.URL.Path` for the \"/api/\" prefix, but the router cleaned/normalized paths (e.g., `//api/admin` becomes `/api/admin`). This mismatch let attackers access protected endpoints without auth.\n\nThe fix aligns the middleware check with the router by cleaning the path using `path.Clean` before checking the prefix.\n\nRunning `test.sh` confirms the fix: all bypass attempts now return 401 (unauthorized), and protected routes work only with valid auth. The test passes.",
+  "timestamp": "2026-04-03T01:21:35Z",
+  "token_cost": 48772,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 44.304
+}

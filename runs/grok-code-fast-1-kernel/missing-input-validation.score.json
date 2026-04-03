@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.014184259999999999,
+  "input_tokens": 22927,
+  "output_tokens": 8757,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The hidden problem (the \"needle in the haystack\") was missing input validation in the inventory adjustment endpoint. Specifically, the POST `/inventory/:sku/adjust` route did not prevent adjustments that would result in negative inventory quantities.\n\nI add input validation to check if an adjustment would make the quantity go below zero. If so, the API now rejects it with a 400 error.\n\nThis prevents the inventory from going negative, as confirmed by the test.",
+  "timestamp": "2026-04-03T01:57:06Z",
+  "token_cost": 31684,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 69.706
+}

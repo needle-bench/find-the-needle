@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00340135,
+  "input_tokens": 3352,
+  "output_tokens": 6191,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The Grep on /tmp/output.dat did not find \"needle\", indicating it's likely in /tmp/input.dat. The needle was found in /tmp/input.dat during a previous check.",
+  "timestamp": "2026-04-03T03:07:05Z",
+  "token_cost": 9543,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 72.985
+}

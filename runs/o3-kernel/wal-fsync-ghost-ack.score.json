@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.15208,
+  "input_tokens": 127156,
+  "output_tokens": 2749,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed durability bug.\n\nProblem  \nServer acknowledged SET immediately after buffering entry to WAL; if crash occurred before background fsync, acknowledged data could be lost → test failed.\n\nFix  \nserver.go  \n1. After s.wal.Append, call s.wal.Sync() to flush buffer and fsync file.  \n2. Only then write sync-offset sidecar and return +OK.\n\nThis guarantees every acknowledged write is on stable storage.\n\nAll tests pass:\n\n$ ./test.sh  \ncrash-recover: WAL truncated to last sync point  \nsummary: 50 OK, 0 missing out of 50 acked  \nPASS",
+  "timestamp": "2026-04-03T04:04:22Z",
+  "token_cost": 129905,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 66.317
+}

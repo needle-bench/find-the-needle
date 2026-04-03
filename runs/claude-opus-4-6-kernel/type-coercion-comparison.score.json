@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.23514000000000002,
+  "input_tokens": 39323,
+  "output_tokens": 1541,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n**The Bug (Type Coercion Comparison):** In `/app/utils.js`, `query.minRating` was being set as a **string** (the raw query parameter value) instead of being parsed to a number:\n```js\nquery.minRating = searchParams.get('min_rating');  // returns string \"4\"\n```\n\nThis caused two problems in `filter.js`'s `buildRatingRange(min, max)`:\n1. The `for` loop `for (let i = min; i <= max; i++)` started with `i = \"4\"` (a string). The `i++` still works numerically, but `range.push(i)` pushes a **string** `\"4\"` on the first iteration, then numbers `5` on subsequent iterations.\n2. `acceptable.includes(p.rating)` compared product ratings (which are **numbers** like `4`) against the string `\"4\"` in the array — and `\"4\" !== 4` in strict comparison, so products with the exact minimum rating were incorrectly excluded.\n\n**The Fix:** Parse the rating as an integer in `utils.js`:\n```js\nquery.minRating = parseInt(searchParams.get('min_rating'), 10);\n```",
+  "timestamp": "2026-04-03T03:38:00Z",
+  "token_cost": 40864,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 116.736
+}

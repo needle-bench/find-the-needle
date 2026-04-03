@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 43723,
+  "output_tokens": 50215,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The problem is that the file encoding is not set to UTF-8. The file encoding is set to ISO-8859-1. To fix this, you need to set the file encoding to UTF-8.",
+  "timestamp": "2026-04-03T01:27:22Z",
+  "token_cost": 93938,
+  "tool_uses": 28,
+  "turns_to_fix": 1,
+  "wall_clock": 170.725
+}

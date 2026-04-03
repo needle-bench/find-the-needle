@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0023039499999999995,
+  "input_tokens": 9994,
+  "output_tokens": 2866,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The needle was an off-by-one error in `./app/app.py` pagination:\n\n**Bug:**  \n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\nPage 1: offset 0 → IDs 1-10  \nPage 2: offset 9 → IDs 10-19 (overlap on ID 10)\n\n**Fix:**  \n```python\noffset = (page - 1) * per_page\n```\nPage 2: offset 10 → IDs 11-20 (no gap/overlap)\n\n`./test.sh` now passes ✅",
+  "timestamp": "2026-04-03T02:36:38Z",
+  "token_cost": 12860,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 26.433
+}

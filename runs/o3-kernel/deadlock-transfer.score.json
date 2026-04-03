@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.046953999999999996,
+  "input_tokens": 25333,
+  "output_tokens": 2200,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed the deadlock “needle”.\n\nWhat was wrong:\n• TransferService locked the two account objects in call-site order (from → to).  \n  Two simultaneous opposite transfers (A→B and B→A) could lock A then B and B then A, producing a circular wait and deadlock.\n\nWhat I changed:\n• Implemented deterministic lock ordering in TransferService:\n  – Decide lock order via System.identityHashCode of each account’s lock.  \n  – If the hash codes collide, fall back to a global tie-breaker lock, then lock the two accounts in a stable order.\n• Replaced manual int counters with AtomicInteger for thread-safe statistics.\n• Moved the real debit/credit logic into a helper method to keep code clean.\n\nVerification:\nRunning the supplied test script twice now completes without timeouts or balance errors:\n\nPASS: All concurrent transfers completed without deadlock",
+  "timestamp": "2026-04-03T01:36:58Z",
+  "token_cost": 27533,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 35.589
+}

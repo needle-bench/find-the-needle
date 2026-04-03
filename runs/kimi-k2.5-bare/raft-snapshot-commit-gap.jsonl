@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:34:47Z", "benchmark": "raft-snapshot-commit-gap", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 75, "tokens_out": 133, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 346, "tokens_out": 60, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 399, "tokens_out": 55, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 455, "tokens_out": 38, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 687, "tokens_out": 37, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:35:01Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

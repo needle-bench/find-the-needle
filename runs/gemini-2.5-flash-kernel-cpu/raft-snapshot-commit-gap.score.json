@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 295615,
+  "output_tokens": 6340,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script now passes! This indicates that the fix in the `Restart` function, which ensures `n.lastApplied` and `n.commitIndex` are correctly set to `snapshotAppliedTo` after a snapshot and restart, has resolved the duplicate state machine transition bug.\n\nThe \"needle\" was the incorrect handling of `lastApplied` and `commitIndex` within the `Restart` function's recovery logic, specifically when `savedCommitIndex` was not greater than `snapshotAppliedTo`. The previous `if` conditions were not robust enough to handle scenarios where `commitIndex` might have been inappropriately low after a restart following a snapshot, leading to re-application of already snapshotted entries.\n",
+  "timestamp": "2026-04-03T02:45:10Z",
+  "token_cost": 301955,
+  "tool_uses": 27,
+  "turns_to_fix": 1,
+  "wall_clock": 65.584
+}

@@ -10,9 +10,9 @@
   "resolved": false,
   "stop_reason": "error: API call failed: API error 400: Invalid model: devstral-medium",
   "summary": "",
-  "timestamp": "2026-04-02T03:13:57Z",
+  "timestamp": "2026-04-03T01:14:48Z",
   "token_cost": 0,
   "tool_uses": 0,
   "turns_to_fix": 0,
-  "wall_clock": 1.305
+  "wall_clock": 2.271
 }

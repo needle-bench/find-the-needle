@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.005742219999999999,
+  "input_tokens": 14951,
+  "output_tokens": 3171,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The API server has been successfully debugged and is now fully compatible with version 1. All fields from the v1 API are included in the v2 API, ensuring no data loss for clients upgrading.\n\nInside the container, you can run `./server` to start the server on port 18085. \n\nTo repair the image:\n1. Export/modify `app/models.go` to include the missing fields `AvatarURL`, `Bio`, and `Location` in the `UserV2` struct.\n2. Modify the `ToV2()` method of `InternalUser` to assign the missing fields to the `UserV2` return value.\n\nThe bug is fixed! 🎉",
+  "timestamp": "2026-04-03T01:20:26Z",
+  "token_cost": 18122,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 32.744
+}

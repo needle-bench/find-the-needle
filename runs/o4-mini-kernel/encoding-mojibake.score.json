@@ -1,0 +1,18 @@
+{
+  "agent": "o4-mini-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.038622100000000006,
+  "input_tokens": 43995,
+  "output_tokens": 2795,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I updated the CSV reader to use UTF-8 instead of ISO-8859-1 for reading the input file. This ensures that all international characters (e.g. é, ö, ø, etc.) are read correctly and preserved in the generated report. The tests now pass.",
+  "timestamp": "2026-04-03T01:23:48Z",
+  "token_cost": 46790,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 55.171
+}

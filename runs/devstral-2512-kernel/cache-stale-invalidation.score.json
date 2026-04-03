@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.02547712,
-  "input_tokens": 93780,
-  "output_tokens": 1508,
+  "estimated_cost_usd": 0.011314,
+  "input_tokens": 40895,
+  "output_tokens": 790,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Excellent! The fixes are in place:\n\n1. **In `_update_product`**: Added `cache.delete(cache_key)` to invalidate the cache for the updated product\n2. **In `_create_product`**: Added `cache.invalidate_prefix('products:list')` to invalidate the product list cache\n\nThe test now passes, confirming that the cache is properly invalidated after writes.",
-  "timestamp": "2026-04-02T04:00:43Z",
-  "token_cost": 95288,
-  "tool_uses": 22,
+  "summary": "Perfect! The test passes. The issue was that the cache was not being invalidated after updates and creates. I fixed both bugs:\n\n1. **In `_update_product`**: Added `cache.delete(f'products:{product_id}')` to invalidate the cache for the updated product.\n2. **In `_create_product`**: Added `cache.delete('products:list')` to invalidate the product list cache so new products appear immediately.\n\nThe cache now correctly serves fresh data after writes.",
+  "timestamp": "2026-04-03T01:19:52Z",
+  "token_cost": 41685,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 23.26
+  "wall_clock": 15.738
 }

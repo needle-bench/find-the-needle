@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.013736799999999997,
+  "input_tokens": 19469,
+  "output_tokens": 235,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle has been found and fixed (incorrect owned vs. reference return type for `Ref` fields in the code generator). `./test.sh` now passes.",
+  "timestamp": "2026-04-03T07:30:05Z",
+  "token_cost": 19704,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 6.322
+}

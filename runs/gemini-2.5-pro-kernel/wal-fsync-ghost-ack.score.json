@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0167075,
+  "input_tokens": 3046,
+  "output_tokens": 1290,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "",
+  "timestamp": "2026-04-03T06:03:34Z",
+  "token_cost": 4336,
+  "tool_uses": 4,
+  "turns_to_fix": 0,
+  "wall_clock": 146.324
+}

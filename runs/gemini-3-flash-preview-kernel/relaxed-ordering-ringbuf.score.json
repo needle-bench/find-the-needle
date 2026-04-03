@@ -4,15 +4,15 @@
   "benchmark": "relaxed-ordering-ringbuf",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.0274077,
-  "input_tokens": 59871,
-  "output_tokens": 1474,
+  "estimated_cost_usd": 0.02122645,
+  "input_tokens": 31400,
+  "output_tokens": 2418,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The bug was located in `ring_buffer.c`, where all atomic operations on `write_idx` and `read_idx` were using `memory_order_relaxed`. While the existing comments suggested this was acceptable for x86-TSO, it is not correct for C11 memory models (which can allow compiler-level reordering) and is definitely incorrect for non-TSO architectures like ARM64 (often used in containerized environments).\n\nSpecifically:\n1.  **Producer (`ringbuf_push`)**: Needs `memory_order_release` when storing the new `write_idx` to ensure the data write to `slots[]` is visible to the consumer. It also needs `memory_order_acquire` when loading `read_idx` to see the latest slot availability from the consumer.\n2.  **Consumer (`ringbuf_pop`)**: Needs `memory_order_acquire` when loading `write_idx` to ensure the data in `slots[]` published by the producer is visible. It also needs `memory_order_release` when storing the new `read_idx` to signal that it has finished reading the slot, preventing the producer from overwriting it prematurely.\n\nI updated these operations to use `memory_order_acquire` and `memory_order_release` respectively, which fixed the data corruption detected during the stress tests.\n\n```c\n/* Producer (ringbuf_push) */\nsize_t r = atomic_load_explicit(&rb->read_idx,  memory_order_acquire);\n...\natomic_store_explicit(&rb->write_idx, w + 1, memory_order_release);\n\n/* Consumer (ringbuf_pop) */\nsize_t w = atomic_load_explicit(&rb->write_idx, memory_order_acquire);\n...\natomic_store_explicit(&rb->read_idx, r + 1, memory_order_release);\n```",
-  "timestamp": "2026-04-02T03:40:37Z",
-  "token_cost": 61345,
-  "tool_uses": 11,
+  "summary": "The SPSC ring buffer used `memory_order_relaxed` for all atomic operations, which is insufficient for correct data synchronization on non-TSO architectures (like ARM64) and generally violates the C11 memory model for data visibility between threads.\n\nIn `ringbuf_push`, the store to `write_idx` must have `memory_order_release` to ensure that the data written to `slots` is visible to the consumer once it reads the updated `write_idx`. Conversely, in `ringbuf_pop`, the load of `write_idx` must use `memory_order_acquire` to guarantee it observes the data written by the producer. Similarly, `read_idx` updates must use acquire/release semantics to prevent the producer from overwriting a slot before the consumer has finished reading it.\n\nI have updated `ring_buffer.c` to use proper acquire/release semantics:\n- **`ringbuf_push`**: Loads `read_idx` with `memory_order_acquire` and stores `write_idx` with `memory_order_release`.\n- **`ringbuf_pop`**: Loads `write_idx` with `memory_order_acquire` and stores `read_idx` with `memory_order_release`.\n\nThe tests now pass consistently.",
+  "timestamp": "2026-04-03T04:07:40Z",
+  "token_cost": 33818,
+  "tool_uses": 8,
   "turns_to_fix": 1,
-  "wall_clock": 21.903
+  "wall_clock": 21.891
 }

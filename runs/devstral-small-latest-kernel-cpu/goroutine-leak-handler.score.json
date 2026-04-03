@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 35761,
+  "output_tokens": 1930,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix has resolved the issue. The goroutines are now properly cleaned up after client disconnections, and the test script passes. The key changes made were:\n\n1. **Added `context.Context` support**: The `computeHandler` now uses the request context to detect client disconnections.\n2. **Updated `performComputation`**: The function now accepts a `context.Context` parameter and checks for cancellation during the computation loop.\n3. **Graceful handling of disconnections**: When a client disconnects, the goroutine is cancelled via the context, preventing leaks.\n\nThe needle in the haystack was the missing context cancellation mechanism in the goroutine handling. The fix ensures that goroutines are properly terminated when clients disconnect, preventing resource leaks.",
+  "timestamp": "2026-04-03T02:32:45Z",
+  "token_cost": 37691,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 32.465
+}

@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.03729375,
-  "input_tokens": 20576,
-  "output_tokens": 1079,
+  "estimated_cost_usd": 0.05093324999999999,
+  "input_tokens": 25468,
+  "output_tokens": 1657,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I've found and fixed the issue. The problem was in the caching mechanism of the server. There were two main bugs:\n\n1. When creating a new product, the cache for the product list wasn't being invalidated, so new products wouldn't show up in the list until the cache expired.\n2. When updating a product, the cache for that specific product wasn't being cleared, leading to stale data being served.\n\nI've modified the code in `server.py` to:\n- Invalidate the product list cache when a new product is created using `cache.invalidate_prefix('products:')`\n- Delete the specific product's cache entry and invalidate the list cache when a product is updated using `cache.delete()` and `cache.invalidate_prefix()`\n\nRunning the test script `./test.sh` now shows all tests passing, confirming that the cache is properly invalidated after writes, and new products are visible in the product list immediately after creation.",
-  "timestamp": "2026-04-02T01:22:57Z",
-  "token_cost": 21655,
+  "summary": "I've found and fixed the issue. The problem was in the server code where the cache wasn't being invalidated after updates or creations of products. This caused stale data to be served from the cache.\n\nSpecifically, I made two fixes to `server.py`:\n1. Added cache invalidation for both the specific product and the product list when a product is updated\n2. Added cache invalidation for the product list when a new product is created\n\nAfter making these changes, I ran the test script again, and all tests now pass, confirming that the cache is correctly invalidated after writes, ensuring fresh data is shown.",
+  "timestamp": "2026-04-03T01:18:21Z",
+  "token_cost": 27125,
   "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 24.695
+  "wall_clock": 32.076
 }

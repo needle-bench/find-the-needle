@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9555,
-  "output_tokens": 1005,
+  "input_tokens": 14403,
+  "output_tokens": 867,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests passed. \n\n**The needle:** In `/etc/nginx/sites-available/default`, the `proxy_pass` directive was pointing to port **5001** (`http://127.0.0.1:5001`), but the Flask backend server was listening on port **5000**. \n\n**The fix:** Changed `proxy_pass http://127.0.0.1:5001;` → `proxy_pass http://127.0.0.1:5000;` to match the actual Flask server port.",
-  "timestamp": "2026-04-02T02:31:58Z",
-  "token_cost": 10560,
-  "tool_uses": 14,
+  "summary": "All tests passed. \n\n**The needle:** In `/etc/nginx/sites-available/default`, the `proxy_pass` directive was pointing to port `5001` instead of port `5000`. The Flask backend (`server.py`) listens on port `5000`, so the nginx upstream proxy port was mismatched, causing `/api/data` requests to fail while `/health` still worked (because the health endpoint was served directly by nginx with a static `return 200` response, bypassing the upstream entirely).\n\n**The fix:** Changed `proxy_pass http://127.0.0.1:5001;` → `proxy_pass http://127.0.0.1:5000;`",
+  "timestamp": "2026-04-03T02:21:20Z",
+  "token_cost": 15270,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 29.537
+  "wall_clock": 25.225
 }

@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 8758,
-  "output_tokens": 1945,
+  "input_tokens": 8743,
+  "output_tokens": 1613,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test passes. Here's a summary of the bug and fix:\n\n**The Bug (Memory Leak via Event Listener Accumulation):**\nIn `/app/app/processor.js`, the `process()` method was registering **new** event listeners on `data:validated` and `data:error` on **every single request**. These listeners were never removed. Each listener's closure also captured the `data` parameter from the request, preventing it from being garbage collected. After 500 requests, there would be 500+ listeners accumulated on the event bus, causing unbounded memory growth.\n\n**The Fix:**\nMoved the `eventBus.on('data:validated', ...)` and `eventBus.on('data:error', ...)` listener registrations from the `process()` method into the `constructor()`, so they are registered **once** when the `DataProcessor` is instantiated, not per-request. This keeps the listener count stable (2 from processor + 1 from monitor = stable) regardless of how many requests are processed.",
-  "timestamp": "2026-04-02T02:30:31Z",
-  "token_cost": 10703,
+  "summary": "The test passes. Here's a summary of the bug and the fix:\n\n**The Bug (Memory Leak via Event Listener Accumulation):**\nIn `processor.js`, the `process()` method was registering **new** `data:validated` and `data:error` event listeners on the `eventBus` on **every single call**. These listeners were never removed, causing them to accumulate unboundedly. Additionally, the `data:validated` listener's closure captured the `data` parameter from each request, preventing garbage collection of all request data.\n\n**The Fix:**\nMoved the event listener registrations from the `process()` method into the `constructor()`, so they are registered **once** when the `DataProcessor` is created, not on every request. This keeps the listener count constant (2 for the processor + 3 from the monitor = 5 total, but only 2 for `data:validated`) regardless of how many requests are processed.",
+  "timestamp": "2026-04-03T02:12:10Z",
+  "token_cost": 10356,
   "tool_uses": 14,
   "turns_to_fix": 1,
-  "wall_clock": 44.787
+  "wall_clock": 41.38
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.013499982300000001,
+  "input_tokens": 28487,
+  "output_tokens": 2413,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " Found and fixed the needle! \n\n**The Bug:** A classic **deadlock** in `TransferService.java`. The original code locked accounts in parameter order (`from`, then `to`). When two concurrent transfers went in opposite directions (A→B and B→A), they would lock in opposite order, causing a circular wait:\n\n- Thread 1 (A→B): locks A, waits for B\n- Thread 2 (B→A): locks B, waits for A → **DEADLOCK**\n\n**The Fix:** Lock accounts in a **consistent order by account ID** instead of parameter order:\n\n```java\nAccount firstLock = from.getId().compareTo(to.getId()) < 0 ? from : to;\nAccount secondLock = from.getId().compareTo(to.getId()) < 0 ? to : from;\n\nsynchronized (firstLock.getLock()) {\n    synchronized (secondLock.getLock()) {\n        // ... transfer logic\n    }\n}\n```\n\nThis ensures both threads always acquire locks in the same order (e.g., by account A first, then B), eliminating the circular wait condition. Tests now pass reliably.",
+  "timestamp": "2026-04-03T01:42:48Z",
+  "token_cost": 30900,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 123.725
+}

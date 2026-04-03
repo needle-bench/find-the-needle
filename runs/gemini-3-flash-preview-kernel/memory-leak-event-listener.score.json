@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.015032500000000002,
-  "input_tokens": 25235,
-  "output_tokens": 805,
+  "estimated_cost_usd": 0.013730000000000001,
+  "input_tokens": 20704,
+  "output_tokens": 1126,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The user was facing a memory leak issue in a Node.js application caused by event listeners being registered on every request without ever being removed. Specifically, the `DataProcessor.process()` method in `app/processor.js` was adding new listeners for `data:validated` and `data:error` events to a global `eventBus` every time it was called. This led to a linear growth in the number of listeners and memory usage over time.\n\nI fixed this by removing the redundant and leaking event listener registrations from the `process()` method. Since the application components already communicate via the `eventBus` and the `Monitor` class is already tracking metrics through persistent listeners, these per-request listeners were both incorrect and unnecessary.\n\nAfter making this change, I verified the fix by running `test.sh`, which now shows that the listener count remains stable.\n\n```bash\n./test.sh\n```\nOutput:\n```\nServer listening on port 8080\nBaseline: listeners=1, heap=4.42MB\nAfter 500 requests: listeners=1, heap=5.06MB\nPASS: Listener count stable at 1\nPASS: No event listener leak detected\n```",
-  "timestamp": "2026-04-02T03:29:04Z",
-  "token_cost": 26040,
-  "tool_uses": 11,
+  "summary": "I have fixed the memory leak in `app/processor.js`.\n\nThe issue was that the `process(data)` method in `DataProcessor` was registering new event listeners for `data:validated` and `data:error` on every single request, but never removing them. These listeners also captured the `data` object in their closures, preventing it from being garbage collected.\n\nI modified the code to properly clean up the listeners after they are triggered (or after either event occurs), ensuring that only the permanent listeners (like those from the `Monitor` class) remain on the event bus.\n\n```javascript\n  process(data) {\n    const onValidated = (validatedData) => {\n      this._handleValidated(validatedData, data);\n      cleanup();\n    };\n\n    const onError = (err) => {\n      console.error(`Processing error for batch ${this.processedCount}: ${err.message}`);\n      cleanup();\n    };\n\n    const cleanup = () => {\n      this.eventBus.removeListener('data:validated', onValidated);\n      this.eventBus.removeListener('data:error', onError);\n    };\n\n    this.eventBus.on('data:validated', onValidated);\n    this.eventBus.on('data:error', onError);\n\n    // Validate and emit\n    const validated = this._validate(data);\n    if (validated.errors.length > 0) {\n      this.eventBus.emit('data:error', new Error(validated.errors.join(', ')));\n      return { success: false, errors: validated.errors };\n    }\n\n    this.eventBus.emit('data:validated', validated.data);\n    // ...\n```\n\nRunning `test.sh` now confirms that the listener count remains stable:\n```\nBaseline: listeners=1, heap=4.43MB\nAfter 500 requests: listeners=1, heap=5.34MB\nPASS: Listener count stable at 1\nPASS: No event listener leak detected\n```",
+  "timestamp": "2026-04-03T03:08:50Z",
+  "token_cost": 21830,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 28.867
+  "wall_clock": 32.564
 }

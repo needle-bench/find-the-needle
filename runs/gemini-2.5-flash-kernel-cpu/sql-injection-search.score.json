@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 13765,
+  "output_tokens": 999,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reports \"PASS\" for all SQL injection tests, confirming that the fix was successful. The \"needle\" was indeed the SQL injection vulnerability in `app/search.py`, which I have now resolved.\n",
+  "timestamp": "2026-04-03T03:08:01Z",
+  "token_cost": 14764,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 11.677
+}

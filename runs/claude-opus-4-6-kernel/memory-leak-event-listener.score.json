@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.3486,
+  "input_tokens": 58910,
+  "output_tokens": 2162,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and fix:\n\n## The Needle (Bug): Event Listener Memory Leak in `processor.js`\n\n**Problem:** In `/app/app/processor.js`, the `process()` method was registering **new** `data:validated` and `data:error` event listeners on the global event bus **every single time** it was called. These listeners were never removed, causing:\n\n1. **Listener accumulation** — After 500 requests, there would be 500+ listeners for `data:validated` (and `data:error`)\n2. **Memory leak** — Each listener's closure captured the `data` parameter from that request, preventing garbage collection of all request data\n\nThe `eventBus.setMaxListeners(0)` in `server.js` was a red flag — it suppressed Node.js's built-in warning about potential memory leaks from too many listeners.\n\n**Fix:** Moved the event listener registrations from the `process()` method into the `constructor()`, so they are registered **once** when the `DataProcessor` is created, not on every request. After the fix, the listener count stays at 2 (one from Monitor, one from DataProcessor) regardless of how many requests are processed.",
+  "timestamp": "2026-04-03T02:11:18Z",
+  "token_cost": 61072,
+  "tool_uses": 23,
+  "turns_to_fix": 1,
+  "wall_clock": 88.983
+}

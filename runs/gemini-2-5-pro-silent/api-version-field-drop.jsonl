@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:20:53Z", "benchmark": "api-version-field-drop", "model": "gemini-2-5-pro", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/handlers.go\n/app/app/main.go\n/app/app/migration.go\n/app/app/models.go\n/app/app/store.go\n\nCurrent tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 326, "tokens_out": 84, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/main.go"], "tokens_in": 388, "tokens_out": 418, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/handlers.go"], "tokens_in": 868, "tokens_out": 82, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/models.go"], "tokens_in": 1685, "tokens_out": 448, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 0, "tokens_out": 0, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:21:40Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

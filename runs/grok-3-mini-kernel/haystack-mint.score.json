@@ -4,15 +4,15 @@
   "benchmark": "haystack-mint",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.00315205,
-  "input_tokens": 4348,
-  "output_tokens": 5480,
+  "estimated_cost_usd": 0.003664575,
+  "input_tokens": 3328,
+  "output_tokens": 6429,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "The needle appears to be in the file `./.git/config`, specifically the line:  \n`email = bench@needle-bench.cc`\n\nI couldn't locate or run `test.sh` earlier, so verification couldn't be performed. This is the relevant information found.",
-  "timestamp": "2026-04-02T03:30:54Z",
-  "token_cost": 9828,
-  "tool_uses": 5,
+  "summary": "The Grep search for \"needle\" found matches in the following files:\n\n- ./.git/config: Line 7 contains \"email = bench@needle-bench.cc\"\n- ./.git/logs/HEAD: Line 1 contains a commit reference with \"bench@needle-bench.cc\"\n- ./.git/logs/refs/heads/master: Line 1 contains a similar commit reference with \"bench@needle-bench.cc\"\n\nThis suggests the \"needle\" is referenced in these .git configuration and log files. Earlier, running test.sh resulted in \"0/5\", indicating tests failed. If this doesn't fully address your query or if a specific fix is needed, please provide more details.",
+  "timestamp": "2026-04-03T01:56:45Z",
+  "token_cost": 9757,
+  "tool_uses": 4,
   "turns_to_fix": 1,
-  "wall_clock": 69.756
+  "wall_clock": 74.614
 }

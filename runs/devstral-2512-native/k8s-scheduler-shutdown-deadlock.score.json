@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The fix is verified. The deadlock is resolved by calling `s.queue.Close()` before waiting for the goroutine to finish.",
-  "timestamp": "2026-04-02T03:19:27Z",
+  "summary": "Fix applied successfully. The deadlock is resolved by calling `s.queue.Close()` before waiting for the goroutine to finish, allowing any blocked `Pop()` calls to wake up and exit cleanly.",
+  "timestamp": "2026-04-03T02:13:43Z",
   "token_cost": 0,
-  "tool_uses": 5,
-  "turns_to_fix": 6,
-  "wall_clock": 10.611
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 12.306
 }

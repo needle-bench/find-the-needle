@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-native",
+  "arm": "native",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fix verified. Changed `Product.java:36` to use `sku.hashCode()` instead of `category.hashCode()`. Test now passes with max chain length of 4 (was 1000).",
+  "timestamp": "2026-04-03T02:45:22Z",
+  "token_cost": 0,
+  "tool_uses": 13,
+  "turns_to_fix": 14,
+  "wall_clock": 14.486
+}

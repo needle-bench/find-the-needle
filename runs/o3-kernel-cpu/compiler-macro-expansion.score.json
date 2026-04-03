@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.064266,
+  "input_tokens": 37753,
+  "output_tokens": 2003,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed.\n\nThe getter that is generated for `Ref` (nested-struct) fields now correctly returns a reference (`&T`) instead of an owned value (`T`).  \nUpdate made in src/codegen.rs:\n\nfrom  \n    pub fn field(&self) -> T { &self.field }\n\nto  \n    pub fn field(&self) -> &T { &self.field }\n\nAll tests in `test.sh` now pass:\n\n=== Code Generation Engine Tests ===  \n--- Building --- …  \n--- Simple accessor test --- PASS  \n--- Complex nested accessor test --- PASS  \n--- Generated code inspection --- PASS\n\nThe “needle” is found and removed – code generation is now type-correct for nested accessors.",
+  "timestamp": "2026-04-03T01:34:36Z",
+  "token_cost": 39756,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 46.079
+}

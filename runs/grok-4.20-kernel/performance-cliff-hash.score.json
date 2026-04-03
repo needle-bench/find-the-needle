@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.034102,
+  "input_tokens": 86999,
+  "output_tokens": 588,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle (the `hashCode()` collision bug in `Product.java` that was causing massive performance degradation at scale) has been found and fixed. `test.sh` now passes successfully.",
+  "timestamp": "2026-04-03T01:38:05Z",
+  "token_cost": 87587,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 14.642
+}

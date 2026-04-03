@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.47684,
+  "input_tokens": 84728,
+  "output_tokens": 2128,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the fix:\n\n**The Needle (Bug):** In `/app/app/auth/compare.go`, the `compareHashes` function was using Go's built-in `==` operator to compare password hashes:\n\n```go\nreturn stored == input\n```\n\nThis is vulnerable to a **timing side-channel attack** because `==` short-circuits — it returns `false` as soon as it finds the first mismatching character. An attacker can measure the response time to determine how many leading characters of their guessed hash match the stored hash, effectively leaking the hash one character at a time.\n\n**The Fix:** Replaced the `==` comparison with `crypto/subtle.ConstantTimeCompare()`, which always compares all bytes regardless of where the first mismatch occurs, making the comparison constant-time and immune to timing attacks:\n\n```go\nreturn subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1\n```",
+  "timestamp": "2026-04-03T03:26:47Z",
+  "token_cost": 86856,
+  "tool_uses": 31,
+  "turns_to_fix": 1,
+  "wall_clock": 81.74
+}

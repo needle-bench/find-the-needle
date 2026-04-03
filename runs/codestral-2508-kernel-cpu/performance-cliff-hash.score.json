@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 308610,
+  "output_tokens": 6084,
+  "resolved": false,
+  "stop_reason": "error: API call failed: API error 429: Rate limit exceeded",
+  "summary": "The old_string was not found in the file. This suggests that the previous changes were not applied correctly. Let's try a different approach by using a custom hash function that combines the fields in a way that reduces collisions.",
+  "timestamp": "2026-04-03T02:10:51Z",
+  "token_cost": 314694,
+  "tool_uses": 60,
+  "turns_to_fix": 0,
+  "wall_clock": 76.517
+}

@@ -4,15 +4,15 @@
   "benchmark": "nginx-upstream-port-mismatch",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.012822400000000001,
-  "input_tokens": 26834,
-  "output_tokens": 354,
+  "estimated_cost_usd": 0.014327599999999998,
+  "input_tokens": 32299,
+  "output_tokens": 396,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**The needle has been found and removed.** \n\nThe bug was an upstream port mismatch in `/etc/nginx/sites-enabled/default`: nginx was proxying `/api/` to `http://127.0.0.1:5001`, while the Flask app listens on port 5000. This caused the `/api/data` test to fail.\n\nI fixed it by updating `proxy_pass http://127.0.0.1:5001;` → `proxy_pass http://127.0.0.1:5000;`.\n\n`test.sh` now passes cleanly (exit 0).",
-  "timestamp": "2026-04-02T03:26:34Z",
-  "token_cost": 27188,
-  "tool_uses": 15,
+  "summary": "**Needle found and fixed!** The bug was a port mismatch in the nginx config: `/etc/nginx/sites-available/default` was proxying `/api/` to `http://127.0.0.1:5001`, but the Flask app in `app/server.py` listens on port 5000. (The `/health` endpoint bypassed the proxy, so Test 1 always passed.)\n\nI updated the `proxy_pass` line to use the correct port. Running `./test.sh` now confirms **ALL TESTS PASSED** (exit code 0).",
+  "timestamp": "2026-04-03T01:35:44Z",
+  "token_cost": 32695,
+  "tool_uses": 17,
   "turns_to_fix": 1,
-  "wall_clock": 9.284
+  "wall_clock": 14.552
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.04821612,
+  "input_tokens": 80580,
+  "output_tokens": 30186,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The test passes now! The DataLoader batching is working correctly, with only 2 DB queries (1 for users + 1 batched query for posts) instead of the previous 101 N+1 queries.\n\nThe fix involved moving the DataLoader instances from individual resolvers to the per-request context, so they can batch loads across the entire query execution. I also updated the resolvers to use the shared loaders instead of creating new ones each time.",
+  "timestamp": "2026-04-03T01:36:24Z",
+  "token_cost": 110766,
+  "tool_uses": 25,
+  "turns_to_fix": 1,
+  "wall_clock": 209.551
+}

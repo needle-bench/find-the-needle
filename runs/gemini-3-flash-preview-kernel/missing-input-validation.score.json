@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.013619,
-  "input_tokens": 23452,
-  "output_tokens": 631,
+  "estimated_cost_usd": 0.012305,
+  "input_tokens": 21058,
+  "output_tokens": 592,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The inventory system lacked validation to prevent negative stock levels. I have updated the `Inventory.adjustQuantity` method in `inventory.ts` to throw an error if an adjustment would result in a quantity less than zero. Additionally, I updated the adjustment route in `routes.ts` to catch this error and return a `400 Bad Request` status code to the client.\n\nSummary of changes:\n1.  **inventory.ts**: Added a check in `adjustQuantity` to ensure the resulting quantity is not negative.\n2.  **routes.ts**: Wrapped the call to `inventory.adjustQuantity` in a try-catch block to handle validation errors and return appropriate HTTP status codes.\n\nRunning `test.sh` now confirms that negative inventory states are prevented and invalid requests are rejected.",
-  "timestamp": "2026-04-02T03:29:39Z",
-  "token_cost": 24083,
-  "tool_uses": 10,
+  "summary": "The issue was a missing validation in the inventory management system that allowed the inventory quantity to drop below zero. I implemented a check in `inventory.ts` to ensure that any adjustment to the quantity does not result in a negative value, and updated `routes.ts` to catch the resulting error and return a 400 Bad Request status code.\n\nModified files:\n- `inventory.ts`: Added a check in `adjustQuantity` to throw an error if the adjustment would result in a negative quantity.\n- `routes.ts`: Wrapped the call to `inventory.adjustQuantity` in a try-catch block to handle the potential validation error and respond with an appropriate HTTP error status.\n\nVerified the fix by running `test.sh`.",
+  "timestamp": "2026-04-03T03:14:37Z",
+  "token_cost": 21650,
+  "tool_uses": 9,
   "turns_to_fix": 1,
-  "wall_clock": 24.689
+  "wall_clock": 19.712
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00742835,
+  "input_tokens": 33029,
+  "output_tokens": 9464,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The scheduler now correctly handles late-night events that cross midnight UTC by using the event's **local timezone date** for \"today\" instead of UTC date.\n\n### The Bug (Needle)\nIn `/app/app/scheduler.py` → `_is_due()` method:\n\n**Before (broken):**\n```python\n# Get today's date in UTC  ← WRONG for timezones west of UTC\ntoday_utc = window_start.date()\n# Build scheduled: UTC-today + local hour/min\nnaive_scheduled = datetime(today_utc.year, today_utc.month, today_utc.day, ...)\n```\n\n**Example Failure:**\n- evt-002: 23:30 US/Eastern (EST=UTC-5)\n- Test at `2025-01-16T04:30 UTC` → Should be 23:30 EST on **Jan 15**.\n- But code used **Jan 16 UTC date** → Built 23:30 EST on **Jan 16** → Wrong UTC time (~04:30 on Jan 17).\n\n**After (fixed):**\n```python\n# Get today's date in event's LOCAL timezone\ntz = pytz.timezone(event.timezone)\nlocal_now = window_start.astimezone(tz)\ntoday_local = local_now.date()\n# Build scheduled: LOCAL-today + local hour/min\nnaive_scheduled = datetime(today_local.year, today_local.month, today_local.day, ...)\nlocal_scheduled = tz.localize(naive_scheduled)  # Already correct\n```\n\n### Verification\n```\n$ bash test.sh\n...\nOK: EST nightly sync (crosses midnight) - evt-002 fires at 2025-01-16T04:30 UTC\nOK: PST late cleanup (crosses midnight) - evt-004 fires at 2025-01-16T07:45 UTC\n...\nPASS: All scheduling tests passed\n```\n\nAll 6 tests now pass! 🎉",
+  "timestamp": "2026-04-03T03:26:49Z",
+  "token_cost": 42493,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 75.439
+}

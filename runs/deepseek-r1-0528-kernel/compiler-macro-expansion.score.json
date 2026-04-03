@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-r1-0528-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0110544,
+  "input_tokens": 5058,
+  "output_tokens": 2920,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Let me examine the codegen.rs file since it's responsible for generating the accessor methods:",
+  "timestamp": "2026-04-03T01:35:27Z",
+  "token_cost": 7978,
+  "tool_uses": 4,
+  "turns_to_fix": 0,
+  "wall_clock": 209.553
+}

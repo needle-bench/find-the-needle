@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.013493679999999997,
-  "input_tokens": 47384,
-  "output_tokens": 1207,
+  "estimated_cost_usd": 0.02322536,
+  "input_tokens": 80353,
+  "output_tokens": 1760,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The test now passes. The issue was that the scheduler was only checking events for the current UTC date, but when an event is scheduled for late night in a timezone behind UTC (like US/Eastern or US/Pacific), the UTC time actually falls on the next calendar day.\n\nThe fix checks both the current UTC date and the previous UTC date when the scheduled UTC time would be in the future relative to the window we're checking. This ensures that late-night events that cross the midnight UTC boundary are properly detected.",
-  "timestamp": "2026-04-02T04:06:38Z",
-  "token_cost": 48591,
-  "tool_uses": 14,
+  "summary": "Perfect! All tests pass. Let me summarize what the issue was and how I fixed it:\n\n## Summary\n\n**The Problem:**\nThe scheduler had a bug when handling events scheduled for late night hours in timezones behind UTC. When checking if an event should fire, the code would always use the current UTC date to build the event's scheduled time. This caused issues for late-night events (e.g., 23:30 US/Eastern) that should fire early the next UTC day.\n\nFor example:\n- Event scheduled for 23:30 US/Eastern (UTC-5) should fire at 04:30 UTC the next day\n- But the code was creating the event time as \"today 23:30 EST\" which would be \"tomorrow 04:30 UTC\" - one day in the future\n- This meant the event would never fire at the correct time\n\n**The Fix:**\nI modified the `_is_due` method in `app/scheduler.py` to check if the calculated UTC scheduled time is in the future relative to the current window. If it is, we subtract one day to get the correct scheduled time.\n\nThe key change:\n```python\n# If the scheduled time is in the future (after window_end),\n# it means the event should have fired yesterday instead\nif utc_scheduled >= window_end:\n    utc_scheduled = utc_scheduled - timedelta(days=1)\n```\n\nThis ensures that late-night events in timezones behind UTC are correctly scheduled for the previous calendar day in their local timezone, which translates to the correct UTC time.",
+  "timestamp": "2026-04-03T03:29:01Z",
+  "token_cost": 82113,
+  "tool_uses": 19,
   "turns_to_fix": 1,
-  "wall_clock": 19.082
+  "wall_clock": 26.366
 }

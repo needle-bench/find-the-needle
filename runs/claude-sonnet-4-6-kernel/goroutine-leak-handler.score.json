@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.147297,
+  "input_tokens": 38224,
+  "output_tokens": 2175,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the **needle** (the bug) and the fix:\n\n---\n\n## The Bug: Goroutine Leak on Client Disconnect\n\n**Location:** `computeHandler` and `performComputation` in `/app/app/main.go`\n\n**Problem:** The goroutine spawned to do heavy computation was never made aware of context cancellation. When a client disconnected mid-request, the handler returned but the goroutine continued running indefinitely — one leaked goroutine per disconnected client.\n\nTwo issues:\n1. `performComputation` didn't accept a `context.Context`, so it had no way to be cancelled.\n2. `computeHandler` didn't listen on `r.Context().Done()` to detect client disconnection.\n\n**Fix:**\n1. **Passed `r.Context()` to the goroutine** and had it propagate to `performComputation`.\n2. **Added a `select` inside each iteration** of `performComputation` to check `ctx.Done()` and return early if the context is cancelled.\n3. **Updated the `select` in `computeHandler`** to also listen on `ctx.Done()`, so if the client disconnects the handler exits cleanly (and the goroutine sees the cancelled context on its next iteration and exits too).\n\nResult: goroutine count returns to baseline (0 leaked) after client disconnects, down from 20 leaked goroutines before the fix.",
+  "timestamp": "2026-04-03T01:26:15Z",
+  "token_cost": 40399,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 47.085
+}

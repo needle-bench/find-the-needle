@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 109059,
+  "output_tokens": 1482,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix is working correctly. Let me explain what was happening:\n\n## The Bug\n\nThe bug was in the `Restart()` function in `/app/app/raft.go`. When a node restarted after receiving a snapshot:\n\n1. Node3 received a snapshot with `lastIncludedIndex=10` (entries 1-10)\n2. `InstallSnapshot()` correctly set `lastApplied=10` and restored the state machine\n3. However, `commitIndex` was never updated during `InstallSnapshot()` (it remained 0)\n4. When the node restarted, the recovery logic in `Restart()` would see `savedCommitIndex=0 <= snapshotAppliedTo=10`\n5. The buggy code would then set `lastApplied = savedCommitIndex = 0`, rolling back the state machine\n6. This caused entries 1-10 to be reapplied when the new leader sent entries 11-13\n\n## The Fix\n\nThe fix ensures that when recovering from a snapshot, `lastApplied` is never set to a value less than the snapshot's `lastIncludedIndex`. The corrected logic:\n\n```go\nif snapshotAppliedTo > savedCommitIndex {\n    n.lastApplied = snapshotAppliedTo\n    n.commitIndex = snapshotAppliedTo\n} else {\n    n.lastApplied = savedCommitIndex\n    n.commitIndex = savedCommitIndex\n}\n```\n\nThis ensures that the state machine position (`lastApplied`) respects the snapshot boundary, preventing duplicate application of entries that were already included in the snapshot.\n\nThe test now passes, confirming that no duplicate state machine transitions occur after the snapshot+restart sequence.",
+  "timestamp": "2026-04-03T04:41:21Z",
+  "token_cost": 110541,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 28.454
+}

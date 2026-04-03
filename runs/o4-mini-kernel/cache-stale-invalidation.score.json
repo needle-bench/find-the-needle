@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0351637,
-  "input_tokens": 37443,
-  "output_tokens": 3911,
+  "estimated_cost_usd": 0.034404699999999996,
+  "input_tokens": 33097,
+  "output_tokens": 3721,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I’ve updated the server to invalidate relevant cache entries after writes: \n\n- On PUT /products/{id}, it now deletes both the individual product cache key and the product list cache.  \n- On POST /products, it deletes the product list cache.\n\nAll tests now pass. Let me know if you need anything else!",
-  "timestamp": "2026-04-02T01:29:55Z",
-  "token_cost": 41354,
-  "tool_uses": 12,
+  "summary": "I’ve added cache invalidation in the server:\n\n- On PUT /products/{id}: delete both the specific product cache and the products list cache\n- On POST /products: delete the products list cache\n\nAll tests now pass. Let me know if anything else is needed!",
+  "timestamp": "2026-04-03T01:20:52Z",
+  "token_cost": 36818,
+  "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 53.889
+  "wall_clock": 46.808
 }

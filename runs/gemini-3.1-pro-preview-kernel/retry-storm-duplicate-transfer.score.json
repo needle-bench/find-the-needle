@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.6765762000000001,
-  "input_tokens": 454446,
-  "output_tokens": 14134,
-  "resolved": true,
+  "estimated_cost_usd": 0.9165063999999999,
+  "input_tokens": 838433,
+  "output_tokens": 19188,
+  "resolved": false,
   "stop_reason": "end_turn",
   "summary": "",
-  "timestamp": "2026-04-02T02:13:33Z",
-  "token_cost": 468580,
+  "timestamp": "2026-04-03T06:31:53Z",
+  "token_cost": 857621,
   "tool_uses": 61,
   "turns_to_fix": 1,
-  "wall_clock": 754.669
+  "wall_clock": 1278.186
 }

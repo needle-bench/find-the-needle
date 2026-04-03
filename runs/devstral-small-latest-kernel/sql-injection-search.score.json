@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00419808,
+  "input_tokens": 112965,
+  "output_tokens": 6089,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "",
+  "timestamp": "2026-04-03T04:54:57Z",
+  "token_cost": 119054,
+  "tool_uses": 41,
+  "turns_to_fix": 1,
+  "wall_clock": 30.438
+}

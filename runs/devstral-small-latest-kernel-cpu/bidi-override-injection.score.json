@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 141966,
-  "output_tokens": 3283,
+  "input_tokens": 68813,
+  "output_tokens": 1351,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The fix is complete and working correctly. Let me create a summary of what was fixed:\n\n## Summary\n\nThe vulnerability was a **Unicode BIDI (Bidirectional) override privilege escalation attack**. An attacker could register with a username containing the RIGHT-TO-LEFT OVERRIDE character (U+202E) followed by \"nimda\", which visually renders as \"admin\" in most text displays.\n\n### The Problem\n\n1. **Registration**: The attacker registers with username `\\u202enimda` (RLO + \"nimda\")\n2. **Visual Display**: This renders visually as \"admin\" due to the BIDI override\n3. **Admin Check**: The `check_admin_access()` function in `auth.py` used `_render_display_name()` to render the username with BIDI characters applied, then compared this rendered form against the `ADMIN_USERS` allowlist\n4. **Privilege Escalation**: The rendered form matched \"admin\", granting admin access to the attacker\n\n### The Fix\n\n**1. In `sanitizer.py`**: Added a step to strip Unicode BIDI control characters from usernames during registration:\n```python\n# Strip Unicode BIDI control characters to prevent display spoofing\nbidi_chars = '\\u202a\\u202b\\u202c\\u202d\\u202e\\u2066\\u2067\\u2068\\u2069'\ncleaned = ''.join(ch for ch in username if ch not in bidi_chars)\n```\n\n**2. In `auth.py`**: Changed `check_admin_access()` to compare the stored username directly against the allowlist (not the rendered display name):\n```python\n# Compare the stored username directly against the admin allowlist\n# Do NOT use _render_display_name here, as that would enable BIDI\n# spoofing attacks\nif username in ADMIN_USERS:\n    return True, \"admin access granted\"\n```\n\n### Result\n\n- The username `\\u202enimda` is now sanitized to `nimda` during registration\n- The admin check compares the stored username directly, not the rendered form\n- All tests pass, including the critical test that verifies BIDI-injected usernames do NOT get admin access",
-  "timestamp": "2026-04-02T02:22:39Z",
-  "token_cost": 145249,
-  "tool_uses": 22,
+  "summary": "Perfect! All tests pass. The fix successfully prevents the BIDI injection attack. Let me verify what happened:\n\n1. The attacker tried to register with username `\\u202enimda`\n2. The `sanitize_username` function stripped the BIDI control character, leaving just \"nimda\"\n3. When the attacker tried to login with the original username (with BIDI character), it failed because the stored username is \"nimda\"\n4. The test correctly reports \"PASS: BIDI-injected username was rejected or normalized\"\n\nThe vulnerability has been fixed by stripping Unicode bidirectional control characters (U+202E, U+202D, U+202C) from usernames during sanitization. This prevents visual spoofing attacks where an attacker could make their username appear as \"admin\" while storing a different value.",
+  "timestamp": "2026-04-03T01:34:56Z",
+  "token_cost": 70164,
+  "tool_uses": 14,
   "turns_to_fix": 1,
-  "wall_clock": 45.979
+  "wall_clock": 27.347
 }

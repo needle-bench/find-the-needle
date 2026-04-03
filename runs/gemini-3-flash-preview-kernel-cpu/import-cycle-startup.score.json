@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 150032,
+  "output_tokens": 1177,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I will check `app/notifications.py` one last time to ensure everything is correct.\n",
+  "timestamp": "2026-04-03T01:52:11Z",
+  "token_cost": 151209,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 72.151
+}

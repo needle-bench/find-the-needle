@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.07719600000000001,
+  "input_tokens": 20047,
+  "output_tokens": 1137,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Test passed!** ✅\n\n---\n\n### What the bug was\n\nIn `/app/src/main.rs`, the `process_file` function used a **fixed 64KB stack buffer** and a single `file.read()` call:\n\n```rust\n// BUGGY\nlet mut buffer = [0u8; BUFFER_SIZE];  // fixed 64KB array\nlet bytes_read = file.read(&mut buffer)?;  // reads AT MOST 64KB\n```\n\n`Read::read()` is only guaranteed to read *up to* the buffer size — any data beyond 64KB was **silently truncated**. Since the test uses a 100KB file, 36KB of data was lost.\n\n### The fix\n\nReplace the fixed buffer + single `read()` with a growable `Vec` and `read_to_end()`, which loops internally until EOF:\n\n```rust\n// FIXED\nlet mut buffer = Vec::new();\nfile.read_to_end(&mut buffer)?;  // reads the entire file\n```",
+  "timestamp": "2026-04-03T02:24:53Z",
+  "token_cost": 21184,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 22.795
+}

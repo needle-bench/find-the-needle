@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Excellent! The fix is working correctly. The BIDI control characters are being stripped from usernames during sanitization, so:\n\n1. `\\u202enimda` (which visually renders as \"admin\") becomes `nimda`\n2. `\\u202dnimda` (another BIDI variant) also becomes `nimda`\n\nThis means the attacker can no longer register with a username that visually appears as \"admin\" but is stored differently, preventing the privilege escalation vulnerability.\n\nThe test confirms that:\n- Normal registration and login work ✓\n- Real admin can access the dashboard ✓\n- BIDI-injected usernames are rejected or normalized (they become \"nimda\", not \"admin\") ✓\n- Non-admin users cannot access admin dashboard ✓\n- Other BIDI variants are also blocked ✓",
-  "timestamp": "2026-04-02T03:15:29Z",
+  "summary": "Excellent! The fix is working. Here's what was done:\n\n## Summary\n\n**Problem**: The application was vulnerable to Unicode BIDI (bidirectional) override attacks. An attacker could register with a username containing U+202E (RIGHT-TO-LEFT OVERRIDE) followed by \"nimda\", which visually renders as \"admin\" but stores as `\\xe2\\x80\\xaenimda`. The `check_admin_access()` function in `auth.py` used `_render_display_name()` to render the username visually, causing it to match against the ADMIN_USERS allowlist and grant admin privileges.\n\n**Solution**: Modified `sanitize_username()` in `app/sanitizer.py` to strip all Unicode bidirectional control characters (U+202A, U+202B, U+202C, U+202D, U+202E, U+2066, U+2067, U+2068, U+2069) before the username is stored. This ensures the stored username contains only the actual characters without visual rendering tricks.\n\n**Result**: The test now passes - BIDI-injected usernames are normalized to their true form (e.g., \"nimda\" instead of visually appearing as \"admin\"), preventing privilege escalation while maintaining normal functionality for legitimate users.",
+  "timestamp": "2026-04-03T01:17:23Z",
   "token_cost": 0,
-  "tool_uses": 12,
-  "turns_to_fix": 13,
-  "wall_clock": 38.201
+  "tool_uses": 13,
+  "turns_to_fix": 14,
+  "wall_clock": 31.572
 }

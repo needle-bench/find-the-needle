@@ -4,15 +4,15 @@
   "benchmark": "haystack-mint",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0145995,
-  "input_tokens": 3566,
-  "output_tokens": 786,
+  "estimated_cost_usd": 0.019671749999999998,
+  "input_tokens": 8861,
+  "output_tokens": 716,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: total 16\ndrwxr-xr-x 1 root root 4096 Oct 16 07:18 .\ndrwxr-xr-x 1 root root 4096 Oct 16 07:18 ..\n-rw------- 1 root root    0 Oct 16 07:18 .bash_history\n-rw-r--r-- 1 root root 3080 Apr  6  2022 .bashrc\ndrwxr-xr-x 2 root root 4096 Apr 15  2020 .landscape\n-rw-r--r-- 1 root root  148 Aug 17  2015 .profile\ndrwxr-xr-x 2 root root 4096 Oct 16 07:18 haystack\ndrwxr-xr-x 2 root root 4096 Oct 16 07:18 home\ndrwxr-xr-x 2 root root 4096 Oct 16 07:18 needle\ndrwxr-xr-x 2 root root 4096 Oct 16 07:18 test\n-rwxr-xr-x 1 root root  428 Oct 16 07:18 test.sh\ndrwxr-xr-x 2 root root 4096 Oct 16 07:18 workspace",
-  "timestamp": "2026-04-02T01:36:36Z",
-  "token_cost": 4352,
-  "tool_uses": 2,
+  "summary": "Function: 32",
+  "timestamp": "2026-04-03T01:25:29Z",
+  "token_cost": 9577,
+  "tool_uses": 4,
   "turns_to_fix": 1,
-  "wall_clock": 16.458
+  "wall_clock": 17.669
 }

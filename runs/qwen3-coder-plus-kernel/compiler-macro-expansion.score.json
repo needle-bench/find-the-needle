@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-plus-kernel",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.022810060000000004,
+  "input_tokens": 54323,
+  "output_tokens": 1407,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue has been successfully identified and resolved. The \"needle in the haystack\" was a bug in the `generate_getter` function in `src/codegen.rs` where Ref-type fields were generating getters with owned return types instead of reference return types. I've fixed this by adding the `&` symbol to the return type in the format string for `FieldType::Ref`.",
+  "timestamp": "2026-04-03T07:30:39Z",
+  "token_cost": 55730,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 40.591
+}

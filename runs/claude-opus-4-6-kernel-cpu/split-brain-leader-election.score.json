@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 10640,
+  "output_tokens": 1476,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the fix:\n\n**The Bug:** An off-by-one error in the quorum check in `/app/app/cluster/node.go`. The original code was:\n```go\nif finalVotes >= totalNodes/2 {\n```\n\nFor a 5-node cluster, `totalNodes/2` = `5/2` = `2` (Go integer division). This means only 2 votes were needed to become leader. In a network partition of `[0,1]` vs `[2,3,4]`, the minority partition (2 nodes) could get 2 votes and elect a leader, while the majority partition (3 nodes) could also elect a leader — resulting in split-brain.\n\n**The Fix:** Changed the quorum threshold to require a strict majority:\n```go\nif finalVotes >= totalNodes/2+1 {\n```\n\nNow `totalNodes/2 + 1` = `5/2 + 1` = `2 + 1` = `3`, requiring 3 votes (a true majority of a 5-node cluster). The minority partition with only 2 nodes can never reach 3 votes, preventing split-brain.",
+  "timestamp": "2026-04-03T03:13:16Z",
+  "token_cost": 12116,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 46.973
+}

@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T02:01:59Z", "benchmark": "performance-cliff-hash", "model": "deepseek-r1", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# performance-cliff-hash\n\n## Project\n\nA Java inventory cache system (`perftest`) that stores products in a custom hash"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/\"*.java\""], "tokens_in": 807, "tokens_out": 85, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/src/Product.java"], "tokens_in": 904, "tokens_out": 70, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/src/ProductCache.java"], "tokens_in": 1305, "tokens_out": 105, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/src/ProductCache.java"], "tokens_in": 2301, "tokens_out": 76, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3004, "tokens_out": 85, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T02:02:22Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

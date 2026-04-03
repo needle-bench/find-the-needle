@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.03596,
-  "input_tokens": 66082,
-  "output_tokens": 1438,
+  "estimated_cost_usd": 0.0283476,
+  "input_tokens": 54549,
+  "output_tokens": 1172,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle has been found and fixed (bug was in timezone-aware date selection for events crossing midnight in local time).  \n\n`test.sh` now passes.",
-  "timestamp": "2026-04-02T03:37:39Z",
-  "token_cost": 67520,
-  "tool_uses": 16,
+  "summary": "The needle has been found and removed (the buggy date logic in the scheduler that failed to respect per-event timezones for \"today\" calculations on nighttime/cross-midnight events). The tests now pass.",
+  "timestamp": "2026-04-03T01:57:31Z",
+  "token_cost": 55721,
+  "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 13.129
+  "wall_clock": 13.201
 }

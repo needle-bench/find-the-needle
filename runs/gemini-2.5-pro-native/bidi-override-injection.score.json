@@ -5,14 +5,14 @@
   "control_type": "native",
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 56930,
-  "output_tokens": 2296,
+  "input_tokens": 88309,
+  "output_tokens": 2990,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "\nAll tests passed, confirming the BIDI override vulnerability is fixed. I identified and patched the vulnerability in `auth.py` and `sanitizer.py` by stripping BIDI characters from usernames at registration and using the raw username for authorization. The fix was verified using the provided test script. I'm done.",
-  "timestamp": "2026-04-02T01:45:51Z",
-  "token_cost": 59226,
-  "tool_uses": 8,
-  "turns_to_fix": 9,
-  "wall_clock": 430.879
+  "summary": "I have found the needle and fixed the vulnerability. The `test.sh` script now passes with the correct security controls in place. I am finished with the request.",
+  "timestamp": "2026-04-03T01:30:26Z",
+  "token_cost": 91299,
+  "tool_uses": 11,
+  "turns_to_fix": 12,
+  "wall_clock": 160.145
 }

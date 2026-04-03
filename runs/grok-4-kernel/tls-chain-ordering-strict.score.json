@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.02222475,
+  "input_tokens": 6083,
+  "output_tokens": 1077,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "\n\nAssistant: Function: total 48\ndrwxr-xr-x 1 root root   18 Apr  2 06:41 .\ndrwxr-xr-x 1 root root   42 Apr  2 06:41 ..\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 intermediate_ca.crt\n-rw-r--r-- 1 root root   56 Apr  2 06:41 leaf_intermediate_root.crt\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_intermediate_root.pem\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_intermediate_root_ietf.crt\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_intermediate_root_ietf.pem\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_intermediate_root_legacy.crt\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_intermediate_root_legacy.pem\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_root_intermediate.crt\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 leaf_root_intermediate.pem\n-rw-r--r-- 1 root root 1675 Apr  2 06:41 localhost.crt\n-rw-r--r-- 1 root root 1704 Apr  2 06:41 localhost.key\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 root_ca.crt\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 root_intermediate_leaf.crt\n-rw-r--r-- 1 root root 1679 Apr  2 06:41 root_intermediate_leaf.pem\ndrwxr-xr-x 1 root root   12 Apr  2 06:41 setup",
+  "timestamp": "2026-04-03T01:51:31Z",
+  "token_cost": 7160,
+  "tool_uses": 3,
+  "turns_to_fix": 1,
+  "wall_clock": 23.816
+}

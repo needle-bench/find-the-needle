@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-pro-kernel",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.08353937499999999,
+  "input_tokens": 19003,
+  "output_tokens": 6509,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue has been resolved. The overlapping segment assignments that were causing data corruption have been corrected. The `test.sh` script now passes, indicating that the concurrent writes are functioning as expected.",
+  "timestamp": "2026-04-03T01:57:37Z",
+  "token_cost": 25512,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 89.878
+}

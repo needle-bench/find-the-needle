@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0662525,
-  "input_tokens": 16482,
-  "output_tokens": 5429,
+  "estimated_cost_usd": 0.06133625,
+  "input_tokens": 16909,
+  "output_tokens": 4596,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I located the issue in `Scheduler._is_due`: it only checked the event’s scheduled time using the UTC date, so events near midnight (or around DST changes) could be missed. I updated the function so it:\n\n- Converts the window’s start and end times into the event’s local timezone.\n- Considers both local dates spanning the window.\n- Handles ambiguous/non-existent times around DST transitions.\n\nThis ensures late-night events fire correctly. I reran `test.sh` and all tests pass.",
-  "timestamp": "2026-04-02T03:52:20Z",
-  "token_cost": 21911,
-  "tool_uses": 10,
+  "summary": "### Summary\nFixed the scheduler’s midnight crossover bug by determining the event’s “today” based on the window start in the event’s own timezone before constructing the scheduled datetime. This ensures events scheduled near local midnight are evaluated on the correct local date.\n\n### Testing\n`./test.sh` ✅",
+  "timestamp": "2026-04-03T02:27:15Z",
+  "token_cost": 21505,
+  "tool_uses": 12,
   "turns_to_fix": 1,
-  "wall_clock": 53.487
+  "wall_clock": 39.775
 }

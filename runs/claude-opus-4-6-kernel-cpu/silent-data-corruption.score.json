@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 8811,
+  "output_tokens": 1142,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. \n\n**The bug:** In `src/main.rs`, the `process_file` function used a single `file.read(&mut buffer)?` call with a fixed 64KB buffer (`BUFFER_SIZE: usize = 65536`). The `read()` method reads *at most* `buffer.len()` bytes, so any file larger than 64KB was silently truncated — only the first 64KB was processed and written to the output.\n\n**The fix:** Replaced the fixed-size buffer and single `read()` call with `read_to_end(&mut data)` which reads the entire file contents into a `Vec<u8>`, ensuring no data is lost regardless of file size.",
+  "timestamp": "2026-04-03T03:09:28Z",
+  "token_cost": 9953,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 30.709
+}

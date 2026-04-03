@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.116121,
+  "input_tokens": 30262,
+  "output_tokens": 1689,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of what the bug was and how it was fixed:\n\n## The Needle 🪡\n\n**File:** `/app/app/models.go`\n\n**Bug:** The `UserV2` struct was missing three fields that existed in `UserV1`:\n- `avatar_url`\n- `bio`\n- `location`\n\nThese fields were accidentally dropped during the v2 refactor, causing clients that upgraded from v1 to v2 to silently lose data — a backward-compatibility regression.\n\n**Fix:** \n1. Added `AvatarURL`, `Bio`, and `Location` fields back to the `UserV2` struct.\n2. Updated the `ToV2()` conversion method to populate those fields from the `InternalUser`.\n\nThe v2 API is now a **proper superset** of v1 — all v1 fields are preserved, and the new v2-only fields (`department`, `phone_number`, `is_active`) are additive.",
+  "timestamp": "2026-04-03T01:12:57Z",
+  "token_cost": 31951,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 28.736
+}

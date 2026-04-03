@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 15230,
+  "output_tokens": 335,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The container is not running, which is preventing me from executing any commands. I need assistance to either restart the container or investigate the issue further.",
+  "timestamp": "2026-04-03T05:39:46Z",
+  "token_cost": 15565,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 1265.083
+}

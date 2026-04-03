@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 22338,
+  "output_tokens": 1125,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The needle in the haystack was the deadlock issue in the `TransferService.java` file. The problem was that locks were acquired in the order of the parameters (from account first, then to account), which could lead to a deadlock when two threads tried to transfer funds in opposite directions.\n\nThe fix ensures that locks are always acquired in a consistent order based on account IDs (alphabetically), preventing the circular wait condition that causes deadlocks. The test now passes, confirming that the concurrent transfers complete successfully without deadlock.",
+  "timestamp": "2026-04-03T02:21:37Z",
+  "token_cost": 23463,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 17.004
+}

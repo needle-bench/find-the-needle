@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:37:31Z", "benchmark": "rate-limit-bypass-header", "model": "qwen3-coder-plus", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 283, "tokens_out": 41, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home"], "tokens_in": 349, "tokens_out": 79, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 446, "tokens_out": 72, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/."], "tokens_in": 536, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 640, "tokens_out": 60, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:39:50Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "bare"}

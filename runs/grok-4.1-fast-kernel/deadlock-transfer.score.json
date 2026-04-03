@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.010275,
+  "input_tokens": 51838,
+  "output_tokens": 11489,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** The test.sh script now passes:\n\n```\nPASS: All concurrent transfers completed without deadlock\n```\n\n**The needle (bug):** Deadlock in `TransferService.transfer()` caused by inconsistent lock acquisition order. Threads doing A→B and B→A would each hold one lock and wait for the other, deadlocking.\n\n**The fix:** Modified `TransferService.java` to *always lock accounts in consistent global order* (by ID: lower first). This prevents circular wait conditions.\n\n**Before (buggy):**\n```java\nsynchronized (from.getLock()) {\n    synchronized (to.getLock()) { ... }\n}\n```\n\n**After (fixed):**\n```java\nAccount first = from.getId().compareTo(to.getId()) < 0 ? from : to;\nAccount second = from.getId().compareTo(to.getId()) < 0 ? to : from;\nsynchronized (first.getLock()) {\n    synchronized (second.getLock()) { ... }\n}\n```\n\nRemoved the artificial `Thread.sleep(1)` delay too, as it was just to provoke the deadlock. Concurrent transfers now complete reliably without deadlock or balance errors.",
+  "timestamp": "2026-04-03T01:38:33Z",
+  "token_cost": 63327,
+  "tool_uses": 30,
+  "turns_to_fix": 1,
+  "wall_clock": 116.273
+}

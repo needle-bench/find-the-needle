@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.032323899999999996,
+  "input_tokens": 130598,
+  "output_tokens": 43476,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fix applied:** Updated `/app/app/handler.go` to proxy read requests from followers to the leader and use `ReadLinearizable` on the leader. This ensures linearizable reads by avoiding stale local state on followers after partition recovery.\n\n**Verification:** Ran `./test.sh` — all 3 rounds passed successfully (no stale reads detected).",
+  "timestamp": "2026-04-03T02:27:47Z",
+  "token_cost": 174074,
+  "tool_uses": 46,
+  "turns_to_fix": 1,
+  "wall_clock": 421.77
+}

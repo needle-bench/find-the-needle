@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:31:17Z", "benchmark": "import-cycle-startup", "model": "grok-4-1-fast", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/", "/", "/haystack"], "tokens_in": 371, "tokens_out": 487, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/", "/", "/", "/"], "tokens_in": 512, "tokens_out": 1046, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app", "/app/app\"", "/app.orig", "/app.orig\"", "/app/test.sh", "/", "/", "/app", "/app/.git"], "tokens_in": 1361, "tokens_out": 663, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:31:35Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "bare"}

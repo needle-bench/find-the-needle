@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.052106999999999994,
+  "input_tokens": 44207,
+  "output_tokens": 1580,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! 🎉 I found and fixed the needle!\n\n## Summary\n\n**The Vulnerability:** The original `compare.go` file used a simple string equality comparison (`stored == input`) to compare password hashes, which is vulnerable to timing side-channel attacks. In Go and most languages, `==` operator exits early when it finds a mismatch, allowing attackers to infer the correct password character-by-character by measuring how long the comparison takes.\n\n**The Fix:** I replaced the vulnerable comparison with `crypto/subtle.ConstantTimeCompare()`, which is specifically designed to perform constant-time byte comparisons that don't leak timing information through side-channels.\n\n**Changes made to `/app/app/auth/compare.go`:**\n- Added import: `import \"crypto/subtle\"`\n- Changed comparison from `return stored == input` to `return subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1`\n\nThe test now passes all security checks:\n✅ Correct password accepted\n✅ Wrong password rejected\n✅ Static analysis confirms constant-time comparison is used\n✅ Timing ratio shows no measurable difference (0.943x) between matching and non-matching hashes",
+  "timestamp": "2026-04-03T01:37:20Z",
+  "token_cost": 45787,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 29.21
+}

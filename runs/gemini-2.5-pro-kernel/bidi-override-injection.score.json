@@ -4,15 +4,15 @@
   "benchmark": "bidi-override-injection",
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.264964,
-  "input_tokens": 192399,
-  "output_tokens": 14716,
+  "estimated_cost_usd": 0.116071375,
+  "input_tokens": 79111,
+  "output_tokens": 7826,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test has passed. The vulnerability has been fixed. The needle has been found. The `test.sh` script now runs successfully, indicating that the bidirectional override attack has been mitigated. The application is now secure from this specific privilege escalation vulnerability.\nDone.\n",
-  "timestamp": "2026-04-02T01:25:20Z",
-  "token_cost": 207115,
-  "tool_uses": 23,
+  "summary": "I have found the needle and fixed it. The vulnerability was in the `app/auth.py` file, where a username was being rendered before being checked for admin privileges. This allowed for a specially crafted username to be rendered as \"admin\", granting unauthorized access. I have patched the file to use the raw username for authorization checks, and the provided `test.sh` script now passes all tests, confirming the fix.",
+  "timestamp": "2026-04-03T01:33:18Z",
+  "token_cost": 86937,
+  "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 215.236
+  "wall_clock": 161.79
 }

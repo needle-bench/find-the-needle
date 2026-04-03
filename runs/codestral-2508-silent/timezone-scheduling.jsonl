@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:31:02Z", "benchmark": "timezone-scheduling", "model": "codestral-2508", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/event_store.py\n/app/app/models.py\n/app/app/runner.py\n/app/app/scheduler.py\n\nCurrent test output (tes"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/"], "tokens_in": 499, "tokens_out": 20, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/scheduler.py"], "tokens_in": 861, "tokens_out": 94, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1550, "tokens_out": 505, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:31:07Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

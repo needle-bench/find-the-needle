@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 2346,
-  "output_tokens": 1805,
+  "input_tokens": 2345,
+  "output_tokens": 1796,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass! Here's a summary of the **needle** (the bug) and the fix:\n\n## The Bug: Schema Drift — Stale Column Name in SQL Queries\n\n**Root cause:** Migration `002_rename_status.sql` renamed the column `status` → `order_status` in the database, but the Go application code in `main.go` still referenced the old column name `status` in two SQL queries:\n\n1. **`createOrder()`** — The `INSERT` used `status` in both the column list and the `RETURNING` clause.\n2. **`getOrder()`** — The `SELECT` queried `status` instead of `order_status`.\n\nBoth would fail at runtime with `column \"status\" does not exist`.\n\n**Fix:** Updated both SQL queries to use the correct column name `order_status` to match the post-migration schema:\n- `INSERT INTO orders (user_id, total, order_status, ...)` + `RETURNING ... order_status ...`\n- `SELECT id, user_id, total, order_status, ... FROM orders WHERE id = $1`",
-  "timestamp": "2026-04-02T02:32:47Z",
-  "token_cost": 4151,
+  "summary": "All tests pass. Here's a summary of the needle and the fix:\n\n## The Bug: Schema Drift — Stale Column Name in SQL Queries\n\n**Location:** `/workspace/app/main.go`\n\n**Root Cause:** Migration `002_rename_status.sql` renamed the `status` column to `order_status`, but the Go application's SQL queries were never updated to reflect this change. Two queries were broken:\n\n1. **`createOrder`** — INSERT referenced `status` (old name) in both the column list and the `RETURNING` clause.\n2. **`getOrder`** — SELECT also referenced `status` (old name).\n\n**Fix:** Updated both SQL queries to use the correct column name `order_status`:\n\n```sql\n-- Before (broken):\nINSERT INTO orders (user_id, total, status, shipping_address) ...\nRETURNING id, user_id, total, status, shipping_address, created_at\n\nSELECT id, user_id, total, status, shipping_address, created_at FROM orders WHERE id = $1\n\n-- After (fixed):\nINSERT INTO orders (user_id, total, order_status, shipping_address) ...\nRETURNING id, user_id, total, order_status, shipping_address, created_at\n\nSELECT id, user_id, total, order_status, shipping_address, created_at FROM orders WHERE id = $1\n```",
+  "timestamp": "2026-04-03T02:10:26Z",
+  "token_cost": 4141,
   "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 39.951
+  "wall_clock": 33.915
 }

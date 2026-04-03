@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 11144,
+  "output_tokens": 1576,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ I found and fixed the needle!\n\n## Summary\n\n**The Vulnerability:** Path Traversal/Manipulation Auth Bypass\n\nThe authentication middleware in `/app/app/middleware.go` was checking the **raw** request path (`r.URL.Path`) for the \"/api/\" prefix, but the router was normalizing/cleaning the path before routing. This created a gap where attackers could bypass authentication using:\n\n1. **Double-slash bypass**: `//api/admin` - raw path doesn't start with \"/api/\" but gets normalized to \"/api/admin\" by the router\n2. **Path traversal bypass**: `/health/../api/data` - same issue\n\n**The Fix:** I added the same `path.Clean()` logic to the middleware that the router uses, ensuring the path is normalized **before** the auth check. Now all path manipulation attempts are properly detected and blocked.\n\nThe test.sh script now passes all tests, confirming that:\n- ✅ Direct API access without auth is blocked (401)\n- ✅ Direct API access with valid auth works (200)\n- ✅ Double-slash bypass is blocked\n- ✅ Path traversal bypass is blocked\n- ✅ Sensitive data is accessible only with authentication",
+  "timestamp": "2026-04-03T00:00:14Z",
+  "token_cost": 12720,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 17.183
+}

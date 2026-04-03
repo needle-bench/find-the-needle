@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.0426485,
-  "input_tokens": 45418,
-  "output_tokens": 1770,
+  "estimated_cost_usd": 0.03736250000000001,
+  "input_tokens": 24506,
+  "output_tokens": 2113,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I tracked down the bug in the POST `/inventory/:sku/adjust` route: negative adjustments were accepted even when they would drive the quantity below zero. In `routes.ts` I added a guard that rejects any adjustment resulting in a negative stock level, returning a 400 error instead.\n\nAfter rebuilding (`npm run build`), I ran `test.sh`; it now passes:\n\n```\nInventory API running on port 3000\nPASS: Input validation correctly prevents impossible inventory states\n```\n\nThe negative adjustment is correctly blocked and the inventory never goes below zero—needle found.",
-  "timestamp": "2026-04-02T03:35:29Z",
-  "token_cost": 47188,
-  "tool_uses": 20,
+  "summary": "The “needle” turned out to be missing safeguards around inventory adjustments.  \nHere’s what was fixed:\n\n- Inventory now prevents quantity updates from driving stock below zero, throwing a clear error instead.\n- The adjust route validates and handles malformed JSON requests, catching the parsing error and any adjustment errors, returning appropriate 400 responses.\n\nTests: `./test.sh` ✅",
+  "timestamp": "2026-04-03T01:54:04Z",
+  "token_cost": 26619,
+  "tool_uses": 14,
   "turns_to_fix": 1,
-  "wall_clock": 42.844
+  "wall_clock": 38.058
 }

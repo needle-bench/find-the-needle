@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-pagination",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.01746,
-  "input_tokens": 6045,
-  "output_tokens": 762,
+  "estimated_cost_usd": 0.01689,
+  "input_tokens": 4185,
+  "output_tokens": 847,
   "resolved": false,
   "stop_reason": "end_turn",
-  "summary": "Function: from flask import Flask, request, jsonify\nfrom models import products, Product\nfrom utils import paginate\n\napp = Flask(__name__)\n\n@app.route('/products', methods=['GET'])\ndef get_products():\n    page = int(request.args.get('page', 1))\n    per_page = int(request.args.get('per_page', 5))\n\n    start = (page - 1) * per_page\n    end = start + per_page\n\n    paginated = paginate(products, page, per_page)\n\n    return jsonify(paginated), 200\n\n@app.route('/products/<int:product_id>', methods=['GET'])\ndef get_product(product_id):\n    product = next((p for p in products if p.id == product_id), None)\n    if product:\n        return jsonify(product.to_dict()), 200\n    return jsonify({\"error\": \"Product not found\"}), 404\n\nif __name__ == '__main__':\n    app.run(host='0.0.0.0', port=5000)",
-  "timestamp": "2026-04-02T01:45:50Z",
-  "token_cost": 6807,
-  "tool_uses": 3,
+  "summary": "Function: total 20\ndrwxr-xr-x 1 root root 110 Mar  8 22:42 .\ndrwxr-xr-x 1 root root   8 Apr  3 01:36 ..\ndrwxr-xr-x 1 root root  16 Mar  8 22:42 __pycache__\n-rw-r--r-- 1 root root 425 Mar  8 22:42 __init__.py\n-rw-r--r-- 1 root root 791 Mar  8 23:06 app.py\ndrwxr-xr-x 1 root root  22 Mar  8 22:42 data\n-rw-r--r-- 1 root root 658 Mar  8 22:42 products.json\n-rw-r--r-- 1 root root 475 Mar  8 22:42 routes.py\n",
+  "timestamp": "2026-04-03T01:37:05Z",
+  "token_cost": 5032,
+  "tool_uses": 2,
   "turns_to_fix": 1,
-  "wall_clock": 16.94
+  "wall_clock": 19.704
 }

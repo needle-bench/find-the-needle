@@ -4,15 +4,15 @@
   "benchmark": "haystack-mint",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.015309999999999999,
-  "input_tokens": 30080,
-  "output_tokens": 493,
-  "resolved": false,
+  "estimated_cost_usd": 0.0157488,
+  "input_tokens": 32010,
+  "output_tokens": 422,
+  "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**Needle found** — it's a hidden \"minted\" benchmark entity hidden inside the `.haystack/` directory (a custom benchmark framework called *haystack-mint* v1.3.0).\n\nThe entity lives in `.haystack/` with supporting files like:\n- `boot.md` (kernel boot sequence)\n- `.primefile` (kernel declaration)\n- `needles/` directory (containing counter + issues.jsonl)\n- `audit.jsonl` (for attestation)\n\nThe `test.sh` script checks for the presence of `ENTITYFILE*`, lineage (\"predecessor\"), laws (\"law\"), hierarchical CLI usage (\"doc promote\" / \"commit\"), and trust chain (\"attested_by\").\n\n**To verify/fix:**\nRun the test with:\n```bash\n./test.sh\n```\n\nThis should output something like `5/5` (or at least `3/5` to pass) if the haystack entity is properly \"minted\" and attested. If it's failing, the entity may need to be regenerated with the correct lineage, laws, and attestation markers.",
-  "timestamp": "2026-04-02T03:23:43Z",
-  "token_cost": 30573,
+  "summary": "**No needle found yet.**\n\nThe `test.sh` script is expecting a file matching `.haystack/ENTITYFILE*` (with contents containing \"predecessor\", \"law\", and \"attested_by\") plus audit evidence of a hierarchical CLI command like \"doc promote\" or \"commit\". Nothing in the current workspace matches that pattern or those strings.\n\nI have explored the filesystem (`.haystack/`, `.git/`, `needles/`, etc.) with `ls`, `cat`, `glob`, and `read` and haven't located the hidden \"needle\".\n\n**Next step:** Run `test.sh` anyway to get the current score? Or would you like me to try creating/attesting an ENTITYFILE to make the test pass?",
+  "timestamp": "2026-04-03T01:27:58Z",
+  "token_cost": 32432,
   "tool_uses": 20,
   "turns_to_fix": 1,
-  "wall_clock": 22.52
+  "wall_clock": 26.76
 }

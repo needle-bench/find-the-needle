@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0660055,
+  "input_tokens": 41798,
+  "output_tokens": 4011,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Implemented trusted proxy validation and IP normalization in `RateLimiter.getClientIp` to avoid blindly trusting spoofed `X-Forwarded-For` headers.\n- Added configuration support for specifying trusted proxies and ensured only recognized proxies can forward valid IPs.\n\nTests:\n- `./test.sh`",
+  "timestamp": "2026-04-03T02:12:43Z",
+  "token_cost": 45809,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 52.378
+}

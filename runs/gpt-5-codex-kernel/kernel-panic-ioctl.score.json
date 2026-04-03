@@ -4,15 +4,15 @@
   "benchmark": "kernel-panic-ioctl",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.22974400000000003,
-  "input_tokens": 186840,
-  "output_tokens": 16525,
+  "estimated_cost_usd": 0.10252525000000001,
+  "input_tokens": 103249,
+  "output_tokens": 4388,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The fault was in `handle_set_config` and `handle_get_config` inside `src/ioctl_handler.c`. Both functions dereferenced user‑controlled pointers (value buffers) without checking for nulls, zero lengths, and oversize lengths, allowing the fuzzed requests to crash the program. \n\nFix:\n- Added explicit validation that `req->value` is non-null and `value_len` is non-zero for both setters and getters.\n- For setters, now reject lengths exceeding `MAX_VALUE_LEN - 1`, compute the actual copy length using `strnlen`, and only copy when safe.\n- Guard the getter’s copy similarly to avoid writing into invalid buffers.\n\nAfter rebuilding, `./test.sh` shows the self-test and fuzz test both passing.",
-  "timestamp": "2026-04-02T03:33:49Z",
-  "token_cost": 203365,
-  "tool_uses": 27,
+  "summary": "The hidden issue was missing validation of the request’s value buffer: the handler trusted `req->value` and `req->value_len`, so crafted inputs could crash the program. I updated `handle_set_config` and `handle_get_config` to reject NULL value pointers, zero-length buffers, and oversized lengths before dereferencing. With these checks in place, `test.sh` now builds successfully and both the self-test and fuzz test pass.",
+  "timestamp": "2026-04-03T01:44:06Z",
+  "token_cost": 107637,
+  "tool_uses": 17,
   "turns_to_fix": 1,
-  "wall_clock": 141.008
+  "wall_clock": 53.467
 }

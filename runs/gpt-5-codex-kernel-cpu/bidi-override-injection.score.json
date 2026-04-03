@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.075397,
+  "input_tokens": 56012,
+  "output_tokens": 3951,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue causing the privilege escalation was a username containing Unicode control characters (BIDI overrides) that survived sanitization and fooled the admin allow-list check. I updated `sanitize_username` to strip characters in the Unicode Control (Cc), Format (Cf), and Surrogate (Cs) categories; such usernames are now rejected or normalized properly. With this change, `bash test.sh` passes all checks.",
+  "timestamp": "2026-04-03T01:21:19Z",
+  "token_cost": 59963,
+  "tool_uses": 17,
+  "turns_to_fix": 1,
+  "wall_clock": 45.864
+}

@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.00985975,
-  "input_tokens": 23254,
-  "output_tokens": 15403,
+  "estimated_cost_usd": 0.006859799999999999,
+  "input_tokens": 34129,
+  "output_tokens": 8840,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "**Fixed!** The needle was the missing cache invalidation for the product list on create in `/app/app/server.py`.\n\n**Changes:**\n- Added `cache.delete('products:list')` after `store.create_product(data)` in `_create_product()`.\n\n**Verification:** `./test.sh` now passes fully:\n```\nInitial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 6\nPASS: Product list correctly shows 6 items\nPASS: Cache correctly invalidated after writes\n```\n\n**Notes on behavior:**\n- Single product update works despite no explicit invalidation because `store.update_product()` mutates the cached dict object in-place.\n- Product list needed invalidation after create (new entry added to store).\n- The inline code comment about stale single-product cache on update is inaccurate due to mutation semantics.",
-  "timestamp": "2026-04-02T04:09:30Z",
-  "token_cost": 38657,
-  "tool_uses": 14,
+  "summary": "PASS: All tests passed after fixing cache invalidation in `/app/app/server.py`. Cache now correctly refreshes after product updates and creations.",
+  "timestamp": "2026-04-03T01:34:11Z",
+  "token_cost": 42969,
+  "tool_uses": 28,
   "turns_to_fix": 1,
-  "wall_clock": 112.912
+  "wall_clock": 71.804
 }

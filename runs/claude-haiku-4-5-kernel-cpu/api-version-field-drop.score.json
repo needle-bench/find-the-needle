@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 7398,
+  "output_tokens": 1893,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✅ **The test passed!**\n\n## Summary\n\n**The Needle Found:** The bug was a backward compatibility regression in the v2 API.\n\n**What was wrong:**\n- The `UserV2` struct was missing three fields that existed in `UserV1`: `avatar_url`, `bio`, and `location`\n- The `ToV2()` method wasn't populating these fields in the response\n- This would cause clients upgrading from v1 to v2 to silently lose access to these fields\n\n**The Fix:**\n1. Added the three missing fields (`AvatarURL`, `Bio`, `Location`) to the `UserV2` struct\n2. Updated the `ToV2()` method to populate these fields when converting from internal user representation\n3. Updated the comments to reflect the fix\n\nThe test now confirms that v2 API is a proper superset of v1 API with all v1 fields preserved plus the new v2 fields (`department`, `phone_number`, `is_active`).",
+  "timestamp": "2026-04-02T23:58:38Z",
+  "token_cost": 9291,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 19.447
+}

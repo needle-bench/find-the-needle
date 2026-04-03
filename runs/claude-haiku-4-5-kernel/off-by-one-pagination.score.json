@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0236,
+  "input_tokens": 18190,
+  "output_tokens": 1082,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! ✓ **PASS**\n\n## Summary\n\n**The needle (bug):** Off-by-one pagination error in `/app/app/app.py`\n\n**Location:** Line 26 in the `list_products()` function\n\n**The bug:**\n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\n\nThis line incorrectly subtracts 1 from the offset for pages beyond page 1, causing items to be duplicated or skipped across page boundaries.\n\n**The fix:**\n```python\noffset = (page - 1) * per_page\n```\n\nThe correct offset calculation uses the standard pagination formula without the erroneous subtraction. This ensures that:\n- Page 1 returns items 1-10 (offset 0)\n- Page 2 returns items 11-20 (offset 10)\n- No gaps, no duplicates\n\nThe test now passes successfully! ✓",
+  "timestamp": "2026-04-03T00:58:23Z",
+  "token_cost": 19272,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 24.12
+}

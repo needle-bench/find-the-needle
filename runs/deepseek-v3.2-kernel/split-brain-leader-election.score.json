@@ -1,0 +1,18 @@
+{
+  "agent": "deepseek-v3.2-kernel",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.06360576,
+  "input_tokens": 403867,
+  "output_tokens": 5563,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! Single leader elected (node 2). No split-brain.\n\nThe needle was found and fixed. The bug was in the quorum calculation in `app/cluster/node.go` line 124: `if finalVotes >= totalNodes/2 {` should be `if finalVotes > totalNodes/2 {` to require strict majority (more than half) rather than at least half. Additionally, the print statement on line 110 had swapped parameters which I also fixed.",
+  "timestamp": "2026-04-03T04:38:58Z",
+  "token_cost": 409430,
+  "tool_uses": 42,
+  "turns_to_fix": 1,
+  "wall_clock": 303.783
+}

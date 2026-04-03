@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "retry-storm-duplicate-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.24041999999999997,
+  "input_tokens": 41689,
+  "output_tokens": 1279,
+  "resolved": true,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "Now I understand the bug. The problem is in `processor.py`'s `execute_transfer` function. The idempotency check is done **after** the debit is committed, with a `time.sleep(0.05)` gap in between. This creates a race condition:\n\n1. Multiple concurrent requests all pass the balance check\n2. Each one debits the source account and commits\n3. During the 50ms sleep, no idempotency record exists yet\n4. Multiple requests can all pass the idempotency check before the first one records it\n5. Result: money is debited multiple times\n\nThe fix is to check idempotency **before** doing any debit, and to do the entire operation atomically within a single transaction. Let me fix the processor:",
+  "timestamp": "2026-04-03T03:04:03Z",
+  "token_cost": 42968,
+  "tool_uses": 25,
+  "turns_to_fix": 0,
+  "wall_clock": 176.587
+}

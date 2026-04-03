@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.104856,
+  "input_tokens": 77848,
+  "output_tokens": 3629,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Needle found and removed.\n\nProblem  \nProduct.hashCode() was based on category, so only 10 distinct hash values existed.  \nWith 10 000 products this put ~1000 items in each bucket, producing O(n) chains and the test failed.\n\nFix  \nHash on the unique SKU instead of the coarse-grained category.\n\nsrc/Product.java\n\n```java\n@Override\npublic int hashCode() {\n    // SKU is unique and high-cardinality → good distribution.\n    return sku.hashCode();\n}\n```\n\nResult  \nAfter recompiling:\n\n• Max chain length drops from 1000 → 4  \n• 5991 of 16384 buckets used (≈37 %)  \n• Average lookup at 10 k items: 2 µs (well under threshold)  \n• test.sh now reports PASS.\n\nThe cache again scales with O(1) expected-time operations.",
+  "timestamp": "2026-04-03T02:49:23Z",
+  "token_cost": 81477,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 65.235
+}

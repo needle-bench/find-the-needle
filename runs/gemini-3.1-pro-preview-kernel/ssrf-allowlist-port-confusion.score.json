@@ -4,15 +4,15 @@
   "benchmark": "ssrf-allowlist-port-confusion",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.086068,
-  "input_tokens": 21632,
-  "output_tokens": 3567,
+  "estimated_cost_usd": 0.322258,
+  "input_tokens": 104093,
+  "output_tokens": 9506,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I have identified the issue. The webhook proxy's URL validator only blocked specific IPv4 strings (like `\"127.0.0.1\"`, `\"0.0.0.0\"`) and strings beginning with certain private IP prefixes, but it did not account for IPv6 representations of addresses like the IPv6 loopback address `::1` or its expanded form `0:0:0:0:0:0:0:1`. This allowed an SSRF attack where internal endpoints could be accessed through their IPv6 addresses. \n\nI updated `app/validator.py` to use Python's built-in `ipaddress` library which correctly parses IP addresses (both IPv4 and IPv6) and catches various representations. It will explicitly block if the parsed IP is a loopback, private, link-local, or unspecified address (which also covers the AWS metadata end-point at `169.254.169.254`). \n\nAs requested, I ran `./test.sh` to verify the fix, and all the tests (including the previously failing tests for `[::1]` and expanded `[0:0:0:0:0:0:0:1]`) now successfully **PASS**.",
-  "timestamp": "2026-04-02T02:14:55Z",
-  "token_cost": 25199,
-  "tool_uses": 8,
+  "summary": "I have found and patched the hidden SSRF issue! \n\n### What went wrong\nThe application had an SSRF (Server-Side Request Forgery) bypass via IPv6 loopback. It validated the URL by only checking against a hardcoded list of `BLOCKED_HOSTS` containing entries like `127.0.0.1`, `localhost`, `0.0.0.0`, and `169.254.169.254`, alongside string-matching for `BLOCKED_NETS` (e.g., `10.`, `172.16.`, `192.168.`).\nHowever, this check failed to account for equivalent IPv6 formats like `[::1]` or `[0:0:0:0:0:0:0:1]`, allowing attackers to access internal endpoints (`http://localhost:8888/metadata`) that bypassed the string matches securely.\n\n### Fix\nI modified `app/validator.py` to leverage Python's built-in `ipaddress` library to correctly resolve, parse, and validate the provided host if it resembles an IP address. Any hostname correctly determined to be reserved network ranges via `is_loopback`, `is_private`, `is_unspecified`, `is_multicast`, or `is_link_local` resolves down correctly and securely rejects the outbound connection attempt. Tests verifying those bypasses now execute safely and pass appropriately.",
+  "timestamp": "2026-04-03T06:53:35Z",
+  "token_cost": 113599,
+  "tool_uses": 24,
   "turns_to_fix": 1,
-  "wall_clock": 68.122
+  "wall_clock": 253.808
 }

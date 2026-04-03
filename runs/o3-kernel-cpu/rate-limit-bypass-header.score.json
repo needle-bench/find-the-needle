@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "rate-limit-bypass-header",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.04191,
+  "input_tokens": 31319,
+  "output_tokens": 1489,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed security bug: the rate-limiter trusted the user-supplied X-Forwarded-For header, letting an attacker rotate it to bypass limits.  \nChanges in app/ratelimiter.ts:\n\n• Removed trust in X-Forwarded-For; now always uses req.socket.remoteAddress.  \n• Updated JSDoc to explain reasoning.\n\nAll tests now pass:\n\n$ bash test.sh  \nPASS: Rate limiter is not vulnerable to header spoofing",
+  "timestamp": "2026-04-03T03:01:24Z",
+  "token_cost": 32808,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 39.789
+}

@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T16:28:25Z", "benchmark": "auth-bypass-path-traversal", "model": "kimi-k2-0905", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/logger.go\n/app/app/main.go\n/app/app/middleware.go\n/app/app/ratelimit.go\n\nCurrent test output (test.s"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 239, "tokens_out": 59, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 332, "tokens_out": 17, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/app/middleware.go", "/app/app/main.go"], "tokens_in": 371, "tokens_out": 54, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/app/middleware.go"], "tokens_in": 1552, "tokens_out": 34, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1917, "tokens_out": 198, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-04-01T16:28:39Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

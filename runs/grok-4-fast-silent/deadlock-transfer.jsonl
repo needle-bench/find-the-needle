@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:25:49Z", "benchmark": "deadlock-transfer", "model": "grok-4-fast", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/Account.java\n/app/app/Bank.java\n/app/app/Main.java\n/app/app/TransferResult.java\n/app/app/TransferSer"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/TransferService.java"], "tokens_in": 490, "tokens_out": 257, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/Account.java"], "tokens_in": 897, "tokens_out": 239, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1230, "tokens_out": 2125, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:26:22Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

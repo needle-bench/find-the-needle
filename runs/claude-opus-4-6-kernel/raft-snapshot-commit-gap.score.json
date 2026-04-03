@@ -1,0 +1,18 @@
+{
+  "agent": "claude-opus-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.7395249999999999,
+  "input_tokens": 136550,
+  "output_tokens": 2271,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the bug and fix:\n\n## The Bug: Missing `commitIndex` update in `InstallSnapshot`\n\n**Location:** `/app/app/snapshot.go` — `InstallSnapshot()` method\n\n**Problem:** When a follower receives a snapshot via `InstallSnapshot`, it correctly updates `lastApplied` to the snapshot's `LastIncludedIndex`, but it **never updates `commitIndex`**. This creates an inconsistency where `lastApplied > commitIndex` (e.g., `lastApplied=10, commitIndex=0`).\n\n**How it causes duplicate applies:**\n1. Leader sends snapshot at index 10 to node3 → `lastApplied=10, commitIndex=0`\n2. Node3 restarts → volatile state (`commitIndex`, `lastApplied`) is lost\n3. On recovery, `savedCommitIndex=0`. After restoring from snapshot (`snapshotAppliedTo=10`), the code checks `savedCommitIndex > lastApplied` → `0 > 10` is false\n4. So it falls into the else branch: `lastApplied = savedCommitIndex = 0`\n5. When the new leader sends entries 11-13 with `leaderCommit=13`, node3 tries to apply entries 1 through 13, **re-applying entries 1-10** that were already in the snapshot — causing duplicate state machine transitions.\n\n**Fix:** Added `commitIndex` update in `InstallSnapshot` so that `commitIndex` is advanced to at least `snap.LastIncludedIndex`, since the snapshot represents committed state.",
+  "timestamp": "2026-04-03T02:49:56Z",
+  "token_cost": 138821,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 110.424
+}

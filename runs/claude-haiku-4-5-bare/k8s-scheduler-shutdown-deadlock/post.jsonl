@@ -1,3 +1,0 @@
-{"event": "post.start", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "claude-haiku-4-5-bare", "initial_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "prompt": "find the needle.", "timestamp": "2026-03-30T01:27:42Z"}
-{"event": "agent.bash", "cmd": "find ~ -name \"*needle*\" -type f 2>/dev/null | head -20", "output_preview": "", "turn": 1}
-{"event": "post.end", "resolved": false, "final_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "turns": 2, "timestamp": "2026-03-30T01:27:50Z"}

@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "data-corruption-concurrent-write",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 28117,
+  "output_tokens": 3323,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The test script is still failing due to overlapping segment assignments and data corruption from concurrent writes. This indicates that the workers are still writing to the same segments simultaneously, which is causing the integrity check to fail. We need to ensure that the workers are writing to different segments and that their writes are synchronized.",
+  "timestamp": "2026-04-03T07:29:49Z",
+  "token_cost": 31440,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 17.026
+}

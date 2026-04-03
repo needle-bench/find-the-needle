@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:30:34Z", "benchmark": "goroutine-leak-handler", "model": "qwen3-5-plus-02-15", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 294, "tokens_out": 157, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 352, "tokens_out": 94, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 568, "tokens_out": 94, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 1210, "tokens_out": 36, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/server"], "tokens_in": 1582, "tokens_out": 39, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app.orig/server"], "tokens_in": 1639, "tokens_out": 40, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1697, "tokens_out": 36, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:30:51Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

@@ -1,5 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:23:15Z", "benchmark": "tls-chain-ordering-strict", "model": "kimi-k2-thinking", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# tls-chain-ordering-strict\n\n## Project\n\nA Go HTTPS server that loads a 3-level TLS certificate chain (Root CA -> Inte"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app", "/app/\"*.go\""], "tokens_in": 807, "tokens_out": 325, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/tlssetup/loader.go"], "tokens_in": 890, "tokens_out": 159, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1407, "tokens_out": 40, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:23:23Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0, "arm": "silent"}

@@ -6,13 +6,13 @@
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
   "input_tokens": 2346,
-  "output_tokens": 2708,
+  "output_tokens": 2597,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All tests pass. Here's a summary of the **needle** (the bug) and the fix:\n\n---\n\n## The Bug: DataLoaders Created Per-Resolver-Call (N+1 Problem)\n\n**Root cause:** In both `userResolver.ts` and `postResolver.ts`, new `DataLoader` instances were being created **inside each individual resolver function call**. Since DataLoader batching only works when multiple `.load()` calls share the **same loader instance**, every resolver call was getting its own fresh loader with exactly 1 key — completely defeating batching and causing an N+1 query problem.\n\nFor example, resolving 100 users' posts would fire 100 separate `SELECT ... WHERE author_id IN (?)` queries instead of 1.\n\n---\n\n## The Fix\n\n**Three files changed:**\n\n1. **`src/context.ts`** — Added `loaders` to `GqlContext` and called `createLoaders(db)` inside `createContext()`, so one shared set of DataLoaders is created **once per request**.\n\n2. **`src/resolvers/userResolver.ts`** — Removed all inline `new DataLoader(...)` construction. Both `user()` and `userPosts()` now use `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader` respectively.\n\n3. **`src/resolvers/postResolver.ts`** — Removed inline `makePostsByAuthorLoader()` and the second one-off `userLoader`. `postAuthor()` now uses `ctx.loaders.userLoader`.\n\n**Result:** 100 users + their posts now resolved in **2 DB queries** (1 for users, 1 batched for all posts) instead of 101+.",
-  "timestamp": "2026-04-02T02:24:24Z",
-  "token_cost": 5054,
+  "summary": "All tests pass. Here's a summary of the bug and fix:\n\n## The Needle: DataLoader Instances Created Per-Resolver Call (N+1 Problem)\n\n**Root Cause:** Both `userResolver.ts` and `postResolver.ts` were creating **new `DataLoader` instances inside each individual resolver call**. Since DataLoader batching works by collecting all `.load()` calls made on the *same instance* within the same event loop tick, a fresh loader per call meant every resolver had exactly 1 key — so batching never fired, resulting in N+1 database queries (1 query for users + 100 individual post queries = 101 total).\n\n**Fix — three files changed:**\n\n1. **`context.ts`** — Added `loaders: ReturnType<typeof createLoaders>` to `GqlContext` and called `createLoaders(db)` in `createContext()`, so one shared set of DataLoader instances is created **once per request**.\n\n2. **`userResolver.ts`** — Removed `makeUserLoader()` factory and the inline DataLoader in `userPosts`. Both now use `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader`.\n\n3. **`postResolver.ts`** — Removed `makePostsByAuthorLoader()` factory and the inline `userLoader`. `postAuthor` now uses `ctx.loaders.userLoader`.\n\n**Result:** The performance test went from **~101 DB queries** down to **2 queries** (1 for users + 1 batched query for all posts).",
+  "timestamp": "2026-04-03T01:30:31Z",
+  "token_cost": 4943,
   "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 51.644
+  "wall_clock": 51.197
 }

@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:20:21Z", "benchmark": "api-version-field-drop", "model": "claude-haiku-4-5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 582, "tokens_out": 85, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/tmp", "/opt"], "tokens_in": 682, "tokens_out": 77, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 774, "tokens_out": 71, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1032, "tokens_out": 66, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:20:28Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

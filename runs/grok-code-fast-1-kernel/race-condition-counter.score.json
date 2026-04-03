@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.012545240000000001,
+  "input_tokens": 24049,
+  "output_tokens": 7676,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test now passes:\n\n```\n[INFO] 2026-04-03T02:12:10.325Z Counter service listening on port 3000\nConnected to Redis\n[INFO] 2026-04-03T02:12:12.295Z Counter reset to 0\nFiring 100 concurrent increments...\nExpected: 100\nGot:      100\nPASS: Counter is correct\n```\n\nThe needle was the race condition in `app/counter.js` where the counter was using a read-modify-write pattern instead of an atomic operation, leading to lost increments under concurrent load. I fixed it by replacing the manual read-increment-set with the atomic Redis `incr` command. The git history shows \"needle\" in the initial commit author, but this is metadata. The actual bug was in the code.",
+  "timestamp": "2026-04-03T02:12:16Z",
+  "token_cost": 31725,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 76.813
+}

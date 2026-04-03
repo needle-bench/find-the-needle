@@ -4,15 +4,15 @@
   "benchmark": "missing-input-validation",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.023133829999999998,
-  "input_tokens": 59144,
-  "output_tokens": 1457,
+  "estimated_cost_usd": 0.01315116,
+  "input_tokens": 35476,
+  "output_tokens": 1673,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": " The fix was successful. Let me summarize what was done:\n\n**The Problem:** The `adjustQuantity` method in `/app/inventory.ts` was allowing inventory adjustments that would result in negative quantities. There was no validation to prevent this, meaning a user could request to remove more items than were available in inventory.\n\n**The Fix:**\n1. **In `/app/inventory.ts`**: Added validation in the `adjustQuantity` method to check if the new quantity would be negative after the adjustment. If so, it throws an error with a descriptive message.\n\n2. **In `/app/routes.ts`**: Wrapped the `inventory.adjustQuantity()` call in a try-catch block to properly handle the error and return a 400 status code with an error message when validation fails.\n\nThe test now passes, confirming that:\n- Positive adjustments work correctly\n- Negative adjustments that don't make inventory go negative work correctly  \n- Negative adjustments that would result in negative inventory are properly rejected with a 400 status",
-  "timestamp": "2026-04-02T01:55:56Z",
-  "token_cost": 60601,
-  "tool_uses": 18,
+  "summary": " The fix is complete. The issue was in the `adjustQuantity` function in `/app/inventory.ts` - it was not validating that an adjustment would result in a negative inventory quantity.\n\n**The fix:**\n1. **inventory.ts**: Added validation to check if the new quantity would be negative before applying the adjustment, throwing an error if so.\n2. **routes.ts**: Wrapped the adjustment logic in a try-catch block to properly return a 400 status code when validation fails.\n\nThe test now passes - the API correctly rejects negative quantity adjustments that would make inventory impossible to maintain.",
+  "timestamp": "2026-04-03T02:34:53Z",
+  "token_cost": 37149,
+  "tool_uses": 14,
   "turns_to_fix": 1,
-  "wall_clock": 102.327
+  "wall_clock": 66.481
 }

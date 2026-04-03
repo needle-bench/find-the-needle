@@ -4,15 +4,15 @@
   "benchmark": "cache-stale-invalidation",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.0083729,
-  "input_tokens": 41335,
-  "output_tokens": 9225,
+  "estimated_cost_usd": 0.013305850000000003,
+  "input_tokens": 102071,
+  "output_tokens": 13335,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The bugs in `app/server.py` (failure to invalidate the products list cache after create/update) have been fixed. `./test.sh` now passes fully.",
-  "timestamp": "2026-04-02T03:33:16Z",
-  "token_cost": 50560,
-  "tool_uses": 15,
+  "summary": "The fix is complete and verified by running test.sh.",
+  "timestamp": "2026-04-03T01:24:14Z",
+  "token_cost": 115406,
+  "tool_uses": 27,
   "turns_to_fix": 1,
-  "wall_clock": 84.415
+  "wall_clock": 93.434
 }

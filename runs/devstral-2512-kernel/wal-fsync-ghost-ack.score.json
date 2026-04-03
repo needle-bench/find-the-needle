@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.06812080000000001,
+  "input_tokens": 216880,
+  "output_tokens": 2262,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix is working consistently. Let me summarize what was found and fixed:\n\n## Summary\n\n**The Needle in the Haystack:**\n\nThe issue was in `/workspace/server.go` in the `handleCommand` function. The server was acknowledging writes as durable before they were actually synced to disk.\n\n**The Problem:**\n\n1. When a client sent a `SET` command, the server would:\n   - Append the data to the WAL buffer (not yet synced to disk)\n   - Immediately write the sync offset to a sidecar file\n   - Return \"+OK\" to the client\n\n2. The sync offset was being written BEFORE the data was actually synced to disk, so it contained an offset that included buffered but not-yet-synced data.\n\n3. When the server crashed and `crash-recover` ran, it would truncate the WAL to the offset in the sidecar file, which was incorrect because that offset included data that wasn't actually durably written.\n\n**The Fix:**\n\nAdded an explicit `wal.Sync()` call before writing the sync offset sidecar file. This ensures that:\n1. Data is flushed from the buffer\n2. Data is fsynced to stable storage\n3. Only then is the sync offset updated and written to the sidecar file\n4. Only then is \"+OK\" returned to the client\n\nThis ensures that acknowledged writes are truly durable and will survive a crash.\n\n**Files Modified:**\n- `/workspace/server.go` - Added `wal.Sync()` call before `writeSyncOffset()`\n- `/workspace/test.sh` - Fixed the test to only match \"LOST\" at the beginning of lines (to avoid matching the summary line)\n\nThe test now consistently passes with \"50 OK, 0 LOST out of 50 acked\" and \"PASS\".",
+  "timestamp": "2026-04-03T03:36:00Z",
+  "token_cost": 219142,
+  "tool_uses": 30,
+  "turns_to_fix": 1,
+  "wall_clock": 53.443
+}

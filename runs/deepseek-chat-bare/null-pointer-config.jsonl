@@ -1,4 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:30:01Z", "benchmark": "null-pointer-config", "model": "deepseek-chat", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 413, "tokens_out": 183, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 477, "tokens_out": 65, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:30:14Z", "test_exit": 52, "total_turns": 2, "correct_lines": 0, "arm": "bare"}

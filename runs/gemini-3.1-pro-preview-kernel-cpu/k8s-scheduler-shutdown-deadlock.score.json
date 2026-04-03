@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 9391,
-  "output_tokens": 601,
+  "input_tokens": 9259,
+  "output_tokens": 738,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The problem was a shutdown deadlock caused by improper ordering in the `Scheduler.Run` method. The code was waiting for the scheduling goroutine to finish before closing the queue. If the goroutine was blocked on `s.queue.Pop()` waiting for work, it could never exit until the queue was closed, resulting in a deadlock.\n\nBy moving `s.queue.Close()` to be executed right after `<-ctx.Done()` and before `<-done`, the blocked `Pop()` operation correctly unblocks and notices the queue is closed, returning an error. This allows the scheduling loop to continue, check `ctx.Done()`, and exit cleanly.\n\nThe tests now pass successfully showing \"OK: clean shutdown\".",
-  "timestamp": "2026-04-02T03:24:37Z",
-  "token_cost": 9992,
+  "summary": "The fix was successful. Running `./test.sh` now prints `OK: clean shutdown` and passes the test.\n\n### Summary of Findings\n- **The Bug:** In `main.go`, the scheduler's `Run` method starts a background goroutine to process items in a loop. Upon cancellation (`ctx.Done()`), it would wait for the goroutine to finish (`<-done`) before explicitly closing its internal queue (`s.queue.Close()`). However, if the queue was empty, the goroutine would be permanently blocked inside `queue.Pop()` waiting for the queue to be either appended to or closed. This resulted in a cyclic deadlock: `Run` waiting for the goroutine to finish, but the goroutine waiting for `Run` to close the queue.\n- **The Fix:** I modified `main.go` to invoke `s.queue.Close()` *before* blocking on `<-done`. This correctly signals the queue condition variable, unblocking `Pop()` so the goroutine can realize the queue is shut down, complete its final loop, and gracefully terminate.",
+  "timestamp": "2026-04-03T04:17:15Z",
+  "token_cost": 9997,
   "tool_uses": 5,
   "turns_to_fix": 1,
-  "wall_clock": 25.042
+  "wall_clock": 23.474
 }

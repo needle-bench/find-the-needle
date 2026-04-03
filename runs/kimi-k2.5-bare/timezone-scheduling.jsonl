@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T17:53:39Z", "benchmark": "timezone-scheduling", "model": "kimi-k2.5", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 75, "tokens_out": 101, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 131, "tokens_out": 75, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/."], "tokens_in": 208, "tokens_out": 109, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 308, "tokens_out": 19, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/."], "tokens_in": 475, "tokens_out": 36, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/./app", "/app/./test.sh"], "tokens_in": 1058, "tokens_out": 32, "test_exit": 1}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 1113, "tokens_out": 36, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-04-01T17:54:06Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}

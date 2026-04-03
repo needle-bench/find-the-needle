@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 142133,
+  "output_tokens": 1264,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue was an off-by-one error in the leader election quorum check and a logging bug in the simulation output. \n\nIn a cluster of size `n`, a leader should only be elected if it receives a majority of votes, which is `n/2 + 1`. The original implementation used `finalVotes >= totalNodes/2`, which for a 5-node cluster incorrectly allowed a node to become leader with only 2 votes (since `5/2 = 2` in integer division). This led to a split-brain scenario where two different nodes in separate network partitions could both believe they were the leader.\n\nI have corrected the quorum check to use `finalVotes > totalNodes/2` and also fixed the swapped arguments in the corresponding `fmt.Printf` statement.\n\n### Changes:\n- **`app/cluster/node.go`**:\n    - Changed `finalVotes >= totalNodes/2` to `finalVotes > totalNodes/2`.\n    - Corrected the `fmt.Printf` argument order so that the term and vote count are displayed correctly.\n\nAfter rebuilding the `split-brain` binary and running the provided `test.sh`, the leader election now correctly handles network partitions and no longer allows split-brain scenarios.\n\n```bash\n=== Split-Brain Leader Election Test ===\n--- Round 1 ---\n...\nRound 1: OK\n--- Round 2 ---\n...\nRound 2: OK\n--- Round 3 ---\n...\nRound 3: OK\nPASS: No split-brain detected across all rounds\n```",
+  "timestamp": "2026-04-03T04:35:20Z",
+  "token_cost": 143397,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 78.126
+}

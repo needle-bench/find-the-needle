@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-2.5-flash-kernel",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0023846699999999998,
+  "input_tokens": 7149,
+  "output_tokens": 381,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The `test.sh` script reports \"PASS: Hash map distributes items evenly across buckets\", and the `Max chain length` is 4, which is well within the acceptable bound of 50. This indicates that the fix was successful.",
+  "timestamp": "2026-04-03T02:16:10Z",
+  "token_cost": 7530,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 8.263
+}

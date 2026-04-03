@@ -1,0 +1,18 @@
+{
+  "agent": "claude-haiku-4-5-kernel",
+  "arm": "kernel",
+  "benchmark": "bidi-override-injection",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.092931,
+  "input_tokens": 79241,
+  "output_tokens": 2738,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! \n\n## Summary\n\nI found and fixed the **Unicode BIDI (Bidirectional) Override Privilege Escalation vulnerability**.\n\n### The Needle: \nThe vulnerability was in the `sanitizer.py` file's `sanitize_username()` function, which was not stripping Unicode BIDI control characters. This allowed an attacker to:\n\n1. Register with username containing U+202E (RIGHT-TO-LEFT OVERRIDE) followed by \"nimda\": `\\u202enimda`\n2. When displayed through the BIDI rendering algorithm, this visually appeared as \"admin\"\n3. The `check_admin_access()` function in `auth.py` used `_render_display_name()` to check against the admin allowlist, causing the rendered display name to match \"admin\"\n4. This granted unauthorized admin access to the attacker\n\n### The Fix:\nI added **Step 0** to the `sanitize_username()` function to strip all Unicode BIDI control characters:\n- U+202A (LEFT-TO-RIGHT EMBEDDING)\n- U+202B (RIGHT-TO-LEFT EMBEDDING)\n- U+202C (POP DIRECTIONAL FORMATTING)\n- U+202D (LEFT-TO-RIGHT OVERRIDE)\n- U+202E (RIGHT-TO-LEFT OVERRIDE)\n- U+2066-U+2069 (Directional Isolates)\n\nNow when a user tries to register with these characters, they are stripped during sanitization, so the stored username is just \"nimda\" which doesn't match \"admin\" in the allowlist, preventing the privilege escalation attack.\n\n### Test Results:\n✅ All tests now pass, including the critical Test 3 that checks for BIDI injection attacks.",
+  "timestamp": "2026-04-03T00:01:58Z",
+  "token_cost": 81979,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 48.986
+}

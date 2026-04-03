@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:22:14Z", "benchmark": "cache-stale-invalidation", "model": "llama-4-maverick", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/cache.py\n/app/app/config.py\n/app/app/server.py\n/app/app/store.py\n\nCurrent test output (test.sh):\nIni"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/app/store.py", "/app/app/cache.py"], "tokens_in": 272, "tokens_out": 332, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 1789, "tokens_out": 624, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/cache./cache.delete(\"products:list\")/g'", "/app/app/server.py", "/app/'/self._json_response(201,", "/app/cache.delete(\"products:list\")'", "/app/app/server.py"], "tokens_in": 3440, "tokens_out": 254, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/store.create_product(data)/a", "/app/cache.delete('products:list')", "/app/app/server.py"], "tokens_in": 3783, "tokens_out": 143, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 3938, "tokens_out": 32, "test_exit": 1}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/store.create_product(data)/a", "/app/cache.delete(\"products:list\")", "/app/app/server.py"], "tokens_in": 4078, "tokens_out": 99, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 4192, "tokens_out": 60, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-30T01:22:39Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0, "arm": "silent"}

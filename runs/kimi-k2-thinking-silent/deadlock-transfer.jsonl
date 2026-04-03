@@ -1,7 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T16:39:11Z", "benchmark": "deadlock-transfer", "model": "kimi-k2-thinking", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nSource files:\n/app/test.sh\n/app/app/Account.java\n/app/app/Bank.java\n/app/app/Main.java\n/app/app/TransferResult.java\n/app/app/TransferSer"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/Files...\\n\\ncat", "/app/app/Account.java"], "tokens_in": 204, "tokens_out": 228, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/Files...", "/app/app/Account.java", "/app/app/TransferService.java", "/app/app/Bank.java", "/app/app/Main.java"], "tokens_in": 291, "tokens_out": 96, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/app/needle...\ud83d\udd0d", "/app/TransferService.java", "/app/app/TransferService.java"], "tokens_in": 1269, "tokens_out": 291, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/app/TransferService.java\"", "/app/1.", "/app/(from.getLock())\"", "/app/2.", "/app/(to.getLock())\""], "tokens_in": 1714, "tokens_out": 600, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2047, "tokens_out": 585, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-04-01T16:39:43Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0, "arm": "silent"}

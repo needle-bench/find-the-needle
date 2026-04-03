@@ -4,15 +4,15 @@
   "benchmark": "off-by-one-array-slice",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.00103152,
-  "input_tokens": 24024,
-  "output_tokens": 1992,
+  "estimated_cost_usd": 0.0007644600000000001,
+  "input_tokens": 30969,
+  "output_tokens": 366,
   "resolved": false,
   "stop_reason": "end_turn",
   "summary": "",
-  "timestamp": "2026-04-02T01:38:03Z",
-  "token_cost": 26016,
+  "timestamp": "2026-04-03T04:01:52Z",
+  "token_cost": 31335,
   "tool_uses": 21,
   "turns_to_fix": 1,
-  "wall_clock": 12.4
+  "wall_clock": 366.811
 }

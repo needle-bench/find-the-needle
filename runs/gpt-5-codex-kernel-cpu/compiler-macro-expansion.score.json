@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "compiler-macro-expansion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.12497849999999999,
+  "input_tokens": 147722,
+  "output_tokens": 3767,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ The “needle” has been found — the buggy getter for reference fields has been corrected so it now returns a reference (`&Type`) instead of an owned value. `test.sh` runs cleanly, with both the simple and complex accessor tests passing.",
+  "timestamp": "2026-04-03T07:27:11Z",
+  "token_cost": 151489,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 51.148
+}

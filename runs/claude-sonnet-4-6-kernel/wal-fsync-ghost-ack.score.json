@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.42368399999999995,
+  "input_tokens": 127023,
+  "output_tokens": 2841,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. Here's a summary of the **two bugs** found and fixed:\n\n---\n\n### Bug 1 — WAL durability: `+OK` before fsync (`server.go`)\n\n**Root cause:** `wal.Append()` only writes data into a 64KB in-memory buffer. The actual `fsync` to disk only happens in the background every 100ms. However, the server immediately sent `+OK` to the client *before* the data was fsynced. When the server was killed and the WAL was truncated to the last real sync point, all buffered-but-not-yet-fsynced writes were lost — even though clients had been acknowledged.\n\n**Fix:** Added an explicit `s.wal.Sync()` call *after* `Append()` and *before* sending `+OK`, ensuring data is durably on disk before acknowledging the client.\n\n---\n\n### Bug 2 — False FAIL in test output (`client.go`)\n\n**Root cause:** `VerifyBatch` always printed `\"summary: N OK, M LOST out of K acked\"` — even when `M == 0`. The test script uses `grep -q LOST` to detect failures, so it always matched the word \"LOST\" in the summary line and always reported `FAIL`, even on a perfectly successful run.\n\n**Fix:** Changed the summary to only use the uppercase word `LOST` when there are actual losses (`lost > 0`). When everything is recovered, it prints lowercase `\"0 lost\"` instead.",
+  "timestamp": "2026-04-03T02:48:41Z",
+  "token_cost": 129864,
+  "tool_uses": 24,
+  "turns_to_fix": 1,
+  "wall_clock": 73.945
+}

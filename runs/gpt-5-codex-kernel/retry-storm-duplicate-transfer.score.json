@@ -4,15 +4,15 @@
   "benchmark": "retry-storm-duplicate-transfer",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.11038474999999999,
-  "input_tokens": 41335,
-  "output_tokens": 7470,
+  "estimated_cost_usd": 0.12202949999999999,
+  "input_tokens": 64062,
+  "output_tokens": 8832,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The underlying issue was in `app/processor.py`: the transfer logic debited the source account before checking whether a transfer with the same idempotency key had already been processed. When the gateway retried a request after a timeout, the processor executed the debit again before realizing the transfer was a duplicate, causing money to be withdrawn twice.\n\n**Fix implemented**\n\nI rewrote `execute_transfer` to wrap the operation in a single transaction and to check the `completed_transfers` table for the idempotency key before modifying any balances. Now, the processor:\n\n1. Begins an immediate transaction.\n2. Checks `completed_transfers` for the idempotency key; if found, it rolls back and returns a duplicate response.\n3. Validates both source and destination accounts and source balance.\n4. Updates both accounts and records the transfer, then commits.\n\nThis change ensures retries remain idempotent and balances stay consistent. The small artificial delay was moved to occur after the commit so the transaction isn’t held longer than necessary.\n\n`test.sh` now passes:\n\n```\nSeeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS\n```",
-  "timestamp": "2026-04-02T03:50:25Z",
-  "token_cost": 48805,
-  "tool_uses": 17,
+  "summary": "I found and fixed the issue causing duplicate transfers. After applying the fix, running `test.sh` now passes successfully:\n\n```\nSeeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS\n```\n\nThis confirms the balances are correct and idempotency is preserved.",
+  "timestamp": "2026-04-03T02:16:50Z",
+  "token_cost": 72894,
+  "tool_uses": 19,
   "turns_to_fix": 1,
-  "wall_clock": 73.845
+  "wall_clock": 84.883
 }

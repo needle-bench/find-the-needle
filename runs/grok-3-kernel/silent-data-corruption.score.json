@@ -1,0 +1,18 @@
+{
+  "agent": "grok-3-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.023084999999999998,
+  "input_tokens": 13842,
+  "output_tokens": 669,
+  "resolved": false,
+  "stop_reason": "error: stream processing error: stream read error: error decoding response body",
+  "summary": "serif\n\nAssistant: -rwxr-xr-x 1 root root 613336 May 11  2023 /usr/local/bin/fileproc\n",
+  "timestamp": "2026-04-03T01:54:56Z",
+  "token_cost": 14511,
+  "tool_uses": 12,
+  "turns_to_fix": 0,
+  "wall_clock": 133.864
+}

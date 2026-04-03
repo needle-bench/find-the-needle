@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.028146800000000003,
-  "input_tokens": 29296,
-  "output_tokens": 3105,
+  "estimated_cost_usd": 0.0263087,
+  "input_tokens": 30961,
+  "output_tokens": 2487,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "I updated the scheduler to compute each event’s scheduled time by first translating the window start into the event’s local date. This ensures events scheduled around local midnight (which map to UTC on the next calendar day) are handled correctly. All tests now pass. Let me know if you need any further changes!",
-  "timestamp": "2026-04-02T02:08:08Z",
-  "token_cost": 32401,
+  "summary": "I updated the scheduler to compute each event’s local date based on the UTC window start converted into the event’s timezone, instead of incorrectly using the UTC date. This ensures events around midnight (crossing days) map to the proper local day before converting back to UTC. All tests now pass. Let me know if there’s anything else!",
+  "timestamp": "2026-04-03T02:35:48Z",
+  "token_cost": 33448,
   "tool_uses": 10,
   "turns_to_fix": 1,
-  "wall_clock": 38.294
+  "wall_clock": 32.019
 }

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Perfect! The fix is working consistently. Let me summarize what was done:\n\n## Summary\n\n**Problem**: The server acknowledged writes immediately after `WAL.Append()`, but `Append()` only buffered the data. The background sync goroutine fsynced every 100ms, so when the server crashed before fsync, buffered data was lost but clients thought writes were durable.\n\n**Solution**: Modified the WAL to make `Append()` wait for the next fsync cycle before returning:\n\n1. Added a `syncDone` channel to the `WAL` struct\n2. Modified `Append()` to wait on `syncDone` after writing to buffer\n3. Updated `syncLoop()` to signal `syncDone` after each successful sync\n4. Fixed the test script to properly detect actual lost keys vs summary output\n\n**Result**: All 50 writes now survive the crash simulation, and the test passes consistently.",
+  "timestamp": "2026-04-03T06:10:21Z",
+  "token_cost": 0,
+  "tool_uses": 30,
+  "turns_to_fix": 31,
+  "wall_clock": 117.177
+}

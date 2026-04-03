@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.00604,
+  "input_tokens": 2004,
+  "output_tokens": 254,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "The test script `test.sh` was run, and here's the situation:\n\n- **Daytime events** are working correctly.\n- **Late night events** (those that cross midnight in their timezones) are failing to trigger.\n- **Negative tests** (checking that events don't fire incorrectly) are successful.\n- **2 tests are failing**, both related to events that should fire late at night, but are not recognized as due.\n\n**Summary:**  \nThe \"needle\" problem is a bug in handling late-night (cross-midnight) scheduled events; the system fails to recognize them as due at the proper UTC time.\n\n**Next steps:**  \nTo fix this, inspect the timezone and day-transition logic in your scheduling or event code—especially where local day boundaries are converted to UTC. Would you like help pinpointing the relevant code or suggesting a patch for this midnight-crossing bug?",
+  "timestamp": "2026-04-03T01:55:50Z",
+  "token_cost": 2258,
+  "tool_uses": 4,
+  "turns_to_fix": 1,
+  "wall_clock": 6.263
+}

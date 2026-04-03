@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-native",
+  "arm": "native",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 32987,
+  "output_tokens": 3037,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "I have fixed the goroutine leak in the application.\n\n1. **Root cause:** The `computeHandler` was spawning background goroutines that were unaware of the client's connection state. If a client disconnected early, the HTTP handler leaked both the goroutine and the resources executing the `performComputation` logic.\n2. **Fix:** \n    - Updated `performComputation` to accept a `context.Context` and regularly check `ctx.Done()` during execution and while sleeping, allowing it to exit gracefully when the context is cancelled.\n    - Updated `computeHandler` to pass `r.Context()` to the background worker and to immediately return if `r.Context().Done()` closes.\n\nI've run the provided `test.sh` script and the server no longer leaks goroutines after simulated client disconnects.",
+  "timestamp": "2026-04-03T03:32:19Z",
+  "token_cost": 36024,
+  "tool_uses": 13,
+  "turns_to_fix": 10,
+  "wall_clock": 96.051
+}

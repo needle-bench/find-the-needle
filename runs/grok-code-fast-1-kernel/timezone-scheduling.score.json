@@ -1,0 +1,18 @@
+{
+  "agent": "grok-code-fast-1-kernel",
+  "arm": "kernel",
+  "benchmark": "timezone-scheduling",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.013691900000000002,
+  "input_tokens": 21154,
+  "output_tokens": 8381,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle in the haystack was the bug in the scheduler logic where it incorrectly used the UTC date instead of the local date in the event's timezone to determine today's scheduled events. This caused issues for events scheduled late at night in a timezone that crosses midnight in UTC.\n\nI fixed this by modifying `app/scheduler.py` to compute the scheduled time using the local date in the event's timezone, ensuring accurate firing of events that span across midnights in UTC.\n\nThe fix passed all tests in `test.sh`.```",
+  "timestamp": "2026-04-03T02:37:15Z",
+  "token_cost": 29535,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 53.916
+}

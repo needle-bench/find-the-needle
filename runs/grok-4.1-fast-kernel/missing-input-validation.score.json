@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.1-fast-kernel",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.010138600000000001,
+  "input_tokens": 72134,
+  "output_tokens": 11319,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Fixed!** PASS: Input validation correctly prevents impossible inventory states\n\nThe bug was in `/app/routes.ts`. The `adjustQuantity` endpoint was missing validation to reject adjustments that would make `quantity < 0`.\n\n**Fix applied:**\n```diff\n// In routes.ts, POST /inventory/:sku/adjust handler, before `inventory.adjustQuantity(sku, quantity)`:\n+  const newQuantity = product.quantity + quantity;\n+  if (newQuantity < 0) {\n+    res.statusCode = 400;\n+    res.end(JSON.stringify({ error: 'Cannot adjust inventory below zero' }));\n+    return;\n+  }\n```\n\nThis ensures negative adjustments beyond current stock are rejected with a 400 error, preventing negative inventory. Verified by running `./test.sh` (compiles and all tests pass).",
+  "timestamp": "2026-04-03T02:31:37Z",
+  "token_cost": 83453,
+  "tool_uses": 30,
+  "turns_to_fix": 1,
+  "wall_clock": 99.547
+}

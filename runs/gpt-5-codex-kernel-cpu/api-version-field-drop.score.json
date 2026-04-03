@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.061064,
+  "input_tokens": 69472,
+  "output_tokens": 2016,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Restored backward compatibility for the v2 user API by reintroducing the missing `avatar_url`, `bio`, and `location` fields in `UserV2`.\n- Updated `InternalUser.ToV2()` to populate all v1 fields along with the v2 additions.\n- Adjusted comments to reflect the intended compatibility guarantees.\n\nTests:\n- `./test.sh`",
+  "timestamp": "2026-04-03T01:16:47Z",
+  "token_cost": 71488,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 29.695
+}

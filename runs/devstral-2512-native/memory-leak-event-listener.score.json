@@ -9,10 +9,10 @@
   "output_tokens": 0,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed. The event listeners are now registered once in the constructor instead of on every `process()` call, preventing the memory leak. Test passes with stable listener count.",
-  "timestamp": "2026-04-02T03:20:48Z",
+  "summary": "Excellent! The test passes. The listener count remains stable at 2 (1 from Monitor, 1 from DataProcessor) instead of growing with each request. The memory usage also remains bounded.\n\n## Summary\n\n**Problem**: The `DataProcessor.process()` method was registering new event listeners on every call, causing memory leaks. Each listener captured the `data` parameter in its closure, preventing garbage collection.\n\n**Solution**: Moved the event listener registration from the `process()` method to the constructor, so listeners are registered once when the processor is instantiated, not on every request.\n\n**Changes made**:\n- `app/processor.js`: Moved `eventBus.on()` calls from `process()` to `constructor()`\n- `app/processor.js`: Updated `_handleValidated()` to remove the unused `originalData` parameter\n\n**Verification**: The test now passes, showing stable listener count (2) and bounded memory usage after 500 requests.",
+  "timestamp": "2026-04-03T02:36:53Z",
   "token_cost": 0,
-  "tool_uses": 8,
-  "turns_to_fix": 9,
-  "wall_clock": 24.179
+  "tool_uses": 11,
+  "turns_to_fix": 12,
+  "wall_clock": 28.219
 }

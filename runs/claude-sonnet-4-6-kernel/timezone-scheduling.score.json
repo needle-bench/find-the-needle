@@ -4,15 +4,15 @@
   "benchmark": "timezone-scheduling",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.14310599999999998,
-  "input_tokens": 38122,
-  "output_tokens": 1916,
+  "estimated_cost_usd": 0.14322,
+  "input_tokens": 39135,
+  "output_tokens": 1721,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "All 7 tests pass. Here's a summary of the needle and the fix:\n\n---\n\n## The Bug: Wrong Date Anchor in `scheduler.py`\n\n**Location:** `/app/app/scheduler.py`, method `_is_due`\n\n**Root cause:** The code was using **`window_start.date()` (UTC date)** to construct the event's scheduled datetime in its local timezone:\n\n```python\n# BUG: anchors to UTC date\ntoday_utc = window_start.date()\nnaive_scheduled = datetime(today_utc.year, today_utc.month, today_utc.day,\n                           event.hour, event.minute, 0)\n```\n\nThis is wrong for events in **negative-offset timezones** (US/Eastern UTC-5, US/Pacific UTC-8). For example:\n- `evt-002` fires at **23:30 US/Eastern** → that's **04:30 UTC the next day**\n- When checking at `2025-01-16T04:30 UTC`, the code incorrectly used Jan 16 (UTC date) as the local date, built `2025-01-16 23:30 EST = 2025-01-17 04:30 UTC`, and missed the window entirely.\n\n**Fix:** Anchor to **the local date in the event's own timezone**:\n\n```python\n# FIX: convert window_start to local timezone first, then get local date\nlocal_now = window_start.astimezone(tz)\ntoday_local = local_now.date()\nnaive_scheduled = datetime(today_local.year, today_local.month, today_local.day,\n                           event.hour, event.minute, 0)\n```",
-  "timestamp": "2026-04-02T01:42:09Z",
-  "token_cost": 40038,
-  "tool_uses": 17,
+  "summary": "All 7 tests pass. Here's a summary of the bug and the fix:\n\n## The Bug (Needle 🪡)\n\n**File:** `/app/app/scheduler.py` — `_is_due()` method\n\n**Root Cause:** The scheduler was using **today's UTC date** to construct the event's scheduled local time. For late-night events in timezones behind UTC (e.g., `US/Eastern` UTC-5, `US/Pacific` UTC-8), the event fires at a local time like `23:30` which converts to a UTC time on the **next calendar day** (e.g., `04:30 UTC Jan 16`). \n\nWhen the scheduler ran at `2025-01-16T04:30 UTC`, it correctly had `window_start` on Jan 16, but then used `Jan 16` as the base date to construct `23:30 US/Eastern`, which converted to `04:30 UTC Jan 17` — **a full day too late** — so the event never fired.\n\n**Fix:** Use `window_start.astimezone(tz).date()` to get the **local date in the event's own timezone**, not the UTC date. When UTC is already on Jan 16 at 04:30, the US/Eastern local time is still Jan 15 at 23:30 — the correct date to use when building the scheduled event time.",
+  "timestamp": "2026-04-03T02:35:32Z",
+  "token_cost": 40856,
+  "tool_uses": 16,
   "turns_to_fix": 1,
-  "wall_clock": 41.47
+  "wall_clock": 39.306
 }

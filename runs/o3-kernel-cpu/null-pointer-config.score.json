@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.11840399999999998,
+  "input_tokens": 88578,
+  "output_tokens": 4152,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Root-cause  \nWhen the feature flag features.enable_metrics is true but the metrics block is missing in config.json, cfg.Metrics remains nil.  \nmakeStatusHandler dereferences cfg.Metrics.Endpoint / cfg.Metrics.IntervalSec unconditionally, so the first request to /status panics with a nil-pointer and the tests fail.\n\nFix  \nGive LoadConfig a safety-net: if EnableMetrics is true and Metrics is still nil, create a sensible default struct so the rest of the code can dereference it safely.\n\nconfig.go (LoadConfig):\n\n```go\n// After applying basic defaults\nif cfg.Features.EnableMetrics && cfg.Metrics == nil {\n    cfg.Metrics = &MetricsConfig{\n        Endpoint:    \"/metrics\",\n        IntervalSec: 60,\n    }\n}\n```\n\nWith this small addition the server always has a non-nil MetricsConfig whenever metrics are enabled. All endpoints work and test.sh now prints:\n\n```\nPASS: Server starts and responds correctly with metrics enabled\n```\n\nThe “needle” (nil-pointer bug) has been removed.",
+  "timestamp": "2026-04-03T02:45:11Z",
+  "token_cost": 92730,
+  "tool_uses": 29,
+  "turns_to_fix": 1,
+  "wall_clock": 110.464
+}

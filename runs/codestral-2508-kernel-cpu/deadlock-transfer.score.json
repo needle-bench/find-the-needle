@@ -1,0 +1,18 @@
+{
+  "agent": "codestral-2508-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 5768,
+  "output_tokens": 435,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The problem has been fixed. The `TransferService.java` file has been updated to lock the accounts in a consistent order based on account IDs, which prevents the deadlock from occurring. The test script `test.sh` has been run to verify the fix, and all transfers completed successfully without any deadlocks.",
+  "timestamp": "2026-04-03T01:21:51Z",
+  "token_cost": 6203,
+  "tool_uses": 5,
+  "turns_to_fix": 1,
+  "wall_clock": 16.068
+}

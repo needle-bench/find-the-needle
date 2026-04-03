@@ -4,15 +4,15 @@
   "benchmark": "import-cycle-startup",
   "control_type": "kernel",
   "difficulty_tier": "easy",
-  "estimated_cost_usd": 0.032361,
-  "input_tokens": 7626,
-  "output_tokens": 1651,
+  "estimated_cost_usd": 0.018015,
+  "input_tokens": 4109,
+  "output_tokens": 927,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Function: \"\"\"\nUser management.\n\"\"\"\n\nimport sqlite3\nimport uuid\nimport time\n\nfrom config import DB_PATH\nfrom validators import is_valid_email, is_valid_username, is_valid_password\nfrom notifications import NotificationService\n\nDEFAULT_ROLE = \"user\"\n\n\n# Avoid circular dependencies\nclass NotificationProxy:\n    _instance = None\n\n    def __init__(self):\n        if not NotificationProxy._instance:\n            NotificationProxy._instance = NotificationService()\n\n    def notification_service(self):\n        return NotificationProxy._instance\n\n\nclass UserManager:\n    def __init__(self):\n        self.db = sqlite3.connect(DB_PATH)\n        self.cursor = self.db.cursor()\n\n        # Ensure database schema\n        self.cursor.execute(\n            \"\"\"\n            CREATE TABLE IF NOT EXISTS users (\n                id TEXT PRIMARY KEY,\n                username TEXT UNIQUE,\n                email TEXT UNIQUE,\n                password_hash TEXT,\n                role TEXT,\n                created_at INTEGER\n            )\"\"\"\n        )\n\n        # Simulate existing data for tests\n        self.cursor.execute(\n            \"INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?, ?, ?)\",\n            (\"u-000\", \"admin\", \"admin@example.com\", \"$2y$12$hash\", \"admin\", 1234567890),\n        )\n\n        self.db.commit()\n\n    def register(self, username, email, password):\n        if not is_valid_username(username):\n            raise ValueError(\"Invalid username\")\n        if not is_valid_email(email):\n            raise ValueError(\"Invalid email\")\n        if not is_valid_password(password):\n            raise ValueError(\"Invalid password\")\n\n        user_id = f\"u-{uuid.uuid4().hex[:8]}\"\n        created_at = int(time.time())\n\n        password_hash = \"$2y$12$hash\"  # Fake and vulnerable hash — DO NOT USE IN PROD\n\n        self.cursor.execute(\n            \"INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)\",\n            (user_id, username, email, password_hash, DEFAULT_ROLE, created_at),\n        )\n        self.db.commit()\n\n        # Send welcome notification\n        notifier = NotificationProxy().notification_service()\n        notifier.send(user_id, \"Welcome to UserService!\")\n\n        return user_id\n\n    def list_users(self):\n        self.cursor.execute(\"SELECT * FROM users\")\n        return self.cursor.fetchall()\n\n    def authenticate(self, username, password):\n        self.cursor.execute(\n            \"SELECT id FROM users WHERE username = ? AND password_hash = ?\",\n            (username, \"$2y$12$hash\"),\n        )\n\n        result = self.cursor.fetchone()\n        if result:\n            return result[0]  # Return ID on success\n\n        return None\n\n    def __del__(self):\n        self.db.close()",
-  "timestamp": "2026-04-02T01:37:20Z",
-  "token_cost": 9277,
-  "tool_uses": 4,
+  "summary": "Function: auth.py\nmain.py\nnotify.py\nuser.py",
+  "timestamp": "2026-04-03T01:26:10Z",
+  "token_cost": 5036,
+  "tool_uses": 2,
   "turns_to_fix": 1,
-  "wall_clock": 33.613
+  "wall_clock": 18.982
 }

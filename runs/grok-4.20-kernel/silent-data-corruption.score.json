@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.013485599999999999,
+  "input_tokens": 31269,
+  "output_tokens": 311,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle has been found (silent truncation bug in `process_file()` due to fixed-size `read()` on a 64KB buffer) and fixed by switching to `read_to_end()` on a growable `Vec`. The test now passes.",
+  "timestamp": "2026-04-03T01:43:55Z",
+  "token_cost": 31580,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 8.291
+}

@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.023768249999999998,
+  "input_tokens": 20549,
+  "output_tokens": 845,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue was an upstream port mismatch in Nginx. The `/api/` location block was proxying to `127.0.0.1:5001`, but the Flask service actually listens on port `5000`. Updating the Nginx configuration to use `proxy_pass http://127.0.0.1:5000;` resolves the problem. All tests now pass when running `bash test.sh`.",
+  "timestamp": "2026-04-03T01:56:13Z",
+  "token_cost": 21394,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 22.348
+}

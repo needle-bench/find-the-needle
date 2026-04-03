@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-4.1-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.021954,
+  "input_tokens": 10557,
+  "output_tokens": 417,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The \"needle\" (the bug) was in `pricing.py` where the discount calculation was:\n\n```python\ndiscount = subtotal + discount_percent / 100\n```\n\nIt should have been:\n\n```python\ndiscount = subtotal * discount_percent / 100\n```\n\nI've fixed this, and now all tests in `test.sh` pass:\n\n```\nPASS: Discount calculations are correct\n```\n\n✅ The bug is fixed.",
+  "timestamp": "2026-04-03T02:00:14Z",
+  "token_cost": 10974,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 11.165
+}

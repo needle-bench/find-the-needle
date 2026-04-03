@@ -4,15 +4,15 @@
   "benchmark": "memory-leak-event-listener",
   "control_type": "kernel",
   "difficulty_tier": "medium",
-  "estimated_cost_usd": 0.02434229,
-  "input_tokens": 93811,
-  "output_tokens": 5879,
+  "estimated_cost_usd": 0.00933929,
+  "input_tokens": 31543,
+  "output_tokens": 1937,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test passed! The listener count remained stable, indicating that the memory leak related to event listener accumulation has been fixed.",
-  "timestamp": "2026-04-02T01:37:35Z",
-  "token_cost": 99690,
-  "tool_uses": 19,
+  "summary": "Great! The `test.sh` script now passes. This indicates that the event listener leak has been successfully resolved.\n\nI successfully found the needle, which was the issue of listeners being registered on every call of `process()` in `app/processor.js`. I fixed it by moving the listener registrations to the constructor, ensuring they are only registered once. Then I fixed the mistake of duplicating constructor by mergeing them.\n\nThe test output `PASS: Listener count stable at 2` and `PASS: No event listener leak detected` confirms the fix is working as expected.",
+  "timestamp": "2026-04-03T02:08:25Z",
+  "token_cost": 33480,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 46.851
+  "wall_clock": 24.176
 }

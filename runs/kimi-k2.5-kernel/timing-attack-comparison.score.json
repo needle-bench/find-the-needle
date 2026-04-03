@@ -1,0 +1,18 @@
+{
+  "agent": "kimi-k2.5-kernel",
+  "arm": "kernel",
+  "benchmark": "timing-attack-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0072521093,
+  "input_tokens": 13077,
+  "output_tokens": 1203,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": " Found the needle! The vulnerability was in `/app/app/auth/compare.go`. The original code used `stored == input` which is NOT constant-time in Go - string comparison can return early on the first mismatch, creating a timing side-channel.\n\nI fixed it by using `crypto/subtle.ConstantTimeCompare` which:\n1. Always compares all bytes regardless of where a difference is found\n2. Prevents attackers from learning password hash information through timing analysis\n\nThe test now passes with:\n- Basic auth still works correctly\n- Timing ratio is stable (0.905 for full_match / no_match, within acceptable bounds)\n- No timing information leaks about how many characters match",
+  "timestamp": "2026-04-03T03:44:05Z",
+  "token_cost": 14280,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 65.797
+}

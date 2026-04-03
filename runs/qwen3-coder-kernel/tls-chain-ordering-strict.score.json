@@ -1,0 +1,18 @@
+{
+  "agent": "qwen3-coder-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.004047896,
+  "input_tokens": 73884,
+  "output_tokens": 1061,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! I've found and fixed the issue. The problem was that the certificate chain in `/certs/chain.pem` was not in the correct RFC 5246 order. \n\nThe certificate chain had the certificates in the wrong order:\n- It had: leaf.crt, root.crt, intermediate.crt\n- But RFC 5246 requires: leaf.crt, intermediate.crt, root.crt\n\nWhere each subsequent certificate must be the issuer of the previous one:\n- leaf.crt is issued by intermediate.crt\n- intermediate.crt is issued by root.crt\n\nI fixed this by recreating the chain.pem file with the certificates in the correct order: leaf.crt, followed by intermediate.crt, followed by root.crt.\n\nThe test now passes all checks, confirming that the TLS certificate chain is properly ordered according to RFC 5246 requirements.",
+  "timestamp": "2026-04-03T03:50:52Z",
+  "token_cost": 74945,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 50.939
+}

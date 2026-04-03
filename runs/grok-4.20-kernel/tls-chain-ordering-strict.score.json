@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.030031199999999997,
+  "input_tokens": 43992,
+  "output_tokens": 1458,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle has been found and fixed (TLS certificate chain ordering in the Go loader to satisfy RFC 5246). The test now passes.",
+  "timestamp": "2026-04-03T01:58:36Z",
+  "token_cost": 45450,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 12.134
+}

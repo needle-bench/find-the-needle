@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-small-latest-native",
+  "arm": "native",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "## Summary\n\nThe issue was in the leader election quorum calculation in `app/cluster/node.go`. The original code used `finalVotes >= totalNodes/2`, which allowed a node to become leader with only 2 votes in a 5-node cluster (since 2 >= 5/2 = 2). This enabled split-brain scenarios where both partitions could elect leaders simultaneously.\n\n**The fix:** Changed the condition from `>=` to `>` to require a strict majority:\n```go\n// Before (incorrect)\nif finalVotes >= totalNodes/2 {\n\n// After (correct)\nif finalVotes > totalNodes/2 {\n```\n\nFor a 5-node cluster:\n- `totalNodes/2 = 2` (integer division)\n- `finalVotes > 2` means 3 votes are required for leadership\n- This ensures only one partition can achieve a majority, preventing split-brain\n\nThe test now passes, confirming that the leader election protocol correctly handles network partitions without allowing multiple leaders to be elected simultaneously.",
+  "timestamp": "2026-04-03T04:51:20Z",
+  "token_cost": 0,
+  "tool_uses": 52,
+  "turns_to_fix": 53,
+  "wall_clock": 74.103
+}

@@ -1,6 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T16:44:58Z", "benchmark": "kernel-panic-ioctl", "model": "kimi-k2-0905", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/."], "tokens_in": 82, "tokens_out": 56, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/app/."], "tokens_in": 160, "tokens_out": 51, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 233, "tokens_out": 31, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 294, "tokens_out": 23, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-04-01T16:47:08Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0, "arm": "bare"}

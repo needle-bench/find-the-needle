@@ -4,15 +4,15 @@
   "benchmark": "k8s-scheduler-shutdown-deadlock",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.011569999999999999,
-  "input_tokens": 4965,
-  "output_tokens": 445,
+  "estimated_cost_usd": 0.02109,
+  "input_tokens": 8993,
+  "output_tokens": 676,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The needle (bug) was a shutdown deadlock where the main goroutine waited for a worker goroutine to exit (which was blocked), while the worker was waiting for the queue to close. I fixed it by calling `s.queue.Close()` before waiting for the worker goroutine to finish. The test now passes:\n\n- Bug: Deadlock in main.go shutdown ordering.\n- Fix: Call `s.queue.Close()` before `<-done`.\n\nTest result:\n```\nOK: clean shutdown\nPASS\n```",
-  "timestamp": "2026-04-02T01:25:41Z",
-  "token_cost": 5410,
-  "tool_uses": 5,
+  "summary": "The \"needle\" in this haystack was a shutdown deadlock caused by closing the queue after waiting for the scheduler goroutine to finish. The fix is to close the queue *before* waiting for the goroutine.\n\nI have applied this fix. The test now passes and reports \"OK: clean shutdown\". ✅\n\nIf you need an explanation or a patch diff, let me know!",
+  "timestamp": "2026-04-03T01:27:50Z",
+  "token_cost": 9669,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 14.181
+  "wall_clock": 22.937
 }

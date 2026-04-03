@@ -1,2 +1,0 @@
-{"event": "run.start", "timestamp": "2026-04-01T16:59:53Z", "benchmark": "null-pointer-config", "model": "kimi-k2-0905", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "run.end", "timestamp": "2026-04-01T17:01:55Z", "test_exit": 52, "total_turns": 0, "correct_lines": 0, "arm": "bare"}

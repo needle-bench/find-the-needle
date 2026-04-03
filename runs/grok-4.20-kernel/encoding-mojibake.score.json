@@ -1,0 +1,18 @@
+{
+  "agent": "grok-4.20-kernel",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.021328,
+  "input_tokens": 26183,
+  "output_tokens": 1163,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The needle (bug causing mojibake/garbled non-ASCII international names in the CSV parsing step) has been found and fixed by updating `CsvReader.java` to use UTF-8 encoding.\n\n`test.sh` has been run to verify: **PASS** (all names and cities are now preserved correctly in the generated report).",
+  "timestamp": "2026-04-03T01:23:44Z",
+  "token_cost": 27346,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 11.418
+}

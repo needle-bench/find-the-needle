@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3-flash-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 160118,
+  "output_tokens": 1441,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "267 bytes for `tsc.js`? Impossible.\n",
+  "timestamp": "2026-04-03T03:15:50Z",
+  "token_cost": 161559,
+  "tool_uses": 21,
+  "turns_to_fix": 1,
+  "wall_clock": 59.981
+}

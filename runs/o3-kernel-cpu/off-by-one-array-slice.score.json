@@ -1,0 +1,18 @@
+{
+  "agent": "o3-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-array-slice",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.019436,
+  "input_tokens": 9550,
+  "output_tokens": 546,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Fixed off-by-one error in processor.py.\n\nChange:\n    end = start + batch_size - 1\nto:\n    end = start + batch_size      # slice end is exclusive\n\nNow each batch slice includes the correct number of elements and no records are dropped. All tests in test.sh pass.",
+  "timestamp": "2026-04-03T02:46:07Z",
+  "token_cost": 10096,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 15.217
+}

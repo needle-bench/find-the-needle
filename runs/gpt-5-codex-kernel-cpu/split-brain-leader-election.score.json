@@ -1,0 +1,18 @@
+{
+  "agent": "gpt-5-codex-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.10090525,
+  "input_tokens": 79561,
+  "output_tokens": 4739,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Summary:\n- Corrected the quorum check in `app/cluster/node.go` to require a strict majority (`totalNodes/2 + 1`) before a node declares itself leader, preventing both sides of a partition from electing a leader simultaneously.\n- Updated `test.sh` to rebuild the `split-brain` binary prior to running safety checks, ensuring the tests exercise the latest code.\n\nTests:\n- `bash test.sh`",
+  "timestamp": "2026-04-03T02:24:15Z",
+  "token_cost": 84300,
+  "tool_uses": 22,
+  "turns_to_fix": 1,
+  "wall_clock": 63.86
+}

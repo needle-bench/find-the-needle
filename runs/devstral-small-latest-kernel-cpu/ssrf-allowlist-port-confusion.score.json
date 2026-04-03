@@ -5,14 +5,14 @@
   "control_type": "kernel",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "input_tokens": 18282,
-  "output_tokens": 408,
+  "input_tokens": 32061,
+  "output_tokens": 474,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "Perfect! The fix works. All tests pass, including the IPv6 loopback blocking tests. The needle in the haystack was the missing IPv6 loopback addresses in the `BLOCKED_HOSTS` list in `app/validator.py`.",
-  "timestamp": "2026-04-02T03:09:34Z",
-  "token_cost": 18690,
-  "tool_uses": 7,
+  "summary": "Perfect! The test passes now. The fix successfully blocks IPv6 loopback addresses, preventing the SSRF vulnerability.",
+  "timestamp": "2026-04-03T04:56:36Z",
+  "token_cost": 32535,
+  "tool_uses": 11,
   "turns_to_fix": 1,
-  "wall_clock": 10.314
+  "wall_clock": 13.393
 }

@@ -4,15 +4,15 @@
   "benchmark": "k8s-assume-cache-silent-drop",
   "control_type": "kernel",
   "difficulty_tier": "hard",
-  "estimated_cost_usd": 0.150885,
-  "input_tokens": 38685,
-  "output_tokens": 2322,
+  "estimated_cost_usd": 0.156207,
+  "input_tokens": 41589,
+  "output_tokens": 2096,
   "resolved": true,
   "stop_reason": "end_turn",
-  "summary": "The test passes. Here's a summary of the needle and the fix:\n\n## The Bug (Needle)\n\n**Location:** `informerUpdate()` in `/workspace/main.go` — a reproduction of the real Kubernetes `assume_cache.go:426` bug.\n\n**Problem:** When the informer delivers a newer version of an object that the scheduler had *assumed* (optimistically cached), the assumed entry was **silently deleted** with no notification:\n```go\n// BUG: Silent drop — no notification to the assumer\ndelete(c.assumed, obj.Key)\n```\nThe scheduler had no way to know its optimistic state was gone, leading to invisible data loss / stale scheduling decisions.\n\n## The Fix\n\nAdded a conflict notification callback (`onConflict func(assumed, informer *Object)`) to the `AssumeCache` struct. When `informerUpdate` detects that the informer's version supersedes the assumed version, it now **calls the callback before dropping the assumed entry**, allowing the caller (the scheduler) to react to the conflict:\n\n```go\n// FIX: Notify about the conflict before dropping the assumed state\nif c.onConflict != nil {\n    c.onConflict(assumed, obj)\n}\ndelete(c.assumed, obj.Key)\n```",
-  "timestamp": "2026-04-02T01:28:46Z",
-  "token_cost": 41007,
+  "summary": "The test passes. Here's a summary of what the bug was and how it was fixed:\n\n---\n\n## The Needle: Silent Drop of Assumed State in `informerUpdate`\n\n### The Bug\nIn `AssumeCache.informerUpdate()` (mirroring `k8s assume_cache.go:426`), when the informer delivers a newer version of an object that the scheduler had **optimistically assumed**, the code would:\n1. Detect the conflict (`informer.Version > assumed.Version`)\n2. **Silently** `delete` the assumed entry\n3. Replace it with the informer's version\n\nNo callback, no channel, no log — the scheduler had **no way to know** its assumed state was gone. It would continue operating on stale beliefs.\n\n### The Fix\nThree changes were made:\n\n1. **Added a `conflictCallback` field** to `AssumeCache` — a `func(assumed, incoming *Object)` invoked whenever an assumed entry is displaced.\n\n2. **Added `SetConflictCallback()`** — lets callers register their notification handler.\n\n3. **Fixed `informerUpdate()`** — after deleting the assumed entry, it now invokes the callback (releasing the lock first to avoid deadlock), so the scheduler is immediately informed of the conflict with full context (what it assumed vs. what the API server returned).",
+  "timestamp": "2026-04-03T01:37:52Z",
+  "token_cost": 43685,
   "tool_uses": 15,
   "turns_to_fix": 1,
-  "wall_clock": 41.709
+  "wall_clock": 44.404
 }

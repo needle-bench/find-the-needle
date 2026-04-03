@@ -1,9 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-30T01:51:46Z", "benchmark": "sql-injection-search", "model": "qwen3-5-plus-02-15", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 294, "tokens_out": 109, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/home", "/root", "/tmp", "/var", "/opt"], "tokens_in": 352, "tokens_out": 128, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 444, "tokens_out": 65, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/"], "tokens_in": 533, "tokens_out": 71, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app", "/app.orig"], "tokens_in": 1176, "tokens_out": 66, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app"], "tokens_in": 1517, "tokens_out": 64, "test_exit": null}
-{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 2204, "tokens_out": 33, "test_exit": 0}
-{"event": "run.end", "timestamp": "2026-03-30T01:54:01Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0, "arm": "bare"}
