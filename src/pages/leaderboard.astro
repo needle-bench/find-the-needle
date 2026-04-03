@@ -51,19 +51,29 @@ import Base from '../layouts/Base.astro';
 
       <h3>Key findings</h3>
       <ul>
-        <li><strong>Kernel lift</strong>: native 40% &rarr; kernel-cpu 82%. Average +42pp.</li>
-        <li><strong>Cost</strong>: CPU driver achieves 82% at $15 vs native $87. Same models.</li>
-        <li><strong>Turns</strong>: kernel solves in 1 turn (582 total) vs native 2,827 turns. Context eliminates exploration.</li>
-        <li><strong>Tokens</strong>: CPU driver uses 12M tokens vs native 33M. Prompt caching cuts 65&ndash;77% for Anthropic.</li>
+        <li><strong>Kernel lift</strong>: Claude native 63% &rarr; kernel 100%. Average +28&ndash;42pp for vendor CLI models.</li>
+        <li><strong>100% club</strong>: gpt-5-codex, claude-haiku/sonnet/opus all achieve 100% on kernel-cpu arm.</li>
+        <li><strong>Best value</strong>: kimi-k2.5 (95% solve, $0.71), devstral-small-latest (92%, $0.56).</li>
+        <li><strong>Non-agent models unlock</strong>: codestral-2508 solves 0% through Vibe but 35% through ostk kernel.</li>
         <li><strong>Cheap models win</strong>: Haiku ($1/M) + kernel = Opus ($5/M) + kernel. The kernel equalizes.</li>
       </ul>
 
       <h3>Methodology</h3>
       <ul>
-        <li>24 Docker benchmarks with real bugs. <code>test.sh</code> exits 0 = fixed.</li>
-        <li>Kernel routes all models through OpenRouter for fair comparison.</li>
-        <li>CPU uses native drivers (Anthropic w/ caching, Gemini, Mistral).</li>
-        <li>Native uses each vendor&rsquo;s CLI with their own API key.</li>
+        <li>40 Docker benchmarks with real bugs. <code>test.sh</code> exits 0 = fixed.</li>
+        <li>31 models &times; 3 arms &times; 40 benchmarks = 3,641 score files.</li>
+        <li><strong>Native</strong>: vendor CLI (Claude Code, Gemini CLI, Codex, Vibe, Kimi CLI) or OpenCode fallback.</li>
+        <li><strong>Kernel</strong>: ostk agent loop via OpenRouter &mdash; fair comparison, same harness for all models.</li>
+        <li><strong>CPU</strong>: ostk agent loop via native API driver (Anthropic, Google, OpenAI, Mistral). Models without a driver show &ldquo;no driver&rdquo;.</li>
+        <li>Identical prompt across all arms: same system prompt, same user message, same benchmarks.</li>
+      </ul>
+
+      <h3>Notes</h3>
+      <ul>
+        <li>Native arm varies by vendor: different CLIs, different API constraints, different metric capture.</li>
+        <li>CPU arm only available for providers with a native driver in ostk (Anthropic, Google, OpenAI, Mistral).</li>
+        <li>Kernel arm (OpenRouter) is the controlled comparison &mdash; same harness, same API proxy, same tools.</li>
+        <li>codestral-2508 native unavailable due to Mistral API rate limiting (1 RPS).</li>
       </ul>
     </section>
   </main>
@@ -180,6 +190,7 @@ import Base from '../layouts/Base.astro';
     model: string; model_normalized: string; benchmarks: number;
     native: ArmAgg; kernel: ArmAgg; cpu: ArmAgg;
     price_per_m_input?: number; price_per_m_output?: number;
+    native_cli?: string; cpu_driver_status?: string;
   }
 
   function fmtN(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
@@ -189,8 +200,11 @@ import Base from '../layouts/Base.astro';
 
   function armPct(a: ArmAgg): number { return a.total > 0 ? a.solved / a.total * 100 : -1; }
 
-  function solveCell(a: ArmAgg, cls: string): string {
-    if (a.total === 0) return `<td class="${cls} col-solve"><span class="pct-na">-</span></td>`;
+  function solveCell(a: ArmAgg, cls: string, label?: string): string {
+    if (a.total === 0) {
+      if (label === 'no_driver') return `<td class="${cls} col-solve"><span class="pct-na" title="No native CPU driver for this provider">no driver</span></td>`;
+      return `<td class="${cls} col-solve"><span class="pct-na">-</span></td>`;
+    }
     const pct = armPct(a);
     return `<td class="${cls} col-solve"><span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span></td>`;
   }
@@ -244,6 +258,7 @@ import Base from '../layouts/Base.astro';
         const dHtml = d > 0 ? `<span class="delta-pos">+${d.toFixed(0)}</span>`
           : d < 0 ? `<span class="delta-neg">${d.toFixed(0)}</span>`
           : `<span class="delta-zero">0</span>`;
+        const cpuLabel = r.cpu_driver_status === 'no_driver' && r.cpu.total === 0 ? 'no_driver' : undefined;
         return `<tr>
           <td><span class="model-name">${r.model_normalized}</span></td>
           <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '<span class="dim">-</span>'}</td>
@@ -251,7 +266,7 @@ import Base from '../layouts/Base.astro';
           ${metricCells(r.native, 'arm-native')}
           ${solveCell(r.kernel, 'arm-kernel')}
           ${metricCells(r.kernel, 'arm-kernel')}
-          ${solveCell(r.cpu, 'arm-cpu')}
+          ${solveCell(r.cpu, 'arm-cpu', cpuLabel)}
           ${metricCells(r.cpu, 'arm-cpu')}
           <td class="col-delta">${dHtml}</td>
         </tr>`;
