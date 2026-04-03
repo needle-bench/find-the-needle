@@ -160,7 +160,7 @@ import Base from '../layouts/Base.astro';
   .totals { font-size: 0.78rem; margin: 0.5rem 0; color: var(--text-muted); font-family: var(--mono); }
 
   .arm-comparison {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;
     margin: 1rem 0; font-family: var(--mono); font-size: 0.8rem;
   }
   .arm-card {
@@ -317,10 +317,22 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>`;
     };
+    // CPU "building" card for models without drivers yet
+    const noDriverModels = rows.filter(r => r.cpu_driver_status === 'no_driver');
+    const noDriverCard = noDriverModels.length > 0 ? `<div class="arm-card" style="opacity:0.6">
+      <h4>CPU — drivers building</h4>
+      <div class="big" style="color:#484f58">${noDriverModels.length} models</div>
+      <div class="detail">
+        ${noDriverModels.map(r => r.model_normalized).slice(0,6).join(', ')}${noDriverModels.length > 6 ? `, +${noDriverModels.length - 6} more` : ''}<br>
+        native API drivers not yet built — kernel (OpenRouter) covers these
+      </div>
+    </div>` : '';
+
     document.getElementById('arm-comparison')!.innerHTML =
       armCard('native', 'Native (vendor CLI)', 'pct-30') +
       armCard('kernel', 'Kernel (OpenRouter)', 'pct-70') +
-      armCard('cpu', 'Kernel-CPU (optimized)', 'pct-90');
+      armCard('cpu', 'CPU (native driver)', 'pct-90') +
+      noDriverCard;
   }
 
   init();
