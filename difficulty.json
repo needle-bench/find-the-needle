@@ -1,9 +1,25 @@
 {
   "tiers": {
-    "easy": {"turns": 20, "tokens": 100000, "wall_clock": 300},
-    "medium": {"turns": 40, "tokens": 200000, "wall_clock": 600},
-    "hard": {"turns": 60, "tokens": 400000, "wall_clock": 1200},
-    "extreme": {"turns": 80, "tokens": 600000, "wall_clock": 2400}
+    "easy": {
+      "turns": 20,
+      "tokens": 100000,
+      "wall_clock": 300
+    },
+    "medium": {
+      "turns": 40,
+      "tokens": 200000,
+      "wall_clock": 600
+    },
+    "hard": {
+      "turns": 60,
+      "tokens": 400000,
+      "wall_clock": 1200
+    },
+    "extreme": {
+      "turns": 80,
+      "tokens": 600000,
+      "wall_clock": 2400
+    }
   },
   "benchmarks": {
     "off-by-one-pagination": "easy",
@@ -43,6 +59,7 @@
     "bidi-override-injection": "extreme",
     "raft-snapshot-commit-gap": "extreme",
     "tls-chain-ordering-strict": "extreme",
-    "relaxed-ordering-ringbuf": "extreme"
+    "relaxed-ordering-ringbuf": "extreme",
+    "stub-001": "medium"
   }
 }
