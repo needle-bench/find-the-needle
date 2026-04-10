@@ -5,9 +5,10 @@ const datasetSchema = {
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "needle-bench AI Coding Agent Benchmark",
-  "description": "Open benchmark for AI coding agents. 34 models × 24 benchmarks × 3 arms. Deterministic scoring.",
-  "url": "https://needle-bench.cc",
+  "description": "Open benchmark for AI coding agents. Real bugs as frozen Docker snapshots, deterministic scoring across native CLI, kernel (OpenRouter) and CPU (native driver) arms.",
+  "url": "https://needle-bench.cc/",
   "license": "https://opensource.org/licenses/MIT",
+  "keywords": ["AI coding benchmark", "LLM evaluation", "agent benchmark", "debugging benchmark", "Docker bugs", "Claude", "GPT", "Gemini", "DeepSeek"],
   "creator": {
     "@type": "Organization",
     "name": "os-tack",
@@ -21,10 +22,338 @@ const datasetSchema = {
 };
 ---
 
-<!-- Index redirects to leaderboard content inline -->
-<meta http-equiv="refresh" content="0; url=/leaderboard/" />
-<Base title="needle-bench — find the needle" description="34 models. 3 arms. 1,511 runs. One prompt: find the needle." jsonLd={datasetSchema}>
+<Base
+  title="needle-bench — AI coding agent leaderboard on real Docker bugs"
+  description="Open benchmark for AI coding agents. 31 models × 40 benchmarks × 3 arms = 3,641 runs. Deterministic scoring on real bugs frozen as Docker snapshots. Native CLI vs kernel vs native driver."
+  jsonLd={datasetSchema}
+>
   <main>
-    <p>Redirecting to <a href="/leaderboard/">leaderboard</a>...</p>
+    <h1 class="visually-hidden">needle-bench AI Coding Agent Leaderboard</h1>
+    <div class="experiment-info">
+      <p><strong>Three-arm experiment.</strong> 31 models &times; 40 benchmarks &times; 3 arms = 3,641 runs.</p>
+      <p class="muted"><strong>Native</strong>: vendor CLI. <strong>Kernel</strong>: ostk via OpenRouter. <strong>CPU</strong>: ostk + optimized driver. Click headers to sort.</p>
+    </div>
+
+    <div class="lb-container" id="lb-container">
+      <table id="lb">
+        <thead>
+          <tr id="lb-group-row">
+            <th colspan="2"></th>
+            <th colspan="4" class="group-header group-native">Native (vendor CLI)</th>
+            <th colspan="4" class="group-header group-kernel">Kernel (OpenRouter)</th>
+            <th colspan="4" class="group-header group-cpu">CPU (optimized driver)</th>
+            <th colspan="1"></th>
+          </tr>
+          <tr id="lb-head">
+            <th class="col-model" data-key="model">Model</th>
+            <th class="col-price" data-key="price">$/M</th>
+            <th class="col-solve arm-native" data-key="nativePct">Solve</th>
+            <th class="col-metric arm-native" data-key="nativeCost">Cost</th>
+            <th class="col-metric arm-native" data-key="nativeTokens">Tokens</th>
+            <th class="col-metric arm-native last" data-key="nativeTurns">Turns</th>
+            <th class="col-solve arm-kernel" data-key="kernelPct">Solve</th>
+            <th class="col-metric arm-kernel" data-key="kernelCost">Cost</th>
+            <th class="col-metric arm-kernel" data-key="kernelTokens">Tokens</th>
+            <th class="col-metric arm-kernel last" data-key="kernelTurns">Turns</th>
+            <th class="col-solve arm-cpu" data-key="cpuPct">Solve</th>
+            <th class="col-metric arm-cpu" data-key="cpuCost">Cost</th>
+            <th class="col-metric arm-cpu" data-key="cpuTokens">Tokens</th>
+            <th class="col-metric arm-cpu last" data-key="cpuTurns">Turns</th>
+            <th class="col-delta" data-key="bestDelta">&Delta;</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body">
+          <tr><td colspan="15" class="empty">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals" id="totals"></div>
+
+    <section class="results-summary">
+      <h2>Results</h2>
+      <div class="arm-comparison" id="arm-comparison"></div>
+
+      <h3>Key findings</h3>
+      <ul>
+        <li><strong>Kernel lift</strong>: Claude native 63% &rarr; kernel 100%. Average +28&ndash;42pp for vendor CLI models.</li>
+        <li><strong>100% club</strong>: gpt-5-codex, claude-haiku/sonnet/opus all achieve 100% on kernel-cpu arm.</li>
+        <li><strong>Best value</strong>: kimi-k2.5 (95% solve, $0.71), devstral-small-latest (92%, $0.56).</li>
+        <li><strong>Non-agent models unlock</strong>: codestral-2508 solves 0% through Vibe but 35% through ostk kernel.</li>
+        <li><strong>Cheap models win</strong>: Haiku ($1/M) + kernel = Opus ($5/M) + kernel. The kernel equalizes.</li>
+      </ul>
+
+      <h3>Methodology</h3>
+      <ul>
+        <li>40 Docker benchmarks with real bugs. <code>test.sh</code> exits 0 = fixed.</li>
+        <li>31 models &times; 3 arms &times; 40 benchmarks = 3,641 score files.</li>
+        <li><strong>Native</strong>: vendor CLI (Claude Code, Gemini CLI, Codex, Vibe, Kimi CLI) or OpenCode fallback.</li>
+        <li><strong>Kernel</strong>: ostk agent loop via OpenRouter &mdash; fair comparison, same harness for all models.</li>
+        <li><strong>CPU</strong>: ostk agent loop via native API driver (Anthropic, Google, OpenAI, Mistral). Models without a driver show &ldquo;no driver&rdquo;.</li>
+        <li>Identical prompt across all arms: same system prompt, same user message, same benchmarks.</li>
+      </ul>
+
+      <h3>Notes</h3>
+      <ul>
+        <li>Native arm varies by vendor: different CLIs, different API constraints, different metric capture.</li>
+        <li>CPU arm only available for providers with a native driver in ostk (Anthropic, Google, OpenAI, Mistral).</li>
+        <li>Kernel arm (OpenRouter) is the controlled comparison &mdash; same harness, same API proxy, same tools.</li>
+        <li>codestral-2508 native unavailable due to Mistral API rate limiting (1 RPS).</li>
+      </ul>
+    </section>
   </main>
 </Base>
+
+<style is:global>
+  main { max-width: none; padding: 1rem 1.5rem 2rem; }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .experiment-info { font-size: 0.85rem; max-width: 800px; margin-bottom: 0.75rem; line-height: 1.5; }
+  .experiment-info p { margin: 0 0 0.25rem; }
+
+  .lb-container {
+    overflow-x: auto; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); -webkit-overflow-scrolling: touch;
+  }
+
+  #lb { border-collapse: separate; border-spacing: 0; min-width: 100%; font-size: 0.72rem; }
+
+  /* Group headers */
+  .group-header {
+    text-align: center !important; font-size: 0.6rem; padding: 0.3rem 0.4rem !important;
+    border-bottom: 1px solid var(--border) !important; letter-spacing: 0.06em;
+  }
+  .group-native { background: rgba(248,81,73,0.08); color: #f85149; }
+  .group-kernel { background: rgba(210,153,34,0.08); color: #d29922; }
+  .group-cpu { background: rgba(63,185,80,0.08); color: #3fb950; }
+
+  #lb th {
+    padding: 0.4rem 0.4rem; font-size: 0.6rem; letter-spacing: 0.04em;
+    text-transform: uppercase; background: var(--surface); border-bottom: 2px solid var(--border);
+    white-space: nowrap; cursor: pointer; user-select: none; text-align: right;
+  }
+  #lb th.sorted { color: #d4a054; }
+  #lb th:first-child { text-align: left; }
+  #lb th[title] { cursor: help; }
+  #lb th.last { border-right: 2px solid rgba(139,148,158,0.2); }
+
+  /* Sticky model column */
+  .col-model, #lb td:first-child {
+    position: sticky; left: 0; z-index: 2; background: var(--surface);
+    min-width: 150px; width: 150px;
+  }
+  #lb th:first-child { z-index: 3; }
+
+  .col-price { min-width: 45px; }
+  .col-solve { min-width: 52px; text-align: center !important; }
+  .col-metric { min-width: 50px; }
+  .col-delta { min-width: 45px; text-align: center !important; }
+
+  /* Arm column tinting */
+  .arm-native { background: rgba(248,81,73,0.03) !important; }
+  .arm-kernel { background: rgba(210,153,34,0.03) !important; }
+  .arm-cpu { background: rgba(63,185,80,0.03) !important; }
+  td.arm-native { background: rgba(248,81,73,0.03) !important; }
+  td.arm-kernel { background: rgba(210,153,34,0.03) !important; }
+  td.arm-cpu { background: rgba(63,185,80,0.03) !important; }
+  td.last { border-right: 2px solid rgba(139,148,158,0.15); }
+
+  #lb td {
+    padding: 0.3rem 0.4rem; border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 0.68rem; white-space: nowrap; text-align: right;
+  }
+  #lb tr:nth-child(even) td { background-color: rgba(255,255,255,0.015); }
+  #lb tr:hover td { background: rgba(255,255,255,0.05); }
+  #lb tr:hover td:first-child { background: color-mix(in srgb, var(--surface) 94%, white); }
+
+  .model-name { font-weight: 600; font-size: 0.72rem; color: var(--text); }
+
+  .solve-pct { font-weight: 700; }
+  .pct-100 { color: #3fb950; }
+  .pct-90  { color: #3fb950; }
+  .pct-70  { color: #d29922; }
+  .pct-50  { color: #db6d28; }
+  .pct-30  { color: #f85149; }
+  .pct-0   { color: #484f58; }
+  .pct-na  { color: #30363d; font-weight: 400; }
+
+  .delta-pos { color: #3fb950; font-weight: 600; }
+  .delta-neg { color: #f85149; font-weight: 600; }
+  .delta-zero { color: #484f58; }
+
+  .dim { color: #484f58; }
+
+  .totals { font-size: 0.78rem; margin: 0.5rem 0; color: var(--text-muted); font-family: var(--mono); }
+
+  .arm-comparison {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;
+    margin: 1rem 0; font-family: var(--mono); font-size: 0.8rem;
+  }
+  .arm-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+  }
+  .arm-card h4 { margin: 0 0 0.4rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+  .arm-card .big { font-size: 1.4rem; font-weight: 700; }
+  .arm-card .detail { font-size: 0.68rem; color: var(--text-muted); line-height: 1.5; }
+
+  .results-summary { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; font-size: 0.88rem; line-height: 1.6; }
+  .results-summary h2 { margin-top: 0; }
+  .results-summary h3 { margin: 1rem 0 0.4rem; font-size: 0.95rem; }
+  .results-summary ul { padding-left: 1.5rem; margin: 0.4rem 0; }
+  .results-summary li { margin-bottom: 0.3rem; }
+
+  @media (max-width: 768px) {
+    .arm-comparison { grid-template-columns: 1fr; }
+    main { padding: 0.5rem; }
+    .col-model { width: 100px; min-width: 100px; }
+  }
+</style>
+
+<script>
+  interface ArmAgg { solved: number; total: number; cost: number; tokens: number; tools: number; turns: number; wall: number; }
+  interface ModelData {
+    model: string; model_normalized: string; benchmarks: number;
+    native: ArmAgg; kernel: ArmAgg; cpu: ArmAgg;
+    price_per_m_input?: number; price_per_m_output?: number;
+    native_cli?: string; cpu_driver_status?: string;
+  }
+
+  function fmtN(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
+  function fmtT(s: number): string { return s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(0)+'m' : Math.round(s)+'s'; }
+  function fmtUsd(n: number): string { return n >= 10 ? '$'+n.toFixed(0) : n >= 1 ? '$'+n.toFixed(2) : n > 0 ? '$'+n.toFixed(3) : ''; }
+  function pctClass(pct: number): string { return pct >= 100 ? 'pct-100' : pct >= 90 ? 'pct-90' : pct >= 70 ? 'pct-70' : pct >= 50 ? 'pct-50' : pct > 0 ? 'pct-30' : 'pct-0'; }
+
+  function armPct(a: ArmAgg): number { return a.total > 0 ? a.solved / a.total * 100 : -1; }
+
+  function solveCell(a: ArmAgg, cls: string, label?: string): string {
+    if (a.total === 0) {
+      if (label === 'no_driver') return `<td class="${cls} col-solve"><span class="pct-na" title="No native CPU driver for this provider">no driver</span></td>`;
+      return `<td class="${cls} col-solve"><span class="pct-na">-</span></td>`;
+    }
+    const pct = armPct(a);
+    return `<td class="${cls} col-solve"><span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span></td>`;
+  }
+
+  function metricCells(a: ArmAgg, cls: string): string {
+    if (a.total === 0) return `<td class="${cls}"><span class="dim">-</span></td><td class="${cls}"><span class="dim">-</span></td><td class="${cls} last"><span class="dim">-</span></td>`;
+    const cost = fmtUsd(a.cost);
+    const tok = a.tokens > 0 ? fmtN(a.tokens) : '-';
+    const turns = a.turns > 0 ? String(a.turns) : '-';
+    return `<td class="${cls}">${cost || '<span class="dim">-</span>'}</td><td class="${cls}">${tok}</td><td class="${cls} last">${turns}</td>`;
+  }
+
+  async function init() {
+    const resp = await fetch('/experiment-scores.json');
+    const data = await resp.json();
+    const models: ModelData[] = data.models;
+
+    const rows = models.map(m => {
+      const nPct = armPct(m.native);
+      const kPct = armPct(m.kernel);
+      const cPct = armPct(m.cpu);
+      // Best kernel arm pct vs native
+      const bestKernelPct = Math.max(kPct >= 0 ? kPct : 0, cPct >= 0 ? cPct : 0);
+      const delta = nPct >= 0 ? bestKernelPct - nPct : bestKernelPct;
+      // Best overall pct for sorting
+      const bestPct = Math.max(nPct >= 0 ? nPct : 0, kPct >= 0 ? kPct : 0, cPct >= 0 ? cPct : 0);
+      return {
+        ...m,
+        nativePct: nPct, kernelPct: kPct, cpuPct: cPct,
+        nativeCost: m.native.cost, kernelCost: m.kernel.cost, cpuCost: m.cpu.cost,
+        nativeTokens: m.native.tokens, kernelTokens: m.kernel.tokens, cpuTokens: m.cpu.tokens,
+        nativeTurns: m.native.turns, kernelTurns: m.kernel.turns, cpuTurns: m.cpu.turns,
+        bestDelta: delta, bestPct,
+        price: m.price_per_m_input || 0,
+      };
+    });
+
+    let sortKey = 'bestPct';
+    let sortDir = -1;
+    const sort = () => rows.sort((a: any, b: any) => {
+      const av = a[sortKey] ?? 0, bv = b[sortKey] ?? 0;
+      if (av === bv) return (a.price || 99) - (b.price || 99); // tiebreak by price
+      return sortDir * (typeof av === 'string' ? av.localeCompare(bv) : av - bv);
+    });
+
+    const render = () => {
+      sort();
+      const tbody = document.getElementById('lb-body')!;
+      tbody.innerHTML = rows.map(r => {
+        const d = r.bestDelta;
+        const dHtml = d > 0 ? `<span class="delta-pos">+${d.toFixed(0)}</span>`
+          : d < 0 ? `<span class="delta-neg">${d.toFixed(0)}</span>`
+          : `<span class="delta-zero">0</span>`;
+        const cpuLabel = r.cpu_driver_status === 'no_driver' && r.cpu.total === 0 ? 'no_driver' : undefined;
+        return `<tr>
+          <td><span class="model-name">${r.model_normalized}</span></td>
+          <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '<span class="dim">-</span>'}</td>
+          ${solveCell(r.native, 'arm-native')}
+          ${metricCells(r.native, 'arm-native')}
+          ${solveCell(r.kernel, 'arm-kernel')}
+          ${metricCells(r.kernel, 'arm-kernel')}
+          ${solveCell(r.cpu, 'arm-cpu', cpuLabel)}
+          ${metricCells(r.cpu, 'arm-cpu')}
+          <td class="col-delta">${dHtml}</td>
+        </tr>`;
+      }).join('');
+
+      document.querySelectorAll('#lb-head th').forEach(th => {
+        th.classList.toggle('sorted', (th as HTMLElement).dataset.key === sortKey);
+      });
+    };
+
+    document.querySelectorAll('#lb-head th').forEach(th => {
+      th.addEventListener('click', () => {
+        const key = (th as HTMLElement).dataset.key;
+        if (!key) return;
+        if (sortKey === key) sortDir *= -1;
+        else { sortKey = key; sortDir = key === 'model' ? 1 : -1; }
+        render();
+      });
+    });
+
+    render();
+
+    // Totals
+    const sum = (fn: (r: any) => number) => rows.reduce((s, r) => s + fn(r), 0);
+    const tScores = sum(r => r.native.total + r.kernel.total + r.cpu.total);
+    const tSolved = sum(r => r.native.solved + r.kernel.solved + r.cpu.solved);
+    const tCost = sum(r => r.native.cost + r.kernel.cost + r.cpu.cost);
+    const tTokens = sum(r => r.native.tokens + r.kernel.tokens + r.cpu.tokens);
+    document.getElementById('totals')!.textContent =
+      `${rows.length} models · ${tScores.toLocaleString()} runs · ${tSolved.toLocaleString()} solved · ${fmtN(tTokens)} tokens · $${tCost.toFixed(2)} spend`;
+
+    // Arm comparison cards
+    const armCard = (key: 'native' | 'kernel' | 'cpu', label: string, colorClass: string) => {
+      // For CPU card, only count models with a working driver
+      const filtered = key === 'cpu' ? rows.filter(r => r.cpu_driver_status === 'tested') : rows;
+      const sumF = (fn: (r: any) => number) => filtered.reduce((s, r) => s + fn(r), 0);
+      const s = sumF(r => r[key].solved), t = sumF(r => r[key].total);
+      const c = sumF(r => r[key].cost), tok = sumF(r => r[key].tokens);
+      const tools = sumF(r => r[key].tools), turns = sumF(r => r[key].turns);
+      const pct = t > 0 ? (s / t * 100).toFixed(0) : '0';
+      const count = key === 'cpu' ? ` · ${filtered.length} models` : '';
+      return `<div class="arm-card">
+        <h4>${label}</h4>
+        <div class="big ${pctClass(Number(pct))}">${pct}% <span style="font-size:0.6em;font-weight:400">(${s}/${t})</span></div>
+        <div class="detail">
+          $${c.toFixed(2)} · ${fmtN(tok)} tokens${count}<br>
+          ${tools.toLocaleString()} tools · ${turns.toLocaleString()} turns
+        </div>
+      </div>`;
+    };
+    document.getElementById('arm-comparison')!.innerHTML =
+      armCard('native', 'Native (vendor CLI)', 'pct-30') +
+      armCard('kernel', 'Kernel (OpenRouter)', 'pct-70') +
+      armCard('cpu', 'CPU (native driver)*', 'pct-90') +
+      '<div style="font-size:0.65rem;color:#484f58;grid-column:1/-1;margin-top:-0.5rem">* still building custom drivers for some providers — kernel (OpenRouter) covers all models</div>';
+  }
+
+  init();
+</script>

@@ -4,7 +4,15 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://needle-bench.cc',
   output: 'static',
-  integrations: [sitemap()],
+  trailingSlash: 'always',
+  redirects: {
+    '/leaderboard': '/',
+  },
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/leaderboard'),
+    }),
+  ],
   build: {
     format: 'directory',
   },
