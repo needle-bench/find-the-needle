@@ -4,6 +4,30 @@
 
 A benchmark suite of 29 scenarios for AI coding agents, built from real bugs in real codebases. No synthetic tasks. No contrived puzzles. Just broken containers and one prompt: *find the needle.*
 
+> **v4.6.1 — 2026-04-28 — what to trust, what not to.**
+>
+> The kernel + kernel-cpu arms are the trustable signal in this release.
+> Per-cell turns, tokens, and cost on those arms reflect real model work
+> against real bugs. The 50-turn cap that quietly truncated kernel-arm
+> agents in v4.6.0 is gone (Agentfile parser bug — `LIMIT max_turns`
+> vs `LIMIT turns`); cells now run to genuine completion.
+>
+> **Native arm: read with caution.** Vendor-CLI tokens include harness
+> scaffolding the kernel arms don't pay, so cost/token comparisons across
+> arms aren't apples-to-apples. The claude-code harness specifically has
+> a verification disconnect — the agent reports "test.sh passes" while
+> ostk's post-run verification disagrees — so claude-code native cells
+> may be under-reported. opencode/codex/kimi-cli native paths look fine.
+>
+> **Deadline-killed cells show 0 turns / $0.** Pre-SIGTERM journal
+> snapshot is broken; affected cells under-report. If you see `t=0` on
+> a cell that took 11 minutes, that's a slow-model-vs-wall-clock
+> result, not infrastructure failure.
+>
+> Resolution rates support the leaderboard's PASS/FAIL claims. Token
+> and cost figures support kernel-vs-kernel-cpu comparison; cross-arm
+> cost claims are not yet supported.
+
 ## How it works
 
 Each benchmark is a Docker container with a real bug. The agent gets tools (`shell`, `file:read`, `file:edit`), a time limit, and a test that fails. The agent explores, diagnoses, and patches. The test either passes or it doesn't.
