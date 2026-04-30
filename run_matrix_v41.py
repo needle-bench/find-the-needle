@@ -1,0 +1,495 @@
+#!/usr/bin/env python3
+"""
+needle-bench v4.1.0 matrix coordinator — resumable, per-cell retries.
+
+State file: runs/.state.jsonl  (append-only, one JSON row per cell attempt)
+Cell:      (model, bench, arm)
+Status:    pending | success | failed | transient_fail
+
+Resume semantics:
+  - success: skip
+  - transient_fail (< MAX_RETRIES): retry with backoff
+  - failed (hard): skip; listed in final punch-list
+  - missing: run
+
+Invoke:
+  ./run_matrix_v41.py                      # full matrix per ROSTER config
+  ./run_matrix_v41.py --only-new           # only newly-added models
+  ./run_matrix_v41.py --arm kernel         # restrict arms
+  ./run_matrix_v41.py --model claude-opus-4-7  # restrict models
+  ./run_matrix_v41.py --dry-run            # show what would run
+  ./run_matrix_v41.py --retry-failed       # also retry hard-failed cells
+"""
+from __future__ import annotations
+import argparse, json, os, subprocess, sys, time
+from dataclasses import dataclass, field
+from pathlib import Path
+from datetime import datetime, timezone
+
+ROOT = Path(__file__).parent.resolve()
+RUNS = ROOT / "runs"
+STATE = RUNS / ".state.jsonl"
+
+# ---------- roster ----------
+# Each entry: model -> dict(arms=[...], category="existing"|"new", new_in_v41=bool)
+# "existing": already had v4.0.0 data; on v4.1.0, only kernel arms re-run.
+# "new": first-time bench; on v4.1.0, ALL applicable arms run.
+# arms[] lists which arms are applicable (mlx is kernel-only; some models have no native).
+EXISTING_3ARM = [
+    "claude-haiku-4-5", "claude-sonnet-4-6", "claude-opus-4-6",
+    "devstral-2512", "devstral-medium", "devstral-small",
+    "kimi-k2.5",
+]
+EXISTING_2ARM = [
+    # gemini models: native via GeminiCpuDriver (kernel-cpu arm) — no CLI harness
+    "gemini-2.5-flash", "gemini-2.5-pro",
+    "gemini-3-flash-preview", "gemini-3.1-pro-preview",
+    "codestral-2508", "gpt-4.1", "gpt-5-codex", "o3", "o4-mini",
+    "grok-3", "grok-3-mini", "grok-4", "grok-4-fast",
+    "grok-4.1-fast", "grok-4.20", "grok-code-fast-1",
+    "deepseek-r1", "deepseek-r1-0528", "deepseek-v3.2",
+    "qwen3-coder", "qwen3-coder-flash", "qwen3-coder-plus",
+    "llama-4-maverick",
+]
+NEW_3ARM = [
+    "claude-opus-4-7",  # sonnet-4-7 and haiku-4-7 not released — dropped 2026-04-28
+    "kimi-k2.6",
+    # Audit 2026-04-28: codex CLI 0.125.0 accepts all gpt-5.x — promote to 3ARM
+    "gpt-5.2", "gpt-5.4",
+    "gpt-5.5", "gpt-5.5-pro",
+]
+NEW_2ARM = [
+    # gemini models: native arm uses GeminiCpuDriver via kernel-cpu — no CLI harness
+    "gemini-3.1-flash-lite-preview",
+    "qwen3.6-35b-a3b",
+]
+# MLX-bonsai: local inference via ostk v4.1.0 `mlx` subcommand.
+# Kernel-only (no native CLI, no remote provider).
+# MLX-bonsai: local inference via ostk v4.1.0 `mlx` subcommand.
+# Kernel-only — no native CLI exists, no remote provider.
+# Arms TBD on v4.1.0 release:
+#   - "kernel-mlx" is the likely label (driver=mlx, via `--arm kernel --driver mlx`)
+#   - may also run under plain "kernel" with openrouter base_url pointed at mlx_lm.server
+# For now: we list it under EXISTING arm names and will adjust on v4.1.0 drop.
+NEW_MLX_KERNEL = [
+    "ternary-bonsai-8b",
+]
+
+@dataclass
+class ModelSpec:
+    name: str
+    arms: list[str]
+    category: str  # "existing" | "new"
+
+def has_native_cpu_driver(model: str) -> bool:
+    """Whether `model` has a hand-written native CpuDriver in haystack.
+    kernel-cpu arm is only meaningful for these models — for everything else
+    kernel-cpu is identical to kernel (both route via OpenRouterClient), so
+    running both is redundant compute.
+
+    Native drivers (haystack/src/cpu/{anthropic,gemini,mistral,openrouter}.rs):
+    - Anthropic:  claude-*
+    - Google:     gemini-*
+    - Mistral:    mistral-*, codestral-*, devstral-*, ministral-*, magistral-*
+    - OpenAI:     gpt-*, o3, o4-mini, gpt-5-codex (uses OpenRouterClient
+                  pointed at api.openai.com — separate URL but shared client)
+    - MLX:        mlx/*  (local mlx_lm.server)
+
+    NOT native (use OpenRouter for both kernel and kernel-cpu):
+    - grok-*, kimi-*, qwen*, deepseek-*, llama-*
+    """
+    prefixes = (
+        "claude-",
+        "gemini-",
+        "mistral-", "codestral-", "devstral-", "ministral-", "magistral-",
+        "gpt-", "o3", "o4-mini",
+        "mlx/",
+    )
+    return any(model.startswith(p) for p in prefixes)
+
+
+def roster() -> list[ModelSpec]:
+    """Build the model × arm matrix, dropping kernel-cpu for models without a
+    native CpuDriver (where kernel-cpu would be a redundant duplicate of
+    kernel via OpenRouter)."""
+    r = []
+    def arms_for(default_arms: list[str], model: str) -> list[str]:
+        if "kernel-cpu" in default_arms and not has_native_cpu_driver(model):
+            return [a for a in default_arms if a != "kernel-cpu"]
+        return default_arms
+
+    for m in EXISTING_3ARM:
+        r.append(ModelSpec(m, arms_for(["kernel", "kernel-cpu"], m), "existing"))
+    for m in EXISTING_2ARM:
+        r.append(ModelSpec(m, arms_for(["kernel", "kernel-cpu"], m), "existing"))
+    for m in NEW_3ARM:
+        r.append(ModelSpec(m, arms_for(["native", "kernel", "kernel-cpu"], m), "new"))
+    for m in NEW_2ARM:
+        r.append(ModelSpec(m, arms_for(["kernel", "kernel-cpu"], m), "new"))
+    for m in NEW_MLX_KERNEL:
+        r.append(ModelSpec(m, ["kernel", "kernel-cpu"], "new"))  # mlx/ has Mlx provider
+    return r
+
+# ---------- benchmarks ----------
+def load_benchmarks() -> list[str]:
+    bdir = ROOT / "benchmarks"
+    names = []
+    for p in sorted(bdir.iterdir()):
+        if p.is_dir() and not p.name.startswith("_"):
+            names.append(p.name)
+    return names
+
+# ---------- state ----------
+def load_state() -> dict:
+    """Return dict[(model,bench,arm)] -> latest row."""
+    cells = {}
+    if not STATE.exists():
+        return cells
+    with STATE.open() as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            k = (row["model"], row["bench"], row["arm"])
+            cells[k] = row
+    return cells
+
+def append_state(row: dict) -> None:
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    with STATE.open("a") as f:
+        f.write(json.dumps(row) + "\n")
+
+def score_exists(model: str, bench: str, arm: str) -> bool:
+    return (RUNS / f"{model}-{arm}" / f"{bench}.score.json").exists()
+
+def score_path(model: str, bench: str, arm: str) -> Path:
+    return RUNS / f"{model}-{arm}" / f"{bench}.score.json"
+
+def samples_path(model: str, bench: str, arm: str) -> Path:
+    return RUNS / f"{model}-{arm}" / f"{bench}.samples.json"
+
+def read_score_resolved(model: str, bench: str, arm: str) -> bool | None:
+    p = score_path(model, bench, arm)
+    if not p.exists():
+        return None
+    try:
+        return bool(json.loads(p.read_text()).get("resolved", False))
+    except Exception:
+        return None
+
+def append_sample(model: str, bench: str, arm: str, attempt: int) -> None:
+    """F7: copy the current .score.json into the samples sidecar so we keep
+    every attempt's record for variance / majority-vote analysis."""
+    sp = score_path(model, bench, arm)
+    if not sp.exists():
+        return
+    sample = {}
+    try:
+        sample = json.loads(sp.read_text())
+    except Exception:
+        return
+    sample["sample_attempt"] = attempt
+    sample["sample_ts"] = now_iso()
+    sxp = samples_path(model, bench, arm)
+    samples = []
+    if sxp.exists():
+        try:
+            samples = json.loads(sxp.read_text())
+            if not isinstance(samples, list):
+                samples = []
+        except Exception:
+            samples = []
+    samples.append(sample)
+    sxp.parent.mkdir(parents=True, exist_ok=True)
+    sxp.write_text(json.dumps(samples, indent=2))
+
+def majority_resolved(model: str, bench: str, arm: str) -> bool | None:
+    """Return majority verdict from samples sidecar, or None if no samples."""
+    sxp = samples_path(model, bench, arm)
+    if not sxp.exists():
+        return None
+    try:
+        samples = json.loads(sxp.read_text())
+    except Exception:
+        return None
+    if not samples:
+        return None
+    yes = sum(1 for s in samples if s.get("resolved"))
+    return yes * 2 > len(samples)  # strict majority
+
+# ---------- runner ----------
+ARM_FLAGS = {
+    "native":      ["--arm", "native"],
+    # --local: docker-cp the local musl binary into the container instead
+    # of curl-downloading from ostk.ai. The download path flakes under
+    # high parallelism (15-way sweep saw ~15-30% kernel-cpu cells fail
+    # with `ostk: command not found`). The local binary path is a single
+    # docker cp per container — reliable, idempotent, no network.
+    # Requires haystack's musl bench binary to be fresh (make install).
+    "kernel":      ["--arm", "kernel", "--local"],
+    "kernel-cpu":  ["--arm", "kernel",  "--driver", "cpu", "--local"],
+    "kernel-mlx":  ["--arm", "kernel",  "--driver", "mlx", "--local"],
+}
+
+MAX_RETRIES = 2
+BACKOFF_SEC = [10, 60]  # 2 retries with escalating backoff
+WALL_TIMEOUT_SEC = 1800  # 30min per cell
+
+# F7: cheap-retry-on-fail sampling. First attempt always runs. If resolved=false,
+# run up to MAX_SAMPLES total (cost-aware: a clean-on-first-try cell incurs 1
+# run, only the noisy ones pay for triplication).
+MAX_SAMPLES = 3
+
+TRANSIENT_MARKERS = [
+    "rate limit", "rate-limit", "429", "503", "504", "502",
+    "connection reset", "timed out", "timeout",
+    "upstream error", "temporarily unavailable", "EOF",
+]
+
+def classify_failure(output: str, returncode: int) -> str:
+    """Return 'transient_fail' or 'failed'.
+
+    Deadline-exceeded cells are NOT transient — the model just didn't finish.
+    Re-running them at the same wall_clock_s is pure waste; classify as failed
+    so the inner retry loop doesn't burn 3× the cost on a cell that needs
+    longer wall_clock or a different model, not a retry.
+
+    F1 (haystack bench.rs): credit-cap / auth / rate-limit / 4xx-5xx upstream
+    failures now surface as `stop=api_error` in the bench summary line. These
+    are NOT transient — retrying with the same key hits the same wall. Mark
+    failed; only transient network noise (rate-limit bursts, 5xx, EOF) gets
+    retried via TRANSIENT_MARKERS below.
+    """
+    lo = output.lower()
+    if "poll deadline exceeded" in lo or "deadline_exceeded" in lo:
+        return "failed"
+    if "stop=api_error" in lo:
+        return "failed"
+    if any(m in lo for m in TRANSIENT_MARKERS):
+        return "transient_fail"
+    return "failed"
+
+def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]:
+    """Invoke ostk bench. Return (status, tail_output)."""
+    cmd = ["ostk", "bench", bench, "--model", model, *ARM_FLAGS[arm], "--docker"]
+    if dry_run:
+        print(f"    DRY-RUN: {' '.join(cmd)}")
+        return "success", ""
+    start = time.time()
+    try:
+        proc = subprocess.run(
+            cmd, cwd=ROOT,
+            capture_output=True, text=True,
+            timeout=WALL_TIMEOUT_SEC,
+        )
+        elapsed = time.time() - start
+        tail = (proc.stdout + "\n" + proc.stderr).strip().splitlines()[-10:]
+        tail_str = "\n".join(tail)
+        if proc.returncode == 0 and score_exists(model, bench, arm):
+            return "success", f"({elapsed:.0f}s)"
+        return classify_failure(proc.stdout + proc.stderr, proc.returncode), tail_str
+    except subprocess.TimeoutExpired:
+        return "transient_fail", f"timeout after {WALL_TIMEOUT_SEC}s"
+    except Exception as e:
+        return "failed", f"exception: {e}"
+
+def cell_action(model: str, bench: str, arm: str, state: dict, retry_failed: bool) -> str:
+    """Return 'skip', 'run', or 'retry'."""
+    if score_exists(model, bench, arm):
+        return "skip"
+    prior = state.get((model, bench, arm))
+    if prior is None:
+        return "run"
+    status = prior.get("status")
+    if status == "success":
+        # State says success but the score file was cleared (e.g., re-run
+        # after a binary update). Trust the filesystem: re-run.
+        return "run"
+    if status == "transient_fail":
+        attempts = prior.get("attempts", 1)
+        if attempts < MAX_RETRIES:
+            return "retry"
+        if retry_failed:
+            return "retry"
+        return "skip"
+    if status == "failed":
+        if retry_failed:
+            return "retry"
+        return "skip"
+    return "run"
+
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+# ---------- main ----------
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--only-new", action="store_true", help="skip existing models, run only new additions")
+    ap.add_argument("--model", action="append", default=[], help="restrict to model(s); repeatable")
+    ap.add_argument("--arm", action="append", default=[], help="restrict to arm(s); repeatable")
+    ap.add_argument("--bench", action="append", default=[], help="restrict to bench(es); repeatable")
+    ap.add_argument("--retry-failed", action="store_true", help="retry hard-failed cells too")
+    ap.add_argument("--dry-run", action="store_true", help="print cells that would run; don't execute")
+    ap.add_argument("--ostk-version-gate", default=None, help="require ostk --version contains this (e.g. 4.1.0)")
+    ap.add_argument("--samples", type=int, default=MAX_SAMPLES,
+                    help=f"F7 cheap-retry-on-fail: max samples per cell (default {MAX_SAMPLES}). "
+                         "First attempt always runs; subsequent attempts only fire if the previous one "
+                         "produced resolved=false. Pass --samples 1 to disable.")
+    ap.add_argument("--no-resample", action="store_true",
+                    help="alias for --samples 1 (single attempt, no F7 re-sampling)")
+    args = ap.parse_args()
+    samples_max = 1 if args.no_resample else max(1, args.samples)
+
+    # version gate
+    if args.ostk_version_gate:
+        v = subprocess.run(["ostk", "--version"], capture_output=True, text=True).stdout.strip()
+        if args.ostk_version_gate not in v:
+            print(f"ERROR: ostk version '{v}' does not contain '{args.ostk_version_gate}'", file=sys.stderr)
+            return 1
+        print(f"[gate] ostk version OK: {v}")
+
+    bench_list = load_benchmarks()
+    if args.bench:
+        bench_list = [b for b in bench_list if b in args.bench]
+    if not bench_list:
+        print("no benchmarks selected", file=sys.stderr)
+        return 1
+
+    models = roster()
+    if args.only_new:
+        models = [m for m in models if m.category == "new"]
+    if args.model:
+        models = [m for m in models if m.name in args.model]
+    if not models:
+        print("no models selected", file=sys.stderr)
+        return 1
+
+    state = load_state()
+
+    total = pending = skipped = succeeded = failed_hard = failed_trans = 0
+    for m in models:
+        arms = [a for a in m.arms if not args.arm or a in args.arm]
+        for bench in bench_list:
+            for arm in arms:
+                total += 1
+                action = cell_action(m.name, bench, arm, state, args.retry_failed)
+                if action == "skip":
+                    skipped += 1
+                    continue
+                pending += 1
+
+    print(f"[plan] models={len(models)} benches={len(bench_list)}")
+    print(f"[plan] total cells={total} pending={pending} skipped={skipped}")
+    if args.dry_run and pending == 0:
+        print("[plan] nothing to run")
+        return 0
+
+    print(f"[run] starting at {now_iso()}")
+    for m in models:
+        arms = [a for a in m.arms if not args.arm or a in args.arm]
+        print(f"\n========== {m.name} ({m.category}, arms={arms}) ==========")
+        for bench in bench_list:
+            for arm in arms:
+                action = cell_action(m.name, bench, arm, state, args.retry_failed)
+                if action == "skip":
+                    continue
+                attempt_num = 1
+                if action == "retry":
+                    prior = state.get((m.name, bench, arm), {})
+                    attempt_num = prior.get("attempts", 1) + 1
+
+                # F7 outer loop: up to samples_max attempts driven by
+                # resolved=false (in addition to the inner transient retry).
+                # First sample always runs; later samples only fire if the
+                # previous score.json reported resolved=false.
+                final_status = "skipped"
+                for sample_idx in range(1, samples_max + 1):
+                    cell_succeeded = False
+                    for backoff_idx in range(attempt_num - 1, MAX_RETRIES + 1):
+                        if backoff_idx > 0:
+                            sleep_s = BACKOFF_SEC[min(backoff_idx - 1, len(BACKOFF_SEC)-1)]
+                            print(f"  [retry] sleeping {sleep_s}s before attempt {backoff_idx+1}")
+                            time.sleep(sleep_s)
+                        print(f"  [{now_iso()}] {m.name} / {bench} / {arm}  (sample {sample_idx}/{samples_max}, attempt {backoff_idx+1})")
+                        status, tail = run_cell(m.name, bench, arm, args.dry_run)
+                        row = {
+                            "ts": now_iso(),
+                            "model": m.name, "bench": bench, "arm": arm,
+                            "status": status,
+                            "attempts": backoff_idx + 1,
+                            "sample": sample_idx,
+                            "tail": tail,
+                        }
+                        if not args.dry_run:
+                            append_state(row)
+                        state[(m.name, bench, arm)] = row
+                        final_status = status
+                        if status == "success":
+                            cell_succeeded = True
+                            print(f"    OK {tail}")
+                            break
+                        if status == "failed":
+                            print(f"    HARD FAIL: {tail[:200]}")
+                            break
+                        if status == "transient_fail":
+                            if backoff_idx + 1 >= MAX_RETRIES + 1:
+                                print(f"    TRANSIENT (gave up after {backoff_idx+1}): {tail[:200]}")
+                                break
+                            else:
+                                print(f"    TRANSIENT (will retry): {tail[:200]}")
+                                continue
+                    # F7: snapshot this sample, decide whether to resample
+                    if cell_succeeded and not args.dry_run:
+                        append_sample(m.name, bench, arm, sample_idx)
+                        resolved = read_score_resolved(m.name, bench, arm)
+                        if resolved:
+                            print(f"    [F7] sample {sample_idx} resolved=true; canonical score preserved")
+                            break
+                        if sample_idx < samples_max:
+                            print(f"    [F7] sample {sample_idx} resolved=false; resampling ({sample_idx+1}/{samples_max})")
+                            attempt_num = 1  # reset transient-retry budget for the next sample
+                            time.sleep(5)
+                            continue
+                        else:
+                            print(f"    [F7] all {samples_max} samples resolved=false")
+                            break
+                    else:
+                        # Hard/transient failure — don't burn extra samples
+                        break
+                # tally the cell once after F7 outer loop concludes
+                if final_status == "success":
+                    succeeded += 1
+                elif final_status == "failed":
+                    failed_hard += 1
+                elif final_status == "transient_fail":
+                    failed_trans += 1
+
+    print(f"\n========== summary @ {now_iso()} ==========")
+    print(f"  succeeded: {succeeded}")
+    print(f"  hard fail: {failed_hard}")
+    print(f"  gave up:   {failed_trans}")
+    print(f"  skipped:   {skipped}")
+    print(f"  total:     {total}")
+
+    # punch list
+    if failed_hard or failed_trans:
+        print(f"\n========== punch list ==========")
+        for k, v in state.items():
+            if v.get("status") in ("failed", "transient_fail"):
+                if v.get("status") == "transient_fail" and v.get("attempts", 0) <= MAX_RETRIES:
+                    continue  # still retryable
+                print(f"  {v['status']:16s} {k[0]} / {k[1]} / {k[2]}")
+
+    # auto-consolidate on full success (skip in dry-run)
+    if not args.dry_run and failed_hard == 0 and failed_trans == 0 and (ROOT / "consolidate_scores.py").exists():
+        print("\n[consolidate] running consolidate_scores.py")
+        subprocess.run(["python3", "consolidate_scores.py"], cwd=ROOT)
+
+    return 0 if failed_hard == 0 else 2
+
+if __name__ == "__main__":
+    sys.exit(main())
