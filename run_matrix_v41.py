@@ -245,9 +245,9 @@ WALL_TIMEOUT_SEC = 1800  # 30min per cell
 MAX_SAMPLES = 3
 
 TRANSIENT_MARKERS = [
-    "rate limit", "rate-limit", "429", "503", "504", "502",
-    "connection reset", "timed out", "timeout",
-    "upstream error", "temporarily unavailable", "EOF",
+    "rate limit", "rate-limit", " 429 ", " 503 ", " 504 ", " 502 ",
+    "connection reset", "timed out",
+    "upstream error", "temporarily unavailable",
 ]
 
 def classify_failure(output: str, returncode: int) -> str:
